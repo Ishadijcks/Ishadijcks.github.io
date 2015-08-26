@@ -1,11 +1,16 @@
 .container{
-width:80% !important
+width:80% !important;
 }
 
 canvas {
-width: 240px;
-height: 336px;
+width: 180px;
+height: 280px;
 border: 1px solid black;
+
+}
+
+canvas:hover{
+background-color: #F5F7F7;
 }
 
 col-sm-4 {
