@@ -297,7 +297,7 @@ updateRoute();
 log("You gained " + money + " money!");
 	
 	setTimeout(function(){ 
-	$("#enemyInfo").html("<br>"+curEnemy.name+"<br><img height=96px width=96px id=enemy src=images/Pokeball.png>");
+	$("#enemyInfo").html("<br>"+curEnemy.name+"<br><img height=96px width=96px id=enemy src=images/Pokeball.PNG>");
 	player.pokeballs--;
 	}, 1);
 	
