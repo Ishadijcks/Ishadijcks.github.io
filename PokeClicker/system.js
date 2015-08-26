@@ -279,16 +279,17 @@ var accessToRoute = function(route){
 	return true;
 }
 
-			// Save and load
+			// Save and load functions
+			
 var save = function(){
-	localStorage.setItem("player", JSON.stringify(player));
+	localStorage.setItem("player", player);
 
 }
 
 var load = function(){
 	log("asd");
 	log(JSON.parse(localStorage.getItem("player")));
-	player = JSON.parse(localStorage.getItem("player"));
+	player = localStorage.getItem("player");
 	console.log(player);
     var link = document.createElement('link');
     link.type = 'image/x-icon';
