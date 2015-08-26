@@ -280,6 +280,8 @@ var save = function(){
 }
 
 var load = function(){
+	log("asd");
+	log(JSON.parse(localStorage.getItem("player")));
 	player = JSON.parse(localStorage.getItem("player"));
 }		
 
