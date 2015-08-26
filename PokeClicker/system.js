@@ -187,7 +187,7 @@ if(JSON.parse(localStorage.getItem("player")) != null){
 	load();
 }
 else {
-	$('#pickStarter').modal({backdrop: 'static', keyboard: false})
+	$('#pickStarter').modal({backdrop: 'static', keyboard: false});
 }
 
 
