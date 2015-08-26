@@ -1,0 +1,74 @@
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<title>Pokeclicker</title>
+
+			<script src="jquery.js"></script>
+			<script src="system.js"></script>
+			<link type="text/css" href="system.css" rel="stylesheet" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	
+		</head>
+<body>	
+	<div class="container">
+	<br>	
+		<div class="row">
+			<div class="col-sm-1" id="caughtPokemon"> Caught</div>
+			<div class="col-sm-1" id="AttackCaughtPokemon"> Attack</div>
+			<div class="col-sm-1" id="LevelCaughtPokemon"> Level</div>
+
+			<div class="col-sm-4 col-md-offset-1" id="currentEnemy"> 
+				<span id="routeLeft" class="glyphicon glyphicon-arrow-left"></span>
+				<span id="currentRoute"></span> 
+				<span id="routeRight" class="glyphicon glyphicon-arrow-right"></span>
+				
+				<div id="enemyInfo"></div>
+ 
+				<div class="progress">
+					<div id="healthBar" class="progress-bar progress-bar-danger" style="width: 0%">
+						<span class="sr-only"></span>
+					</div>
+				</div>
+				
+				<span id="healthDisplay"></span>
+			</div>
+			<div class="col-sm-1 col-md-offset-2" id="statBox">Stats</div>
+			<div class="col-sm-1" id="statBoxStats"></div>
+		</div>
+
+		<div id="console" class="col-sm-6 col-md-offset-3 footer navbar-fixed-bottom"></div>
+	
+		<!-- Modal -->
+		<div class="modal fade" id="pickStarter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h4 class="modal-title" id="myModalLabel">Pick a starter</h4>
+			  </div>
+			  <div id="myModalBody" class="modal-body">
+				<div id="starterPokemons" class="row">
+				<img class="starter" id="Bulbasaur" src="images/1.png"> 
+				<img class="starter" id="Charmander" src="images/4.png"> 
+				<img class="starter" id="Squirtle" src="images/7.png"> <br>
+				<span id="curStarterPick"></span>
+				</div>
+			  </div>
+			  <div class="modal-footer">
+				<button id="startAdventure" type="button" class="btn btn-primary">Start your adventure!</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	
+	</div>
+	
+	
+</body>
+	</html>

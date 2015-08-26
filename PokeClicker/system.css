@@ -1,0 +1,52 @@
+#myModalLabel{
+	text-align:center;
+}
+
+#starterPokemons{
+	text-align:center;
+}
+
+#console{
+	border: 1px solid black;
+	width:50%;
+	height:300px;
+	bottom:50px;
+	overflow: scroll;
+}
+
+#caughtPokemon{
+	border-left: 1px solid black;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;	
+}
+
+#AttackCaughtPokemon{
+
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;	
+}
+
+#LevelCaughtPokemon{
+	border-right: 1px solid black;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;	
+	text-align:right;
+}
+
+#statBox{
+	border-left: 1px solid black;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;	
+}
+
+#statBoxStats{
+	border-right: 1px solid black;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;	
+	text-align:right;
+}
+
+#currentEnemy{
+	border: 1px solid black;
+	text-align:center
+}

@@ -1,0 +1,19 @@
+.no-print, .no-print *{
+
+    display: none !important;
+}
+
+.container{
+
+	width:100% !important;
+	border: 1px solid black !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+html, body {
+
+	margin: 0 !important;
+	padding: 0 !important;
+	background: #FFF !important; 		
+}
