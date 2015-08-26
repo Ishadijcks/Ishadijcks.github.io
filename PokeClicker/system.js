@@ -283,12 +283,11 @@ var accessToRoute = function(route){
 			
 var save = function(){
 	localStorage.setItem("player", JSON.stringify(player));
-
 }
 
 var load = function(){
 	
-	player = localStorage.getItem("player");
+	player = JSON.parse(localStorage.getItem("player"));
 	console.log(player);
     var link = document.createElement('link');
     link.type = 'image/x-icon';
