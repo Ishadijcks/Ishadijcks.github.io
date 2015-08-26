@@ -182,7 +182,7 @@ var curEnemy = {
 
 $(document).ready(function(){
 
-
+log(JSON.parse(localStorage.getItem("player")) != null);
 if(JSON.parse(localStorage.getItem("player")) != null){
 	load();
 }
