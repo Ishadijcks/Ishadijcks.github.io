@@ -288,7 +288,7 @@ var save = function(){
 var load = function(){
 	log("asd");
 	log(JSON.parse(localStorage.getItem("player")));
-	player = (localStorage.getItem("player");
+	player = localStorage.getItem("player");
 	
     var link = document.createElement('link');
     link.type = 'image/x-icon';
