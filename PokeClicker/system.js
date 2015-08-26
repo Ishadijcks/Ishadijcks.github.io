@@ -181,9 +181,18 @@ var curEnemy = {
 }
 
 $(document).ready(function(){
-$('#pickStarter').modal({backdrop: 'static', keyboard: false})
 
-save();
+
+if(JSON.parse(localStorage.getItem("player")) != null){
+	load();
+}
+else {
+	$('#pickStarter').modal({backdrop: 'static', keyboard: false})
+}
+
+
+
+
 
 generatePokemon(player.route);
 updateAll();
@@ -211,6 +220,7 @@ updateEnemy();
 $("body").on('click',".starter", function(){
 	$("#curStarterPick").html(this.id);
 	player.starter = this.id;
+	save();
 })
 
 $("body").on('click',"#startAdventure", function(){
@@ -249,6 +259,7 @@ updateStats();
 updateEnemy();
 updateCaughtList();
 updateRoute();
+save();
 }
 
 // Returns true if the player has access to this route
@@ -264,7 +275,12 @@ var accessToRoute = function(route){
 
 			// Save and load
 var save = function(){
-	localStorage.setItem("player", player);
+	localStorage.setItem("player", JSON.stringify(player));
+
+}
+
+var load = function(){
+	player = JSON.parse(localStorage.getItem("player"));
 }		
 
 			// Leveling functions
@@ -380,10 +396,9 @@ var calculateAttack = function(){
 var generatePokemon = function (route){
 	var randomRoute = 0;
 	while(!correctRoute(randomRoute)){
-	randomRoute =  Math.max(1,player.route-Math.floor(Math.random()*player.routeVariation));
-	console.log(randomRoute);
+			randomRoute =  Math.max(1,player.route-Math.floor(Math.random()*player.routeVariation));
 	}
-
+console.log(randomRoute);
 	var randomPokemon = pokemonList[Math.floor(Math.random()*pokemonList.length)];
 		while (randomPokemon.route != randomRoute){
 		randomPokemon = pokemonList[Math.floor(Math.random()*pokemonList.length)];
