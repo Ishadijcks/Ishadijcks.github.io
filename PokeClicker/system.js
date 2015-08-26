@@ -182,7 +182,6 @@ var curEnemy = {
 
 $(document).ready(function(){
  
-log(JSON.parse(localStorage.getItem("player")) != null);
 if(localStorage.getItem("player") != null){
 	load();
 }
@@ -288,7 +287,6 @@ var save = function(){
 var load = function(){
 	
 	player = JSON.parse(localStorage.getItem("player"));
-	console.log(player);
     var link = document.createElement('link');
     link.type = 'image/x-icon';
     link.rel = 'shortcut icon';
@@ -414,7 +412,6 @@ var generatePokemon = function (route){
 	while(!correctRoute(randomRoute)){
 			randomRoute =  Math.max(1,player.route-Math.floor(Math.random()*player.routeVariation));
 	}
-console.log(randomRoute);
 	var randomPokemon = pokemonList[Math.floor(Math.random()*pokemonList.length)];
 		while (randomPokemon.route != randomRoute){
 		randomPokemon = pokemonList[Math.floor(Math.random()*pokemonList.length)];
