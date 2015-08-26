@@ -282,13 +282,12 @@ var accessToRoute = function(route){
 			// Save and load functions
 			
 var save = function(){
-	localStorage.setItem("player", player);
+	localStorage.setItem("player", JSON.stringify(player));
 
 }
 
 var load = function(){
-	log("asd");
-	log(JSON.parse(localStorage.getItem("player")));
+	
 	player = localStorage.getItem("player");
 	console.log(player);
     var link = document.createElement('link');
