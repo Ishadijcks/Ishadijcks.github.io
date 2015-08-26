@@ -162,7 +162,7 @@ var player = {
 	attack: 0,
 	attackMultiplier: 1,
 	money: 1000,
-	catchPercentage: 90,
+	catchPercentage: 25,
 	route: 1,
 	pokeballs: 100,
 	routeVariation: 5,
@@ -450,7 +450,7 @@ var updateStats = function(){
 
 var updateRoute = function(){
 
-	$("#currentRoute").html("Route "+player.route);
+	$("#currentRoute").html("Route "+player.route+ "<br>"+Math.min(10,routeKills[player.route])+"/10");
 	
 	if(accessToRoute(player.route+1)){
 		$("#routeRight").show();
