@@ -183,7 +183,7 @@ var curEnemy = {
 $(document).ready(function(){
 
 log(JSON.parse(localStorage.getItem("player")) != null);
-if(JSON.parse(localStorage.getItem("player")) != null){
+if(localStorage.getItem("player") != null){
 	load();
 }
 else {
@@ -289,7 +289,7 @@ var load = function(){
 	log("asd");
 	log(JSON.parse(localStorage.getItem("player")));
 	player = JSON.parse(localStorage.getItem("player"));
-	
+	console.log(player);
     var link = document.createElement('link');
     link.type = 'image/x-icon';
     link.rel = 'shortcut icon';
