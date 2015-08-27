@@ -206,16 +206,16 @@ var initUpgrades = function(){
 	addUpgrade("Catch time upgrade III",25000, "catchTime",500,5,"Decrease the catch time by half a second"); 
 	addUpgrade("Catch time upgrade IV",75000, "catchTime",500,8,"Decrease the catch time by half a second"); 
 	addUpgrade("Catch time upgrade V",1000000, "catchTime",1000,15,"Decrease the catch time by a whole second"); 
-	addUpgrade("Money multiplier upgrade I",2000, "moneyMultiplier",0.25,0,"Gain 25% more money"); 
-	addUpgrade("Money multiplier upgrade II",10000, "moneyMultiplier",0.30,3,"Gain 30% more money"); 
-	addUpgrade("Money multiplier upgrade III",50000, "moneyMultiplier",0.35,6,"Gain 35% more money"); 
-	addUpgrade("Money multiplier upgrade IV",125000, "moneyMultiplier",0.40,10,"Gain 40% more money"); 
-	addUpgrade("Money multiplier upgrade V",250000, "moneyMultiplier",0.50,16,"Gain 50% more money"); 
+	addUpgrade("Money multiplier upgrade I",1500, "moneyMultiplier",0.25,0,"Gain 25% more money"); 
+	addUpgrade("Money multiplier upgrade II",4000, "moneyMultiplier",0.30,3,"Gain 30% more money"); 
+	addUpgrade("Money multiplier upgrade III",10000, "moneyMultiplier",0.35,6,"Gain 35% more money"); 
+	addUpgrade("Money multiplier upgrade IV",25000, "moneyMultiplier",0.40,10,"Gain 40% more money"); 
+	addUpgrade("Money multiplier upgrade V",50000, "moneyMultiplier",0.50,16,"Gain 50% more money"); 
 	addUpgrade("Click multiplier upgrade I",100, "clickMultiplier",1,0,"Clicks do 100% more damage"); 
-	addUpgrade("Click multiplier upgrade II",500, "clickMultiplier",1,3,"Clicks do 100% more damage"); 
-	addUpgrade("Click multiplier upgrade III",1000, "clickMultiplier",1,8,"Clicks do 100% more damage"); 
-	addUpgrade("Click multiplier upgrade IV",2500, "clickMultiplier",1,10,"Clicks do 100% more damage"); 
-	addUpgrade("Click multiplier upgrade V",5000, "clickMultiplier",1,12,"Clicks do 100% more damage"); 
+	addUpgrade("Click multiplier upgrade II",500, "clickMultiplier",1,2,"Clicks do 100% more damage"); 
+	addUpgrade("Click multiplier upgrade III",1000, "clickMultiplier",1,5,"Clicks do 100% more damage"); 
+	addUpgrade("Click multiplier upgrade IV",2500, "clickMultiplier",1,7,"Clicks do 100% more damage"); 
+	addUpgrade("Click multiplier upgrade V",5000, "clickMultiplier",1,10,"Clicks do 100% more damage"); 
 }
 
 var player = {
@@ -252,14 +252,14 @@ $(document).ready(function(){
  
 	if(localStorage.getItem("player") != null){
 		load();
-		
+		generatePokemon(player.route);
 	}
 	
 	else {
 		$('#pickStarter').modal({backdrop: 'static', keyboard: false});
 	}
 	initUpgrades();
-	generatePokemon(player.route);
+
 	updateAll();
 
 	setInterval(function(){
@@ -292,7 +292,9 @@ $(document).ready(function(){
 		link.rel = 'shortcut icon';
 		link.href = 'images/'+player.starter+'.png';
 		document.getElementsByTagName('head')[0].appendChild(link);
-
+		
+		generatePokemon(player.route);
+		
 		save();
 	})
 	
@@ -592,7 +594,7 @@ var generatePokemon = function (route){
 	
 	curEnemy.name = randomPokemon.name;
 	curEnemy.id = randomPokemon.id;
-	curEnemy.health = randomPokemon.health*1/2*randomPokemon.route*(player.caughtPokemonList.length+1);
+	curEnemy.health = 20+randomPokemon.health*1/4*randomPokemon.route*(player.caughtPokemonList.length-1);
 	curEnemy.maxHealth = curEnemy.health;
 	curEnemy.catchPercentage = player.catchPercentage;
 	curEnemy.alive = true;
