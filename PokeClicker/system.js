@@ -481,7 +481,7 @@ var updateEnemy = function(){
 var enemyDefeated = function(){
 	if (curEnemy.alive){
 		log("You defeated the wild "+ curEnemy.name);
-		var money = 10 + Math.floor(Math.random()*10) + 3 * curEnemy.route;
+		var money = 15 + Math.floor(Math.random()*20) + 4 * curEnemy.route;
 		player.money += money*player.moneyMultiplier;
 		getExp(money);
 		player.routeKills[player.route]++
