@@ -524,7 +524,7 @@ var capturePokemon = function(name){
 	
 	else{
 		log(name+" has already been caught!");
-		log("You managed to sell the "+name+" for " + 10*curEnemy.route + " money!");
+		log("You managed to sell the "+name+" for " + 50*curEnemy.route + " money!");
 	}
 	
 	updateCaughtList();
