@@ -1,8 +1,16 @@
 #upgradeBox{
-	border: 1px solid black;
 	text-align:center;
 }
 
+.smallImage{
+	height:16px;
+	width:16px;
+}
+
+.smallImage:hover{
+	position:relative;
+	
+}
 
 .upgradeBoxes{
 	border: 1px solid black;
@@ -57,6 +65,8 @@
 	border-left: 1px solid black;
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;	
+	text-align:right;
+	width: 10% !important
 }
 
 #statBoxStats{
