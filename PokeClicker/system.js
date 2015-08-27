@@ -481,12 +481,12 @@ var updateEnemy = function(){
 var enemyDefeated = function(){
 	if (curEnemy.alive){
 		log("You defeated the wild "+ curEnemy.name);
-		var money = 15 + Math.floor(Math.random()*20) + 4 * curEnemy.route;
+		var money = 15 + Math.floor(Math.random()*30) + 8 * curEnemy.route;
 		player.money += money*player.moneyMultiplier;
 		getExp(money);
 		player.routeKills[player.route]++
 		updateRoute();
-		log("You gained " + money + " money!");
+		log("You earned " + money + " money!");
 	
 		setTimeout(function(){ 
 			$("#enemyInfo").html("<br>"+curEnemy.name+"<br><img height=96px width=96px id=enemy src=images/Pokeball.PNG>");
