@@ -337,7 +337,20 @@ $(document).ready(function(){
 		updateUpgrades();
 	})
 
+	// Allows the player to sort hist pokemon
+	$("body").on('click',"#caughtPokemon", function(){
+		player.caughtPokemonList.sort(compareByName);
+	})
 
+	$("body").on('click',"#AttackCaughtPokemon", function(){
+		player.caughtPokemonList.sort(compareByAttack);
+	})
+
+	$("body").on('click',"#LevelCaughtPokemon", function(){
+		player.caughtPokemonList.sort(compareByLevel);
+	})
+	
+	
 	// Logs to welcome the player
 	log("Welcome to PokeClicker");
 	log("Click on the pokemon to defeat them!");
@@ -706,4 +719,32 @@ var updateRoute = function(){
 	else{
 		$("#routeLeft").show();
 	}
+}
+
+	// Sorting functions
+	
+function compareByName(a,b) {
+  if (a.name < b.name)
+    return -1;
+  if (a.name > b.name)
+    return 1;
+  return 0;
+}	
+
+function compareByLevel(a,b) {
+  if (experienceToLevel(a.experience,a.levelType) > experienceToLevel(b.experience,b.levelType))
+    return -1;
+  if (experienceToLevel(a.experience,a.levelType) < experienceToLevel(b.experience,b.levelType))
+    return 1;
+  return 0;
+}
+
+function compareByAttack(a,b) {
+	var aAttack = experienceToLevel(a.experience,a.levelType)*a.attack/100;
+	var bAttack = experienceToLevel(b.experience,b.levelType)*b.attack/100;
+  if (aAttack> bAttack)
+    return -1;
+  if (aAttack < bAttack)
+    return 1;
+  return 0;
 }

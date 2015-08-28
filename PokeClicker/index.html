@@ -32,7 +32,7 @@
 	<div class="container">
 	<br>	
 		<div class="row">
-			<div class="col-sm-1" id="caughtPokemon"> Caught</div>
+			<div class="col-sm-1" id="caughtPokemon"> Name</div>
 			<div class="col-sm-1" id="AttackCaughtPokemon"> Attack</div>
 			<div class="col-sm-1" id="LevelCaughtPokemon"> Level</div>
 
@@ -61,7 +61,7 @@
 		
 		<div id="console" class="col-sm-6 col-md-offset-3 footer navbar-fixed-bottom"></div>
 	
-		<!-- Modal -->
+		<!-- Starter Modal -->
 		<div class="modal fade" id="pickStarter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		  <div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -82,7 +82,30 @@
 			</div>
 		  </div>
 		</div>
+
+		
+		<!-- Badge Modal -->
+		<div class="modal fade" id="badgeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h4 class="modal-title" id="myModalLabel">Pick a starter</h4>
+			  </div>
+			  <div id="myModalBody" class="modal-body">
+				<div id="badges" class="row">
+				<img class="badge" id="Badge1" src="images/1.png"> 
+				<img class="badge" id="Badge2" src="images/4.png"> 
 	
+
+				</div>
+			  </div>
+			  <div class="modal-footer">
+				<button id="closeBadge" type="button" class="btn btn-primary">Close</button>
+			  </div>
+			</div>
+		  </div>
+		</div>		
+		
 	</div>
 	
 	
