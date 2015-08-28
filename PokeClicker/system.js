@@ -337,19 +337,34 @@ $(document).ready(function(){
 		updateUpgrades();
 	})
 
-	// Allows the player to sort hist pokemon
+	// Allows the player to sort his pokemon
 	$("body").on('click',"#caughtPokemon", function(){
 		player.caughtPokemonList.sort(compareByName);
+		updateCaughtList();
 	})
 
 	$("body").on('click',"#AttackCaughtPokemon", function(){
 		player.caughtPokemonList.sort(compareByAttack);
+		updateCaughtList();
 	})
 
 	$("body").on('click',"#LevelCaughtPokemon", function(){
 		player.caughtPokemonList.sort(compareByLevel);
+		updateCaughtList();
 	})
 	
+	// Navbar Button controllers
+	$("body").on('click',"#badgeButton", function(){
+		$("#badgeModal").modal("show");
+		for (var i = 1; i<=player.gymBadges; i++){
+			$("#Badge"+i).fadeTo("slow",1);
+		}
+	})
+
+	$("body").on('click',"#pokedexButton", function(){
+		$("#pokedexModal").modal("show");
+
+	})		
 	
 	// Logs to welcome the player
 	log("Welcome to PokeClicker");
@@ -422,7 +437,9 @@ var applyUpgrade = function(type, amount){
 		default:
 			console.log("This should never happen, contact the developer immediately!");
 			break;
+
 	}	
+		updateStats();
 }
 
 			// Save and load functions
@@ -504,12 +521,12 @@ var enemyDefeated = function(){
 		log("You defeated the wild "+ curEnemy.name);
 		var money = 15 + Math.floor(Math.random()*30) + 8 * curEnemy.route;
 		money *= player.moneyMultiplier
-		player.money += money;
+		player.money += Math.floor(money);
 		var exp = 10 + Math.floor(Math.random()*10) + 3 *  curEnemy.route;
 		getExp(exp);
 		player.routeKills[player.route]++
 		updateRoute();
-		log("You earned " + money + " money!");
+		log("You earned " + Math.floor(money) + " money!");
 	
 		setTimeout(function(){ 
 			$("#enemyInfo").html("<br>"+curEnemy.name+"<br><img height=96px width=96px id=enemy src=images/Pokeball.PNG>");
@@ -549,6 +566,7 @@ var capturePokemon = function(name){
 	else{
 		log(name+" has already been caught!");
 		log("You managed to sell the "+name+" for " + 50*curEnemy.route + " money!");
+		player.money += Math.floor(50*curEnemy.route*player.moneyMultiplier);
 	}
 	
 	updateCaughtList();
@@ -619,7 +637,10 @@ var checkEvolution = function(){
 	for( var i = 0; i<player.caughtPokemonList.length; i++){
 		if(player.caughtPokemonList[i].evoLevel != null){
 			if( experienceToLevel(player.caughtPokemonList[i].experience) >= player.caughtPokemonList[i].evoLevel && !player.caughtPokemonList[i].evolved){
+				log(player.caughtPokemonList[i].name);
 				capturePokemon(player.caughtPokemonList[i].evolution);
+				log("Evolution triggered ^");
+				player.caughtPokemonList[i].evolved = 1;
 			}
 		}
 	}
@@ -681,7 +702,7 @@ var boughtUpgrades = function(){
 		
 // Update the list of caught pokemon
 var updateCaughtList = function(){
-	$("#caughtPokemon").html("Caught <br><br>");
+	$("#caughtPokemon").html("Name <br><br>");
 	$("#AttackCaughtPokemon").html("Attack <br><br>");
 	$("#LevelCaughtPokemon").html("Level <br><br>");
 	

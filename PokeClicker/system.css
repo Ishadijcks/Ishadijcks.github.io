@@ -1,3 +1,15 @@
+#pokedexModal{
+	width:100% !important;
+}
+
+#navBar{
+	border: 1px solid black;
+}
+
+.pokeBadge{
+	opacity:0.10;
+}
+
 #upgradeBox{
 	text-align:center;
 }
