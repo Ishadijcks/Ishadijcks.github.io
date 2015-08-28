@@ -142,14 +142,14 @@ var pokemonList = [
 {id: 141, name: "Kabutops", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "rock", attack: 115, route:null, health:100, levelType: "medium fast", experience: 150  },
 {id: 142, name: "Aerodactyl", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "rock", attack: 105, route:null, health:100, levelType: "slow", experience: 150  },
 {id: 143, name: "Snorlax", catchRate: 25, evolution: null, evoLevel: null, evolved: 0, type: "normal", attack: 110, route:16, health:100, levelType: "slow", experience: 150  },
-{id: 144, name: "Articuno", catchRate: 3, evolution: null, evoLevel: null, evolved: 0, type: "ice", attack: 85, route:null, health:100, levelType: "slow", experience: 150  },
-{id: 145, name: "Zapdos", catchRate: 3, evolution: null, evoLevel: null, evolved: 0, type: "electric", attack: 90, route:null, health:100, levelType: "slow", experience: 150  },
-{id: 146, name: "Moltres", catchRate: 3, evolution: null, evoLevel: null, evolved: 0, type: "fire", attack: 100, route:null, health:100, levelType: "slow", experience: 150  },
+{id: 144, name: "Articuno", catchRate: 3, evolution: null, evoLevel: null, evolved: 0, type: "ice", attack: 85, route:50, health:100, levelType: "slow", experience: 150  },
+{id: 145, name: "Zapdos", catchRate: 3, evolution: null, evoLevel: null, evolved: 0, type: "electric", attack: 90, route:50, health:100, levelType: "slow", experience: 150  },
+{id: 146, name: "Moltres", catchRate: 3, evolution: null, evoLevel: null, evolved: 0, type: "fire", attack: 100, route:50, health:100, levelType: "slow", experience: 150  },
 {id: 147, name: "Dratini", catchRate: 45, evolution: "Dragonair", evoLevel: 30, evolved: 0, type: "dragon", attack: 64, route:null, health:100, levelType: "slow", experience: 150  },
 {id: 148, name: "Dragonair", catchRate: 45, evolution: "Dragonite", evoLevel: 55, evolved: 0, type: "dragon", attack: 84, route:null, health:100, levelType: "slow", experience: 150  },
 {id: 149, name: "Dragonite", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "dragon", attack: 134, route:null, health:100, levelType: "slow", experience: 150  },
-{id: 150, name: "Mewtwo", catchRate: 3, evolution: null, evoLevel: null, evolved: 0, type: "psychic", attack: 110, route:null, health:100, levelType: "slow", experience: 150  },
-{id: 151, name: "Mew", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "psychic", attack: 100, route:null, health:100, levelType: "medium slow", experience: 150  },
+{id: 150, name: "Mewtwo", catchRate: 3, evolution: null, evoLevel: null, evolved: 0, type: "psychic", attack: 110, route:75, health:100, levelType: "slow", experience: 150  },
+{id: 151, name: "Mew", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "psychic", attack: 100, route:100, health:100, levelType: "medium slow", experience: 150  },
 ];
 
 var alreadyUpgrade = function(name){
@@ -309,12 +309,14 @@ $(document).ready(function(){
 	// Allows the player to move to the previous route
 	$("body").on('click',"#routeLeft", function(){
 		player.route--;
+		generatePokemon(player.route);
 		updateAll();
 	})
 	
 	// Allows the player to move to the next route
 	$("body").on('click',"#routeRight", function(){
 		player.route++;
+		generatePokemon(player.route);
 		updateAll();
 	})	
 	
@@ -656,9 +658,15 @@ var generatePokemon = function (route){
 		randomPokemon = pokemonList[Math.floor(Math.random()*pokemonList.length)];
 	}
 	
+	var legendary = generateLegendary();
+	if( legendary){
+		randomPokemon = pokemonByName(legendary);
+	}
+	console.log(randomPokemon);
 	curEnemy.name = randomPokemon.name;
 	curEnemy.id = randomPokemon.id;
 	curEnemy.health = 20+randomPokemon.health*1/4*randomPokemon.route*(player.caughtPokemonList.length-1);
+	console.log(randomPokemon.health);
 	curEnemy.maxHealth = curEnemy.health;
 	curEnemy.catchRate = Math.floor(Math.pow(randomPokemon.catchRate,0.8));
 	curEnemy.alive = true;
@@ -678,6 +686,62 @@ var checkEvolution = function(){
 	}
 }
 
+var pokemonByName = function(name){
+	for( var i = 0; i<pokemonList.length; i++){
+		if(pokemonList[i].name == name){
+			return pokemonList[i];
+		}
+	}
+}
+
+var generateLegendary = function(){
+	var chance = Math.floor(Math.random()*100+1);
+	if (chance < 2){
+		chance = Math.floor(Math.random()*100+1);
+		if(chance == 1){
+			return "Mew";
+		}
+		if(chance == 2){
+			return "Mewtwo";
+		}
+		if (chance < 33){
+			return "Articuno";
+		}
+		else if (chance <66){
+			return "Zapdos";
+		}
+		else if (chance <100){
+			return "Moltres";
+		}
+	}
+	return false;
+}
+
+var testLegendary = function(tries){
+	var uno = 0;
+	var dos = 0;
+	var tres = 0;
+	var mew = 0;
+	var two = 0;
+	var fail = 0;
+	
+	for( var i = 0; i<tries; i++){
+		var pokemon = generateLegendary();
+	if(!pokemon ){ fail++;}
+	if(pokemon == "Articuno"){uno++;}
+	if(pokemon == "Zapdos"){dos++;}
+	if(pokemon == "Moltres"){tres++;}
+	if(pokemon == "Mew"){mew++;}
+	if(pokemon == "Mewtwo"){two++;}
+	}
+	console.log(tries+" tries");
+	console.log("Articuno: "+uno);
+	console.log("Zapdos: "+dos);
+	console.log("Moltres: "+tres);
+	console.log("Mew: "+mew);
+	console.log("Mewtwo: "+two);
+	console.log("False: "+fail);
+}
 
 
 // Returns true is the route is valid by checking if there
