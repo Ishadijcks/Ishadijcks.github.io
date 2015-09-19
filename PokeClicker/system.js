@@ -260,12 +260,16 @@ $(document).ready(function(){
 	}
 	initUpgrades();
 
+	
+	if(player.starter != "none"){
 	updateAll();
-
+	}
+	
 	setInterval(function(){
-
+		if(player.starter != "none"){
 		curEnemy.health -= player.attack*player.attackMultiplier;
 		updateAll();
+		}
 	},1000);
 
 	$("body").on('click',"#enemy", function(){
@@ -382,7 +386,7 @@ $(document).ready(function(){
 	log("And perhaps you'll get lucky and catch one");
 	log("So they will fight wild pokemon for you!");
 	log("Buy upgrades to increase your catch rate");
-	log("Defeat 10 pokemon on a route to get access to the next");
+	log("Defeat 5 pokemon on a route to get access to the next");
 	log("Have fun!");
 
 });
@@ -401,7 +405,7 @@ var updateAll = function(){
 // Returns true if the player has access to this route
 var accessToRoute = function(route){
 	for (var i = 1; i<route; i++){
-		if(player.routeKills[i] <10 || player.routeKills[i] == undefined){
+		if(player.routeKills[i] < 5 || player.routeKills[i] == undefined){
 			return false;
 		}
 	}
@@ -557,7 +561,7 @@ var enemyDefeated = function(){
 		updateRoute();
 		log("You earned " + Math.floor(money) + " money!");
 
-		var catchRate = curEnemy.catchRate + player.catchBonus;
+		var catchRate = curEnemy.catchRate + player.catchBonus-10;
 		$("#catchDisplay").html("Catch chance: "+Math.min(100,catchRate));
 		
 		setTimeout(function(){ 
@@ -662,11 +666,11 @@ var generatePokemon = function (route){
 	if( legendary){
 		randomPokemon = pokemonByName(legendary);
 	}
-	console.log(randomPokemon);
+//	console.log(randomPokemon);
 	curEnemy.name = randomPokemon.name;
 	curEnemy.id = randomPokemon.id;
 	curEnemy.health = 20+randomPokemon.health*1/4*randomPokemon.route*(player.caughtPokemonList.length-1);
-	console.log(randomPokemon.health);
+//	console.log(randomPokemon.health);
 	curEnemy.maxHealth = curEnemy.health;
 	curEnemy.catchRate = Math.floor(Math.pow(randomPokemon.catchRate,0.8));
 	curEnemy.alive = true;
@@ -695,8 +699,8 @@ var pokemonByName = function(name){
 }
 
 var generateLegendary = function(){
-	var chance = Math.floor(Math.random()*100+1);
-	if (chance < 2){
+	var chance = Math.floor(Math.random()*200+1);
+	if (chance < 3){
 		chance = Math.floor(Math.random()*100+1);
 		if(chance == 1){
 			return "Mew";
@@ -823,7 +827,7 @@ var updateStats = function(){
 
 
 var updateRoute = function(){
-	$("#currentRoute").html("Route "+player.route+ "<br>"+Math.min(10,player.routeKills[player.route])+"/10");
+	$("#currentRoute").html("Route "+player.route+ "<br>"+Math.min(5,player.routeKills[player.route])+"/5");
 	if(accessToRoute(player.route+1)){
 		$("#routeRight").show();
 	}
