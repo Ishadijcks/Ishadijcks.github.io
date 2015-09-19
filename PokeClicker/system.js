@@ -821,7 +821,7 @@ var updateCaughtList = function(){
 // Update the stats
 var updateStats = function(){
 	$("#statBox").html("Stats<br><br>Money<br>Click attack<br>Pokemon attack<br>Exp multiplier<br>Catch bonus<br>Catch time<br>Pokeballs<br>Route");
-	$("#statBoxStats").html("<br><br>"+player.money+"<br>"+player.clickAttack*player.clickMultiplier+"<br>"+player.attack*player.attackMultiplier+"<br>"+player.expMultiplier+"x<br>"+player.catchBonus+"%<br>"+player.catchTime/1000+" sec<br>"+player.pokeballs+"<br>"+player.route);	
+	$("#statBoxStats").html("<br><br>"+player.money+"<br>"+player.clickAttack*player.clickMultiplier+"<br>"+player.attack*player.attackMultiplier+"<br>"+player.expMultiplier.toFixed(2)+"x<br>"+player.catchBonus+"%<br>"+player.catchTime/1000+" sec<br>"+player.pokeballs+"<br>"+player.route);	
 }
 
 
