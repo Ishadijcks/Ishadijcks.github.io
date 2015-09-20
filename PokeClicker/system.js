@@ -719,7 +719,7 @@ var generatePokemon = function (route){
 			i = 100;
 		}
 		if(i == 99 && !correctRoute(randomRoute)){
-			randomRoute = 1;
+			randomRoute = 30;
 			i = 100;
 		}
 	}
