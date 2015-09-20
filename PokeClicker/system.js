@@ -359,36 +359,21 @@ $(document).ready(function(){
 		updateCaughtList();
 	})
 
-	var sortByName = function(){
-	console.log("asd");
-		player.caughtPokemonList.sort(compareByName);
-		updateCaughtList();
-	}
+	
 	
 	$("body").on('click',"#AttackCaughtPokemon", function(){
 		player.caughtPokemonList.sort(compareByAttack);
 		updateCaughtList();
 	})
 	
-	var sortByAttack = function(){
-		player.caughtPokemonList.sort(compareByAttack);
-		updateCaughtList();
-	}
+
 
 	$("body").on('click',"#LevelCaughtPokemon", function(){
 		player.caughtPokemonList.sort(compareByLevel);
 		updateCaughtList();
 	})
 	
-	var sortByLevel = function(){
-		player.caughtPokemonList.sort(compareByLevel);
-		updateCaughtList();
-	}
-	
-	var sortById = function(){
-		player.caughtPokemonList.sort(compareById);
-		updateCaughtList();
-	}
+
 	// Navbar Button controllers
 	$("body").on('click',"#badgeButton", function(){
 		$("#badgeModal").modal("show");
@@ -442,6 +427,9 @@ var sortChange = function() {
 		case "level":
 			player.caughtPokemonList.sort(compareByLevel);
 			break;
+		case "time":
+			player.caughtPokemonList.sort(compareByTimeStamp);
+			break
 	}
 	
 	updateCaughtList();
@@ -656,6 +644,7 @@ var capturePokemon = function(name){
 	if(!alreadyCaught(name)){
 		for( var i = 0; i<pokemonList.length; i++){
 			if (pokemonList[i].name == name){
+				pokemonList[i].timeStamp = Math.floor(Date.now() / 1000);
 				player.caughtPokemonList.push(pokemonList[i]);
 				calculateAttack();
 			}
@@ -923,6 +912,14 @@ function compareById(a,b) {
   return 0;
 }
 
+function compareByTimeStamp(a,b) {
+  if (a.timeStamp < b.timeStamp)
+    return -1;
+  if (a.timeStamp > b.timeStamp)
+    return 1;
+  return 0;
+}
+
 function compareByLevel(a,b) {
   if (experienceToLevel(a.experience,a.levelType) > experienceToLevel(b.experience,b.levelType))
     return -1;
@@ -940,3 +937,4 @@ function compareByAttack(a,b) {
     return 1;
   return 0;
 }
+
