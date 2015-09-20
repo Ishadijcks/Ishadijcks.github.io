@@ -759,26 +759,28 @@ var pokemonByName = function(name){
 }
 
 var generateLegendary = function(){
-	var chance = Math.floor(Math.random()*200+1);
-	if (chance < 3){
-		chance = Math.floor(Math.random()*100+1);
-		if(chance == 1){
-			return "Mew";
+	if(player.route > 9){
+		var chance = Math.floor(Math.random()*500+1);
+		if (chance < 3){
+			chance = Math.floor(Math.random()*100+1);
+			if(chance == 1){
+				return "Mew";
+			}
+			if(chance == 2){
+				return "Mewtwo";
+			}
+			if (chance < 33){
+				return "Articuno";
+			}
+			else if (chance <66){
+				return "Zapdos";
+			}
+			else if (chance <100){
+				return "Moltres";
+			}
 		}
-		if(chance == 2){
-			return "Mewtwo";
-		}
-		if (chance < 33){
-			return "Articuno";
-		}
-		else if (chance <66){
-			return "Zapdos";
-		}
-		else if (chance <100){
-			return "Moltres";
-		}
+		return false;
 	}
-	return false;
 }
 
 var testLegendary = function(tries){
