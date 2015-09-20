@@ -70,6 +70,7 @@
 	border-left: 1px solid black;
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;	
+	width:10% !important
 	
 }
 
@@ -77,7 +78,7 @@
 
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;	
-	width:5% !important
+	width:3% !important
 }
 
 #LevelCaughtPokemon{
@@ -85,7 +86,7 @@
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;	
 	text-align:left;
-	width:5% !important	
+	width:3% !important	
 }
 
 #statBox{
