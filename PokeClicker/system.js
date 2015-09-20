@@ -624,7 +624,13 @@ var enemyDefeated = function(){
 		$("#catchDisplay").html("Catch chance: "+Math.min(100,catchRate));
 		
 		setTimeout(function(){ 
+			
+			if(alreadyCaught(curEnemy.name)){
+			$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=enemy src=images/"+curEnemy.id+".png>");
+			}
+			else{
 			$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img height=96px width=96px id=enemy src=images/Pokeball.PNG>");
+			}
 			player.pokeballs--;
 		}, 1);
 		
