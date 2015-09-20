@@ -25,7 +25,7 @@ var pokemonList = [
 {id: 22, name: "Fearow", catchRate: 90, evolution: null, evoLevel: null, evolved: 0, type: "flying", attack: 90, route:9, health:100, levelType: "medium fast", experience: 150  },
 {id: 23, name: "Ekans", catchRate: 255, evolution: "Arbok", evoLevel: 22, evolved: 0, type: "poison", attack: 60, route:4, health:100, levelType: "medium fast", experience: 150  },
 {id: 24, name: "Arbok", catchRate: 90, evolution: null, evoLevel: null, evolved: 0, type: "poison", attack: 85, route:23, health:100, levelType: "medium fast", experience: 150  },
-{id: 25, name: "Pikachu", catchRate: 190, evolution: "Raichu", evoLevel: "Thunder Stone", evolved: 0, type: "electric", attack: 55, route:null, health:100, levelType: "medium fast", experience: 150  },
+{id: 25, name: "Pikachu", catchRate: 190, evolution: "Raichu", evoLevel: "Thunder Stone", evolved: 0, type: "electric", attack: 55, route:25, health:100, levelType: "medium fast", experience: 150  },
 {id: 26, name: "Raichu", catchRate: 75, evolution: null, evoLevel: null, evolved: 0, type: "electric", attack: 90, route:null, health:100, levelType: "medium fast", experience: 150  },
 {id: 27, name: "Sandshrew", catchRate: 255, evolution: "Sandslash", evoLevel: 22, evolved: 0, type: "ground", attack: 75, route:3, health:100, levelType: "medium fast", experience: 150  },
 {id: 28, name: "Sandslash", catchRate: 90, evolution: null, evoLevel: null, evolved: 0, type: "ground", attack: 100, route:23, health:100, levelType: "medium fast", experience: 150  },
@@ -35,22 +35,22 @@ var pokemonList = [
 {id: 32, name: "Nidoran♂", catchRate: 235, evolution: "Nidorino", evoLevel: 16, evolved: 0, type: "poison", attack: 57, route:2, health:100, levelType: "medium slow", experience: 150  },
 {id: 33, name: "Nidorino", catchRate: 120, evolution: "Nidoking", evoLevel: "Moon Stone", evolved: 0, type: "poison", attack: 72, route:9, health:100, levelType: "medium slow", experience: 150  },
 {id: 34, name: "Nidoking", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "poison", attack: 92, route:null, health:100, levelType: "medium slow", experience: 150  },
-{id: 35, name: "Clefairy", catchRate: 150, evolution: "Clefable", evoLevel: "Moon Stone", evolved: 0, type: "normal", attack: 45, route:null, health:100, levelType: "fast", experience: 150  },
+{id: 35, name: "Clefairy", catchRate: 150, evolution: "Clefable", evoLevel: "Moon Stone", evolved: 0, type: "normal", attack: 45, route:25, health:100, levelType: "fast", experience: 150  },
 {id: 36, name: "Clefable", catchRate: 25, evolution: null, evoLevel: null, evolved: 0, type: "normal", attack: 70, route:null, health:100, levelType: "fast", experience: 150  },
 {id: 37, name: "Vulpix", catchRate: 190, evolution: "Ninetales", evoLevel: "Fire Stone", evolved: 0, type: "fire", attack: 41, route:7, health:100, levelType: "medium fast", experience: 150  },
 {id: 38, name: "Ninetales", catchRate: 75, evolution: null, evoLevel: null, evolved: 0, type: "fire", attack: 76, route:null, health:100, levelType: "medium fast", experience: 150  },
 {id: 39, name: "Jigglypuff", catchRate: 170, evolution: "Wigglytuff", evoLevel: "Moon Stone", evolved: 0, type: "normal", attack: 45, route:3, health:100, levelType: "fast", experience: 150  },
 {id: 40, name: "Wigglytuff", catchRate: 50, evolution: null, evoLevel: null, evolved: 0, type: "normal", attack: 70, route:null, health:100, levelType: "fast", experience: 150  },
-{id: 41, name: "Zubat", catchRate: 2550, evolution: "Golbat", evoLevel: 22, evolved: 0, type: "poison", attack: 45, route:null, health:100, levelType: "medium fast", experience: 150  },
+{id: 41, name: "Zubat", catchRate: 2550, evolution: "Golbat", evoLevel: 22, evolved: 0, type: "poison", attack: 45, route:26, health:100, levelType: "medium fast", experience: 150  },
 {id: 42, name: "Golbat", catchRate: 90, evolution: null, evoLevel: null, evolved: 0, type: "poison", attack: 80, route:null, health:100, levelType: "medium fast", experience: 150  },
 {id: 43, name: "Oddish", catchRate: 255, evolution: "Gloom", evoLevel: 21, evolved: 0, type: "grass", attack: 50, route:5, health:100, levelType: "medium slow", experience: 150  },
 {id: 44, name: "Gloom", catchRate: 120, evolution: "Vileplume", evoLevel: "Leaf Stone", evolved: 0, type: "grass", attack: 65, route:12, health:100, levelType: "medium slow", experience: 150  },
 {id: 45, name: "Vileplume", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "grass", attack: 80, route:null, health:100, levelType: "medium slow", experience: 150  },
-{id: 46, name: "Paras", catchRate: 190, evolution: "Parasect", evoLevel: 24, evolved: 0, type: "grass", attack: 70, route:null, health:100, levelType: "medium fast", experience: 150  },
+{id: 46, name: "Paras", catchRate: 190, evolution: "Parasect", evoLevel: 24, evolved: 0, type: "grass", attack: 70, route:27, health:100, levelType: "medium fast", experience: 150  },
 {id: 47, name: "Parasect", catchRate: 75, evolution: null, evoLevel: null, evolved: 0, type: "grass", attack: 95, route:null, health:100, levelType: "medium fast", experience: 150  },
 {id: 48, name: "Venonat", catchRate: 190, evolution: "Venomoth", evoLevel: 31, evolved: 0, type: "grass", attack: 55, route:12, health:100, levelType: "medium fast", experience: 150  },
 {id: 49, name: "Venomoth", catchRate: 75, evolution: null, evoLevel: null, evolved: 0, type: "grass", attack: 65, route:14, health:100, levelType: "medium fast", experience: 150  },
-{id: 50, name: "Diglett", catchRate: 255, evolution: "Dugtrio", evoLevel: 26, evolved: 0, type: "ground", attack: 55, route:null, health:100, levelType: "medium fast", experience: 150  },
+{id: 50, name: "Diglett", catchRate: 255, evolution: "Dugtrio", evoLevel: 26, evolved: 0, type: "ground", attack: 55, route:28, health:100, levelType: "medium fast", experience: 150  },
 {id: 51, name: "Dugtrio", catchRate: 50, evolution: null, evoLevel: null, evolved: 0, type: "ground", attack: 80, route:null, health:100, levelType: "medium fast", experience: 150  },
 {id: 52, name: "Meowth", catchRate: 255, evolution: "Persian", evoLevel: 28, evolved: 0, type: "normal", attack: 45, route:5, health:100, levelType: "medium fast", experience: 150  },
 {id: 53, name: "Persian", catchRate: 90, evolution: null, evoLevel: null, evolved: 0, type: "normal", attack: 70, route:null, health:100, levelType: "medium fast", experience: 150  },
@@ -74,7 +74,7 @@ var pokemonList = [
 {id: 71, name: "Victreebel", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "grass", attack: 105, route:null, health:100, levelType: "medium slow", experience: 150  },
 {id: 72, name: "Tentacool", catchRate: 190, evolution: "Tentacruel", evoLevel: 30, evolved: 0, type: "water", attack: 40, route:11, health:100, levelType: "slow", experience: 150  },
 {id: 73, name: "Tentacruel", catchRate: 60, evolution: null, evoLevel: null, evolved: 0, type: "water", attack: 70, route:19, health:100, levelType: "slow", experience: 150  },
-{id: 74, name: "Geodude", catchRate: 255, evolution: "Graveler", evoLevel: 25, evolved: 0, type: "rock", attack: 80, route:null, health:100, levelType: "medium slow", experience: 150  },
+{id: 74, name: "Geodude", catchRate: 255, evolution: "Graveler", evoLevel: 25, evolved: 0, type: "rock", attack: 80, route:18, health:100, levelType: "medium slow", experience: 150  },
 {id: 75, name: "Graveler", catchRate: 120, evolution: "Golem", evoLevel: "Trade", evolved: 0, type: "rock", attack: 95, route:null, health:100, levelType: "medium slow", experience: 150  },
 {id: 76, name: "Golem", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "rock", attack: 110, route:null, health:100, levelType: "medium slow", experience: 150  },
 {id: 77, name: "Ponyta", catchRate: 190, evolution: "Rapidash", evoLevel: 40, evolved: 0, type: "fire", attack: 85, route:17, health:100, levelType: "medium fast", experience: 150  },
@@ -86,7 +86,7 @@ var pokemonList = [
 {id: 83, name: "Farfetch'd", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "normal", attack: 65, route:12, health:100, levelType: "medium fast", experience: 150  },
 {id: 84, name: "Doduo", catchRate: 190, evolution: "Dodrio", evoLevel: 31, evolved: 0, type: "normal", attack: 85, route:16, health:100, levelType: "medium fast", experience: 150  },
 {id: 85, name: "Dodrio", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "normal", attack: 110, route:17, health:100, levelType: "medium fast", experience: 150  },
-{id: 86, name: "Seel", catchRate: 190, evolution: "Dewgong", evoLevel: 34, evolved: 0, type: "water", attack: 45, route:null, health:100, levelType: "medium fast", experience: 150  },
+{id: 86, name: "Seel", catchRate: 190, evolution: "Dewgong", evoLevel: 34, evolved: 0, type: "water", attack: 45, route:30, health:100, levelType: "medium fast", experience: 150  },
 {id: 87, name: "Dewgong", catchRate: 75, evolution: null, evoLevel: null, evolved: 0, type: "water", attack: 70, route:null, health:100, levelType: "medium fast", experience: 150  },
 {id: 88, name: "Grimer", catchRate: 190, evolution: "Muk", evoLevel: 38, evolved: 0, type: "poison", attack: 80, route:null, health:100, levelType: "medium fast", experience: 150  },
 {id: 89, name: "Muk", catchRate: 75, evolution: null, evoLevel: null, evolved: 0, type: "poison", attack: 105, route:null, health:100, levelType: "medium fast", experience: 150  },
@@ -634,6 +634,7 @@ var enemyDefeated = function(){
 			var chance = Math.floor(Math.random()*100+1);
 			if(chance<=curEnemy.catchRate+player.catchBonus){
 				capturePokemon(curEnemy.name);
+				
 			}
 		
 		generatePokemon(player.route);
@@ -670,6 +671,7 @@ var capturePokemon = function(name){
 	
 	updateCaughtList();
 	updateStats();
+	sortChange();
 }
 
 // Checks if you already caught a pokemon
