@@ -41,8 +41,17 @@
 	width:90% !important
 }
 
+#alreadyCaughtImage{
+	height:16px;
+	width:16px;
+}
 #myModalLabel{
 	text-align:center;
+}
+
+#changeLogModal .modal-dialog
+{
+    width: 1000px; /* your width */
 }
 
 #starterPokemons{
@@ -57,11 +66,11 @@
 	overflow: scroll;
 }
 
-#caughtPokemon{
+#pokemons{
 	border-left: 1px solid black;
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;	
-	width:10% !important;
+	
 }
 
 #AttackCaughtPokemon{

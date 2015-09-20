@@ -15,7 +15,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	
-	<script>
+<!--	<script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -25,17 +25,32 @@
   ga('send', 'pageview');
 
 </script>
-
+-->
 	
 		</head>
 <body>	
 	<div class="container">
 	<br>	
 		<div class="row">
-			<div class="col-sm-1" id="caughtPokemon"> Name</div>
+	
+			<div class="col-sm-1" id="pokemons">
+			
+			<select id="sortBox"  onchange="sortChange()">
+				<option> Sort by... </option>
+				<option value ="id">Pokedex #</option>
+				<option value ="name">Name</option>
+				<option value ="attack">Attack</option>
+				<option value ="level">Level</option>
+			</select>
+			 Name
+			<div id="caughtPokemon"></div>
+			</div>
 			<div class="col-sm-1" id="AttackCaughtPokemon"> Attack</div>
 			<div class="col-sm-1" id="LevelCaughtPokemon"> Level</div>
 
+
+			
+			
 			<div class="col-sm-4 col-md-offset-1" id="currentEnemy"> 
 				<span id="routeLeft" class="glyphicon glyphicon-arrow-left"></span>
 				<span id="currentRoute"></span> 
@@ -65,6 +80,7 @@
 			<button id="badgeButton" class="btn-success">Badges</button>
 			<button id="pokedexButton" class="btn-danger">Pokedex</button>
 			<button id="mapButton" class="btn-info">Map</button>
+			<button id="changeLogButton" class="btn-info">Changelog</button>
 			<button id="resetButton" class="btn-danger">Reset</button>
 		</div>
 		
@@ -130,13 +146,100 @@
 				<h4 class="modal-title" id="myModalLabel">Pokedex</h4>
 			  </div>
 			  <div id="myModalBody" class="modal-body">
-				asdasd
+				Will be implemented soon!
 
 			  </div>
 			 
 			</div>
 		  </div>
 		</div>	
+		
+				<!-- changelog Modal -->
+		<div class="modal fade" id="changeLogModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h4 class="modal-title" id="myModalLabel">Changelog</h4>
+			  </div>
+			  <div id="changeLogBody" class="modal-body">
+				<br>
+		
+				<div class="entry-content">
+					
+					<div id="0.1">
+					<p><img src="Images/version.png" alt="Version: "> <big><strong>0.1</strong> - <span>Reddit feedback</span></big></p>
+					<p><em>Release Date: Sep. 20, 2015</em></p>
+					
+					<h4>Changelog</h4>
+						<li>Added a changelog (thanks to Volbric)</li>
+						<li>Here you can read about all the updates I make to this game (thanks to me :)</li>
+					<h4>Small additions</h4>
+						<li>Pokemon can now be sorted by PokeDex entry, Name, Level and Attack (thanks to Pedter)</li>
+						<li>A little pokeball it added to a wild pokemon name if you already caught it (thanks to TheTreester)</li>
+					<h4>Bug fixes</h4>
+						<li>Removed pokeballs until I implement a way to regain them (thanks to Yocoolman)</li>
+						<li>Fixed the pokemonbox clipping with the log (thanks to Rarylith)</li>
+						<li>Fixed the upgradebox being pushed down by the pokemonbox (thanks to Rarylith)</li>
+						<li>Fixed a javascript floating point error (thanks to Rarylith)</li>
+						<hr>
+					</div>
+					
+					<div id="0.09">
+					<p><img src="Images/version.png" alt="Version: "> <big><strong>0.09</strong> - <span>Legendaries</span></big></p>
+					<p><em>Release Date: Sep. 18, 2015</em></p>
+					<h4>Legendaries</h4>
+						<li>The player now has a small chance to encounter legendaries</li>
+							<ul>
+								<li>Legendaries are rare pokemon who are a lot stronger than other pokemon</li>
+								<li>Articuno, Zapdos, Moltres, Mew and Mewtwo are all in the game!</li>
+								<li>Everytime a pokemon spawns it has a chance to be a legendary</li>
+								<li>This chance can of course be improved by buying upgrades</li>
+							
+							</ul>
+							<hr>
+					</div>
+					
+					<div id="0.08">
+					<p><img src="Images/version.png" alt="Version: "> <big><strong>0.08</strong> - <span>Dynamic catch rate</span></big></p>
+					<p><em>Release Date: Sep. 16, 2015</em></p>
+					<h4>Pokemon</h4>
+						<li>Catch rate is no longer fixed for all pokemon</li>
+							<ul>
+								<li>Weak pokemon have a higher chance to be caught than strong pokemon</li>
+								<li>Your overall catch chance can still be upgraded!</li>
+							
+							</ul>
+					<h4>Savefile</h4>
+						<li>You no longer need to delete your savefile every time the game updates</li>
+						<hr>
+					</div>
+					
+					<div id="0.07">
+					<p><img src="Images/version.png" alt="Version: "> <big><strong>0.07</strong> - <span>Evolution</span></big></p>
+					<p><em>Release Date: Sep. 15, 2015</em></p>
+					<h4>Pokemon</h4>
+						<li>Pokemon can now evolve!</li>
+							<ul>
+								<li>When a pokemon reaches a high enough level it can evolve</li>
+								<li>When a pokemon evolves, you keep the pokemon and get the evolution at level 1</li>
+								<li>Example: I have a level 15 Pidgey, and it reaches level 16. I end up with a level 16 pidgey and a level 1 pidgeotto</li>
+								
+							
+							</ul>
+							<hr>
+					</div>
+					
+					
+				</div>
+		
+		
+			  </div>
+			 
+			</div>
+		  </div>
+		</div>	
+		
+		
 	</div>
 	
 	
