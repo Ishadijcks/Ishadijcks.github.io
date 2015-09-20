@@ -671,8 +671,9 @@ var capturePokemon = function(name){
 	
 	else{
 		log(name+" has already been caught!");
-		log("You managed to sell the "+name+" for " + 50*curEnemy.route + " money!");
-		player.money += Math.floor(50*curEnemy.route*player.moneyMultiplier);
+		var getMoney = Math.floor(50*curEnemy.route*player.moneyMultiplier);
+		log("You managed to sell the "+name+" for " + getMoney + " money!");
+		player.money += getMoney;
 	}
 	
 	updateCaughtList();
