@@ -597,7 +597,7 @@ var updateEnemy = function(){
 	}
 	if (curEnemy.alive){
 		if(alreadyCaught(curEnemy.name)){
-			$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.png><br><img id=enemy src=images/"+curEnemy.id+".png>");
+			$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=enemy src=images/"+curEnemy.id+".png>");
 		}
 		else{
 			$("#enemyInfo").html("<br>"+curEnemy.name+"<br><img id=enemy src=images/"+curEnemy.id+".png>");
@@ -839,9 +839,6 @@ var log = function(text){
 var updateUpgrades = function(){
 	$(".upgradeBoxes").remove();
 	for( var i = 0; i<player.upgradeList.length; i++){
-		console.log(player.upgradeList[i].name);
-		console.log(player.upgradeList[i].requiredUpgrade);
-		console.log(alreadyUpgradeId(player.upgradeList[i].requiredUpgrade));
 		if( player.upgradeList[i].require <= boughtUpgrades() && 
 		    !player.upgradeList[i].bought && 
 			(alreadyUpgradeId(player.upgradeList[i].requiredUpgrade) || player.upgradeList[i].requiredUpgrade == null )){
