@@ -475,7 +475,7 @@ var applyUpgrade = function(type, amount){
 			break;
 		case "catchTime":
 			player.catchTime -= amount;
-			log("Your catch time is decreased by "+amount+ " seconds");
+			log("Your catch time is decreased by "+amount+ " milliseconds");
 			break;
 		case "moneyMultiplier":
 			player.moneyMultiplier += amount;
@@ -659,7 +659,7 @@ var capturePokemon = function(name){
 				calculateAttack();
 			}
 		}
-		log("You succesfully caught "+name);
+		log("You successfully caught "+name);
 
 	}
 	
