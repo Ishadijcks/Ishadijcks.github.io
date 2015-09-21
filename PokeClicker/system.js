@@ -144,13 +144,13 @@ var pokemonList = [
 {id: 141, name: "Kabutops", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "rock", attack: 115, route:null, health:100, levelType: "medium fast", experience: 150  },
 {id: 142, name: "Aerodactyl", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "rock", attack: 105, route:null, health:100, levelType: "slow", experience: 150  },
 {id: 143, name: "Snorlax", catchRate: 25, evolution: null, evoLevel: null, evolved: 0, type: "normal", attack: 110, route:16, health:100, levelType: "slow", experience: 150  },
-{id: 144, name: "Articuno", catchRate: 3, evolution: null, evoLevel: null, evolved: 0, type: "ice", attack: 85, route:50, health:100, levelType: "slow", experience: 150  },
-{id: 145, name: "Zapdos", catchRate: 3, evolution: null, evoLevel: null, evolved: 0, type: "electric", attack: 90, route:50, health:100, levelType: "slow", experience: 150  },
-{id: 146, name: "Moltres", catchRate: 3, evolution: null, evoLevel: null, evolved: 0, type: "fire", attack: 100, route:50, health:100, levelType: "slow", experience: 150  },
+{id: 144, name: "Articuno", catchRate: 3, evolution: null, evoLevel: null, evolved: 0, type: "ice", attack: 85, route:100, health:100, levelType: "slow", experience: 150  },
+{id: 145, name: "Zapdos", catchRate: 3, evolution: null, evoLevel: null, evolved: 0, type: "electric", attack: 90, route:100, health:100, levelType: "slow", experience: 150  },
+{id: 146, name: "Moltres", catchRate: 3, evolution: null, evoLevel: null, evolved: 0, type: "fire", attack: 100, route:100, health:100, levelType: "slow", experience: 150  },
 {id: 147, name: "Dratini", catchRate: 45, evolution: "Dragonair", evoLevel: 30, evolved: 0, type: "dragon", attack: 64, route:null, health:100, levelType: "slow", experience: 150  },
 {id: 148, name: "Dragonair", catchRate: 45, evolution: "Dragonite", evoLevel: 55, evolved: 0, type: "dragon", attack: 84, route:null, health:100, levelType: "slow", experience: 150  },
 {id: 149, name: "Dragonite", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "dragon", attack: 134, route:null, health:100, levelType: "slow", experience: 150  },
-{id: 150, name: "Mewtwo", catchRate: 3, evolution: null, evoLevel: null, evolved: 0, type: "psychic", attack: 110, route:75, health:100, levelType: "slow", experience: 150  },
+{id: 150, name: "Mewtwo", catchRate: 3, evolution: null, evoLevel: null, evolved: 0, type: "psychic", attack: 110, route:100, health:100, levelType: "slow", experience: 150  },
 {id: 151, name: "Mew", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "psychic", attack: 100, route:100, health:100, levelType: "medium slow", experience: 150  },
 ];
 
