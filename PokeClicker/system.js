@@ -713,15 +713,15 @@ var calculateAttack = function(){
 // TODO
 var generatePokemon = function (route){
 	var randomRoute = 0;
-
+	var decrease = 0;
 	for( var i = 0; i<100; i++){
-		randomRoute =  Math.max(1,player.route-Math.floor(Math.random()*player.routeVariation));
+		randomRoute =  Math.max(1,player.route-Math.floor(Math.random()*player.routeVariation)-decrease);
 		if(correctRoute(randomRoute)){
 			i = 100;
 		}
 		if(i == 99 && !correctRoute(randomRoute)){
-			randomRoute = 30;
-			i = 100;
+			decrease++;
+			i = 1;
 		}
 	}
 	
