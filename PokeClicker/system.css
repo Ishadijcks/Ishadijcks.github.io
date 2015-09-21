@@ -105,6 +105,10 @@
 	width:8% !important
 }
 
+#enemy:hover{
+	cursor:pointer
+}
+
 #currentEnemy{
 	border: 1px solid black;
 	text-align:center
