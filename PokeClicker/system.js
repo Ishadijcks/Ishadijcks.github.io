@@ -202,7 +202,7 @@ var addUpgrade = function(name,cost,type,amount,require,flavorText, requiredUpgr
 //									name,cost,type,amount,require,flavorText
 var initUpgrades = function(){
 	addUpgrade("Pokeball upgrade I",1000, "catchBonus",3,0,"New technology gives you a 3% bonus to catch rate",null); 
-	addUpgrade("Pokeball upgrade II",5000, "catchBonus",3,3,"New technology gives you a 3% bonus to catch rate"),0; 
+	addUpgrade("Pokeball upgrade II",5000, "catchBonus",3,3,"New technology gives you a 3% bonus to catch rate",0); 
 	addUpgrade("Pokeball upgrade III",10000, "catchBonus",3,5,"New technology gives you a 3% bonus to catch rate",1); 
 	addUpgrade("Pokeball upgrade IV",25000, "catchBonus",3,7,"New technology gives you a 3% bonus to catch rate",2); 
 	addUpgrade("Pokeball upgrade V",75000, "catchBonus",10,10,"New technology gives you a 10% bonus to catch rate",3); 
