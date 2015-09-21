@@ -438,7 +438,9 @@ var sortChange = function() {
 			break;
 		case "time":
 			player.caughtPokemonList.sort(compareByTimeStamp);
-			break
+			break;
+		case "rarity":
+			player.caughtPokemonList.sort(compareByRarity);
 	}
 	
 	updateCaughtList();
