@@ -439,8 +439,8 @@ var sortChange = function() {
 		case "time":
 			player.caughtPokemonList.sort(compareByTimeStamp);
 			break;
-		case "rarity":
-			player.caughtPokemonList.sort(compareByRarity);
+		case "catchRate":
+			player.caughtPokemonList.sort(compareByCatchRate);
 	}
 	
 	updateCaughtList();
@@ -940,6 +940,14 @@ function compareByTimeStamp(a,b) {
   if (a.timeStamp < b.timeStamp)
     return -1;
   if (a.timeStamp > b.timeStamp)
+    return 1;
+  return 0;
+}
+
+function compareByCatchRate(a,b) {
+  if (a.catchRate < b.catchRate)
+    return -1;
+  if (a.catchRate > b.catchRate)
     return 1;
   return 0;
 }
