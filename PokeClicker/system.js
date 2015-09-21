@@ -626,10 +626,10 @@ var enemyDefeated = function(){
 		setTimeout(function(){ 
 			
 			if(alreadyCaught(curEnemy.name)){
-			$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=enemy src=images/"+curEnemy.id+".png>");
+			$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img height=96px width=96px id=enemy src=images/Pokeball.PNG>");
 			}
 			else{
-			$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img height=96px width=96px id=enemy src=images/Pokeball.PNG>");
+			$("#enemyInfo").html("<br>"+curEnemy.name+" <br><img height=96px width=96px id=enemy src=images/Pokeball.PNG>");
 			}
 			player.pokeballs--;
 		}, 1);
