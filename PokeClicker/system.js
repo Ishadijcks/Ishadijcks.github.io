@@ -246,7 +246,8 @@ var player = {
 	starter: "none",
 	upgradeList: [],
 	gymBadges: 0,
-	version: "0.1"
+	version: version,
+	totalCaught: 0
 }
 
 var curEnemy = {
@@ -551,6 +552,8 @@ var load = function(){
 	if (typeof savegame.starter !== "undefined") player.starter = savegame.starter;
 	if (typeof savegame.upgradeList !== "undefined") player.upgradeList = savegame.upgradeList;
 	if (typeof savegame.gymBadges !== "undefined") player.gymBadges = savegame.gymBadges;
+	if (typeof savegame.totalCaught !== "undefined") player.totalCaught = savegame.totalCaught;
+	if (typeof savegame.version !== "undefined") player.version = savegame.version;
 	
 	
     var link = document.createElement('link');
@@ -686,7 +689,7 @@ var capturePokemon = function(name){
 			}
 		}
 		log("You successfully caught "+name);
-
+		
 	}
 	
 	else{
@@ -701,7 +704,7 @@ var capturePokemon = function(name){
 		log("You managed to sell the "+name+" for " + getMoney + " money!");
 		player.money += getMoney;
 	}
-	
+	player.totalCaught++;
 	updateCaughtList();
 	updateStats();
 	sortChange();
@@ -938,8 +941,8 @@ var updateCaughtList = function(){
 
 // Update the stats
 var updateStats = function(){
-	$("#statBox").html("Stats<br><br>Money<br>Click attack<br>Pokemon attack<br>Exp multiplier<br>Catch bonus<br>Catch time<br>Route");
-	$("#statBoxStats").html("<br><br>"+player.money+"<br>"+player.clickAttack*player.clickMultiplier+"<br>"+player.attack*player.attackMultiplier+"<br>"+player.expMultiplier.toFixed(2)+"x<br>"+player.catchBonus+"%<br>"+player.catchTime/1000+" sec<br>"+player.route);	
+	$("#statBox").html("Stats<br><br>Money<br>Click attack<br>Pokemon attack<br>Exp multiplier<br>Catch bonus<br>Catch time<br>Route<br>Pokemon Caught");
+	$("#statBoxStats").html("<br><br>"+player.money+"<br>"+player.clickAttack*player.clickMultiplier+"<br>"+player.attack*player.attackMultiplier+"<br>"+player.expMultiplier.toFixed(2)+"x<br>"+player.catchBonus+"%<br>"+player.catchTime/1000+" sec<br>"+player.route+"<br>"+player.totalCaught);	
 }
 
 
