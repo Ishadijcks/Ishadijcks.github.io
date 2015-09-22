@@ -729,8 +729,12 @@ var generatePokemon = function (route){
 	
 	var randomPokemon = pokemonList[Math.floor(Math.random()*pokemonList.length)];
 	
+	if(route> 30){
+	
 	while (randomPokemon.route != randomRoute){
 		randomPokemon = pokemonList[Math.floor(Math.random()*pokemonList.length)];
+	}
+	
 	}
 	
 	var legendary = generateLegendary();
