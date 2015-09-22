@@ -613,10 +613,17 @@ var updateEnemy = function(){
 var enemyDefeated = function(){
 	if (curEnemy.alive){
 		log("You defeated the wild "+ curEnemy.name);
+		if(player.route <30){
 		var money = 15 + Math.floor(Math.random()*30) + 8 * curEnemy.route;
+		var exp = 10 + Math.floor(Math.random()*10) + 3 *  curEnemy.route;
+		}
+		
+		else{
+		var money = 15 + Math.floor(Math.random()*30) + 8 * player.route;
+		var exp = 10 + Math.floor(Math.random()*10) + 3 * player.route;
+		}
 		money *= player.moneyMultiplier
 		player.money += Math.floor(money);
-		var exp = 10 + Math.floor(Math.random()*10) + 3 *  curEnemy.route;
 		getExp(exp);
 		player.routeKills[player.route]++
 		updateRoute();
@@ -673,7 +680,13 @@ var capturePokemon = function(name){
 	
 	else{
 		log(name+" has already been caught!");
+		if(player.route <30){
 		var getMoney = Math.floor(50*curEnemy.route*player.moneyMultiplier);
+		}
+		else{
+		var getMoney = Math.floor(50*player.route*player.moneyMultiplier);
+		
+		}
 		log("You managed to sell the "+name+" for " + getMoney + " money!");
 		player.money += getMoney;
 	}
