@@ -728,24 +728,39 @@ var generatePokemon = function (route){
 	}
 	
 	var randomPokemon = pokemonList[Math.floor(Math.random()*pokemonList.length)];
-	
-	if(route<30){
+	console.log("Route: "+ route);
+	console.log(randomPokemon);
+	if(route < 30){
 	
 	while (randomPokemon.route != randomRoute){
 		randomPokemon = pokemonList[Math.floor(Math.random()*pokemonList.length)];
+		console.log(randomPokemon.name);
+	}
+	}
+	else{
+		while (randomPokemon.route == 100 || randomPokemon.route == null){
+		randomPokemon = pokemonList[Math.floor(Math.random()*pokemonList.length)];
+		console.log(randomPokemon.name);
+		}	
 	}
 	
-	}
+	
 	
 	var legendary = generateLegendary();
 	if( legendary){
 		randomPokemon = pokemonByName(legendary);
 	}
-//	console.log(randomPokemon);
+
 	curEnemy.name = randomPokemon.name;
 	curEnemy.id = randomPokemon.id;
+	if(route<30){
 	curEnemy.health = 20+randomPokemon.health*1/4*randomPokemon.route*(player.caughtPokemonList.length-1);
-//	console.log(randomPokemon.health);
+	}
+	else{
+	curEnemy.health = 20+randomPokemon.health*1/4*player.route*(player.caughtPokemonList.length-1);
+	
+	}
+	
 	curEnemy.maxHealth = curEnemy.health;
 	curEnemy.catchRate = Math.floor(Math.pow(randomPokemon.catchRate,0.8));
 	curEnemy.alive = true;
