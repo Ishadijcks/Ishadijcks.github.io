@@ -328,16 +328,27 @@ $(document).ready(function(){
 	
 	// Allows the player to move to the previous route
 	$("body").on('click',"#routeLeft", function(){
+	console.log(curEnemy.alive);
+	if(curEnemy.alive){
 		player.route--;
 		generatePokemon(player.route);
 		updateAll();
+		}
+		else{
+	log("You can't switch routes while catching a pokemon");
+	}
 	})
 	
 	// Allows the player to move to the next route
 	$("body").on('click',"#routeRight", function(){
+	if(curEnemy.alive){
 		player.route++;
 		generatePokemon(player.route);
 		updateAll();
+	}
+	else{
+	log("You can't switch routes while catching a pokemon");
+	}
 	})	
 	
 	// Allows the player buy upgrades
@@ -741,8 +752,7 @@ var generatePokemon = function (route){
 	}
 	
 	var randomPokemon = pokemonList[Math.floor(Math.random()*pokemonList.length)];
-	console.log("Route: "+ route);
-	console.log(randomPokemon);
+
 	if(route < 30){
 	
 	while (randomPokemon.route != randomRoute){
