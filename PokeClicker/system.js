@@ -641,7 +641,7 @@ var enemyDefeated = function(){
 		getExp(exp);
 		player.routeKills[player.route]++
 		updateRoute();
-		log("You earned " + Math.floor(money) + " money!");
+		log("You earned $" + Math.floor(money) + "!");
 
 		var catchRate = curEnemy.catchRate + player.catchBonus-10;
 		$("#catchDisplay").html("Catch chance: "+Math.min(100,catchRate));
@@ -701,7 +701,7 @@ var capturePokemon = function(name){
 		var getMoney = Math.floor(50*player.route*player.moneyMultiplier);
 		
 		}
-		log("You managed to sell the "+name+" for " + getMoney + " money!");
+		log("You managed to sell the "+name+" for $" + getMoney + "!");
 		player.money += getMoney;
 	}
 	player.totalCaught++;
@@ -942,7 +942,7 @@ var updateCaughtList = function(){
 // Update the stats
 var updateStats = function(){
 	$("#statBox").html("Stats<br><br>Money<br>Click attack<br>Pokemon attack<br>Exp multiplier<br>Catch bonus<br>Catch time<br>Route<br>Pokemon Caught");
-	$("#statBoxStats").html("<br><br>"+player.money+"<br>"+player.clickAttack*player.clickMultiplier+"<br>"+player.attack*player.attackMultiplier+"<br>"+player.expMultiplier.toFixed(2)+"x<br>"+player.catchBonus+"%<br>"+player.catchTime/1000+" sec<br>"+player.route+"<br>"+player.totalCaught);	
+	$("#statBoxStats").html("<br><br>$"+player.money+"<br>"+player.clickAttack*player.clickMultiplier+"<br>"+player.attack*player.attackMultiplier+"<br>"+player.expMultiplier.toFixed(2)+"x<br>"+player.catchBonus+"%<br>"+player.catchTime/1000+" sec<br>"+player.route+"<br>"+player.totalCaught);	
 }
 
 
