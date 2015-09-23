@@ -329,7 +329,6 @@ $(document).ready(function(){
 	
 	// Allows the player to move to the previous route
 	$("body").on('click',"#routeLeft", function(){
-	console.log(curEnemy.alive);
 	if(curEnemy.alive){
 		player.route--;
 		generatePokemon(player.route);
@@ -433,8 +432,9 @@ $(document).ready(function(){
 
 var sortChange = function() {
     var selectBox = document.getElementById("sortBox");
+	
     var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    
+   console.log(selectedValue); 
 	switch(selectedValue){
 		case "name": 
 			player.caughtPokemonList.sort(compareByName);
@@ -760,13 +760,13 @@ var generatePokemon = function (route){
 	
 	while (randomPokemon.route != randomRoute){
 		randomPokemon = pokemonList[Math.floor(Math.random()*pokemonList.length)];
-		console.log(randomPokemon.name);
+		
 	}
 	}
 	else{
 		while (randomPokemon.route == 100 || randomPokemon.route == null){
 		randomPokemon = pokemonList[Math.floor(Math.random()*pokemonList.length)];
-		console.log(randomPokemon.name);
+		
 		}	
 	}
 	
