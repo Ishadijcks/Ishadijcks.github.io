@@ -7,6 +7,7 @@ var movingRight = false;
 var stickHeight = 50;
 var stickWidth = 15;
 
+var name;
 var stickList = [];
 var playerList = [];
 var stickColors = ["red","green","striped"];
@@ -58,7 +59,7 @@ $(document).ready(function(){
 	ctx.canvas.width  = screenWidth;
 	ctx.canvas.height = screenHeight;
 		
-		
+	name = prompt("Wat is je naam?");
 		
 	setInterval(spawnStick,750);
 	  addPlayer("Isha");
@@ -121,7 +122,11 @@ var draw = function(){
 	
 	for(var i = 0; i<playerList.length; i++){
 		var player = playerList[i];
+		ctx.fillStyle = "blue";
 		ctx.fillRect(player.x,player.y,playerWidth,playerHeight);
+		ctx.fillStyle = "black";
+		ctx.font="20px Arial";
+		ctx.textAlign="center"; 
 		ctx.fillText(player.name,player.x+playerWidth/2,player.y-30);
 	}
 	
