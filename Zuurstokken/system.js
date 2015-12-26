@@ -89,18 +89,20 @@ var Player  = function(name){
 	}
 }
 
-var Stick = function(x,y,type){
+var Stick = function(x,y,type,speed){
 	this.x = x;
 	this.y = y;
+	this.speed = speed;
 	this.type = type;
 	this.move = function(){
-		this.y++;
+		this.y+=speed;
 	}
 }
 
 var spawnStick = function(){
 	var tempX = Math.floor(Math.random()*screenWidth+1);
-	var tempStick = new Stick(tempX,-stickHeight,1);
+	var tempSpeed = 0.5+Math.random();
+	var tempStick = new Stick(tempX,-stickHeight,1,tempSpeed);
 	stickList.push(tempStick);
 }
 
