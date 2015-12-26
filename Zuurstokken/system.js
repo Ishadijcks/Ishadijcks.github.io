@@ -62,7 +62,7 @@ $(document).ready(function(){
 	name = prompt("Wat is je naam?");
 		
 	setInterval(spawnStick,750);
-	  addPlayer("Isha");
+	  addPlayer(name);
 	setInterval(function(){
 	  mover();
 	  draw();
