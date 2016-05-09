@@ -51,7 +51,7 @@
 
 #changeLogModal .modal-dialog
 {
-    width: 1000px; /* your width */
+    width: 1000px;
 }
 
 #starterPokemons{
@@ -64,45 +64,6 @@
 	height:300px;
 	bottom:50px;
 	overflow: scroll;
-}
-
-#pokemons{
-	border-left: 1px solid black;
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;	
-	width:10% !important
-	
-}
-
-#AttackCaughtPokemon{
-
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;	
-	width:3% !important
-}
-
-#LevelCaughtPokemon{
-	border-right: 1px solid black;
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;	
-	text-align:left;
-	width:3% !important	
-}
-
-#statBox{
-	border-left: 1px solid black;
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;	
-	text-align:right;
-	width: 10% !important
-}
-
-#statBoxStats{
-	border-right: 1px solid black;
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;	
-	text-align:right;
-	width:8% !important
 }
 
 #enemy:hover{

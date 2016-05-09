@@ -171,6 +171,9 @@ var alreadyUpgradeId = function(id){
 	}
 
 }
+
+// Add an upgrade to the upgradeList
+// An upgrade consists of a name, money cost, what stat it upgrades, some flavorText, and other upgrades that might be required to buy it
 var addUpgrade = function(name,cost,type,amount,require,flavorText, requiredUpgrade){
 
 	var temp = {
@@ -264,8 +267,8 @@ var curEnemy = {
 
 
 $(document).ready(function(){
- 
-	$('#changeLogModal').modal('show');
+ //TODO uncomment this for release
+//	$('#changeLogModal').modal('show');
  
 	if(localStorage.getItem("player") != null){
 		load();
@@ -743,39 +746,20 @@ var calculateAttack = function(){
 var generatePokemon = function (route){
 	var randomRoute = 0;
 	var decrease = 0;
-	for( var i = 0; i<100; i++){
-		randomRoute =  Math.max(1,player.route-Math.floor(Math.random()*player.routeVariation)-decrease);
-		if(correctRoute(randomRoute)){
-			i = 100;
-		}
-		if(i == 99 && !correctRoute(randomRoute)){
-			decrease++;
-			i = 1;
-		}
-	}
-	
-	var randomPokemon = pokemonList[Math.floor(Math.random()*pokemonList.length)];
 
-	if(route < 30){
-	
-	while (randomPokemon.route != randomRoute){
-		randomPokemon = pokemonList[Math.floor(Math.random()*pokemonList.length)];
-		
-	}
-	}
-	else{
-		while (randomPokemon.route == 100 || randomPokemon.route == null){
-		randomPokemon = pokemonList[Math.floor(Math.random()*pokemonList.length)];
-		
-		}	
-	}
-	
-	
-	
 	var legendary = generateLegendary();
 	if( legendary){
-		randomPokemon = pokemonByName(legendary);
+		randomPokemon = getPokemonByName(legendary);
 	}
+	else {
+		var possiblePokemons = pokemonsPerRoute[route].land;
+		console.log(possiblePokemons);
+		var rand = Math.floor(Math.random()*possiblePokemons.length);
+		console.log(rand);
+		randomPokemonName = possiblePokemons[rand]
+		randomPokemon = getPokemonByName(randomPokemonName);
+	}
+		
 
 	curEnemy.name = randomPokemon.name;
 	curEnemy.id = randomPokemon.id;
@@ -806,7 +790,7 @@ var checkEvolution = function(){
 	}
 }
 
-var pokemonByName = function(name){
+var getPokemonByName = function(name){
 	for( var i = 0; i<pokemonList.length; i++){
 		if(pokemonList[i].name == name){
 			return pokemonList[i];
@@ -923,7 +907,20 @@ var boughtUpgrades = function(){
 		
 // Update the list of caught pokemon
 var updateCaughtList = function(){
-	$("#caughtPokemon").html("<br>");
+
+	var pokemonHtml = ""
+
+	for (var i = 0; i<player.caughtPokemonList.length; i++){
+		pokemonHtml += "<tr>";
+		pokemonHtml += "<th><img class=smallImage src=images/"+player.caughtPokemonList[i].id+".png>"+player.caughtPokemonList[i].name + "</th>";
+		pokemonHtml += "<th>" + Math.ceil(experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType)*(player.caughtPokemonList[i].attack)/100) +"</th>";
+		pokemonHtml += "<th>" + experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType) + "</th>";
+		pokemonHtml += "</tr>";
+		
+	}
+	$("#pokemonBody").html(pokemonHtml);
+
+	$("#caughtPokemon").html("<br>Name<br>");
 	$("#AttackCaughtPokemon").html("<br>Attack <br><br>");
 	$("#LevelCaughtPokemon").html("<br>Level <br><br>");
 	
@@ -933,7 +930,7 @@ var updateCaughtList = function(){
 		$("#LevelCaughtPokemon").append("<br>");
 	}
 	for (var i = 0; i<player.caughtPokemonList.length; i++){
-		$("#caughtPokemon").append("<img class=smallImage src=images/"+player.caughtPokemonList[i].id+".png>"+player.caughtPokemonList[i].name+"<br>");
+		$("#caughtPokemon").append("<div class=row> <img class=smallImage src=images/"+player.caughtPokemonList[i].id+".png>"+player.caughtPokemonList[i].name+"</div>>");
 		$("#AttackCaughtPokemon").append(Math.ceil(experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType)*(player.caughtPokemonList[i].attack)/100)+"<br>");
 		$("#LevelCaughtPokemon").append(experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType)+"<br>");
 	}
@@ -941,8 +938,16 @@ var updateCaughtList = function(){
 
 // Update the stats
 var updateStats = function(){
-	$("#statBox").html("Stats<br><br>Money<br>Click attack<br>Pokemon attack<br>Exp multiplier<br>Catch bonus<br>Catch time<br>Route<br>Pokemon Caught");
-	$("#statBoxStats").html("<br><br>$"+player.money+"<br>"+player.clickAttack*player.clickMultiplier+"<br>"+player.attack*player.attackMultiplier+"<br>"+player.expMultiplier.toFixed(2)+"x<br>"+player.catchBonus+"%<br>"+player.catchTime/1000+" sec<br>"+player.route+"<br>"+player.totalCaught);	
+	$("#statBody").html("<tr><th>Money</th><th>$"+player.money+"</th></tr>" +
+		"<tr><th>Click attack</th><th>$"+player.clickAttack*player.clickMultiplier+"</th></tr>" +
+		"<tr><th>Pokemon attack</th><th>$"+player.attack*player.attackMultiplier+"</th></tr>" +
+		"<tr><th>Exp multiplier</th><th>$"+player.expMultiplier.toFixed(2)+"</th></tr>" +
+		"<tr><th>Catch bonus</th><th>$"+player.catchBonus+"</th></tr>" +
+		"<tr><th>Catch time</th><th>$"+player.catchTime/1000+" sec</th></tr>" +
+		"<tr><th>Route</th><th>$"+player.route+"</th></tr>" + 
+		"<tr><th>Pokemon Caught</th><th>$"+player.totalCaught+"</th></tr>");
+//	$("#statBody").html("Stats<br><br>Money<br>Click attack<br>Pokemon attack<br>Exp multiplier<br>Catch bonus<br>Catch time<br>Route<br>Pokemon Caught");
+//	$("#statBoxStats").html("<br><br>$"+player.money+"<br>"+player.clickAttack*player.clickMultiplier+"<br>"+player.attack*player.attackMultiplier+"<br>"+player.expMultiplier.toFixed(2)+"x<br>"+player.catchBonus+"%<br>"+player.catchTime/1000+" sec<br>"+player.route+"<br>"+player.totalCaught);	
 }
 
 

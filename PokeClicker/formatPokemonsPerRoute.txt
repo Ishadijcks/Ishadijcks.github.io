@@ -1,0 +1,50 @@
+1 : Pidgey Rattata
+-
+2 : Caterpie Weedle Rattata Nidoran♀ Nidoran♂
+-
+3 : Pidgey Rattata Spearow Sandshrew Jigglypuff Mankey
+-
+4 : Rattata Spearow Ekans Sandshrew Mankey
+Magikarp Poliwag Goldeen Psyduck Krabby Seaking
+5 : Pidgey Pidgeotto Rattata Jigglypuff Oddish Meowth Mankey Abra Bellsprout
+-
+6 : Pidgey Pidgeotto Rattata Jigglypuff Oddish Meowth Mankey Abra Bellsprout
+Magikarp Poliwag Goldeen Shellder Krabby
+7 : Pidgey Pidgeotto Rattata Vulpix Jigglypuff Oddish Meowth Mankey Growlithe Abra Bellsprout
+-
+8 : Pidgey Pidgey Rattata Ekans Sandshrew Vulpix Jigglypuff Meowth Mankey Growlithe Abra Kadabra
+-
+9 : Rattata Raticate Spearow Fearow Ekans Sandshrew Nidoran♀ Nidoran♂ Nidorina Nidorino
+-
+10 : Rattata Raticate Spearow Ekans Sandshrew Nidoran♀ Nidoran♂ Machop Magnemite Voltorb
+Magikarp Poliwag Goldeen Poliwhirl Slowpoke Krabby Kingler Horsea
+11 : Pidgey Pidgeotto Raticate Rattata Spearow Ekans Sandshrew Drowzee
+Magikarp Poliwag Goldeen Tentacool Shellder Krabby Horsea
+12 : Pidgey Pidgeotto Oddish Gloom Venonat Bellsprout Weepinbell Farfetch'd Snorlax
+Slowpoke Slowbro Magikarp Poliwag Goldeen Tentacool Krabby Horsea Seadra
+13 : Pidgey Pidgeotto Oddish Gloom Venonat Bellsprout Weepinbell Farfetch'd Ditto
+Slowpoke Slowbro Magikarp Poliwag Goldeen Tentacool Krabby Horsea Seadra
+14 : Pidgey Pidgeotto Oddish Gloom Venonat Venomoth Bellsprout Weepinbell Ditto
+Magikarp Poliwag Goldeen
+15 : Pidgey Pidgeotto Oddish Gloom Venonat Venomoth Bellsprout Weepinbell Ditto
+-
+16 : Rattata Raticate Spearow Fearow Doduo Snorlax
+-
+17 : Raticate Spearow Fearow Ponyta Doduo Dodrio
+Magikarp Poliwag Goldeen Tentacool Shellder Krabby
+18 : Rattata Raticate Spearow Fearow Doduo
+Magikarp Poliwag Goldeen Tentacool Shellder Krabby 
+19 : -
+Tentacool Magikarp Poliwag Goldeen Tentacruel Shellder Horsea Staryu
+20 : -
+Tentacool Magikarp Poliwag Goldeen Tentacruel Shellder Horsea Staryu
+21 : Pidgey Pidgeotto Rattata Raticate Tangela
+Tentacool Magikarp Poliwag Goldeen Tentacruel Shellder Horsea Staryu
+22 : Rattata Spearow Nidoran♀ Nidoran♂ Mankey
+Magikarp Poliwag Poliwhirl Goldeen 
+23 : Spearow Fearow Ekans Arbok Sandshrew Sandslash Nidorina Nidorino Mankey Primepe Ditto
+Magikarp Poliwag Goldeen Poliwhirl Slowbro Kingler Seadra Seaking
+24 : Caterpie Metapod Weedle Kakuna Pidgey Pidgey Pidgeotto Oddish Venonat Abra Bellsprout
+Magikarp Poliwag Goldeen Psyduck Krabby Seaking
+25 : Caterpie Metapod Weedle Kakuna Pidgey Pidgeotto Oddish Venonat Abra Bellsprout
+Magikarp Poliwag Goldeen Psyduck Krabby

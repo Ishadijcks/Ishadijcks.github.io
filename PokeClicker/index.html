@@ -5,6 +5,7 @@
 
 			<script src="jquery.js"></script>
 			<script src="system.js"></script>
+			<script src="formatPokemonsPerRoute.js"></script>
 			<link type="text/css" href="system.css" rel="stylesheet" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -15,46 +16,50 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-66813636-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
 	
 		</head>
 <body>	
 	<div class="container">
 	<br>	
 		<div class="row">
-	
-			<div class="col-sm-1" id="pokemons">
+			<div class="col-lg-2 col-md-4 col-sm-4" id="pokemons">
+				<select id="sortBox"  onchange="sortChange()">
+					<option> Sort by... </option>
+					<option value ="id">Pokedex #</option>
+					<option value ="name">Name</option>
+					<option value ="attack">Attack</option>
+					<option value ="level">Level</option>
+					<option value ="time">Order captured</option>
+					<option value ="catchRate">Catch Rate</option>
+				</select>
+
 			
-			<select id="sortBox"  onchange="sortChange()">
-				<option> Sort by... </option>
-				<option value ="id">Pokedex #</option>
-				<option value ="name">Name</option>
-				<option value ="attack">Attack</option>
-				<option value ="level">Level</option>
-				<option value ="time">Order captured</option>
-				<option value ="catchRate">Catch Rate</option>
-			</select>
-			 Name
-			<div id="caughtPokemon"></div>
+				<table class="table table-striped table-bordered table-condensed">
+		
+					<thead>
+						<tr>
+							<th>Pokemon</th>
+							<th>Attack</th>
+							<th>Level</th>
+						</tr>
+					</thead>
+					<tbody id="pokemonBody">
+						<tr>
+							<th>It appears your javascript isn't loading properly</th>
+							<th></th>
+						</tr>
+					</tbody>
+				</table>
 			</div>
-			<div class="col-sm-1" id="AttackCaughtPokemon"> Attack</div>
-			<div class="col-sm-1" id="LevelCaughtPokemon"> Level</div>
+			
 
 
 			
 			
-			<div class="col-sm-4 col-md-offset-1" id="currentEnemy"> 
+			<div class="col-sm-3 col-sm-offset-2" id="currentEnemy"> 
 				<span id="routeLeft" class="glyphicon glyphicon-arrow-left"></span>
-				<span id="currentRoute"></span> 
+				<span id="currentRoute"></span>
 				<span id="routeRight" class="glyphicon glyphicon-arrow-right"></span>
 				
 				<div id="enemyInfo"></div>
@@ -68,12 +73,32 @@
 				<span id="healthDisplay"></span>
 			
 			</div>
-			<div class="col-sm-1 col-md-offset-1" id="statBox">Stats</div>
-			<div class="col-sm-1" id="statBoxStats"></div>
+			<div class= "col-sm-2 col-sm-offset-2" id="statTable">
+				<table class="table table-striped table-bordered table-condensed">
+					<colgroup>
+					    <col id="statDesc" span="1">
+						<col id="statValue" span="1">
+					</colgroup>
+					<thead>
+						<tr>
+							<th>Stats</th>
+							<th>Amount</th>
+						</tr>
+					</thead>
+					<tbody id="statBody">
+						<tr>
+							<th>It appears your javascript isn't loading properly</th>
+							<th></th>
+						</tr>
+						
+					</tbody>
+				</table>
+			</div>
+
 		</div>
 		
 		
-			<div id="upgradeBox" class="col-sm-2 col-md-offset-9">Upgrades!</div>
+			<div id="upgradeBox" class="col-sm-2 col-sm-offset-9">Upgrades!</div>
 		
 		
 		<div id="console" class="col-sm-6 col-md-offset-3 footer navbar-fixed-bottom"></div>
