@@ -2,6 +2,14 @@
 	width:100% !important;
 }
 
+body {
+	background-image: url('http://i.imgur.com/O7ZWigt.png'); 
+}
+
+table, #console, #currentEnemy, #upgradeBox, #navBar {
+	background-color: white;
+}
+
 #navBar{
 	border: 1px solid black;
 }
@@ -10,10 +18,13 @@
 	opacity:0.10;
 }
 
+#statTable {
+	padding-right:0px;
+}
+
 #upgradeBox{
 	text-align:center;
-	position:absolute;
-	top:300px;
+	border: 1px solid black;
 }
 
 .smallImage{
@@ -28,17 +39,15 @@
 
 .upgradeBoxes{
 	position:relative;
-	border: 1px solid black;
+	
 	margin-top:2px;
 	margin-bottom:2px;
 }
 
-.upgradeBoxes:hover{
-	background-color: #F2F2F2;
-}
+
 
 .container {
-	width:95% !important
+	width:100% !important
 }
 
 #alreadyCaughtImage{
@@ -60,9 +69,9 @@
 
 #console{
 	border: 1px solid black;
-	width:50%;
+
 	height:300px;
-	bottom:50px;
+	bottom:50px;	
 	overflow: scroll;
 }
 
@@ -72,5 +81,6 @@
 
 #currentEnemy{
 	border: 1px solid black;
-	text-align:center
+	text-align:center;
+	height: 261px;
 }

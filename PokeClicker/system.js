@@ -616,7 +616,7 @@ var updateEnemy = function(){
 	}
 	if (curEnemy.alive){
 		if(alreadyCaught(curEnemy.name)){
-			$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=enemy src=images/"+curEnemy.id+".png>");
+			$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.png><br><img id=enemy src=images/"+curEnemy.id+".png>");
 		}
 		else{
 			$("#enemyInfo").html("<br>"+curEnemy.name+"<br><img id=enemy src=images/"+curEnemy.id+".png>");
@@ -652,10 +652,10 @@ var enemyDefeated = function(){
 		setTimeout(function(){ 
 			
 			if(alreadyCaught(curEnemy.name)){
-			$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img height=96px width=96px id=enemy src=images/Pokeball.PNG>");
+			$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.png><br><img height=96px width=96px id=enemy src=images/Pokeball.png>");
 			}
 			else{
-			$("#enemyInfo").html("<br>"+curEnemy.name+" <br><img height=96px width=96px id=enemy src=images/Pokeball.PNG>");
+			$("#enemyInfo").html("<br>"+curEnemy.name+" <br><img height=96px width=96px id=enemy src=images/Pokeball.png>");
 			}
 			player.pokeballs--;
 		}, 1);
@@ -886,7 +886,7 @@ var updateUpgrades = function(){
 			(alreadyUpgradeId(player.upgradeList[i].requiredUpgrade) || player.upgradeList[i].requiredUpgrade == null )){
 			
 			var upgrade = player.upgradeList[i];
-			$("#upgradeBox").append("<div id=Upgrade"+upgrade.id+" title=s class=upgradeBoxes>"+upgrade.name+"<br>Cost: "+upgrade.cost+"</div>");
+			$("#upgradeBox").append("<button type=button id=Upgrade"+upgrade.id+" title=s class='upgradeBoxes btn btn-primary col-sm-12'>"+upgrade.name+"<br>Cost: "+upgrade.cost+"</button>");
 			
 			document.getElementById("Upgrade"+upgrade.id).title = upgrade.flavorText;
 		}
@@ -939,13 +939,13 @@ var updateCaughtList = function(){
 // Update the stats
 var updateStats = function(){
 	$("#statBody").html("<tr><th>Money</th><th>$"+player.money+"</th></tr>" +
-		"<tr><th>Click attack</th><th>$"+player.clickAttack*player.clickMultiplier+"</th></tr>" +
-		"<tr><th>Pokemon attack</th><th>$"+player.attack*player.attackMultiplier+"</th></tr>" +
-		"<tr><th>Exp multiplier</th><th>$"+player.expMultiplier.toFixed(2)+"</th></tr>" +
-		"<tr><th>Catch bonus</th><th>$"+player.catchBonus+"</th></tr>" +
-		"<tr><th>Catch time</th><th>$"+player.catchTime/1000+" sec</th></tr>" +
-		"<tr><th>Route</th><th>$"+player.route+"</th></tr>" + 
-		"<tr><th>Pokemon Caught</th><th>$"+player.totalCaught+"</th></tr>");
+		"<tr><th>Click attack</th><th>"+player.clickAttack*player.clickMultiplier+"</th></tr>" +
+		"<tr><th>Pokemon attack</th><th>"+player.attack*player.attackMultiplier+"%</th></tr>" +
+		"<tr><th>Exp multiplier</th><th>"+player.expMultiplier.toFixed(2)+"</th></tr>" +
+		"<tr><th>Catch bonus</th><th>"+player.catchBonus+"%</th></tr>" +
+		"<tr><th>Catch time</th><th>"+player.catchTime/1000+" sec</th></tr>" +
+		"<tr><th>Route</th><th>"+player.route+"</th></tr>" + 
+		"<tr><th>Pokemon Caught</th><th>"+player.totalCaught+"</th></tr>");
 //	$("#statBody").html("Stats<br><br>Money<br>Click attack<br>Pokemon attack<br>Exp multiplier<br>Catch bonus<br>Catch time<br>Route<br>Pokemon Caught");
 //	$("#statBoxStats").html("<br><br>$"+player.money+"<br>"+player.clickAttack*player.clickMultiplier+"<br>"+player.attack*player.attackMultiplier+"<br>"+player.expMultiplier.toFixed(2)+"x<br>"+player.catchBonus+"%<br>"+player.catchTime/1000+" sec<br>"+player.route+"<br>"+player.totalCaught);	
 }
