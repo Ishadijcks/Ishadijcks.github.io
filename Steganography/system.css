@@ -1,0 +1,8 @@
+#canvas {
+	border: 1px solid black;
+}
+
+#inputMessage {
+	width: 300px;
+	height:400px;
+}
