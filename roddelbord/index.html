@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.link {
+  stroke: #999;
+  stroke-opacity: .6;
+}
+
+.node text {
+  font: 15px;
+}
+
+svg {
+	position:absolute;
+	left:300px;
+	top:0px;
+	border: 1px solid black;
+}
+
+</style>
+<body>
+
+<p>Nieuwe roddel</p>
+<input id="name1" value="Naam1">
+
+<form id="radio" action="">
+  <input type="radio" name="gender1" checked="checked" value="male"> Male<br>
+  <input type="radio" name="gender1" value="female"> Female<br>
+</form>
+<br>
+<input id="name2" value="Naam2">
+<form action="">
+  <input type="radio" name="gender2" value="male"> Male<br>
+  <input type="radio" name="gender2" checked="checked" value="female"> Female<br>
+</form>
+<br>
+<button id="submitRoddel">Submit</button>
+
+<br><br><br><br><br><br>
+<input id="deleteName1" value="Verwijder Naam1">
+<br>
+<input id="deleteName2" value="Verwijder Naam2">
+<br>
+<button id="deleteRoddel">Remove!</button>
+
+</body>
+<script src="d3.js"></script>
+<script src="graaf.js"></script>
+<script src="jquery.js"></script>
+
+<script src="draw.js"></script>
