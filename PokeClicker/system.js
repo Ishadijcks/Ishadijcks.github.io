@@ -116,7 +116,7 @@ var curEnemy = {
 
 $(document).ready(function(){
  //TODO uncomment this for release
-//	$('#changeLogModal').modal('show');
+	$('#changeLogModal').modal('show');
  
 	if(localStorage.getItem("player") != null){
 		load();
