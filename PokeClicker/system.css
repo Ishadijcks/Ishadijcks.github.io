@@ -18,6 +18,36 @@ table, #console, #currentEnemy, #upgradeBox, #navBar {
 	opacity:0.10;
 }
 
+#pokeball {
+	-webkit-animation:spinleft 1s linear infinite;
+    -moz-animation:spinleft 1s linear infinite;
+    animation:spinleft 1s linear infinite;
+}
+
+@-moz-keyframes spinleft { 100% { -moz-transform: rotate(20deg); } }
+@-webkit-keyframes spinleft { 100% { -webkit-transform: rotate(20deg); } }
+
+    @keyframes spinleft { 
+        0% { 
+            transform: rotate(0deg); 
+        }
+        15% { 
+            transform: rotate(10deg); 
+        }
+        30% { 
+            transform: rotate(0deg); 
+        }
+        50% {
+        	transform: rotate (0deg);
+        }
+        65% { 
+            transform: rotate(-10deg); 
+        }
+        80% { 
+            transform: rotate(0deg); 
+        }
+    }
+
 #statTable {
 	padding-right:0px;
 }
