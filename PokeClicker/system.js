@@ -35,8 +35,7 @@ var curEnemy = {
 
 
 $(document).ready(function(){
- //TODO uncomment this for release
-//	$('#changeLogModal').modal('show');
+ 	$('#changeLogModal').modal('show');
  
 	if(localStorage.getItem("player") != null){
 		load();
@@ -371,11 +370,7 @@ var calculateAttack = function(){
 }
 
 
-// Takes a route and spits out a pokemon that can be found on the route
-// Can be done more efficient:
-// Let correctRoute return all pokemon on a route
-// Choose random from that set
-// TODO
+
 var generatePokemon = function (route){
 	var randomRoute = 0;
 	var decrease = 0;
@@ -476,10 +471,6 @@ var testLegendary = function(tries){
 }
 
 
-// Returns true is the route is valid by checking if there
-// is a pokemon on that route
-// TODO:
-// Support multiple routes per pokemon
 var correctRoute = function (route){
 	for (var i = 0; i<pokemonList.length; i++){
 		if (pokemonList[i].route == route){
