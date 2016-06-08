@@ -635,7 +635,7 @@ var generatePokemon = function (route){
 var checkEvolution = function(){
 	for( var i = 0; i<player.caughtPokemonList.length; i++){
 		if(player.caughtPokemonList[i].evoLevel != null){
-			if( experienceToLevel(player.caughtPokemonList[i].experience, player.caughtPokemonList[i].experience) >= player.caughtPokemonList[i].evoLevel && !player.caughtPokemonList[i].evolved){
+			if( experienceToLevel(player.caughtPokemonList[i].experience, player.caughtPokemonList[i].levelType) >= player.caughtPokemonList[i].evoLevel && !player.caughtPokemonList[i].evolved){
 				log("Your "+player.caughtPokemonList[i].name+" evolved into "+player.caughtPokemonList[i].evolution+"!");
 				capturePokemon(player.caughtPokemonList[i].evolution);
 				player.caughtPokemonList[i].evolved = 1;
