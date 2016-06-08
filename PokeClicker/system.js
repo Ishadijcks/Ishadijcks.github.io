@@ -35,8 +35,7 @@ var curEnemy = {
 
 
 $(document).ready(function(){
- //TODO uncomment this for release
-//	$('#changeLogModal').modal('show');
+ 	$('#changeLogModal').modal('show');
  
 	if(localStorage.getItem("player") != null){
 		load();
@@ -259,6 +258,26 @@ var getExp = function(exp){
 	checkEvolution();
 }
 
+// Update the health of the current enemy
+var updateEnemy = function(){
+    if (curEnemy.health <0){
+        curEnemy.health = 0;
+    }
+    if(curEnemy.health == 0 ){
+        enemyDefeated();
+    }
+    if (curEnemy.alive){
+        if(alreadyCaught(curEnemy.name)){
+            $("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=enemy src=images/"+curEnemy.id+".png>");
+        }
+        else{
+            $("#enemyInfo").html("<br>"+curEnemy.name+"<br><img id=enemy src=images/"+curEnemy.id+".png>");
+        }
+    }
+        $("#healthBar").width(100*curEnemy.health/curEnemy.maxHealth+"%"); 
+        $("#healthDisplay").html(curEnemy.health+"/"+curEnemy.maxHealth);
+}
+
 
 // When the enemy is defeated all stats are updated and a new enemy is picked
 var enemyDefeated = function(){
@@ -371,11 +390,7 @@ var calculateAttack = function(){
 }
 
 
-// Takes a route and spits out a pokemon that can be found on the route
-// Can be done more efficient:
-// Let correctRoute return all pokemon on a route
-// Choose random from that set
-// TODO
+
 var generatePokemon = function (route){
 	var randomRoute = 0;
 	var decrease = 0;
@@ -476,10 +491,6 @@ var testLegendary = function(tries){
 }
 
 
-// Returns true is the route is valid by checking if there
-// is a pokemon on that route
-// TODO:
-// Support multiple routes per pokemon
 var correctRoute = function (route){
 	for (var i = 0; i<pokemonList.length; i++){
 		if (pokemonList[i].route == route){
