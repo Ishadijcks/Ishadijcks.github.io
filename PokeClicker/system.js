@@ -500,10 +500,10 @@ var enemyDefeated = function(){
 		setTimeout(function(){ 
 			
 			if(alreadyCaught(curEnemy.name)){
-			$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img height=96px width=96px id=enemy src=images/Pokeball.PNG>");
+			$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img height=96px width=96px id=pokeball src=images/Pokeball.PNG>");
 			}
 			else{
-			$("#enemyInfo").html("<br>"+curEnemy.name+" <br><img height=96px width=96px id=enemy src=images/Pokeball.PNG>");
+			$("#enemyInfo").html("<br>"+curEnemy.name+" <br><img height=96px width=96px id=pokeball src=images/Pokeball.PNG>");
 			}
 			player.pokeballs--;
 		}, 1);
@@ -600,6 +600,12 @@ var generatePokemon = function (route){
 		randomPokemon = getPokemonByName(legendary);
 	}
 	else {
+		if(route == 19 || route == 20){
+			route = 18;
+		}
+		if( route > 25){
+			route = 25
+		}
 		var possiblePokemons = pokemonsPerRoute[route].land;
 		console.log(possiblePokemons);
 		var rand = Math.floor(Math.random()*possiblePokemons.length);
@@ -788,7 +794,7 @@ var updateCaughtList = function(){
 var updateStats = function(){
 	$("#statBody").html("<tr><th>Money</th><th>$"+player.money+"</th></tr>" +
 		"<tr><th>Click attack</th><th>"+player.clickAttack*player.clickMultiplier+"</th></tr>" +
-		"<tr><th>Pokemon attack</th><th>"+player.attack*player.attackMultiplier+"%</th></tr>" +
+		"<tr><th>Pokemon attack</th><th>"+player.attack*player.attackMultiplier+"</th></tr>" +
 		"<tr><th>Exp multiplier</th><th>"+player.expMultiplier.toFixed(2)+"</th></tr>" +
 		"<tr><th>Catch bonus</th><th>"+player.catchBonus+"%</th></tr>" +
 		"<tr><th>Catch time</th><th>"+player.catchTime/1000+" sec</th></tr>" +
