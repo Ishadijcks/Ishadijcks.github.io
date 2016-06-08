@@ -541,7 +541,7 @@ var capturePokemon = function(name){
 	
 	else{
 		log(name+" has already been caught!");
-		x
+		
 
 		var deviation = Math.floor(Math.random() * 11 ) -5;
 		console.log("Deviation: " + deviation);
@@ -602,14 +602,17 @@ var generatePokemon = function (route){
 		if(route == 19 || route == 20){
 			route = 18;
 		}
-		if( route > 25){
-			route = 25
-		}
+		if (route <= 25){
 		var possiblePokemons = pokemonsPerRoute[route].land;
-		console.log(possiblePokemons);
 		var rand = Math.floor(Math.random()*possiblePokemons.length);
-		console.log("Rand: " + rand);
 		randomPokemonName = possiblePokemons[rand]
+		}	
+
+		else {
+			var rand = Math.floor(Math.random()*144);
+			randomPokemonName = pokemonList[rand].name;
+		}
+
 		randomPokemon = getPokemonByName(randomPokemonName);
 	}
 		
