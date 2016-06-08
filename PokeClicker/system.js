@@ -1,84 +1,5 @@
 var version = "0.1"
 
-
-
-var alreadyUpgrade = function(name){
-	for( var i = 0; i<player.upgradeList.length;i++){
-		if( player.upgradeList[i].name == name){
-			return true;
-		}
-	}
-	return false;
-}
-
-var alreadyUpgradeId = function(id){
-	for( var i = 0; i<player.upgradeList.length;i++){
-		if( player.upgradeList[i].id == id){
-			return player.upgradeList[i].bought == 1;
-		}
-	}
-
-}
-
-// Add an upgrade to the upgradeList
-// An upgrade consists of a name, money cost, what stat it upgrades, some flavorText, and other upgrades that might be required to buy it
-var addUpgrade = function(name,cost,type,amount,require,flavorText, requiredUpgrade){
-
-	var temp = {
-		id: player.upgradeList.length,
-		name: name,
-		cost: cost,
-		type: type,
-		amount: amount,
-		bought:0,
-		require:require,
-		flavorText:flavorText,
-		requiredUpgrade: requiredUpgrade
-	}
-	if( !alreadyUpgrade(name)){
-	player.upgradeList.push(temp);
-	}
-}
-
-// 	clickAttack: 1,
-//	clickMultiplier: 1,
-//	attack: 0,
-//	attackMultiplier: 1,
-//	money: 0,
-//	moneyMultiplier: 1,
-//	expMultiplier:1,
-//	catchBonus: 25,
-//	routeVariation: 5,
-//	catchTime: 3000,
-//									name,cost,type,amount,require,flavorText
-var initUpgrades = function(){
-	addUpgrade("Pokeball upgrade I",1000, "catchBonus",3,0,"New technology gives you a 3% bonus to catch rate",null); 
-	addUpgrade("Pokeball upgrade II",5000, "catchBonus",3,3,"New technology gives you a 3% bonus to catch rate",0); 
-	addUpgrade("Pokeball upgrade III",10000, "catchBonus",3,5,"New technology gives you a 3% bonus to catch rate",1); 
-	addUpgrade("Pokeball upgrade IV",25000, "catchBonus",3,7,"New technology gives you a 3% bonus to catch rate",2); 
-	addUpgrade("Pokeball upgrade V",75000, "catchBonus",10,10,"New technology gives you a 10% bonus to catch rate",3); 
-	addUpgrade("Experience upgrade I",500, "expMultiplier",0.10,0,"New technology gives you a 10% bonus to experience gain",null); 
-	addUpgrade("Experience upgrade II",5000, "expMultiplier",0.10,1,"New technology gives you a 10% bonus to experience gain",5); 
-	addUpgrade("Experience upgrade III",50000, "expMultiplier",0.10,4,"New technology gives you a 10% bonus to experience gain",6); 
-	addUpgrade("Experience upgrade IV",100000, "expMultiplier",0.10,6,"New technology gives you a 10% bonus to experience gain",7); 
-	addUpgrade("Experience upgrade V",500000, "expMultiplier",0.20,12,"New technology gives you a 20% bonus to experience gain",8); 
-	addUpgrade("Catch time upgrade I",2000, "catchTime",250,0,"Decrease the catch time by 250 milliseconds",null); 
-	addUpgrade("Catch time upgrade II",10000, "catchTime",250,2,"Decrease the catch time by 250 milliseconds",10); 
-	addUpgrade("Catch time upgrade III",25000, "catchTime",500,5,"Decrease the catch time by half a second",11); 
-	addUpgrade("Catch time upgrade IV",75000, "catchTime",500,8,"Decrease the catch time by half a second",12); 
-	addUpgrade("Catch time upgrade V",1000000, "catchTime",1000,15,"Decrease the catch time by a whole second",13); 
-	addUpgrade("Money multiplier upgrade I",1500, "moneyMultiplier",0.25,0,"Gain 25% more money",null); 
-	addUpgrade("Money multiplier upgrade II",4000, "moneyMultiplier",0.30,3,"Gain 30% more money",15); 
-	addUpgrade("Money multiplier upgrade III",10000, "moneyMultiplier",0.35,6,"Gain 35% more money",16); 
-	addUpgrade("Money multiplier upgrade IV",25000, "moneyMultiplier",0.40,10,"Gain 40% more money",17); 
-	addUpgrade("Money multiplier upgrade V",50000, "moneyMultiplier",0.50,16,"Gain 50% more money",18); 
-	addUpgrade("Click multiplier upgrade I",100, "clickMultiplier",1,0,"Clicks do 100% more damage",null); 
-	addUpgrade("Click multiplier upgrade II",500, "clickMultiplier",1,2,"Clicks do 100% more damage",20); 
-	addUpgrade("Click multiplier upgrade III",1000, "clickMultiplier",1,5,"Clicks do 100% more damage",21); 
-	addUpgrade("Click multiplier upgrade IV",2500, "clickMultiplier",1,7,"Clicks do 100% more damage",22); 
-	addUpgrade("Click multiplier upgrade V",5000, "clickMultiplier",1,10,"Clicks do 100% more damage",23); 
-}
-
 var player = {
 	clickAttack: 1,
 	clickMultiplier: 1,
@@ -111,7 +32,6 @@ var curEnemy = {
 	route: 0,
 	catchRate: 0
 }
-
 
 
 $(document).ready(function(){
@@ -222,29 +142,22 @@ $(document).ready(function(){
 	})
 
 	// Allows the player to sort his pokemon
-	
-
-	
+	// Add the listeners
 	$("body").on('click',"#caughtPokemon", function(){
 		player.caughtPokemonList.sort(compareByName);
 		updateCaughtList();
 	})
-
-	
 	
 	$("body").on('click',"#AttackCaughtPokemon", function(){
 		player.caughtPokemonList.sort(compareByAttack);
 		updateCaughtList();
 	})
-	
-
 
 	$("body").on('click',"#LevelCaughtPokemon", function(){
 		player.caughtPokemonList.sort(compareByLevel);
 		updateCaughtList();
 	})
 	
-
 	// Navbar Button controllers
 	$("body").on('click',"#badgeButton", function(){
 		$("#badgeModal").modal("show");
@@ -281,34 +194,6 @@ $(document).ready(function(){
 
 });
 
-var sortChange = function() {
-    var selectBox = document.getElementById("sortBox");
-	
-    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-   console.log(selectedValue); 
-	switch(selectedValue){
-		case "name": 
-			player.caughtPokemonList.sort(compareByName);
-			break;
-		case "id":
-			player.caughtPokemonList.sort(compareById);
-			break;
-		case "attack":
-			player.caughtPokemonList.sort(compareByAttack);
-			break;
-		case "level":
-			player.caughtPokemonList.sort(compareByLevel);
-			break;
-		case "time":
-			player.caughtPokemonList.sort(compareByTimeStamp);
-			break;
-		case "catchRate":
-			player.caughtPokemonList.sort(compareByCatchRate);
-	}
-	
-	updateCaughtList();
-}
-
 
 // Update all functions and save
 var updateAll = function(){
@@ -331,88 +216,8 @@ var accessToRoute = function(route){
 	return true;
 }
 
-// Here I can add all upgradeTypes
-var applyUpgrade = function(type, amount){
-	switch(type){
-		case "catchBonus":
-			player.catchBonus += amount;
-			log("Your catch bonus is increased by "+amount+ "%");
-			break;
-		case "catchTime":
-			player.catchTime -= amount;
-			log("Your catch time is decreased by "+amount+ " milliseconds");
-			break;
-		case "moneyMultiplier":
-			player.moneyMultiplier += amount;
-			log("Your money multiplier is increased by "+amount);
-			break;
-		case "expMultiplier":
-			player.expMultiplier += amount;
-			log("Your exp multiplier is increased by "+amount);
-			break;
-		case "clickAttack":
-			player.clickAttack += amount;
-			log("Your click attack is increased by "+amount);
-			break;
-		case "clickMultiplier":
-			player.clickMultiplier += amount;
-			log("Your click attack multiplier is increased by "+amount);
-			break;		
-		case "routeVariation":
-			player.routeVariation -= amount;
-			log("Your route variation is decreased by "+amount);
-			break;		
-		case "attackMultiplier":
-			player.attackMultiplier += amount;
-			log("Your pokemon attack multiplier is increased by "+amount);
-			break;					
-		default:
-			console.log("This should never happen, contact the developer immediately!");
-			break;
 
-	}	
-		updateStats();
-}
-
-			// Save and load functions
-
-// Saves the game by writing play to JSON and save it in localStorage			
-var save = function(){
-	localStorage.setItem("player", JSON.stringify(player));
-}
-
-
-
-// Loads the game from localStorage and update favIcon to starter
-var load = function(){
-	var savegame = JSON.parse(localStorage.getItem("player"));
 	
-	if (typeof savegame.clickAttack !== "undefined") player.clickAttack = savegame.clickAttack;
-	if (typeof savegame.clickMultiplier !== "undefined") player.clickMultiplier = savegame.clickMultiplier;
-	if (typeof savegame.attack !== "undefined") player.attack = savegame.attack;
-	if (typeof savegame.attackMultiplier !== "undefined") player.attackMultiplier = savegame.attackMultiplier;
-	if (typeof savegame.money !== "undefined") player.money = savegame.money;
-	if (typeof savegame.moneyMultiplier !== "undefined") player.moneyMultiplier = savegame.moneyMultiplier;
-	if (typeof savegame.expMultiplier !== "undefined") player.expMultiplier = savegame.expMultiplier;
-	if (typeof savegame.catchBonus !== "undefined") player.catchBonus = savegame.catchBonus;
-	if (typeof savegame.route !== "undefined") player.route = savegame.route;
-	if (typeof savegame.pokeballs !== "undefined") player.pokeballs = savegame.pokeballs;
-	if (typeof savegame.catchTime !== "undefined") player.catchTime = savegame.catchTime;
-	if (typeof savegame.caughtPokemonList !== "undefined") player.caughtPokemonList = savegame.caughtPokemonList;
-	if (typeof savegame.routeKills !== "undefined") player.routeKills = savegame.routeKills;
-	if (typeof savegame.starter !== "undefined") player.starter = savegame.starter;
-	if (typeof savegame.upgradeList !== "undefined") player.upgradeList = savegame.upgradeList;
-	if (typeof savegame.gymBadges !== "undefined") player.gymBadges = savegame.gymBadges;
-	if (typeof savegame.totalCaught !== "undefined") player.totalCaught = savegame.totalCaught;
-	if (typeof savegame.version !== "undefined") player.version = savegame.version;
-	
-	
-    var link = document.createElement('link');
-    link.type = 'image/x-icon';
-    link.rel = 'shortcut icon';
-    link.href = 'images/'+player.starter+'.png';
-    document.getElementsByTagName('head')[0].appendChild(link);
-}		
 
 			// Leveling functions
 
@@ -454,25 +259,6 @@ var getExp = function(exp){
 	checkEvolution();
 }
 
-// Update the health of the current enemy
-var updateEnemy = function(){
-	if (curEnemy.health <0){
-		curEnemy.health = 0;
-	}
-	if(curEnemy.health == 0 ){
-		enemyDefeated();
-	}
-	if (curEnemy.alive){
-		if(alreadyCaught(curEnemy.name)){
-			$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=enemy src=images/"+curEnemy.id+".png>");
-		}
-		else{
-			$("#enemyInfo").html("<br>"+curEnemy.name+"<br><img id=enemy src=images/"+curEnemy.id+".png>");
-		}
-	}
-		$("#healthBar").width(100*curEnemy.health/curEnemy.maxHealth+"%"); 
-		$("#healthDisplay").html(curEnemy.health+"/"+curEnemy.maxHealth);
-}
 
 // When the enemy is defeated all stats are updated and a new enemy is picked
 var enemyDefeated = function(){
@@ -628,17 +414,7 @@ var generatePokemon = function (route){
 	return randomPokemon;
 }
 
-var checkEvolution = function(){
-	for( var i = 0; i<player.caughtPokemonList.length; i++){
-		if(player.caughtPokemonList[i].evoLevel != null){
-			if( experienceToLevel(player.caughtPokemonList[i].experience, player.caughtPokemonList[i].levelType) >= player.caughtPokemonList[i].evoLevel && !player.caughtPokemonList[i].evolved){
-				log("Your "+player.caughtPokemonList[i].name+" evolved into "+player.caughtPokemonList[i].evolution+"!");
-				capturePokemon(player.caughtPokemonList[i].evolution);
-				player.caughtPokemonList[i].evolved = 1;
-			}
-		}
-	}
-}
+
 
 var getPokemonByName = function(name){
 	for( var i = 0; i<pokemonList.length; i++){
@@ -711,162 +487,5 @@ var correctRoute = function (route){
 		}
 	}
 	return false;
-}
-
-		// Console stuff
-		
-var specialLog = [];
-var completeLog = specialLog;
-
-var log = function(text){
-	$("#console").append(text+"<br>");
-	var elem = document.getElementById('console');
-	elem.scrollTop = elem.scrollHeight;
-}
-
-		// HTML functions
-
-// Update the upgradeBox
-
-var updateUpgrades = function(){
-	$(".upgradeBoxes").remove();
-	for( var i = 0; i<player.upgradeList.length; i++){
-		if( player.upgradeList[i].require <= boughtUpgrades() && 
-		    !player.upgradeList[i].bought && 
-			(alreadyUpgradeId(player.upgradeList[i].requiredUpgrade) || player.upgradeList[i].requiredUpgrade == null )){
-			
-			var upgrade = player.upgradeList[i];
-			$("#upgradeBox").append("<button type=button id=Upgrade"+upgrade.id+" title=s class='upgradeBoxes btn btn-primary col-sm-12'>"+upgrade.name+"<br>Cost: "+upgrade.cost+"</button>");
-			
-			document.getElementById("Upgrade"+upgrade.id).title = upgrade.flavorText;
-		}
-	}
-}
-
-var boughtUpgrades = function(){
-	var number = 0;
-	for( var i = 0; i<player.upgradeList.length; i++){
-		
-		if( player.upgradeList[i].bought == 1){
-			number++;
-		}
-	}
-	
-	return number;
-}
-		
-// Update the list of caught pokemon
-var updateCaughtList = function(){
-
-	var pokemonHtml = ""
-
-	for (var i = 0; i<player.caughtPokemonList.length; i++){
-		pokemonHtml += "<tr>";
-		pokemonHtml += "<th><img class=smallImage src=images/"+player.caughtPokemonList[i].id+".png>"+player.caughtPokemonList[i].name + "</th>";
-		pokemonHtml += "<th>" + Math.ceil(experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType)*(player.caughtPokemonList[i].attack)/100) +"</th>";
-		pokemonHtml += "<th>" + experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType) + "</th>";
-		pokemonHtml += "</tr>";
-		
-	}
-	$("#pokemonBody").html(pokemonHtml);
-
-	$("#caughtPokemon").html("<br>Name<br>");
-	$("#AttackCaughtPokemon").html("<br>Attack <br><br>");
-	$("#LevelCaughtPokemon").html("<br>Level <br><br>");
-	
-	if( player.caughtPokemonList.length == 0){
-		$("#caughtPokemon").append("None");
-		$("#AttackCaughtPokemon").append("<br>");
-		$("#LevelCaughtPokemon").append("<br>");
-	}
-	for (var i = 0; i<player.caughtPokemonList.length; i++){
-		$("#caughtPokemon").append("<div class=row> <img class=smallImage src=images/"+player.caughtPokemonList[i].id+".png>"+player.caughtPokemonList[i].name+"</div>>");
-		$("#AttackCaughtPokemon").append(Math.ceil(experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType)*(player.caughtPokemonList[i].attack)/100)+"<br>");
-		$("#LevelCaughtPokemon").append(experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType)+"<br>");
-	}
-}
-
-// Update the stats
-var updateStats = function(){
-	$("#statBody").html("<tr><th>Money</th><th>$"+player.money+"</th></tr>" +
-		"<tr><th>Click attack</th><th>"+player.clickAttack*player.clickMultiplier+"</th></tr>" +
-		"<tr><th>Pokemon attack</th><th>"+player.attack*player.attackMultiplier+"</th></tr>" +
-		"<tr><th>Exp multiplier</th><th>"+player.expMultiplier.toFixed(2)+"</th></tr>" +
-		"<tr><th>Catch bonus</th><th>"+player.catchBonus+"%</th></tr>" +
-		"<tr><th>Catch time</th><th>"+player.catchTime/1000+" sec</th></tr>" +
-		"<tr><th>Route</th><th>"+player.route+"</th></tr>" + 
-		"<tr><th>Pokemon Caught</th><th>"+player.totalCaught+"</th></tr>");
-//	$("#statBody").html("Stats<br><br>Money<br>Click attack<br>Pokemon attack<br>Exp multiplier<br>Catch bonus<br>Catch time<br>Route<br>Pokemon Caught");
-//	$("#statBoxStats").html("<br><br>$"+player.money+"<br>"+player.clickAttack*player.clickMultiplier+"<br>"+player.attack*player.attackMultiplier+"<br>"+player.expMultiplier.toFixed(2)+"x<br>"+player.catchBonus+"%<br>"+player.catchTime/1000+" sec<br>"+player.route+"<br>"+player.totalCaught);	
-}
-
-
-
-var updateRoute = function(){
-	$("#currentRoute").html("Route "+player.route+ "<br>"+Math.min(5,player.routeKills[player.route])+"/5");
-	if(accessToRoute(player.route+1)){
-		$("#routeRight").show();
-	}
-	else{
-		$("#routeRight").hide();
-	}
-	if(player.route == 1){
-		$("#routeLeft").hide();
-	} 
-	else{
-		$("#routeLeft").show();
-	}
-}
-
-	// Sorting functions
-	
-function compareByName(a,b) {
-  if (a.name < b.name)
-    return -1;
-  if (a.name > b.name)
-    return 1;
-  return 0;
-}	
-
-function compareById(a,b) {
-  if (a.id < b.id)
-    return -1;
-  if (a.id > b.id)
-    return 1;
-  return 0;
-}
-
-function compareByTimeStamp(a,b) {
-  if (a.timeStamp < b.timeStamp)
-    return -1;
-  if (a.timeStamp > b.timeStamp)
-    return 1;
-  return 0;
-}
-
-function compareByCatchRate(a,b) {
-  if (a.catchRate < b.catchRate)
-    return -1;
-  if (a.catchRate > b.catchRate)
-    return 1;
-  return 0;
-}
-
-function compareByLevel(a,b) {
-  if (experienceToLevel(a.experience,a.levelType) > experienceToLevel(b.experience,b.levelType))
-    return -1;
-  if (experienceToLevel(a.experience,a.levelType) < experienceToLevel(b.experience,b.levelType))
-    return 1;
-  return 0;
-}
-
-function compareByAttack(a,b) {
-	var aAttack = experienceToLevel(a.experience,a.levelType)*a.attack/100;
-	var bAttack = experienceToLevel(b.experience,b.levelType)*b.attack/100;
-  if (aAttack> bAttack)
-    return -1;
-  if (aAttack < bAttack)
-    return 1;
-  return 0;
 }
 
