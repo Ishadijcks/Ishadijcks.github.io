@@ -413,7 +413,7 @@ var generatePokemon = function (route){
 		}	
 
 		else {
-			var rand = Math.floor(Math.random()*144);
+			var rand = Math.floor(Math.random()*pokemonList.length);
 			randomPokemonName = pokemonList[rand].name;
 		}
 
