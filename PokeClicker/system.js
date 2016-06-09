@@ -35,7 +35,7 @@ var curEnemy = {
 
 
 $(document).ready(function(){
- 	$('#changeLogModal').modal('show');
+ //	$('#changeLogModal').modal('show');
  
 	if(localStorage.getItem("player") != null){
 		load();
@@ -157,6 +157,15 @@ $(document).ready(function(){
 		updateCaughtList();
 	})
 	
+
+	$("svg").on('click',"rect", function(){
+		alert("YES!");
+	})
+
+	$("g").click(function() {
+	   console.log(this);        
+	});
+
 	// Navbar Button controllers
 	$("body").on('click',"#badgeButton", function(){
 		$("#badgeModal").modal("show");
