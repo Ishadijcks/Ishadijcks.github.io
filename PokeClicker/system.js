@@ -207,6 +207,9 @@ var updateAll = function(){
 
 // Returns true if the player has access to this route
 var accessToRoute = function(route){
+	if(route > 100){
+		return false;
+	}
 	for (var i = 1; i<route; i++){
 		if(player.routeKills[i] < 5 || player.routeKills[i] == undefined){
 			return false;
