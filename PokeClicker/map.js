@@ -24,7 +24,7 @@ var routeRequirements = {
 	22:[[100]],
 	23:[[100]],
 	24:[[4]],
-	25:[[25]],
+	25:[[24]],
 }
 
 var idToRoute = function(id){
@@ -35,19 +35,21 @@ var idToRoute = function(id){
 }
 
 var moveToRoute = function(route){
+	console.log(accessToRoute(route));
 	if(accessToRoute(route)){
 		player.route = route;
 	}
 	else {
 		log("You don't have access to that route yet.")
 	}
+	updateAll();
 }
 
 var accessToRoute = function(route){
 	
 	var reqList = routeRequirements[route];
 	if(reqList != undefined){
-	console.log(route);
+//	console.log(route);
 		for( var i = 0; i<reqList.length; i++){
 			if(enoughRouteKills(reqList[i])){
 				return true;
