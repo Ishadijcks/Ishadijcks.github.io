@@ -21,8 +21,12 @@ var updateUpgrades = function(){
 			(alreadyUpgradeId(player.upgradeList[i].requiredUpgrade) || player.upgradeList[i].requiredUpgrade == null )){
 			
 			var upgrade = player.upgradeList[i];
-			$("#upgradeBox").append("<button type=button id=Upgrade"+upgrade.id+" title=s class='upgradeBoxes btn btn-primary col-sm-12'>"+upgrade.name+"<br>Cost: "+upgrade.cost+"</button>");
-			
+			if(player.money > upgrade.cost){
+				$("#upgradeBox").append("<button type=button id=Upgrade"+upgrade.id+" title=s class='upgradeBoxes btn btn-primary col-sm-12'>"+upgrade.name+"<br>Cost: "+upgrade.cost+"</button>");
+			}
+			else {
+				$("#upgradeBox").append("<button type=button id=Upgrade"+upgrade.id+" title=s class='upgradeBoxes disabled btn btn-primary col-sm-12'>"+upgrade.name+"<br>Cost: "+upgrade.cost+"</button>");	
+			}
 			document.getElementById("Upgrade"+upgrade.id).title = upgrade.flavorText;
 		}
 	}
@@ -34,6 +38,16 @@ var updateUpgrades = function(){
 var updateCaughtList = function(){
 
 	var pokemonHtml = ""
+
+	var pokemonHeight = $("#pokemonBody").height()
+	// log("pokemonHeight: "+pokemonHeight);
+	// log("windowHeight: "+getHeight())
+	if( pokemonHeight > 1000){
+		$("#pokemons").height(1000);
+	}
+	else {
+		$("#pokemons").height(pokemonHeight + 120);
+	}
 
 	for (var i = 0; i<player.caughtPokemonList.length; i++){
 		pokemonHtml += "<tr>";
