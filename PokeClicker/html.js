@@ -104,6 +104,20 @@ var updateRoute = function(){
 	// 	$("#routeLeft").show();
 	// }
 
+	for(var i = 1; i< 26; i++){
+		if(player.routeKills[i]> player.routeKillsNeeded){
+			$("#route_"+i).attr('style', "fill:#FCB612" );
+		}
+		else if (accessToRoute(i)){
+			$("#route_"+i).attr('style', "fill:#D89803");
+		}
+		else {
+			$("#route_"+i).attr('style', "fill:#BD1952");	
+		}
+
+		document.getElementById("route_"+i).style.border = "1px solid black";
+	}
+
 	$("#route_"+player.route).attr('style', "fill:green" );
 }
 
