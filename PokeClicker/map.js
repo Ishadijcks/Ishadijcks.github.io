@@ -27,3 +27,41 @@ var routeRequirements = {
 	25:[[25]],
 }
 
+var idToRoute = function(id){
+	var split = id.split("_")
+	var route = split[1];
+	var routeNumber = parseInt(route);
+	return routeNumber;
+}
+
+var moveToRoute = function(route){
+	if(accessToRoute(route)){
+		player.route = route;
+	}
+	else {
+		log("You don't have access to that route yet.")
+	}
+}
+
+var accessToRoute = function(route){
+	
+	var reqList = routeRequirements[route];
+	if(reqList != undefined){
+	console.log(route);
+		for( var i = 0; i<reqList.length; i++){
+			if(enoughRouteKills(reqList[i])){
+				return true;
+			}
+		}
+	}
+		return false;
+}
+
+var enoughRouteKills = function(reqList){
+	for( var i = 0; i<reqList.length; i++){
+		if(player.routeKills[reqList[i]] < player.routeKillsNeeded){
+			return false;
+		}
+	}
+	return true;
+}

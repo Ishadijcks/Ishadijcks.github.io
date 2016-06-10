@@ -91,17 +91,19 @@ var getHeight = function(){
 
 var updateRoute = function(){
 	$("#currentRoute").html("Route "+player.route+ "<br>"+Math.min(player.routeKillsNeeded, player.routeKills[player.route])+"/"+player.routeKillsNeeded);
-	if(accessToRoute(player.route+1)){
-		$("#routeRight").show();
-	}
-	else{
-		$("#routeRight").hide();
-	}
-	if(player.route == 1){
-		$("#routeLeft").hide();
-	} 
-	else{
-		$("#routeLeft").show();
-	}
+	// if(accessToRoute(player.route+1)){
+	// 	$("#routeRight").show();
+	// }
+	// else{
+	// 	$("#routeRight").hide();
+	// }
+	// if(player.route == 1){
+	// 	$("#routeLeft").hide();
+	// } 
+	// else{
+	// 	$("#routeLeft").show();
+	// }
+
+	$("#route_"+player.route).attr('style', "fill:green" );
 }
 
