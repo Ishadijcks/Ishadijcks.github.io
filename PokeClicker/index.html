@@ -1,550 +1,720 @@
-	<!DOCTYPE html>
-	<html>
-		<head>
-			<title>Pokeclicker</title>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pokeclicker</title>
+	<script src="jquery.js"></script>
+	<script src="system.js"></script>
+	<script src="pokemonsPerRoute.js"></script>
+	<script src="pokemonList.js"></script>
+	<script src="evolution.js"></script>
+	<script src="upgrades.js"></script>
+	<script src="html.js"></script>
+	<script src="sorting.js"></script>
+	<script src="save.js">
+	</script><!-- Latest compiled and minified CSS -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"><!-- Optional theme -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" rel="stylesheet"><!-- Latest compiled and minified JavaScript -->
 
-			<script src="jquery.js"></script>
-			<script src="system.js"></script>
-			<script src="pokemonsPerRoute.js"></script>
-			<script src="pokemonList.js"></script>
-			<script src="evolution.js"></script>
-			<script src="upgrades.js"></script>
-			<script src="html.js"></script>
-			<script src="sorting.js"></script>
-			<script src="save.js"></script>
-			
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	
-<link type="text/css" href="system.css" rel="stylesheet" />
-	
-		</head>
-<body>	
-	<div class="container">
-	<br>	
-		<div class="row">
-			<div class="col-lg-2 col-md-3 col-sm-4" id="pokemons">
-				<select id="sortBox"  onchange="sortChange()">
-					<option> Sort by... </option>
-					<option value ="id">Pokedex #</option>
-					<option value ="name">Name</option>
-					<option value ="attack">Attack</option>
-					<option value ="level">Level</option>
-					<option value ="time">Order captured</option>
-					<option value ="catchRate">Catch Rate</option>
-				</select>
-
-			
-				<table class="table table-striped table-bordered table-condensed">
-		
-					<thead>
-						<tr>
-							<th>Pokemon</th>
-							<th>Attack</th>
-							<th>Level</th>
-						</tr>
-					</thead>
-					<tbody id="pokemonBody">
-						<tr>
-							<th>It appears your javascript isn't loading properly</th>
-							<th></th>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			
-
-
-			
-			
-			<div class="col-sm-4 col-md-offset-1" id="currentEnemy"> 
-				<span id="routeLeft" class="glyphicon glyphicon-arrow-left"></span>
-				<span id="currentRoute"></span>
-				<span id="routeRight" class="glyphicon glyphicon-arrow-right"></span>
-				
-				<div id="enemyInfo"></div>
-				<span id="catchDisplay"></span>
-				<div class="progress">
-					<div id="healthBar" class="progress-bar progress-bar-danger" style="width: 0%">
-						<span class="sr-only"></span>
-					</div>
-				</div>
-				<span id="healthDisplay"></span>
-			</div>
-
-			<div class= "col-sm-2" id="statTable">
-				<table class="table table-striped table-bordered table-condensed">
-					<colgroup>
-					    <col id="statDesc" span="1">
-						<col id="statValue" span="1">
-					</colgroup>
-					<thead>
-						<tr>
-							<th>Stats</th>
-							<th>Amount</th>
-						</tr>
-					</thead>
-					<tbody id="statBody">
-						<tr>
-							<th>It appears your javascript isn't loading properly</th>
-							<th></th>
-						</tr>
-						
-					</tbody>
-				</table>
-			</div>
-
-			<div id="upgradeBox" class="col-sm-2 col-md-offset-1">Upgrades!<br></div>
-	
-		
-		</div>
-
-		<div class="row">
-			<div class="col-sm-6 col-sm-offset-3">
-				<svg height="693px" width="800px">
-	<script type="text/javascript"><![CDATA[
-	    function test() {
-	        alert("test");
-	    }
-	]]>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">
 	</script>
-					<defs>
-						<lineargradient id="mx-gradient-f8cecc-1-ea6b66-1-s-0" x1="0%" x2="0%" y1="0%" y2="100%">
-							<stop offset="0%" style="stop-color:#F8CECC"></stop>
-							<stop offset="100%" style="stop-color:#EA6B66"></stop>
-						</lineargradient>
-						<lineargradient id="mx-gradient-f8cecc-1-ea583b-1-s-0" x1="0%" x2="0%" y1="0%" y2="100%">
-							<stop offset="0%" style="stop-color:#F8CECC"></stop>
-							<stop offset="100%" style="stop-color:#EA583B"></stop>
-						</lineargradient>
-						<lineargradient id="mx-gradient-dae8fc-1-7ea6e0-1-s-0" x1="0%" x2="0%" y1="0%" y2="100%">
-							<stop offset="0%" style="stop-color:#DAE8FC"></stop>
-							<stop offset="100%" style="stop-color:#7EA6E0"></stop>
-						</lineargradient>
-					</defs>
+	<link href="system.css" rel="stylesheet" type="text/css">
+</head>
+<body>
 
-					<g transform="translate(0.5,0.5)">
-						<image height="690" pointer-events="none" width="1224" xlink:href="http://pre11.deviantart.net/c4b9/th/pre/f/2013/170/c/b/kanto_map_hd_by_jaime07-d69q1vi.png"></image>
-				
-						<rect id="route1" onClick = "test()" fill="url(#mx-gradient-000000-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" width="153" x="231" y="230"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" width="233" x="341" y="191"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" width="117" x="613" y="191"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" width="117" x="574" y="113"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" width="117" x="613" y="306"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" width="117" x="613" y="421"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" width="117" x="613" y="499"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" width="150" x="306" y="306"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" width="117" x="536" y="537"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" width="39" x="574" y="153"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" transform="rotate(90,326.5,460)"
-						width="231" x="211" y="440"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" width="153" x="347" y="535"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" width="117" x="381" y="612"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" width="117" x="230" y="612"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" transform="rotate(90,593.5,268)"
-						width="81" x="553" y="248"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" transform="rotate(90,593.5,384)"
-						width="81" x="553" y="364"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" width="81" x="493" y="306"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" transform="rotate(90,747.5,443)"
-						width="195" x="650" y="423"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" transform="rotate(90,747.5,250)"
-						width="117" x="689" y="230"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" transform="rotate(90,516.5,613)"
-						width="81" x="476" y="593"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" transform="rotate(90,134.5,308)"
-						width="153" x="58" y="288"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" transform="rotate(90,211.5,326)"
-						width="117" x="153" y="306"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" transform="rotate(90,211.5,463)"
-						width="81" x="171" y="443"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" transform="rotate(90,211.5,573)"
-						width="81" x="171" y="553"></rect>
-						<rect fill="url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)" height="40"
-						pointer-events="none" stroke="#b85450" width="81" x="113" y="381"></rect>
-						<path d=
-						"M 192 241.84 L 203.84 230 L 220.16 230 L 232 241.84 L 232 258.16 L 220.16 270 L 203.84 270 L 192 258.16 Z"
-						fill="#ffffff" pointer-events="none" stroke="#000000" stroke-miterlimit="10"
-						stroke-width="2"></path>
-						<path d=
-						"M 196 243.47 L 205.47 234 L 218.53 234 L 228 243.47 L 228 256.53 L 218.53 266 L 205.47 266 L 196 256.53 Z"
-						fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" pointer-events="none" stroke=
-						"#b85450" stroke-miterlimit="10" stroke-width="2"></path>
-						<path d=
-						"M 192 394.84 L 203.84 383 L 220.16 383 L 232 394.84 L 232 411.16 L 220.16 423 L 203.84 423 L 192 411.16 Z"
-						fill="#ffffff" pointer-events="none" stroke="#000000" stroke-miterlimit="10"
-						stroke-width="2"></path>
-						<path d=
-						"M 196 396.47 L 205.47 387 L 218.53 387 L 228 396.47 L 228 409.53 L 218.53 419 L 205.47 419 L 196 409.53 Z"
-						fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" pointer-events="none" stroke=
-						"#b85450" stroke-miterlimit="10" stroke-width="2"></path>
-						<path d=
-						"M 191 510.84 L 202.84 499 L 219.16 499 L 231 510.84 L 231 527.16 L 219.16 539 L 202.84 539 L 191 527.16 Z"
-						fill="#ffffff" pointer-events="none" stroke="#000000" stroke-miterlimit="10"
-						stroke-width="2"></path>
-						<path d=
-						"M 195 512.47 L 204.47 503 L 217.53 503 L 227 512.47 L 227 525.53 L 217.53 535 L 204.47 535 L 195 525.53 Z"
-						fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" pointer-events="none" stroke=
-						"#b85450" stroke-miterlimit="10" stroke-width="2"></path>
-						<path d=
-						"M 575 317.84 L 586.84 306 L 603.16 306 L 615 317.84 L 615 334.16 L 603.16 346 L 586.84 346 L 575 334.16 Z"
-						fill="#ffffff" pointer-events="none" stroke="#000000" stroke-miterlimit="10"
-						stroke-width="2"></path>
-						<path d=
-						"M 579 319.47 L 588.47 310 L 601.53 310 L 611 319.47 L 611 332.53 L 601.53 342 L 588.47 342 L 579 332.53 Z"
-						fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" pointer-events="none" stroke=
-						"#b85450" stroke-miterlimit="10" stroke-width="2"></path>
-						<path d=
-						"M 455 317.84 L 466.84 306 L 483.16 306 L 495 317.84 L 495 334.16 L 483.16 346 L 466.84 346 L 455 334.16 Z"
-						fill="#ffffff" pointer-events="none" stroke="#000000" stroke-miterlimit="10"
-						stroke-width="2"></path>
-						<path d=
-						"M 459 319.47 L 468.47 310 L 481.53 310 L 491 319.47 L 491 332.53 L 481.53 342 L 468.47 342 L 459 332.53 Z"
-						fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" pointer-events="none" stroke=
-						"#b85450" stroke-miterlimit="10" stroke-width="2"></path>
-						<path d=
-						"M 573 431.84 L 584.84 420 L 601.16 420 L 613 431.84 L 613 448.16 L 601.16 460 L 584.84 460 L 573 448.16 Z"
-						fill="#ffffff" pointer-events="none" stroke="#000000" stroke-miterlimit="10"
-						stroke-width="2"></path>
-						<path d=
-						"M 577 433.47 L 586.47 424 L 599.53 424 L 609 433.47 L 609 446.53 L 599.53 456 L 586.47 456 L 577 446.53 Z"
-						fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" pointer-events="none" stroke=
-						"#b85450" stroke-miterlimit="10" stroke-width="2"></path>
-						<path d=
-						"M 115 202.84 L 126.84 191 L 143.16 191 L 155 202.84 L 155 219.16 L 143.16 231 L 126.84 231 L 115 219.16 Z"
-						fill="#ffffff" pointer-events="none" stroke="#000000" stroke-miterlimit="10"
-						stroke-width="2"></path>
-						<path d=
-						"M 119 204.47 L 128.47 195 L 141.53 195 L 151 204.47 L 151 217.53 L 141.53 227 L 128.47 227 L 119 217.53 Z"
-						fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" pointer-events="none" stroke=
-						"#b85450" stroke-miterlimit="10" stroke-width="2"></path>
-						<path d=
-						"M 575 200.84 L 586.84 189 L 603.16 189 L 615 200.84 L 615 217.16 L 603.16 229 L 586.84 229 L 575 217.16 Z"
-						fill="#ffffff" pointer-events="none" stroke="#000000" stroke-miterlimit="10"
-						stroke-width="2"></path>
-						<path d=
-						"M 579 202.47 L 588.47 193 L 601.53 193 L 611 202.47 L 611 215.53 L 601.53 225 L 588.47 225 L 579 215.53 Z"
-						fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" pointer-events="none" stroke=
-						"#b85450" stroke-miterlimit="10" stroke-width="2"></path>
-						<path d=
-						"M 728 319.84 L 739.84 308 L 756.16 308 L 768 319.84 L 768 336.16 L 756.16 348 L 739.84 348 L 728 336.16 Z"
-						fill="#ffffff" pointer-events="none" stroke="#000000" stroke-miterlimit="10"
-						stroke-width="2"></path>
-						<path d=
-						"M 732 321.47 L 741.47 312 L 754.53 312 L 764 321.47 L 764 334.53 L 754.53 344 L 741.47 344 L 732 334.53 Z"
-						fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" pointer-events="none" stroke=
-						"#b85450" stroke-miterlimit="10" stroke-width="2"></path>
-						<rect fill="#ffffff" height="22" pointer-events="none" stroke="none" width=
-						"22" x="744" y="325"></rect>
-						<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="18"
-						pointer-events="none" stroke="#6c8ebf" width="18" x="746" y="327"></rect>
-						<path d=
-						"M 498 548.84 L 509.84 537 L 526.16 537 L 538 548.84 L 538 565.16 L 526.16 577 L 509.84 577 L 498 565.16 Z"
-						fill="#ffffff" pointer-events="none" stroke="#000000" stroke-miterlimit="10"
-						stroke-width="2"></path>
-						<path d=
-						"M 502 550.47 L 511.47 541 L 524.53 541 L 534 550.47 L 534 563.53 L 524.53 573 L 511.47 573 L 502 563.53 Z"
-						fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" pointer-events="none" stroke=
-						"#b85450" stroke-miterlimit="10" stroke-width="2"></path>
-						<rect fill="#ffffff" height="22" pointer-events="none" stroke="none" width=
-						"22" x="514" y="554"></rect>
-						<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="18"
-						pointer-events="none" stroke="#6c8ebf" width="18" x="516" y="556"></rect>
-						<path d=
-						"M 192 623.84 L 203.84 612 L 220.16 612 L 232 623.84 L 232 640.16 L 220.16 652 L 203.84 652 L 192 640.16 Z"
-						fill="#ffffff" pointer-events="none" stroke="#000000" stroke-miterlimit="10"
-						stroke-width="2"></path>
-						<path d=
-						"M 196 625.47 L 205.47 616 L 218.53 616 L 228 625.47 L 228 638.53 L 218.53 648 L 205.47 648 L 196 638.53 Z"
-						fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" pointer-events="none" stroke=
-						"#b85450" stroke-miterlimit="10" stroke-width="2"></path>
-						<rect fill="#ffffff" height="22" pointer-events="none" stroke="none" width=
-						"22" x="208" y="629"></rect>
-						<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="18"
-						pointer-events="none" stroke="#6c8ebf" width="18" x="210" y="631"></rect>
-						<rect fill="#ffffff" height="22" pointer-events="none" stroke="none" width=
-						"22" x="591" y="206"></rect>
-						<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="18"
-						pointer-events="none" stroke="#6c8ebf" width="18" x="593" y="208"></rect>
-						<rect fill="#ffffff" height="22" pointer-events="none" stroke="none" width=
-						"22" x="124" y="244"></rect>
-						<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="18"
-						pointer-events="none" stroke="#6c8ebf" width="18" x="126" y="246"></rect>
-						<rect fill="#ffffff" height="22" pointer-events="none" stroke="none" width=
-						"22" x="201" y="277"></rect>
-						<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="18"
-						pointer-events="none" stroke="#6c8ebf" width="18" x="203" y="279"></rect>
-						<rect fill="#ffffff" height="22" pointer-events="none" stroke="none" width=
-						"22" x="201" y="310"></rect>
-						<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="18"
-						pointer-events="none" stroke="#6c8ebf" width="18" x="203" y="312"></rect>
-						<rect fill="#ffffff" height="22" pointer-events="none" stroke="none" width=
-						"22" x="351" y="622"></rect>
-						<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="18"
-						pointer-events="none" stroke="#6c8ebf" width="18" x="353" y="624"></rect>
-						<rect fill="#ffffff" height="22" pointer-events="none" stroke="none" width=
-						"22" x="392" y="200"></rect>
-						<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="18"
-						pointer-events="none" stroke="#6c8ebf" width="18" x="394" y="202"></rect>
-						<rect fill="#ffffff" height="22" pointer-events="none" stroke="none" width=
-						"22" x="623" y="430"></rect>
-						<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="18"
-						pointer-events="none" stroke="#6c8ebf" width="18" x="625" y="432"></rect>
-						<rect fill="#ffffff" height="22" pointer-events="none" stroke="none" width=
-						"22" x="737" y="200"></rect>
-						<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="18"
-						pointer-events="none" stroke="#6c8ebf" width="18" x="739" y="202"></rect>
-						<rect fill="#ffffff" height="22" pointer-events="none" stroke="none" width=
-						"22" x="737" y="235"></rect>
-						<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="18"
-						pointer-events="none" stroke="#6c8ebf" width="18" x="739" y="237"></rect>
-					</g>
-				</svg>
-
-			</div>
-		</div>
-
-		 <h1>Sample Interactivity</h1>
-      
-       <svg width="600" height="600">
-         <script type="text/JavaScript">
-            <![CDATA[
-				
-               
-               function c(event){
-                 
-                  alert("Test");
-               }
-               
-            
-            ]]>
-         </script>
-         
-         <g>
-            <text x="30" y="50" onClick="c()">Click me to show rectangle color.</text>
-            
-            <rect id="rect1" x="100" y="100" width="200" height="200" 
-            stroke="green" stroke-width="3" fill="red" 
-            onClick="c(event)"/>
-            
-         
-         </g>
-      </svg>
-
-
-
+	<div class="container-fluid">
 		<div class="row">
-			<div id="console" class="col-sm-6 col-sm-offset-3 navbar-fixed-bottom"></div>
-		</div>
-
-		<div class="row">
-			<div id="navBar" class="col-sm-6 col-md-offset-3 navbar-fixed-bottom">
-				<button id="badgeButton" class="btn-success">Badges</button>
-				<button id="pokedexButton" class="btn-danger">Pokedex</button>
-				<button id="mapButton" class="btn-info">Map</button>
-				<button id="changeLogButton" class="btn-info">Changelog</button>
-				<button id="resetButton" class="btn-danger">Reset</button>
-			</div>
-		</div>
-		
-		
-		
-		
-		
-		<!-- Starter Modal -->
-		<div class="modal fade" id="pickStarter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
-			<div class="modal-content">
-			  <div class="modal-header">
-				<h4 class="modal-title" id="myModalLabel">Pick a starter</h4>
-			  </div>
-			  <div id="myModalBody" class="modal-body">
-				<div id="starterPokemons" class="row">
-				<img class="starter" id="Bulbasaur" src="images/1.png"> 
-				<img class="starter" id="Charmander" src="images/4.png"> 
-				<img class="starter" id="Squirtle" src="images/7.png"> <br>
-				<span id="curStarterPick"></span>
+			<div class="col-lg-2 col-md-3">
+				<div class="col-sm-12" id="pokemons">
+					<select id="sortBox" onchange="sortChange()">
+						<option>
+							Sort by...
+						</option>
+						<option value="id">Pokedex #</option>
+						<option value="name">Name</option>
+						<option value="attack">Attack</option>
+						<option value="level">Level</option>
+						<option value="time">Order captured</option>
+						<option value="catchRate">Catch Rate
+						</option>
+					</select>
+					<table class="table table-striped table-bordered table-condensed">
+						<thead>
+							<tr>
+								<th>Pokemon</th>
+								<th>Attack</th>
+								<th>Level</th>
+							</tr>
+						</thead>
+						<tbody id="pokemonBody">
+							<tr>
+								<th>It appears your javascript isn't loading properly</th>
+								<th></th>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-			  </div>
-			  <div class="modal-footer">
-				<button id="startAdventure" type="button" class="btn btn-primary">Start your adventure!</button>
-			  </div>
 			</div>
-		  </div>
+			<div class="col-lg-10 col-md-9">
+				<div class="row">
+					<div class="col-lg-5 col-sm-offset-1" id="currentEnemy">
+						<span class="glyphicon glyphicon-arrow-left" id="routeLeft"></span> <span id="currentRoute"></span> <span class="glyphicon glyphicon-arrow-right" id="routeRight"></span>
+						<div id="enemyInfo"></div><span id="catchDisplay"></span>
+						<div class="progress">
+							<div class="progress-bar progress-bar-danger" id="healthBar" style="width: 0%">
+								<span class="sr-only"></span>
+							</div>
+						</div><span id="healthDisplay"></span>
+					</div>
+					<div class="col-lg-2 col-md-5 col-md-offset-1 col-lg-offset-0" id="statTable">
+						<table class="table table-striped table-bordered table-condensed">
+							<colgroup>
+								<col id="statDesc" span="1">
+								<col id="statValue" span="1">
+							</colgroup>
+							<thead>
+								<tr>
+									<th>Stats</th>
+									<th>Amount</th>
+								</tr>
+							</thead>
+							<tbody id="statBody">
+								<tr>
+									<th>It appears your javascript isn't loading properly</th>
+									<th></th>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-lg-2 col-md-5 col-md-offset-1" id="upgradeBox">
+						<br>Upgrades!<br>
+					</div>
+				</div>
+
+				<!-- Map row -->
+				<div class="row">
+					<div class="col-sm-6 col-sm-offset-1" style="padding-left: 0px;">
+						<svg height="420.7" id="map" width="519.4">
+						<defs>
+							<lineargradient id="mx-gradient-f8cecc-1-ea583b-1-s-0" x1="0%" x2="0%" y1="0%" y2="100%">
+								<stop offset="0%" style="stop-color:#F8CECC"></stop>
+								<stop offset="100%" style="stop-color:#EA583B"></stop>
+							</lineargradient>
+							<lineargradient id="mx-gradient-dae8fc-1-7ea6e0-1-s-0" x1="0%" x2="0%" y1="0%" y2="100%">
+								<stop offset="0%" style="stop-color:#DAE8FC"></stop>
+								<stop offset="100%" style="stop-color:#7EA6E0"></stop>
+							</lineargradient>
+						</defs>
+						<g transform="translate(-1,-1)">
+							<image height="420.7" width="519.4" xlink:href="images/kanto_Map.png" ></image>
+							<rect fill="#fcb612" height="28" id="route_3" stroke="none" width="107.1" x="97.3" y="100.1"></rect>
+							<g id="route_3a" transform="translate(128.5,106.5)scale(0.7)">
+								<switch>
+									<foreignobject height="19" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="63">
+										<div>
+											<div>
+												<font>Route 3</font>
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="32" y="16">
+										[Not supported by viewer]
+									</text>
+								</switch>
+							</g>
+							<rect fill="#fcb612" height="28" stroke="none" width="163.1" x="174.3" y="72.8"></rect>
+							<g transform="translate(233.5,79.5)scale(0.7)">
+								<switch>
+									<foreignobject height="19" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="63">
+										<div>
+											<div>
+												<font>Route 4</font>
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="32" y="16">
+										[Not supported by viewer]
+									</text>
+								</switch>
+							</g>
+							<rect fill="#fcb612" height="28" stroke="none" width="81.9" x="364.7" y="72.8"></rect>
+							<g transform="translate(383.5,79.5)scale(0.7)">
+								<switch>
+									<foreignobject height="19" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="63">
+										<div>
+											<div>
+												<span><font>Route 9</font></span>
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="32" y="16">
+										[Not supported by viewer]
+									</text>
+								</switch>
+							</g>
+							<rect fill="#fcb612" height="28" stroke="none" width="81.9" x="337.4" y="18.2"></rect>
+							<g transform="translate(352.5,25.5)scale(0.7)">
+								<switch>
+									<foreignobject height="19" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="73">
+										<div>
+											<div>
+												<span>Route 25</span>
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="18px" text-anchor="middle" x="37" y="19">
+										[Not supported by viewer]
+									</text>
+								</switch>
+							</g>
+							<rect fill="#fcb612" height="28" stroke="none" width="81.9" x="364.7" y="153.3"></rect>
+							<g transform="translate(381.5,159.5)scale(0.7)">
+								<switch>
+									<foreignobject height="20" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="67">
+										<div>
+											<div>
+												Route 7
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="19px" text-anchor="middle" x="34" y="20">
+										Route 7
+									</text>
+								</switch>
+							</g>
+							<rect fill="#fcb612" height="28" stroke="none" width="81.9" x="364.7" y="233.8"></rect>
+							<g transform="translate(391.5,240.5)scale(0.7)">
+								<switch>
+									<foreignobject height="20" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="76">
+										<div>
+											<div>
+												Route 11
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="19px" text-anchor="middle" x="38" y="20">
+										Route 11
+									</text>
+								</switch>
+							</g>
+							<rect fill="#fcb612" height="28" stroke="none" width="81.9" x="364.7" y="288.4"></rect>
+							<g transform="translate(378.5,294.5)scale(0.7)">
+								<switch>
+									<foreignobject height="20" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="77">
+										<div>
+											<div>
+												Route 14
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="19px" text-anchor="middle" x="39" y="20">
+										Route 14
+									</text>
+								</switch>
+							</g>
+							<rect fill="#fcb612" height="28" stroke="none" width="105" x="151.9" y="153.3"></rect>
+							<g transform="translate(178.5,160.5)scale(0.7)">
+								<switch>
+									<foreignobject height="19" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="74">
+										<div>
+											<div>
+												<font>Route 16</font>
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="37" y="16">
+										[Not supported by viewer]
+									</text>
+								</switch>
+							</g>
+							<rect fill="#fcb612" height="28" stroke="none" width="81.9" x="310.8" y="315"></rect>
+							<g transform="translate(324.5,321.5)scale(0.7)">
+								<switch>
+									<foreignobject height="20" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="77">
+										<div>
+											<div>
+												Route 15
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="19px" text-anchor="middle" x="39" y="20">
+										Route 15
+									</text>
+								</switch>
+							</g>
+							<rect fill="#fcb612" height="28.7" stroke="none" width="27.3" x="337.4" y="45.5"></rect>
+							<g transform="translate(343.5,52.5)scale(0.7)">
+								<switch>
+									<foreignobject height="19" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="21">
+										<div>
+											<div>
+												<font>24</font>
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="11" y="16">
+										[Not supported by viewer]
+									</text>
+								</switch>
+							</g>
+							<rect fill="#0412d9" height="27.3" stroke="none" transform="rotate(90,163.45,262.15)" width="161.7" x="82.6" y="248.5"></rect>
+							<g transform="translate(137.5,255.5)scale(0.7)rotate(90,36.5,9.5)">
+								<switch>
+									<foreignobject height="19" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="73">
+										<div>
+											<div>
+												<font>Route 17</font>
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="37" y="16">
+										[Not supported by viewer]
+									</text>
+								</switch>
+							</g>
+							<rect fill="#0412d9" height="28" stroke="none" width="107.8" x="177.1" y="315"></rect>
+							<g transform="translate(204.5,321.5)scale(0.7)">
+								<switch>
+									<foreignobject height="19" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="74">
+										<div>
+											<div>
+												Route 18
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="18px" text-anchor="middle" x="37" y="19">
+										Route 18
+									</text>
+								</switch>
+							</g>
+							<rect fill="#0412d9" height="28" stroke="none" width="81.9" x="202.3" y="368.9"></rect>
+							<g transform="translate(217.5,375.5)scale(0.7)">
+								<switch>
+									<foreignobject height="19" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="73">
+										<div>
+											<div>
+												Route 19
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="18px" text-anchor="middle" x="37" y="19">
+										Route 19
+									</text>
+								</switch>
+							</g>
+							<rect fill="#0412d9" height="28" stroke="none" width="81.9" x="97.3" y="368.2"></rect>
+							<g transform="translate(112.5,375.5)scale(0.7)">
+								<switch>
+									<foreignobject height="19" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="73">
+										<div>
+											<div>
+												Route 20
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="18px" text-anchor="middle" x="37" y="19">
+										Route 20
+									</text>
+								</switch>
+							</g>
+							<rect fill="#fcb612" height="28" stroke="none" transform="rotate(90,351.05,126.7)" width="56.7" x="322.7" y="112.7"></rect>
+							<g transform="translate(328.5,119.5)scale(0.7)rotate(90,31.5,9.5)">
+								<switch>
+									<foreignobject height="19" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="63">
+										<div>
+											<div>
+												<font>Route 5</font>
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="32" y="16">
+										[Not supported by viewer]
+									</text>
+								</switch>
+							</g>
+							<rect fill="#fcb612" height="28" stroke="none" transform="rotate(90,351.05,207.9)" width="56.7" x="322.7" y="193.9"></rect>
+							<g transform="translate(327.5,200.5)scale(0.7)rotate(90,33.5,10)">
+								<switch>
+									<foreignobject height="20" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="67">
+										<div>
+											<div>
+												Route&nbsp;<span>6</span>
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="19px" text-anchor="middle" x="34" y="20">
+										[Not supported by viewer]
+									</text>
+								</switch>
+							</g>
+							<rect fill="#fcb612" height="28" stroke="none" width="56.7" x="280.7" y="153.3"></rect>
+							<g transform="translate(286.5,160.5)scale(0.7)">
+								<switch>
+									<foreignobject height="19" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="63">
+										<div>
+											<div>
+												Route 8
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="18px" text-anchor="middle" x="32" y="19">
+										Route 8
+									</text>
+								</switch>
+							</g>
+							<rect fill="#fcb612" height="28" stroke="none" transform="rotate(90,458.85,219.8)" width="80.5" x="418.6" y="205.8"></rect>
+							<g transform="translate(431.5,212.5)scale(0.7)rotate(90,38.5,10)">
+								<switch>
+									<foreignobject height="20" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="77">
+										<div>
+											<div>
+												<div>
+													<span>Route 12</span>
+												</div>
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="19px" text-anchor="middle" x="39" y="20">
+										[Not supported by viewer]
+									</text>
+								</switch>
+							</g>
+							<rect fill="#fcb612" height="28" stroke="none" transform="rotate(90,458.85,114.1)" width="81.9" x="417.9" y="100.1"></rect>
+							<g transform="translate(430.5,146.5)scale(0.7)rotate(90,40,9.5)">
+								<switch>
+									<foreignobject height="19" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="40">
+										<div>
+											<div>
+												<div>
+													<span>10 &nbsp; &nbsp;</span>
+												</div>
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="20" y="16">
+										[Not supported by viewer]
+									</text>
+								</switch>
+							</g>
+							<rect fill="#0412d9" height="28" stroke="none" transform="rotate(90,297.85,368.2)" width="56.7" x="269.5" y="354.2"></rect>
+							<rect fill="#fcb612" height="28" stroke="none" transform="rotate(90,29.75,154.7)" width="107.1" x="-23.8" y="140.7"></rect>
+							<g transform="translate(3.5,147.5)scale(0.7)rotate(90,36.5,9.5)">
+								<switch>
+									<foreignobject height="19" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="73">
+										<div>
+											<div>
+												Route 23
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="18px" text-anchor="middle" x="37" y="19">
+										Route 23
+									</text>
+								</switch>
+							</g>
+							<rect fill="#fcb612" height="28" stroke="none" transform="rotate(90,83.65,161.7)" width="81.9" x="42.7" y="147.7"></rect>
+							<g transform="translate(53.5,154.5)scale(0.7)rotate(90,42.5,9.5)">
+								<switch>
+									<foreignobject height="19" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="85">
+										<div>
+											<div>
+												<div>
+													<span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2</span><br>
+												</div>
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="18px" text-anchor="middle" x="43" y="19">
+										[Not supported by viewer]
+									</text>
+								</switch>
+							</g>
+							<rect fill="#fcb612" height="28" stroke="none" transform="rotate(90,83.65,263.2)" width="56.7" x="55.3" y="249.2"></rect>
+							<g transform="translate(61.5,256.5)scale(0.7)rotate(90,31.5,9.5)">
+								<switch>
+									<foreignobject height="19" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="63">
+										<div>
+											<div>
+												Route 1
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="18px" text-anchor="middle" x="32" y="19">
+										Route 1
+									</text>
+								</switch>
+							</g>
+							<rect fill="#0412d9" height="28" stroke="none" transform="rotate(90,83.65,340.2)" width="56.7" x="55.3" y="326.2"></rect>
+							<g transform="translate(57.5,333.5)scale(0.7)rotate(90,36.5,9.5)">
+								<switch>
+									<foreignobject height="19" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="73">
+										<div>
+											<div>
+												Route 21
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="18px" text-anchor="middle" x="37" y="19">
+										Route 21
+									</text>
+								</switch>
+							</g>
+							<rect fill="#fcb612" height="28" stroke="none" width="56.7" x="15.4" y="205.8"></rect>
+							<g transform="translate(17.5,212.5)scale(0.7)">
+								<switch>
+									<foreignobject height="19" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="73">
+										<div>
+											<div>
+												<font>Route 22</font>
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="37" y="16">
+										[Not supported by viewer]
+									</text>
+								</switch>
+							</g>
+							<path d="M 70 108.39 L 78.29 100.1 L 89.71 100.1 L 98 108.39 L 98 119.81 L 89.71 128.1 L 78.29 128.1 L 70 119.81 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+							</path>
+							<path d="M 72.8 109.53 L 79.43 102.9 L 88.57 102.9 L 95.2 109.53 L 95.2 118.67 L 88.57 125.3 L 79.43 125.3 L 72.8 118.67 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+							stroke-miterlimit="10" stroke-width="1.4"></path>
+							<path d="M 70 215.49 L 78.29 207.2 L 89.71 207.2 L 98 215.49 L 98 226.91 L 89.71 235.2 L 78.29 235.2 L 70 226.91 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+							</path>
+							<path d="M 72.8 216.63 L 79.43 210 L 88.57 210 L 95.2 216.63 L 95.2 225.77 L 88.57 232.4 L 79.43 232.4 L 72.8 225.77 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+							stroke-miterlimit="10" stroke-width="1.4"></path>
+							<path d="M 69.3 296.69 L 77.59 288.4 L 89.01 288.4 L 97.3 296.69 L 97.3 308.11 L 89.01 316.4 L 77.59 316.4 L 69.3 308.11 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width=
+							"1.4"></path>
+							<path d="M 72.1 297.83 L 78.73 291.2 L 87.87 291.2 L 94.5 297.83 L 94.5 306.97 L 87.87 313.6 L 78.73 313.6 L 72.1 306.97 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+							stroke-miterlimit="10" stroke-width="1.4"></path>
+							<path d="M 338.1 161.59 L 346.39 153.3 L 357.81 153.3 L 366.1 161.59 L 366.1 173.01 L 357.81 181.3 L 346.39 181.3 L 338.1 173.01 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10"
+							stroke-width="1.4"></path>
+							<path d="M 340.9 162.73 L 347.53 156.1 L 356.67 156.1 L 363.3 162.73 L 363.3 171.87 L 356.67 178.5 L 347.53 178.5 L 340.9 171.87 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke=
+							"#b85450" stroke-miterlimit="10" stroke-width="1.4"></path>
+							<path d="M 254.1 161.59 L 262.39 153.3 L 273.81 153.3 L 282.1 161.59 L 282.1 173.01 L 273.81 181.3 L 262.39 181.3 L 254.1 173.01 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10"
+							stroke-width="1.4"></path>
+							<path d="M 256.9 162.73 L 263.53 156.1 L 272.67 156.1 L 279.3 162.73 L 279.3 171.87 L 272.67 178.5 L 263.53 178.5 L 256.9 171.87 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke=
+							"#b85450" stroke-miterlimit="10" stroke-width="1.4"></path>
+							<path d="M 336.7 241.39 L 344.99 233.1 L 356.41 233.1 L 364.7 241.39 L 364.7 252.81 L 356.41 261.1 L 344.99 261.1 L 336.7 252.81 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10"
+							stroke-width="1.4"></path>
+							<path d="M 339.5 242.53 L 346.13 235.9 L 355.27 235.9 L 361.9 242.53 L 361.9 251.67 L 355.27 258.3 L 346.13 258.3 L 339.5 251.67 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke=
+							"#b85450" stroke-miterlimit="10" stroke-width="1.4"></path>
+							<path d="M 16.1 81.09 L 24.39 72.8 L 35.81 72.8 L 44.1 81.09 L 44.1 92.51 L 35.81 100.8 L 24.39 100.8 L 16.1 92.51 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+							</path>
+							<path d="M 18.9 82.23 L 25.53 75.6 L 34.67 75.6 L 41.3 82.23 L 41.3 91.37 L 34.67 98 L 25.53 98 L 18.9 91.37 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+							stroke-miterlimit="10" stroke-width="1.4"></path>
+							<path d="M 338.1 79.69 L 346.39 71.4 L 357.81 71.4 L 366.1 79.69 L 366.1 91.11 L 357.81 99.4 L 346.39 99.4 L 338.1 91.11 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width=
+							"1.4"></path>
+							<path d="M 340.9 80.83 L 347.53 74.2 L 356.67 74.2 L 363.3 80.83 L 363.3 89.97 L 356.67 96.6 L 347.53 96.6 L 340.9 89.97 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+							stroke-miterlimit="10" stroke-width="1.4"></path>
+							<path d="M 445.2 162.99 L 453.49 154.7 L 464.91 154.7 L 473.2 162.99 L 473.2 174.41 L 464.91 182.7 L 453.49 182.7 L 445.2 174.41 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10"
+							stroke-width="1.4"></path>
+							<path d="M 448 164.13 L 454.63 157.5 L 463.77 157.5 L 470.4 164.13 L 470.4 173.27 L 463.77 179.9 L 454.63 179.9 L 448 173.27 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+							stroke-miterlimit="10" stroke-width="1.4"></path>
+							<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="456.4" y="166.6"></rect>
+							<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="457.8" y="168"></rect>
+							<path d="M 284.2 323.29 L 292.49 315 L 303.91 315 L 312.2 323.29 L 312.2 334.71 L 303.91 343 L 292.49 343 L 284.2 334.71 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width=
+							"1.4"></path>
+							<path d="M 287 324.43 L 293.63 317.8 L 302.77 317.8 L 309.4 324.43 L 309.4 333.57 L 302.77 340.2 L 293.63 340.2 L 287 333.57 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+							stroke-miterlimit="10" stroke-width="1.4"></path>
+							<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="295.4" y="326.9"></rect>
+							<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="296.8" y="328.3"></rect>
+							<path d="M 70 375.79 L 78.29 367.5 L 89.71 367.5 L 98 375.79 L 98 387.21 L 89.71 395.5 L 78.29 395.5 L 70 387.21 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+							</path>
+							<path d="M 72.8 376.93 L 79.43 370.3 L 88.57 370.3 L 95.2 376.93 L 95.2 386.07 L 88.57 392.7 L 79.43 392.7 L 72.8 386.07 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+							stroke-miterlimit="10" stroke-width="1.4"></path>
+							<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="81.2" y="379.4"></rect>
+							<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="82.6" y="380.8"></rect>
+							<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="349.3" y="83.3"></rect>
+							<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="350.7" y="84.7"></rect>
+							<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="22.4" y="109.9"></rect>
+							<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="23.8" y="111.3"></rect>
+							<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="76.3" y="133"></rect>
+							<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="77.7" y="134.4"></rect>
+							<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="76.3" y="156.1"></rect>
+							<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="77.7" y="157.5"></rect>
+							<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="181.3" y="374.5"></rect>
+							<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="182.7" y="375.9"></rect>
+							<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="210" y="79.1"></rect>
+							<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="211.4" y="80.5"></rect>
+							<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="371.7" y="240.1"></rect>
+							<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="373.1" y="241.5"></rect>
+							<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="451.5" y="79.1"></rect>
+							<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="452.9" y="80.5"></rect>
+							<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="451.5" y="103.6"></rect>
+							<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="452.9" y="105"></rect>
+							<rect fill="#fcb612" height="28" stroke="none" transform="rotate(90,458.85,286.3)" width="59.5" x="429.1" y="272.3"></rect>
+							<g transform="translate(458.5,250.5)scale(0.7)rotate(90,0,10)">
+								<switch>
+									<foreignobject height="20" pointer-events="all" requiredfeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;" width="77">
+										<div>
+											<div>
+												Route 13
+											</div>
+										</div>
+									</foreignobject>
+									<text fill="#000000" font-family="Helvetica" font-size="19px" text-anchor="middle" x="39" y="20">
+										Route 13
+									</text>
+								</switch>
+							</g>
+						</g></svg>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6 col-sm-offset-1" id="console"></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6 col-md-offset-1" id="navBar">
+						<button class="btn-success" id="badgeButton">Badges</button> <button class="btn-danger" id="pokedexButton">Pokedex</button> <button class="btn-info" id="mapButton">Map</button> <button class=
+						"btn-info" id="changeLogButton">Changelog</button> <button class="btn-danger" id="resetButton">Reset</button>
+					</div>
+				</div>
+				<!-- Starter Modal -->
+				<div aria-labelledby="myModalLabel" class="modal fade" id="pickStarter" role="dialog" tabindex="-1">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title" id="myModalLabel">Pick a starter</h4>
+							</div>
+							<div class="modal-body" id="myModalBody">
+								<div class="row" id="starterPokemons">
+									<img class="starter" id="Bulbasaur" src="images/1.png"> <img class="starter" id="Charmander" src="images/4.png"> <img class="starter" id="Squirtle" src="images/7.png"><br>
+									<span id="curStarterPick"></span>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button class="btn btn-primary" id="startAdventure" type="button">Start your adventure!</button>
+							</div>
+						</div>
+					</div>
+				</div><!-- Badge Modal -->
+				<div aria-labelledby="myModalLabel" class="modal fade" id="badgeModal" role="dialog" tabindex="-1">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title" id="myModalLabel">Badges</h4>
+							</div>
+							<div class="modal-body" id="myModalBody">
+								<div class="row" id="badges"><img class="pokeBadge col-sm-3" id="Badge1" src="images/Badge1.png"> <img class="pokeBadge col-sm-3" id="Badge2" src="images/Badge2.png"> <img class=
+								"pokeBadge col-sm-3" id="Badge3" src="images/Badge3.png"> <img class="pokeBadge col-sm-3" id="Badge4" src="images/Badge4.png"></div><br>
+								<div class="row" id="badges2"><img class="pokeBadge col-sm-3" id="Badge5" src="images/Badge5.png"> <img class="pokeBadge col-sm-3" id="Badge6" src="images/Badge6.png"> <img class=
+								"pokeBadge col-sm-3" id="Badge7" src="images/Badge7.png"> <img class="pokeBadge col-sm-3" id="Badge8" src="images/Badge8.png"></div>
+							</div>
+						</div>
+					</div>
+				</div><!-- Pokedex Modal -->
+				<div aria-labelledby="myModalLabel" class="modal fade" id="pokedexModal" role="dialog" tabindex="-1">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title" id="myModalLabel">Pokedex</h4>
+							</div>
+							<div class="modal-body" id="myModalBody">
+								Will be implemented soon!
+							</div>
+						</div>
+					</div>
+				</div><!-- changelog Modal -->
+				<div aria-labelledby="myModalLabel" class="modal fade" id="changeLogModal" role="dialog" tabindex="-1">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title" id="myModalLabel">Changelog</h4>
+							</div>
+							<div class="modal-body" id="changeLogBody">
+								<br>
+								<div class="entry-content">
+									<div id="0.1">
+										<p><img alt="Version: " src="images/version.png"> <big><strong>0.1</strong> - <span>Reddit feedback</span></big></p>
+										<p><em>Release Date: Sep. 20, 2015</em></p>
+										<h4>Changelog</h4>
+										<ul>
+											<li>Added a changelog (thanks to Volbric)</li>
+											<li>Here you can read about all the updates I make to this game (thanks to me :)</li>
+											<li style="list-style: none; display: inline">
+												<h4>Small additions</h4>
+											</li>
+											<li>Changed "money" to "$" (thanks to TheRyno123)</li>
+											<li>Added spawn routes for all the pokemon (thanks to MarkVM)</li>
+											<li>There is a stat for how many pokemon you have caught in total (individual pokemon stats will be in the pokedex) (thanks to iHacked)</li>
+											<li>Pokemon can now be sorted by PokeDex entry, Name, Level, Attack, and order captured (thanks to Pedter)</li>
+											<li>The captured pokemon lists automatically updates when you capture a new one (thanks to Hannomeggel)</li>
+											<li>A little pokeball it added to a wild pokemon name if you already caught it (thanks to TheTreester)</li>
+											<li style="list-style: none; display: inline">
+												<h4>Bug fixes</h4>
+											</li>
+											<li>Fixed a bug where switching routes while the game was in capture state to catch the newly spawned pokemon (thanks to Virgildiablo)</li>
+											<li>Fixed seels being everywhere!</li>
+											<li>Fixed money gained from selling not showing correctly in the logs (thanks to Hannomeggel)</li>
+											<li>Removed pokeballs until I implement a way to regain them (thanks to Yocoolman)</li>
+											<li>Fixed the pokemonbox clipping with the log (thanks to Rarylith)</li>
+											<li>Fixed the upgradebox being pushed down by the pokemonbox (thanks to Rarylith)</li>
+											<li>Fixed a javascript floating point error (thanks to Rarylith)</li>
+											<li>Upgrades no longer show without buying the previous upgrade (thanks to Quietlark)</li>
+											<li>Fixed a bug where you could buy PokeballUpgrade II before I (thanks to G-ice)</li>
+											<li style="list-style: none; display: inline">
+												<hr>
+											</li>
+										</ul>
+									</div>
+									<div id="0.09">
+										<p><img alt="Version: " src="images/version.png"> <big><strong>0.09</strong> - <span>Legendaries</span></big></p>
+										<p><em>Release Date: Sep. 18, 2015</em></p>
+										<h4>Legendaries</h4>
+										<ul>
+											<li>The player now has a small chance to encounter legendaries</li>
+											<li style="list-style: none; display: inline">
+												<ul>
+													<li>Legendaries are rare pokemon who are a lot stronger than other pokemon</li>
+													<li>Articuno, Zapdos, Moltres, Mew and Mewtwo are all in the game!</li>
+													<li>Everytime a pokemon spawns it has a chance to be a legendary</li>
+													<li>This chance can of course be improved by buying upgrades</li>
+												</ul>
+												<hr>
+											</li>
+										</ul>
+									</div>
+									<div id="0.08">
+										<p><img alt="Version: " src="images/version.png"> <big><strong>0.08</strong> - <span>Dynamic catch rate</span></big></p>
+										<p><em>Release Date: Sep. 16, 2015</em></p>
+										<h4>Pokemon</h4>
+										<ul>
+											<li>Catch rate is no longer fixed for all pokemon</li>
+											<li style="list-style: none; display: inline">
+												<ul>
+													<li>Weak pokemon have a higher chance to be caught than strong pokemon</li>
+													<li>Your overall catch chance can still be upgraded!</li>
+												</ul>
+												<h4>Savefile</h4>
+											</li>
+											<li>You no longer need to delete your savefile every time the game updates</li>
+											<li style="list-style: none; display: inline">
+												<hr>
+											</li>
+										</ul>
+									</div>
+									<div id="0.07">
+										<p><img alt="Version: " src="images/version.png"> <big><strong>0.07</strong> - <span>Evolution</span></big></p>
+										<p><em>Release Date: Sep. 15, 2015</em></p>
+										<h4>Pokemon</h4>
+										<ul>
+											<li>Pokemon can now evolve!</li>
+											<li style="list-style: none; display: inline">
+												<ul>
+													<li>When a pokemon reaches a high enough level it can evolve</li>
+													<li>When a pokemon evolves, you keep the pokemon and get the evolution at level 1</li>
+													<li>Example: I have a level 15 Pidgey, and it reaches level 16. I end up with a level 16 pidgey and a level 1 pidgeotto</li>
+												</ul>
+												<hr>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-
-		
-		<!-- Badge Modal -->
-		<div class="modal fade" id="badgeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
-			<div class="modal-content">
-			  <div class="modal-header">
-				<h4 class="modal-title" id="myModalLabel">Badges</h4>
-			  </div>
-			  <div id="myModalBody" class="modal-body">
-				<div id="badges" class="row">
-				<img class="pokeBadge col-sm-3" id="Badge1" src="images/Badge1.png"> 
-				<img class="pokeBadge col-sm-3" id="Badge2" src="images/Badge2.png"> 
-				<img class="pokeBadge col-sm-3" id="Badge3" src="images/Badge3.png"> 
-				<img class="pokeBadge col-sm-3" id="Badge4" src="images/Badge4.png"> 
-				</div><br>
-				<div id="badges2" class="row">
-				<img class="pokeBadge col-sm-3" id="Badge5" src="images/Badge5.png"> 
-				<img class="pokeBadge col-sm-3" id="Badge6" src="images/Badge6.png"> 
-				<img class="pokeBadge col-sm-3" id="Badge7" src="images/Badge7.png"> 
-				<img class="pokeBadge col-sm-3" id="Badge8" src="images/Badge8.png"> 
-				</div>
-
-			  </div>
-			 
-			</div>
-		  </div>
-		</div>		
-		
-		<!-- Pokedex Modal -->
-		<div class="modal fade" id="pokedexModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
-			<div class="modal-content">
-			  <div class="modal-header">
-				<h4 class="modal-title" id="myModalLabel">Pokedex</h4>
-			  </div>
-			  <div id="myModalBody" class="modal-body">
-				Will be implemented soon!
-
-			  </div>
-			 
-			</div>
-		  </div>
-		</div>	
-		
-		<!-- changelog Modal -->
-		<div class="modal fade" id="changeLogModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
-			<div class="modal-content">
-			  <div class="modal-header">
-				<h4 class="modal-title" id="myModalLabel">Changelog</h4>
-			  </div>
-			  <div id="changeLogBody" class="modal-body">
-				<br>
-		
-				<div class="entry-content">
-					
-					<div id="0.1">
-					<p><img src="images/version.png" alt="Version: "> <big><strong>0.1</strong> - <span>Reddit feedback</span></big></p>
-					<p><em>Release Date: Sep. 20, 2015</em></p>
-					
-					<h4>Changelog</h4>
-						<li>Added a changelog (thanks to Volbric)</li>
-						<li>Here you can read about all the updates I make to this game (thanks to me :)</li>
-					<h4>Small additions</h4>
-						<li>Changed "money" to "$" (thanks to TheRyno123)</li>
-						<li>Added spawn routes for all the pokemon (thanks to MarkVM)</li>
-						<li>There is a stat for how many pokemon you have caught in total (individual pokemon stats will be in the pokedex) (thanks to iHacked)</li>
-						<li>Pokemon can now be sorted by PokeDex entry, Name, Level, Attack, and order captured (thanks to Pedter)</li>
-						<li>The captured pokemon lists automatically updates when you capture a new one (thanks to Hannomeggel)</li>
-						<li>A little pokeball it added to a wild pokemon name if you already caught it (thanks to TheTreester)</li>
-					<h4>Bug fixes</h4>
-					
-						<li>Fixed a bug where switching routes while the game was in capture state to catch the newly spawned pokemon (thanks to Virgildiablo)</li>
-						<li>Fixed seels being everywhere!</li>
-						<li>Fixed money gained from selling not showing correctly in the logs (thanks to Hannomeggel)</li>
-						<li>Removed pokeballs until I implement a way to regain them (thanks to Yocoolman)</li>
-						<li>Fixed the pokemonbox clipping with the log (thanks to Rarylith)</li>
-						<li>Fixed the upgradebox being pushed down by the pokemonbox (thanks to Rarylith)</li>
-						<li>Fixed a javascript floating point error (thanks to Rarylith)</li>
-						<li>Upgrades no longer show without buying the previous upgrade (thanks to Quietlark)</li>
-						<li>Fixed a bug where you could buy PokeballUpgrade II before I (thanks to G-ice)</li>
-						<hr>
-					</div>
-					
-					<div id="0.09">
-					<p><img src="images/version.png" alt="Version: "> <big><strong>0.09</strong> - <span>Legendaries</span></big></p>
-					<p><em>Release Date: Sep. 18, 2015</em></p>
-					<h4>Legendaries</h4>
-						<li>The player now has a small chance to encounter legendaries</li>
-							<ul>
-								<li>Legendaries are rare pokemon who are a lot stronger than other pokemon</li>
-								<li>Articuno, Zapdos, Moltres, Mew and Mewtwo are all in the game!</li>
-								<li>Everytime a pokemon spawns it has a chance to be a legendary</li>
-								<li>This chance can of course be improved by buying upgrades</li>
-							
-							</ul>
-							<hr>
-					</div>
-					
-					<div id="0.08">
-					<p><img src="images/version.png" alt="Version: "> <big><strong>0.08</strong> - <span>Dynamic catch rate</span></big></p>
-					<p><em>Release Date: Sep. 16, 2015</em></p>
-					<h4>Pokemon</h4>
-						<li>Catch rate is no longer fixed for all pokemon</li>
-							<ul>
-								<li>Weak pokemon have a higher chance to be caught than strong pokemon</li>
-								<li>Your overall catch chance can still be upgraded!</li>
-							
-							</ul>
-					<h4>Savefile</h4>
-						<li>You no longer need to delete your savefile every time the game updates</li>
-						<hr>
-					</div>
-					
-					<div id="0.07">
-					<p><img src="images/version.png" alt="Version: "> <big><strong>0.07</strong> - <span>Evolution</span></big></p>
-					<p><em>Release Date: Sep. 15, 2015</em></p>
-					<h4>Pokemon</h4>
-						<li>Pokemon can now evolve!</li>
-							<ul>
-								<li>When a pokemon reaches a high enough level it can evolve</li>
-								<li>When a pokemon evolves, you keep the pokemon and get the evolution at level 1</li>
-								<li>Example: I have a level 15 Pidgey, and it reaches level 16. I end up with a level 16 pidgey and a level 1 pidgeotto</li>
-								
-							
-							</ul>
-							<hr>
-					</div>
-					
-					
-				</div>
-		
-		
-			  </div>
-			 
-			</div>
-		  </div>
-		</div>	
-		
-		
 	</div>
-	
-	
 </body>
-	</html>
+</html>

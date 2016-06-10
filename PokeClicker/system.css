@@ -6,16 +6,35 @@ body {
 	background-image: url('http://i.imgur.com/O7ZWigt.png'); 
 }
 
+.container-fluid{
+	margin-top: 10px;
+}
+
 table, #console, #currentEnemy, #upgradeBox, #navBar {
 	background-color: white;
 }
 
 #navBar{
 	border: 1px solid black;
+	position:fixed;
+	bottom:0px;
 }
 
 .pokeBadge{
 	opacity:0.10;
+}
+
+#map {
+	
+	border: 1px solid black;
+	font-size:17px;
+}
+
+#pokemons {
+	height:400px;
+	overflow:auto;
+	background-color:white;
+	border:1px solid black;
 }
 
 #pokeball {
@@ -101,7 +120,7 @@ table, #console, #currentEnemy, #upgradeBox, #navBar {
 	border: 1px solid black;
 
 	height:300px;
-	bottom:50px;	
+	margin-top: 15px;	
 	overflow: scroll;
 }
 

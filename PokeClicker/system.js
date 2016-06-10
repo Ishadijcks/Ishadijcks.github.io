@@ -158,13 +158,14 @@ $(document).ready(function(){
 	})
 	
 
-	$("svg").on('click',"rect", function(){
-		alert("YES!");
+	$("svg").on('click',"g", function(){
+		console.log(this.id);
 	})
 
-	$("g").click(function() {
-	   console.log(this);        
-	});
+	$("svg").on('click',"rect", function(){
+		console.log(this.id);
+	})
+
 
 	// Navbar Button controllers
 	$("body").on('click',"#badgeButton", function(){
@@ -215,6 +216,8 @@ var updateAll = function(){
 }
 
 // Returns true if the player has access to this route
+// TODO
+// Completely rewrite this for the new map.
 var accessToRoute = function(route){
 	for (var i = 1; i<route; i++){
 		if(player.routeKills[i] < 5 || player.routeKills[i] == undefined){

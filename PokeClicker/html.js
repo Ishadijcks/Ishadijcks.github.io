@@ -34,6 +34,15 @@ var updateUpgrades = function(){
 var updateCaughtList = function(){
 
 	var pokemonHtml = ""
+	var pokemonHeight = $("#pokemonBody").height()
+	log("pokemonHeight: "+pokemonHeight);
+	log("windowHeight: "+getHeight())
+	if( pokemonHeight > 1000){
+		$("#pokemons").height(1000);
+	}
+	else {
+		$("#pokemons").height(pokemonHeight + 120);
+	}
 
 	for (var i = 0; i<player.caughtPokemonList.length; i++){
 		pokemonHtml += "<tr>";
@@ -75,6 +84,9 @@ var updateStats = function(){
 //	$("#statBoxStats").html("<br><br>$"+player.money+"<br>"+player.clickAttack*player.clickMultiplier+"<br>"+player.attack*player.attackMultiplier+"<br>"+player.expMultiplier.toFixed(2)+"x<br>"+player.catchBonus+"%<br>"+player.catchTime/1000+" sec<br>"+player.route+"<br>"+player.totalCaught);	
 }
 
+var getHeight = function(){
+	return $(window).height();
+}
 
 
 var updateRoute = function(){
