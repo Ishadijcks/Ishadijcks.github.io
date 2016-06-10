@@ -73,8 +73,8 @@ var updateCaughtList = function(){
 // Update the stats
 var updateStats = function(){
 	$("#statBody").html("<tr><th>Money</th><th>$"+player.money+"</th></tr>" +
-		"<tr><th>Click attack</th><th>"+player.clickAttack*player.clickMultiplier+"</th></tr>" +
-		"<tr><th>Pokemon attack</th><th>"+player.attack*player.attackMultiplier+"</th></tr>" +
+		"<tr><th>Click attack</th><th>"+Math.floor(player.clickAttack*player.clickMultiplier*1.5)+"</th></tr>" +
+		"<tr><th>Pokemon attack</th><th>"+Math.floor(player.attack*player.attackMultiplier*1.5)+"</th></tr>" +
 		"<tr><th>Exp multiplier</th><th>"+player.expMultiplier.toFixed(2)+"</th></tr>" +
 		"<tr><th>Catch bonus</th><th>"+player.catchBonus+"%</th></tr>" +
 		"<tr><th>Catch time</th><th>"+player.catchTime/1000+" sec</th></tr>" +
@@ -90,7 +90,7 @@ var getHeight = function(){
 
 
 var updateRoute = function(){
-	$("#currentRoute").html("Route "+player.route+ "<br>"+Math.min(5,player.routeKills[player.route])+"/5");
+	$("#currentRoute").html("Route "+player.route+ "<br>"+Math.min(player.routeKillsNeeded, player.routeKills[player.route])+"/"+player.routeKillsNeeded);
 	if(accessToRoute(player.route+1)){
 		$("#routeRight").show();
 	}
