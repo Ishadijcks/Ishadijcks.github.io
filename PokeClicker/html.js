@@ -35,8 +35,7 @@ var updateCaughtList = function(){
 
 	var pokemonHtml = ""
 	var pokemonHeight = $("#pokemonBody").height()
-	log("pokemonHeight: "+pokemonHeight);
-	log("windowHeight: "+getHeight())
+
 	if( pokemonHeight > 1000){
 		$("#pokemons").height(1000);
 	}
@@ -106,18 +105,28 @@ var updateRoute = function(){
 
 	for(var i = 1; i< 26; i++){
 		if(player.routeKills[i]> player.routeKillsNeeded){
+			if( i == 19){
+				$("#route_"+i+"a").attr('style', "fill:#FCB612" );	
+			}
 			$("#route_"+i).attr('style', "fill:#FCB612" );
 		}
 		else if (accessToRoute(i)){
+			if( i == 19){
+				$("#route_"+i+"a").attr('style', "fill:#D89803");
+			}
 			$("#route_"+i).attr('style', "fill:#D89803");
 		}
 		else {
+			if( i == 19){
+				$("#route_"+i+"a").attr('style', "fill:#BD1952");	
+			}
 			$("#route_"+i).attr('style', "fill:#BD1952");	
 		}
-
-		document.getElementById("route_"+i).style.border = "1px solid black";
+		
 	}
-
 	$("#route_"+player.route).attr('style', "fill:green" );
+	if( player.route == 19){
+		$("#route_"+player.route+"a").attr('style', "fill:green" );	
+	}
 }
 

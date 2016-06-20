@@ -35,12 +35,22 @@ var idToRoute = function(id){
 }
 
 var moveToRoute = function(route){
-	console.log(accessToRoute(route));
-	if(accessToRoute(route)){
-		player.route = route;
+
+	
+
+	if(curEnemy.alive){
+		if(!isNaN(route)){
+			if(accessToRoute(route)){
+				player.route = route;
+				generatePokemon(player.route);
+			}
+			else {
+				log("You don't have access to that route yet.")
+			}
+		}
 	}
-	else {
-		log("You don't have access to that route yet.")
+	else{
+		log("You can't switch routes while catching a pokemon");
 	}
 	updateAll();
 }
@@ -49,7 +59,6 @@ var accessToRoute = function(route){
 	
 	var reqList = routeRequirements[route];
 	if(reqList != undefined){
-//	console.log(route);
 		for( var i = 0; i<reqList.length; i++){
 			if(enoughRouteKills(reqList[i])){
 				return true;
