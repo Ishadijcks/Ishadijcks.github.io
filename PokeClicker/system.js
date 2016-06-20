@@ -19,7 +19,8 @@ var player = {
 	upgradeList: [],
 	gymBadges: 0,
 	version: version,
-	totalCaught: 0
+	totalCaught: 0,
+	routeKillsNeeded: 10
 }
 
 var curEnemy = {
@@ -54,7 +55,7 @@ $(document).ready(function(){
 	
 	setInterval(function(){
 		if(player.starter != "none"){
-		curEnemy.health -= player.attack*player.attackMultiplier;
+		curEnemy.health -= Math.floor(player.attack*player.attackMultiplier*1.5);
 		updateAll();
 		}
 	},1000);
@@ -62,7 +63,7 @@ $(document).ready(function(){
 	$("body").on('click',"#enemy", function(){
 		if (curEnemy.alive){
 			if(curEnemy.health > 0){
-				curEnemy.health -= player.clickAttack*player.clickMultiplier;
+				curEnemy.health -= Math.floor(player.clickAttack*player.clickMultiplier*1.5);
 			}			
 			
 			else {
@@ -219,8 +220,11 @@ var updateAll = function(){
 // TODO
 // Completely rewrite this for the new map.
 var accessToRoute = function(route){
+	if(route > 100){
+		return false;
+	}
 	for (var i = 1; i<route; i++){
-		if(player.routeKills[i] < 5 || player.routeKills[i] == undefined){
+		if(player.routeKills[i] < player.routeKillsNeeded || player.routeKills[i] == undefined){
 			return false;
 		}
 	}
@@ -366,7 +370,7 @@ var capturePokemon = function(name){
 			var getMoney = Math.floor(30*1*player.moneyMultiplier);
 		}
 		else {
-			var getMoney = Math.floor(30-deviation*player.route*player.moneyMultiplier);
+			var getMoney = Math.floor((30-deviation)*player.route*player.moneyMultiplier);
 		}
 		log("You managed to sell the "+name+" for $" + getMoney + "!");
 		player.money += getMoney;
@@ -422,7 +426,7 @@ var generatePokemon = function (route){
 		}	
 
 		else {
-			var rand = Math.floor(Math.random()*144);
+			var rand = Math.floor(Math.random()*pokemonList.length);
 			randomPokemonName = pokemonList[rand].name;
 		}
 

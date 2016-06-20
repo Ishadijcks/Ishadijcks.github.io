@@ -133,3 +133,31 @@ table, #console, #currentEnemy, #upgradeBox, #navBar {
 	text-align:center;
 	height: 261px;
 }
+
+table{
+	display: block;
+	overflow: auto;
+	max-height:500px;
+<!-- change this to any number you want -->
+
+}
+
+thead{
+	min-width: 100%;
+	display: table;
+}
+
+tbody{
+	min-width: 100%;
+	display: table;
+}
+
+th{
+	width: 25%;
+}
+
+th:first-child{
+	width: 50%;
+}
+
+

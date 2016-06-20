@@ -29,6 +29,7 @@ var load = function(){
 	if (typeof savegame.gymBadges !== "undefined") player.gymBadges = savegame.gymBadges;
 	if (typeof savegame.totalCaught !== "undefined") player.totalCaught = savegame.totalCaught;
 	if (typeof savegame.version !== "undefined") player.version = savegame.version;
+	if (typeof savegame.routeKillsNeeded !== "undefined") player.routeKillsNeeded = savegame.routeKillsNeeded;
 	
 	
     var link = document.createElement('link');
