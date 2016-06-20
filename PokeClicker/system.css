@@ -176,27 +176,27 @@ g, rect {
 	margin-bottom: 20px;
 }
 
-table{
+#pokemons table{
 	display: block;
 }
 
-thead{
+#pokemons thead{
 	min-width: 100%;
 	display: table;
 }
 
-tbody{
+#pokemons tbody{
 	min-width: 100%;
 	display: table;
 }
 
-th{
+#pokemons th{
 	width: 25%;
 	text-align: center;
 	vertical-align: middle !important;
 }
 
-th:first-child{
+#pokemons th:first-child{
 	width: 50%;
 	text-align: left;
 
