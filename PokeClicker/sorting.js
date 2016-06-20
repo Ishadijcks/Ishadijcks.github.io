@@ -55,7 +55,6 @@ var sortChange = function() {
     var selectBox = document.getElementById("sortBox");
   
     var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-   console.log(selectedValue); 
   switch(selectedValue){
     case "name": 
       player.caughtPokemonList.sort(compareByName);

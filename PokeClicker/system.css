@@ -6,21 +6,86 @@ body {
 	background-image: url('http://i.imgur.com/O7ZWigt.png'); 
 }
 
+.container-fluid{
+	margin-top: 15px;
+}
+
 table, #console, #currentEnemy, #upgradeBox, #navBar {
 	background-color: white;
 }
 
 #navBar{
 	border: 1px solid black;
+
+	bottom:0px;
+}
+
+#leftColumn {
+	margin-right: 7.5px;
+}
+
+#rightColumn {
+	margin-left: 7.5px;
 }
 
 .pokeBadge{
 	opacity:0.10;
 }
 
-#statTable {
-	padding-right:0px;
+#map {
+	cursor:default;
+	border: 1px solid black;
+	font-size:17px;
 }
+
+#pokemonTable {
+	margin-bottom:0px;
+}
+
+#pokemons {
+	height:300px;
+	overflow:auto;
+	background-color:white;
+	border:1px solid black;
+	margin-bottom: 20px;
+}
+
+
+#pokeball {
+	-webkit-animation:spinleft 1s linear infinite;
+    -moz-animation:spinleft 1s linear infinite;
+    animation:spinleft 1s linear infinite;
+
+    height:76px;
+    width:76px;
+
+}
+
+@-moz-keyframes spinleft { 100% { -moz-transform: rotate(20deg); } }
+@-webkit-keyframes spinleft { 100% { -webkit-transform: rotate(20deg); } }
+
+    @keyframes spinleft { 
+        0% { 
+            transform: rotate(0deg); 
+        }
+        15% { 
+            transform: rotate(10deg); 
+        }
+        30% { 
+            transform: rotate(0deg); 
+        }
+        50% {
+        	transform: rotate (0deg);
+        }
+        65% { 
+            transform: rotate(-10deg); 
+        }
+        80% { 
+            transform: rotate(0deg); 
+        }
+    }
+
+
 
 #upgradeBox{
 	text-align:center;
@@ -28,8 +93,11 @@ table, #console, #currentEnemy, #upgradeBox, #navBar {
 }
 
 .smallImage{
-	height:16px;
-	width:16px;
+	max-height: 40px;
+	height: auto;
+	width: auto;
+	margin: -7px;
+	margin-right: 0;
 }
 
 .smallImage:hover{
@@ -39,12 +107,35 @@ table, #console, #currentEnemy, #upgradeBox, #navBar {
 
 .upgradeBoxes{
 	position:relative;
-	
 	margin-top:2px;
 	margin-bottom:2px;
 }
 
+image {
+	cursor: default
+}
 
+g, rect {
+	cursor:pointer;
+}
+
+#statDiv {
+	height:300px;
+	overflow:auto;
+	background-color:white;
+	border:1px solid black;
+	margin-bottom: 20px;	
+
+}
+
+#mapDiv {
+	padding-left:0px;
+	padding-right: 0px;
+}
+
+#statTable {
+	margin-bottom:0px;
+}
 
 .container {
 	width:100% !important
@@ -69,10 +160,9 @@ table, #console, #currentEnemy, #upgradeBox, #navBar {
 
 #console{
 	border: 1px solid black;
-
-	height:300px;
-	bottom:50px;	
+	height:198px;
 	overflow: scroll;
+	margin-bottom: 10px;
 }
 
 #enemy:hover{
@@ -82,15 +172,12 @@ table, #console, #currentEnemy, #upgradeBox, #navBar {
 #currentEnemy{
 	border: 1px solid black;
 	text-align:center;
-	height: 261px;
+	height: 250px;
+	margin-bottom: 20px;
 }
 
 table{
 	display: block;
-	overflow: auto;
-	max-height:500px;
-<!-- change this to any number you want -->
-
 }
 
 thead{
@@ -105,10 +192,14 @@ tbody{
 
 th{
 	width: 25%;
+	text-align: center;
+	vertical-align: middle !important;
 }
 
 th:first-child{
 	width: 50%;
+	text-align: left;
+
 }
 
 
