@@ -98,30 +98,6 @@ $(document).ready(function(){
 		}
 	})
 	
-	// Allows the player to move to the previous route
-	$("body").on('click',"#routeLeft", function(){
-	if(curEnemy.alive){
-		player.route--;
-		generatePokemon(player.route);
-		updateAll();
-		}
-		else{
-	log("You can't switch routes while catching a pokemon");
-	}
-	})
-	
-	// Allows the player to move to the next route
-	$("body").on('click',"#routeRight", function(){
-	if(curEnemy.alive){
-		player.route++;
-		generatePokemon(player.route);
-		updateAll();
-	}
-	else{
-	log("You can't switch routes while catching a pokemon");
-	}
-	})	
-	
 	// Allows the player buy upgrades
 	$("body").on('click',".upgradeBoxes", function(){
 		var id = this.id.substr(7,this.id.length);
@@ -160,11 +136,15 @@ $(document).ready(function(){
 	
 
 	$("svg").on('click',"g", function(){
-		console.log(this.id);
+		var id = this.id;
+		routeNumber = idToRoute(id);
+		moveToRoute(routeNumber);
 	})
 
 	$("svg").on('click',"rect", function(){
-		console.log(this.id);
+		var id = this.id;
+		routeNumber = idToRoute(id);
+		moveToRoute(routeNumber);
 	})
 
 
@@ -214,21 +194,6 @@ var updateAll = function(){
 	updateRoute();
 	updateUpgrades();
 	save();
-}
-
-// Returns true if the player has access to this route
-// TODO
-// Completely rewrite this for the new map.
-var accessToRoute = function(route){
-	if(route > 100){
-		return false;
-	}
-	for (var i = 1; i<route; i++){
-		if(player.routeKills[i] < player.routeKillsNeeded || player.routeKills[i] == undefined){
-			return false;
-		}
-	}
-	return true;
 }
 
 
@@ -365,7 +330,7 @@ var capturePokemon = function(name){
 		
 
 		var deviation = Math.floor(Math.random() * 11 ) -5;
-		console.log("Deviation: " + deviation);
+	//	console.log("Deviation: " + deviation);
 		if (deviation > player.route + 1){
 			var getMoney = Math.floor(30*1*player.moneyMultiplier);
 		}
@@ -506,13 +471,4 @@ var testLegendary = function(tries){
 	console.log("False: "+fail);
 }
 
-
-var correctRoute = function (route){
-	for (var i = 0; i<pokemonList.length; i++){
-		if (pokemonList[i].route == route){
-			return true;
-		}
-	}
-	return false;
-}
 

@@ -39,8 +39,6 @@ var updateCaughtList = function(){
 
 	var pokemonHtml = ""
 	var pokemonHeight = $("#pokemonBody").height()
-	// log("pokemonHeight: "+pokemonHeight);
-	// log("windowHeight: "+getHeight())
 	if( pokemonHeight > 1000){
 		$("#pokemons").height(1000);
 	}
@@ -49,8 +47,7 @@ var updateCaughtList = function(){
 	}
 
 	var pokemonHeight = $("#pokemonBody").height()
-	// log("pokemonHeight: "+pokemonHeight);
-	// log("windowHeight: "+getHeight())
+
 	if( pokemonHeight > 1000){
 		$("#pokemons").height(1000);
 	}
@@ -105,17 +102,43 @@ var getHeight = function(){
 
 var updateRoute = function(){
 	$("#currentRoute").html("Route "+player.route+ "<br>"+Math.min(player.routeKillsNeeded, player.routeKills[player.route])+"/"+player.routeKillsNeeded);
-	if(accessToRoute(player.route+1)){
-		$("#routeRight").show();
+	// if(accessToRoute(player.route+1)){
+	// 	$("#routeRight").show();
+	// }
+	// else{
+	// 	$("#routeRight").hide();
+	// }
+	// if(player.route == 1){
+	// 	$("#routeLeft").hide();
+	// } 
+	// else{
+	// 	$("#routeLeft").show();
+	// }
+
+	for(var i = 1; i< 26; i++){
+		if(player.routeKills[i]> player.routeKillsNeeded){
+			if( i == 19){
+				$("#route_"+i+"a").attr('style', "fill:#FCB612" );	
+			}
+			$("#route_"+i).attr('style', "fill:#FCB612" );
+		}
+		else if (accessToRoute(i)){
+			if( i == 19){
+				$("#route_"+i+"a").attr('style', "fill:#D89803");
+			}
+			$("#route_"+i).attr('style', "fill:#D89803");
+		}
+		else {
+			if( i == 19){
+				$("#route_"+i+"a").attr('style', "fill:#BD1952");	
+			}
+			$("#route_"+i).attr('style', "fill:#BD1952");	
+		}
+		
 	}
-	else{
-		$("#routeRight").hide();
-	}
-	if(player.route == 1){
-		$("#routeLeft").hide();
-	} 
-	else{
-		$("#routeLeft").show();
+	$("#route_"+player.route).attr('style', "fill:green" );
+	if( player.route == 19){
+		$("#route_"+player.route+"a").attr('style', "fill:green" );	
 	}
 }
 

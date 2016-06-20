@@ -61,6 +61,7 @@ var initUpgrades = function(){
 
 
 // Here I can add all upgradeTypes
+// Lol, do you even factory pattern?
 var applyUpgrade = function(type, amount){
 	switch(type){
 		case "catchBonus":
