@@ -24,10 +24,10 @@
 
 	<div class="container-fluid">
 		<div class="row-fluid">
-			<div class="col-lg-2 col-lg-offset-3 col-md-12" id="leftColumn">
+			<div class="col-lg-2 col-lg-offset-3 col-sm-5" id="leftColumn">
 				<div class="row">			
 					<div id="pokemons">
-						<select id="sortBox"  onchange="sortChange()">
+						<select id="sortBox" onchange="sortChange()">
 							<option> Sort by... </option>
 							<option value ="id">Pokedex #</option>	
 							<option value ="name">Name</option>
@@ -36,8 +36,6 @@
 							<option value ="time">Order captured</option>
 							<option value ="catchRate">Catch Rate</option>
 						</select>
-
-					
 						<table id="pokemonTable" class="table table-striped table-bordered table-condensed">
 				
 							<thead>
@@ -57,10 +55,7 @@
 					</div>
 				</div>
 				<div class="row">
-
-
-
-						<div class="col-lg-12 col-md-6" id="statDiv">
+					<div class="col-lg-12" id="statDiv">
 						<table id="statTable" class="table table-striped table-bordered table-condensed">
 							<colgroup>
 								<col id="statDesc" span="1">
@@ -92,7 +87,7 @@
 
 			<div class="col-lg-4" id="rightColumn">
 				<div class="row">
-					<div class="col-sm-12" id="currentEnemy">
+					<div class="col-lg-12 col-sm-6" id="currentEnemy">
 						<span id="currentRoute"></span>
 						<div id="enemyInfo"></div><span id="catchDisplay"></span>
 						<div class="progress">
