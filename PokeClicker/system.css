@@ -7,7 +7,7 @@ body {
 }
 
 .container-fluid{
-	margin-top: 10px;
+	margin-top: 15px;
 }
 
 table, #console, #currentEnemy, #upgradeBox, #navBar {
@@ -20,6 +20,14 @@ table, #console, #currentEnemy, #upgradeBox, #navBar {
 	bottom:0px;
 }
 
+#leftColumn {
+	margin-right: 7.5px;
+}
+
+#rightColumn {
+	margin-left: 7.5px;
+}
+
 .pokeBadge{
 	opacity:0.10;
 }
@@ -30,17 +38,27 @@ table, #console, #currentEnemy, #upgradeBox, #navBar {
 	font-size:17px;
 }
 
+#pokemonTable {
+	margin-bottom:0px;
+}
+
 #pokemons {
-	height:400px;
+	height:300px;
 	overflow:auto;
 	background-color:white;
 	border:1px solid black;
+	margin-bottom: 20px;
 }
+
 
 #pokeball {
 	-webkit-animation:spinleft 1s linear infinite;
     -moz-animation:spinleft 1s linear infinite;
     animation:spinleft 1s linear infinite;
+
+    height:76px;
+    width:76px;
+
 }
 
 @-moz-keyframes spinleft { 100% { -moz-transform: rotate(20deg); } }
@@ -67,9 +85,7 @@ table, #console, #currentEnemy, #upgradeBox, #navBar {
         }
     }
 
-#statTable {
-	padding-right:0px;
-}
+
 
 #upgradeBox{
 	text-align:center;
@@ -88,7 +104,6 @@ table, #console, #currentEnemy, #upgradeBox, #navBar {
 
 .upgradeBoxes{
 	position:relative;
-	
 	margin-top:2px;
 	margin-bottom:2px;
 }
@@ -101,7 +116,23 @@ g, rect {
 	cursor:pointer;
 }
 
+#statDiv {
+	height:300px;
+	overflow:auto;
+	background-color:white;
+	border:1px solid black;
+	margin-bottom: 20px;	
 
+}
+
+#mapDiv {
+	padding-left:0px;
+	padding-right: 0px;
+}
+
+#statTable {
+	margin-bottom:0px;
+}
 
 .container {
 	width:100% !important
@@ -127,8 +158,8 @@ g, rect {
 #console{
 	border: 1px solid black;
 
-	height:300px;
-	margin-top: 15px;	
+	height:210px;
+	
 	overflow: scroll;
 }
 
@@ -139,15 +170,12 @@ g, rect {
 #currentEnemy{
 	border: 1px solid black;
 	text-align:center;
-	height: 261px;
+	height: 250px;
+	margin-bottom: 20px;
 }
 
 table{
 	display: block;
-	overflow: auto;
-	max-height:500px;
-<!-- change this to any number you want -->
-
 }
 
 thead{

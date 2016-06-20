@@ -38,22 +38,22 @@ var updateUpgrades = function(){
 var updateCaughtList = function(){
 
 	var pokemonHtml = ""
-	var pokemonHeight = $("#pokemonBody").height()
-	if( pokemonHeight > 1000){
-		$("#pokemons").height(1000);
-	}
-	else {
-		$("#pokemons").height(pokemonHeight + 120);
-	}
+	// var pokemonHeight = $("#pokemonBody").height()
+	// if( pokemonHeight > 1000){
+	// 	$("#pokemons").height(1000);
+	// }
+	// else {
+	// 	$("#pokemons").height(pokemonHeight + 120);
+	// }
 
-	var pokemonHeight = $("#pokemonBody").height()
+	// var pokemonHeight = $("#pokemonBody").height()
 
-	if( pokemonHeight > 1000){
-		$("#pokemons").height(1000);
-	}
-	else {
-		$("#pokemons").height(pokemonHeight + 120);
-	}
+	// if( pokemonHeight > 1000){
+	// 	$("#pokemons").height(1000);
+	// }
+	// else {
+	// 	$("#pokemons").height(pokemonHeight + 120);
+	// }
 
 	for (var i = 0; i<player.caughtPokemonList.length; i++){
 		pokemonHtml += "<tr>";
@@ -89,7 +89,6 @@ var updateStats = function(){
 		"<tr><th>Exp multiplier</th><th>"+player.expMultiplier.toFixed(2)+"</th></tr>" +
 		"<tr><th>Catch bonus</th><th>"+player.catchBonus+"%</th></tr>" +
 		"<tr><th>Catch time</th><th>"+player.catchTime/1000+" sec</th></tr>" +
-		"<tr><th>Route</th><th>"+player.route+"</th></tr>" + 
 		"<tr><th>Pokemon Caught</th><th>"+player.totalCaught+"</th></tr>");
 //	$("#statBody").html("Stats<br><br>Money<br>Click attack<br>Pokemon attack<br>Exp multiplier<br>Catch bonus<br>Catch time<br>Route<br>Pokemon Caught");
 //	$("#statBoxStats").html("<br><br>$"+player.money+"<br>"+player.clickAttack*player.clickMultiplier+"<br>"+player.attack*player.attackMultiplier+"<br>"+player.expMultiplier.toFixed(2)+"x<br>"+player.catchBonus+"%<br>"+player.catchTime/1000+" sec<br>"+player.route+"<br>"+player.totalCaught);	
