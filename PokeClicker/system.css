@@ -93,8 +93,11 @@ table, #console, #currentEnemy, #upgradeBox, #navBar {
 }
 
 .smallImage{
-	height:16px;
-	width:16px;
+	max-height: 40px;
+	height: auto;
+	width: auto;
+	margin: -7px;
+	margin-right: 0;
 }
 
 .smallImage:hover{
@@ -190,10 +193,14 @@ tbody{
 
 th{
 	width: 25%;
+	text-align: center;
+	vertical-align: middle !important;
 }
 
 th:first-child{
 	width: 50%;
+	text-align: left;
+
 }
 
 
