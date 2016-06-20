@@ -36,7 +36,7 @@ var curEnemy = {
 
 
 $(document).ready(function(){
- //	$('#changeLogModal').modal('show');
+	$('#changeLogModal').modal('show');
  
 	if(localStorage.getItem("player") != null){
 		load();

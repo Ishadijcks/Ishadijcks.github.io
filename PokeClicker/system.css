@@ -16,7 +16,7 @@ table, #console, #currentEnemy, #upgradeBox, #navBar {
 
 #navBar{
 	border: 1px solid black;
-	position:fixed;
+
 	bottom:0px;
 }
 
@@ -160,10 +160,9 @@ g, rect {
 
 #console{
 	border: 1px solid black;
-
-	height:210px;
-	
+	height:198px;
 	overflow: scroll;
+	margin-bottom: 10px;
 }
 
 #enemy:hover{
