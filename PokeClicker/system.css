@@ -22,6 +22,7 @@ table, #console, #currentEnemy, #upgradeBox, #navBar {
 
 #leftColumn {
 	margin-right: 7.5px;
+	padding-right: 25px;
 }
 
 #rightColumn {
@@ -124,7 +125,8 @@ g, rect {
 	overflow:auto;
 	background-color:white;
 	border:1px solid black;
-	margin-bottom: 20px;	
+	margin-bottom: 20px;
+	padding:0;
 
 }
 
