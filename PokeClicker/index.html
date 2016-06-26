@@ -577,7 +577,6 @@
 					<div class="col-lg-12" id="navBar">
 						<button class="btn-success" id="badgeButton">Badges</button>
 						<button class="btn-danger" id="pokedexButton">Pokedex</button>
-						<button class="btn-info" id="mapButton">Map</button>
 						<button class="btn-info" id="changeLogButton">Changelog</button>
 						<button class="btn-danger" id="resetButton">Reset</button>
 					</div>
@@ -639,6 +638,40 @@
 							<div class="modal-body" id="changeLogBody">
 								<br>
 								<div class="entry-content">
+									<div id="0.3">
+										<p><img alt="Version: " src="images/version.png"> <big><strong>0.2</strong> - <span>Pok&eacute;dex</span></big></p>
+										<p><em>Release Date: Jun. 26, 2016</em></p>
+										
+										<ul>
+											<li style="list-style: none; display: inline">
+												<h4>Pok&eacute;dex</h4>
+											</li>
+											The pok&eacute;dex is here! See how many of each pok&eacute;mon you have defeated and captured!<br>
+											Get up to 60% bonus exp by killing the same pok&eacute;mon over and over.
+											Defeat pok&eacute;mon to unlock their dex entry.
+											
+										
+										
+											<li style="list-style: none; display: inline">
+												<h4>Small changes</h4>
+											</li>
+											<li>Decreased base catch rate</li>
+											<li>Increased catch rate upgrades</li>
+											<li>Changed base catch time to 3 second (old value: 3 seconds)</li>
+											<li>Rebalanced some catchtime upgrades</li>
+											<li>Changelog doesn't automatically open when you start the game anymore</li>
+
+											<li style="list-style: none; display: inline">
+												<h4>Bug fixes</h4>
+											</li>
+											<li>Removed a few faulty prints</li>
+											<li>Changed 'e' to '&eacute;'</li>
+											<li>Removed the map button from the navbar at the bottom of the screen</li>
+											<li style="list-style: none; display: inline">
+												<hr>
+											</li>
+										</ul>
+									</div>
 									<div id="0.2">
 										<p><img alt="Version: " src="images/version.png"> <big><strong>0.2</strong> - <span>Interface improvements!</span></big></p>
 										<p><em>Release Date: Jun. 20, 2016</em></p>
@@ -649,7 +682,7 @@
 											</li>
 											<li>Completely changed the interface, based on u/ScaryBee's design</li>
 											<li>Added a new background (made by u/Sandi315)</li>
-											<li>Made the captured pokemon list scrollable (thanks to Dennis)</li>
+											<li>Made the captured pok&eacute;mon list scrollable (thanks to Dennis)</li>
 											<li>Added a graphical map</li>
 											<li>Upgrade buttons fade to gray when you don't have enough money to buy the ugrade</li>
 											<li style="list-style: none; display: inline">
@@ -660,19 +693,19 @@
 											<li>Red routes are inaccessible</li>
 											<li>Green marks your current route</li>
 											<li>Dark orange is unlocked, but not yet completed</li>
-											<li>Light orange is unlocked, and killed enough pokemon to progress to the next route</li>
+											<li>Light orange is unlocked, and killed enough pok&eacute;mon to progress to the next route</li>
 										
 											<li style="list-style: none; display: inline">
 												<h4>Small changes</h4>
 											</li>
 											<li>Increased click attack by 50%</li>
-											<li>Increased pokemon attack by 50%</li>
-											<li>Changed the required amount of pokemon to clear a route to 10 (old value: 5)</li>
+											<li>Increased pok&eacute;mon attack by 50%</li>
+											<li>Changed the required amount of pok&eacute;mon to clear a route to 10 (old value: 5)</li>
 
 											<li style="list-style: none; display: inline">
 												<h4>Bug fixes</h4>
 											</li>
-											<li>Fixed a bug where pokemon would evolve too soon</li>
+											<li>Fixed a bug where pok&eacute;mon would evolve too soon</li>
 										
 											<li style="list-style: none; display: inline">
 												<hr>
@@ -690,23 +723,23 @@
 												<h4>Small additions</h4>
 											</li>
 											<li>Changed "money" to "$" (thanks to TheRyno123)</li>
-											<li>Added spawn routes for all the pokemon (thanks to MarkVM)</li>
-											<li>There is a stat for how many pokemon you have caught in total (individual pokemon stats will be in the pokedex) (thanks to iHacked)</li>
-											<li>Pokemon can now be sorted by PokeDex entry, Name, Level, Attack, and order captured (thanks to Pedter)</li>
-											<li>The captured pokemon lists automatically updates when you capture a new one (thanks to Hannomeggel)</li>
-											<li>A little pokeball it added to a wild pokemon name if you already caught it (thanks to TheTreester)</li>
+											<li>Added spawn routes for all the pok&eacute;mon (thanks to MarkVM)</li>
+											<li>There is a stat for how many pok&eacute;mon you have caught in total (individual pok&eacute;mon stats will be in the pok&eacute;dex) (thanks to iHacked)</li>
+											<li>pok&eacute;mon can now be sorted by pok&eacute;Dex entry, Name, Level, Attack, and order captured (thanks to Pedter)</li>
+											<li>The captured pok&eacute;mon lists automatically updates when you capture a new one (thanks to Hannomeggel)</li>
+											<li>A little pok&eacute;ball it added to a wild pok&eacute;mon name if you already caught it (thanks to TheTreester)</li>
 											<li style="list-style: none; display: inline">
 												<h4>Bug fixes</h4>
 											</li>
-											<li>Fixed a bug where switching routes while the game was in capture state to catch the newly spawned pokemon (thanks to Virgildiablo)</li>
+											<li>Fixed a bug where switching routes while the game was in capture state to catch the newly spawned pok&eacute;mon (thanks to Virgildiablo)</li>
 											<li>Fixed seels being everywhere!</li>
 											<li>Fixed money gained from selling not showing correctly in the logs (thanks to Hannomeggel)</li>
-											<li>Removed pokeballs until I implement a way to regain them (thanks to Yocoolman)</li>
-											<li>Fixed the pokemonbox clipping with the log (thanks to Rarylith)</li>
-											<li>Fixed the upgradebox being pushed down by the pokemonbox (thanks to Rarylith)</li>
+											<li>Removed pok&eacute;balls until I implement a way to regain them (thanks to Yocoolman)</li>
+											<li>Fixed the pok&eacute;monbox clipping with the log (thanks to Rarylith)</li>
+											<li>Fixed the upgradebox being pushed down by the pok&eacute;monbox (thanks to Rarylith)</li>
 											<li>Fixed a javascript floating point error (thanks to Rarylith)</li>
 											<li>Upgrades no longer show without buying the previous upgrade (thanks to Quietlark)</li>
-											<li>Fixed a bug where you could buy PokeballUpgrade II before I (thanks to G-ice)</li>
+											<li>Fixed a bug where you could buy pok&eacute;ballUpgrade II before I (thanks to G-ice)</li>
 											<li style="list-style: none; display: inline">
 												<hr>
 											</li>
@@ -720,9 +753,9 @@
 											<li>The player now has a small chance to encounter legendaries</li>
 											<li style="list-style: none; display: inline">
 												<ul>
-													<li>Legendaries are rare pokemon who are a lot stronger than other pokemon</li>
+													<li>Legendaries are rare pok&eacute;mon who are a lot stronger than other pok&eacute;mon</li>
 													<li>Articuno, Zapdos, Moltres, Mew and Mewtwo are all in the game!</li>
-													<li>Everytime a pokemon spawns it has a chance to be a legendary</li>
+													<li>Everytime a pok&eacute;mon spawns it has a chance to be a legendary</li>
 													<li>This chance can of course be improved by buying upgrades</li>
 												</ul>
 												<hr>
@@ -732,12 +765,12 @@
 									<div id="0.08">
 										<p><img alt="Version: " src="images/version.png"> <big><strong>0.08</strong> - <span>Dynamic catch rate</span></big></p>
 										<p><em>Release Date: Sep. 16, 2015</em></p>
-										<h4>Pokemon</h4>
+										<h4>pok&eacute;mon</h4>
 										<ul>
-											<li>Catch rate is no longer fixed for all pokemon</li>
+											<li>Catch rate is no longer fixed for all pok&eacute;mon</li>
 											<li style="list-style: none; display: inline">
 												<ul>
-													<li>Weak pokemon have a higher chance to be caught than strong pokemon</li>
+													<li>Weak pok&eacute;mon have a higher chance to be caught than strong pok&eacute;mon</li>
 													<li>Your overall catch chance can still be upgraded!</li>
 												</ul>
 												<h4>Savefile</h4>
@@ -751,13 +784,13 @@
 									<div id="0.07">
 										<p><img alt="Version: " src="images/version.png"> <big><strong>0.07</strong> - <span>Evolution</span></big></p>
 										<p><em>Release Date: Sep. 15, 2015</em></p>
-										<h4>Pokemon</h4>
+										<h4>pok&eacute;mon</h4>
 										<ul>
-											<li>Pokemon can now evolve!</li>
+											<li>pok&eacute;mon can now evolve!</li>
 											<li style="list-style: none; display: inline">
 												<ul>
-													<li>When a pokemon reaches a high enough level it can evolve</li>
-													<li>When a pokemon evolves, you keep the pokemon and get the evolution at level 1</li>
+													<li>When a pok&eacute;mon reaches a high enough level it can evolve</li>
+													<li>When a pok&eacute;mon evolves, you keep the pok&eacute;mon and get the evolution at level 1</li>
 													<li>Example: I have a level 15 Pidgey, and it reaches level 16. I end up with a level 16 pidgey and a level 1 pidgeotto</li>
 												</ul>
 												<hr>

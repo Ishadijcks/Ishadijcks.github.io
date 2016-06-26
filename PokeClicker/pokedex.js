@@ -2,10 +2,10 @@ var showPokedex = function(){
 	html = "";
 	html += "<div class='row'>";
 		html += "<div class='col-sm-4 col-sm-offset-2'>";
-			html += "<h3>Unique Pokemon captured: "+getUniqueCaptures()+"</h3><h3>Total Pokemon captured: "+getTotalCaptures()+"</h3>";
+			html += "<h3>Unique Pok&eacute;mon captured: "+getUniqueCaptures()+"</h3><h3>Total Pok&eacute;mon captured: "+getTotalCaptures()+"</h3>";
 		html += "</div>"
 		html += "<div class='col-sm-4 col-sm-offset-2'>";
-			html += "<h3>Total Pokemon defeated: "+getTotalDefeats()+"</h3><h3>Total Pokemon bred: 0</h3>";
+			html += "<h3>Total Pok&eacute;mon defeated: "+getTotalDefeats()+"</h3><h3>Total Pok&eacute;mon bred: 0</h3>";
 		html += "</div>"
 	html += "</div>";
 	html += "<div class='row'>";
