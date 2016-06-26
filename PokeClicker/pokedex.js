@@ -6,6 +6,7 @@ var showPokedex = function(){
 		html += "<div class='col-sm-3 col-md-2 pokedexEntry'>";
 		if( player.defeatNumbers[i] > 0 || player.catchNumbers[i] > 0){
 			html += "<img class='center-block' id='pokedexImage' src=images/"+(i+1)+".png >";
+			html += "<div class='pokedexRank'>" + Math.min(6,pokedexRank(player.defeatNumbers[i]))+ "</div>"
 			html += "<p class='pokedexText'>"+ pokemonList[i].name + "</p>";
 			html += "<p class='pokedexText'>Defeated: "+ player.defeatNumbers[i]+ "</p>";
 			html += "<p class='pokedexText'>Captured: "+ player.catchNumbers[i] + "</p>";
@@ -29,4 +30,17 @@ var highestPokemonId = function(){
 		}
 	}
 	return 150;
+}
+
+var pokedexBonus = function(kills){
+	return pokedexRank(kills)/10 + 1;
+}
+
+var pokedexRank = function(kills){
+	if(kills <= 0){
+		return 0;
+	}
+	else {
+		return Math.min((Math.floor(Math.log10(kills) + 1)),6);
+	}	
 }

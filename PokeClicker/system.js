@@ -264,16 +264,22 @@ var updateEnemy = function(){
 }
 
 
+
 // When the enemy is defeated all stats are updated and a new enemy is picked
 var enemyDefeated = function(){
 	if (curEnemy.alive){
 		log("You defeated the wild "+ curEnemy.name);
 		
-		var money = curEnemy.moneyReward;
-		var exp = 30+ 0.8*curEnemy.moneyReward;
+		
 		
 		var id = getPokemonByName(curEnemy.name).id-1;
 		player.defeatNumbers[id]++;
+		
+		var pokedexBonusExp = pokedexBonus(player.defeatNumbers[id]);
+		
+		var money = curEnemy.moneyReward;
+		var exp = 30+ 0.8*curEnemy.moneyReward;
+		exp *= pokedexBonusExp;
 		money *= player.moneyMultiplier
 		player.money += Math.floor(money);
 		getExp(exp);
