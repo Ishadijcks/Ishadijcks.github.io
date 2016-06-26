@@ -1,10 +1,10 @@
 var showPokedex = function(){
 	html = "";
 	html += "<div class='row'>";
-		html += "<div class='col-sm-4 col-sm-offset-2'>";
+		html += "<div class='col-md-4 col-md-offset-2'>";
 			html += "<h3>Unique Pok&eacute;mon captured: "+getUniqueCaptures()+"</h3><h3>Total Pok&eacute;mon captured: "+getTotalCaptures()+"</h3>";
 		html += "</div>"
-		html += "<div class='col-sm-4 col-sm-offset-2'>";
+		html += "<div class='col-md-4 col-md-offset-2'>";
 			html += "<h3>Total Pok&eacute;mon defeated: "+getTotalDefeats()+"</h3><h3>Total Pok&eacute;mon bred: 0</h3>";
 		html += "</div>"
 	html += "</div>";
@@ -15,7 +15,7 @@ var showPokedex = function(){
 		html += "<div class='col-sm-3 col-md-2 pokedexEntry'>";
 		if( player.defeatNumbers[i] > 0 || player.catchNumbers[i] > 0){
 			html += "<img class='center-block' id='pokedexImage' src=images/"+(i+1)+".png >";
-			html += "<div class='pokedexRank rank"+ Math.min(6,pokedexRank(player.defeatNumbers[i])) + "''>" + Math.min(6,pokedexRank(player.defeatNumbers[i]))+ "</div>"
+			html += "<div class='pokedexRank rank"+ Math.min(6,pokedexRank(player.defeatNumbers[i])) + "''><span class='pokedexRankText'>"+ Math.min(6,pokedexRank(player.defeatNumbers[i]))+ "</span></div>"
 			html += "<p class='pokedexText'>"+ pokemonList[i].name + "</p>";
 			html += "<p class='pokedexText'>Defeated: "+ player.defeatNumbers[i]+ "</p>";
 			html += "<p class='pokedexText'>Captured: "+ player.catchNumbers[i] + "</p>";
