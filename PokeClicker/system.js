@@ -232,7 +232,7 @@ var experienceToLevel = function(exp,levelType){
 		
 	}
 	exp *= mult;
-	return Math.min(100,Math.floor(-5/4 + Math.sqrt(8*exp +125)/(6*Math.sqrt(5))));
+	return Math.min(100,Math.floor( Math.pow(10*exp,0.5)/(6*Math.sqrt(5))));
 }
 
 // All pokemon you have gain exp
