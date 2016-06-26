@@ -33,6 +33,7 @@ var load = function(){
 	if (typeof savegame.catchNumbers !== "undefined") player.catchNumbers = savegame.catchNumbers;
 	if (typeof savegame.defeatNumbers !== "undefined") player.defeatNumbers = savegame.defeatNumbers;
 	
+	player.version = version;
 	
     var link = document.createElement('link');
     link.type = 'image/x-icon';

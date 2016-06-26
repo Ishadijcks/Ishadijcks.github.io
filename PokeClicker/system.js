@@ -1,4 +1,4 @@
-var version = "0.2"
+var version = "0.3"
 
 // Add new variables to the savefile!!
 var player = {
