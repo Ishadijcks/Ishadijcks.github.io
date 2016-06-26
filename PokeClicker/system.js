@@ -402,7 +402,7 @@ var generatePokemon = function (route){
 	curEnemy.name = randomPokemon.name;
 	curEnemy.id = randomPokemon.id;
 	curEnemy.health = Math.max(20+randomPokemon.health*1/4*route*(player.caughtPokemonList.length-1),20);
-console.log(curEnemy.health);
+
 	curEnemy.maxHealth = curEnemy.health;
 	curEnemy.catchRate = Math.floor(Math.pow(randomPokemon.catchRate,0.8));
 	curEnemy.alive = true;
