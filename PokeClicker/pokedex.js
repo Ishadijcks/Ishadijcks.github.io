@@ -1,6 +1,15 @@
 var showPokedex = function(){
-	html = "<div class='row'>";
-	console.log("asd");
+	html = "";
+	html += "<div class='row'>";
+		html += "<div class='col-sm-4 col-sm-offset-2'>";
+			html += "<h3>Unique Pokemon captured: "+getUniqueCaptures()+"</h3><h3>Total Pokemon captured: "+getTotalCaptures()+"</h3>";
+		html += "</div>"
+		html += "<div class='col-sm-4 col-sm-offset-2'>";
+			html += "<h3>Total Pokemon defeated: "+getTotalDefeats()+"</h3><h3>Total Pokemon bred: 0</h3>";
+		html += "</div>"
+	html += "</div>";
+	html += "<div class='row'>";
+	
 	var max = highestPokemonId();
 	for( var i = 0; i<= max; i++){
 		html += "<div class='col-sm-3 col-md-2 pokedexEntry'>";
@@ -43,4 +52,28 @@ var pokedexRank = function(kills){
 	else {
 		return Math.min((Math.floor(Math.log10(kills) + 1)),6);
 	}	
+}
+
+var getUniqueCaptures = function(){
+	return player.caughtPokemonList.length;
+}
+
+var getTotalDefeats = function(){
+	var total = 0;
+	for (var i = 0; i< player.defeatNumbers.length; i++){
+		if(player.defeatNumbers[i] > 0){
+			total += player.defeatNumbers[i];
+		}
+	}
+	return total;
+}
+
+var getTotalCaptures = function(){
+	var total = 0;
+	for (var i = 0; i< player.catchNumbers.length; i++){
+		if(player.catchNumbers[i] > 0){
+			total += player.catchNumbers[i];
+		}
+	}
+	return total;
 }
