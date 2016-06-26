@@ -1,5 +1,33 @@
 #pokedexModal{
-	width:100% !important;
+	width:100%;
+}
+
+#pokedex{
+	width:70%;
+	overflow: auto;
+}
+
+.pokedexEntry {
+	height:175px;
+	border: 1px solid black;
+	margin: 4%;
+	text-align: center;
+}
+
+#unkownPokemonImage{
+	
+	height:96px;
+	width:96px;
+	margin-top:39px;
+	margin-bottom: 39px;
+}
+
+#pokedexImage {
+	text-align:auto;
+}
+
+.pokedexText {
+	margin-bottom: 3px;
 }
 
 body {

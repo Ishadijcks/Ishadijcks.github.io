@@ -3,15 +3,16 @@
 <head>
 	<title>Pokeclicker</title>
 	<script src="jquery.js"></script>
+	<script src="pokemonList.js"></script>
 	<script src="system.js"></script>
 	<script src="pokemonsPerRoute.js"></script>
-	<script src="pokemonList.js"></script>
 	<script src="evolution.js"></script>
 	<script src="upgrades.js"></script>
 	<script src="html.js"></script>
 	<script src="sorting.js"></script>
 	<script src="save.js"></script>
 	<script src="map.js"></script>
+	<script src="pokedex.js"></script>
 	</script><!-- Latest compiled and minified CSS -->
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"><!-- Optional theme -->
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" rel="stylesheet"><!-- Latest compiled and minified JavaScript -->
@@ -616,13 +617,15 @@
 					</div>
 				</div><!-- Pokedex Modal -->
 				<div aria-labelledby="myModalLabel" class="modal fade" id="pokedexModal" role="dialog" tabindex="-1">
-					<div class="modal-dialog" role="document">
+					<div class="modal-dialog" role="document" id="pokedex">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h4 class="modal-title" id="myModalLabel">Pokedex</h4>
 							</div>
-							<div class="modal-body" id="myModalBody">
+							<div class="modal-body">
+								<div class="entry-content"  id="pokedexBody">
 								Will be implemented soon!
+								</div>
 							</div>
 						</div>
 					</div>
