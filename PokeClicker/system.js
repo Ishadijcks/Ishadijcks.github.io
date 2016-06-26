@@ -412,7 +412,9 @@ var generatePokemon = function (route){
 	curEnemy.health = Math.max(20+randomPokemon.health*1/4*route*(player.caughtPokemonList.length-1),20);
 
 	curEnemy.maxHealth = curEnemy.health;
-	curEnemy.catchRate = Math.floor(Math.pow(randomPokemon.catchRate,0.8));
+
+	var catchVariation = Math.floor(Math.random()*7-3);
+	curEnemy.catchRate = Math.floor(Math.pow(randomPokemon.catchRate,0.75)) + catchVariation;
 	curEnemy.alive = true;
 	curEnemy.moneyReward = 30 + 3*Math.pow(route,1.2);
 	return randomPokemon;
