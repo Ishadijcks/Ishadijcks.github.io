@@ -28,6 +28,35 @@
 	width:20px;
 }
 
+.rank0 {
+	background-color: #F1F8E9;
+}
+
+.rank1 {
+	background-color: #DCEDC8;
+}
+
+.rank2 {
+	background-color: #C5E1A5;
+}
+
+.rank3 {
+	background-color: #AED581;
+}
+
+.rank4 {
+	background-color: #9CCC65;
+}
+
+.rank5 {
+	background-color: #8BC34A;
+}
+
+.rank6 {
+	background-color: #7CB342;
+}
+
+
 #unkownPokemonImage{
 	height:96px;
 	width:96px;
