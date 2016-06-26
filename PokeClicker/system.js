@@ -13,7 +13,7 @@ var player = {
 	route: 1,
 	pokeballs: 100,
 	routeVariation: 5,
-	catchTime: 3000,
+	catchTime: 2000,
 	caughtPokemonList: [],
 	catchNumbers: Array.apply(null, Array(pokemonList.length)).map(Number.prototype.valueOf,0),
 	defeatNumbers: Array.apply(null, Array(pokemonList.length)).map(Number.prototype.valueOf,0),
