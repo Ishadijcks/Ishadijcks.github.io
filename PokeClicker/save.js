@@ -30,6 +30,8 @@ var load = function(){
 	if (typeof savegame.totalCaught !== "undefined") player.totalCaught = savegame.totalCaught;
 	if (typeof savegame.version !== "undefined") player.version = savegame.version;
 	if (typeof savegame.routeKillsNeeded !== "undefined") player.routeKillsNeeded = savegame.routeKillsNeeded;
+	if (typeof savegame.catchNumbers !== "undefined") player.catchNumbers = savegame.catchNumbers;
+	if (typeof savegame.defeatNumbers !== "undefined") player.defeatNumbers = savegame.defeatNumbers;
 	
 	
     var link = document.createElement('link');

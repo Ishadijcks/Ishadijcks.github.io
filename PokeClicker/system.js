@@ -1,5 +1,6 @@
 var version = "0.2"
 
+// Add new variables to the savefile!!
 var player = {
 	clickAttack: 1,
 	clickMultiplier: 1,
@@ -14,6 +15,8 @@ var player = {
 	routeVariation: 5,
 	catchTime: 3000,
 	caughtPokemonList: [],
+	catchNumbers: Array.apply(null, Array(pokemonList.length)).map(Number.prototype.valueOf,0),
+	defeatNumbers: Array.apply(null, Array(pokemonList.length)).map(Number.prototype.valueOf,0),
 	routeKills: Array.apply(null, Array(100)).map(Number.prototype.valueOf,0),
 	starter: "none",
 	upgradeList: [],
@@ -157,6 +160,7 @@ $(document).ready(function(){
 	})
 
 	$("body").on('click',"#pokedexButton", function(){
+		showPokedex();
 		$("#pokedexModal").modal("show");
 
 	})		
@@ -268,7 +272,8 @@ var enemyDefeated = function(){
 		var money = curEnemy.moneyReward;
 		var exp = 30+ 0.8*curEnemy.moneyReward;
 		
-		
+		var id = getPokemonByName(curEnemy.name).id-1;
+		player.defeatNumbers[id]++;
 		money *= player.moneyMultiplier
 		player.money += Math.floor(money);
 		getExp(exp);
@@ -313,11 +318,14 @@ var enemyDefeated = function(){
 // Capture a pokemon by moving it to the player.caughtPokemonList
 // Pokemon are adressable by name
 var capturePokemon = function(name){
+	var id = getPokemonByName(name).id-1;
+	player.catchNumbers[id]++;
 	if(!alreadyCaught(name)){
 		for( var i = 0; i<pokemonList.length; i++){
 			if (pokemonList[i].name == name){
 				pokemonList[i].timeStamp = Math.floor(Date.now() / 1000);
 				player.caughtPokemonList.push(pokemonList[i]);
+
 				calculateAttack();
 			}
 		}
