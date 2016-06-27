@@ -1,5 +1,6 @@
 var version = "0.3"
 
+var inProgress = 1;
 // Add new variables to the savefile!!
 var player = {
 	clickAttack: 1,
@@ -56,15 +57,17 @@ $(document).ready(function(){
 	updateAll();
 	}
 	
+	loadTowns();
+		
 	setInterval(function(){
-		if(player.starter != "none"){
+		if(player.starter != "none" && inProgress){
 		curEnemy.health -= Math.floor(player.attack*player.attackMultiplier*1.5);
 		updateAll();
 		}
 	},1000);
 
 	$("body").on('click',"#enemy", function(){
-		if (curEnemy.alive){
+		if (curEnemy.alive && inProgress){
 			if(curEnemy.health > 0){
 				curEnemy.health -= Math.floor(player.clickAttack*player.clickMultiplier*1.5);
 			}			
@@ -137,7 +140,6 @@ $(document).ready(function(){
 		updateCaughtList();
 	})
 	
-
 	$("svg").on('click',"g", function(){
 		var id = this.id;
 		routeNumber = idToRoute(id);

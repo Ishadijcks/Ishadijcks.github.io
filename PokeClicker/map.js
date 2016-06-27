@@ -40,6 +40,7 @@ var moveToRoute = function(route){
 
 	if(curEnemy.alive){
 		if(!isNaN(route)){
+			inProgress = 1;
 			if(accessToRoute(route)){
 				player.route = route;
 				generatePokemon(player.route);
