@@ -136,7 +136,7 @@ var updateRoute = function(){
 		
 	}
 
-	if( inProgress){
+	if( inProgress == 1){
 		$("#route_"+player.route).attr('style', "fill:green" );
 		if( player.route == 19){
 			$("#route_"+player.route+"a").attr('style', "fill:green" );	

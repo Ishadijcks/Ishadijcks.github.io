@@ -1,4 +1,4 @@
-var version = "0.3"
+var version = "0.4"
 
 var inProgress = 1;
 // Add new variables to the savefile!!
@@ -21,7 +21,7 @@ var player = {
 	routeKills: Array.apply(null, Array(100)).map(Number.prototype.valueOf,0),
 	starter: "none",
 	upgradeList: [],
-	gymBadges: 0,
+	gymBadges: [],
 	version: version,
 	totalCaught: 0,
 	routeKillsNeeded: 10
@@ -62,14 +62,14 @@ $(document).ready(function(){
 	$("#currentEnemy").show();
 
 	setInterval(function(){
-		if(player.starter != "none" && inProgress){
+		if(player.starter != "none" && inProgress != 0){
 		curEnemy.health -= Math.floor(player.attack*player.attackMultiplier*1.5);
 		updateAll();
 		}
 	},1000);
 
 	$("body").on('click',"#enemy", function(){
-		if (curEnemy.alive && inProgress){
+		if (curEnemy.alive && inProgress != 0){
 			if(curEnemy.health > 0){
 				curEnemy.health -= Math.floor(player.clickAttack*player.clickMultiplier*1.5);
 			}			
@@ -159,12 +159,17 @@ $(document).ready(function(){
 		moveToTown(id);
 	})
 
+
+	$("body").on('click',".gym", function(){
+		var id = this.id;
+		id = id.slice(0, -4);
+		loadGym(id);
+	})
+
 	// Navbar Button controllers
 	$("body").on('click',"#badgeButton", function(){
 		$("#badgeModal").modal("show");
-		for (var i = 1; i<=player.gymBadges; i++){
-			$("#Badge"+i).fadeTo("slow",1);
-		}
+		showGymBadges();
 	})
 
 	$("body").on('click',"#pokedexButton", function(){
@@ -201,7 +206,12 @@ $(document).ready(function(){
 var updateAll = function(){
 	calculateAttack();
 	updateStats();
-	updateEnemy();
+	if( inProgress == 1){
+		updateEnemy();
+	}
+	else if (inProgress == 2){
+		updateGym();
+	}
 	updateCaughtList();
 	updateRoute();
 	updateUpgrades();
@@ -298,8 +308,9 @@ var enemyDefeated = function(){
 				capturePokemon(curEnemy.name);
 				
 			}
-		
-		generatePokemon(player.route);
+		if( inProgress == 1){
+			generatePokemon(player.route);
+		}
 		updateStats();
 		updateEnemy();
 		$("#catchDisplay").html("");

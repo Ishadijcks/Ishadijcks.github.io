@@ -40,7 +40,7 @@ var showTown = function(town){
 	//html += "<img src="+town.image+">";
 	html += "<div class='row'>";
 		if (town.gym != null){
-			html += "<button class='leftTownButton btn btn-primary col-sm-2' id="+town.name+"gym>Gym</button>"
+			html += "<button class='gym leftTownButton btn btn-primary col-sm-2' id='"+town.name+" Gym'>Gym</button>"
 		}
 	html += "</div>"
 	$("#townView").html(html);
