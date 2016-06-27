@@ -58,7 +58,9 @@ $(document).ready(function(){
 	}
 	
 	loadTowns();
-		
+	$("#townView").hide();
+
+
 	setInterval(function(){
 		if(player.starter != "none" && inProgress){
 		curEnemy.health -= Math.floor(player.attack*player.attackMultiplier*1.5);

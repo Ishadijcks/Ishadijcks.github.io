@@ -135,9 +135,12 @@ var updateRoute = function(){
 		}
 		
 	}
-	$("#route_"+player.route).attr('style', "fill:green" );
-	if( player.route == 19){
-		$("#route_"+player.route+"a").attr('style', "fill:green" );	
+
+	if( inProgress){
+		$("#route_"+player.route).attr('style', "fill:green" );
+		if( player.route == 19){
+			$("#route_"+player.route+"a").attr('style', "fill:green" );	
+		}
 	}
 }
 
