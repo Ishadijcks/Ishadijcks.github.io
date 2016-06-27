@@ -1,5 +1,6 @@
 var gymPokemonIndex = 0;
 var currentGym;
+var counter;
 
 var Gym = function(leaderName,town,pokemons,badgeReward,moneyReward){
 	var temp = {
@@ -8,8 +9,8 @@ var Gym = function(leaderName,town,pokemons,badgeReward,moneyReward){
 		pokemons: pokemons,
 		badgeReward: badgeReward,
 		moneyReward: moneyReward,
-		timeLimit: 30,
-		timeLeft: 30
+		timeLimit: 30*100,
+		timeLeft: 30*100
 	}
 	return temp;
 }
@@ -25,7 +26,7 @@ var GymPokemon = function(name, health){
 
 var PewterCityGym = function(){
 	var pokemonList = [];
-	pokemonList.push(GymPokemon("Geodude", 3000));
+	pokemonList.push(GymPokemon("Geodude", 30000));
 	pokemonList.push(GymPokemon("Onix", 6000))
 	return Gym("Brock", "Pewter City Gym", pokemonList, "Boulder", 5000);
 }
@@ -35,21 +36,22 @@ var loadGym = function(townId){
 	currentGym = getTown(townId).gym;
 	spawnGymPokemon(gymPokemonIndex);
 
-	var counter = setInterval(timer, 100); //100 will  run it every 10th of a second
+	counter = setInterval(timer, 100); //100 will  run it every 10th of a second
     
    
 }
 
-var timer = function()
-    {
-        if (count <= 0)
-        {
-            clearInterval(counter);
-            return;
-         }
-         timeLimit-=10;
-         document.getElementById("timer").innerHTML=count /100+ " secs"; 
-     }
+var timer = function(){
+	if (currentGym.timeLeft <= 0){
+    	clearInterval(counter);
+        inProgress = 0;
+        moveToTown(currentGym.town.slice(0,-4));
+        log("You couldn't defeat "+currentGym.leaderName+ " in time.");
+        log("Train harder and try again!")
+    }
+    currentGym.timeLeft-=10;
+        $("#timer").html((currentGym.timeLeft/100)+"/"+currentGym.timeLimit/100); 
+    }
 
 var updateGym= function(){
 	
@@ -82,14 +84,13 @@ var updateGym= function(){
 }
 
 var gymEnemyDefeated = function(){
-	log("You defeated the "+ curEnemy.name);
+	log("You defeated "+currentGym.leaderName+"'s " + curEnemy.name);
 	gymPokemonIndex++;
-	console.log(currentGym);
 	if(currentGym.pokemons[gymPokemonIndex] != null){
 		spawnGymPokemon(gymPokemonIndex);
 	}
 	else {
-		log("Congratulations, you have defeated the gym leader!");
+		log("Congratulations, you have defeated "+ currentGym.leaderName+"!");
 		inProgress = 0;
 		moveToTown(currentGym.town.slice(0,-4));
 		if(!alreadyGotBadge(currentGym.badgeReward)){
