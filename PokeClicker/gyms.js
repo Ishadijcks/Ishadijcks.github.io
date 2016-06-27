@@ -26,13 +26,13 @@ var GymPokemon = function(name, health){
 
 var PewterCityGym = function(){
 	var pokemonList = [];
-	pokemonList.push(GymPokemon("Geodude", 30000));
+	pokemonList.push(GymPokemon("Geodude", 3000));
 	pokemonList.push(GymPokemon("Onix", 6000))
 	return Gym("Brock", "Pewter City Gym", pokemonList, "Boulder", 5000);
 }
 
 var loadGym = function(townId){
-	var gymPokemonIndex = 0;
+	gymPokemonIndex = 0;
 	currentGym = getTown(townId).gym;
 	spawnGymPokemon(gymPokemonIndex);
 
@@ -46,6 +46,7 @@ var timer = function(){
     	clearInterval(counter);
         inProgress = 0;
         moveToTown(currentGym.town.slice(0,-4));
+        currentGym.timeLeft = currentGym.timeLimit;
         log("You couldn't defeat "+currentGym.leaderName+ " in time.");
         log("Train harder and try again!")
     }
@@ -90,9 +91,11 @@ var gymEnemyDefeated = function(){
 		spawnGymPokemon(gymPokemonIndex);
 	}
 	else {
+		clearInterval(counter);
 		log("Congratulations, you have defeated "+ currentGym.leaderName+"!");
 		inProgress = 0;
 		moveToTown(currentGym.town.slice(0,-4));
+        currentGym.timeLeft = currentGym.timeLimit;
 		if(!alreadyGotBadge(currentGym.badgeReward)){
 			player.gymBadges.push(currentGym.badgeReward);
 			console.log("first");
