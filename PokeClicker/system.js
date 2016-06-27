@@ -152,6 +152,10 @@ $(document).ready(function(){
 		moveToRoute(routeNumber);
 	})
 
+	$("svg").on('click',".city", function(){
+		var id = this.id;
+		moveToTown(id);
+	})
 
 	// Navbar Button controllers
 	$("body").on('click',"#badgeButton", function(){
