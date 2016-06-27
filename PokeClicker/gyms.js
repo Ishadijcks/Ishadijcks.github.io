@@ -8,7 +8,8 @@ var Gym = function(leaderName,town,pokemons,badgeReward,moneyReward){
 		pokemons: pokemons,
 		badgeReward: badgeReward,
 		moneyReward: moneyReward,
-		timeLimit: 30
+		timeLimit: 30,
+		timeLeft: 30
 	}
 	return temp;
 }
@@ -33,13 +34,30 @@ var loadGym = function(townId){
 	var gymPokemonIndex = 0;
 	currentGym = getTown(townId).gym;
 	spawnGymPokemon(gymPokemonIndex);
+
+	var counter = setInterval(timer, 100); //100 will  run it every 10th of a second
+    
+   
 }
 
+var timer = function()
+    {
+        if (count <= 0)
+        {
+            clearInterval(counter);
+            return;
+         }
+         timeLimit-=10;
+         document.getElementById("timer").innerHTML=count /100+ " secs"; 
+     }
+
 var updateGym= function(){
-	inProgress = 2;
+	
 	hideAllViews();
 	$("#gymView").show();
     
+
+
     if (curEnemy.health <0){
         curEnemy.health = 0;
     }
@@ -57,6 +75,10 @@ var updateGym= function(){
     }
         $("#gymHealthBar").width(100*curEnemy.health/curEnemy.maxHealth+"%"); 
         $("#gymHealthDisplay").html(curEnemy.health+"/"+curEnemy.maxHealth);
+
+    if(curEnemy.health != 0){
+    	inProgress = 2;
+	}
 }
 
 var gymEnemyDefeated = function(){
