@@ -2,6 +2,9 @@
 	cursor:pointer
 }
 
+#gymDefeatedBody {
+	text-align: center;
+}
 #townView {
 	border: 1px solid black;
 	height: 250px;

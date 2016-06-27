@@ -26,9 +26,9 @@ var GymPokemon = function(name, health){
 
 var PewterCityGym = function(){
 	var pokemonList = [];
-	pokemonList.push(GymPokemon("Geodude", 3000));
-	pokemonList.push(GymPokemon("Onix", 6000))
-	return Gym("Brock", "Pewter City Gym", pokemonList, "Boulder", 5000);
+	pokemonList.push(GymPokemon("Geodude", 2000));
+	pokemonList.push(GymPokemon("Onix", 4000))
+	return Gym("Brock", "Pewter City Gym", pokemonList, "Boulder", 1000);
 }
 
 var loadGym = function(townId){
@@ -37,8 +37,6 @@ var loadGym = function(townId){
 	spawnGymPokemon(gymPokemonIndex);
 
 	counter = setInterval(timer, 100); //100 will  run it every 10th of a second
-    
-   
 }
 
 var timer = function(){
@@ -59,8 +57,6 @@ var updateGym= function(){
 	hideAllViews();
 	$("#gymView").show();
     
-
-
     if (curEnemy.health <0){
         curEnemy.health = 0;
     }
@@ -91,16 +87,44 @@ var gymEnemyDefeated = function(){
 		spawnGymPokemon(gymPokemonIndex);
 	}
 	else {
-		clearInterval(counter);
-		log("Congratulations, you have defeated "+ currentGym.leaderName+"!");
-		inProgress = 0;
-		moveToTown(currentGym.town.slice(0,-4));
-        currentGym.timeLeft = currentGym.timeLimit;
-		if(!alreadyGotBadge(currentGym.badgeReward)){
-			player.gymBadges.push(currentGym.badgeReward);
-			console.log("first");
-		}
+		gymDefeated();
 	}
+}
+
+var gymDefeated = function(){
+	clearInterval(counter);
+	log("Congratulations, you have defeated "+ currentGym.leaderName+"!");
+	inProgress = 0;
+	moveToTown(currentGym.town.slice(0,-4));
+	currentGym.timeLeft = currentGym.timeLimit;
+	var first = !alreadyGotBadge(currentGym.badgeReward);
+	if(first){
+		player.gymBadges.push(currentGym.badgeReward);
+		player.money += currentGym.moneyReward;
+	}
+	else {
+		player.money += currentGym.moneyReward/10;
+	}
+	showGymDefeated(first);
+}
+
+var showGymDefeated = function(first){
+	html = "";
+
+	if(first){
+		html += "You have defeated " + currentGym.leaderName+"!<br>" ;		
+		html +=	"<img id='badgeReward' src=images/gyms/badges/"+currentGym.badgeReward+"Badge.png><br>";
+		html += "You have earned the "+currentGym.badgeReward+ " Badge!<br>";
+		html += "Prize money: $" + currentGym.moneyReward;
+	} else {
+		html += "You have defeated " + currentGym.leaderName+" again!<br>" ;
+		html += "Prize money: " + currentGym.moneyReward+ " x 10% = $"+ currentGym.moneyReward/10;
+	}
+
+	html += "<br><br>You can replay this gym for 10% of its original money reward!"
+	
+	$("#gymDefeatedBody").html(html);
+	$("#gymModal").modal('show');
 }
 
 var alreadyGotBadge = function(badgeName){
