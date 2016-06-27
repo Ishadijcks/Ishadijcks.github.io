@@ -24,7 +24,9 @@ var showTown = function(town){
 	html += "<h3 class='townName strokeme'>"+town.name+"</h3>";
 	//html += "<img src="+town.image+">";
 	html += "<div class='row'>";
-		html += "<button class='leftTownButton btn btn-primary col-sm-2' id='gymButton'>Gym</button>"
+		if (town.gym != null){
+			html += "<button class='leftTownButton btn btn-primary col-sm-2' id='gymButton'>Gym</button>"
+		}
 	html += "</div>"
 	$("#townView").html(html);
 	$("#townView").css("background-image", "url("+town.image+")");  
