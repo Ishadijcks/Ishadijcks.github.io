@@ -115,7 +115,7 @@ var updateRoute = function(){
 	// }
 
 	for(var i = 1; i< 26; i++){
-		if(player.routeKills[i]> player.routeKillsNeeded){
+		if(player.routeKills[i] >= player.routeKillsNeeded){
 			if( i == 19){
 				$("#route_"+i+"a").attr('style', "fill:#FCB612" );	
 			}
