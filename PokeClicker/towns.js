@@ -20,7 +20,7 @@ var moveToTown = function(townName){
 		showTown(town);
 	}
 	else {
-		log("You don't have access to "+townName + " yet.");
+		log("You don't have access to "+ townName + " yet.");
 	}
 }
 
@@ -40,7 +40,7 @@ var showTown = function(town){
 	//html += "<img src="+town.image+">";
 	html += "<div class='row'>";
 		if (town.gym != null){
-			html += "<button class='leftTownButton btn btn-primary col-sm-2' id='gymButton'>Gym</button>"
+			html += "<button class='leftTownButton btn btn-primary col-sm-2' id="+town.name+"gym>Gym</button>"
 		}
 	html += "</div>"
 	$("#townView").html(html);
@@ -49,7 +49,7 @@ var showTown = function(town){
 	$("#townView").css("background-repeat", "no-repeat");
 	$("#townView").css("background-position", "center");    
 
-	$("#currentEnemy").hide();
+	hideAllViews()
 	$("#townView").show();	
 }
 
@@ -66,32 +66,6 @@ var getTown = function(townName){
 	return null;
 }
 
-var Gym = function(leaderName,city,pokemons,badgeReward,moneyReward){
-	var temp = {
-		leaderName: leaderName,
-		city: city,
-		pokemons: pokemons,
-		badgeReward: badgeReward,
-		moneyReward: moneyReward,
-		timeLimit: 30
-	}
-	return temp;
-}
-
-var GymPokemon = function(name, health){
-	var temp = {
-		name: name,
-		health: health
-	}
-	return temp;
-}
-
-var PewterCityGym = function(){
-	var pokemonList = [];
-	pokemonList.push(GymPokemon("Geodude", 3000));
-	pokemonList.push(GymPokemon("Onix", 6000))
-	return Gym("Brock", "Pewter City", pokemonList, "Boulder", 5000);
-}
 
 
 

@@ -1,4 +1,4 @@
-#townView{
+#townView {
 	border: 1px solid black;
 	height: 250px;
 	margin-bottom: 20px;
@@ -16,8 +16,7 @@
 	margin-right: 2%;
 }
 
-.strokeme
-{
+.strokeme {
     color: white;
     text-shadow:
     -1px -1px 0 #000,
@@ -113,7 +112,7 @@ body {
 	margin-top: 15px;
 }
 
-table, #console, #currentEnemy, #upgradeBox, #navBar, #townView {
+table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView {
 	background-color: white;
 }
 
@@ -274,7 +273,7 @@ g, rect {
 	cursor:pointer
 }
 
-#currentEnemy{
+#currentEnemy, #gymView{
 	border: 1px solid black;
 	text-align:center;
 	height: 250px;
