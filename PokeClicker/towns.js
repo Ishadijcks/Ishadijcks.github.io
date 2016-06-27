@@ -1,12 +1,13 @@
 var townList = [];
 
-var addTown = function(name,gym,image,shop,reqRoute){
+var addTown = function(name,gym,image,shop,reqRoutes){
 
 	var temp = {
 		name: name,
 		gym: gym,
 		image: image,
 		shop: shop,
+		reqRoutes: reqRoutes
 	}
 	
 	townList.push(temp);
@@ -14,8 +15,22 @@ var addTown = function(name,gym,image,shop,reqRoute){
 
 var moveToTown = function(townName){
 	var town = getTown(townName);
-	inProgress = 0;
-	showTown(town);
+	if( accessToTown(town.reqRoutes)){
+		inProgress = 0;
+		showTown(town);
+	}
+	else {
+		log("You don't have access to "+townName + " yet.");
+	}
+}
+
+var accessToTown = function(routeList){
+	for( var i = 0; i<routeList.length; i++){
+		if(player.routeKills[routeList[i]] > player.routeKillsNeeded){
+			return true;
+		}
+	}
+	return false;
 }
 
 var showTown = function(town){
@@ -39,7 +54,7 @@ var showTown = function(town){
 }
 
 var loadTowns = function(){
-	addTown("Pewter City", PewterCityGym(), "images/gyms/pewtercity.png", null, 2);
+	addTown("Pewter City", PewterCityGym(), "images/gyms/pewtercity.png", null, [2]);
 }
 
 var getTown = function(townName){
