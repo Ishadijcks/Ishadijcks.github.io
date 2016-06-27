@@ -14,10 +14,30 @@ var addTown = function(name,gym,image,shop,reqRoute){
 
 var moveToTown = function(townName){
 	var town = getTown(townName);
+	inProgress = 0;
+	showTown(town);
+}
+
+var showTown = function(town){
+	
+	var html = "";
+	html += "<h3 class='townName strokeme'>"+town.name+"</h3>";
+	//html += "<img src="+town.image+">";
+	html += "<div class='row'>";
+		html += "<button class='leftTownButton btn btn-primary col-sm-2' id='gymButton'>Gym</button>"
+	html += "</div>"
+	$("#townView").html(html);
+	$("#townView").css("background-image", "url("+town.image+")");  
+	$("#townView").css("background-repeat", "no-repeat");  
+	$("#townView").css("background-repeat", "no-repeat");
+	$("#townView").css("background-position", "center");    
+
+	$("#currentEnemy").hide();
+	$("#townView").show();	
 }
 
 var loadTowns = function(){
-	addTown("Pewter City", PewterCityGym(), "images/charmander.png", null, 2);
+	addTown("Pewter City", PewterCityGym(), "images/gyms/pewtercity.png", null, 2);
 }
 
 var getTown = function(townName){

@@ -1,3 +1,31 @@
+#townView{
+	border: 1px solid black;
+	height: 250px;
+	margin-bottom: 20px;
+}
+
+.townName {
+	text-align:center;
+}
+
+.leftTownButton {
+	margin-left: 2%;
+}
+
+.rightTownButton {
+	margin-right: 2%;
+}
+
+.strokeme
+{
+    color: white;
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;  
+}
+
 #pokedexModal{
 	width:100%;
 }
@@ -85,7 +113,7 @@ body {
 	margin-top: 15px;
 }
 
-table, #console, #currentEnemy, #upgradeBox, #navBar {
+table, #console, #currentEnemy, #upgradeBox, #navBar, #townView {
 	background-color: white;
 }
 
