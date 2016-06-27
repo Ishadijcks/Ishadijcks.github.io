@@ -83,6 +83,22 @@ $(document).ready(function(){
 
 	});
 
+	$("body").on('click',"#gymEnemy", function(){
+		if (curEnemy.alive && inProgress != 0){
+			if(curEnemy.health > 0){
+				curEnemy.health -= Math.floor(player.clickAttack*player.clickMultiplier*1.5);
+			}			
+			
+			else {
+				curEnemy.health = 0;
+			}
+			
+			updateGym();
+		}
+
+	});
+
+
 	$("body").on('click',".starter", function(){
 		$("#curStarterPick").html(this.id);
 		player.starter = this.id;

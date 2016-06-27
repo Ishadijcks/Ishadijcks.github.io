@@ -1,3 +1,7 @@
+#gymEnemy:hover{
+	cursor:pointer
+}
+
 #townView {
 	border: 1px solid black;
 	height: 250px;
