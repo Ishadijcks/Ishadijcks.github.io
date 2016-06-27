@@ -46,7 +46,7 @@ var initUpgrades = function(){
 	addUpgrade("Catch time upgrade II",10000, "catchTime",250,2,"Decrease the catch time by 250 milliseconds",10); 
 	addUpgrade("Catch time upgrade III",25000, "catchTime",250,5,"Decrease the catch time by 250 milliseconds",11); 
 	addUpgrade("Catch time upgrade IV",75000, "catchTime",500,8,"Decrease the catch time by half a second",12); 
-	addUpgrade("Catch time upgrade V",1000000, "catchTime",1000,15,"Decrease the catch time by a whole second",13); 
+	addUpgrade("Catch time upgrade V",1000000, "catchTime",500,15,"Decrease the catch time by half a second",13); 
 	addUpgrade("Money multiplier upgrade I",1500, "moneyMultiplier",0.25,0,"Gain 25% more money",null); 
 	addUpgrade("Money multiplier upgrade II",4000, "moneyMultiplier",0.30,3,"Gain 30% more money",15); 
 	addUpgrade("Money multiplier upgrade III",10000, "moneyMultiplier",0.35,6,"Gain 35% more money",16); 
