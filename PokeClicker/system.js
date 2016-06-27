@@ -42,6 +42,7 @@ var curEnemy = {
 $(document).ready(function(){
 	//$('#changeLogModal').modal('show');
  
+
 	if(localStorage.getItem("player") != null){
 		load();
 		generatePokemon(player.route);
@@ -212,7 +213,7 @@ $(document).ready(function(){
 	log("And perhaps you'll get lucky and catch one");
 	log("So they will fight wild pokemon for you!");
 	log("Buy upgrades to increase your catch rate");
-	log("Defeat 5 pokemon on a route to get access to the next");
+	log("Defeat 10 pokemon on a route to get access to the next");
 	log("Have fun!");
 
 });
