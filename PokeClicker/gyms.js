@@ -27,10 +27,46 @@ var GymPokemon = function(name, health){
 var PewterCityGym = function(){
 	var pokemonList = [];
 	pokemonList.push(GymPokemon("Geodude", 2000));
+	pokemonList.push(GymPokemon("Onix", 4000));
+	return Gym("Brock", "Pewter City Gym", pokemonList, "Boulder", 1000);
+}
+
+var CeruleanCityGym = function(){
+	var pokemonList = [];
+	pokemonList.push(GymPokemon("Staryu", 6000));
+	pokemonList.push(GymPokemon("Starmie", 8000));
+	return Gym("Misty", "Cerulean City Gym", pokemonList, "Cascade", 5000);
+}
+
+var VermillionCityGym = function(){
+	var pokemonList = [];
+	pokemonList.push(GymPokemon("Voltorb", 5000));
+	pokemonList.push(GymPokemon("Pikachu", 8000));
+	pokemonList.push(GymPokemon("Raichu", 8000));
+	return Gym("Lt. Surge", "Vermillion City Gym", pokemonList, "Thunder", 15000);
+}
+
+var CeladonCityGym = function(){
+	var pokemonList = [];
+	pokemonList.push(GymPokemon("Victreebel", 2000));
+	pokemonList.push(GymPokemon("Tangela", 4000));
+	pokemonList.push(GymPokemon("VilePlume", 4000))
+	return Gym("Erika", "Celadon City Gym", pokemonList, "Rainbow", 25000);
+}
+
+var PewterCityGym = function(){
+	var pokemonList = [];
+	pokemonList.push(GymPokemon("Geodude", 2000));
 	pokemonList.push(GymPokemon("Onix", 4000))
 	return Gym("Brock", "Pewter City Gym", pokemonList, "Boulder", 1000);
 }
 
+var PewterCityGym = function(){
+	var pokemonList = [];
+	pokemonList.push(GymPokemon("Geodude", 2000));
+	pokemonList.push(GymPokemon("Onix", 4000))
+	return Gym("Brock", "Pewter City Gym", pokemonList, "Boulder", 1000);
+}
 var loadGym = function(townId){
 	gymPokemonIndex = 0;
 	currentGym = getTown(townId).gym;
@@ -52,7 +88,7 @@ var timer = function(){
         $("#timer").html((currentGym.timeLeft/100)+"/"+currentGym.timeLimit/100); 
     }
 
-var updateGym= function(){
+var updateGym = function(){
 	
 	hideAllViews();
 	$("#gymView").show();
