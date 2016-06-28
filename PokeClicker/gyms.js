@@ -51,7 +51,7 @@ var CeladonCityGym = function(){
 	var pokemonList = [];
 	pokemonList.push(GymPokemon("Victreebel", 2000));
 	pokemonList.push(GymPokemon("Tangela", 4000));
-	pokemonList.push(GymPokemon("VilePlume", 4000));
+	pokemonList.push(GymPokemon("Vileplume", 4000));
 	return Gym("Erika", "Celadon City Gym", pokemonList, "Rainbow", 25000 ,3);
 }
 
