@@ -94,8 +94,10 @@ var ViridianCityGym = function(){
 
 
 var loadGym = function(townId){
+	clearInterval(counter);
 	gymPokemonIndex = 0;
 	currentGym = getTown(townId).gym;
+	currentGym.timeLeft = currentGym.timeLimit;
 	spawnGymPokemon(gymPokemonIndex);
 
 	counter = setInterval(timer, 100); //100 will  run it every 10th of a second
