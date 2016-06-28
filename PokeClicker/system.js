@@ -379,7 +379,7 @@ var capturePokemon = function(name){
 		else {
 			var getMoney = Math.floor((30-deviation)*player.route*player.moneyMultiplier);
 		}
-		$.notify("You managed to sell the "+name+" for $" + getMoney + "!", 'info');
+		log("You managed to sell the "+name+" for $" + getMoney + "!");
 		player.money += getMoney;
 	}
 	player.totalCaught++;

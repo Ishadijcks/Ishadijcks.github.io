@@ -66,38 +66,38 @@ var applyUpgrade = function(type, amount){
 	switch(type){
 		case "catchBonus":
 			player.catchBonus += amount;
-			log("Your catch bonus is increased by "+amount+ "%");
+			$.notify("Your catch bonus is increased by "+amount+ "%", 'success');
 			break;
 		case "catchTime":
 			player.catchTime -= amount;
-			log("Your catch time is decreased by "+amount+ " milliseconds");
+			$.notify("Your catch time is decreased by "+amount+ " milliseconds", 'success');
 			break;
 		case "moneyMultiplier":
 			player.moneyMultiplier += amount;
-			log("Your money multiplier is increased by "+amount);
+			$.notify("Your money multiplier is increased by "+amount, 'success');
 			break;
 		case "expMultiplier":
 			player.expMultiplier += amount;
-			log("Your exp multiplier is increased by "+amount);
+			$.notify("Your exp multiplier is increased by "+amount, 'success');
 			break;
 		case "clickAttack":
 			player.clickAttack += amount;
-			log("Your click attack is increased by "+amount);
+			$.notify("Your click attack is increased by "+amount, 'success');
 			break;
 		case "clickMultiplier":
 			player.clickMultiplier += amount;
-			log("Your click attack multiplier is increased by "+amount);
+			$.notify("Your click attack multiplier is increased by "+amount, 'success');
 			break;		
 		case "routeVariation":
 			player.routeVariation -= amount;
-			log("Your route variation is decreased by "+amount);
+			$.notify("Your route variation is decreased by "+amount, 'success');
 			break;		
 		case "attackMultiplier":
 			player.attackMultiplier += amount;
-			log("Your pokemon attack multiplier is increased by "+amount);
+			$.notify("Your pokemon attack multiplier is increased by "+amount, 'success');
 			break;					
 		default:
-			console.log("This should never happen, contact the developer immediately!");
+			console.$.notify("This should never happen, contact the developer immediately!", 'error');
 			break;
 
 	}	
