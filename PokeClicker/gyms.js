@@ -136,7 +136,7 @@ var updateGym = function(){
 
     var html = "";
     html += currentGym.leaderName + "<br>";
-    html += "<img src=images/gyms/"+currentGym.leaderName+".png><br><br>";
+    html += "<img src='images/gyms/"+currentGym.leaderName+".png'><br><br>";
 
     for (var i = 0; i<gymPokemonIndex; i++){
     	html += "<img class='gymPokeball defeatPokeball' src=images/gyms/pokeball.png>";
@@ -188,6 +188,7 @@ var gymDefeated = function(){
 		player.money += currentGym.moneyReward/10;
 	}
 	showGymDefeated(first);
+	updateAll();
 }
 
 var showGymDefeated = function(first){
