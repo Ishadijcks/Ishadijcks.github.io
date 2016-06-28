@@ -26,7 +26,7 @@ var GymPokemon = function(name, health){
 
 var PewterCityGym = function(){
 	var pokemonList = [];
-	pokemonList.push(GymPokemon("Geodude", 2000));
+	pokemonList.push(GymPokemon("Geodude", 200000));
 	pokemonList.push(GymPokemon("Onix", 4000));
 	return Gym("Brock", "Pewter City Gym", pokemonList, "Boulder", 1000);
 }

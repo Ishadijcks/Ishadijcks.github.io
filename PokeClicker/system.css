@@ -2,6 +2,10 @@
 	cursor:pointer
 }
 
+#gymTrainer {
+	float:right;
+}
+
 #gymDefeatedBody {
 	text-align: center;
 }
