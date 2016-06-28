@@ -114,8 +114,9 @@ var timer = function(){
 	        inProgress = 0;
 	        moveToTown(currentGym.town.slice(0,-4));
 	        currentGym.timeLeft = currentGym.timeLimit;
+	     	$.notify("Train harder and try again!", 'error')
 	        $.notify("You couldn't defeat "+currentGym.leaderName+ " in time.", 'error');
-	        $.notify("Train harder and try again!", 'error')
+	     
     	}
     }
     currentGym.timeLeft-=10;
