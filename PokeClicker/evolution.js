@@ -1,11 +1,18 @@
 var checkEvolution = function(){
-	for( var i = 0; i<player.caughtPokemonList.length; i++){
-		if(player.caughtPokemonList[i].evoLevel != null){
-			curPokemon = player.caughtPokemonList[i];
-			if( experienceToLevel(curPokemon.experience, curPokemon.levelType) >= curPokemon.evoLevel && !curPokemon.evolved){
+
+	for( var i = 0; i<player.caughtPokemonList.length; i++){ // For all pokemon that you have captured, do the following:
+
+		if(player.caughtPokemonList[i].evoLevel != null){ // If the pokemon can actually evolve
+
+			curPokemon = player.caughtPokemonList[i]; // Grab the pokemon we are currently evaluating
+
+			if( experienceToLevel(curPokemon.experience, curPokemon.levelType) >= curPokemon.evoLevel && !curPokemon.evolved){  // If this pokemons level is high enough, and not evolved yet.
+
 				log("Your "+curPokemon.name+" evolved into "+curPokemon.evolution+"!");
-				capturePokemon(curPokemon.evolution);
-				player.caughtPokemonList[i].evolved = 1;
+
+				capturePokemon(curPokemon.evolution); // Capture it's evolution
+
+				player.caughtPokemonList[i].evolved = 1; // Mark it as evolved.
 			}
 		}
 	}

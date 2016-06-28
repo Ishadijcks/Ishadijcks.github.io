@@ -312,7 +312,7 @@ var enemyDefeated = function(){
 		log("You earned $" + Math.floor(money) + "!");
 
 		var catchRate = curEnemy.catchRate + player.catchBonus-10;
-		$("#catchDisplay").html("Catch chance: "+Math.min(100,catchRate));
+		$("#catchDisplay").html("Catch chance: "+Math.min(100,catchRate) + "%");
 		
 		setTimeout(function(){ 
 			
@@ -475,10 +475,10 @@ var generateLegendary = function(){
 			if(chance < 10){
 				return "Mewtwo";
 			}
-			if (chance < 33){
+			if (chance < 40){
 				return "Articuno";
 			}
-			else if (chance <66){
+			else if (chance <70){
 				return "Zapdos";
 			}
 			else if (chance <100){
