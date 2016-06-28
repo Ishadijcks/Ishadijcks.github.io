@@ -27,6 +27,35 @@ var routeRequirements = {
 	25:[[24]],
 }
 
+var routeGymRequirements = {
+	1: 0,
+	2: 0,
+	3: 1,
+	4: 0,
+	5: 2,
+	6: 0,
+	7: 3,
+	8: 3,
+	9: 2,
+	10: 0,
+	11: 3,
+	12: 0,
+	13: 5,
+	14: 0,
+	15: 0,
+	16: 5,
+	17: 0,
+	18: 0,
+	19: 6,
+	20: 0,
+	21: 7,
+	22: 8,
+	23: 0,
+	24: 2,
+	25: 0,
+
+}
+
 var idToRoute = function(id){
 	var split = id.split("_")
 	var route = split[1];
