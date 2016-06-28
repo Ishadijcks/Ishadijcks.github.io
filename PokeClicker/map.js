@@ -21,8 +21,8 @@ var routeRequirements = {
 	19:[[18],[15]],
 	20:[[19]],
 	21:[[20]],
-	22:[[99]],
-	23:[[99]],
+	22:[[1]],
+	23:[[22]],
 	24:[[4]],
 	25:[[24]],
 }
@@ -53,7 +53,6 @@ var routeGymRequirements = {
 	23: 0,
 	24: 2,
 	25: 0,
-
 }
 
 var idToRoute = function(id){
@@ -87,11 +86,14 @@ var moveToRoute = function(route){
 
 var accessToRoute = function(route){
 	
-	var reqList = routeRequirements[route];
-	if(reqList != undefined){
-		for( var i = 0; i<reqList.length; i++){
-			if(enoughRouteKills(reqList[i])){
-				return true;
+	if(player.gymBadges.length >= routeGymRequirements[route]){
+
+		var reqList = routeRequirements[route];
+		if(reqList != undefined){
+			for( var i = 0; i<reqList.length; i++){
+				if(enoughRouteKills(reqList[i])){
+					return true;
+				}
 			}
 		}
 	}
