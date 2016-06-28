@@ -33,6 +33,10 @@ var load = function(){
 	if (typeof savegame.catchNumbers !== "undefined") player.catchNumbers = savegame.catchNumbers;
 	if (typeof savegame.defeatNumbers !== "undefined") player.defeatNumbers = savegame.defeatNumbers;
 	
+	if(player.version < 0.4){
+		player.gymBadges = [];
+	}
+
 	player.version = version;
 	
     var link = document.createElement('link');

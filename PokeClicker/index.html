@@ -12,6 +12,8 @@
 	<script src="sorting.js"></script>
 	<script src="save.js"></script>
 	<script src="map.js"></script>
+	<script src="towns.js"></script>
+	<script src="gyms.js"></script>
 	<script src="pokedex.js"></script>
 	</script><!-- Latest compiled and minified CSS -->
 	<link href="bootstrap.css" rel="stylesheet"><!-- Optional theme -->
@@ -106,6 +108,17 @@
 								<span class="sr-only"></span>
 							</div>
 						</div><span id="healthDisplay"></span>
+					</div>
+					<div class="col-lg-12" id="townView"></div>
+				<div class="col-lg-12" id="gymView">
+						<div id="gymTrainer"></div>
+						<span id="timer"></span>
+						<div id="gymEnemyInfo"></div>
+						<div class="progress">
+							<div class="progress-bar progress-bar-danger" id="gymHealthBar" style="width: 0%">
+								<span class="sr-only"></span>
+							</div>
+						</div><span id="gymHealthDisplay"></span>
 					</div>
 				</div>
 
@@ -495,11 +508,11 @@
 								</g>
 								<path d="M 70 108.39 L 78.29 100.1 L 89.71 100.1 L 98 108.39 L 98 119.81 L 89.71 128.1 L 78.29 128.1 L 70 119.81 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
 								</path>
-								<path d="M 72.8 109.53 L 79.43 102.9 L 88.57 102.9 L 95.2 109.53 L 95.2 118.67 L 88.57 125.3 L 79.43 125.3 L 72.8 118.67 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+								<path class="city" id="Pewter City" d="M 72.8 109.53 L 79.43 102.9 L 88.57 102.9 L 95.2 109.53 L 95.2 118.67 L 88.57 125.3 L 79.43 125.3 L 72.8 118.67 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
 								stroke-miterlimit="10" stroke-width="1.4"></path>
 								<path d="M 70 215.49 L 78.29 207.2 L 89.71 207.2 L 98 215.49 L 98 226.91 L 89.71 235.2 L 78.29 235.2 L 70 226.91 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
 								</path>
-								<path d="M 72.8 216.63 L 79.43 210 L 88.57 210 L 95.2 216.63 L 95.2 225.77 L 88.57 232.4 L 79.43 232.4 L 72.8 225.77 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+								<path class="city" id="Viridian City" d="M 72.8 216.63 L 79.43 210 L 88.57 210 L 95.2 216.63 L 95.2 225.77 L 88.57 232.4 L 79.43 232.4 L 72.8 225.77 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
 								stroke-miterlimit="10" stroke-width="1.4"></path>
 								<path d="M 69.3 296.69 L 77.59 288.4 L 89.01 288.4 L 97.3 296.69 L 97.3 308.11 L 89.01 316.4 L 77.59 316.4 L 69.3 308.11 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width=
 								"1.4"></path>
@@ -507,15 +520,15 @@
 								stroke-miterlimit="10" stroke-width="1.4"></path>
 								<path d="M 338.1 161.59 L 346.39 153.3 L 357.81 153.3 L 366.1 161.59 L 366.1 173.01 L 357.81 181.3 L 346.39 181.3 L 338.1 173.01 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10"
 								stroke-width="1.4"></path>
-								<path d="M 340.9 162.73 L 347.53 156.1 L 356.67 156.1 L 363.3 162.73 L 363.3 171.87 L 356.67 178.5 L 347.53 178.5 L 340.9 171.87 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke=
+								<path  class="city" id="Saffron City" d="M 340.9 162.73 L 347.53 156.1 L 356.67 156.1 L 363.3 162.73 L 363.3 171.87 L 356.67 178.5 L 347.53 178.5 L 340.9 171.87 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke=
 								"#b85450" stroke-miterlimit="10" stroke-width="1.4"></path>
 								<path d="M 254.1 161.59 L 262.39 153.3 L 273.81 153.3 L 282.1 161.59 L 282.1 173.01 L 273.81 181.3 L 262.39 181.3 L 254.1 173.01 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10"
 								stroke-width="1.4"></path>
-								<path d="M 256.9 162.73 L 263.53 156.1 L 272.67 156.1 L 279.3 162.73 L 279.3 171.87 L 272.67 178.5 L 263.53 178.5 L 256.9 171.87 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke=
+								<path  class="city" id="Celadon City" d="M 256.9 162.73 L 263.53 156.1 L 272.67 156.1 L 279.3 162.73 L 279.3 171.87 L 272.67 178.5 L 263.53 178.5 L 256.9 171.87 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke=
 								"#b85450" stroke-miterlimit="10" stroke-width="1.4"></path>
 								<path d="M 336.7 241.39 L 344.99 233.1 L 356.41 233.1 L 364.7 241.39 L 364.7 252.81 L 356.41 261.1 L 344.99 261.1 L 336.7 252.81 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10"
 								stroke-width="1.4"></path>
-								<path d="M 339.5 242.53 L 346.13 235.9 L 355.27 235.9 L 361.9 242.53 L 361.9 251.67 L 355.27 258.3 L 346.13 258.3 L 339.5 251.67 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke=
+								<path  class="city" id="Vermillion City" d="M 339.5 242.53 L 346.13 235.9 L 355.27 235.9 L 361.9 242.53 L 361.9 251.67 L 355.27 258.3 L 346.13 258.3 L 339.5 251.67 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke=
 								"#b85450" stroke-miterlimit="10" stroke-width="1.4"></path>
 								<path d="M 16.1 81.09 L 24.39 72.8 L 35.81 72.8 L 44.1 81.09 L 44.1 92.51 L 35.81 100.8 L 24.39 100.8 L 16.1 92.51 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
 								</path>
@@ -523,7 +536,7 @@
 								stroke-miterlimit="10" stroke-width="1.4"></path>
 								<path d="M 338.1 79.69 L 346.39 71.4 L 357.81 71.4 L 366.1 79.69 L 366.1 91.11 L 357.81 99.4 L 346.39 99.4 L 338.1 91.11 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width=
 								"1.4"></path>
-								<path d="M 340.9 80.83 L 347.53 74.2 L 356.67 74.2 L 363.3 80.83 L 363.3 89.97 L 356.67 96.6 L 347.53 96.6 L 340.9 89.97 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+								<path  class="city" id="Cerulean City" d="M 340.9 80.83 L 347.53 74.2 L 356.67 74.2 L 363.3 80.83 L 363.3 89.97 L 356.67 96.6 L 347.53 96.6 L 340.9 89.97 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
 								stroke-miterlimit="10" stroke-width="1.4"></path>
 								<path d="M 445.2 162.99 L 453.49 154.7 L 464.91 154.7 L 473.2 162.99 L 473.2 174.41 L 464.91 182.7 L 453.49 182.7 L 445.2 174.41 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10"
 								stroke-width="1.4"></path>
@@ -533,18 +546,18 @@
 								<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="457.8" y="168"></rect>
 								<path d="M 284.2 323.29 L 292.49 315 L 303.91 315 L 312.2 323.29 L 312.2 334.71 L 303.91 343 L 292.49 343 L 284.2 334.71 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width=
 								"1.4"></path>
-								<path d="M 287 324.43 L 293.63 317.8 L 302.77 317.8 L 309.4 324.43 L 309.4 333.57 L 302.77 340.2 L 293.63 340.2 L 287 333.57 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+								<path  class="city" id="Fuchsia City" d="M 287 324.43 L 293.63 317.8 L 302.77 317.8 L 309.4 324.43 L 309.4 333.57 L 302.77 340.2 L 293.63 340.2 L 287 333.57 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
 								stroke-miterlimit="10" stroke-width="1.4"></path>
 								<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="295.4" y="326.9"></rect>
-								<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="296.8" y="328.3"></rect>
+								<rect  class="city" id="Fuchsia City" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="296.8" y="328.3"></rect>
 								<path d="M 70 375.79 L 78.29 367.5 L 89.71 367.5 L 98 375.79 L 98 387.21 L 89.71 395.5 L 78.29 395.5 L 70 387.21 Z" fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
 								</path>
-								<path d="M 72.8 376.93 L 79.43 370.3 L 88.57 370.3 L 95.2 376.93 L 95.2 386.07 L 88.57 392.7 L 79.43 392.7 L 72.8 386.07 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+								<path  class="city" id="Cinnabar Island" d="M 72.8 376.93 L 79.43 370.3 L 88.57 370.3 L 95.2 376.93 L 95.2 386.07 L 88.57 392.7 L 79.43 392.7 L 72.8 386.07 Z" fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
 								stroke-miterlimit="10" stroke-width="1.4"></path>
 								<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="81.2" y="379.4"></rect>
-								<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="82.6" y="380.8"></rect>
+								<rect  class="city" id="Cinnabar Island" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="82.6" y="380.8"></rect>
 								<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="349.3" y="83.3"></rect>
-								<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="350.7" y="84.7"></rect>
+								<rect  class="city" id="Cerulean City" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="350.7" y="84.7"></rect>
 								<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="22.4" y="109.9"></rect>
 								<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="23.8" y="111.3"></rect>
 								<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="76.3" y="133"></rect>
@@ -609,7 +622,22 @@
 							</div>
 						</div>
 					</div>
-				</div><!-- Badge Modal -->
+				</div>
+
+				<!-- Gym completed Modal -->
+				<div aria-labelledby="myModalLabel" class="modal fade" id="gymModal" role="dialog" tabindex="-1">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title" id="myModalLabel">Gym leader defeated!</h4>
+							</div>
+							<div class="modal-body" id="gymDefeatedBody">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Badge Modal -->
 				<div aria-labelledby="myModalLabel" class="modal fade" id="badgeModal" role="dialog" tabindex="-1">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
@@ -617,10 +645,19 @@
 								<h4 class="modal-title" id="myModalLabel">Badges</h4>
 							</div>
 							<div class="modal-body" id="myModalBody">
-								<div class="row" id="badges"><img class="pokeBadge col-sm-3" id="Badge1" src="images/Badge1.png"> <img class="pokeBadge col-sm-3" id="Badge2" src="images/Badge2.png"> <img class=
-								"pokeBadge col-sm-3" id="Badge3" src="images/Badge3.png"> <img class="pokeBadge col-sm-3" id="Badge4" src="images/Badge4.png"></div><br>
-								<div class="row" id="badges2"><img class="pokeBadge col-sm-3" id="Badge5" src="images/Badge5.png"> <img class="pokeBadge col-sm-3" id="Badge6" src="images/Badge6.png"> <img class=
-								"pokeBadge col-sm-3" id="Badge7" src="images/Badge7.png"> <img class="pokeBadge col-sm-3" id="Badge8" src="images/Badge8.png"></div>
+								<div class="row" id="badges">
+									<img class="pokeBadge col-sm-3" id="BoulderBadge" src="images/gyms/badges/BoulderBadge.png">
+									<img class="pokeBadge col-sm-3" id="CascadeBadge" src="images/gyms/badges/CascadeBadge.png">
+									<img class="pokeBadge col-sm-3" id="ThunderBadge" src="images/gyms/badges/ThunderBadge.png">
+									<img class="pokeBadge col-sm-3" id="RainbowBadge" src="images/gyms/badges/RainbowBadge.png">
+								</div>
+								<br>
+								<div class="row" id="badges2">
+									<img class="pokeBadge col-sm-3" id="SoulBadge" src="images/gyms/badges/SoulBadge.png">
+									<img class="pokeBadge col-sm-3" id="MarshBadge" src="images/gyms/badges/MarshBadge.png">
+									<img class="pokeBadge col-sm-3" id="VolcanoBadge" src="images/gyms/badges/VolcanoBadge.png">
+									<img class="pokeBadge col-sm-3" id="EarthBadge" src="images/gyms/badges/EarthBadge.png">
+								</div>
 							</div>
 						</div>
 					</div>
@@ -648,8 +685,47 @@
 							<div class="modal-body" id="changeLogBody">
 								<br>
 								<div class="entry-content">
+
+									<div id="0.4">
+										<p><img alt="Version: " src="images/version.png"> <big><strong>0.4</strong> - <span>Badges</span></big></p>
+										<p><em>Release Date: Jun. 28, 2016</em></p>
+										
+										<ul>
+											<li style="list-style: none; display: inline">
+												<h4>Gyms</h4>
+											</li>
+											You can now challenge all of the gym leaders in the Indigo League!<br>
+											Gym leaders are timed battles, defeat all their pokemon in 30 seconds to earn your badge.<br>
+											Replay gym battles for 10% of their original reward.<br><br>
+											Good luck!
+
+											<li style="list-style: none; display: inline">
+												<h4>Towns</h4>
+											</li>
+											Most towns are added to the Kanto map.<br>
+											Clear all the routes to a town to get access to it<br>
+											You can fight gym leaders in towns.<br>
+
+											<li style="list-style: none; display: inline">
+												<h4>Bug fixes</h4>
+											</li>
+											<li>Fixed catchtime being able to go into the negative.</li>
+											<li>Made the pokeball transparant so it doesn't overlap with other info.</li>
+											<li>Changed the intro text to correspond with recent updates.</li>
+											<li>All legendary birds now have the same spawn chance.</li>
+											<li>Added % sign to the catch rate.</li>
+											<li>Colors of completed routes now update after the right amount of kills.</li>
+
+
+											<li style="list-style: none; display: inline">
+												<hr>
+											</li>
+										</ul>
+									</div>							
+
+
 									<div id="0.3">
-										<p><img alt="Version: " src="images/version.png"> <big><strong>0.2</strong> - <span>Pok&eacute;dex</span></big></p>
+										<p><img alt="Version: " src="images/version.png"> <big><strong>0.3</strong> - <span>Pok&eacute;dex</span></big></p>
 										<p><em>Release Date: Jun. 26, 2016</em></p>
 										
 										<ul>
