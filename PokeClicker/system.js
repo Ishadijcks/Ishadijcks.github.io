@@ -289,7 +289,7 @@ var enemyDefeated = function(){
 		log("You earned $" + Math.floor(money) + "!");
 
 		var catchRate = curEnemy.catchRate + player.catchBonus-10;
-		$("#catchDisplay").html("Catch chance: "+Math.min(100,catchRate));
+		$("#catchDisplay").html("Catch chance: "+Math.min(100,catchRate) + "%");
 		
 		setTimeout(function(){ 
 			
