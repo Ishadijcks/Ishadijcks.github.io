@@ -363,12 +363,12 @@ var capturePokemon = function(name){
 				calculateAttack();
 			}
 		}
-		log("You successfully caught "+name);
+		$.notify("You successfully caught "+name, 'success');
 		
 	}
 	
 	else{
-		log(name+" has already been caught!");
+		
 		
 
 		var deviation = Math.floor(Math.random() * 11 ) -5;
