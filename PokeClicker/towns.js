@@ -70,6 +70,9 @@ var loadTowns = function(){
 	addTown("Fuchsia City", FuchsiaCityGym(), "images/gyms/pewtercity.png", null, [18,15]);
 	addTown("Cinnabar Island", CinnabarIslandGym(), "images/gyms/cinnabarisland.png", null, [20]);
 	addTown("Viridian City", ViridianCityGym(), "images/gyms/viridiancity.png", null, [1]);
+
+	addTown("Lavender Town", null, "images/gyms/lavendertown.png", null, [7]);
+
 }
 
 var getTown = function(townName){
