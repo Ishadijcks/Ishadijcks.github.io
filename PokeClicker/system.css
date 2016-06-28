@@ -11,6 +11,14 @@
 	border-bottom: 1px solid black;
 }
 
+.defeatPokeball {
+	opacity: 0.3
+}
+
+.gymPokeball {
+	margin-left:1px;
+	margin-right: 1px;
+}
 
 #gymDefeatedBody {
 	text-align: center;
