@@ -135,9 +135,39 @@ var updateRoute = function(){
 		}
 		
 	}
-	$("#route_"+player.route).attr('style', "fill:green" );
-	if( player.route == 19){
-		$("#route_"+player.route+"a").attr('style', "fill:green" );	
+
+	if( inProgress == 1){
+		$("#route_"+player.route).attr('style', "fill:green" );
+		if( player.route == 19){
+			$("#route_"+player.route+"a").attr('style', "fill:green" );	
+		}
 	}
 }
 
+// Update the health of the current enemy
+var updateEnemy = function(){
+    if (curEnemy.health <0){
+        curEnemy.health = 0;
+    }
+    if(curEnemy.health == 0 ){
+        enemyDefeated();
+    }
+    if (curEnemy.alive){
+        if(alreadyCaught(curEnemy.name)){
+            $("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=enemy src=images/"+curEnemy.id+".png>");
+        }
+        else{
+            $("#enemyInfo").html("<br>"+curEnemy.name+"<br><img id=enemy src=images/"+curEnemy.id+".png>");
+        }
+    }
+        $("#healthBar").width(100*curEnemy.health/curEnemy.maxHealth+"%"); 
+        $("#healthDisplay").html(curEnemy.health+"/"+curEnemy.maxHealth);
+}
+
+
+
+var hideAllViews = function(){
+	$("#currentEnemy").hide();
+	$("#gymView").hide();
+	$("#townView").hide();
+}

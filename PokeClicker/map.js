@@ -21,10 +21,38 @@ var routeRequirements = {
 	19:[[18],[15]],
 	20:[[19]],
 	21:[[20]],
-	22:[[99]],
-	23:[[99]],
+	22:[[1]],
+	23:[[22]],
 	24:[[4]],
 	25:[[24]],
+}
+
+var routeGymRequirements = {
+	1: 0,
+	2: 0,
+	3: 1,
+	4: 0,
+	5: 2,
+	6: 0,
+	7: 3,
+	8: 3,
+	9: 2,
+	10: 0,
+	11: 3,
+	12: 0,
+	13: 5,
+	14: 0,
+	15: 0,
+	16: 5,
+	17: 0,
+	18: 0,
+	19: 6,
+	20: 0,
+	21: 7,
+	22: 8,
+	23: 0,
+	24: 2,
+	25: 0,
 }
 
 var idToRoute = function(id){
@@ -35,11 +63,14 @@ var idToRoute = function(id){
 }
 
 var moveToRoute = function(route){
+	canCatch = 0;
+	$("#catchDisplay").html("");	
 
 	
-
-	if(curEnemy.alive){
 		if(!isNaN(route)){
+			inProgress = 1;
+			hideAllViews()
+			$("#currentEnemy").show();
 			if(accessToRoute(route)){
 				player.route = route;
 				generatePokemon(player.route);
@@ -48,20 +79,21 @@ var moveToRoute = function(route){
 				log("You don't have access to that route yet.")
 			}
 		}
-	}
-	else{
-		log("You can't switch routes while catching a pokemon");
-	}
+	
+	
 	updateAll();
 }
 
 var accessToRoute = function(route){
 	
-	var reqList = routeRequirements[route];
-	if(reqList != undefined){
-		for( var i = 0; i<reqList.length; i++){
-			if(enoughRouteKills(reqList[i])){
-				return true;
+	if(player.gymBadges.length >= routeGymRequirements[route]){
+
+		var reqList = routeRequirements[route];
+		if(reqList != undefined){
+			for( var i = 0; i<reqList.length; i++){
+				if(enoughRouteKills(reqList[i])){
+					return true;
+				}
 			}
 		}
 	}

@@ -1,3 +1,55 @@
+#gymEnemy:hover{
+	cursor:pointer
+}
+
+#gymTrainer {
+	float:right;
+	margin-right: 15%;
+	padding-bottom: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-bottom: 1px solid black;
+}
+
+.defeatPokeball {
+	opacity: 0.3
+}
+
+.gymPokeball {
+	margin-left:1px;
+	margin-right: 1px;
+}
+
+#gymDefeatedBody {
+	text-align: center;
+}
+#townView {
+	border: 1px solid black;
+	height: 250px;
+	margin-bottom: 20px;
+}
+
+.townName {
+	text-align:center;
+}
+
+.leftTownButton {
+	margin-left: 2%;
+}
+
+.rightTownButton {
+	margin-right: 2%;
+}
+
+.strokeme {
+    color: white;
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;  
+}
+
 #pokedexModal{
 	width:100%;
 }
@@ -85,7 +137,7 @@ body {
 	margin-top: 15px;
 }
 
-table, #console, #currentEnemy, #upgradeBox, #navBar {
+table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView {
 	background-color: white;
 }
 
@@ -246,7 +298,7 @@ g, rect {
 	cursor:pointer
 }
 
-#currentEnemy{
+#currentEnemy, #gymView{
 	border: 1px solid black;
 	text-align:center;
 	height: 250px;

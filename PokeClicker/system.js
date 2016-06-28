@@ -1,5 +1,7 @@
-var version = "0.3"
+var version = "0.4"
 
+var inProgress = 1;
+var canCatch = 1;
 // Add new variables to the savefile!!
 var player = {
 	clickAttack: 1,
@@ -20,7 +22,7 @@ var player = {
 	routeKills: Array.apply(null, Array(100)).map(Number.prototype.valueOf,0),
 	starter: "none",
 	upgradeList: [],
-	gymBadges: 0,
+	gymBadges: [],
 	version: version,
 	totalCaught: 0,
 	routeKillsNeeded: 10
@@ -57,15 +59,19 @@ $(document).ready(function(){
 	updateAll();
 	}
 	
+	loadTowns();
+	hideAllViews()
+	$("#currentEnemy").show();
+
 	setInterval(function(){
-		if(player.starter != "none"){
+		if(player.starter != "none" && inProgress != 0){
 		curEnemy.health -= Math.floor(player.attack*player.attackMultiplier*1.5);
 		updateAll();
 		}
 	},1000);
 
 	$("body").on('click',"#enemy", function(){
-		if (curEnemy.alive){
+		if (curEnemy.alive && inProgress != 0){
 			if(curEnemy.health > 0){
 				curEnemy.health -= Math.floor(player.clickAttack*player.clickMultiplier*1.5);
 			}			
@@ -78,6 +84,22 @@ $(document).ready(function(){
 		}
 
 	});
+
+	$("body").on('click',"#gymEnemy", function(){
+		if (curEnemy.alive && inProgress != 0){
+			if(curEnemy.health > 0){
+				curEnemy.health -= Math.floor(player.clickAttack*player.clickMultiplier*1.5);
+			}			
+			
+			else {
+				curEnemy.health = 0;
+			}
+			
+			updateGym();
+		}
+
+	});
+
 
 	$("body").on('click',".starter", function(){
 		$("#curStarterPick").html(this.id);
@@ -138,7 +160,6 @@ $(document).ready(function(){
 		updateCaughtList();
 	})
 	
-
 	$("svg").on('click',"g", function(){
 		var id = this.id;
 		routeNumber = idToRoute(id);
@@ -151,13 +172,26 @@ $(document).ready(function(){
 		moveToRoute(routeNumber);
 	})
 
+	$("svg").on('click',".city", function(){
+		var id = this.id;
+		moveToTown(id);
+	})
+
+
+	$("body").on('click',".gym", function(){
+		var id = this.id;
+		id = id.slice(0, -4);
+		loadGym(id);
+	})
+
+	$("body").on('click',".wrongGym", function(){
+		log("You need more badges to challenge this gym leader")
+	})
 
 	// Navbar Button controllers
 	$("body").on('click',"#badgeButton", function(){
 		$("#badgeModal").modal("show");
-		for (var i = 1; i<=player.gymBadges; i++){
-			$("#Badge"+i).fadeTo("slow",1);
-		}
+		showGymBadges();
 	})
 
 	$("body").on('click',"#pokedexButton", function(){
@@ -177,6 +211,8 @@ $(document).ready(function(){
 	$("body").on('click',"#changeLogButton", function(){
 		$("#changeLogModal").modal("show");
 	})
+
+
 	// Logs to welcome the player
 	log("Welcome to PokeClicker");
 	log("Click on the pokemon to defeat them!");
@@ -194,7 +230,12 @@ $(document).ready(function(){
 var updateAll = function(){
 	calculateAttack();
 	updateStats();
-	updateEnemy();
+	if( inProgress == 1){
+		updateEnemy();
+	}
+	else if (inProgress == 2){
+		updateGym();
+	}
 	updateCaughtList();
 	updateRoute();
 	updateUpgrades();
@@ -244,30 +285,12 @@ var getExp = function(exp){
 	checkEvolution();
 }
 
-// Update the health of the current enemy
-var updateEnemy = function(){
-    if (curEnemy.health <0){
-        curEnemy.health = 0;
-    }
-    if(curEnemy.health == 0 ){
-        enemyDefeated();
-    }
-    if (curEnemy.alive){
-        if(alreadyCaught(curEnemy.name)){
-            $("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=enemy src=images/"+curEnemy.id+".png>");
-        }
-        else{
-            $("#enemyInfo").html("<br>"+curEnemy.name+"<br><img id=enemy src=images/"+curEnemy.id+".png>");
-        }
-    }
-        $("#healthBar").width(100*curEnemy.health/curEnemy.maxHealth+"%"); 
-        $("#healthDisplay").html(curEnemy.health+"/"+curEnemy.maxHealth);
-}
 
 
 
 // When the enemy is defeated all stats are updated and a new enemy is picked
 var enemyDefeated = function(){
+	canCatch = 1;
 	if (curEnemy.alive){
 		log("You defeated the wild "+ curEnemy.name);
 		
@@ -305,16 +328,20 @@ var enemyDefeated = function(){
 
 	
 		setTimeout(function(){
+	if(canCatch){
 			var chance = Math.floor(Math.random()*100+1);
 			if(chance<=curEnemy.catchRate+player.catchBonus){
 				capturePokemon(curEnemy.name);
 				
 			}
-		
-		generatePokemon(player.route);
+
+		if( inProgress == 1){
+			generatePokemon(player.route);
+		}
 		updateStats();
 		updateEnemy();
 		$("#catchDisplay").html("");
+	}
 		}, player.catchTime);
 		
 		curEnemy.alive = false;
