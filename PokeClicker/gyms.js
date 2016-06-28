@@ -46,6 +46,14 @@ var VermillionCityGym = function(){
 	return Gym("Lt. Surge", "Vermillion City Gym", pokemonList, "Thunder", 15000);
 }
 
+var SCityGym = function(){
+	var pokemonList = [];
+	pokemonList.push(GymPokemon("Victreebel", 2000));
+	pokemonList.push(GymPokemon("Tangela", 4000));
+	pokemonList.push(GymPokemon("VilePlume", 4000))
+	return Gym("Erika", "Celadon City Gym", pokemonList, "Rainbow", 25000);
+}
+
 var CeladonCityGym = function(){
 	var pokemonList = [];
 	pokemonList.push(GymPokemon("Victreebel", 2000));
@@ -54,19 +62,7 @@ var CeladonCityGym = function(){
 	return Gym("Erika", "Celadon City Gym", pokemonList, "Rainbow", 25000);
 }
 
-var PewterCityGym = function(){
-	var pokemonList = [];
-	pokemonList.push(GymPokemon("Geodude", 2000));
-	pokemonList.push(GymPokemon("Onix", 4000))
-	return Gym("Brock", "Pewter City Gym", pokemonList, "Boulder", 1000);
-}
 
-var PewterCityGym = function(){
-	var pokemonList = [];
-	pokemonList.push(GymPokemon("Geodude", 2000));
-	pokemonList.push(GymPokemon("Onix", 4000))
-	return Gym("Brock", "Pewter City Gym", pokemonList, "Boulder", 1000);
-}
 var loadGym = function(townId){
 	gymPokemonIndex = 0;
 	currentGym = getTown(townId).gym;
