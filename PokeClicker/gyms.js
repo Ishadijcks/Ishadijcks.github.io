@@ -46,20 +46,49 @@ var VermillionCityGym = function(){
 	return Gym("Lt. Surge", "Vermillion City Gym", pokemonList, "Thunder", 15000);
 }
 
-var SCityGym = function(){
-	var pokemonList = [];
-	pokemonList.push(GymPokemon("Victreebel", 2000));
-	pokemonList.push(GymPokemon("Tangela", 4000));
-	pokemonList.push(GymPokemon("VilePlume", 4000))
-	return Gym("Erika", "Celadon City Gym", pokemonList, "Rainbow", 25000);
-}
-
 var CeladonCityGym = function(){
 	var pokemonList = [];
 	pokemonList.push(GymPokemon("Victreebel", 2000));
 	pokemonList.push(GymPokemon("Tangela", 4000));
-	pokemonList.push(GymPokemon("VilePlume", 4000))
+	pokemonList.push(GymPokemon("VilePlume", 4000));
 	return Gym("Erika", "Celadon City Gym", pokemonList, "Rainbow", 25000);
+}
+
+var SaffronCityGym = function(){
+	var pokemonList = [];
+	pokemonList.push(GymPokemon("Kadabra", 2000));
+	pokemonList.push(GymPokemon("Mr. Mime", 4000));
+	pokemonList.push(GymPokemon("Venomoth", 4000));
+	pokemonList.push(GymPokemon("Alakazam", 4000));
+	return Gym("Sabrina", "Saffron City Gym", pokemonList, "Marsh", 25000);
+}
+
+var FuchsiaCityGym = function(){
+	var pokemonList = [];
+	pokemonList.push(GymPokemon("Koffing", 2000));
+	pokemonList.push(GymPokemon("Muk", 4000));
+	pokemonList.push(GymPokemon("Koffing", 4000));
+	pokemonList.push(GymPokemon("Weezing", 4000));
+	return Gym("Koga", "Fuchsia City Gym", pokemonList, "Soul", 25000);
+}
+
+var CinnabarIslandGym = function(){
+	var pokemonList = [];
+	pokemonList.push(GymPokemon("Growlithe", 2000));
+	pokemonList.push(GymPokemon("Ponyta", 4000));
+	pokemonList.push(GymPokemon("Rapidash", 4000));
+	pokemonList.push(GymPokemon("Arcanine", 4000));
+	return Gym("Blain", "Cinnabar Island Gym", pokemonList, "Volcano", 25000);
+}
+
+var ViridianCityGym = function(){
+	var pokemonList = [];
+	pokemonList.push(GymPokemon("Rhyhorn", 2000));
+	pokemonList.push(GymPokemon("Dugtrio", 4000));
+	pokemonList.push(GymPokemon("Nidoqueen", 4000));
+	pokemonList.push(GymPokemon("Nidoking", 4000));
+	pokemonList.push(GymPokemon("Rhydon", 4000));
+	return Gym("Giovanni", "Viridian City Gym", pokemonList, "Earth", 25000);
 }
 
 
