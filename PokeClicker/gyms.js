@@ -199,12 +199,13 @@ var showGymDefeated = function(first){
 		html +=	"<img id='badgeReward' src=images/gyms/badges/"+currentGym.badgeReward+"Badge.png><br>";
 		html += "You have earned the "+currentGym.badgeReward+ " Badge!<br>";
 		html += "Prize money: $" + currentGym.moneyReward;
+		html += "<br><br>You can replay this gym for 10% of its original money reward!"
 	} else {
 		html += "You have defeated " + currentGym.leaderName+" again!<br>" ;
 		html += "Prize money: " + currentGym.moneyReward+ " x 10% = $"+ currentGym.moneyReward/10;
 	}
 
-	html += "<br><br>You can replay this gym for 10% of its original money reward!"
+	
 	
 	$("#gymDefeatedBody").html(html);
 	$("#gymModal").modal('show');
