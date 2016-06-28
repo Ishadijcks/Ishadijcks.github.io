@@ -33,6 +33,10 @@ var load = function(){
 	if (typeof savegame.catchNumbers !== "undefined") player.catchNumbers = savegame.catchNumbers;
 	if (typeof savegame.defeatNumbers !== "undefined") player.defeatNumbers = savegame.defeatNumbers;
 	
+	if(player.version < 0.4){
+		player.gymBadges = [];
+	}
+
 	player.version = version;
 	
     var link = document.createElement('link');
@@ -41,3 +45,16 @@ var load = function(){
     link.href = 'images/'+player.starter+'.png';
     document.getElementsByTagName('head')[0].appendChild(link);
 }	
+
+var ex = function(){
+	$("#exportBody").html("<textarea id='saveCode'>"+btoa(JSON.stringify(player))+"</textarea>");
+	$("#exportModal").modal('show');
+	console.log(btoa(JSON.stringify(player)));
+}
+
+var im = function(){
+	var save = prompt("Paste your savefile here");
+
+	localStorage.setItem("player",atob(save));
+	load();
+}

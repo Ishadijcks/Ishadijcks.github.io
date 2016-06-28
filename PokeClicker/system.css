@@ -31,7 +31,10 @@
 	width:30px;
 }
 
-
+#saveCode {
+	width:100%;
+	height: 350px;
+}
 
 .rank0 {
 	background-color: #F1F8E9;
