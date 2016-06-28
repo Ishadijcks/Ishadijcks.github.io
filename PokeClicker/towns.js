@@ -44,7 +44,6 @@ var showTown = function(town){
 	//html += "<img src="+town.image+">";
 	html += "<div class='row'>";
 		if (town.gym != null){
-			console.log(town.gym.badgeReq)
 			if(player.gymBadges.length >= town.gym.badgeReq){
 				html += "<button class='gym leftTownButton btn btn-primary col-sm-2' id='"+town.name+" Gym'>Gym</button>"
 			} else {
