@@ -8,7 +8,7 @@ var checkEvolution = function(){
 
 			if( experienceToLevel(curPokemon.experience, curPokemon.levelType) >= curPokemon.evoLevel && !curPokemon.evolved){  // If this pokemons level is high enough, and not evolved yet.
 
-				log("Your "+curPokemon.name+" evolved into "+curPokemon.evolution+"!");
+				$.notify("Your "+curPokemon.name+" evolved into "+curPokemon.evolution+"!", 'success');
 
 				capturePokemon(curPokemon.evolution); // Capture it's evolution
 

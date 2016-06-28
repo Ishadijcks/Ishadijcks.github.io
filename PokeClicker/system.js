@@ -336,12 +336,12 @@ var capturePokemon = function(name){
 				calculateAttack();
 			}
 		}
-		log("You successfully caught "+name);
+		$.notify("You successfully caught "+name, 'success');
 		
 	}
 	
 	else{
-		log(name+" has already been caught!");
+		
 		
 
 		var deviation = Math.floor(Math.random() * 11 ) -5;
@@ -352,7 +352,7 @@ var capturePokemon = function(name){
 		else {
 			var getMoney = Math.floor((30-deviation)*player.route*player.moneyMultiplier);
 		}
-		log("You managed to sell the "+name+" for $" + getMoney + "!");
+		$.notify("You managed to sell the "+name+" for $" + getMoney + "!", 'info');
 		player.money += getMoney;
 	}
 	player.totalCaught++;
