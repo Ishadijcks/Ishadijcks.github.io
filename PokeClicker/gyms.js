@@ -106,11 +106,16 @@ var loadGym = function(townId){
 var timer = function(){
 	if (currentGym.timeLeft <= 0){
     	clearInterval(counter);
-        inProgress = 0;
-        moveToTown(currentGym.town.slice(0,-4));
-        currentGym.timeLeft = currentGym.timeLimit;
-        log("You couldn't defeat "+currentGym.leaderName+ " in time.");
-        log("Train harder and try again!")
+
+    	console.log("bad");
+    	console.log(inProgress);
+	    if (inProgress == 2){
+	        inProgress = 0;
+	        moveToTown(currentGym.town.slice(0,-4));
+	        currentGym.timeLeft = currentGym.timeLimit;
+	        log("You couldn't defeat "+currentGym.leaderName+ " in time.");
+	        log("Train harder and try again!")
+    	}
     }
     currentGym.timeLeft-=10;
         $("#timer").html((currentGym.timeLeft/100)+"/"+currentGym.timeLimit/100); 
