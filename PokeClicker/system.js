@@ -448,10 +448,10 @@ var generateLegendary = function(){
 			if(chance < 10){
 				return "Mewtwo";
 			}
-			if (chance < 33){
+			if (chance < 40){
 				return "Articuno";
 			}
-			else if (chance <66){
+			else if (chance <70){
 				return "Zapdos";
 			}
 			else if (chance <100){
