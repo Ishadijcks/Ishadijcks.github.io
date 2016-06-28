@@ -44,7 +44,12 @@ var showTown = function(town){
 	//html += "<img src="+town.image+">";
 	html += "<div class='row'>";
 		if (town.gym != null){
-			html += "<button class='gym leftTownButton btn btn-primary col-sm-2' id='"+town.name+" Gym'>Gym</button>"
+			console.log(town.gym.badgeReq)
+			if(player.gymBadges.length >= town.gym.badgeReq){
+				html += "<button class='gym leftTownButton btn btn-primary col-sm-2' id='"+town.name+" Gym'>Gym</button>"
+			} else {
+				html += "<button class='wrongGym leftTownButton btn btn-primary disabled col-sm-2' id='"+town.name+" Gym'>Gym</button>"
+			}
 		}
 	html += "</div>"
 	$("#townView").html(html);

@@ -184,6 +184,10 @@ $(document).ready(function(){
 		loadGym(id);
 	})
 
+	$("body").on('click',".wrongGym", function(){
+		log("You need more badges to challenge this gym leader")
+	})
+
 	// Navbar Button controllers
 	$("body").on('click',"#badgeButton", function(){
 		$("#badgeModal").modal("show");
@@ -207,6 +211,8 @@ $(document).ready(function(){
 	$("body").on('click',"#changeLogButton", function(){
 		$("#changeLogModal").modal("show");
 	})
+
+
 	// Logs to welcome the player
 	log("Welcome to PokeClicker");
 	log("Click on the pokemon to defeat them!");

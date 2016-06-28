@@ -2,13 +2,14 @@ var gymPokemonIndex = 0;
 var currentGym;
 var counter;
 
-var Gym = function(leaderName,town,pokemons,badgeReward,moneyReward){
+var Gym = function(leaderName,town,pokemons,badgeReward,moneyReward,badgeReq){
 	var temp = {
 		leaderName: leaderName,
 		town: town,
 		pokemons: pokemons,
 		badgeReward: badgeReward,
 		moneyReward: moneyReward,
+		badgeReq: badgeReq,
 		timeLimit: 30*100,
 		timeLeft: 30*100
 	}
@@ -26,16 +27,16 @@ var GymPokemon = function(name, health){
 
 var PewterCityGym = function(){
 	var pokemonList = [];
-	pokemonList.push(GymPokemon("Geodude", 200000));
+	pokemonList.push(GymPokemon("Geodude", 2000));
 	pokemonList.push(GymPokemon("Onix", 4000));
-	return Gym("Brock", "Pewter City Gym", pokemonList, "Boulder", 1000);
+	return Gym("Brock", "Pewter City Gym", pokemonList, "Boulder", 1000, 0);
 }
 
 var CeruleanCityGym = function(){
 	var pokemonList = [];
 	pokemonList.push(GymPokemon("Staryu", 6000));
 	pokemonList.push(GymPokemon("Starmie", 8000));
-	return Gym("Misty", "Cerulean City Gym", pokemonList, "Cascade", 5000);
+	return Gym("Misty", "Cerulean City Gym", pokemonList, "Cascade", 5000, 1);
 }
 
 var VermillionCityGym = function(){
@@ -43,7 +44,7 @@ var VermillionCityGym = function(){
 	pokemonList.push(GymPokemon("Voltorb", 5000));
 	pokemonList.push(GymPokemon("Pikachu", 8000));
 	pokemonList.push(GymPokemon("Raichu", 8000));
-	return Gym("Lt. Surge", "Vermillion City Gym", pokemonList, "Thunder", 15000);
+	return Gym("Lt. Surge", "Vermillion City Gym", pokemonList, "Thunder", 15000, 2);
 }
 
 var CeladonCityGym = function(){
@@ -51,7 +52,7 @@ var CeladonCityGym = function(){
 	pokemonList.push(GymPokemon("Victreebel", 2000));
 	pokemonList.push(GymPokemon("Tangela", 4000));
 	pokemonList.push(GymPokemon("VilePlume", 4000));
-	return Gym("Erika", "Celadon City Gym", pokemonList, "Rainbow", 25000);
+	return Gym("Erika", "Celadon City Gym", pokemonList, "Rainbow", 25000 ,3);
 }
 
 var SaffronCityGym = function(){
@@ -60,7 +61,7 @@ var SaffronCityGym = function(){
 	pokemonList.push(GymPokemon("Mr. Mime", 4000));
 	pokemonList.push(GymPokemon("Venomoth", 4000));
 	pokemonList.push(GymPokemon("Alakazam", 4000));
-	return Gym("Sabrina", "Saffron City Gym", pokemonList, "Marsh", 25000);
+	return Gym("Sabrina", "Saffron City Gym", pokemonList, "Marsh", 25000, 4);
 }
 
 var FuchsiaCityGym = function(){
@@ -69,7 +70,7 @@ var FuchsiaCityGym = function(){
 	pokemonList.push(GymPokemon("Muk", 4000));
 	pokemonList.push(GymPokemon("Koffing", 4000));
 	pokemonList.push(GymPokemon("Weezing", 4000));
-	return Gym("Koga", "Fuchsia City Gym", pokemonList, "Soul", 25000);
+	return Gym("Koga", "Fuchsia City Gym", pokemonList, "Soul", 25000, 5);
 }
 
 var CinnabarIslandGym = function(){
@@ -78,7 +79,7 @@ var CinnabarIslandGym = function(){
 	pokemonList.push(GymPokemon("Ponyta", 4000));
 	pokemonList.push(GymPokemon("Rapidash", 4000));
 	pokemonList.push(GymPokemon("Arcanine", 4000));
-	return Gym("Blain", "Cinnabar Island Gym", pokemonList, "Volcano", 25000);
+	return Gym("Blain", "Cinnabar Island Gym", pokemonList, "Volcano", 25000, 6);
 }
 
 var ViridianCityGym = function(){
@@ -88,7 +89,7 @@ var ViridianCityGym = function(){
 	pokemonList.push(GymPokemon("Nidoqueen", 4000));
 	pokemonList.push(GymPokemon("Nidoking", 4000));
 	pokemonList.push(GymPokemon("Rhydon", 4000));
-	return Gym("Giovanni", "Viridian City Gym", pokemonList, "Earth", 25000);
+	return Gym("Giovanni", "Viridian City Gym", pokemonList, "Earth", 25000, 7);
 }
 
 
@@ -124,6 +125,14 @@ var updateGym = function(){
     if(curEnemy.health == 0 ){
         gymEnemyDefeated(currentGym);
     }
+
+    var html = "";
+    html += currentGym.leaderName + "<br>";
+    html += "<img src=images/gyms/"+currentGym.leaderName+".png><br><br>";
+    for (var i = 0; i<currentGym.pokemons.length-gymPokemonIndex; i++){
+    	html += "<img src=images/gyms/pokeball.png>";
+    }
+    $("#gymTrainer").html(html);
 
     if (curEnemy.alive){
         if(alreadyCaught(curEnemy.name)){
