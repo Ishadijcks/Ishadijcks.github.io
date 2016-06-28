@@ -27,40 +27,40 @@ var GymPokemon = function(name, health){
 
 var PewterCityGym = function(){
 	var pokemonList = [];
-	pokemonList.push(GymPokemon("Geodude", 2000));
+	pokemonList.push(GymPokemon("Geodude", 3500));
 	pokemonList.push(GymPokemon("Onix", 4000));
-	return Gym("Brock", "Pewter City Gym", pokemonList, "Boulder", 1000, 0);
+	return Gym("Brock", "Pewter City Gym", pokemonList, "Boulder", 2000, 0);
 }
 
 var CeruleanCityGym = function(){
 	var pokemonList = [];
-	pokemonList.push(GymPokemon("Staryu", 6000));
-	pokemonList.push(GymPokemon("Starmie", 8000));
+	pokemonList.push(GymPokemon("Staryu", 6500));
+	pokemonList.push(GymPokemon("Starmie", 8500));
 	return Gym("Misty", "Cerulean City Gym", pokemonList, "Cascade", 5000, 1);
 }
 
 var VermillionCityGym = function(){
 	var pokemonList = [];
-	pokemonList.push(GymPokemon("Voltorb", 5000));
-	pokemonList.push(GymPokemon("Pikachu", 8000));
-	pokemonList.push(GymPokemon("Raichu", 8000));
+	pokemonList.push(GymPokemon("Voltorb", 12000));
+	pokemonList.push(GymPokemon("Pikachu", 15000));
+	pokemonList.push(GymPokemon("Raichu", 18000));
 	return Gym("Lt. Surge", "Vermillion City Gym", pokemonList, "Thunder", 15000, 2);
 }
 
 var CeladonCityGym = function(){
 	var pokemonList = [];
-	pokemonList.push(GymPokemon("Victreebel", 2000));
-	pokemonList.push(GymPokemon("Tangela", 4000));
-	pokemonList.push(GymPokemon("Vileplume", 4000));
+	pokemonList.push(GymPokemon("Victreebel", 15000));
+	pokemonList.push(GymPokemon("Tangela", 18000));
+	pokemonList.push(GymPokemon("Vileplume", 25000));
 	return Gym("Erika", "Celadon City Gym", pokemonList, "Rainbow", 25000 ,3);
 }
 
 var SaffronCityGym = function(){
 	var pokemonList = [];
-	pokemonList.push(GymPokemon("Kadabra", 2000));
-	pokemonList.push(GymPokemon("Mr. Mime", 4000));
-	pokemonList.push(GymPokemon("Venomoth", 4000));
-	pokemonList.push(GymPokemon("Alakazam", 4000));
+	pokemonList.push(GymPokemon("Kadabra", 12000));
+	pokemonList.push(GymPokemon("Mr. Mime", 15000));
+	pokemonList.push(GymPokemon("Venomoth", 18000));
+	pokemonList.push(GymPokemon("Alakazam", 20000));
 	return Gym("Sabrina", "Saffron City Gym", pokemonList, "Marsh", 25000, 4);
 }
 
@@ -91,6 +91,7 @@ var ViridianCityGym = function(){
 	pokemonList.push(GymPokemon("Rhydon", 4000));
 	return Gym("Giovanni", "Viridian City Gym", pokemonList, "Earth", 25000, 7);
 }
+
 
 
 var loadGym = function(townId){
