@@ -35,7 +35,10 @@ var load = function(){
 	
 	if(player.version < 0.4){
 		player.gymBadges = [];
+		$('#changeLogModal').modal('show');
 	}
+
+
 
 	player.version = version;
 	
