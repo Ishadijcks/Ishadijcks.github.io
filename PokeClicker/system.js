@@ -1,6 +1,7 @@
 var version = "0.4"
 
 var inProgress = 1;
+var canCatch = 1;
 // Add new variables to the savefile!!
 var player = {
 	clickAttack: 1,
@@ -283,6 +284,7 @@ var getExp = function(exp){
 
 // When the enemy is defeated all stats are updated and a new enemy is picked
 var enemyDefeated = function(){
+	canCatch = 1;
 	if (curEnemy.alive){
 		log("You defeated the wild "+ curEnemy.name);
 		
@@ -320,17 +322,20 @@ var enemyDefeated = function(){
 
 	
 		setTimeout(function(){
+	if(canCatch){
 			var chance = Math.floor(Math.random()*100+1);
 			if(chance<=curEnemy.catchRate+player.catchBonus){
 				capturePokemon(curEnemy.name);
 				
 			}
+
 		if( inProgress == 1){
 			generatePokemon(player.route);
 		}
 		updateStats();
 		updateEnemy();
 		$("#catchDisplay").html("");
+	}
 		}, player.catchTime);
 		
 		curEnemy.alive = false;

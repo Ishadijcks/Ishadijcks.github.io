@@ -35,10 +35,10 @@ var idToRoute = function(id){
 }
 
 var moveToRoute = function(route){
+	canCatch = 0;
+	$("#catchDisplay").html("");	
 
 	
-
-	if(curEnemy.alive){
 		if(!isNaN(route)){
 			inProgress = 1;
 			hideAllViews()
@@ -51,10 +51,8 @@ var moveToRoute = function(route){
 				log("You don't have access to that route yet.")
 			}
 		}
-	}
-	else{
-		log("You can't switch routes while catching a pokemon");
-	}
+	
+	
 	updateAll();
 }
 
