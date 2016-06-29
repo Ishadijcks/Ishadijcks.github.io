@@ -25,7 +25,8 @@ var player = {
 	gymBadges: [],
 	version: version,
 	totalCaught: 0,
-	routeKillsNeeded: 10
+	routeKillsNeeded: 10,
+	evoExplain: 0
 }
 
 var curEnemy = {
@@ -311,8 +312,7 @@ var enemyDefeated = function(){
 		updateRoute();
 		log("You earned $" + Math.floor(money) + "!");
 
-		var catchRate = curEnemy.catchRate + player.catchBonus-10;
-		$("#catchDisplay").html("Catch chance: "+Math.min(100,catchRate) + "%");
+		
 		
 		setTimeout(function(){ 
 			

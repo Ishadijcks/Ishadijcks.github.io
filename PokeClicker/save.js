@@ -32,6 +32,7 @@ var load = function(){
 	if (typeof savegame.routeKillsNeeded !== "undefined") player.routeKillsNeeded = savegame.routeKillsNeeded;
 	if (typeof savegame.catchNumbers !== "undefined") player.catchNumbers = savegame.catchNumbers;
 	if (typeof savegame.defeatNumbers !== "undefined") player.defeatNumbers = savegame.defeatNumbers;
+	if (typeof savegame.evoExplain !== "undefined") player.evoExplain = savegame.evoExplain;
 	
 	if(player.version < 0.4){
 		player.gymBadges = [];
