@@ -166,6 +166,10 @@ var updateGym = function(){
 var gymEnemyDefeated = function(){
 	log("You defeated "+currentGym.leaderName+"'s " + curEnemy.name);
 	gymPokemonIndex++;
+
+	var id = getPokemonByName(curEnemy.name).id-1;
+	player.defeatNumbers[id]++;
+
 	if(currentGym.pokemons[gymPokemonIndex] != null){
 		spawnGymPokemon(gymPokemonIndex);
 	}
