@@ -29,6 +29,11 @@ var moveToTown = function(townName){
 }
 
 var accessToTown = function(routeList){
+
+	if(routeList.length == 0){
+		return true;
+	}
+
 	for( var i = 0; i<routeList.length; i++){
 		if(player.routeKills[routeList[i]] >= player.routeKillsNeeded){
 			return true;
@@ -70,6 +75,7 @@ var loadTowns = function(){
 	addTown("Fuchsia City", FuchsiaCityGym(), "images/gyms/pewtercity.png", null, [18,15]);
 	addTown("Cinnabar Island", CinnabarIslandGym(), "images/gyms/cinnabarisland.png", null, [20]);
 	addTown("Viridian City", ViridianCityGym(), "images/gyms/viridiancity.png", null, [1]);
+	addTown("Pallet Town", null, "images/gyms/pallettown.png", null, []);
 }
 
 var getTown = function(townName){
