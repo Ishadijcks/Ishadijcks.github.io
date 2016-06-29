@@ -325,23 +325,25 @@ var enemyDefeated = function(){
 			player.pokeballs--;
 		}, 1);
 		
-
+		var catchRate = curEnemy.catchRate + player.catchBonus-10;
+		$("#catchDisplay").html("Catch chance: "+Math.min(100,catchRate) + "%");
 	
 		setTimeout(function(){
-	if(canCatch){
+		if(canCatch){
 			var chance = Math.floor(Math.random()*100+1);
-			if(chance<=curEnemy.catchRate+player.catchBonus){
+			if(chance<=catchRate){
 				capturePokemon(curEnemy.name);
 				
 			}
 
-		if( inProgress == 1){
-			generatePokemon(player.route);
+			if( inProgress == 1){
+				generatePokemon(player.route);
+			}
+
+			updateStats();
+			updateEnemy();
+			$("#catchDisplay").html("");
 		}
-		updateStats();
-		updateEnemy();
-		$("#catchDisplay").html("");
-	}
 		}, player.catchTime);
 		
 		curEnemy.alive = false;
