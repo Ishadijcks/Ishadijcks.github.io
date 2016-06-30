@@ -2,6 +2,7 @@ var version = "0.4"
 
 var inProgress = 1;
 var canCatch = 1;
+var attackInterval;
 // Add new variables to the savefile!!
 var player = {
 	clickAttack: 1,
@@ -64,12 +65,7 @@ $(document).ready(function(){
 	hideAllViews()
 	$("#currentEnemy").show();
 
-	setInterval(function(){
-		if(player.starter != "none" && inProgress != 0){
-		curEnemy.health -= Math.floor(player.attack*player.attackMultiplier*1.5);
-		updateAll();
-		}
-	},1000);
+	
 
 	$("body").on('click',"#enemy", function(){
 		if (curEnemy.alive && inProgress != 0){
@@ -244,7 +240,12 @@ var updateAll = function(){
 }
 
 
-	
+var pokemonsAttack = function(){
+	if(player.starter != "none" && inProgress != 0){
+		curEnemy.health -= Math.floor(player.attack*player.attackMultiplier*1.5);
+		updateAll();
+	}
+}	
 
 			// Leveling functions
 
@@ -291,6 +292,7 @@ var getExp = function(exp){
 
 // When the enemy is defeated all stats are updated and a new enemy is picked
 var enemyDefeated = function(){
+
 	canCatch = 1;
 	if (curEnemy.alive){
 		log("You defeated the wild "+ curEnemy.name);
@@ -417,6 +419,8 @@ var calculateAttack = function(){
 
 
 var generatePokemon = function (route){
+	clearInterval(attackInterval);
+	attackInterval = setInterval(pokemonsAttack,1000);
 	var randomRoute = 0;
 	var decrease = 0;
 
