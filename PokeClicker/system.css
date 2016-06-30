@@ -1,4 +1,25 @@
-#gymEnemy:hover{
+.container {
+	padding: 15px;
+	max-width: 1170px;
+	width: 100%;
+}
+
+@media (min-width:838px) {
+	#leftColumn {
+		width: 43%;
+	}
+	#rightColumn {
+		width: 57%;
+	}
+	#leftColumn > div {
+		padding-right: 7.5px;
+	}
+	#rightColumn > div {
+		padding-left: 7.5px;
+	}
+}
+
+#gymEnemy:hover {
 	cursor:pointer
 }
 
@@ -6,8 +27,8 @@
 	float:right;
 	margin-right: 15%;
 	padding-bottom: 5px;
-	padding-left: 20px;
-	padding-right: 20px;
+	padding-left: 15px;
+	padding-right: 15px;
 	border-bottom: 1px solid black;
 }
 
@@ -26,7 +47,7 @@
 #townView {
 	border: 1px solid black;
 	height: 250px;
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 }
 
 .townName {
@@ -47,7 +68,7 @@
     -1px -1px 0 #000,
     1px -1px 0 #000,
     -1px 1px 0 #000,
-    1px 1px 0 #000;  
+    1px 1px 0 #000;
 }
 
 #pokedexModal{
@@ -130,11 +151,9 @@
 }
 
 body {
-	background-image: url('http://i.imgur.com/O7ZWigt.png'); 
-}
-
-.container-fluid{
-	margin-top: 15px;
+	background-image: url('http://i.imgur.com/O7ZWigt.png');
+	background-size: cover;
+	min-height: 100vh;
 }
 
 table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView {
@@ -145,15 +164,6 @@ table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView {
 	border: 1px solid black;
 
 	bottom:0px;
-}
-
-#leftColumn {
-	margin-right: 7.5px;
-	padding-right: 25px;
-}
-
-#rightColumn {
-	margin-left: 7.5px;
 }
 
 .pokeBadge{
@@ -175,7 +185,7 @@ table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView {
 	overflow:auto;
 	background-color:white;
 	border:1px solid black;
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 }
 
 
@@ -192,24 +202,24 @@ table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView {
 @-moz-keyframes spinleft { 100% { -moz-transform: rotate(20deg); } }
 @-webkit-keyframes spinleft { 100% { -webkit-transform: rotate(20deg); } }
 
-    @keyframes spinleft { 
-        0% { 
-            transform: rotate(0deg); 
+    @keyframes spinleft {
+        0% {
+            transform: rotate(0deg);
         }
-        15% { 
-            transform: rotate(10deg); 
+        15% {
+            transform: rotate(10deg);
         }
-        30% { 
-            transform: rotate(0deg); 
+        30% {
+            transform: rotate(0deg);
         }
         50% {
         	transform: rotate (0deg);
         }
-        65% { 
-            transform: rotate(-10deg); 
+        65% {
+            transform: rotate(-10deg);
         }
-        80% { 
-            transform: rotate(0deg); 
+        80% {
+            transform: rotate(0deg);
         }
     }
 
@@ -230,7 +240,7 @@ table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView {
 
 .smallImage:hover{
 	position:relative;
-	
+
 }
 
 .upgradeBoxes{
@@ -252,7 +262,7 @@ g, rect {
 	overflow:auto;
 	background-color:white;
 	border:1px solid black;
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 	padding:0;
 
 }
@@ -264,10 +274,6 @@ g, rect {
 
 #statTable {
 	margin-bottom:0px;
-}
-
-.container {
-	width:100% !important
 }
 
 #alreadyCaughtImage{
@@ -291,7 +297,7 @@ g, rect {
 	border: 1px solid black;
 	height:198px;
 	overflow: scroll;
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 }
 
 #enemy:hover{
@@ -302,7 +308,7 @@ g, rect {
 	border: 1px solid black;
 	text-align:center;
 	height: 250px;
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 }
 
 #pokemons table{
@@ -331,4 +337,8 @@ g, rect {
 
 }
 
-
+@media (min-width:1200px) {
+	.container {
+		width:1170px
+	}
+}
