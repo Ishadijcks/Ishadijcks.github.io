@@ -102,7 +102,7 @@ var getHeight = function(){
 var updateRoute = function(){
 	var html = "Route "+player.route;
 	if(routeCompleted(player.route)){
-		html += "<img class='gymPokeball' src='images/gyms/pokeball.png'>";
+		html += "<a title='You have caught all available Pokemon on this route!'><img class='gymPokeball' src='images/gyms/pokeball.png'></a>";
 	}
 	html += "<br>" + Math.min(player.routeKillsNeeded, player.routeKills[player.route])+"/"+player.routeKillsNeeded;
 	$("#currentRoute").html(html);
