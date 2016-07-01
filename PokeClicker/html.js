@@ -100,7 +100,12 @@ var getHeight = function(){
 
 
 var updateRoute = function(){
-	$("#currentRoute").html("Route "+player.route+ "<br>"+Math.min(player.routeKillsNeeded, player.routeKills[player.route])+"/"+player.routeKillsNeeded);
+	var html = "Route "+player.route;
+	if(routeCompleted(player.route)){
+		html += "<img class='gymPokeball' src='images/gyms/pokeball.png'>";
+	}
+	html += "<br>" + Math.min(player.routeKillsNeeded, player.routeKills[player.route])+"/"+player.routeKillsNeeded;
+	$("#currentRoute").html(html);
 	// if(accessToRoute(player.route+1)){
 	// 	$("#routeRight").show();
 	// }

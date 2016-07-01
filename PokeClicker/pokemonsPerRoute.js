@@ -89,3 +89,17 @@ var pokemonsPerRoute = {
         water: ["Poliwag", "Goldeen", "Psyduck", "Krabby"]
     }
 }
+
+var routeCompleted = function(route){
+    if(route == 19 || route == 20){
+        route = 18;
+    }
+
+    var possiblePokemon = pokemonsPerRoute[route].land;
+    for( var i = 0; i<possiblePokemon.length; i++){
+        if(!alreadyCaught(possiblePokemon[i])){
+            return false;
+        }
+    }
+    return true;
+}
