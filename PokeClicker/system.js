@@ -282,7 +282,10 @@ var experienceToLevel = function(exp,levelType){
 // All pokemon you have gain exp
 var getExp = function(exp){
 	for( var i = 0; i<player.caughtPokemonList.length; i++){
-		player.caughtPokemonList[i].experience+= exp*player.expMultiplier;
+		var pokemonLevel = experienceToLevel(player.caughtPokemonList[i].experience, player.caughtPokemonList[i].levelType);
+		if(pokemonLevel < (1+player.gymBadges.length) * 10){
+			player.caughtPokemonList[i].experience+= exp*player.expMultiplier;
+		}
 	}
 	checkEvolution();
 }

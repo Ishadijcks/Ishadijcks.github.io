@@ -277,6 +277,7 @@ var showGymDefeated = function(first, town){
 		else {
 			html +=	"<img id='badgeReward' src=images/gyms/badges/"+currentGym.badgeReward+"Badge.png><br>";
 			html += "You have earned the "+currentGym.badgeReward+ " Badge!<br>";
+			html += "You can now train your pokemon to level " + (1+player.gymBadges.length)*10 + "<br>";
 			html += "Prize money: $" + currentGym.moneyReward;
 			html += "<br><br>You can replay this gym for 10% of its original money reward!"
 		}
