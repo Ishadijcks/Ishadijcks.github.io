@@ -143,7 +143,7 @@ $(document).ready(function(){
 				}
 			}
 		}
-		updateUpgrades();
+		updateAll();
 	})
 
 	// Allows the player to sort his pokemon
