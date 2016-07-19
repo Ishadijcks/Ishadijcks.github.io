@@ -460,7 +460,7 @@ var generatePokemon = function (route){
 	//console.log(pokemonList);
 	curEnemy.name = randomPokemon.name;
 	curEnemy.id = randomPokemon.id;
-	curEnemy.health = Math.max(Math.floor(20+randomPokemon.health*1/4*route*(player.caughtPokemonList.length-1)/4),20);
+	curEnemy.health = Math.max(Math.floor(Math.pow( (20+randomPokemon.health*route*(player.caughtPokemonList.length-1)/16) ,1.1)), 20);
 
 	curEnemy.maxHealth = curEnemy.health;
 
