@@ -101,7 +101,7 @@ var applyUpgrade = function(type, amount){
 			break;
 
 	}	
-		updateStats();
+		updateAll();
 }
 
 
