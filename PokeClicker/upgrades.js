@@ -97,11 +97,11 @@ var applyUpgrade = function(type, amount){
 			$.notify("Your pokemon attack multiplier is increased by "+amount, 'success');
 			break;					
 		default:
-			console.$.notify("This should never happen, contact the developer immediately!", 'error');
+			$.notify("This should never happen, contact the developer immediately!", 'error');
 			break;
 
 	}	
-		updateAll();
+		
 }
 
 
