@@ -27,50 +27,50 @@ var GymPokemon = function(name, health){
 
 var PewterCityGym = function(){
 	var pokemonList = [];
-	pokemonList.push(GymPokemon("Geodude", 3500));
-	pokemonList.push(GymPokemon("Onix", 4000));
-	return Gym("Brock", "Pewter City Gym", pokemonList, "Boulder", 2000, 0);
+	pokemonList.push(GymPokemon("Geodude", 500));
+	pokemonList.push(GymPokemon("Onix", 1000));
+	return Gym("Brock", "Pewter City Gym", pokemonList, "Boulder", 1000, 0);
 }
 
 var CeruleanCityGym = function(){
 	var pokemonList = [];
-	pokemonList.push(GymPokemon("Staryu", 8000));
-	pokemonList.push(GymPokemon("Starmie", 10000));
+	pokemonList.push(GymPokemon("Staryu", 2000));
+	pokemonList.push(GymPokemon("Starmie", 3000));
 	return Gym("Misty", "Cerulean City Gym", pokemonList, "Cascade", 5000, 1);
 }
 
 var VermillionCityGym = function(){
 	var pokemonList = [];
-	pokemonList.push(GymPokemon("Voltorb", 12000));
-	pokemonList.push(GymPokemon("Pikachu", 15000));
-	pokemonList.push(GymPokemon("Raichu", 18000));
-	return Gym("Lt. Surge", "Vermillion City Gym", pokemonList, "Thunder", 15000, 2);
+	pokemonList.push(GymPokemon("Voltorb", 3000));
+	pokemonList.push(GymPokemon("Pikachu", 4000));
+	pokemonList.push(GymPokemon("Raichu", 4500));
+	return Gym("Lt. Surge", "Vermillion City Gym", pokemonList, "Thunder", 10000, 2);
 }
 
 var CeladonCityGym = function(){
 	var pokemonList = [];
-	pokemonList.push(GymPokemon("Victreebel", 20000));
-	pokemonList.push(GymPokemon("Tangela", 22500));
-	pokemonList.push(GymPokemon("Vileplume", 25000));
-	return Gym("Erika", "Celadon City Gym", pokemonList, "Rainbow", 25000 ,3);
+	pokemonList.push(GymPokemon("Victreebel", 7500));
+	pokemonList.push(GymPokemon("Tangela", 8500));
+	pokemonList.push(GymPokemon("Vileplume", 9000));
+	return Gym("Erika", "Celadon City Gym", pokemonList, "Rainbow", 15000 ,3);
 }
 
 var SaffronCityGym = function(){
 	var pokemonList = [];
-	pokemonList.push(GymPokemon("Kadabra", 15000));
-	pokemonList.push(GymPokemon("Mr. Mime", 17500));
-	pokemonList.push(GymPokemon("Venomoth", 20000));
-	pokemonList.push(GymPokemon("Alakazam", 25000));
-	return Gym("Sabrina", "Saffron City Gym", pokemonList, "Marsh", 25000, 4);
+	pokemonList.push(GymPokemon("Kadabra", 11000));
+	pokemonList.push(GymPokemon("Mr. Mime", 11500));
+	pokemonList.push(GymPokemon("Venomoth", 12000));
+	pokemonList.push(GymPokemon("Alakazam", 12500));
+	return Gym("Sabrina", "Saffron City Gym", pokemonList, "Marsh", 20000, 4);
 }
 
 var FuchsiaCityGym = function(){
 	var pokemonList = [];
+	pokemonList.push(GymPokemon("Koffing", 17500));
+	pokemonList.push(GymPokemon("Muk", 18000));
 	pokemonList.push(GymPokemon("Koffing", 20000));
-	pokemonList.push(GymPokemon("Muk", 22000));
-	pokemonList.push(GymPokemon("Koffing", 22500));
-	pokemonList.push(GymPokemon("Weezing", 25000));
-	return Gym("Koga", "Fuchsia City Gym", pokemonList, "Soul", 25000, 5);
+	pokemonList.push(GymPokemon("Weezing", 22500));
+	return Gym("Koga", "Fuchsia City Gym", pokemonList, "Soul", 30000, 5);
 }
 
 var CinnabarIslandGym = function(){
@@ -79,77 +79,77 @@ var CinnabarIslandGym = function(){
 	pokemonList.push(GymPokemon("Ponyta", 25000));
 	pokemonList.push(GymPokemon("Rapidash", 27500));
 	pokemonList.push(GymPokemon("Arcanine", 30000));
-	return Gym("Blaine", "Cinnabar Island Gym", pokemonList, "Volcano", 25000, 6);
+	return Gym("Blaine", "Cinnabar Island Gym", pokemonList, "Volcano", 40000, 6);
 }
 
 var ViridianCityGym = function(){
 	var pokemonList = [];
-	pokemonList.push(GymPokemon("Rhyhorn", 25000));
-	pokemonList.push(GymPokemon("Dugtrio", 27500));
-	pokemonList.push(GymPokemon("Nidoqueen", 28000));
-	pokemonList.push(GymPokemon("Nidoking", 29000));
-	pokemonList.push(GymPokemon("Rhydon", 30000));
-	return Gym("Giovanni", "Viridian City Gym", pokemonList, "Earth", 25000, 7);
+	pokemonList.push(GymPokemon("Rhyhorn", 27500));
+	pokemonList.push(GymPokemon("Dugtrio", 30000));
+	pokemonList.push(GymPokemon("Nidoqueen", 30000));
+	pokemonList.push(GymPokemon("Nidoking", 32500));
+	pokemonList.push(GymPokemon("Rhydon", 35000));
+	return Gym("Giovanni", "Viridian City Gym", pokemonList, "Earth", 50000, 7);
 }
 
 var EliteLorelei = function(){
     var pokemonList = [];
-    pokemonList.push(GymPokemon("Dewgong", 25000));
-    pokemonList.push(GymPokemon("Cloyster", 27500));
-    pokemonList.push(GymPokemon("Slowbro", 28000));
-    pokemonList.push(GymPokemon("Jynx", 29000));
-    pokemonList.push(GymPokemon("Lapras", 30000));
-    return Gym("Elite Lorelei", "Indigo Plateau Gym", pokemonList, "E1", 25000, 8);
+    pokemonList.push(GymPokemon("Dewgong", 30000));
+    pokemonList.push(GymPokemon("Cloyster", 32500));
+    pokemonList.push(GymPokemon("Slowbro", 35000));
+    pokemonList.push(GymPokemon("Jynx", 37500));
+    pokemonList.push(GymPokemon("Lapras", 40000));
+    return Gym("Elite Lorelei", "Indigo Plateau Gym", pokemonList, "E1", 60000, 8);
 }
 
 var EliteBruno = function(){
     var pokemonList = [];
-    pokemonList.push(GymPokemon("Onix", 25000));
-    pokemonList.push(GymPokemon("Hitmonchan", 27500));
-    pokemonList.push(GymPokemon("Hitmonlee", 28000));
-    pokemonList.push(GymPokemon("Onix", 29000));
-    pokemonList.push(GymPokemon("Machamp", 30000));
-    return Gym("Elite Bruno", "Indigo Plateau Gym", pokemonList, "E2", 25000, 9);
+    pokemonList.push(GymPokemon("Onix", 35000));
+    pokemonList.push(GymPokemon("Hitmonchan", 37500));
+    pokemonList.push(GymPokemon("Hitmonlee", 40000));
+    pokemonList.push(GymPokemon("Onix", 42500));
+    pokemonList.push(GymPokemon("Machamp", 45000));
+    return Gym("Elite Bruno", "Indigo Plateau Gym", pokemonList, "E2", 75000, 9);
 }
 
 var EliteAgatha = function(){
     var pokemonList = [];
-    pokemonList.push(GymPokemon("Gengar", 25000));
-    pokemonList.push(GymPokemon("Golbat", 27500));
-    pokemonList.push(GymPokemon("Haunter", 28000));
-    pokemonList.push(GymPokemon("Arbok", 29000));
-    pokemonList.push(GymPokemon("Gengar", 30000));
-    return Gym("Elite Agatha", "Indigo Plateau Gym", pokemonList, "E3", 25000, 10);
+    pokemonList.push(GymPokemon("Gengar", 40000));
+    pokemonList.push(GymPokemon("Golbat", 42500));
+    pokemonList.push(GymPokemon("Haunter", 45000));
+    pokemonList.push(GymPokemon("Arbok", 47500));
+    pokemonList.push(GymPokemon("Gengar", 50000));
+    return Gym("Elite Agatha", "Indigo Plateau Gym", pokemonList, "E3", 80000, 10);
 }
 
 var EliteLance = function(){
     var pokemonList = [];
-    pokemonList.push(GymPokemon("Gyarados", 25000));
-    pokemonList.push(GymPokemon("Dragonair", 27500));
-    pokemonList.push(GymPokemon("Dragonair", 28000));
-    pokemonList.push(GymPokemon("Aerodactyl", 29000));
-    pokemonList.push(GymPokemon("Dragonite", 30000));
-    return Gym("Elite Lance", "Indigo Plateau Gym", pokemonList, "E4", 25000, 11);
+    pokemonList.push(GymPokemon("Gyarados", 45000));
+    pokemonList.push(GymPokemon("Dragonair", 47500));
+    pokemonList.push(GymPokemon("Dragonair", 50000));
+    pokemonList.push(GymPokemon("Aerodactyl", 52500));
+    pokemonList.push(GymPokemon("Dragonite", 55000));
+    return Gym("Elite Lance", "Indigo Plateau Gym", pokemonList, "E4", 90000, 11);
 }
 
 var Champion = function(){
     var pokemonList = [];
-    pokemonList.push(GymPokemon("Pidgeot", 25000));
-    pokemonList.push(GymPokemon("Alakazam", 27500));
-    pokemonList.push(GymPokemon("Rhydon", 28000));
-    pokemonList.push(GymPokemon("Arcanine", 29000));
+    pokemonList.push(GymPokemon("Pidgeot", 50000));
+    pokemonList.push(GymPokemon("Alakazam", 60000));
+    pokemonList.push(GymPokemon("Rhydon", 700000));
+    pokemonList.push(GymPokemon("Arcanine", 75000));
     if( player.starter === "Charmander"){
-    	pokemonList.push(GymPokemon("Blastoise", 30000));
+    	pokemonList.push(GymPokemon("Blastoise", 100000));
 	}
 
     if( player.starter === "Squirtle"){
-    	pokemonList.push(GymPokemon("Venusaur", 30000));
+    	pokemonList.push(GymPokemon("Venusaur", 100000));
 	}
 
     if( player.starter === "Bulbasaur"){
-    	pokemonList.push(GymPokemon("Charizard", 30000));
+    	pokemonList.push(GymPokemon("Charizard", 100000));
 	}	
-    return Gym("Champion", "Indigo Plateau Gym", pokemonList, "Champion", 25000, 12);
+    return Gym("Champion", "Indigo Plateau Gym", pokemonList, "Champion", 100000, 12);
 }
 
 
@@ -272,14 +272,14 @@ var showGymDefeated = function(first, town){
 		html += "You have defeated " + currentGym.leaderName+"!<br>" ;
 		if( e4){
 			html += "Prize money: $" + currentGym.moneyReward;
-			html += "<br><br>You can challenge this elite four member again for 10% of its original money reward!"
+			html += "<br><br>Defeat this elite four member again for 10% of its original money reward!"
 		}
 		else {
 			html +=	"<img id='badgeReward' src=images/gyms/badges/"+currentGym.badgeReward+"Badge.png><br>";
 			html += "You have earned the "+currentGym.badgeReward+ " Badge!<br>";
 			html += "You can now train your pokemon to level " + (1+player.gymBadges.length)*10 + "<br>";
 			html += "Prize money: $" + currentGym.moneyReward;
-			html += "<br><br>You can replay this gym for 10% of its original money reward!"
+			html += "<br><br>Defeat this gym again to earn 10% of its original money reward!"
 		}
 
 	} else {
