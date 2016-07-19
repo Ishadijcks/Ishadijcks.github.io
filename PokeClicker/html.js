@@ -84,8 +84,8 @@ var updateCaughtList = function(){
 // Update the stats
 var updateStats = function(){
 	$("#statBody").html("<tr><th>Money</th><th>$"+player.money+"</th></tr>" +
-		"<tr><th>Click attack</th><th>"+Math.floor(player.clickAttack*player.clickMultiplier*1.5)+"</th></tr>" +
-		"<tr><th>Pokemon attack</th><th>"+Math.floor(player.attack*player.attackMultiplier*1.5)+"</th></tr>" +
+		"<tr><th>Click attack</th><th>"+Math.floor(player.clickAttack*player.clickMultiplier)+"</th></tr>" +
+		"<tr><th>Pokemon attack</th><th>"+Math.floor(player.attack*player.attackMultiplier)+"</th></tr>" +
 		"<tr><th>Exp multiplier</th><th>"+player.expMultiplier.toFixed(2)+"</th></tr>" +
 		"<tr><th>Catch bonus</th><th>"+player.catchBonus+"%</th></tr>" +
 		"<tr><th>Catch time</th><th>"+player.catchTime/1000+" sec</th></tr>" +

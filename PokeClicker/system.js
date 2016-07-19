@@ -3,6 +3,8 @@ var version = "0.4"
 var inProgress = 1;
 var canCatch = 1;
 var attackInterval;
+var maxClicks = 15;
+var clicks = 0;
 // Add new variables to the savefile!!
 var player = {
 	clickAttack: 1,
@@ -68,33 +70,37 @@ $(document).ready(function(){
 	
 
 	$("body").on('click',"#enemy", function(){
-		if (curEnemy.alive && inProgress != 0){
-			if(curEnemy.health > 0){
-				curEnemy.health -= Math.floor(player.clickAttack*player.clickMultiplier*1.5);
-			}			
-			
-			else {
-				curEnemy.health = 0;
+		clicks++;
+		if(clicks < maxClicks){
+			if (curEnemy.alive && inProgress != 0){
+				if(curEnemy.health > 0){
+					curEnemy.health -= Math.floor(player.clickAttack*player.clickMultiplier);
+				}			
+				
+				else {
+					curEnemy.health = 0;
+				}
+				
+				updateEnemy();
 			}
-			
-			updateEnemy();
 		}
-
 	});
 
 	$("body").on('click',"#gymEnemy", function(){
-		if (curEnemy.alive && inProgress != 0){
-			if(curEnemy.health > 0){
-				curEnemy.health -= Math.floor(player.clickAttack*player.clickMultiplier*1.5);
-			}			
-			
-			else {
-				curEnemy.health = 0;
+		clicks++;
+		if(clicks < maxClicks){
+			if (curEnemy.alive && inProgress != 0){
+				if(curEnemy.health > 0){
+					curEnemy.health -= Math.floor(player.clickAttack*player.clickMultiplier);
+				}			
+				
+				else {
+					curEnemy.health = 0;
+				}
+				
+				updateGym();
 			}
-			
-			updateGym();
 		}
-
 	});
 
 
@@ -241,8 +247,10 @@ var updateAll = function(){
 
 
 var pokemonsAttack = function(){
+	console.log(clicks);
+	clicks = 0;
 	if(player.starter != "none" && inProgress != 0){
-		curEnemy.health -= Math.floor(player.attack*player.attackMultiplier*1.5);
+		curEnemy.health -= Math.floor(player.attack*player.attackMultiplier);
 		updateAll();
 	}
 }	
@@ -276,7 +284,7 @@ var experienceToLevel = function(exp,levelType){
 		
 	}
 	exp *= mult;
-	return Math.min(100,Math.floor( Math.pow(10*exp,0.5)/(6*Math.sqrt(5))));
+	return Math.min(100,Math.floor( Math.pow(20*exp,0.5)/(6*Math.sqrt(5))));
 }
 
 // All pokemon you have gain exp
@@ -308,7 +316,7 @@ var enemyDefeated = function(){
 		var pokedexBonusExp = pokedexBonus(player.defeatNumbers[id]);
 		
 		var money = curEnemy.moneyReward;
-		var exp = 30+ 0.8*curEnemy.moneyReward;
+		var exp = 30 + 1.2*curEnemy.moneyReward;
 		exp *= pokedexBonusExp;
 		money *= player.moneyMultiplier
 		player.money += Math.floor(money);
@@ -384,7 +392,7 @@ var capturePokemon = function(name){
 			var getMoney = Math.floor(30*1*player.moneyMultiplier);
 		}
 		else {
-			var getMoney = Math.floor((30-deviation)*player.route*player.moneyMultiplier);
+			var getMoney = Math.floor((30-deviation)*player.route/4*player.moneyMultiplier);
 		}
 		log("You managed to sell the "+name+" for $" + getMoney + "!");
 		player.money += getMoney;
@@ -452,14 +460,15 @@ var generatePokemon = function (route){
 	//console.log(pokemonList);
 	curEnemy.name = randomPokemon.name;
 	curEnemy.id = randomPokemon.id;
-	curEnemy.health = Math.max(20+randomPokemon.health*1/4*route*(player.caughtPokemonList.length-1),20);
+	curEnemy.health = Math.max(Math.floor(20+randomPokemon.health*1/4*route*(player.caughtPokemonList.length-1)/4),20);
 
 	curEnemy.maxHealth = curEnemy.health;
 
 	var catchVariation = Math.floor(Math.random()*7-3);
 	curEnemy.catchRate = Math.floor(Math.pow(randomPokemon.catchRate,0.75)) + catchVariation;
 	curEnemy.alive = true;
-	curEnemy.moneyReward = 30 + 3*Math.pow(route,1.2);
+	var deviation = Math.floor(Math.random() * 51 ) - 25;
+	curEnemy.moneyReward = Math.max(10, 6 * route + 5*Math.pow(route,1.2) + deviation);
 	return randomPokemon;
 }
 
