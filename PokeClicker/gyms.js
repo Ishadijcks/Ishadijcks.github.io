@@ -92,6 +92,65 @@ var ViridianCityGym = function(){
 	return Gym("Giovanni", "Viridian City Gym", pokemonList, "Earth", 25000, 7);
 }
 
+var EliteLorelei = function(){
+    var pokemonList = [];
+    pokemonList.push(GymPokemon("Dewgong", 25000));
+    pokemonList.push(GymPokemon("Cloyster", 27500));
+    pokemonList.push(GymPokemon("Slowbro", 28000));
+    pokemonList.push(GymPokemon("Jynx", 29000));
+    pokemonList.push(GymPokemon("Lapras", 30000));
+    return Gym("Elite Lorelei", "Indigo Plateau Gym", pokemonList, "E1", 25000, 8);
+}
+
+var EliteBruno = function(){
+    var pokemonList = [];
+    pokemonList.push(GymPokemon("Onix", 25000));
+    pokemonList.push(GymPokemon("Hitmonchan", 27500));
+    pokemonList.push(GymPokemon("Hitmonlee", 28000));
+    pokemonList.push(GymPokemon("Onix", 29000));
+    pokemonList.push(GymPokemon("Machamp", 30000));
+    return Gym("Elite Bruno", "Indigo Plateau Gym", pokemonList, "E2", 25000, 9);
+}
+
+var EliteAgatha = function(){
+    var pokemonList = [];
+    pokemonList.push(GymPokemon("Gengar", 25000));
+    pokemonList.push(GymPokemon("Golbat", 27500));
+    pokemonList.push(GymPokemon("Haunter", 28000));
+    pokemonList.push(GymPokemon("Arbok", 29000));
+    pokemonList.push(GymPokemon("Gengar", 30000));
+    return Gym("Elite Agatha", "Indigo Plateau Gym", pokemonList, "E3", 25000, 10);
+}
+
+var EliteLance = function(){
+    var pokemonList = [];
+    pokemonList.push(GymPokemon("Gyarados", 25000));
+    pokemonList.push(GymPokemon("Dragonair", 27500));
+    pokemonList.push(GymPokemon("Dragonair", 28000));
+    pokemonList.push(GymPokemon("Aerodactyl", 29000));
+    pokemonList.push(GymPokemon("Dragonite", 30000));
+    return Gym("Elite Lance", "Indigo Plateau Gym", pokemonList, "E4", 25000, 11);
+}
+
+var Champion = function(){
+    var pokemonList = [];
+    pokemonList.push(GymPokemon("Pidgeot", 25000));
+    pokemonList.push(GymPokemon("Alakazam", 27500));
+    pokemonList.push(GymPokemon("Rhydon", 28000));
+    pokemonList.push(GymPokemon("Arcanine", 29000));
+    if( player.starter === "Charmander"){
+    	pokemonList.push(GymPokemon("Blastoise", 30000));
+	}
+
+    if( player.starter === "Squirtle"){
+    	pokemonList.push(GymPokemon("Venusaur", 30000));
+	}
+
+    if( player.starter === "Bulbasaur"){
+    	pokemonList.push(GymPokemon("Charizard", 30000));
+	}	
+    return Gym("Champion", "Indigo Plateau Gym", pokemonList, "Champion", 25000, 12);
+}
 
 
 var loadGym = function(townId){
@@ -182,7 +241,6 @@ var gymDefeated = function(){
 	clearInterval(counter);
 	log("Congratulations, you have defeated "+ currentGym.leaderName+"!");
 	inProgress = 0;
-	moveToTown(currentGym.town.slice(0,-4));
 	currentGym.timeLeft = currentGym.timeLimit;
 	var first = !alreadyGotBadge(currentGym.badgeReward);
 	if(first){
@@ -192,19 +250,37 @@ var gymDefeated = function(){
 	else {
 		player.money += currentGym.moneyReward/10;
 	}
-	showGymDefeated(first);
+
+	
+	var town = currentGym.town.slice(0,-4);
+	
+	moveToTown(town);
+	showGymDefeated(first, town);
+
 	updateAll();
 }
 
-var showGymDefeated = function(first){
+var showGymDefeated = function(first, town){
+	var e4 = 0;
+	if( town === "Indigo Plateau"){
+		e4 = 1;
+	}
+
 	html = "";
 
 	if(first){
-		html += "You have defeated " + currentGym.leaderName+"!<br>" ;		
-		html +=	"<img id='badgeReward' src=images/gyms/badges/"+currentGym.badgeReward+"Badge.png><br>";
-		html += "You have earned the "+currentGym.badgeReward+ " Badge!<br>";
-		html += "Prize money: $" + currentGym.moneyReward;
-		html += "<br><br>You can replay this gym for 10% of its original money reward!"
+		html += "You have defeated " + currentGym.leaderName+"!<br>" ;
+		if( e4){
+			html += "Prize money: $" + currentGym.moneyReward;
+			html += "<br><br>You can challenge this elite four member again for 10% of its original money reward!"
+		}
+		else {
+			html +=	"<img id='badgeReward' src=images/gyms/badges/"+currentGym.badgeReward+"Badge.png><br>";
+			html += "You have earned the "+currentGym.badgeReward+ " Badge!<br>";
+			html += "Prize money: $" + currentGym.moneyReward;
+			html += "<br><br>You can replay this gym for 10% of its original money reward!"
+		}
+
 	} else {
 		html += "You have defeated " + currentGym.leaderName+" again!<br>" ;
 		html += "Prize money: " + currentGym.moneyReward+ " x 10% = $"+ currentGym.moneyReward/10;
