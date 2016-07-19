@@ -16,9 +16,10 @@ var addTown = function(name,gym,image,shop,reqRoutes){
 var moveToTown = function(townName){
 	var town = getTown(townName);
 	canCatch = 0;
-	$("#catchDisplay").html("");	
+	
 	
 		if( accessToTown(town.reqRoutes)){
+			$("#catchDisplay").html("");	
 			inProgress = 0;
 			showTown(town);
 		}
@@ -46,9 +47,22 @@ var showTown = function(town){
 	
 	var html = "";
 	html += "<h3 class='townName strokeme'>"+town.name+"</h3>";
-	//html += "<img src="+town.image+">";
 	html += "<div class='row'>";
-		if (town.gym != null){
+
+		if (Array.isArray(town.gym)){
+			
+			for(var i = 0; i<town.gym.length; i++){
+				if(player.gymBadges.length >= town.gym[i].badgeReq){
+					html += "<button class='gym leftTownButton btn btn-primary col-sm-2' id='"+town.gym[i].leaderName + " Gym'>"+town.gym[i].leaderName+"</button>"
+					html += "</div><div class='row'>";
+				}
+				else {
+					html += "<button class='leftTownButton btn btn-primary disabled col-sm-2' id='"+town.gym[i].leaderName + " Gym'>"+town.gym[i].leaderName+"</button>"
+					html += "</div><div class='row'>";
+				}
+			}
+		}
+		else if (town.gym != null){
 			if(player.gymBadges.length >= town.gym.badgeReq){
 				html += "<button class='gym leftTownButton btn btn-primary col-sm-2' id='"+town.name+" Gym'>Gym</button>"
 			} else {
@@ -58,7 +72,6 @@ var showTown = function(town){
 	html += "</div>"
 	$("#townView").html(html);
 	$("#townView").css("background-image", "url("+town.image+")");  
-	$("#townView").css("background-repeat", "no-repeat");  
 	$("#townView").css("background-repeat", "no-repeat");
 	$("#townView").css("background-position", "center");    
 
@@ -77,6 +90,12 @@ var loadTowns = function(){
 	addTown("Viridian City", ViridianCityGym(), "images/gyms/viridiancity.png", null, [1]);
 	addTown("Pallet Town", null, "images/gyms/pallettown.png", null, []);
 	addTown("Lavender Town", null, "images/gyms/lavendertown.png", null, [7]);
+	addTown("Indigo Plateau", [EliteLorelei(), EliteBruno(), EliteAgatha(), EliteLance(), Champion()], "images/gyms/indigoplateau.png", null, [8]);
+	addTown("Elite Lorelei", EliteLorelei(), null, null, null);
+	addTown("Elite Bruno", EliteBruno(), null, null, null);
+	addTown("Elite Agatha", EliteAgatha(), null, null, null);
+	addTown("Elite Lance", EliteLance(), null, null, null);
+	addTown("Champion", Champion(), null, null, null);
 }
 
 var getTown = function(townName){
