@@ -136,7 +136,7 @@ var Champion = function(){
     var pokemonList = [];
     pokemonList.push(GymPokemon("Pidgeot", 50000));
     pokemonList.push(GymPokemon("Alakazam", 60000));
-    pokemonList.push(GymPokemon("Rhydon", 700000));
+    pokemonList.push(GymPokemon("Rhydon", 70000));
     pokemonList.push(GymPokemon("Arcanine", 75000));
     if( player.starter === "Charmander"){
     	pokemonList.push(GymPokemon("Blastoise", 100000));
