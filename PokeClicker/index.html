@@ -3,6 +3,7 @@
 <head>
 	<title>Pokeclicker</title>
 	<script src="jquery.js"></script>
+	<script type="text/javascript" src="tooltipster/dist/js/tooltipster.bundle.min.js"></script>
 	<script src="pokemonList.js"></script>
 	<script src="system.js"></script>
 	<script src="pokemonsPerRoute.js"></script>
@@ -15,13 +16,15 @@
 	<script src="towns.js"></script>
 	<script src="gyms.js"></script>
 	<script src="pokedex.js"></script>
+	<script src="oak.js"></script>
 	<script src="notify.js"></script>
-	</script><!-- Latest compiled and minified CSS -->
+	<!-- Latest compiled and minified CSS -->
 	<link href="bootstrap.css" rel="stylesheet"><!-- Optional theme -->
-
+	
 	<script src="bootstrap.js">
 	</script>
 	<link href="system.css" rel="stylesheet" type="text/css">
+	<link href="tooltipster/dist/css/tooltipster.bundle.min.css" rel="stylesheet" type="text/css">
 
 	<script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -33,6 +36,15 @@
   ga('send', 'pageview');
 
 </script>
+
+    <script>
+        $(document).ready(function(){
+	        $(".tooltipRight").tooltipster({
+				  position: "right"
+			});
+		});
+    </script>
+
 </head>
 <body>
 
@@ -638,6 +650,18 @@
 					</div>
 				</div>
 
+				<div aria-labelledby="myModalLabel" class="modal fade" id="oakModal" role="dialog" tabindex="-1">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title" id="myModalLabel">Professor Oak</h4>
+							</div>
+							<div class="modal-body" id="oakBody">Test
+							</div>
+						</div>
+					</div>
+				</div>
+
 				<!-- Badge Modal -->
 				<div aria-labelledby="myModalLabel" class="modal fade" id="badgeModal" role="dialog" tabindex="-1">
 					<div class="modal-dialog" role="document">
@@ -936,6 +960,8 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="col-sm-1" id="oakItemBody"></div>
 		</div>
 	</div>
 </body>
