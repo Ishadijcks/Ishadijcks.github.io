@@ -29,7 +29,11 @@ var player = {
 	version: version,
 	totalCaught: 0,
 	routeKillsNeeded: 10,
-	evoExplain: 0
+	oakItemList:[],
+	oakItemSlots: 2,
+	evoExplain: 0,
+	mapExplain: 0,
+	townExplain: 0,
 }
 
 var curEnemy = {
