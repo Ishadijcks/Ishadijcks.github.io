@@ -49,7 +49,9 @@ var curEnemy = {
 
 $(document).ready(function(){
 	//$('#changeLogModal').modal('show');
- 
+
+    $('.tooltip').tooltipster();
+
 
 	if(localStorage.getItem("player") != null){
 		load();
@@ -206,6 +208,12 @@ $(document).ready(function(){
 
 	})		
 	
+	$("body").on('click',".oakItem", function(){
+		var id = this.id;
+		var itemId = id.substr(id.length - 1);
+		activateOakItem(itemId);
+	})		
+
 	$("body").on('click',"#resetButton", function(){
 		var input = prompt("Are you sure you want to delete your savefile?, enter 6 if you are!","9");
 		if (input == 6){
@@ -480,13 +488,26 @@ var generatePokemon = function (route){
 		randomPokemon = getPokemonByName(legendary);
 	}
 	else {
-		if(route == 19 || route == 20){
-			route = 18;
-		}
+
 		if (route <= 25){
-		var possiblePokemons = pokemonsPerRoute[route].land;
-		var rand = Math.floor(Math.random()*possiblePokemons.length);
-		randomPokemonName = possiblePokemons[rand]
+		
+			if(isActive("Normal Rod") && pokemonsPerRoute[route].water != undefined){
+				if(pokemonsPerRoute[route].land != undefined){
+					var possiblePokemons = pokemonsPerRoute[route].land.concat(pokemonsPerRoute[route].water);
+				} else {
+					var possiblePokemons = pokemonsPerRoute[route].water;
+				}
+			} else {
+				if(route == 19 || route == 20){
+					route = 18;
+				}
+				var possiblePokemons = pokemonsPerRoute[route].land;
+			}
+
+
+
+			var rand = Math.floor(Math.random()*possiblePokemons.length);
+			randomPokemonName = possiblePokemons[rand]
 		}	
 
 		else {
@@ -523,8 +544,12 @@ var getPokemonByName = function(name){
 }
 
 var generateLegendary = function(){
+
 	if(player.route > 9){
 		var chance = Math.floor(Math.random()*500+1);
+		if(isActive("Legendary Charm")){
+			chance *= getOakItemBonus("Legendary Charm")
+		}
 		if (chance < 3){
 			chance = Math.floor(Math.random()*100+1);
 			if(chance < 5){
