@@ -1,5 +1,4 @@
 var version = "0.4"
-
 var inProgress = 1;
 var canCatch = 1;
 var attackInterval;
@@ -61,7 +60,7 @@ $(document).ready(function(){
 		$('#pickStarter').modal({backdrop: 'static', keyboard: false});
 	}
 	initUpgrades();
-
+	initOakItems();
 	
 	if(player.starter != "none"){
 	updateAll();
@@ -78,7 +77,7 @@ $(document).ready(function(){
 		if(clicks < maxClicks){
 			if (curEnemy.alive && inProgress != 0){
 				if(curEnemy.health > 0){
-					curEnemy.health -= Math.floor(player.clickAttack*player.clickMultiplier);
+					curEnemy.health -= getClickAttack();
 				}			
 				
 				else {
@@ -95,7 +94,7 @@ $(document).ready(function(){
 		if(clicks < maxClicks){
 			if (curEnemy.alive && inProgress != 0){
 				if(curEnemy.health > 0){
-					curEnemy.health -= Math.floor(player.clickAttack*player.clickMultiplier);
+					curEnemy.health -= getClickAttack();
 				}			
 				
 				else {
@@ -251,10 +250,9 @@ var updateAll = function(){
 
 
 var pokemonsAttack = function(){
-	console.log(clicks);
 	clicks = 0;
 	if(player.starter != "none" && inProgress != 0){
-		curEnemy.health -= Math.floor(player.attack*player.attackMultiplier);
+		curEnemy.health -= getPokemonAttack();
 		updateAll();
 	}
 }	
@@ -291,12 +289,49 @@ var experienceToLevel = function(exp,levelType){
 	return Math.min(100,Math.floor( Math.pow(20*exp,0.5)/(6*Math.sqrt(5))));
 }
 
+var getBonusCatchrate = function(){
+	var catchRate = player.catchBonus;
+	if(isActive("Magic Ball")){
+		catchRate += getOakItemBonus("Magic Ball");
+	}
+	return catchRate;
+}
+
+var getClickAttack = function(){
+	var clickAttack = Math.floor(player.clickAttack*player.clickMultiplier);
+	if(isActive("Poison Barb")){
+		clickAttack *= getOakItemBonus("Poison Barb");
+	}
+	return clickAttack;
+}
+
+var getPokemonAttack = function(){
+	var pokemonAttack = Math.floor(player.attack*player.attackMultiplier)
+	return pokemonAttack;
+}
+
+var gainMoney = function(money, message){
+	money *= player.moneyMultiplier;
+
+	if(isActive("Amulet Coin")){
+		money *= getOakItemBonus("Amulet Coin")
+	}
+	money = Math.floor(money);
+	player.money += money
+	log(message + money + "!"); 
+}
+
 // All pokemon you have gain exp
-var getExp = function(exp){
+var gainExp = function(exp){
+	exp *= player.expMultiplier
+	if(isActive("Exp Share")){
+		exp *= getOakItemBonus("Exp Share")
+	}
+
 	for( var i = 0; i<player.caughtPokemonList.length; i++){
 		var pokemonLevel = experienceToLevel(player.caughtPokemonList[i].experience, player.caughtPokemonList[i].levelType);
 		if(pokemonLevel < (1+player.gymBadges.length) * 10){
-			player.caughtPokemonList[i].experience+= exp*player.expMultiplier;
+			player.caughtPokemonList[i].experience+= exp;
 		}
 	}
 	checkEvolution();
@@ -322,12 +357,12 @@ var enemyDefeated = function(){
 		var money = curEnemy.moneyReward;
 		var exp = 30 + 1.2*curEnemy.moneyReward;
 		exp *= pokedexBonusExp;
-		money *= player.moneyMultiplier
-		player.money += Math.floor(money);
-		getExp(exp);
+
+		gainMoney(Math.floor(money), "You earned $");
+		gainExp(exp);
 		player.routeKills[player.route]++
 		updateRoute();
-		log("You earned $" + Math.floor(money) + "!");
+
 
 		
 		
@@ -342,7 +377,7 @@ var enemyDefeated = function(){
 			player.pokeballs--;
 		}, 1);
 		
-		var catchRate = curEnemy.catchRate + player.catchBonus-10;
+		var catchRate = curEnemy.catchRate + getBonusCatchrate() -10;
 		$("#catchDisplay").html("Catch chance: "+Math.min(100,catchRate) + "%");
 	
 		setTimeout(function(){
@@ -393,17 +428,17 @@ var capturePokemon = function(name){
 		var deviation = Math.floor(Math.random() * 11 ) -5;
 	//	console.log("Deviation: " + deviation);
 		if (deviation > player.route + 1){
-			var getMoney = Math.floor(30*1*player.moneyMultiplier);
+			var money = Math.floor(30*1*player.moneyMultiplier);
 		}
 		else {
-			var getMoney = Math.floor((30-deviation)*player.route/4*player.moneyMultiplier);
+			var money = Math.floor((30-deviation)*player.route/4*player.moneyMultiplier);
 		}
-		log("You managed to sell the "+name+" for $" + getMoney + "!");
-		player.money += getMoney;
+		gainMoney(money, "You managed to sell the "+name+" for $");
 	}
 	player.totalCaught++;
 	updateCaughtList();
 	updateStats();
+	checkOakItems();
 	sortChange();
 }
 
@@ -434,6 +469,7 @@ var calculateAttack = function(){
 
 
 var generatePokemon = function (route){
+	clicks = 0;
 	clearInterval(attackInterval);
 	attackInterval = setInterval(pokemonsAttack,1000);
 	var randomRoute = 0;

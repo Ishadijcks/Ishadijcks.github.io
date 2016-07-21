@@ -84,10 +84,10 @@ var updateCaughtList = function(){
 // Update the stats
 var updateStats = function(){
 	$("#statBody").html("<tr><th>Money</th><th>$"+player.money+"</th></tr>" +
-		"<tr><th>Click attack</th><th>"+Math.floor(player.clickAttack*player.clickMultiplier)+"</th></tr>" +
-		"<tr><th>Pokemon attack</th><th>"+Math.floor(player.attack*player.attackMultiplier)+"</th></tr>" +
+		"<tr><th>Click attack</th><th>"+getClickAttack()+"</th></tr>" +
+		"<tr><th>Pokemon attack</th><th>"+getPokemonAttack()+"</th></tr>" +
 		"<tr><th>Exp multiplier</th><th>"+player.expMultiplier.toFixed(2)+"</th></tr>" +
-		"<tr><th>Catch bonus</th><th>"+player.catchBonus+"%</th></tr>" +
+		"<tr><th>Catch bonus</th><th>"+getBonusCatchrate()+"%</th></tr>" +
 		"<tr><th>Catch time</th><th>"+player.catchTime/1000+" sec</th></tr>" +
 		"<tr><th>Pokemon Caught</th><th>"+player.totalCaught+"</th></tr>");
 //	$("#statBody").html("Stats<br><br>Money<br>Click attack<br>Pokemon attack<br>Exp multiplier<br>Catch bonus<br>Catch time<br>Route<br>Pokemon Caught");
@@ -100,9 +100,18 @@ var getHeight = function(){
 
 
 var updateRoute = function(){
+
+	if (player.routeKills[1] >= player.routeKillsNeeded){
+		oakExplainMap();
+	}
+
+	if (player.routeKills[2] >= player.routeKillsNeeded){
+		oakExplainTown();
+	}
+
 	var html = "Route "+player.route;
 	if(routeCompleted(player.route)){
-		html += "<a title='You have caught all available Pokemon on this route!'><img class='gymPokeball' src='images/gyms/pokeball.png'></a>";
+		html += "<a title='You have caught all available Pokemon on this route!'><img id='alreadyCaughtImage' src='images/pokeball.png'></a>";
 	}
 	html += "<br>" + Math.min(player.routeKillsNeeded, player.routeKills[player.route])+"/"+player.routeKillsNeeded;
 	$("#currentRoute").html(html);
