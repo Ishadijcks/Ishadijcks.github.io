@@ -91,11 +91,23 @@ var pokemonsPerRoute = {
 }
 
 var routeCompleted = function(route){
-    if(route == 19 || route == 20){
-        route = 18;
+    if(isActive("Normal Rod") && pokemonsPerRoute[route].water != undefined){
+        if(pokemonsPerRoute[route].land != undefined){
+            var possiblePokemon = pokemonsPerRoute[route].land.concat(pokemonsPerRoute[route].water);
+        } else {
+            var possiblePokemon = pokemonsPerRoute[route].water;
+        }
+    } 
+
+    else {
+        if(route == 19 || route == 20){
+            route = 18;
+        }
+        var possiblePokemon = pokemonsPerRoute[route].land;
     }
 
-    var possiblePokemon = pokemonsPerRoute[route].land;
+
+
     for( var i = 0; i<possiblePokemon.length; i++){
         if(!alreadyCaught(possiblePokemon[i])){
             return false;
