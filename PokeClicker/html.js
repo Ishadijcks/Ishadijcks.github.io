@@ -57,12 +57,17 @@ var updateCaughtList = function(){
 
 	for (var i = 0; i<player.caughtPokemonList.length; i++){
 		pokemonHtml += "<tr>";
-		pokemonHtml += "<th><img class=smallImage src=images/"+player.caughtPokemonList[i].id+".png>"+player.caughtPokemonList[i].name + "</th>";
+		if(isShiny(player.caughtPokemonList[i].name)){
+			pokemonHtml += "<th><img class=smallShinyImage src=images/shinypokemon/"+player.caughtPokemonList[i].id+".png>"+player.caughtPokemonList[i].name + "</th>";
+		} else {
+			pokemonHtml += "<th><img class=smallImage src=images/pokemon/"+player.caughtPokemonList[i].id+".png>"+player.caughtPokemonList[i].name + "</th>";
+		}
 		pokemonHtml += "<th>" + Math.ceil(experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType)*(player.caughtPokemonList[i].attack)/100) +"</th>";
 		pokemonHtml += "<th>" + experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType) + "</th>";
 		pokemonHtml += "</tr>";
 		
 	}
+
 	$("#pokemonBody").html(pokemonHtml);
 
 	$("#caughtPokemon").html("<br>Name<br>");
@@ -74,11 +79,7 @@ var updateCaughtList = function(){
 		$("#AttackCaughtPokemon").append("<br>");
 		$("#LevelCaughtPokemon").append("<br>");
 	}
-	for (var i = 0; i<player.caughtPokemonList.length; i++){
-		$("#caughtPokemon").append("<div class=row> <img class=smallImage src=images/"+player.caughtPokemonList[i].id+".png>"+player.caughtPokemonList[i].name+"</div>>");
-		$("#AttackCaughtPokemon").append(Math.ceil(experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType)*(player.caughtPokemonList[i].attack)/100)+"<br>");
-		$("#LevelCaughtPokemon").append(experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType)+"<br>");
-	}
+
 }
 
 // Update the stats
@@ -168,10 +169,10 @@ var updateEnemy = function(){
     }
     if (curEnemy.alive){
         if(alreadyCaught(curEnemy.name)){
-            $("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=enemy src=images/"+curEnemy.id+".png>");
+            $("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=enemy src=images/pokemon/"+curEnemy.id+".png>");
         }
         else{
-            $("#enemyInfo").html("<br>"+curEnemy.name+"<br><img id=enemy src=images/"+curEnemy.id+".png>");
+            $("#enemyInfo").html("<br>"+curEnemy.name+"<br><img id=enemy src=images/pokemon/"+curEnemy.id+".png>");
         }
     }
         $("#healthBar").width(100*curEnemy.health/curEnemy.maxHealth+"%"); 

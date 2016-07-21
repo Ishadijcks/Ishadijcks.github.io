@@ -14,6 +14,10 @@
 	margin-bottom:5px;
 }
 
+.shinyFiller {
+	padding:16px;
+}
+
 .oakItemImage {
 	margin-top:9px;
 	display:block;
@@ -265,6 +269,15 @@ table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView {
 	width: auto;
 	margin: -7px;
 	margin-right: 0;
+}
+
+.smallShinyImage{
+	max-height: 40px;
+	height: auto;
+	width: auto;
+	padding: 4.33px;
+	margin: -7px;
+	margin-right: 0	
 }
 
 .smallImage:hover{

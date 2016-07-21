@@ -346,7 +346,14 @@ var gainExp = function(exp){
 }
 
 
-
+var isShiny = function(name){
+	for( var i = 0; i<player.caughtPokemonList.length; i++){
+		if(player.caughtPokemonList[i].name == name){
+			return player.caughtPokemonList[i].shiny;
+		}
+	}
+	return 0;
+}
 
 // When the enemy is defeated all stats are updated and a new enemy is picked
 var enemyDefeated = function(){
@@ -413,13 +420,14 @@ var enemyDefeated = function(){
 
 // Capture a pokemon by moving it to the player.caughtPokemonList
 // Pokemon are adressable by name
-var capturePokemon = function(name){
+var capturePokemon = function(name, shiny){
 	var id = getPokemonByName(name).id-1;
 	player.catchNumbers[id]++;
 	if(!alreadyCaught(name)){
 		for( var i = 0; i<pokemonList.length; i++){
 			if (pokemonList[i].name == name){
 				pokemonList[i].timeStamp = Math.floor(Date.now() / 1000);
+				pokemonList[i].shiny = shiny;
 				player.caughtPokemonList.push(pokemonList[i]);
 
 				calculateAttack();
@@ -522,7 +530,7 @@ var generatePokemon = function (route){
 	curEnemy.name = randomPokemon.name;
 	curEnemy.id = randomPokemon.id;
 	curEnemy.health = Math.max(Math.floor(Math.pow( (20+randomPokemon.health*route*(player.caughtPokemonList.length-1)/16) ,1.1)), 20);
-
+	curEnemy.shiny = generateShiny();
 	curEnemy.maxHealth = curEnemy.health;
 
 	var catchVariation = Math.floor(Math.random()*7-3);
@@ -570,6 +578,20 @@ var generateLegendary = function(){
 		}
 		return false;
 	}
+}
+
+var generateShiny = function(){
+	var chance = 8192;
+	if(isActive("Shiny Charm")){
+		chance /= getOakItemBonus("Shiny Charm");
+	}
+	var number = Math.floor(Math.random()*chance) + 1;
+
+	if(number <= 1){
+		console.log("Shiny!!!");
+		return 1;
+	}
+	return 0;
 }
 
 var testLegendary = function(tries){

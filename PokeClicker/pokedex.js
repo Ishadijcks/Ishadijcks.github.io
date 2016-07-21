@@ -14,7 +14,12 @@ var showPokedex = function(){
 	for( var i = 0; i<= max; i++){
 		html += "<div class='col-sm-3 col-md-2 pokedexEntry'>";
 		if( player.defeatNumbers[i] > 0 || player.catchNumbers[i] > 0){
-			html += "<img class='center-block' id='pokedexImage' src=images/"+(i+1)+".png >";
+			console.log(isShiny(pokemonList[i].name))
+			if( isShiny(pokemonList[i].name)){
+				html += "<img class='center-block shinyFiller' id='pokedexImage' src=images/shinypokemon/"+(i+1)+".png >";
+			} else {
+				html += "<img class='center-block' id='pokedexImage' src=images/pokemon/"+(i+1)+".png >"
+			}
 			html += "<div class='pokedexRank rank"+ Math.min(6,pokedexRank(player.defeatNumbers[i])) + "''><span class='pokedexRankText'>"+ Math.min(6,pokedexRank(player.defeatNumbers[i]))+ "</span></div>"
 			html += "<p class='pokedexText'>"+ pokemonList[i].name + "</p>";
 			html += "<p class='pokedexText'>Defeated: "+ player.defeatNumbers[i]+ "</p>";
