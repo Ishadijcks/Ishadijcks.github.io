@@ -168,12 +168,16 @@ var updateEnemy = function(){
         enemyDefeated();
     }
     if (curEnemy.alive){
-        if(alreadyCaught(curEnemy.name)){
-            $("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=enemy src=images/pokemon/"+curEnemy.id+".png>");
-        }
-        else{
-            $("#enemyInfo").html("<br>"+curEnemy.name+"<br><img id=enemy src=images/pokemon/"+curEnemy.id+".png>");
-        }
+    	if(curEnemy.shiny){
+    		$("#enemyInfo").html("<br>"+curEnemy.name+" <img class='shinyEnemyStar' src='images/shinypokemon/star.png'><br><img id=enemy class='shinyFiller' src=images/shinypokemon/"+curEnemy.id+".png>");
+    	} else {
+			if(alreadyCaught(curEnemy.name)){
+            	$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=enemy src=images/pokemon/"+curEnemy.id+".png>"); 
+            } else {
+            	$("#enemyInfo").html("<br>"+curEnemy.name+"<br><img id=enemy src=images/pokemon/"+curEnemy.id+".png>");
+            }   		
+    	}
+
     }
         $("#healthBar").width(100*curEnemy.health/curEnemy.maxHealth+"%"); 
         $("#healthDisplay").html(curEnemy.health+"/"+curEnemy.maxHealth);

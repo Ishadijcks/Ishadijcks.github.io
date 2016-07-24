@@ -208,10 +208,10 @@ var updateGym = function(){
 
     if (curEnemy.alive){
         if(alreadyCaught(curEnemy.name)){
-            $("#gymEnemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=gymEnemy src=images/"+curEnemy.id+".png>");
+            $("#gymEnemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=gymEnemy src=images/pokemon/"+curEnemy.id+".png>");
         }
         else{
-            $("#gymEnemyInfo").html("<br>"+curEnemy.name+"<br><img id=gymEnemy src=images/"+curEnemy.id+".png>");
+            $("#gymEnemyInfo").html("<br>"+curEnemy.name+"<br><img id=gymEnemy src=images/pokemon/"+curEnemy.id+".png>");
         }
     }
         $("#gymHealthBar").width(100*curEnemy.health/curEnemy.maxHealth+"%"); 

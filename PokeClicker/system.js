@@ -29,7 +29,7 @@ var player = {
 	totalCaught: 0,
 	routeKillsNeeded: 10,
 	oakItemList:[],
-	oakItemSlots: 2,
+	oakItemSlots: 1,
 	evoExplain: 0,
 	mapExplain: 0,
 	townExplain: 0,
@@ -128,7 +128,7 @@ $(document).ready(function(){
 	$("body").on('click',"#startAdventure", function(){
 		if(player.starter != "none"){
 			$('#pickStarter').modal("hide")
-			capturePokemon(player.starter);
+			capturePokemon(player.starter, 0);
 		}
 	})
 	
@@ -399,7 +399,7 @@ var enemyDefeated = function(){
 		if(canCatch){
 			var chance = Math.floor(Math.random()*100+1);
 			if(chance<=catchRate){
-				capturePokemon(curEnemy.name);
+				capturePokemon(curEnemy.name, curEnemy.shiny);
 				
 			}
 
@@ -429,7 +429,9 @@ var capturePokemon = function(name, shiny){
 				pokemonList[i].timeStamp = Math.floor(Date.now() / 1000);
 				pokemonList[i].shiny = shiny;
 				player.caughtPokemonList.push(pokemonList[i]);
-
+				if(shiny){
+					$.notify("You have caught a shiny "+ name +"!", "succes")
+				}
 				calculateAttack();
 			}
 		}
@@ -439,17 +441,26 @@ var capturePokemon = function(name, shiny){
 	
 	else{
 		
+		if(shiny){
+			for( var i = 0; i<player.caughtPokemonList.length; i++){
+				if(player.caughtPokemonList[i].name == name){
+					console.log(name);
+					player.caughtPokemonList[i].shiny = 1;
+					$.notify("You have caught a shiny "+ name +"!", "succes")
+				}
+			}
+		} else {
 		
-
-		var deviation = Math.floor(Math.random() * 11 ) -5;
-	//	console.log("Deviation: " + deviation);
-		if (deviation > player.route + 1){
-			var money = Math.floor(30*1*player.moneyMultiplier);
+			var deviation = Math.floor(Math.random() * 11 ) -5;
+		//	console.log("Deviation: " + deviation);
+			if (deviation > player.route + 1){
+				var money = Math.floor(30*1*player.moneyMultiplier);
+			}
+			else {
+				var money = Math.floor((30-deviation)*player.route/4*player.moneyMultiplier);
+			}
+			gainMoney(money, "You managed to sell the "+name+" for $");
 		}
-		else {
-			var money = Math.floor((30-deviation)*player.route/4*player.moneyMultiplier);
-		}
-		gainMoney(money, "You managed to sell the "+name+" for $");
 	}
 	player.totalCaught++;
 	updateCaughtList();
