@@ -42,6 +42,10 @@ var load = function(){
 		$('#changeLogModal').modal('show');
 	}
 
+	if(player.version < 0.51){
+		player.oakItemList[2].image = "images/oak/amuletCoin.png";
+	}
+
 
 
 	player.version = version;
