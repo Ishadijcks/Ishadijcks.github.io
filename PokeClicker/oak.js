@@ -70,7 +70,7 @@ var checkOakItems = function(){
 var initOakItems = function(){
 	addOakItem("Normal Rod", "images/oak/normalRod.png", 20, "With this rod you are able to catch water Pokemon", null);
 	addOakItem("Magic Ball", "images/oak/magicBall.png", 30, "Get a 10% bonus to your catchRate", 10)
-	addOakItem("Amulet Coin", "images/oak/amuletcoin.png", 40, "Gain 50% more coins from wild Pokemon", 1.5);
+	addOakItem("Amulet Coin", "images/oak/amuletCoin.png", 40, "Gain 50% more coins from wild Pokemon", 1.5);
 	addOakItem("Poison Barb", "images/oak/poisonBarb.png", 50, "Your clicks do 25% more damage!", 1.25);
 	addOakItem("Exp Share", "images/oak/expShare.png", 60, "Gain 25% more exp from wild Pokemon", 1.25);
 	addOakItem("Legendary Charm", "images/oak/pokeDoll.png", 70, "50% more chance to encounter a legendary Pokemon", 1.5);
