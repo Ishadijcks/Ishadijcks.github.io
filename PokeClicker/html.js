@@ -112,7 +112,7 @@ var updateRoute = function(){
 
 	var html = "Route "+player.route;
 	if(routeCompleted(player.route)){
-		html += "<a title='You have caught all available Pokemon on this route!'><img id='alreadyCaughtImage' src='images/pokeball.png'></a>";
+		html += "<a title='You have caught all available Pokemon on this route!'><img id='alreadyCaughtImage' src='images/Pokeball.PNG'></a>";
 	}
 	html += "<br>" + Math.min(player.routeKillsNeeded, player.routeKills[player.route])+"/"+player.routeKillsNeeded;
 	$("#currentRoute").html(html);
