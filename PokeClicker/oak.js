@@ -54,6 +54,10 @@ var addOakItem = function(name, image, pokedexReq, flavorText, value){
 }
 
 var checkOakItems = function(){
+	if(player.oakItemSlots == 1 && player.caughtPokemonList.length > 60){
+		player.oakItemSlots = 2;
+		$.notify("You can now have 2 Oak items active at the same time!");
+	}
 	for( var i = 0; i< player.oakItemList.length; i++){
 		if(player.caughtPokemonList.length >= player.oakItemList[i].pokedexReq && player.oakItemList[i].earned === 0){
 			player.oakItemList[i].earned = 1;
