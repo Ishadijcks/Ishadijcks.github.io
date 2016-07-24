@@ -43,7 +43,9 @@ var load = function(){
 	}
 
 	if(player.version < 0.51){
-		player.oakItemList[2].image = "images/oak/amuletCoin.png";
+		if(player.oakItemList[2].image != undefined){
+			player.oakItemList[2].image = "images/oak/amuletCoin.png";
+		}
 	}
 
 
