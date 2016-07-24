@@ -91,7 +91,7 @@ var getTotalCaptures = function(){
 var getTotalShinies = function(){
 	var total = 0;
 	for (var i = 0; i< player.caughtPokemonList.length; i++){
-		if(player.caughtPokemonList[i].shiny = 1){
+		if(player.caughtPokemonList[i].shiny == 1){
 			total++;
 		}
 	}
