@@ -23,7 +23,7 @@ var pokemonsPerRoute = {
         land: ["Pidgey", "Pidgeotto", "Rattata", "Vulpix", "Jigglypuff", "Oddish", "Meowth", "Mankey", "Growlithe", "Abra", "Bellsprout"]
     },
     8: {
-        land: ["Pidgey", "Pidgey", "Rattata", "Ekans", "Sandshrew", "Vulpix", "Jigglypuff", "Meowth", "Mankey", "Growlithe", "Abra", "Kadabra"]
+        land: ["Pidgey", "Rattata", "Ekans", "Sandshrew", "Vulpix", "Jigglypuff", "Meowth", "Mankey", "Growlithe", "Abra", "Kadabra"]
     },
     9: {
         land: ["Rattata", "Raticate", "Spearow", "Fearow", "Ekans", "Sandshrew", "Nidoran♀", "Nidoran♂", "Nidorina", "Nidorino"]
