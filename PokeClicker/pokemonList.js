@@ -39,7 +39,7 @@ var pokemonList = [
 {id: 38, name: "Ninetales", catchRate: 75, evolution: null, evoLevel: null, evolved: 0, type: "fire", attack: 81, route:null, health:100, levelType: "medium fast", experience: 10  },
 {id: 39, name: "Jigglypuff", catchRate: 170, evolution: "Wigglytuff", evoLevel: "Moon Stone", evolved: 0, type: "normal", attack: 45, route:3, health:100, levelType: "fast", experience: 10  },
 {id: 40, name: "Wigglytuff", catchRate: 50, evolution: null, evoLevel: null, evolved: 0, type: "normal", attack: 85, route:null, health:100, levelType: "fast", experience: 10  },
-{id: 41, name: "Zubat", catchRate: 2550, evolution: "Golbat", evoLevel: 22, evolved: 0, type: "poison", attack: 45, route:26, health:100, levelType: "medium fast", experience: 10  },
+{id: 41, name: "Zubat", catchRate: 255, evolution: "Golbat", evoLevel: 22, evolved: 0, type: "poison", attack: 45, route:26, health:100, levelType: "medium fast", experience: 10  },
 {id: 42, name: "Golbat", catchRate: 90, evolution: null, evoLevel: null, evolved: 0, type: "poison", attack: 80, route:null, health:100, levelType: "medium fast", experience: 10  },
 {id: 43, name: "Oddish", catchRate: 255, evolution: "Gloom", evoLevel: 21, evolved: 0, type: "grass", attack: 75, route:5, health:100, levelType: "medium slow", experience: 10  },
 {id: 44, name: "Gloom", catchRate: 120, evolution: "Vileplume", evoLevel: "Leaf Stone", evolved: 0, type: "grass", attack: 85, route:12, health:100, levelType: "medium slow", experience: 10  },
