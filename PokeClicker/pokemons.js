@@ -76,7 +76,7 @@
         water: ["Poliwag", "Poliwhirl", "Goldeen"]
     },
     23: {
-        land: ["Spearow", "Fearow", "Ekans", "Arbok", "Sandshrew", "Sandslash", "Nidorina", "Nidorino", "Mankey", "Primepe", "Ditto"],
+        land: ["Spearow", "Fearow", "Ekans", "Arbok", "Sandshrew", "Sandslash", "Nidorina", "Nidorino", "Mankey", "Primeape", "Ditto"],
         water: ["Poliwag", "Goldeen", "Poliwhirl", "Slowbro", "Kingler", "Seadra", "Seaking"]
     },
     24: {
