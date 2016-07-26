@@ -5,6 +5,7 @@
 	<script src="jquery.js"></script>
 	<script type="text/javascript" src="tooltipster/dist/js/tooltipster.bundle.min.js"></script>
 	<script src="pokemonList.js"></script>
+	<script src="dungeons.js"></script>
 	<script src="system.js"></script>
 	<script src="pokemonsPerRoute.js"></script>
 	<script src="evolution.js"></script>
@@ -123,7 +124,8 @@
 						</div><span id="healthDisplay"></span>
 					</div>
 					<div class="col-lg-12" id="townView"></div>
-				<div class="col-lg-12" id="gymView">
+
+					<div class="col-lg-12" id="gymView">
 						<div id="gymTrainer"></div>
 						<span id="timer"></span>
 						<div id="gymEnemyInfo"></div>
@@ -132,6 +134,18 @@
 								<span class="sr-only"></span>
 							</div>
 						</div><span id="gymHealthDisplay"></span>
+					</div>
+
+					<div class="col-lg-12" id="dungeonView">
+						<div id="dungeonName"></div>
+						<div id="dungeonMap"></div>
+						<span id="dungeonTimer"></span>
+						<div id="dungeonEnemyInfo"></div><span id="dungeonCatchDisplay"></span>
+						<div class="progress">
+							<div class="progress-bar progress-bar-danger" id="dungeonHealthBar" style="width: 0%">
+								<span class="sr-only"></span>
+							</div>
+						</div><span id="dungeonHealthDisplay"></span>
 					</div>
 				</div>
 
@@ -576,7 +590,7 @@
 								<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="76.3" y="133"></rect>
 								<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="77.7" y="134.4"></rect>
 								<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="76.3" y="156.1"></rect>
-								<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="77.7" y="157.5"></rect>
+								<rect class="city" id="Viridian Forest" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="77.7" y="157.5"></rect>
 								<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="181.3" y="374.5"></rect>
 								<rect fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="182.7" y="375.9"></rect>
 								<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="210" y="79.1"></rect>
@@ -645,6 +659,18 @@
 								<h4 class="modal-title" id="myModalLabel">Gym leader defeated!</h4>
 							</div>
 							<div class="modal-body" id="gymDefeatedBody">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div aria-labelledby="myModalLabel" class="modal fade" id="dungeonModal" role="dialog" tabindex="-1">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title" id="myModalLabel">Dungeon cleared!</h4>
+							</div>
+							<div class="modal-body" id="dungeonDefeatedBody">
 							</div>
 						</div>
 					</div>
