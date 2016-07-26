@@ -70,6 +70,10 @@
 	background-color: black
 }
 
+#chestImage:hover {
+	cursor:pointer;
+}
+
 #dungeonMap {
 	float:right;
 	margin-right: 5%;
