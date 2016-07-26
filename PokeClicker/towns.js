@@ -16,8 +16,6 @@ var addTown = function(name,gym,image,shop,reqRoutes){
 var moveToTown = function(townName){
 	var town = getTown(townName);
 	canCatch = 0;
-	
-	
 		if( accessToTown(town.reqRoutes)){
 			$("#catchDisplay").html("");	
 			inProgress = 0;
@@ -48,8 +46,17 @@ var showTown = function(town){
 	var html = "";
 	html += "<h3 class='townName strokeme'>"+town.name+"</h3>";
 	html += "<div class='row'>";
+		if(town.gym.bossPokemon != undefined){
+			if(player.gymBadges.length >= town.gym.badgeReq){
+				html += "<button class='dungeon leftTownButton btn btn-primary col-sm-2' id='"+town.name+" Dungeon'>Dungeon</button>"
+			} else {
+				html += "<button class='wrongDungeon leftTownButton btn btn-primary disabled col-sm-2' id='"+town.name+" Dungeon'>Dungeon</button>"
+			}
 
-		if (Array.isArray(town.gym)){
+
+
+		}
+		else if (Array.isArray(town.gym)){
 			
 			for(var i = 0; i<town.gym.length; i++){
 				if(player.gymBadges.length >= town.gym[i].badgeReq){
@@ -96,6 +103,8 @@ var loadTowns = function(){
 	addTown("Elite Agatha", EliteAgatha(), null, null, null);
 	addTown("Elite Lance", EliteLance(), null, null, null);
 	addTown("Champion", Champion(), null, null, null);
+
+	addTown("Viridian Forest", ViridianForestDungeon(), "images/dungeons/viridianforest.png", null, [1]);
 }
 
 var getTown = function(townName){
