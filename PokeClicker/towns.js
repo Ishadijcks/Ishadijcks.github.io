@@ -19,6 +19,7 @@ var moveToTown = function(townName){
 		if( accessToTown(town.reqRoutes)){
 			$("#catchDisplay").html("");	
 			inProgress = 0;
+			resetDungeon();
 			showTown(town);
 		}
 		else {
