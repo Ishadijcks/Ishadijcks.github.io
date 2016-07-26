@@ -120,7 +120,7 @@ $(document).ready(function(){
 		document.getElementsByTagName('head')[0].appendChild(link);
 		
 		generatePokemon(player.route);
-		
+		loadTowns();
 		save();
 	})
 	
