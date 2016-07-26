@@ -189,4 +189,5 @@ var hideAllViews = function(){
 	$("#currentEnemy").hide();
 	$("#gymView").hide();
 	$("#townView").hide();
+	$("#dungeonView").hide();
 }
