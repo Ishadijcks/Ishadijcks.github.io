@@ -220,6 +220,26 @@ $(document).ready(function(){
 		moveToRoom(id);
 	})	
 
+	$(document).on("keydown", function (e) {
+		var keyCode = e.keyCode;
+		if(inProgress == 3){
+			if(keyCode == 38){
+				moveToRoom(playerPosition-currentDungeon.size);
+				e.preventDefault();
+			} else if(keyCode == 39){
+				moveToRoom(playerPosition+1);
+				e.preventDefault();
+			} else if(keyCode == 37){
+				moveToRoom(playerPosition-1);
+				e.preventDefault();
+			} else if(keyCode == 40){
+				moveToRoom(playerPosition+currentDungeon.size);
+    			e.preventDefault();
+			}
+		}
+
+	});
+
 	$("body").on('click',".wrongGym", function(){
 		log("You need more badges to challenge this gym leader")
 	})
