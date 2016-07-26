@@ -108,6 +108,23 @@ $(document).ready(function(){
 		}
 	});
 
+	$("body").on('click',"#dungeonEnemy", function(){
+		clicks++;
+		if(clicks < maxClicks){
+			if (curEnemy.alive && inProgress != 0){
+				if(curEnemy.health > 0){
+					curEnemy.health -= getClickAttack();
+				}			
+				
+				else {
+					curEnemy.health = 0;
+				}
+				
+				updateDungeon();
+			}
+		}
+	});
+
 
 	$("body").on('click',".starter", function(){
 		$("#curStarterPick").html(this.id);
@@ -192,6 +209,17 @@ $(document).ready(function(){
 		loadGym(id);
 	})
 
+	$("body").on('click',".dungeon", function(){
+		var id = this.id;
+		id = id.slice(0, -8);
+		loadDungeon(id);
+	})
+
+	$("body").on('click',".dungeonRoom", function(){
+		var id = parseInt(this.id.substring(4));
+		moveToRoom(id);
+	})	
+
 	$("body").on('click',".wrongGym", function(){
 		log("You need more badges to challenge this gym leader")
 	})
@@ -249,6 +277,9 @@ var updateAll = function(){
 	}
 	else if (inProgress == 2){
 		updateGym();
+	}
+	else if (inProgress == 3){
+		updateDungeon();
 	}
 	updateCaughtList();
 	updateRoute();
@@ -495,7 +526,7 @@ var calculateAttack = function(){
 
 
 
-var generatePokemon = function (route){
+var generatePokemon = function(route){
 	clicks = 0;
 	clearInterval(attackInterval);
 	attackInterval = setInterval(pokemonsAttack,1000);
