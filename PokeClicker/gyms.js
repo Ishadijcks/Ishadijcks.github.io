@@ -98,7 +98,7 @@ var EliteLorelei = function(){
     pokemonList.push(GymPokemon("Cloyster", 34320));
     pokemonList.push(GymPokemon("Slowbro", 36960));
     pokemonList.push(GymPokemon("Jynx", 39600));
-    pokemonList.push(GymPokemon("Lapras", 42240);
+    pokemonList.push(GymPokemon("Lapras", 42240));
     return Gym("Elite Lorelei", "Indigo Plateau Gym", pokemonList, "E1", 60000, 8);
 }
 
