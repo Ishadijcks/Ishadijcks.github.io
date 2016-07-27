@@ -86,15 +86,16 @@ var updateItems = function(){
 
 	var itemHtml = ""
 
-	for (var i = 1; i<player.inventoryList.length; i++){
+	for (var i = 0; i<player.inventoryList.length; i++){
 		itemHtml += "<tr>";
-		if(player.inventoryList.length == 1){
+		if(player.inventoryList.length == 0 || isInventoryEmpty()==true){
 			itemHtml += "<th>None</th>";
 			itemHtml += "<th>N/A</th>";
-		} else {
-			if(player.inventoryList[i]!= undefined){
-				itemHtml += "<th><img class=smallImage src=images/items/"+i+".png>"+itemList[i-1].name+"</th>";
-				itemHtml += "<th>"+player.inventoryList[i]+"</th>";
+		}
+		if(player.inventoryList[i] != undefined){
+			if(player.inventoryList[i].quantity > 0){
+				itemHtml += "<th><img class=smallImage src=images/items/"+player.inventoryList[i].id+".png>"+player.inventoryList[i].name+"</th>";
+				itemHtml += "<th>"+player.inventoryList[i].quantity+"</th>";
 			}
 		}
 		itemHtml += "</tr>";

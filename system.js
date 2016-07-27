@@ -32,7 +32,7 @@ var player = {
 	evoExplain: 0,
 	mapExplain: 0,
 	townExplain: 0,
-	inventoryList:[]
+	inventoryList: []
 }
 
 var curEnemy = {
@@ -378,7 +378,7 @@ var enemyDefeated = function(){
 		gainExp(exp);
 		player.routeKills[player.route]++
 		updateRoute();
-		gainItem(player.route);
+		gainRandomItem(player.route);
 
 
 		
@@ -633,26 +633,42 @@ var testLegendary = function(tries){
 	console.log("False: "+fail);
 }
 
-var gainItem = function(route){
+var gainRandomItem = function(route){
 	if(route <= 25){
 		var possibleItems = itemsPerRoute[route];
 		var rand = Math.floor(Math.random()*possibleItems.length);
-		randomItemName = possibleItems[rand];
+		var randomItemName = possibleItems[rand];
 	} else {
 		var rand = Math.floor(Math.random()*itemList.length);
-		randomItemName = itemList[rand];
+		var randomItemName = itemList[rand].name;
 	}
-	randomItem = getItemByName(randomItemName).id;
-	if(player.inventoryList[randomItem]!= undefined){
-		player.inventoryList[randomItem]++;
-	} else {
-		for(var i=1; i<randomItem+1; i++){
-			if(player.inventoryList[i] = undefined){
-				player.inventoryList.push(0);
-			}
-		}
-		player.inventoryList[randomItem]++;
+	var randomItem = getItemByName(randomItemName).id;
+	if (alreadyHaveItem(randomItemName)==true){
+		var itemNum = findItemInInventory(randomItemName);
+		player.inventoryList[itemNum].quantity++;
 	}
+	else{
+		var item = itemList[randomItem-1];
+		var itemObject = {id:item.id, name:item.name, quantity:1, type:item.type, use:item.use, unuse:item.unuse, time:item.time, timeleft:0};
+		player.inventoryList.push(itemObject);
+	}
+
+	
+	updateItems()
+}
+
+var gainItemByName = function(name){
+	if (alreadyHaveItem(name)==true){
+		var itemNum = findItemInInventory(name);
+		player.inventoryList[itemNum].quantity++;
+	}
+	else{
+		var item = getItemByName(name);
+		var itemObject = {id:item.id, name:item.name, quantity:1, type:item.type, use:item.use, unuse:item.unuse, time:item.time, timeleft:0};
+		player.inventoryList.push(itemObject);
+	}
+
+	
 	updateItems()
 }
 
@@ -665,8 +681,47 @@ var getItemByName = function(name){
 }
 
 var alreadyHaveItem = function(name){
-	if (player.inventoryList[getItemByName(name)] != undefined){
+	if(isInventoryEmpty() == true){
+		return false;
+	}
+	else { 
+		for (var i = 0; i<player.inventoryList.length; i++){
+			if(player.inventoryList[i] == undefined){
+				return false;
+			}
+			else if(player.inventoryList[i].name == name){
+				return true;
+			}
+			else if(i==player.inventoryList.length-1){
+				return false;
+			}
+		}
+	}
+}
+
+var findItemInInventory = function(name){
+	for(var i = 0; i<player.inventoryList.length; i++){
+		if(player.inventoryList[i].name == name){
+			return i;
+		}
+		else if(i==player.inventoryList.length-1){
+			return false;
+		}
+	}
+}
+
+var isInventoryEmpty = function(){
+	if (player.inventoryList.length == 0){
 		return true;
 	}
-	return false;
+	else {
+		for (var i = 0; i<player.inventoryList.length; i++){
+			if (player.inventoryList[i].quantity != 0){
+				return false;
+			}
+			else if(i == player.inventoryList.length-1){
+				return true;
+			}
+		}
+	}
 }

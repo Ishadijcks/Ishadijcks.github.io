@@ -213,6 +213,11 @@ table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView {
 	margin-left: 7.5px;
 }
 
+#righterColumn {
+	margin-left: 7.5px;
+	padding-left: 25px;
+}
+
 .pokeBadge{
 	opacity:0.10;
 }
