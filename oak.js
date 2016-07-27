@@ -1,4 +1,5 @@
 var lastNumberOfPokemon = 0;
+var oakItemList = [];
 
 var oakExplainEvolution = function(){
 	if(!player.evoExplain){
@@ -49,19 +50,21 @@ var addOakItem = function(name, image, pokedexReq, flavorText, value){
 		value: value
 	}
 	if(!alreadyOakItem(temp.name)){
-		player.oakItemList.push(temp);
+		oakItemList.push(temp);
 	}
 }
 
-var checkOakItems = function(){
+var checkOakItems = function(suppresnotify){
 	if(player.oakItemSlots == 1 && player.caughtPokemonList.length > 60){
 		player.oakItemSlots = 2;
 		$.notify("You can now have 2 Oak items active at the same time!");
 	}
-	for( var i = 0; i< player.oakItemList.length; i++){
-		if(player.caughtPokemonList.length >= player.oakItemList[i].pokedexReq && player.oakItemList[i].earned === 0){
-			player.oakItemList[i].earned = 1;
-			$.notify("Professor Oak has a present for you: " + player.oakItemList[i].name, "success");
+	for( var i = 0; i< oakItemList.length; i++){
+		if(player.caughtPokemonList.length >= oakItemList[i].pokedexReq && oakItemList[i].earned === 0){
+			oakItemList[i].earned = 1;
+			if(!suppresnotify){
+				$.notify("Professor Oak has a present for you: " + oakItemList[i].name, "success");
+			}
 		}
 	}
 	showOakItems();
@@ -75,21 +78,23 @@ var initOakItems = function(){
 	addOakItem("Exp Share", "images/oak/expShare.png", 60, "Gain 25% more exp from wild Pokemon", 1.25);
 	addOakItem("Legendary Charm", "images/oak/pokeDoll.png", 70, "50% more chance to encounter a legendary Pokemon", 1.5);
 	addOakItem("Shiny Charm", "images/oak/shinyCharm.png", 80, "100% more chance to encounter a shiny Pokemon", 2);
-	showOakItems();
+	checkOakItems(1);
+	showOakItems(1);
+		console.log("asdasd");
 }
 
 var activateOakItem = function(id){
 	if(player.oakItemSlots == 1){
 		deactivateAllOakItems();
-		player.oakItemList[id].active = 1;
+		oakItemList[id].active = 1;
 	}
 	
 	else if(player.oakItemSlots == 2){
-		if(player.oakItemList[id].active == 1){
-			player.oakItemList[id].active = 0;
+		if(oakItemList[id].active == 1){
+			oakItemList[id].active = 0;
 		} else {
 			if (getTotalActiveOakItems() < player.oakItemSlots){
-				player.oakItemList[id].active = 1;
+				oakItemList[id].active = 1;
 			} else {
 				$.notify("You can only have " + player.oakItemSlots + " Oak items active at the same time", "error" );
 			}
@@ -98,13 +103,14 @@ var activateOakItem = function(id){
 
 
 	showOakItems(1);
+
 	updateAll();
 }
 
 var getTotalActiveOakItems = function(){
 	var count = 0;
-	for( var i = 0; i< player.oakItemList.length; i++){
-		if (player.oakItemList[i].active == 1){
+	for( var i = 0; i< oakItemList.length; i++){
+		if (oakItemList[i].active == 1){
 			count++;
 		}
 	}
@@ -112,23 +118,23 @@ var getTotalActiveOakItems = function(){
 }
 
 var deactivateAllOakItems = function(){
-	for( var i = 0; i< player.oakItemList.length; i++){
-		player.oakItemList[i].active = 0;
+	for( var i = 0; i< oakItemList.length; i++){
+		oakItemList[i].active = 0;
 	}
 }
 
 var isActive = function(oakItemName){
-	for( var i = 0; i<player.oakItemList.length; i++){
-		if(player.oakItemList[i].name == oakItemName){
-			return player.oakItemList[i].active;
+	for( var i = 0; i<oakItemList.length; i++){
+		if(oakItemList[i].name == oakItemName){
+			return oakItemList[i].active;
 		}
 	}
 }
 
 var getOakItemBonus = function(oakItemName){
-	for( var i = 0; i<player.oakItemList.length; i++){
-		if(player.oakItemList[i].name == oakItemName && player.oakItemList[i].active){
-			return player.oakItemList[i].value;
+	for( var i = 0; i<oakItemList.length; i++){
+		if(oakItemList[i].name == oakItemName && oakItemList[i].active){
+			return oakItemList[i].value;
 		}
 	}	
 }
@@ -137,12 +143,12 @@ var showOakItems = function(force){
 	if(lastNumberOfPokemon != player.caughtPokemonList.length || force){
 		lastNumberOfPokemon = player.caughtPokemonList.length;
 		html = "";
-		for( var i = 0; i< player.oakItemList.length; i++){
-			if( player.oakItemList[i].earned === 1){
-				if( player.oakItemList[i].active === 1){
-					html += "<div id=item"+i+" class='oakItem activeOakItem'><img title='"+ player.oakItemList[i].flavorText+ "' class='oakItemImage tooltipRight' src='"+ player.oakItemList[i].image +"'' /></div>"
+		for( var i = 0; i< oakItemList.length; i++){
+			if( oakItemList[i].earned === 1){
+				if( oakItemList[i].active === 1){
+					html += "<div id=item"+i+" class='oakItem activeOakItem'><img title='"+ oakItemList[i].flavorText+ "' class='oakItemImage tooltipRight' src='"+ oakItemList[i].image +"'' /></div>"
 				} else {
-					html += "<div id=item"+i+" class='oakItem'><img title='"+ player.oakItemList[i].flavorText+ "' class='oakItemImage tooltipRight' src='"+ player.oakItemList[i].image +"'' /></div>"
+					html += "<div id=item"+i+" class='oakItem'><img title='"+ oakItemList[i].flavorText+ "' class='oakItemImage tooltipRight' src='"+ oakItemList[i].image +"'' /></div>"
 				}
 			}
 		}
@@ -158,8 +164,8 @@ var showOakItems = function(force){
 
 
 var alreadyOakItem = function(name){
-	for( var i = 0; i<player.oakItemList.length;i++){
-		if( player.oakItemList[i].name == name){
+	for( var i = 0; i<oakItemList.length;i++){
+		if( oakItemList[i].name == name){
 			return true;
 		}
 	}
