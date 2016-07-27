@@ -235,6 +235,13 @@ table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView {
 	margin-bottom: 20px;
 }
 
+#items {
+	height:300px;
+	overflow:auto;
+	background-color:white;
+	border:1px solid black;
+	margin-bottom: 20px;
+}
 
 #pokeball {
 	-webkit-animation:spinleft 1s linear infinite;

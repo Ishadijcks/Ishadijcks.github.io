@@ -82,6 +82,30 @@ var updateCaughtList = function(){
 
 }
 
+var updateItems = function(){
+
+	var itemHtml = ""
+
+	for (var i = 1; i<player.inventoryList.length; i++){
+		itemHtml += "<tr>";
+		if(player.inventoryList.length == 1){
+			itemHtml += "<th>None</th>";
+			itemHtml += "<th>N/A</th>";
+		} else {
+			if(player.inventoryList[i]!= undefined){
+				itemHtml += "<th><img class=smallImage src=images/items/"+i+".png>"+itemList[i-1].name+"</th>";
+				itemHtml += "<th>"+player.inventoryList[i]+"</th>";
+			}
+		}
+		itemHtml += "</tr>";
+
+	}
+
+	$("#itemBody").html(itemHtml);
+
+
+}
+
 // Update the stats
 var updateStats = function(){
 	$("#statBody").html("<tr><th>Money</th><th>$"+player.money+"</th></tr>" +

@@ -33,6 +33,7 @@ var player = {
 	evoExplain: 0,
 	mapExplain: 0,
 	townExplain: 0,
+	inventoryList:[]
 }
 
 var curEnemy = {
@@ -63,6 +64,7 @@ $(document).ready(function(){
 	}
 	initUpgrades();
 	initOakItems();
+	updateItems();
 	
 	if(player.starter != "none"){
 	updateAll();
@@ -377,6 +379,7 @@ var enemyDefeated = function(){
 		gainExp(exp);
 		player.routeKills[player.route]++
 		updateRoute();
+		gainItem(player.route);
 
 
 		
@@ -631,4 +634,40 @@ var testLegendary = function(tries){
 	console.log("False: "+fail);
 }
 
+var gainItem = function(route){
+	if(route <= 25){
+		var possibleItems = itemsPerRoute[route];
+		var rand = Math.floor(Math.random()*possibleItems.length);
+		randomItemName = possibleItems[rand];
+	} else {
+		var rand = Math.floor(Math.random()*itemList.length);
+		randomItemName = itemList[rand];
+	}
+	randomItem = getItemByName(randomItemName).id;
+	if(player.inventoryList[randomItem]!= undefined){
+		player.inventoryList[randomItem]++;
+	} else {
+		for(var i=1; i<randomItem+1; i++){
+			if(player.inventoryList[i] = undefined){
+				player.inventoryList.push(0);
+			}
+		}
+		player.inventoryList[randomItem]++;
+	}
+	updateItems()
+}
 
+var getItemByName = function(name){
+	for( var i = 0; i<itemList.length; i++){
+		if(itemList[i].name == name){
+			return itemList[i];
+		}
+	}
+}
+
+var alreadyHaveItem = function(name){
+	if (player.inventoryList[getItemByName(name)] != undefined){
+		return true;
+	}
+	return false;
+}
