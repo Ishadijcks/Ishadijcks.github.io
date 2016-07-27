@@ -32,7 +32,6 @@ var load = function(){
 	if (typeof savegame.routeKillsNeeded !== "undefined") player.routeKillsNeeded = savegame.routeKillsNeeded;
 	if (typeof savegame.catchNumbers !== "undefined") player.catchNumbers = savegame.catchNumbers;
 	if (typeof savegame.defeatNumbers !== "undefined") player.defeatNumbers = savegame.defeatNumbers;
-	if (typeof savegame.oakItemList !== "undefined") player.oakItemList = savegame.oakItemList;
 	if (typeof savegame.oakItemSlots !== "undefined") player.oakItemSlots = savegame.oakItemSlots;
 	if (typeof savegame.evoExplain !== "undefined") player.evoExplain = savegame.evoExplain;
 	if (typeof savegame.mapExplain !== "undefined") player.mapExplain = savegame.mapExplain;
@@ -40,12 +39,6 @@ var load = function(){
 	
 	if(player.version < version){
 		$('#changeLogModal').modal('show');
-	}
-
-	if(player.version < 0.51){
-		if(player.oakItemList[2].image != undefined){
-			player.oakItemList[2].image = "images/oak/amuletCoin.png";
-		}
 	}
 
 

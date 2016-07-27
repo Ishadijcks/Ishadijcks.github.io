@@ -1,4 +1,4 @@
-var version = "0.51"
+var version = "0.52"
 var inProgress = 1;
 var canCatch = 1;
 var attackInterval;
@@ -28,7 +28,6 @@ var player = {
 	version: version,
 	totalCaught: 0,
 	routeKillsNeeded: 10,
-	oakItemList:[],
 	oakItemSlots: 1,
 	evoExplain: 0,
 	mapExplain: 0,
