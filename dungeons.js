@@ -39,6 +39,7 @@ var ViridianForestDungeon = function() {
 }
 
 var loadDungeon = function(townId) {
+    curEnemy.alive = false;
     clearInterval(counter);
 
     currentDungeon = getTown(townId).gym;
@@ -48,8 +49,9 @@ var loadDungeon = function(townId) {
     currentDungeon.map = createMap(currentDungeon.size);
     playerPosition = Math.floor(currentDungeon.size * currentDungeon.size / 2);
     currentDungeon.mapDiscovered[playerPosition] = 1;
-    spawnDungeonPokemon();
-    updateDungeonMap();
+   // spawnDungeonPokemon();
+    dungeonCanMove = 1;
+    updateDungeon();
     counter = setInterval(dungeonTimer, 100); //100 will  run it every 10th of a second
 }
 
@@ -98,9 +100,8 @@ var moveToRoom = function(id) {
         } else if (currentDungeon.map[id] == "Boss") {
             spawnDungeonBoss();
         }
-
     }
-    updateDungeonMap();
+    updateDungeon();
 }
 
 var spawnDungeonChest = function() {
@@ -133,48 +134,54 @@ var dungeonTimer = function() {
     $("#dungeonTimer").html((currentDungeon.timeLeft / 100) + "/" + currentDungeon.timeLimit / 100);
 }
 
-var hideDungeonEnemy = function(){
-    $("#dungeonHealthDisplay").html("");
-    $("#dungeonCatchDisplay").html("");
-    $("#dungeonEnemyInfo").html("");
-    $(".progress").hide();        
-}
+// var hideDungeonEnemy = function(){
+//     $("#dungeonHealthDisplay").html("");
+//     $("#dungeonCatchDisplay").html("");
+//     $("#dungeonEnemyInfo").html("");
+//     $(".progress").hide();        
+// }
 
 var updateDungeon = function() {
-
-    hideAllViews();
-    $("#dungeonView").show();
 
     if (curEnemy.health < 0) {
         curEnemy.health = 0;
     }
 
-    if (curEnemy.alive) {
+    
+    hideAllViews();
+    $("#dungeonView").show();
 
-        $("#dungeonName").html(currentDungeon.name.slice(0, -8));
-        if (alreadyCaught(curEnemy.name)) {
-            $("#dungeonEnemyInfo").html("<br>" + curEnemy.name + " <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=dungeonEnemy src=images/pokemon/" + curEnemy.id + ".png>");
-        } else {
-            $("#dungeonEnemyInfo").html("<br>" + curEnemy.name + "<br><img id=dungeonEnemy src=images/pokemon/" + curEnemy.id + ".png>");
-        }
-
-        $("#dungeonHealthBar").width(100 * curEnemy.health / curEnemy.maxHealth + "%");
-        $("#dungeonHealthDisplay").html(curEnemy.health + "/" + curEnemy.maxHealth);
+    var html = "";
+    html += "<div id='dungeonName'>"+currentDungeon.name.slice(0, -8)+"</div>";
+    html += "<span id='dungeonTimer'>"+(currentDungeon.timeLeft / 100) + "/" + currentDungeon.timeLimit / 100+"</span>";
+    html += "<div id='dungeonMap'></div>"
+    if(!dungeonCanMove){
+        html += "<div id='dungeonEnemyInfo'><br>" +curEnemy.name + "<img id='alreadyCaughtImage' src='images/Pokeball.PNG'><br><img id='dungeonEnemy' src='images/pokemon/"+curEnemy.id+".png' ></div>";
     }
+    if(currentDungeon.map[playerPosition] == "Chest"){
+        html += "<div id='chestInfo'><img class='dungeonChest' id='chestImage' src=images/dungeons/chest.png></div><br>"
+    }
+    if(!dungeonCanMove){
+        html +=     "<span id='dungeonCatchDisplay'></span>";
+        html +=     "<div class='dungeonProgress progress'>";
+        html +=         "<div class='progress-bar progress-bar-danger' id='dungeonHealthBar' style='width: "+100 * curEnemy.health / curEnemy.maxHealth + "%"+"'></div>";
+        html +=     "</div>";
+        html +=     "<span id='dungeonHealthDisplay'>"+curEnemy.health + "/" + curEnemy.maxHealth + "</span>";
+     
+    }
+
+    $("#dungeonView").html(html);
 
 
     if (curEnemy.health == 0) {
         dungeonEnemyDefeated(currentDungeon);
-
     }
 
-
-    if( currentDungeon.map[playerPosition] == "Chest"){
-        hideDungeonEnemy()
-    }
+    updateDungeonMap();
     if (curEnemy.health != 0) {
         inProgress = 3;
     }
+
 }
 
 var updateDungeonMap = function() {
@@ -206,10 +213,6 @@ var updateDungeonMap = function() {
         }
         html += "</div>";
     }
-
-
-
-
     $("#dungeonMap").html(html);
 }
 
@@ -245,20 +248,16 @@ var dungeonEnemyDefeated = function() {
                 }
 
                 updateStats();
-
-
             }
-
-
             currentDungeon.pokemonDefeated++
 
-            updateDungeon();
-            hideDungeonEnemy();
             dungeonCanMove = 1;
+            updateDungeon();
+            // hideDungeonEnemy();
             if(curEnemy.boss){
                 dungeonDefeated();
             }
-        }, player.catchTime/2);
+        }, player.catchTime);
         curEnemy.alive = false;
     }
 
@@ -316,7 +315,7 @@ var alreadyGotBadge = function(badgeName) {
 
 var spawnDungeonBoss = function() {
     dungeonCanMove = 0;
-    $(".progress").show();
+
     hideDungeonChest();
     curEnemy.name = currentDungeon.bossPokemon.name;
     curEnemy.id = getPokemonByName(curEnemy.name).id;
@@ -333,9 +332,7 @@ var spawnDungeonBoss = function() {
 }
 
 var spawnDungeonPokemon = function() {
-   hideDungeonChest();
     dungeonCanMove = 0;
-    $(".progress").show();
     var enemyName = currentDungeon.pokemons[Math.floor(Math.random() * currentDungeon.pokemons.length)];
     curEnemy.name = enemyName;
     curEnemy.id = getPokemonByName(curEnemy.name).id;
