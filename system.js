@@ -566,7 +566,7 @@ var generateLegendary = function(){
 	if(player.route > 9){
 		var chance = Math.floor(Math.random()*500+1);
 		if(isActive("Legendary Charm")){
-			chance *= getOakItemBonus("Legendary Charm")
+			chance /= getOakItemBonus("Legendary Charm")
 		}
 		if (chance < 3){
 			chance = Math.floor(Math.random()*100+1);
