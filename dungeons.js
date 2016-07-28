@@ -71,6 +71,9 @@ var createMap = function(size) {
 }
 
 var adjacent = function(pos, target, size) {
+    if (target < 0 || target > size*size){
+        return false;
+    }
     if (target == pos + size) {
         return true;
     }
