@@ -747,7 +747,20 @@ var isInventoryEmpty = function(){
 }
 
 var useItem = function(id){
-	
+	if(player.inventoryList[id].effect == null){
+		alert("This item has no effect and cannot be used.");
+	}
+	else if(player.inventoryList[id].instant == 0){
+		var result = confirm("Would you like to use a "+player.inventoryList[id].name+"?");
+		if(result == true){
+			player.inventoryList[id].timeLeft = player.inventoryList[id].time;
+			player.inventoryList[id].quantity--;
+			player.inventoryList[id].inUse = 1;
+		}
+	else {
+		// do instant item stuff
+	}
+	}
 }
 
 var itemInterval = function(){
