@@ -103,6 +103,7 @@ var moveToRoom = function(id) {
         } else if (currentDungeon.map[id] == "Boss") {
             spawnDungeonBoss();
         }
+        canCatch = 0;
     }
     updateDungeon();
 }
@@ -158,13 +159,13 @@ var updateDungeon = function() {
     html += "<div id='dungeonName'>"+currentDungeon.name.slice(0, -8)+"</div>";
     html += "<span id='dungeonTimer'>"+(currentDungeon.timeLeft / 100) + "/" + currentDungeon.timeLimit / 100+"</span>";
     html += "<div id='dungeonMap'></div>"
-    if(!dungeonCanMove){
+    if(!dungeonCanMove && curEnemy.alive){
         html += "<div id='dungeonEnemyInfo'><br>" +curEnemy.name + "<img id='alreadyCaughtImage' src='images/Pokeball.PNG'><br><img id='dungeonEnemy' src='images/pokemon/"+curEnemy.id+".png' ></div>";
     }
     if(currentDungeon.map[playerPosition] == "Chest"){
         html += "<div id='chestInfo'><img class='dungeonChest' id='chestImage' src=images/dungeons/chest.png></div><br>"
     }
-    if(!dungeonCanMove){
+    if(!dungeonCanMove && curEnemy.alive){
         html +=     "<span id='dungeonCatchDisplay'></span>";
         html +=     "<div class='dungeonProgress progress'>";
         html +=         "<div class='progress-bar progress-bar-danger' id='dungeonHealthBar' style='width: "+100 * curEnemy.health / curEnemy.maxHealth + "%"+"'></div>";
@@ -220,6 +221,8 @@ var updateDungeonMap = function() {
 }
 
 var dungeonEnemyDefeated = function() {
+    clearInterval(attackInterval);
+    attackInterval = setInterval(pokemonsAttack,1000);
     canCatch = 1;
     if (curEnemy.alive) {
         currentDungeon.map[playerPosition] = "Empty";
@@ -234,6 +237,10 @@ var dungeonEnemyDefeated = function() {
             player.pokeballs--;
         }, 1);
 
+
+        dungeonCanMove = 1;
+        console.log("Move: "+dungeonCanMove);
+
         var catchRate = curEnemy.catchRate + getBonusCatchrate();
         $("#dungeonCatchDisplay").html("Catch chance: " + Math.min(100, catchRate) + "%");
 
@@ -246,15 +253,12 @@ var dungeonEnemyDefeated = function() {
 
                 }
 
-                if (inProgress == 1) {
-                    generatePokemon(player.route);
-                }
 
                 updateStats();
             }
             currentDungeon.pokemonDefeated++
 
-            dungeonCanMove = 1;
+
             updateDungeon();
             // hideDungeonEnemy();
             if(curEnemy.boss){
