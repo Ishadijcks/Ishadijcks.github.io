@@ -254,6 +254,7 @@ var updateAll = function(){
 	updateCaughtList();
 	updateRoute();
 	updateUpgrades();
+	updateItems();
 	save();
 }
 
@@ -307,6 +308,12 @@ var getBonusCatchrate = function(){
 }
 
 var getClickAttack = function(){
+	var totalMagnitude;
+	for (var i = 0; i<player.inventoryList; i++){
+		if (player.inventoryList[i].inUse == 1 && player.inventoryList[i].effect == "clickBoost"){
+			totalMagnitude += player.inventoryList[i].magnitude
+		}
+	}
 	var clickAttack = Math.floor(player.clickAttack*player.clickMultiplier);
 	if(isActive("Poison Barb")){
 		clickAttack *= getOakItemBonus("Poison Barb");
@@ -315,7 +322,13 @@ var getClickAttack = function(){
 }
 
 var getPokemonAttack = function(){
-	var pokemonAttack = Math.floor(player.attack*player.attackMultiplier)
+	var totalMagnitude;
+	for (var i = 0; i<player.inventoryList; i++){
+		if (player.inventoryList[i].inUse == 1 && player.inventoryList[i].effect == "attackBoost"){
+			totalMagnitude += player.inventoryList[i].magnitude
+		}
+	}
+	var pokemonAttack = Math.floor(player.attack*(player.attackMultiplier+totalMagnitude)
 	return pokemonAttack;
 }
 
@@ -649,10 +662,11 @@ var gainRandomItem = function(route){
 	}
 	else{
 		var item = itemList[randomItem-1];
-		var itemObject = {id:item.id, name:item.name, quantity:1, type:item.type, use:item.use, unuse:item.unuse, time:item.time, timeleft:0};
+		var itemObject = {id:item.id, name:item.name, quantity:1, type:item.type, use:item.use, unUse:item.unUse, time:item.time, timeleft:0, instant:item.instant, magnitude:item.magnitude};
 		player.inventoryList.push(itemObject);
 	}
 
+	$.notify("You got a "+randomItemName, 'success');
 	
 	updateItems()
 }
@@ -664,11 +678,12 @@ var gainItemByName = function(name){
 	}
 	else{
 		var item = getItemByName(name);
-		var itemObject = {id:item.id, name:item.name, quantity:1, type:item.type, use:item.use, unuse:item.unuse, time:item.time, timeleft:0};
+		var itemObject = {id:item.id, name:item.name, quantity:1, type:item.type, use:item.use, unUse:item.unUse, time:item.time, timeleft:0, instant:item.instant, magnitude:item.magnitude};
 		player.inventoryList.push(itemObject);
 	}
 
-	
+	$.notify("You got a "+name, 'success');
+
 	updateItems()
 }
 
@@ -721,6 +736,28 @@ var isInventoryEmpty = function(){
 			}
 			else if(i == player.inventoryList.length-1){
 				return true;
+			}
+		}
+	}
+}
+
+var useItem = function(name){
+	if(alreadyHaveItem()==true){
+		var item = inventoryList[findItemInInventory(name)];
+		item.timeLeft = item.time;
+		item.quantity--;
+		item.inUse = 1;
+	}
+}
+
+var itemInterval = function(){
+	for (var i = 0; i<player.inventoryList.length; i++){
+		if (inventoryList[i].inUse == 1){
+			if (inventoryList[i].timeLeft != 0){
+				inventoryList[i].timeLeft--;
+			}
+			else{
+				inventoryList[i].inUse = 0;
 			}
 		}
 	}

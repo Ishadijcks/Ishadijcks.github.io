@@ -15,13 +15,13 @@
 // var xAttack = Item("X Attack", 500, "images/items/xattack.png", "attackBoost", 10, 180);
 // var xDefense = Item("X Defense", 500, "images/items/xdefense.png", "defenseBoost", 10, 180);
 var itemList = [
-{id:1, name:"Cheri Berry", price:100, use:null, unuse:null, time:0, type:"berry"},
-{id:2, name:"Chesto Berry", price:100, use:null, unuse:null, time:0, type:"berry"},
-{id:3, name:"Pecha Berry", price:100, use:null, unuse:null, time:0, type:"berry"},
-{id:4, name:"Rawst Berry", price:100, use:null, unuse:null, time:0, type:"berry"},
-{id:5, name:"Aspear Berry", price:100, use:null, unuse:null, time:0, type:"berry"},
-{id:6, name:"X Attack", price:100, use:"attackBoost", unuse:null, time:180},
-{id:7, name:"X Defense", price:100, use:"defenseBoost", unuse:null, time:180},
+{id:1, name:"Cheri Berry", price:100, use:null, unUse:null, time:0, type:"berry", instant:1, magnitude: 1},
+{id:2, name:"Chesto Berry", price:100, use:null, unUse:null, time:0, type:"berry", instant:1, magnitude: 1},
+{id:3, name:"Pecha Berry", price:100, use:null, unUse:null, time:0, type:"berry", instant:1, magnitude: 1},
+{id:4, name:"Rawst Berry", price:100, use:null, unUse:null, time:0, type:"berry", instant:1, magnitude: 1},
+{id:5, name:"Aspear Berry", price:100, use:null, unUse:null, time:0, type:"berry", instant:1, magnitude: 1},
+{id:6, name:"X Attack", price:25000, use:"attackBoost", unUse:null, time:30, type:"combat", instant:0, magnitude: 0.5},
+{id:7, name:"X Click", price:25000, use:"clickBoost", unUse:null, time:30, type:"combat", instant:0, magnitude: 0.5},
 ];
 
 var itemsPerRoute = {
