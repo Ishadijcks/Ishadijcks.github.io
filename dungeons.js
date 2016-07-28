@@ -108,6 +108,21 @@ var moveToRoom = function(id) {
     updateDungeon();
 }
 
+var revealChests = function(){
+    for(var i = 0; i<currentDungeon.map.length; i++){
+        if(currentDungeon.map[i] == "Chest"){
+            console.log(i)
+            currentDungeon.mapDiscovered[i] = 1;
+        }
+    }
+}
+
+var revealEverything = function(){
+    for(var i = 0; i<currentDungeon.map.length; i++){
+        currentDungeon.mapDiscovered[i] = 1;
+    }
+}
+
 var spawnDungeonChest = function() {
     $("#chestInfo").html("<img class='dungeonChest' id='chestImage' src=images/dungeons/chest.png><br>");
 }
@@ -118,8 +133,19 @@ var hideDungeonChest = function() {
 
 var openDungeonChest = function() {
     currentDungeon.chestsOpened++;
-    //TODO
+    currentDungeon.map[playerPosition] = "Empty";
+    console.log("chest openend: " + currentDungeon.chestsOpened );
+    if( currentDungeon.chestsOpened >= 1){
+
+        revealChests();
+    }
+    if( currentDungeon.chestsOpened >= 2){
+        revealEverything();
+    }
+
     hideDungeonChest();
+    updateDungeonMap();
+
 }
 
 var dungeonTimer = function() {
@@ -239,8 +265,6 @@ var dungeonEnemyDefeated = function() {
 
 
         dungeonCanMove = 1;
-        console.log("Move: "+dungeonCanMove);
-
         var catchRate = curEnemy.catchRate + getBonusCatchrate();
         $("#dungeonCatchDisplay").html("Catch chance: " + Math.min(100, catchRate) + "%");
 
@@ -292,6 +316,7 @@ var resetDungeon = function() {
         currentDungeon.pokemonDefeated = 0;
         currentDungeon.loot = [];
         currentDungeon.mapDiscovered = [];
+        currentDungeon.chestsOpened = 0;
     }
 }
 

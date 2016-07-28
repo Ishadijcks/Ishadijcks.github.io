@@ -274,6 +274,12 @@ $(document).ready(function(){
 	})
 
 
+	$("body").on('click',"#chestImage", function(){
+		openDungeonChest();
+	})
+
+
+
 	// Logs to welcome the player
 	log("Welcome to PokeClicker");
 	log("Click on the pokemon to defeat them!");
