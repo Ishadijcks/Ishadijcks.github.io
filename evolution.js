@@ -10,9 +10,9 @@ var checkEvolution = function(){
 				oakExplainEvolution();
 				$.notify("Your "+curPokemon.name+" evolved into "+curPokemon.evolution+"!", 'success');
 
+				player.caughtPokemonList[i].evolved = 1; // Mark it as evolved.
 				capturePokemon(curPokemon.evolution); // Capture it's evolution
 
-				player.caughtPokemonList[i].evolved = 1; // Mark it as evolved.
 			}
 		}
 	}
