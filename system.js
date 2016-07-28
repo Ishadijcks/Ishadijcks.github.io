@@ -746,17 +746,8 @@ var isInventoryEmpty = function(){
 	}
 }
 
-var useItem = function(name){
-	if(alreadyHaveItem(name)==true){
-		var item = inventoryList[findItemInInventory(name)];
-		item.timeLeft = item.time;
-		item.quantity--;
-		item.inUse = 1;
-		return true;
-	}
-	else{
-		return false;
-	} 
+var useItem = function(id){
+	
 }
 
 var itemInterval = function(){

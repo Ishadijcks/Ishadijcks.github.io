@@ -94,7 +94,7 @@ var updateItems = function(){
 		}
 		if(player.inventoryList[i] != undefined){
 			if(player.inventoryList[i].quantity > 0){
-				itemHtml += "<th><img class=smallImage src=images/items/"+player.inventoryList[i].id+".png>"+player.inventoryList[i].name+"</th>";
+				itemHtml += "<th><img class=smallImage onclick=\"useItem("+i+")\" src=images/items/"+player.inventoryList[i].id+".png>"+player.inventoryList[i].name+"</th>";
 				itemHtml += "<th>"+player.inventoryList[i].quantity+"</th>";
 			}
 		}
