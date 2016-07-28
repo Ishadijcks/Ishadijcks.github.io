@@ -64,6 +64,8 @@ $(document).ready(function(){
 	initUpgrades();
 	initOakItems();
 	updateItems();
+	setInterval(itemInterval, 1000);
+	itemInterval();
 	
 	if(player.starter != "none"){
 	updateAll();
@@ -322,13 +324,13 @@ var getClickAttack = function(){
 }
 
 var getPokemonAttack = function(){
-	var totalMagnitude;
+	var totalMagnitude = 0;
 	for (var i = 0; i<player.inventoryList; i++){
 		if (player.inventoryList[i].inUse == 1 && player.inventoryList[i].effect == "attackBoost"){
-			totalMagnitude += player.inventoryList[i].magnitude
+			totalMagnitude += player.inventoryList[i].magnitude;
 		}
 	}
-	var pokemonAttack = Math.floor(player.attack*(player.attackMultiplier+totalMagnitude)
+	var pokemonAttack = Math.floor(player.attack*(player.attackMultiplier+totalMagnitude))
 	return pokemonAttack;
 }
 
@@ -391,7 +393,10 @@ var enemyDefeated = function(){
 		gainExp(exp);
 		player.routeKills[player.route]++
 		updateRoute();
-		gainRandomItem(player.route);
+		var chance = Math.floor(Math.random()*100+1);
+			if (chance > 101){
+				gainRandomItem(player.route);
+			}
 
 
 		
@@ -742,22 +747,26 @@ var isInventoryEmpty = function(){
 }
 
 var useItem = function(name){
-	if(alreadyHaveItem()==true){
+	if(alreadyHaveItem(name)==true){
 		var item = inventoryList[findItemInInventory(name)];
 		item.timeLeft = item.time;
 		item.quantity--;
 		item.inUse = 1;
+		return true;
 	}
+	else{
+		return false;
+	} 
 }
 
 var itemInterval = function(){
 	for (var i = 0; i<player.inventoryList.length; i++){
-		if (inventoryList[i].inUse == 1){
-			if (inventoryList[i].timeLeft != 0){
-				inventoryList[i].timeLeft--;
+		if (player.inventoryList[i].inUse == 1){
+			if (player.inventoryList[i].timeLeft != 0){
+				player.inventoryList[i].timeLeft--;
 			}
 			else{
-				inventoryList[i].inUse = 0;
+				player.inventoryList[i].inUse = 0;
 			}
 		}
 	}

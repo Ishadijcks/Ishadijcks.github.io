@@ -89,8 +89,8 @@ var updateItems = function(){
 	for (var i = 0; i<player.inventoryList.length; i++){
 		itemHtml += "<tr>";
 		if(player.inventoryList.length == 0 || isInventoryEmpty()==true){
-			itemHtml += "<th>None</th>";
-			itemHtml += "<th>N/A</th>";
+			itemHtml += "<th>You have no items</th>";
+			itemHtml += "<th></th>";
 		}
 		if(player.inventoryList[i] != undefined){
 			if(player.inventoryList[i].quantity > 0){
