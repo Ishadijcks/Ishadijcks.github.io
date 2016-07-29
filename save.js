@@ -17,6 +17,8 @@ var load = function(){
 	if (typeof savegame.attackMultiplier !== "undefined") player.attackMultiplier = savegame.attackMultiplier;
 	if (typeof savegame.money !== "undefined") player.money = savegame.money;
 	if (typeof savegame.moneyMultiplier !== "undefined") player.moneyMultiplier = savegame.moneyMultiplier;
+	if (typeof savegame.dungeonTokens !== "undefined") player.dungeonTokens = savegame.dungeonTokens;
+	if (typeof savegame.dungeonTokenMultiplier !== "undefined") player.dungeonTokenMultiplier = savegame.dungeonTokenMultiplier;
 	if (typeof savegame.expMultiplier !== "undefined") player.expMultiplier = savegame.expMultiplier;
 	if (typeof savegame.catchBonus !== "undefined") player.catchBonus = savegame.catchBonus;
 	if (typeof savegame.route !== "undefined") player.route = savegame.route;

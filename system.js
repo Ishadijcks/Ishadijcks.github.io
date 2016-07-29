@@ -11,6 +11,8 @@ var player = {
 	attack: 0,
 	attackMultiplier: 1,
 	money: 0,
+	dungeonTokens: 0,
+	dungeonTokenMultiplier: 1,
 	moneyMultiplier: 1,
 	expMultiplier:1,
 	catchBonus: 5,
