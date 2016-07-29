@@ -16,11 +16,10 @@ var addTown = function(name,gym,image,shop,reqRoutes){
 var moveToTown = function(townName){
 	var town = getTown(townName);
 	canCatch = 0;
-	
-	
 		if( accessToTown(town.reqRoutes)){
 			$("#catchDisplay").html("");	
 			inProgress = 0;
+			resetDungeon();
 			showTown(town);
 		}
 		else {
@@ -48,8 +47,17 @@ var showTown = function(town){
 	var html = "";
 	html += "<h3 class='townName strokeme'>"+town.name+"</h3>";
 	html += "<div class='row'>";
+		if(town.gym.bossPokemon != undefined){
+			if(player.gymBadges.length >= town.gym.badgeReq){
+				html += "<button class='dungeon leftTownButton btn btn-primary col-sm-2' id='"+town.name+" Dungeon'>Dungeon</button>"
+			} else {
+				html += "<button class='wrongDungeon leftTownButton btn btn-primary disabled col-sm-2' id='"+town.name+" Dungeon'>Dungeon</button>"
+			}
 
-		if (Array.isArray(town.gym)){
+
+
+		}
+		else if (Array.isArray(town.gym)){
 			
 			for(var i = 0; i<town.gym.length; i++){
 				if(player.gymBadges.length >= town.gym[i].badgeReq){
@@ -96,6 +104,15 @@ var loadTowns = function(){
 	addTown("Elite Agatha", EliteAgatha(), null, null, null);
 	addTown("Elite Lance", EliteLance(), null, null, null);
 	addTown("Champion", Champion(), null, null, null);
+
+	addTown("Viridian Forest", ViridianForestDungeon(), "images/dungeons/viridianforest.png", null, [1]);
+	addTown("Digglets Cave", DiglettsCaveDungeon(), "images/dungeons/diggletscave.png", null, [1]);
+	addTown("Mt. Moon", MtMoonDungeon(), "images/dungeons/mtmoon.png", null, [3]);
+	addTown("Rock Tunnel", RockTunnelDungeon(), "images/dungeons/rocktunnel.png", null, [9]);
+	addTown("Power Plant", PowerPlantDungeon(), "images/dungeons/powerplant.png", null, [9]);
+	addTown("Pokemon Tower", PokemonTowerDungeon(), "images/dungeons/pokemontower.png", null, [10,7]);
+	addTown("Seafoam Islands", SeafoamIslandsDungeon(), "images/dungeons/seafoamislands.png", null, [19]);
+	addTown("Victory Road", VictoryRoadDungeon(), "images/dungeons/victoryroad.png", null, [22]);
 }
 
 var getTown = function(townName){

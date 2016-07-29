@@ -11,6 +11,8 @@ var player = {
 	attack: 0,
 	attackMultiplier: 1,
 	money: 0,
+	dungeonTokens: 0,
+	dungeonTokenMultiplier: 1,
 	moneyMultiplier: 1,
 	expMultiplier:1,
 	catchBonus: 5,
@@ -111,6 +113,23 @@ $(document).ready(function(){
 		}
 	});
 
+	$("body").on('click',"#dungeonEnemy", function(){
+		clicks++;
+		if(clicks < maxClicks){
+			if (curEnemy.alive && inProgress != 0){
+				if(curEnemy.health > 0){
+					curEnemy.health -= getClickAttack();
+				}			
+				
+				else {
+					curEnemy.health = 0;
+				}
+				
+				updateDungeon();
+			}
+		}
+	});
+
 
 	$("body").on('click',".starter", function(){
 		$("#curStarterPick").html(this.id);
@@ -195,6 +214,37 @@ $(document).ready(function(){
 		loadGym(id);
 	})
 
+	$("body").on('click',".dungeon", function(){
+		var id = this.id;
+		id = id.slice(0, -8);
+		loadDungeon(id);
+	})
+
+	$("body").on('click',".dungeonRoom", function(){
+		var id = parseInt(this.id.substring(4));
+		moveToRoom(id);
+	})	
+
+	$(document).on("keydown", function (e) {
+		var keyCode = e.keyCode;
+		if(inProgress == 3){
+			if(keyCode == 38){
+				moveToRoom(playerPosition-currentDungeon.size);
+				e.preventDefault();
+			} else if(keyCode == 39){
+				moveToRoom(playerPosition+1);
+				e.preventDefault();
+			} else if(keyCode == 37){
+				moveToRoom(playerPosition-1);
+				e.preventDefault();
+			} else if(keyCode == 40){
+				moveToRoom(playerPosition+currentDungeon.size);
+    			e.preventDefault();
+			}
+		}
+
+	});
+
 	$("body").on('click',".wrongGym", function(){
 		log("You need more badges to challenge this gym leader")
 	})
@@ -230,6 +280,12 @@ $(document).ready(function(){
 	})
 
 
+	$("body").on('click',"#chestImage", function(){
+		openDungeonChest();
+	})
+
+
+
 	// Logs to welcome the player
 	log("Welcome to PokeClicker");
 	log("Click on the pokemon to defeat them!");
@@ -252,6 +308,9 @@ var updateAll = function(){
 	}
 	else if (inProgress == 2){
 		updateGym();
+	}
+	else if (inProgress == 3){
+		updateDungeon();
 	}
 	updateCaughtList();
 	updateRoute();
@@ -515,7 +574,7 @@ var calculateAttack = function(){
 
 
 
-var generatePokemon = function (route){
+var generatePokemon = function(route){
 	clicks = 0;
 	clearInterval(attackInterval);
 	attackInterval = setInterval(pokemonsAttack,1000);

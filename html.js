@@ -113,6 +113,7 @@ var updateItems = function(){
 // Update the stats
 var updateStats = function(){
 	$("#statBody").html("<tr><th>Money</th><th>$"+player.money+"</th></tr>" +
+		"<tr><th>Dungeon Tokens</th><th>$"+player.dungeonTokens+"</th></tr>" +
 		"<tr><th>Click attack</th><th>"+getClickAttack()+"</th></tr>" +
 		"<tr><th>Pokemon attack</th><th>"+getPokemonAttack()+"</th></tr>" +
 		"<tr><th>Exp multiplier</th><th>"+player.expMultiplier.toFixed(2)+"</th></tr>" +
@@ -217,4 +218,5 @@ var hideAllViews = function(){
 	$("#currentEnemy").hide();
 	$("#gymView").hide();
 	$("#townView").hide();
+	$("#dungeonView").hide();
 }

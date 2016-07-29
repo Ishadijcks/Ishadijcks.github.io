@@ -40,9 +40,59 @@
 	width:85%;
 }
 
+.dungeonRoom {
+	height:20px;
+	border:1px solid black;
+	margin:3px;
+}
+
+.playerRoom {
+	background-color: blue;
+}
+
+.bossRoom {
+	background-color: purple;
+}
+
+.chestRoom {
+	background-color: green;
+}
+
+.enemyRoom {
+	background-color: red;
+}
+
+.emptyRoom {
+	background-color: white;
+}
+
+.undiscoveredRoom {
+	background-color: black
+}
+
+#chestImage:hover {
+	cursor:pointer;
+}
+
+#dungeonMap {
+	float:right;
+	margin-right: 5%;
+	padding-bottom: 5px;
+	padding-left: 20px;
+	padding-right: 10px;
+	border-bottom: 1px solid black;
+}
+
+#dungeonEnemy:hover{
+	cursor:pointer
+}
+
 #gymEnemy:hover{
 	cursor:pointer
 }
+
+
+
 
 #gymTrainer {
 	float:right;
@@ -76,9 +126,10 @@
 	margin-right: 1px;
 }
 
-#gymDefeatedBody {
+#gymDefeatedBody, #dungeonDefeatedBody{
 	text-align: center;
 }
+
 #townView {
 	border: 1px solid black;
 	height: 250px;
@@ -194,7 +245,7 @@ body {
 	margin-top: 15px;
 }
 
-table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView {
+table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView, #dungeonView {
 	background-color: white;
 }
 
@@ -376,7 +427,7 @@ g, rect {
 	cursor:pointer
 }
 
-#currentEnemy, #gymView{
+#currentEnemy, #gymView, #dungeonView{
 	border: 1px solid black;
 	text-align:center;
 	height: 250px;
