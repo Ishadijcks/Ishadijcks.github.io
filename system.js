@@ -310,13 +310,13 @@ var getBonusCatchrate = function(){
 }
 
 var getClickAttack = function(){
-	var totalMagnitude;
+	var totalMagnitude = 0;
 	for (var i = 0; i<player.inventoryList; i++){
-		if (player.inventoryList[i].inUse == 1 && player.inventoryList[i].effect == "clickBoost"){
-			totalMagnitude += player.inventoryList[i].magnitude
+		if (player.inventoryList[i].inUse == 1 && player.inventoryList[i].use == "clickBoost"){
+			totalMagnitude += player.inventoryList[i].magnitude;
 		}
 	}
-	var clickAttack = Math.floor(player.clickAttack*player.clickMultiplier);
+	var clickAttack = Math.floor(player.clickAttack*(player.clickMultiplier+totalMagnitude));
 	if(isActive("Poison Barb")){
 		clickAttack *= getOakItemBonus("Poison Barb");
 	}
@@ -326,11 +326,11 @@ var getClickAttack = function(){
 var getPokemonAttack = function(){
 	var totalMagnitude = 0;
 	for (var i = 0; i<player.inventoryList; i++){
-		if (player.inventoryList[i].inUse == 1 && player.inventoryList[i].effect == "attackBoost"){
+		if (player.inventoryList[i].inUse == 1 && player.inventoryList[i].use == "attackBoost"){
 			totalMagnitude += player.inventoryList[i].magnitude;
 		}
 	}
-	var pokemonAttack = Math.floor(player.attack*(player.attackMultiplier+totalMagnitude))
+	var pokemonAttack = Math.floor(player.attack*(player.attackMultiplier+totalMagnitude));
 	return pokemonAttack;
 }
 
@@ -394,7 +394,7 @@ var enemyDefeated = function(){
 		player.routeKills[player.route]++
 		updateRoute();
 		var chance = Math.floor(Math.random()*100+1);
-			if (chance > 101){
+			if (chance < 101){
 				gainRandomItem(player.route);
 			}
 
@@ -667,7 +667,7 @@ var gainRandomItem = function(route){
 	}
 	else{
 		var item = itemList[randomItem-1];
-		var itemObject = {id:item.id, name:item.name, quantity:1, type:item.type, use:item.use, unUse:item.unUse, time:item.time, timeleft:0, instant:item.instant, magnitude:item.magnitude};
+		var itemObject = {id:item.id, name:item.name, quantity:1, type:item.type, use:item.use, unUse:item.unUse, time:item.time, timeleft:0, instant:item.instant, magnitude:item.magnitude, inUse:0};
 		player.inventoryList.push(itemObject);
 	}
 
@@ -683,7 +683,7 @@ var gainItemByName = function(name){
 	}
 	else{
 		var item = getItemByName(name);
-		var itemObject = {id:item.id, name:item.name, quantity:1, type:item.type, use:item.use, unUse:item.unUse, time:item.time, timeleft:0, instant:item.instant, magnitude:item.magnitude};
+		var itemObject = {id:item.id, name:item.name, quantity:1, type:item.type, use:item.use, unUse:item.unUse, time:item.time, timeleft:0, instant:item.instant, magnitude:item.magnitude, inUse:0};
 		player.inventoryList.push(itemObject);
 	}
 
@@ -747,19 +747,37 @@ var isInventoryEmpty = function(){
 }
 
 var useItem = function(id){
-	if(player.inventoryList[id].effect == null){
-		alert("This item has no effect and cannot be used.");
+	if(player.inventoryList[id].use == null){
+		itemModalHtml = "";
+		itemModalHtml += "<div class='row'><p class='oakText'>This item has no effect and cannot be used.</p>";
+		$("#itemModalBody").html(itemModalHtml);
+		$("#itemModal").modal('show');
+		return false;
+	}
+	else if(player.inventoryList[id].quantity<=0){
+		itemModalHtml = "";
+		itemModalHtml += "<div class='row'><p class='oakText'>You don't have any of this item.</p>";
+		$("#itemModalBody").html(itemModalitemModalHtml);
+		$("#itemModal").modal('show');
+		return false;
+	}
+	else if(player.inventoryList[id].inUse==1){
+		itemModalHtml = "";
+		itemModalHtml += "<div class='row'><p class='oakText'>You are already using this item.</p>";
+		$("#itemModalBody").html(itemModalHtml);
+		$("#itemModal").modal('show');
+		return false;
 	}
 	else if(player.inventoryList[id].instant == 0){
-		var result = confirm("Would you like to use a "+player.inventoryList[id].name+"?");
-		if(result == true){
-			player.inventoryList[id].timeLeft = player.inventoryList[id].time;
-			player.inventoryList[id].quantity--;
-			player.inventoryList[id].inUse = 1;
-		}
-	else {
-		// do instant item stuff
+		itemChoiceModalResult = 0;
+		itemChoiceModalHtml = "";
+		itemChoiceModalHtml += "<div class='row'><p class='oakText'>Would you like to use a(n) "+player.inventoryList[id].name+"?</p></div>";
+		itemChoiceModalHtml += "<br><div class='row' align='center'><button id='itemModalClose' type='button' onclick='itemChoiceModalButton(1,"+id+")'>Yes</button>   <button id='itemModalClose' type='button' onclick='itemChoiceModalButton(0,"+id+")'>No</button></div>"
+		$("#itemChoiceModalBody").html(itemChoiceModalHtml);
+		$("#itemChoiceModal").modal('show');
 	}
+	else {
+		// instant item effects
 	}
 }
 
@@ -771,7 +789,26 @@ var itemInterval = function(){
 			}
 			else{
 				player.inventoryList[i].inUse = 0;
+				$.notify("The effects of your "+player.inventoryList[i].name+" ran out.", "succes")
 			}
+			updateItems();
+			updateStats();
 		}
 	}
+}
+
+var itemChoiceModalButton = function(result, id){
+	item = player.inventoryList[id]
+	$('#itemChoiceModal').modal('hide');
+	if(result == 1){
+		item.timeLeft = item.time;
+		item.inUse = 1;
+		item.quantity--;
+		$.notify("You used a(n) "+item.name+".", "succes")
+		return true;
+	}
+	else{
+		return false;
+	}
+	updateAll();
 }

@@ -96,6 +96,9 @@ var updateItems = function(){
 			if(player.inventoryList[i].quantity > 0){
 				itemHtml += "<th><img class=smallImage onclick=\"useItem("+i+")\" src=images/items/"+player.inventoryList[i].id+".png>"+player.inventoryList[i].name+"</th>";
 				itemHtml += "<th>"+player.inventoryList[i].quantity+"</th>";
+				if(player.inventoryList[i].inUse == 1){
+					itemHtml += "<th>"+player.inventoryList[i].timeLeft+"</th>"
+				}
 			}
 		}
 		itemHtml += "</tr>";

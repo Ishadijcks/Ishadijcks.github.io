@@ -80,7 +80,6 @@ var initOakItems = function(){
 	addOakItem("Shiny Charm", "images/oak/shinyCharm.png", 80, "100% more chance to encounter a shiny Pokemon", 2);
 	checkOakItems(1);
 	showOakItems(1);
-		console.log("asdasd");
 }
 
 var activateOakItem = function(id){
