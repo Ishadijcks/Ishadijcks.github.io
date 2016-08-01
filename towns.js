@@ -106,13 +106,14 @@ var loadTowns = function(){
 	addTown("Champion", Champion(), null, null, null);
 
 	addTown("Viridian Forest", ViridianForestDungeon(), "images/dungeons/viridianforest.png", null, [1]);
-	addTown("Digglets Cave", DiglettsCaveDungeon(), "images/dungeons/diggletscave.png", null, [1]);
+	addTown("Digletts Cave", DiglettsCaveDungeon(), "images/dungeons/diglettscave.png", null, [1]);
 	addTown("Mt. Moon", MtMoonDungeon(), "images/dungeons/mtmoon.png", null, [3]);
 	addTown("Rock Tunnel", RockTunnelDungeon(), "images/dungeons/rocktunnel.png", null, [9]);
 	addTown("Power Plant", PowerPlantDungeon(), "images/dungeons/powerplant.png", null, [9]);
 	addTown("Pokemon Tower", PokemonTowerDungeon(), "images/dungeons/pokemontower.png", null, [10,7]);
 	addTown("Seafoam Islands", SeafoamIslandsDungeon(), "images/dungeons/seafoamislands.png", null, [19]);
 	addTown("Victory Road", VictoryRoadDungeon(), "images/dungeons/victoryroad.png", null, [22]);
+	addTown("Cerulean Cave", CeruleanCaveDungeon(), "images/dungeons/ceruleancave.png", null, [4]);
 }
 
 var getTown = function(townName){
