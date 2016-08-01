@@ -47,18 +47,15 @@ var showTown = function(town){
 	var html = "";
 	html += "<h3 class='townName strokeme'>"+town.name+"</h3>";
 	html += "<div class='row'>";
+	if(town.gym != null){
 		if(town.gym.bossPokemon != undefined){
 			if(player.gymBadges.length >= town.gym.badgeReq){
 				html += "<button class='dungeon leftTownButton btn btn-primary col-sm-2' id='"+town.name+" Dungeon'>Dungeon</button>"
 			} else {
 				html += "<button class='wrongDungeon leftTownButton btn btn-primary disabled col-sm-2' id='"+town.name+" Dungeon'>Dungeon</button>"
 			}
-
-
-
 		}
 		else if (Array.isArray(town.gym)){
-			
 			for(var i = 0; i<town.gym.length; i++){
 				if(player.gymBadges.length >= town.gym[i].badgeReq){
 					html += "<button class='gym leftTownButton btn btn-primary col-sm-2' id='"+town.gym[i].leaderName + " Gym'>"+town.gym[i].leaderName+"</button>"
@@ -70,13 +67,15 @@ var showTown = function(town){
 				}
 			}
 		}
-		else if (town.gym != null){
+		else {
 			if(player.gymBadges.length >= town.gym.badgeReq){
 				html += "<button class='gym leftTownButton btn btn-primary col-sm-2' id='"+town.name+" Gym'>Gym</button>"
 			} else {
 				html += "<button class='wrongGym leftTownButton btn btn-primary disabled col-sm-2' id='"+town.name+" Gym'>Gym</button>"
 			}
 		}
+	}
+}
 	html += "</div>"
 	$("#townView").html(html);
 	$("#townView").css("background-image", "url("+town.image+")");  
@@ -97,8 +96,8 @@ var loadTowns = function(){
 	addTown("Cinnabar Island", CinnabarIslandGym(), "images/gyms/cinnabarisland.png", null, [20]);
 	addTown("Viridian City", ViridianCityGym(), "images/gyms/viridiancity.png", null, [1]);
 	addTown("Pallet Town", null, "images/gyms/pallettown.png", null, []);
-	addTown("Lavender Town", null, "images/gyms/lavendertown.png", null, [7]);
-	addTown("Indigo Plateau", [EliteLorelei(), EliteBruno(), EliteAgatha(), EliteLance(), Champion()], "images/gyms/indigoplateau.png", null, [8]);
+	addTown("Lavender Town", null, "images/gyms/lavendertown.png", null, [7,10]);
+	addTown("Indigo Plateau", [EliteLorelei(), EliteBruno(), EliteAgatha(), EliteLance(), Champion()], "images/gyms/indigoplateau.png", null, [23]);
 	addTown("Elite Lorelei", EliteLorelei(), null, null, null);
 	addTown("Elite Bruno", EliteBruno(), null, null, null);
 	addTown("Elite Agatha", EliteAgatha(), null, null, null);
@@ -110,10 +109,11 @@ var loadTowns = function(){
 	addTown("Mt. Moon", MtMoonDungeon(), "images/dungeons/mtmoon.png", null, [3]);
 	addTown("Rock Tunnel", RockTunnelDungeon(), "images/dungeons/rocktunnel.png", null, [9]);
 	addTown("Power Plant", PowerPlantDungeon(), "images/dungeons/powerplant.png", null, [9]);
-	addTown("Pokemon Tower", PokemonTowerDungeon(), "images/dungeons/pokemontower.png", null, [10,7]);
+	addTown("Pokemon Tower", PokemonTowerDungeon(), "images/dungeons/pokemontower.png", null, [7,10]);
 	addTown("Seafoam Islands", SeafoamIslandsDungeon(), "images/dungeons/seafoamislands.png", null, [19]);
 	addTown("Victory Road", VictoryRoadDungeon(), "images/dungeons/victoryroad.png", null, [22]);
 	addTown("Cerulean Cave", CeruleanCaveDungeon(), "images/dungeons/ceruleancave.png", null, [4]);
+	addTown("Pokemon Mansion", CeruleanCaveDungeon(), "images/dungeons/pokemonmansion.png", null, [20]);
 }
 
 var getTown = function(townName){

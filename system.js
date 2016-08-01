@@ -453,7 +453,7 @@ var enemyDefeated = function(){
 		player.routeKills[player.route]++
 		updateRoute();
 		var chance = Math.floor(Math.random()*100+1);
-			if (chance < 101){
+			if (chance > 101){
 				gainRandomItem(player.route);
 			}
 

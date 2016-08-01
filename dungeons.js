@@ -95,6 +95,7 @@ var VictoryRoadDungeon = function(){
     }
     return Dungeon("Victory Road Dungeon", pokemonList, 5, 1800, bossPokemon, 0, 8);   
 }
+
 var CeruleanCaveDungeon = function(){
     var pokemonList = ["Arbok", "Raichu", "Sandslash", "Golbat", "Parasect", "Venomoth", "Kadabra", "Magneton", "Dodrio", "Hypno", "Ditto", "Wigglytuff", "Electrode", "Marowak", "Chansey"];
     if( Math.random >= 0.75){
@@ -104,10 +105,11 @@ var CeruleanCaveDungeon = function(){
     }
     return Dungeon("Cerulean Cave Dungeon", pokemonList, 5, 2100, bossPokemon, 0, 8);   
 }
+
 var PokemonMansionDungeon = function(){
     var pokemonList = ["Growlithe", "Vulpix", "Grimer", "Muk", "Koffing", "Weezing"];
     var bossPokemon = BossPokemon("Magmar", 9000);
-    return Dungeon("Pokemon Mansion Dungeon", pokemonList, 5, 1650, bossPokemon, 0, 8); 
+    return Dungeon("Pokemon Mansion Dungeon", pokemonList, 5, 1650, bossPokemon, 0, 6); 
 }
 
 var loadDungeon = function(townId) {
