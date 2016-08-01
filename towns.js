@@ -75,7 +75,6 @@ var showTown = function(town){
 			}
 		}
 	}
-}
 	html += "</div>"
 	$("#townView").html(html);
 	$("#townView").css("background-image", "url("+town.image+")");  
@@ -92,7 +91,7 @@ var loadTowns = function(){
 	addTown("Vermillion City",VermillionCityGym(), "images/gyms/vermillioncity.png", null, [6]);
 	addTown("Celadon City", CeladonCityGym(), "images/gyms/celadoncity.png", null, [8]);
 	addTown("Saffron City", SaffronCityGym(), "images/gyms/saffroncity.png", null, [5]);
-	addTown("Fuchsia City", FuchsiaCityGym(), "images/gyms/pewtercity.png", null, [18,15]);
+	addTown("Fuchsia City", FuchsiaCityGym(), "images/gyms/fuchsiacity.png", null, [18,15]);
 	addTown("Cinnabar Island", CinnabarIslandGym(), "images/gyms/cinnabarisland.png", null, [20]);
 	addTown("Viridian City", ViridianCityGym(), "images/gyms/viridiancity.png", null, [1]);
 	addTown("Pallet Town", null, "images/gyms/pallettown.png", null, []);
@@ -113,7 +112,7 @@ var loadTowns = function(){
 	addTown("Seafoam Islands", SeafoamIslandsDungeon(), "images/dungeons/seafoamislands.png", null, [19]);
 	addTown("Victory Road", VictoryRoadDungeon(), "images/dungeons/victoryroad.png", null, [22]);
 	addTown("Cerulean Cave", CeruleanCaveDungeon(), "images/dungeons/ceruleancave.png", null, [4]);
-	addTown("Pokemon Mansion", CeruleanCaveDungeon(), "images/dungeons/pokemonmansion.png", null, [20]);
+	addTown("Pokemon Mansion", PokemonMansionDungeon(), "images/dungeons/pokemonmansion.png", null, [20]);
 }
 
 var getTown = function(townName){
