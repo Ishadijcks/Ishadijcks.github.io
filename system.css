@@ -397,7 +397,7 @@ g, rect {
 
 }
 
-+/* http://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting-using-css */
+/* http://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting-using-css */
 .noselect {
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none;   /* Chrome/Safari/Opera */
