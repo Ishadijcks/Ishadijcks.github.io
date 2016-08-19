@@ -410,7 +410,7 @@ var spawnDungeonBoss = function() {
     hideDungeonChest();
     curEnemy.name = currentDungeon.bossPokemon.name;
     curEnemy.id = getPokemonByName(curEnemy.name).id;
-    curEnemy.health = currentDungeon.bossPokemon.health * (1 + (currentDungeon.chestsOpened) / 10);
+    curEnemy.health = Math.floor(currentDungeon.bossPokemon.health * (1 + (currentDungeon.chestsOpened) / 10));
     curEnemy.maxHealth = curEnemy.health;
     curEnemy.reward = 0;
     curEnemy.alive = true;
