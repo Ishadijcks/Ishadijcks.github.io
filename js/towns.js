@@ -44,8 +44,42 @@ var accessToTown = function(routeList){
 }
 
 var showTown = function(town){
-	
-	var html = "";
+
+	var container = $('#townView');
+	var button = container.find('button');
+
+	button.removeClass('gym disabled wrongGym');
+	container.find('.panel-title').text(town.name);
+
+	if (Array.isArray(town.gym)) {
+		for (var i = 0; i < town.gym.length; i++) {
+			if(player.gymBadges.length >= town.gym[i].badgeReq) {
+				button.addClass('gym')
+					.attr('id', town.gym[i].leaderName + ' Gym')
+					.text(town.gym[i].leaderName);
+			} else {
+				button.addClass('disabled')
+					.attr('id', town.gym[i].leaderName + ' Gym')
+					.text(town.gym[i].leaderName);
+			}
+		}
+	} else if (town.gym != null) {
+		if(player.gymBadges.length >= town.gym.badgeReq) {
+			button.addClass('gym')
+				.attr('id', town.name + ' Gym')
+				.text('Gym');
+		} else {
+			button.addClass('disabled')
+				.addClass('wrongGym')
+				.attr('id', town.name + ' Gym')
+				.text('Gym');
+		}
+	}
+
+	container.find('.img-thumbnail').attr('src', town.image);
+	hideAllViews();
+	container.show();
+	/*var html = "";
 	html += "<h3 class='townName strokeme'>"+town.name+"</h3>";
 	html += "<div class='row'>";
 
@@ -75,8 +109,8 @@ var showTown = function(town){
 	$("#townView").css("background-repeat", "no-repeat");
 	$("#townView").css("background-position", "center");    
 
-	hideAllViews()
-	$("#townView").show();	
+	hideAllViews();
+	$("#townView").show();*/
 }
 
 var loadTowns = function(){

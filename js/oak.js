@@ -146,9 +146,9 @@ var showOakItems = function(force){
 		for( var i = 0; i< oakItemList.length; i++){
 			if( oakItemList[i].earned === 1){
 				if( oakItemList[i].active === 1){
-					html += "<div id=item"+i+" class='oakItem activeOakItem'><img title='"+ oakItemList[i].flavorText+ "' class='oakItemImage tooltipRight' src='"+ oakItemList[i].image +"'' /></div>"
+					html += "<div id=item"+i+" class='oakItem'><img title='"+ oakItemList[i].flavorText+ "' class='oakItemImage tooltipRight img-thumbnail activeOakItem' src='"+ oakItemList[i].image +"'' /></div>"
 				} else {
-					html += "<div id=item"+i+" class='oakItem'><img title='"+ oakItemList[i].flavorText+ "' class='oakItemImage tooltipRight' src='"+ oakItemList[i].image +"'' /></div>"
+					html += "<div id=item"+i+" class='oakItem'><img title='"+ oakItemList[i].flavorText+ "' class='oakItemImage tooltipRight img-thumbnail' src='"+ oakItemList[i].image +"'' /></div>"
 				}
 			}
 		}

@@ -1,3 +1,38 @@
+body {
+	background: url('http://i.imgur.com/O7ZWigt.png') no-repeat ;
+	font-family: Tahoma, Verdana, sans-serif;
+	background-color: #7dad71;
+}
+
+.navbar-custom {
+	background: #0B486B;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	border: none;
+}
+
+.navbar-custom a {
+	color: ghostwhite !important;
+	cursor: pointer;
+}
+
+.navbar-custom li:hover {
+	background: #0b6d98;
+}
+
+.main {
+	position:absolute;
+	top: 50px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.main .container:first-child {
+	padding: 20px 0;
+}
+
 .oakImage {
 	display: block;
 	height:150px;
@@ -7,11 +42,8 @@
 }
 
 .oakItem{
-	height:50px;
-	width: 50px;
-	background-color:white;
-	border: 3px solid black;
-	margin-bottom:5px;
+	display: inline-block;
+	padding: 5px;
 }
 
 .shinyFiller {
@@ -19,14 +51,13 @@
 }
 
 .oakItemImage {
-	margin-top:9px;
 	display:block;
 	margin-left: auto;
     margin-right: auto;
 }
 
 .activeOakItem {
-	border: 3px solid red !important;
+	border-color: #337ab7;
 }
 
 .oakText {
@@ -79,23 +110,16 @@
 #gymDefeatedBody {
 	text-align: center;
 }
-#townView {
-	border: 1px solid black;
-	height: 250px;
-	margin-bottom: 20px;
+#townView .panel-body {
+	min-height: 350px;
+}
+
+#townView .panel-footer {
+	min-height: 80px;
 }
 
 .townName {
 	text-align:center;
-}
-
-.leftTownButton {
-	margin-left: 2%;
-	margin-bottom: 5px;
-}
-
-.rightTownButton {
-	margin-right: 2%;
 }
 
 .strokeme {
@@ -186,15 +210,7 @@
 	margin-bottom: 3px;
 }
 
-body {
-	background-image: url('http://i.imgur.com/O7ZWigt.png'); 
-}
-
-.container-fluid{
-	margin-top: 15px;
-}
-
-table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView {
+table, #currentEnemy, #upgradeBox {
 	background-color: white;
 }
 
@@ -204,22 +220,12 @@ table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView {
 	bottom:0px;
 }
 
-#leftColumn {
-	margin-right: 7.5px;
-	padding-right: 25px;
-}
-
-#rightColumn {
-	margin-left: 7.5px;
-}
-
 .pokeBadge{
 	opacity:0.10;
 }
 
 #map {
 	cursor:default;
-	border: 1px solid black;
 	font-size:17px;
 }
 
@@ -323,18 +329,13 @@ g, rect {
 
 }
 
-#mapDiv {
-	padding-left:0px;
-	padding-right: 0px;
-}
-
 #statTable {
 	margin-bottom:0px;
 }
 
-.container {
+/*.container {
 	width:100% !important
-}
+}*/
 
 #alreadyCaughtImage{
 	height:16px;
@@ -354,10 +355,8 @@ g, rect {
 }
 
 #console{
-	border: 1px solid black;
 	height:198px;
-	overflow: scroll;
-	margin-bottom: 10px;
+	overflow-y: auto;
 }
 
 #enemy:hover{
@@ -365,10 +364,16 @@ g, rect {
 }
 
 #currentEnemy, #gymView{
-	border: 1px solid black;
 	text-align:center;
-	height: 250px;
 	margin-bottom: 20px;
+}
+
+#currentEnemy .panel-body, #gymView .panel-body {
+	min-height: 350px;
+}
+
+#currentEnemy .panel-footer, #gymView .panel-footer {
+	min-height: 80px;
 }
 
 #pokemons table{
@@ -396,5 +401,3 @@ g, rect {
 	text-align: left;
 
 }
-
-

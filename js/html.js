@@ -4,7 +4,7 @@ var specialLog = [];
 var completeLog = specialLog;
 
 var log = function(text){
-	$("#console").append(text+"<br>");
+	$("#console").find('.scrollable-console').append('<div>' + text + '</div>');
 	var elem = document.getElementById('console');
 	elem.scrollTop = elem.scrollHeight;
 }
