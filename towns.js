@@ -55,6 +55,7 @@ var showTown = function(town){
 	html += "</h3>";
 	html += "<div class='row'>";
 		if(town.gym.bossPokemon != undefined){
+			oakExplainDungeons()
 			if(player.gymBadges.length >= town.gym.badgeReq){
 				html += "<button class='dungeon leftTownButton btn btn-primary col-sm-2' id='"+town.name+" Dungeon'>Dungeon<br>"+town.gym.tokenCost+" tokens</button>"
 			} else {

@@ -41,11 +41,11 @@ var oakExplainDungeons = function(){
 	if(!player.dungeonExplain){
 		html = "";
 		html += "<div class='row'><img class='oakImage' src='images/oak/oak.png'</div";
-		html += "<div class='row'><p class='oakText'>Visit towns to challenge the gym leaders!</p>";
-		html += "<img class='oakImage' src=images/oak/townExplain.png>";
+		html += "<div class='row'><p class='oakText'>Move around in the dungeon to explore all the rooms!<br>You complete the dungeon when you have defeated the boss Pokemon!</p>";
+		html += "<img class='oakImage' src=images/oak/dungeonExplain.png>";
 		$("#oakBody").html(html);
 		$("#oakModal").modal('show')
-		player.townExplain = 1;
+		player.dungeonExplain = 1;
 	}
 }
 

@@ -34,6 +34,7 @@ var player = {
 	evoExplain: 0,
 	mapExplain: 0,
 	townExplain: 0,
+	dungeonExplain: 0
 }
 
 var curEnemy = {
