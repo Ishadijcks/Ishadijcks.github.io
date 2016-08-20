@@ -37,6 +37,18 @@ var oakExplainTown = function(){
 	}
 }
 
+var oakExplainDungeons = function(){
+	if(!player.dungeonExplain){
+		html = "";
+		html += "<div class='row'><img class='oakImage' src='images/oak/oak.png'</div";
+		html += "<div class='row'><p class='oakText'>Visit towns to challenge the gym leaders!</p>";
+		html += "<img class='oakImage' src=images/oak/townExplain.png>";
+		$("#oakBody").html(html);
+		$("#oakModal").modal('show')
+		player.townExplain = 1;
+	}
+}
+
 
 var addOakItem = function(name, image, pokedexReq, flavorText, value){
 

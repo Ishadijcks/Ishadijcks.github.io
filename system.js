@@ -622,7 +622,7 @@ var generatePokemon = function(route){
 	//console.log(pokemonList);
 	curEnemy.name = randomPokemon.name;
 	curEnemy.id = randomPokemon.id;
-	curEnemy.health = Math.max(Math.floor(Math.pow( (randomPokemon.health*Math.pow(route,1.75)*(Math.pow(player.caughtPokemonList.length-1),1)/8) ,1.15)) - 20, 20) || 20;
+	curEnemy.health = Math.max(Math.floor(Math.pow( (randomPokemon.health*Math.pow(route,1.75)*(Math.pow(player.caughtPokemonList.length-1),1.2)/8) ,1.15)) , 20) || 20;
 	curEnemy.shiny = generateShiny();
 	curEnemy.maxHealth = curEnemy.health;
 	curEnemy.exp = Math.max(Math.floor(10*Math.pow(route ,1.1)), 10) || 10;
