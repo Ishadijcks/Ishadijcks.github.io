@@ -369,7 +369,7 @@ var dungeonEnemyDefeated = function() {
 
             updateDungeon();
             // hideDungeonEnemy();
-            if(curEnemy.boss){
+            if(curEnemy.boss && !curEnemy.alive){
                 dungeonDefeated();
             }
         }, player.catchTime);
