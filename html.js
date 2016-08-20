@@ -93,11 +93,14 @@ var updateItems = function(){
 			itemHtml += "<th></th>";
 		}
 		if(player.inventoryList[i] != undefined){
-			if(player.inventoryList[i].quantity > 0){
-				itemHtml += "<th><img class=smallImage onclick=\"useItem("+i+")\" src=images/items/"+player.inventoryList[i].id+".png>"+player.inventoryList[i].name + "<div class='useItemButton' id='"+player.inventoryList[i].id+"' >Use </div>	</th>";
+			if(player.inventoryList[i].quantity > 0 || player.inventoryList[i].time > 0){
+				itemHtml += "<th><img class=smallImage onclick=\"useItem("+i+")\" src=images/items/"+player.inventoryList[i].id+".png>"+player.inventoryList[i].name + "<div class='useItemButton' id='item"+player.inventoryList[i].id+"' >Use </div>	</th>";
 				itemHtml += "<th>"+player.inventoryList[i].quantity+"</th>";
-				itemHtml += "<th>"+player.inventoryList[i].timeLeft+"</th>"
-				
+				if(player.inventoryList[i].timeLeft == undefined){
+					itemHtml += "<th>0</th>"
+				} else {
+					itemHtml += "<th>"+player.inventoryList[i].timeLeft+"</th>"
+				}
 			}
 		}
 		itemHtml += "</tr>";

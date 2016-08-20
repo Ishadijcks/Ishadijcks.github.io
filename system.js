@@ -131,6 +131,13 @@ $(document).ready(function(){
 		}
 	});
 
+	$("body").on('click',".useItemButton", function(){
+		var id = this.id.substring(4);
+		activateItem(id);
+	});
+
+
+
 
 	$("body").on('click',".starter", function(){
 		$("#curStarterPick").html(this.id);
@@ -372,9 +379,7 @@ var getBonusCatchrate = function(){
 var getClickAttack = function(){
 	var totalMagnitude = 0;
 	for (var i = 0; i<player.inventoryList.length; i++){
-		console.log(player.inventoryList[i].inUse);
 		if (player.inventoryList[i].inUse == 1 && player.inventoryList[i].use == "clickBoost"){
-			console.log("triggered")
 			totalMagnitude += player.inventoryList[i].magnitude;
 		}
 	}
@@ -483,7 +488,7 @@ var enemyDefeated = function(){
 		player.routeKills[player.route]++
 		updateRoute();
 		var chance = Math.floor(Math.random()*100+1);
-			if (chance < 101){
+			if (chance < 15){
 				gainRandomItem(player.route);
 			}
 
