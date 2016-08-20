@@ -428,7 +428,7 @@ var enemyDefeated = function(){
 		var pokedexBonusExp = pokedexBonus(player.defeatNumbers[id]);
 		
 		var money = curEnemy.moneyReward;
-		var exp = 30 + 1.2*curEnemy.moneyReward;
+		var exp = 30 + Math.pow(1.2*curEnemy.moneyReward, 1/2);
 		exp *= pokedexBonusExp;
 
 		gainMoney(Math.floor(money), "You earned $");
@@ -598,7 +598,7 @@ var generatePokemon = function(route){
 	//console.log(pokemonList);
 	curEnemy.name = randomPokemon.name;
 	curEnemy.id = randomPokemon.id;
-	curEnemy.health = Math.max(Math.floor(Math.pow( (20+randomPokemon.health*route*(player.caughtPokemonList.length-1)/16) ,1.1)), 20);
+	curEnemy.health = Math.max(Math.floor(Math.pow( (randomPokemon.health*route*(player.caughtPokemonList.length-1)/8) ,1.15)), 20);
 	curEnemy.shiny = generateShiny();
 	curEnemy.maxHealth = curEnemy.health;
 
