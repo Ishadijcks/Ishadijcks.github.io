@@ -331,7 +331,7 @@ var experienceToLevel = function(exp,levelType){
 	
 	switch(levelType){
 	case "slow":
-		mult	 = 0.8;
+		mult = 0.8;
 		break;
 	case "medium slow":
 		mult = 0.9;
