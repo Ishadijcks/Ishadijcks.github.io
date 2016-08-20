@@ -112,6 +112,7 @@ var loadDungeon = function(townId) {
     dungeonCanMove = 1;
     updateDungeon();
     counter = setInterval(dungeonTimer, 100); //100 will  run it every 10th of a second
+    hideHealthBar();
 }
 
 var createMap = function(size) {
@@ -126,6 +127,13 @@ var createMap = function(size) {
         map[i] = "Pokemon";
     }
     shuffle(map);
+    var center = Math.floor(size * size / 2);
+    if(map[center] == "Boss"){
+        map[0] = "Boss";
+    }
+
+    map[center] = "Empty";
+    
     return map;
 }
 
@@ -230,6 +238,16 @@ var dungeonTimer = function() {
 //     $(".progress").hide();        
 // }
 
+var hideHealthBar = function(){
+    $("#dungeonProgress").hide();
+    $("#dungeonHealthDisplay").hide();
+}
+
+var showHealthBar = function(){
+    $("#dungeonProgress").show();
+    $("#dungeonHealthDisplay").show();
+}
+
 var updateDungeon = function() {
 
     if (curEnemy.health < 0) {
@@ -251,15 +269,16 @@ var updateDungeon = function() {
         html += "<div id='chestInfo'><img class='dungeonChest' id='chestImage' src=images/dungeons/chest.png></div><br>"
     }
     if(!dungeonCanMove && curEnemy.alive){
+
         html +=     "<span id='dungeonCatchDisplay'></span>";
-        html +=     "<div class='dungeonProgress progress'>";
-        html +=         "<div class='progress-bar progress-bar-danger' id='dungeonHealthBar' style='width: "+100 * curEnemy.health / curEnemy.maxHealth + "%"+"'></div>";
-        html +=     "</div>";
+        
         html +=     "<span id='dungeonHealthDisplay'>"+curEnemy.health + "/" + curEnemy.maxHealth + "</span>";
      
     }
 
-    $("#dungeonView").html(html);
+
+    $("#dungeonHealthBar").width(100*curEnemy.health/curEnemy.maxHealth+"%"); 
+    $("#dungeonTest").html(html);
 
 
     if (curEnemy.health == 0) {
@@ -306,6 +325,7 @@ var updateDungeonMap = function() {
 }
 
 var dungeonEnemyDefeated = function() {
+    hideHealthBar();
     clearInterval(attackInterval);
     attackInterval = setInterval(pokemonsAttack,1000);
     canCatch = 1;
@@ -315,9 +335,9 @@ var dungeonEnemyDefeated = function() {
         player.defeatNumbers[id]++;
         setTimeout(function() {
             if (alreadyCaught(curEnemy.name)) {
-                $("#dungeonEnemyInfo").html("<br>" + curEnemy.name + " <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=pokeball src=images/Pokeball.PNG>");
+                $("#dungeonEnemyInfo").html("<br>" + curEnemy.name + " <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=dungeonPokeball src=images/Pokeball.PNG>");
             } else {
-                $("#dungeonEnemyInfo").html("<br>" + curEnemy.name + " <br><img id=pokeball src=images/Pokeball.PNG>");
+                $("#dungeonEnemyInfo").html("<br>" + curEnemy.name + " <br><img id=dungeonPokeball src=images/Pokeball.PNG>");
             }
             player.pokeballs--;
         }, 1);
@@ -405,6 +425,7 @@ var alreadyGotBadge = function(badgeName) {
 }
 
 var spawnDungeonBoss = function() {
+    showHealthBar();
     dungeonCanMove = 0;
 
     hideDungeonChest();
@@ -423,6 +444,7 @@ var spawnDungeonBoss = function() {
 }
 
 var spawnDungeonPokemon = function() {
+    showHealthBar();
     dungeonCanMove = 0;
     var enemyName = currentDungeon.pokemons[Math.floor(Math.random() * currentDungeon.pokemons.length)];
     curEnemy.name = enemyName;
