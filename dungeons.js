@@ -23,41 +23,43 @@ var Dungeon = function(name, pokemons, size, baseHealth, bossPokemon, tokenCost,
     return temp;
 }
 
-var BossPokemon = function(name, health) {
+var BossPokemon = function(name, health, exp) {
     var temp = {
         name: name,
         health: health,
-        maxHealth: health
+        maxHealth: health,
+        exp: exp
     }
     return temp;
 }
 
 var ViridianForestDungeon = function() {
     var pokemonList = ["Caterpie", "Metapod", "Weedle", "Kakuna", "Pidgey", "Pidgeotto"];
-    var bossPokemon = BossPokemon("Pikachu", 1000);
-    return Dungeon("Viridian Forest Dungeon", pokemonList, 5, 100, bossPokemon, 0, 0);
+    var bossPokemon = BossPokemon("Pikachu", 1000, 300);
+    return Dungeon("Viridian Forest Dungeon", pokemonList, 5, 100, bossPokemon, 25, 0);
 }
 
 var DiglettsCaveDungeon = function(){
     var pokemonList = ["Diglett"];
-    var bossPokemon = BossPokemon("Dugtrio", 1500);
-    return Dungeon("Digglets Cave Dungeon", pokemonList, 5, 150, bossPokemon, 0, 0);   
+    var bossPokemon = BossPokemon("Dugtrio", 1500, 400);
+    return Dungeon("Digglets Cave Dungeon", pokemonList, 5, 150, bossPokemon, 50, 0);   
 }
 
 var MtMoonDungeon = function() {
     var pokemonList = ["Sandshrew", "Clefairy", "Zubat", "Paras", "Geodude", "Pidgeotto"];
+    
     if (Math.random() >= 0.5) {
         var bossPokemon = BossPokemon("Kabuto", 2000);
     } else {
         var bossPokemon = BossPokemon("Omanyte", 2000);
     }
-    return Dungeon("Mt. Moon Dungeon", pokemonList, 5, 250, bossPokemon, 0, 1);
+    return Dungeon("Mt. Moon Dungeon", pokemonList, 5, 250, bossPokemon, 200, 1);
 }
 
 var RockTunnelDungeon = function(){
     var pokemonList = ["Zubat", "Geodude", "Machop"];
     var bossPokemon = BossPokemon("Onix", 3000);
-    return Dungeon("Rock Tunnel Dungeon", pokemonList, 5, 400, bossPokemon, 0, 2);   
+    return Dungeon("Rock Tunnel Dungeon", pokemonList, 5, 400, bossPokemon, 500, 2);   
 }
 
 var PowerPlantDungeon = function(){
@@ -67,13 +69,13 @@ var PowerPlantDungeon = function(){
     } else {
         var bossPokemon = BossPokemon("Electabuzz", 5000);
     }
-    return Dungeon("Power Plant Dungeon", pokemonList, 5, 800, bossPokemon, 0, 2);   
+    return Dungeon("Power Plant Dungeon", pokemonList, 5, 800, bossPokemon, 2500, 2);   
 }
 
 var PokemonTowerDungeon = function(){
     var pokemonList = ["Gastly", "Haunter", "Cubone"];
     var bossPokemon = BossPokemon("Marowak", 7000);
-    return Dungeon("Pokemon tower Dungeon", pokemonList, 5, 1200, bossPokemon, 0, 2);   
+    return Dungeon("Pokemon tower Dungeon", pokemonList, 5, 1200, bossPokemon, 3500, 2);   
 }
 
 var SeafoamIslandsDungeon = function(){
@@ -83,7 +85,7 @@ var SeafoamIslandsDungeon = function(){
     } else {
         var bossPokemon = BossPokemon("Seel", 8000);
     }
-    return Dungeon("Seafoam Islands Dungeon", pokemonList, 5, 1500, bossPokemon, 0, 6);   
+    return Dungeon("Seafoam Islands Dungeon", pokemonList, 5, 1500, bossPokemon, 5000, 6);   
 }
 
 var VictoryRoadDungeon = function(){
@@ -93,26 +95,29 @@ var VictoryRoadDungeon = function(){
     } else {
         var bossPokemon = BossPokemon("Machoke", 10000);
     }
-    return Dungeon("Victory Road Dungeon", pokemonList, 5, 1800, bossPokemon, 0, 8);   
+    return Dungeon("Victory Road Dungeon", pokemonList, 5, 1800, bossPokemon, 10000, 8);   
 }
 
 var loadDungeon = function(townId) {
-    curEnemy.alive = false;
-    clearInterval(counter);
+        currentDungeon = getTown(townId).gym;
+    if( player.dungeonTokens >= currentDungeon.tokenCost){
+        curEnemy.alive = false;
+        clearInterval(counter);
 
-    currentDungeon = getTown(townId).gym;
 
-    currentDungeon.timeLeft = currentDungeon.timeLimit;
+        currentDungeon.timeLeft = currentDungeon.timeLimit;
 
-    currentDungeon.map = createMap(currentDungeon.size);
-    playerPosition = Math.floor(currentDungeon.size * currentDungeon.size / 2);
-    currentDungeon.mapDiscovered[playerPosition] = 1;
-    player.dungeonTokens -= currentDungeon.tokenCost;
-   // spawnDungeonPokemon();
-    dungeonCanMove = 1;
-    updateDungeon();
-    counter = setInterval(dungeonTimer, 100); //100 will  run it every 10th of a second
-    hideHealthBar();
+        currentDungeon.map = createMap(currentDungeon.size);
+        playerPosition = Math.floor(currentDungeon.size * currentDungeon.size / 2);
+        currentDungeon.mapDiscovered[playerPosition] = 1;
+        player.dungeonTokens -= currentDungeon.tokenCost;
+        dungeonCanMove = 1;
+        updateDungeon();
+        counter = setInterval(dungeonTimer, 100); //100 will  run it every 10th of a second
+        hideHealthBar();
+    } else {
+        $.notify("You don't have enough tokens to start this dungeon","error");
+    }
 }
 
 var createMap = function(size) {
@@ -347,6 +352,7 @@ var dungeonEnemyDefeated = function() {
             player.pokeballs--;
         }, 1);
 
+        gainExp(curEnemy.exp);
 
         dungeonCanMove = 1;
         var catchRate = curEnemy.catchRate + getBonusCatchrate();
@@ -443,6 +449,8 @@ var spawnDungeonBoss = function() {
     curEnemy.route = 0;
     curEnemy.boss = 1;
     curEnemy.catchRate = 10;
+    curEnemy.shiny = generateShiny();
+    curEnemy.exp = currentDungeon.bossPokemon.exp;
     clearInterval(attackInterval);
     attackInterval = setInterval(pokemonsAttack, 1000);
     updateDungeon();
@@ -460,12 +468,25 @@ var spawnDungeonPokemon = function() {
     curEnemy.alive = true;
     curEnemy.route = 0;
     curEnemy.catchRate = 20;
+    curEnemy.shiny = generateShiny();
     curEnemy.boss = 0;
+    curEnemy.exp = currentDungeon.baseHealth/4;
     clearInterval(attackInterval);
     attackInterval = setInterval(pokemonsAttack, 1000);
     updateDungeon();
 }
 
+var allPokemonCaughtInDungeon = function(pokemons, boss){
+    if(!alreadyCaught(boss)){
+        return false;
+    }
+    for( var i = 0; i<pokemons.length; i++){
+        if(!alreadyCaught(pokemons[i])){
+            return false;
+        }
+    }
+    return true;
+}
 
 /**
  * Shuffles array in place.
