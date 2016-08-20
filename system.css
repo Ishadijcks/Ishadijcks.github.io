@@ -47,7 +47,7 @@
 }
 
 .playerRoom {
-	background-color: blue;
+	background-color: green;
 }
 
 .bossRoom {
@@ -55,7 +55,7 @@
 }
 
 .chestRoom {
-	background-color: green;
+	background-color: orange;
 }
 
 .enemyRoom {
@@ -296,6 +296,17 @@ table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView, #dung
     width:76px;
 
 }
+
+#dungeonPokeball {
+	-webkit-animation:spinleft 1s linear infinite;
+    -moz-animation:spinleft 1s linear infinite;
+    animation:spinleft 1s linear infinite;
+    margin: 20px;
+    height:76px;
+    width:76px;
+
+}
+
 
 @-moz-keyframes spinleft { 100% { -moz-transform: rotate(20deg); } }
 @-webkit-keyframes spinleft { 100% { -webkit-transform: rotate(20deg); } }
