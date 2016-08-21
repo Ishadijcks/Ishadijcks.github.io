@@ -20,9 +20,13 @@ var itemList = [
 {id:3, name:"Pecha Berry", price:100, use:null, unUse:null, time:0, type:"berry", instant:1, magnitude: 1},
 {id:4, name:"Rawst Berry", price:100, use:null, unUse:null, time:0, type:"berry", instant:1, magnitude: 1},
 {id:5, name:"Aspear Berry", price:100, use:null, unUse:null, time:0, type:"berry", instant:1, magnitude: 1},
-{id:6, name:"X Attack", price:25000, use:"attackBoost", unUse:null, time:30, type:"combat", instant:0, magnitude: 1.5},
-{id:7, name:"X Click", price:25000, use:"clickBoost", unUse:null, time:30, type:"combat", instant:0, magnitude: 1.5},
-];
+{id:6, name:"X Attack", price:25000, use:"attackBoost", unUse:null, time:60, type:"combat", instant:0, magnitude: 2, flavorText: "Double your Pokemons attack for 60 seconds!"},
+{id:7, name:"X Click", price:25000, use:"clickBoost", unUse:null, time:60, type:"combat", instant:0, magnitude: 2, flavorText: "Double your click attack for 60 seconds!"},
+{id:8, name:"Lucky Incense", price:25000, use:"coinBoost", unUse:null, time:60, type:"combat", instant:0, magnitude: 2, flavorText: "Double the money you earn for 60 seconds!"},
+{id:9, name:"Item Magnet", price:25000, use:"itemBoost", unUse:null, time:60, type:"combat", instant:0, magnitude: 2, flavorText: "Double your chance of getting items for 60 seconds!"},
+{id:10, name:"X Exp", price:25000, use:"expBoost", unUse:null, time:60, type:"combat", instant:0, magnitude: 2, flavorText: "Double the exp you earn for 60 seconds!"},
+{id:11, name:"Token Collector", price:25000, use:"tokenBoost", unUse:null, time:60, type:"combat", instant:0, magnitude: 2, flavorText: "Double the dungeon tokens you earn for 60 seconds!"},
+
 
 var itemsPerRoute = {
 	1: ["X Attack", "X Click"],
@@ -50,6 +54,10 @@ var itemsPerRoute = {
 	23: ["X Attack", "X Click"],
 	24: ["X Attack", "X Click"],
 	25: ["X Attack", "X Click"],
+}
+
+var getItemChance = function(route){
+	return 1+route/10;
 }
 
 

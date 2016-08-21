@@ -94,12 +94,12 @@ var updateItems = function(){
 		}
 		if(player.inventoryList[i] != undefined){
 			if(player.inventoryList[i].quantity > 0 || player.inventoryList[i].time > 0){
-				itemHtml += "<th><img class=smallImage onclick=\"useItem("+i+")\" src=images/items/"+player.inventoryList[i].id+".png>"+player.inventoryList[i].name + "<div class='useItemButton' id='item"+player.inventoryList[i].id+"' >Use </div>	</th>";
+				itemHtml += "<th><img class=smallImage src=images/items/"+player.inventoryList[i].id+".png>"+player.inventoryList[i].name + "<div class='useItemButton' id='item"+player.inventoryList[i].id+"' >Use </div>	</th>";
 				itemHtml += "<th>"+player.inventoryList[i].quantity+"</th>";
 				if(player.inventoryList[i].timeLeft == undefined){
-					itemHtml += "<th>0</th>"
+					itemHtml += "<th>0s</th>"
 				} else {
-					itemHtml += "<th>"+player.inventoryList[i].timeLeft+"</th>"
+					itemHtml += "<th>"+player.inventoryList[i].timeLeft+"s</th>"
 				}
 			}
 		}
