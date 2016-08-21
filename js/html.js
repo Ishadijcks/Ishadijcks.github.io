@@ -4,10 +4,10 @@ var specialLog = [];
 var completeLog = specialLog;
 
 var log = function(text){
-	$("#console").find('.scrollable-console').append('<div>' + text + '</div>');
+	$("#console").find('.scrollable-console').prepend('<tr><th>' + text + '</th>th></tr>');
 	var elem = document.getElementById('console');
 	elem.scrollTop = elem.scrollHeight;
-}
+};
 
 		// HTML functions
 

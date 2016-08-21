@@ -33,6 +33,15 @@ body {
 	padding: 20px 0;
 }
 
+.notifyjs-corner {
+	top: 50px !important;;
+}
+
+#sortBox {
+	width: auto;
+	margin: 0 auto;
+}
+
 .oakImage {
 	display: block;
 	height:150px;
@@ -210,10 +219,6 @@ body {
 	margin-bottom: 3px;
 }
 
-table, #currentEnemy, #upgradeBox {
-	background-color: white;
-}
-
 #navBar{
 	border: 1px solid black;
 
@@ -234,11 +239,9 @@ table, #currentEnemy, #upgradeBox {
 }
 
 #pokemons {
-	height:300px;
-	overflow:auto;
-	background-color:white;
-	border:1px solid black;
-	margin-bottom: 20px;
+	max-height: 300px;
+	overflow-y: auto;
+	padding: 0;
 }
 
 
@@ -255,32 +258,25 @@ table, #currentEnemy, #upgradeBox {
 @-moz-keyframes spinleft { 100% { -moz-transform: rotate(20deg); } }
 @-webkit-keyframes spinleft { 100% { -webkit-transform: rotate(20deg); } }
 
-    @keyframes spinleft { 
-        0% { 
-            transform: rotate(0deg); 
-        }
-        15% { 
-            transform: rotate(10deg); 
-        }
-        30% { 
-            transform: rotate(0deg); 
-        }
-        50% {
-        	transform: rotate (0deg);
-        }
-        65% { 
-            transform: rotate(-10deg); 
-        }
-        80% { 
-            transform: rotate(0deg); 
-        }
-    }
-
-
-
-#upgradeBox{
-	text-align:center;
-	border: 1px solid black;
+@keyframes spinleft {
+	0% {
+		transform: rotate(0deg);
+	}
+	15% {
+		transform: rotate(10deg);
+	}
+	30% {
+		transform: rotate(0deg);
+	}
+	50% {
+		transform: rotate (0deg);
+	}
+	65% {
+		transform: rotate(-10deg);
+	}
+	80% {
+		transform: rotate(0deg);
+	}
 }
 
 .smallImage{
@@ -320,22 +316,12 @@ g, rect {
 }
 
 #statDiv {
-	height:300px;
-	overflow:auto;
-	background-color:white;
-	border:1px solid black;
-	margin-bottom: 20px;
-	padding:0;
-
+	overflow-y:auto;
 }
 
 #statTable {
-	margin-bottom:0px;
+	margin-bottom:0;
 }
-
-/*.container {
-	width:100% !important
-}*/
 
 #alreadyCaughtImage{
 	height:16px;
@@ -357,6 +343,11 @@ g, rect {
 #console{
 	height:198px;
 	overflow-y: auto;
+	padding: 0;
+}
+
+#console th {
+	font-weight: 400;
 }
 
 #enemy:hover{
