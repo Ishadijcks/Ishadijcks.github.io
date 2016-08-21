@@ -37,6 +37,18 @@ var oakExplainTown = function(){
 	}
 }
 
+var oakExplainDungeons = function(){
+	if(!player.dungeonExplain){
+		html = "";
+		html += "<div class='row'><img class='oakImage' src='images/oak/oak.png'</div";
+		html += "<div class='row'><p class='oakText'>Move around in the dungeon to explore all the rooms!<br>You complete the dungeon when you have defeated the boss Pokemon!</p>";
+		html += "<img class='oakImage' src=images/oak/dungeonExplain.png>";
+		$("#oakBody").html(html);
+		$("#oakModal").modal('show')
+		player.dungeonExplain = 1;
+	}
+}
+
 
 var addOakItem = function(name, image, pokedexReq, flavorText, value){
 

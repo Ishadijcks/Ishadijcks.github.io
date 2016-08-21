@@ -34,7 +34,11 @@ var player = {
 	evoExplain: 0,
 	mapExplain: 0,
 	townExplain: 0,
+<<<<<<< HEAD
 	inventoryList: []
+=======
+	dungeonExplain: 0
+>>>>>>> refs/remotes/Ishadijcks/dungeons
 }
 
 var curEnemy = {
@@ -336,7 +340,7 @@ var experienceToLevel = function(exp,levelType){
 	
 	switch(levelType){
 	case "slow":
-		mult	 = 0.8;
+		mult = 0.8;
 		break;
 	case "medium slow":
 		mult = 0.9;
@@ -393,6 +397,23 @@ var getPokemonAttack = function(){
 	return pokemonAttack;
 }
 
+var gainTokens = function(amount){
+	if(amount >= 1){
+		amount *= player.dungeonTokenMultiplier;
+
+		if(isActive("Token Case")){
+			money *= getOakItemBonus("Token Case")
+		}
+		amount = Math.floor(amount);
+		player.dungeonTokens += amount
+		if(amount == 1){
+			log("You gained " + amount + " dungeon token!");
+		} else {
+			log("You gained " + amount + " dungeon tokens!");	
+		}
+	}
+}
+
 var gainMoney = function(money, message){
 	money *= player.moneyMultiplier;
 
@@ -406,18 +427,28 @@ var gainMoney = function(money, message){
 
 // All pokemon you have gain exp
 var gainExp = function(exp){
-	exp *= player.expMultiplier
-	if(isActive("Exp Share")){
-		exp *= getOakItemBonus("Exp Share")
-	}
-
-	for( var i = 0; i<player.caughtPokemonList.length; i++){
-		var pokemonLevel = experienceToLevel(player.caughtPokemonList[i].experience, player.caughtPokemonList[i].levelType);
-		if(pokemonLevel < (1+player.gymBadges.length) * 10){
-			player.caughtPokemonList[i].experience+= exp;
+	if(!isNaN(exp)){
+		exp *= player.expMultiplier
+		if(isActive("Exp Share")){
+			exp *= getOakItemBonus("Exp Share")
 		}
+
+		var pokedexBonusExp = pokedexBonus(player.defeatNumbers[curEnemy.id]);
+		exp *= pokedexBonusExp;
+
+		exp = Math.floor(exp);
+		$.notify("exp: " + exp);
+
+		for( var i = 0; i<player.caughtPokemonList.length; i++){
+			var pokemonLevel = experienceToLevel(player.caughtPokemonList[i].experience, player.caughtPokemonList[i].levelType);
+			if(pokemonLevel < (1+player.gymBadges.length) * 10){
+				player.caughtPokemonList[i].experience+= exp;
+			}
+		}
+		checkEvolution();
+	} else {
+		console.log("exp NaN");
 	}
-	checkEvolution();
 }
 
 
@@ -442,11 +473,11 @@ var enemyDefeated = function(){
 		var id = getPokemonByName(curEnemy.name).id-1;
 		player.defeatNumbers[id]++;
 		
-		var pokedexBonusExp = pokedexBonus(player.defeatNumbers[id]);
 		
 		var money = curEnemy.moneyReward;
-		var exp = 30 + 1.2*curEnemy.moneyReward;
-		exp *= pokedexBonusExp;
+		var exp = curEnemy.exp;
+		
+
 
 		gainMoney(Math.floor(money), "You earned $");
 		gainExp(exp);
@@ -529,16 +560,13 @@ var capturePokemon = function(name, shiny){
 				}
 			}
 		} else {
-		
-			var deviation = Math.floor(Math.random() * 11 ) -5;
-		//	console.log("Deviation: " + deviation);
-			if (deviation > player.route + 1){
-				var money = Math.floor(30*1*player.moneyMultiplier);
+			if(inProgress == 3){
+				console.log(currentDungeon);
 			}
-			else {
-				var money = Math.floor((30-deviation)*player.route/4*player.moneyMultiplier);
-			}
-			gainMoney(money, "You managed to sell the "+name+" for $");
+			var tokens = Math.floor(Math.pow(player.route,1.4) - player.route/2);
+			var deviation = Math.floor(Math.random() * 2 ) - 4;
+			tokens -= deviation
+			gainTokens(tokens);
 		}
 	}
 	player.totalCaught++;
@@ -619,10 +647,11 @@ var generatePokemon = function(route){
 	//console.log(pokemonList);
 	curEnemy.name = randomPokemon.name;
 	curEnemy.id = randomPokemon.id;
-	curEnemy.health = Math.max(Math.floor(Math.pow( (20+randomPokemon.health*route*(player.caughtPokemonList.length-1)/16) ,1.1)), 20);
+	curEnemy.health = Math.max(Math.floor(Math.pow( (randomPokemon.health*Math.pow(route,1.75)*(Math.pow(player.caughtPokemonList.length-1),1.2)/8) ,1.15)) , 20) || 20;
 	curEnemy.shiny = generateShiny();
 	curEnemy.maxHealth = curEnemy.health;
-
+	curEnemy.exp = Math.max(Math.floor(10*Math.pow(route ,1.1)), 10) || 10;
+	$.notify("pre: "+ curEnemy.exp);
 	var catchVariation = Math.floor(Math.random()*7-3);
 	curEnemy.catchRate = Math.floor(Math.pow(randomPokemon.catchRate,0.75)) + catchVariation;
 	curEnemy.alive = true;
@@ -646,7 +675,7 @@ var generateLegendary = function(){
 	if(player.route > 9){
 		var chance = Math.floor(Math.random()*500+1);
 		if(isActive("Legendary Charm")){
-			chance *= getOakItemBonus("Legendary Charm")
+			chance /= getOakItemBonus("Legendary Charm")
 		}
 		if (chance < 3){
 			chance = Math.floor(Math.random()*100+1);

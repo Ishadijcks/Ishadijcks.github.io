@@ -45,12 +45,20 @@ var accessToTown = function(routeList){
 var showTown = function(town){
 	
 	var html = "";
-	html += "<h3 class='townName strokeme'>"+town.name+"</h3>";
+	html += "<h3 class='townName strokeme'>"+town.name;
+	console.log(town.gym.pokemons);
+	if(town.gym.bossPokemon != undefined){
+		if(allPokemonCaughtInDungeon(town.gym.pokemons, town.gym.bossPokemon.name)){
+		html += "<img id=alreadyCaughtImage src=images/Pokeball.PNG>";
+		}
+	}
+	html += "</h3>";
 	html += "<div class='row'>";
 	if(town.gym != null){
 		if(town.gym.bossPokemon != undefined){
+			oakExplainDungeons()
 			if(player.gymBadges.length >= town.gym.badgeReq){
-				html += "<button class='dungeon leftTownButton btn btn-primary col-sm-2' id='"+town.name+" Dungeon'>Dungeon</button>"
+				html += "<button class='dungeon leftTownButton btn btn-primary col-sm-2' id='"+town.name+" Dungeon'>Dungeon<br>"+town.gym.tokenCost+" tokens</button>"
 			} else {
 				html += "<button class='wrongDungeon leftTownButton btn btn-primary disabled col-sm-2' id='"+town.name+" Dungeon'>Dungeon</button>"
 			}
