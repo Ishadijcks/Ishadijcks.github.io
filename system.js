@@ -377,13 +377,8 @@ var getBonusCatchrate = function(){
 }
 
 var getClickAttack = function(){
-	var totalMagnitude = 0;
-	for (var i = 0; i<player.inventoryList.length; i++){
-		if (player.inventoryList[i].inUse == 1 && player.inventoryList[i].use == "clickBoost"){
-			totalMagnitude += player.inventoryList[i].magnitude;
-		}
-	}
-	var clickAttack = Math.floor(player.clickAttack*(player.clickMultiplier+totalMagnitude));
+	var totalMagnitude = getItemBonus("clickBoost")
+	var clickAttack = Math.floor(player.clickAttack*player.clickMultiplier*totalMagnitude);
 	if(isActive("Poison Barb")){
 		clickAttack *= getOakItemBonus("Poison Barb");
 	}
@@ -391,16 +386,21 @@ var getClickAttack = function(){
 }
 
 var getPokemonAttack = function(){
-	var totalMagnitude = 0;
-	for (var i = 0; i<player.inventoryList.length; i++){
-		if (player.inventoryList[i].inUse == 1 && player.inventoryList[i].use == "attackBoost"){
-			totalMagnitude += player.inventoryList[i].magnitude;
-		}
-	}
-	var pokemonAttack = Math.floor(player.attack*(player.attackMultiplier+totalMagnitude));
+	var totalMagnitude = getItemBonus("attackBoost");
+	var pokemonAttack = Math.floor(player.attack*player.attackMultiplier*totalMagnitude);
 	return pokemonAttack;
 }
 
+var getItemBonus = function(type){
+	var totalMagnitude = 0;
+	for (var i = 0; i<player.inventoryList.length; i++){
+		if (player.inventoryList[i].inUse == 1 && player.inventoryList[i].use == type){
+			totalMagnitude += player.inventoryList[i].magnitude;
+		}
+	}
+	var totalMagnitude = Math.max(1, totalMagnitude);
+	return totalMagnitude;
+}
 var gainTokens = function(amount){
 	if(amount >= 1){
 		amount *= player.dungeonTokenMultiplier;
@@ -409,6 +409,10 @@ var gainTokens = function(amount){
 			money *= getOakItemBonus("Token Case")
 		}
 		amount = Math.floor(amount);
+
+		var totalMagnitude = getItemBonus("tokenBoost");
+		amount *= totalMagnitude;
+
 		player.dungeonTokens += amount
 		if(amount == 1){
 			log("You gained " + amount + " dungeon token!");
@@ -420,7 +424,8 @@ var gainTokens = function(amount){
 
 var gainMoney = function(money, message){
 	money *= player.moneyMultiplier;
-
+	var totalMagnitude = getItemBonus("coinBoost");
+	money *= totalMagnitude;
 	if(isActive("Amulet Coin")){
 		money *= getOakItemBonus("Amulet Coin")
 	}
@@ -441,8 +446,10 @@ var gainExp = function(exp){
 		exp *= pokedexBonusExp;
 
 		exp = Math.floor(exp);
+		var totalMagnitude = getItemBonus("expBoost");
+		exp *= totalMagnitude;
 		$.notify("exp: " + exp);
-
+	
 		for( var i = 0; i<player.caughtPokemonList.length; i++){
 			var pokemonLevel = experienceToLevel(player.caughtPokemonList[i].experience, player.caughtPokemonList[i].levelType);
 			if(pokemonLevel < (1+player.gymBadges.length) * 10){
@@ -488,9 +495,9 @@ var enemyDefeated = function(){
 		player.routeKills[player.route]++
 		updateRoute();
 		var chance = Math.floor(Math.random()*100+1);
-			if (chance < 50){
+		if (chance < getItemChance(player.route)){
 				gainRandomItem(player.route);
-			}
+		}
 
 
 		
