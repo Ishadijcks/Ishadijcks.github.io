@@ -174,10 +174,10 @@ var activateItem = function(id){
 	// Item with a timer.
 	if(!isNaN(item.time)){
 		if(item.quantity > 0){
-			item.timeLeft = item.time;
+			item.timeLeft += item.time;
 			item.inUse = 1;
 			item.quantity--;
-			$.notify(""+item.name+" activated", "succes")
+			//$.notify(""+item.name+" activated", "succes")
 			updateItems();
 			updateStats();
 			return true;
