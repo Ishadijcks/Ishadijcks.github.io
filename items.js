@@ -26,34 +26,34 @@ var itemList = [
 {id:9, name:"Item Magnet", price:25000, use:"itemBoost", unUse:null, time:60, type:"combat", instant:0, magnitude: 2, flavorText: "Double your chance of getting items for 60 seconds!"},
 {id:10, name:"X Exp", price:25000, use:"expBoost", unUse:null, time:60, type:"combat", instant:0, magnitude: 2, flavorText: "Double the exp you earn for 60 seconds!"},
 {id:11, name:"Token Collector", price:25000, use:"tokenBoost", unUse:null, time:60, type:"combat", instant:0, magnitude: 2, flavorText: "Double the dungeon tokens you earn for 60 seconds!"},
-
+]
 
 var itemsPerRoute = {
-	1: ["X Attack", "X Click"],
-	2: ["X Attack", "X Click"],
-	3: ["X Attack", "X Click"],
-	4: ["X Attack", "X Click"],
-	5: ["X Attack", "X Click"],
-	6: ["X Attack", "X Click"],
-	7: ["X Attack", "X Click"],
-	8: ["X Attack", "X Click"],
-	9: ["X Attack", "X Click"],
-	10: ["X Attack", "X Click"],
-	11: ["X Attack", "X Click"],
-	12: ["X Attack", "X Click"],
-	13: ["X Attack", "X Click"],
-	14: ["X Attack", "X Click"],
-	15: ["X Attack", "X Click"],
-	16: ["X Attack", "X Click"],
-	17: ["X Attack", "X Click"],
-	18: ["X Attack", "X Click"],
-	19: ["X Attack", "X Click"],
-	20: ["X Attack", "X Click"],
-	21: ["X Attack", "X Click"],
-	22: ["X Attack", "X Click"],
-	23: ["X Attack", "X Click"],
-	24: ["X Attack", "X Click"],
-	25: ["X Attack", "X Click"],
+	1: ["X Attack", "X Attack", "X Attack", "X Attack", "X Attack", "X Attack", "Lucky Incense"],
+	2: ["X Attack", "X Click", "X Attack", "X Click", "X Attack", "X Attack", "Lucky Incense"],
+	3: ["X Attack", "X Click", "X Attack", "X Click", "X Attack", "X Attack", "Token Collector"],
+	4: ["X Attack", "X Click", "X Attack", "X Attack", "X Attack", "Item Magnet"],
+	5: ["X Attack", "X Click", "X Attack", "X Attack", "X Click", "Lucky Incense"],
+	6: ["X Attack", "X Click", "X Attack", "X Attack", "Item Magnet"],
+	7: ["X Attack", "X Click", "X Attack", "X Attack", "X Exp"],
+	8: ["X Attack", "X Click", "X Attack", "X Attack", "Token Collector"],
+	9: ["X Attack", "X Click", "X Attack", "X Attack", "Item Magnet"],
+	10: ["X Attack", "X Click", "X Click", "Lucky Incense"],
+	11: ["X Attack", "X Click", "X Attack", "Item Magnet"],
+	12: ["X Attack", "X Click", "X Click", "Item Magnet"],
+	13: ["X Attack", "X Click", "X Attack", "X Exp"],
+	14: ["X Attack", "X Click", "X Click", "Token Collector"],
+	15: ["X Attack", "X Click", "Lucky Incense"],
+	16: ["X Attack", "X Click", "Item Magnet"],
+	17: ["X Attack", "X Click", "X Exp"],
+	18: ["X Attack", "X Click", "Token Collector"],
+	19: ["X Attack", "Lucky Incense"],
+	20: ["X Click", "Item Magnet"],
+	21: ["X Attack", "X Exp"],
+	22: ["X Click", "Token Collector"],
+	23: ["Lucky Incense", "Item Magnet", "Token Collector"],
+	24: ["X Exp", "Lucky Incense", "Token Collecor"],
+	25: ["X Exp", "Item Magnet"],
 }
 
 var getItemChance = function(route){
@@ -79,7 +79,6 @@ var gainRandomItem = function(route){
 }
 
 var gainItemByName = function(name){
-	console.log(name);
 	if (alreadyHaveItem(name)){
 		var itemNum = findItemInInventory(name);
 		player.inventoryList[itemNum].quantity++;
