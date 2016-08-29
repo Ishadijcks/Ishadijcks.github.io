@@ -57,7 +57,7 @@ var itemsPerRoute = {
 }
 
 var getItemChance = function(route){
-	return 1+route/10;
+	return (1+route/10)*getItemBonus("itemBoost");
 }
 
 
