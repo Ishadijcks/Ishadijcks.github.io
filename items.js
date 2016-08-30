@@ -29,15 +29,15 @@ var itemList = [
 ]
 
 var itemsPerRoute = {
-	1: ["X Attack", "X Attack", "X Attack", "X Attack", "X Attack", "X Attack", "Lucky Incense"],
+	1: ["X Attack", "X Click", "X Attack", "X Click", "X Attack", "X Click", "Lucky Incense"],
 	2: ["X Attack", "X Click", "X Attack", "X Click", "X Attack", "X Attack", "Lucky Incense"],
 	3: ["X Attack", "X Click", "X Attack", "X Click", "X Attack", "X Attack", "Token Collector"],
-	4: ["X Attack", "X Click", "X Attack", "X Attack", "X Attack", "Item Magnet"],
-	5: ["X Attack", "X Click", "X Attack", "X Attack", "X Click", "Lucky Incense"],
-	6: ["X Attack", "X Click", "X Attack", "X Attack", "Item Magnet"],
-	7: ["X Attack", "X Click", "X Attack", "X Attack", "X Exp"],
-	8: ["X Attack", "X Click", "X Attack", "X Attack", "Token Collector"],
-	9: ["X Attack", "X Click", "X Attack", "X Attack", "Item Magnet"],
+	4: ["X Attack", "X Click", "X Attack", "X Click", "X Attack", "Item Magnet"],
+	5: ["X Attack", "X Click", "X Attack", "X Click", "X Click", "Lucky Incense"],
+	6: ["X Attack", "X Click", "X Attack", "X Click", "Item Magnet"],
+	7: ["X Attack", "X Click", "X Attack", "X Click", "X Exp"],
+	8: ["X Attack", "X Click", "X Attack", "X Click", "Token Collector"],
+	9: ["X Attack", "X Click", "X Attack", "X Click", "Item Magnet"],
 	10: ["X Attack", "X Click", "X Click", "Lucky Incense"],
 	11: ["X Attack", "X Click", "X Attack", "Item Magnet"],
 	12: ["X Attack", "X Click", "X Click", "Item Magnet"],
@@ -52,7 +52,7 @@ var itemsPerRoute = {
 	21: ["X Attack", "X Exp"],
 	22: ["X Click", "Token Collector"],
 	23: ["Lucky Incense", "Item Magnet", "Token Collector"],
-	24: ["X Exp", "Lucky Incense", "Token Collecor"],
+	24: ["X Exp", "Lucky Incense", "Token Collector"],
 	25: ["X Exp", "Item Magnet"],
 }
 
@@ -79,13 +79,15 @@ var gainRandomItem = function(route){
 }
 
 var gainItemByName = function(name){
+	console.log(name);
 	if (alreadyHaveItem(name)){
 		var itemNum = findItemInInventory(name);
 		player.inventoryList[itemNum].quantity++;
 	}
 	else{
+
 		var item = getItemByName(name);
-		var itemObject = {id:item.id, name:item.name, quantity:1, type:item.type, use:item.use, unUse:item.unUse, time:item.time, timeLeft:0, instant:item.instant, magnitude:item.magnitude, inUse:0};
+		var itemObject = {id:item.id, name:item.name, quantity:1, type:item.type, use:item.use, unUse:item.unUse, time:item.time, timeLeft:0, instant:item.instant, magnitude:item.magnitude, inUse:0, flavorText:item.flavorText};
 		player.inventoryList.push(itemObject);
 	}
 
