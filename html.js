@@ -113,8 +113,7 @@ var updateItems = function(){
 	$("#itemBody").html(itemHtml);
 
 		$(".tooltipItem").tooltipster({
-			position: "left",
-			delay: 1
+			position: "left"
 	});
 
 }
