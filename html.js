@@ -82,6 +82,42 @@ var updateCaughtList = function(){
 
 }
 
+var updateItems = function(){
+
+	var itemHtml = ""
+
+	for (var i = 0; i<player.inventoryList.length; i++){
+		itemHtml += "<tr>";
+		if(player.inventoryList.length == 0 || isInventoryEmpty()==true){
+			itemHtml += "<th>You have no items</th>";
+			itemHtml += "<th></th>";
+		}
+		if(player.inventoryList[i] != undefined){
+			if(player.inventoryList[i].quantity > 0 || player.inventoryList[i].time > 0){
+				itemHtml += "<th><img title='"+player.inventoryList[i].flavorText+"' class='smallImage tooltipItem' src=images/items/"+player.inventoryList[i].id+".png>"+player.inventoryList[i].name + "<div class='noselect useItemButton' id='item"+player.inventoryList[i].id+"' >Use </div>	</th>";
+				itemHtml += "<th>"+player.inventoryList[i].quantity+"</th>";
+				if(player.inventoryList[i].timeLeft == undefined){
+					itemHtml += "<th>0s</th>"
+				} else {
+					itemHtml += "<th>"+player.inventoryList[i].timeLeft+"s</th>"
+				}
+			}
+		}
+		itemHtml += "</tr>";
+
+
+	}
+
+
+
+	$("#itemBody").html(itemHtml);
+
+		$(".tooltipItem").tooltipster({
+			position: "left"
+	});
+
+}
+
 // Update the stats
 var updateStats = function(){
 	$("#statBody").html("<tr><th>Money</th><th>$"+player.money+"</th></tr>" +
