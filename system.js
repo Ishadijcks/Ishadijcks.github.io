@@ -53,9 +53,6 @@ var curEnemy = {
 $(document).ready(function(){
 	//$('#changeLogModal').modal('show');
 
-    $('.tooltip').tooltipster();
-
-
 	if(localStorage.getItem("player") != null){
 		load();
 		generatePokemon(player.route);
