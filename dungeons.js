@@ -269,7 +269,7 @@ var updateDungeon = function() {
     html += "<div id='dungeonMap'></div>"
     if(!dungeonCanMove && curEnemy.alive){
         if(alreadyCaught(curEnemy.name)){
-            html += "<div id='dungeonEnemyInfo'><br>" +curEnemy.name + "<img id='alreadyCaughtImage' src='images/Pokeball.PNG'><br><img id='dungeonEnemy' src='images/pokemon/"+curEnemy.id+".png' ></div>";
+            html += "<div id='dungeonEnemyInfo'><br>" +curEnemy.name + " <img id='alreadyCaughtImage' src='images/Pokeball.PNG'><br><img id='dungeonEnemy' src='images/pokemon/"+curEnemy.id+".png' ></div>";
         } else {
             html += "<div id='dungeonEnemyInfo'><br>" +curEnemy.name + "<br><img id='dungeonEnemy' src='images/pokemon/"+curEnemy.id+".png' ></div>";            
         }
