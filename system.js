@@ -664,7 +664,7 @@ var generatePokemon = function(route){
 	curEnemy.catchRate = Math.floor(Math.pow(randomPokemon.catchRate,0.75)) + catchVariation;
 	curEnemy.alive = true;
 	var deviation = Math.floor(Math.random() * 51 ) - 25;
-	curEnemy.moneyReward = Math.max(10, 6 * route + 5*Math.pow(route,1.2) + deviation);
+	curEnemy.moneyReward = Math.max(10, 3 * route + 5*Math.pow(route,1.15) + deviation);
 	return randomPokemon;
 }
 
