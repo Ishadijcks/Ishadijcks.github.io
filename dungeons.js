@@ -36,35 +36,30 @@ var BossPokemon = function(name, health, exp) {
 var ViridianForestDungeon = function() {
     var pokemonList = ["Caterpie", "Metapod", "Weedle", "Kakuna", "Pidgey", "Pidgeotto"];
     var bossPokemon = BossPokemon("Pikachu", 1000, 300);
-    return Dungeon("Viridian Forest Dungeon", pokemonList, 5, 100, bossPokemon, 25, 0);
+    return Dungeon("Viridian Forest Dungeon", pokemonList, 5, 100, bossPokemon, 50, 0);
 }
 
 var DiglettsCaveDungeon = function(){
     var pokemonList = ["Diglett"];
-<<<<<<< HEAD
-    var bossPokemon = BossPokemon("Dugtrio", 1500);
-    return Dungeon("Digletts Cave Dungeon", pokemonList, 5, 150, bossPokemon, 0, 0);   
-=======
     var bossPokemon = BossPokemon("Dugtrio", 1500, 400);
-    return Dungeon("Digglets Cave Dungeon", pokemonList, 5, 150, bossPokemon, 50, 0);   
->>>>>>> refs/remotes/Ishadijcks/dungeons
+    return Dungeon("Digletts Cave Dungeon", pokemonList, 5, 150, bossPokemon, 75, 0);
 }
 
 var MtMoonDungeon = function() {
     var pokemonList = ["Sandshrew", "Clefairy", "Zubat", "Paras", "Geodude", "Pidgeotto"];
-    
+
     if (Math.random() >= 0.5) {
         var bossPokemon = BossPokemon("Kabuto", 2000);
     } else {
         var bossPokemon = BossPokemon("Omanyte", 2000);
     }
-    return Dungeon("Mt. Moon Dungeon", pokemonList, 5, 250, bossPokemon, 200, 1);
+    return Dungeon("Mt. Moon Dungeon", pokemonList, 5, 250, bossPokemon, 95, 1);
 }
 
 var RockTunnelDungeon = function(){
     var pokemonList = ["Zubat", "Geodude", "Machop"];
     var bossPokemon = BossPokemon("Onix", 3000);
-    return Dungeon("Rock Tunnel Dungeon", pokemonList, 5, 400, bossPokemon, 500, 2);   
+    return Dungeon("Rock Tunnel Dungeon", pokemonList, 5, 400, bossPokemon, 500, 2);
 }
 
 var PowerPlantDungeon = function(){
@@ -74,17 +69,13 @@ var PowerPlantDungeon = function(){
     } else {
         var bossPokemon = BossPokemon("Electabuzz", 5000);
     }
-    return Dungeon("Power Plant Dungeon", pokemonList, 5, 800, bossPokemon, 2500, 2);   
+    return Dungeon("Power Plant Dungeon", pokemonList, 5, 800, bossPokemon, 1000, 2);
 }
 
 var PokemonTowerDungeon = function(){
     var pokemonList = ["Gastly", "Haunter", "Cubone"];
     var bossPokemon = BossPokemon("Marowak", 7000);
-<<<<<<< HEAD
-    return Dungeon("Pokemon Tower Dungeon", pokemonList, 5, 1200, bossPokemon, 0, 2);   
-=======
-    return Dungeon("Pokemon tower Dungeon", pokemonList, 5, 1200, bossPokemon, 3500, 2);   
->>>>>>> refs/remotes/Ishadijcks/dungeons
+    return Dungeon("Pokemon Tower Dungeon", pokemonList, 5, 1200, bossPokemon, 750, 2);
 }
 
 var SeafoamIslandsDungeon = function(){
@@ -94,7 +85,13 @@ var SeafoamIslandsDungeon = function(){
     } else {
         var bossPokemon = BossPokemon("Seel", 8000);
     }
-    return Dungeon("Seafoam Islands Dungeon", pokemonList, 5, 1500, bossPokemon, 5000, 6);   
+    return Dungeon("Seafoam Islands Dungeon", pokemonList, 5, 1500, bossPokemon, 1250, 6);
+}
+
+var PokemonMansionDungeon = function(){
+    var pokemonList = ["Growlithe", "Vulpix", "Grimer", "Muk", "Koffing", "Weezing"];
+    var bossPokemon = BossPokemon("Magmar", 9000);
+    return Dungeon("Pokemon Mansion Dungeon", pokemonList, 5, 1650, bossPokemon, 1500, 6);
 }
 
 var VictoryRoadDungeon = function(){
@@ -104,7 +101,7 @@ var VictoryRoadDungeon = function(){
     } else {
         var bossPokemon = BossPokemon("Machoke", 10000);
     }
-    return Dungeon("Victory Road Dungeon", pokemonList, 5, 1800, bossPokemon, 10000, 8);   
+    return Dungeon("Victory Road Dungeon", pokemonList, 5, 1800, bossPokemon, 2000, 8);
 }
 
 var CeruleanCaveDungeon = function(){
@@ -114,13 +111,7 @@ var CeruleanCaveDungeon = function(){
     } else {
         var bossPokemon = BossPokemon("Rhydon", 18000);
     }
-    return Dungeon("Cerulean Cave Dungeon", pokemonList, 5, 2100, bossPokemon, 0, 8);   
-}
-
-var PokemonMansionDungeon = function(){
-    var pokemonList = ["Growlithe", "Vulpix", "Grimer", "Muk", "Koffing", "Weezing"];
-    var bossPokemon = BossPokemon("Magmar", 9000);
-    return Dungeon("Pokemon Mansion Dungeon", pokemonList, 5, 1650, bossPokemon, 0, 6); 
+    return Dungeon("Cerulean Cave Dungeon", pokemonList, 5, 2100, bossPokemon, 2500, 8);
 }
 
 var loadDungeon = function(townId) {
@@ -163,7 +154,7 @@ var createMap = function(size) {
     }
 
     map[center] = "Empty";
-    
+
     return map;
 }
 
@@ -265,7 +256,7 @@ var dungeonTimer = function() {
 //     $("#dungeonHealthDisplay").html("");
 //     $("#dungeonCatchDisplay").html("");
 //     $("#dungeonEnemyInfo").html("");
-//     $(".progress").hide();        
+//     $(".progress").hide();
 // }
 
 var hideHealthBar = function(){
@@ -284,7 +275,7 @@ var updateDungeon = function() {
         curEnemy.health = 0;
     }
 
-    
+
     hideAllViews();
     $("#dungeonView").show();
 
@@ -296,7 +287,7 @@ var updateDungeon = function() {
         if(alreadyCaught(curEnemy.name)){
             html += "<div id='dungeonEnemyInfo'><br>" +curEnemy.name + "<img id='alreadyCaughtImage' src='images/Pokeball.PNG'><br><img id='dungeonEnemy' src='images/pokemon/"+curEnemy.id+".png' ></div>";
         } else {
-            html += "<div id='dungeonEnemyInfo'><br>" +curEnemy.name + "<br><img id='dungeonEnemy' src='images/pokemon/"+curEnemy.id+".png' ></div>";            
+            html += "<div id='dungeonEnemyInfo'><br>" +curEnemy.name + "<br><img id='dungeonEnemy' src='images/pokemon/"+curEnemy.id+".png' ></div>";
         }
     }
 
@@ -306,13 +297,13 @@ var updateDungeon = function() {
     if(!dungeonCanMove && curEnemy.alive){
 
         html +=     "<span id='dungeonCatchDisplay'></span>";
-        
+
         html +=     "<span id='dungeonHealthDisplay'>"+curEnemy.health + "/" + curEnemy.maxHealth + "</span>";
-     
+
     }
 
 
-    $("#dungeonHealthBar").width(100*curEnemy.health/curEnemy.maxHealth+"%"); 
+    $("#dungeonHealthBar").width(100*curEnemy.health/curEnemy.maxHealth+"%");
     $("#dungeonTest").html(html);
 
 

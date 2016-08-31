@@ -34,11 +34,8 @@ var player = {
 	evoExplain: 0,
 	mapExplain: 0,
 	townExplain: 0,
-<<<<<<< HEAD
-	inventoryList: []
-=======
-	dungeonExplain: 0
->>>>>>> refs/remotes/Ishadijcks/dungeons
+	inventoryList: [],
+	dungeonExplain: 0,
 }
 
 var curEnemy = {
@@ -63,7 +60,7 @@ $(document).ready(function(){
 		load();
 		generatePokemon(player.route);
 	}
-	
+
 	else {
 		$('#pickStarter').modal({backdrop: 'static', keyboard: false});
 	}
@@ -72,16 +69,16 @@ $(document).ready(function(){
 	updateItems();
 	setInterval(itemInterval, 1000);
 	itemInterval();
-	
+
 	if(player.starter != "none"){
 	updateAll();
 	}
-	
+
 	loadTowns();
 	hideAllViews();
 	$("#currentEnemy").show();
 
-	
+
 
 	$("body").on('click',"#enemy", function(){
 		clicks++;
@@ -89,12 +86,12 @@ $(document).ready(function(){
 			if (curEnemy.alive && inProgress != 0){
 				if(curEnemy.health > 0){
 					curEnemy.health -= getClickAttack();
-				}			
-				
+				}
+
 				else {
 					curEnemy.health = 0;
 				}
-				
+
 				updateEnemy();
 			}
 		}
@@ -106,12 +103,12 @@ $(document).ready(function(){
 			if (curEnemy.alive && inProgress != 0){
 				if(curEnemy.health > 0){
 					curEnemy.health -= getClickAttack();
-				}			
-				
+				}
+
 				else {
 					curEnemy.health = 0;
 				}
-				
+
 				updateGym();
 			}
 		}
@@ -123,12 +120,12 @@ $(document).ready(function(){
 			if (curEnemy.alive && inProgress != 0){
 				if(curEnemy.health > 0){
 					curEnemy.health -= getClickAttack();
-				}			
-				
+				}
+
 				else {
 					curEnemy.health = 0;
 				}
-				
+
 				updateDungeon();
 			}
 		}
@@ -138,18 +135,18 @@ $(document).ready(function(){
 	$("body").on('click',".starter", function(){
 		$("#curStarterPick").html(this.id);
 		player.starter = this.id;
-		
+
 		var link = document.createElement('link');
 		link.type = 'image/x-icon';
 		link.rel = 'shortcut icon';
 		link.href = 'images/'+player.starter+'.png';
 		document.getElementsByTagName('head')[0].appendChild(link);
-		
+
 		generatePokemon(player.route);
 		loadTowns();
 		save();
 	})
-	
+
 	// Picks a starter and starts the game
 	$("body").on('click',"#startAdventure", function(){
 		if(player.starter != "none"){
@@ -157,7 +154,7 @@ $(document).ready(function(){
 			capturePokemon(player.starter, 0);
 		}
 	})
-	
+
 	// Allows the player buy upgrades
 	$("body").on('click',".upgradeBoxes", function(){
 		var id = this.id.substr(7,this.id.length);
@@ -183,7 +180,7 @@ $(document).ready(function(){
 		player.caughtPokemonList.sort(compareByName);
 		updateCaughtList();
 	})
-	
+
 	$("body").on('click',"#AttackCaughtPokemon", function(){
 		player.caughtPokemonList.sort(compareByAttack);
 		updateCaughtList();
@@ -193,7 +190,7 @@ $(document).ready(function(){
 		player.caughtPokemonList.sort(compareByLevel);
 		updateCaughtList();
 	})
-	
+
 	$("svg").on('click',"g", function(){
 		var id = this.id;
 		routeNumber = idToRoute(id);
@@ -227,7 +224,7 @@ $(document).ready(function(){
 	$("body").on('click',".dungeonRoom", function(){
 		var id = parseInt(this.id.substring(4));
 		moveToRoom(id);
-	})	
+	})
 
 	$(document).on("keydown", function (e) {
 		var keyCode = e.keyCode;
@@ -263,13 +260,13 @@ $(document).ready(function(){
 		showPokedex();
 		$("#pokedexModal").modal("show");
 
-	})		
-	
+	})
+
 	$("body").on('click',".oakItem", function(){
 		var id = this.id;
 		var itemId = id.substr(id.length - 1);
 		activateOakItem(itemId);
-	})		
+	})
 
 	$("body").on('click',"#resetButton", function(){
 		var input = prompt("Are you sure you want to delete your savefile?, enter 6 if you are!","9");
@@ -278,7 +275,7 @@ $(document).ready(function(){
 			location.reload();
 		}
 	})
-	
+
 	$("body").on('click',"#changeLogButton", function(){
 		$("#changeLogModal").modal("show");
 	})
@@ -330,14 +327,14 @@ var pokemonsAttack = function(){
 		curEnemy.health -= getPokemonAttack();
 		updateAll();
 	}
-}	
+}
 
 			// Leveling functions
 
-// Takes the experience and returns the level it is			
+// Takes the experience and returns the level it is
 var experienceToLevel = function(exp,levelType){
 	var mult;
-	
+
 	switch(levelType){
 	case "slow":
 		mult = 0.8;
@@ -354,11 +351,11 @@ var experienceToLevel = function(exp,levelType){
 	case "fast":
 		mult = 1.2;
 		break;
-	default: 
-		
+	default:
+
 		mult = 1;
 		break;
-		
+
 	}
 	exp *= mult;
 	return Math.min(100,Math.floor( Math.pow(20*exp,0.5)/(6*Math.sqrt(5))));
@@ -409,7 +406,7 @@ var gainTokens = function(amount){
 		if(amount == 1){
 			log("You gained " + amount + " dungeon token!");
 		} else {
-			log("You gained " + amount + " dungeon tokens!");	
+			log("You gained " + amount + " dungeon tokens!");
 		}
 	}
 }
@@ -422,7 +419,7 @@ var gainMoney = function(money, message){
 	}
 	money = Math.floor(money);
 	player.money += money
-	log(message + money + "!"); 
+	log(message + money + "!");
 }
 
 // All pokemon you have gain exp
@@ -437,7 +434,6 @@ var gainExp = function(exp){
 		exp *= pokedexBonusExp;
 
 		exp = Math.floor(exp);
-		$.notify("exp: " + exp);
 
 		for( var i = 0; i<player.caughtPokemonList.length; i++){
 			var pokemonLevel = experienceToLevel(player.caughtPokemonList[i].experience, player.caughtPokemonList[i].levelType);
@@ -467,16 +463,16 @@ var enemyDefeated = function(){
 	canCatch = 1;
 	if (curEnemy.alive){
 		log("You defeated the wild "+ curEnemy.name);
-		
-		
-		
+
+
+
 		var id = getPokemonByName(curEnemy.name).id-1;
 		player.defeatNumbers[id]++;
-		
-		
+
+
 		var money = curEnemy.moneyReward;
 		var exp = curEnemy.exp;
-		
+
 
 
 		gainMoney(Math.floor(money), "You earned $");
@@ -489,10 +485,10 @@ var enemyDefeated = function(){
 			}
 
 
-		
-		
-		setTimeout(function(){ 
-			
+
+
+		setTimeout(function(){
+
 			if(alreadyCaught(curEnemy.name)){
 			$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=pokeball src=images/Pokeball.PNG>");
 			}
@@ -501,16 +497,16 @@ var enemyDefeated = function(){
 			}
 			player.pokeballs--;
 		}, 1);
-		
+
 		var catchRate = curEnemy.catchRate + getBonusCatchrate() -10;
 		$("#catchDisplay").html("Catch chance: "+Math.min(100,catchRate) + "%");
-	
+
 		setTimeout(function(){
 		if(canCatch){
 			var chance = Math.floor(Math.random()*100+1);
 			if(chance<=catchRate){
 				capturePokemon(curEnemy.name, curEnemy.shiny);
-				
+
 			}
 
 			if( inProgress == 1){
@@ -522,7 +518,7 @@ var enemyDefeated = function(){
 			$("#catchDisplay").html("");
 		}
 		}, player.catchTime);
-		
+
 		curEnemy.alive = false;
 	}
 }
@@ -546,11 +542,11 @@ var capturePokemon = function(name, shiny){
 			}
 		}
 		$.notify("You successfully caught "+name, 'success');
-		
+
 	}
-	
+
 	else{
-		
+
 		if(shiny){
 			for( var i = 0; i<player.caughtPokemonList.length; i++){
 				if(player.caughtPokemonList[i].name == name){
@@ -564,8 +560,8 @@ var capturePokemon = function(name, shiny){
 				console.log(currentDungeon);
 			}
 			var tokens = Math.floor(Math.pow(player.route,1.4) - player.route/2);
-			var deviation = Math.floor(Math.random() * 2 ) - 4;
-			tokens -= deviation
+			var deviation = Math.floor(Math.random() * 2 ) + 3000;
+			tokens += deviation
 			gainTokens(tokens);
 		}
 	}
@@ -591,7 +587,7 @@ var alreadyCaught = function(name){
 var calculateAttack = function(){
 	var total = 0;
 	for (var i = 0; i<player.caughtPokemonList.length; i++){
-		
+
 		var level = experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType);
 		total += Math.ceil(level*(player.caughtPokemonList[i].attack)/100);
 	}
@@ -616,7 +612,7 @@ var generatePokemon = function(route){
 	else {
 
 		if (route <= 25){
-		
+
 			if(isActive("Normal Rod") && pokemonsPerRoute[route].water != undefined){
 				if(pokemonsPerRoute[route].land != undefined){
 					var possiblePokemons = pokemonsPerRoute[route].land.concat(pokemonsPerRoute[route].water);
@@ -634,7 +630,7 @@ var generatePokemon = function(route){
 
 			var rand = Math.floor(Math.random()*possiblePokemons.length);
 			randomPokemonName = possiblePokemons[rand]
-		}	
+		}
 
 		else {
 			var rand = Math.floor(Math.random()*pokemonList.length);
@@ -643,7 +639,7 @@ var generatePokemon = function(route){
 
 		randomPokemon = getPokemonByName(randomPokemonName);
 	}
-		
+
 	//console.log(pokemonList);
 	curEnemy.name = randomPokemon.name;
 	curEnemy.id = randomPokemon.id;
@@ -651,7 +647,6 @@ var generatePokemon = function(route){
 	curEnemy.shiny = generateShiny();
 	curEnemy.maxHealth = curEnemy.health;
 	curEnemy.exp = Math.max(Math.floor(10*Math.pow(route ,1.1)), 10) || 10;
-	$.notify("pre: "+ curEnemy.exp);
 	var catchVariation = Math.floor(Math.random()*7-3);
 	curEnemy.catchRate = Math.floor(Math.pow(randomPokemon.catchRate,0.75)) + catchVariation;
 	curEnemy.alive = true;
@@ -720,7 +715,7 @@ var testLegendary = function(tries){
 	var mew = 0;
 	var two = 0;
 	var fail = 0;
-	
+
 	for( var i = 0; i<tries; i++){
 		var pokemon = generateLegendary();
 	if(!pokemon ){ fail++;}
@@ -760,7 +755,7 @@ var gainRandomItem = function(route){
 	}
 
 	$.notify("You got a "+randomItemName, 'success');
-	
+
 	updateItems()
 }
 
@@ -792,7 +787,7 @@ var alreadyHaveItem = function(name){
 	if(isInventoryEmpty() == true){
 		return false;
 	}
-	else { 
+	else {
 		for (var i = 0; i<player.inventoryList.length; i++){
 			if(player.inventoryList[i] == undefined){
 				return false;
