@@ -30,7 +30,7 @@ var initTypeEffectiveness = function(){
 	for( var i = 0; i<17; i++){
 		var row = [];
 		for(var j = 0; j<17; j++){
-			row.push(1);
+			row.push(getNormalEffective(i));
 		}
 	typeEffectiveness.push(row);
 	}
@@ -39,11 +39,35 @@ var initTypeEffectiveness = function(){
 	typeEffectiveness[NORMAL][ROCK] = getNotEffective(NORMAL);
 	typeEffectiveness[NORMAL][GHOST] = 0;
 	typeEffectiveness[NORMAL][STEEL] = getNotEffective(NORMAL);
+	
 	typeEffectiveness[FIRE][FIRE] = getNotEffective(FIRE);
 	typeEffectiveness[FIRE][NORMAL] = getNotEffective(FIRE);
 	typeEffectiveness[FIRE][GRASS] = getVeryEffective(FIRE);
+	typeEffectiveness[FIRE][ICE] = getVeryEffective(FIRE);
+	typeEffectiveness[FIRE][BUG] = getVeryEffective(FIRE);
+	typeEffectiveness[FIRE][ROCK] = getNotEffective(FIRE);
+	typeEffectiveness[FIRE][STEEL] = getNotEffective(FIRE);
+	typeEffectiveness[FIRE][DRAGON] = getVeryEffective(FIRE);
 
+	typeEffectiveness[WATER][FIRE] = getVeryEffective(WATER);
+	typeEffectiveness[WATER][WATER] = getNotEffective(WATER);
+	typeEffectiveness[WATER][GRASS] = getNotEffective(WATER);
+	typeEffectiveness[WATER][GROUND] = getVeryEffective(WATER);
+	typeEffectiveness[WATER][ROCK] = getVeryEffective(WATER);
+	typeEffectiveness[WATER][DRAGON] = getNotEffective(WATER);
 
+	typeEffectiveness[GRASS][FIRE] = getNotEffective(GRASS);
+	typeEffectiveness[GRASS][WATER] = getVeryEffective(GRASS);
+	typeEffectiveness[GRASS][GRASS] = getNotEffective(GRASS);
+	typeEffectiveness[GRASS][POISON] = getNotEffective(GRASS);
+	typeEffectiveness[GRASS][GROUND] = getVeryEffective(GRASS);
+	typeEffectiveness[GRASS][FLYING] = getNotEffective(GRASS);
+	typeEffectiveness[GRASS][BUG] = getNotEffective(GRASS);
+	typeEffectiveness[GRASS][ROCK] = getVeryEffective(GRASS);
+	typeEffectiveness[GRASS][DRAGON] = getNotEffective(GRASS);
+	typeEffectiveness[GRASS][STEEL] = getNotEffective(GRASS);
+
+	
 }
 
 var typeToNumber = function(type){
@@ -161,7 +185,7 @@ var showShardModal = function(){
 
 		html +="<tr><td><img class= shardImage' id='normalShard' src='images/shards/" + i + ".png'> " + player.typeShards[i] + "</td>";
 		html +="<td>Normal:</td>";
-		html +="<td>"+getNormal(i).toFixed(2)+"x</td>";
+		html +="<td>"+getNormalEffective(i).toFixed(2)+"x</td>";
 		html +="<td style='width:50%'>";
 		for( var j = 0; j<player.normalEffectiveTypeBonus[i]; j++){
 			html += "<div <div style='background-color:#" + typeColorUnlocked[i] + "' class='col-sm-1 shardUpgrade'></div>";
@@ -221,7 +245,7 @@ var getNotEffective = function(type){
 	return Math.min(0.5 + player.notEffectiveTypeBonus[type]*0.05, 1);
 }
 
-var getNormal = function(type){
+var getNormalEffective = function(type){
 	return Math.min(1 + player.normalEffectiveTypeBonus[type]*0.05, 1.5);
 }
 

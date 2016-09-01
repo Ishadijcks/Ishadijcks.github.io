@@ -68,6 +68,7 @@ $(document).ready(function(){
 	}
 	initUpgrades();
 	initOakItems();
+	initTypeEffectiveness();
 	updateItems();
 	setInterval(itemInterval, 1000);
 	itemInterval();
@@ -395,6 +396,7 @@ var getClickAttack = function(){
 
 var getPokemonAttack = function(){
 	var totalMagnitude = getItemBonus("attackBoost");
+	calculateAttack();
 	var pokemonAttack = Math.floor(player.attack*player.attackMultiplier*totalMagnitude);
 	return pokemonAttack;
 }
@@ -612,7 +614,7 @@ var calculateAttack = function(){
 	for (var i = 0; i<player.caughtPokemonList.length; i++){
 		
 		var level = experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType);
-		total += Math.ceil(level*(player.caughtPokemonList[i].attack)/100);
+		total += Math.ceil(level*(player.caughtPokemonList[i].attack)/100)* typeEffectiveness[typeToNumber(player.caughtPokemonList[i].type)][typeToNumber(curEnemy.type)];
 	}
 	player.attack = total;
 	player.clickAttack = player.caughtPokemonList.length;
