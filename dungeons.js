@@ -3,7 +3,7 @@ var counter;
 var playerPosition;
 var dungeonCanMove = 0;
 
-var Dungeon = function(name, pokemons, size, baseHealth, bossPokemon, tokenCost, badgeReq) {
+var Dungeon = function(name, pokemons, size, baseHealth, bossPokemon, tokenCost, badgeReq, itemRoute) {
     var temp = {
         name: name,
         pokemonDefeated: 0,
@@ -18,7 +18,8 @@ var Dungeon = function(name, pokemons, size, baseHealth, bossPokemon, tokenCost,
         timeLimit: 60 * 100,
         timeLeft: 60 * 100,
         chestsOpened: 0,
-        loot: []
+        loot: [],
+        itemRoute: itemRoute
     }
     return temp;
 }
@@ -36,13 +37,13 @@ var BossPokemon = function(name, health, exp) {
 var ViridianForestDungeon = function() {
     var pokemonList = ["Caterpie", "Metapod", "Weedle", "Kakuna", "Pidgey", "Pidgeotto"];
     var bossPokemon = BossPokemon("Pikachu", 1000, 300);
-    return Dungeon("Viridian Forest Dungeon", pokemonList, 5, 100, bossPokemon, 25, 0);
+    return Dungeon("Viridian Forest Dungeon", pokemonList, 5, 100, bossPokemon, 25, 0, 1);
 }
 
 var DiglettsCaveDungeon = function(){
     var pokemonList = ["Diglett"];
     var bossPokemon = BossPokemon("Dugtrio", 1500, 400);
-    return Dungeon("Digglets Cave Dungeon", pokemonList, 5, 150, bossPokemon, 50, 0);   
+    return Dungeon("Digglets Cave Dungeon", pokemonList, 5, 150, bossPokemon, 50, 0, 2);   
 }
 
 var MtMoonDungeon = function() {
@@ -53,13 +54,13 @@ var MtMoonDungeon = function() {
     } else {
         bossPokemon = BossPokemon("Omanyte", 2000, 500);
     }
-    return Dungeon("Mt. Moon Dungeon", pokemonList, 5, 250, bossPokemon, 200, 1);
+    return Dungeon("Mt. Moon Dungeon", pokemonList, 5, 250, bossPokemon, 200, 1, 4);
 }
 
 var RockTunnelDungeon = function(){
     var pokemonList = ["Zubat", "Geodude", "Machop"];
     var bossPokemon = BossPokemon("Onix", 3000, 1000);
-    return Dungeon("Rock Tunnel Dungeon", pokemonList, 5, 400, bossPokemon, 500, 2);   
+    return Dungeon("Rock Tunnel Dungeon", pokemonList, 5, 400, bossPokemon, 500, 2, 5);   
 }
 
 var PowerPlantDungeon = function(){
@@ -70,13 +71,13 @@ var PowerPlantDungeon = function(){
     } else {
         bossPokemon = BossPokemon("Electabuzz", 5000, 1000);
     }
-    return Dungeon("Power Plant Dungeon", pokemonList, 5, 800, bossPokemon, 2500, 2);   
+    return Dungeon("Power Plant Dungeon", pokemonList, 5, 800, bossPokemon, 2500, 2, 8);   
 }
 
 var PokemonTowerDungeon = function(){
     var pokemonList = ["Gastly", "Haunter", "Cubone"];
     var bossPokemon = BossPokemon("Marowak", 7000, 2000);
-    return Dungeon("Pokemon tower Dungeon", pokemonList, 5, 1200, bossPokemon, 3500, 2);   
+    return Dungeon("Pokemon tower Dungeon", pokemonList, 5, 1200, bossPokemon, 3500, 2, 10);   
 }
 
 var SeafoamIslandsDungeon = function(){
@@ -87,7 +88,7 @@ var SeafoamIslandsDungeon = function(){
     } else {
         bossPokemon = BossPokemon("Seel", 8000, 2500);
     }
-    return Dungeon("Seafoam Islands Dungeon", pokemonList, 5, 1500, bossPokemon, 5000, 6);   
+    return Dungeon("Seafoam Islands Dungeon", pokemonList, 5, 1500, bossPokemon, 5000, 6, 15);   
 }
 
 var VictoryRoadDungeon = function(){
@@ -98,7 +99,7 @@ var VictoryRoadDungeon = function(){
     } else {
         bossPokemon = BossPokemon("Machoke", 10000, 2500);
     }
-    return Dungeon("Victory Road Dungeon", pokemonList, 5, 1800, bossPokemon, 10000, 8);   
+    return Dungeon("Victory Road Dungeon", pokemonList, 5, 1800, bossPokemon, 10000, 8, 20);   
 }
 
 var CeruleanCaveDungeon = function(){
@@ -109,13 +110,13 @@ var CeruleanCaveDungeon = function(){
     } else {
         bossPokemon = BossPokemon("Rhydon", 18000, 4000);
     }
-    return Dungeon("Cerulean Cave Dungeon", pokemonList, 5, 2100, bossPokemon, 0, 8);   
+    return Dungeon("Cerulean Cave Dungeon", pokemonList, 5, 2100, bossPokemon, 0, 8, 24);   
 }
 
 var PokemonMansionDungeon = function(){
     var pokemonList = ["Growlithe", "Vulpix", "Grimer", "Muk", "Koffing", "Weezing"];
     var bossPokemon = BossPokemon("Magmar", 9000, 3000);
-    return Dungeon("Pokemon Mansion Dungeon", pokemonList, 5, 1650, bossPokemon, 0, 6); 
+    return Dungeon("Pokemon Mansion Dungeon", pokemonList, 5, 1650, bossPokemon, 0, 6, 16); 
 }
 
 var loadDungeon = function(townId) {
@@ -228,13 +229,12 @@ var openDungeonChest = function() {
     currentDungeon.map[playerPosition] = "Empty";
     console.log("chest openend: " + currentDungeon.chestsOpened );
     if( currentDungeon.chestsOpened >= 1){
-
         revealChests();
     }
     if( currentDungeon.chestsOpened >= 2){
         revealEverything();
     }
-
+    gainRandomItem(currentDungeon.itemRoute);
     hideDungeonChest();
     updateDungeonMap();
 
