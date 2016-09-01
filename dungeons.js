@@ -47,11 +47,11 @@ var DiglettsCaveDungeon = function(){
 
 var MtMoonDungeon = function() {
     var pokemonList = ["Sandshrew", "Clefairy", "Zubat", "Paras", "Geodude", "Pidgeotto"];
-    
+    var bossPokemon;
     if (Math.random() >= 0.5) {
-        var bossPokemon = BossPokemon("Kabuto", 2000, 500);
+        bossPokemon = BossPokemon("Kabuto", 2000, 500);
     } else {
-        var bossPokemon = BossPokemon("Omanyte", 2000, 500);
+        bossPokemon = BossPokemon("Omanyte", 2000, 500);
     }
     return Dungeon("Mt. Moon Dungeon", pokemonList, 5, 250, bossPokemon, 200, 1);
 }
@@ -64,10 +64,11 @@ var RockTunnelDungeon = function(){
 
 var PowerPlantDungeon = function(){
     var pokemonList = ["Pikachu", "Raichu", "Magnemite", "Magneton", "Grimer", "Muk", "Electrode"];
+		var bossPokemon;
     if( Math.random >= 0.75){
-        var bossPokemon = BossPokemon("Zapdos", 15000, 2500);
+        bossPokemon = BossPokemon("Zapdos", 15000, 2500);
     } else {
-        var bossPokemon = BossPokemon("Electabuzz", 5000, 1000);
+        bossPokemon = BossPokemon("Electabuzz", 5000, 1000);
     }
     return Dungeon("Power Plant Dungeon", pokemonList, 5, 800, bossPokemon, 2500, 2);   
 }
@@ -80,30 +81,33 @@ var PokemonTowerDungeon = function(){
 
 var SeafoamIslandsDungeon = function(){
     var pokemonList = ["Zubat", "Golbat", "Psyduck", "Golduck", "Slowpoke", "Slowbro", "Shellder", "Krabby", "Horsea", "Staryu"];
+	var bossPokemon;
     if( Math.random >= 0.75){
-        var bossPokemon = BossPokemon("Articuno", 25000, 3000);
+        bossPokemon = BossPokemon("Articuno", 25000, 3000);
     } else {
-        var bossPokemon = BossPokemon("Seel", 8000, 2500);
+        bossPokemon = BossPokemon("Seel", 8000, 2500);
     }
     return Dungeon("Seafoam Islands Dungeon", pokemonList, 5, 1500, bossPokemon, 5000, 6);   
 }
 
 var VictoryRoadDungeon = function(){
     var pokemonList = ["Zubat", "Golbat", "Machop", "Geodude", "Graveler", "Onix", "Marowak", "Venomoth"];
+	var bossPokemon;
     if( Math.random >= 0.75){
-        var bossPokemon = BossPokemon("Moltres", 30000, 4000);
+        bossPokemon = BossPokemon("Moltres", 30000, 4000);
     } else {
-        var bossPokemon = BossPokemon("Machoke", 10000, 2500);
+        bossPokemon = BossPokemon("Machoke", 10000, 2500);
     }
     return Dungeon("Victory Road Dungeon", pokemonList, 5, 1800, bossPokemon, 10000, 8);   
 }
 
 var CeruleanCaveDungeon = function(){
     var pokemonList = ["Arbok", "Raichu", "Sandslash", "Golbat", "Parasect", "Venomoth", "Kadabra", "Magneton", "Dodrio", "Hypno", "Ditto", "Wigglytuff", "Electrode", "Marowak", "Chansey"];
+	var bossPokemon;
     if( Math.random >= 0.75){
-        var bossPokemon = BossPokemon("Mewtwo", 50000, 7500);
+        bossPokemon = BossPokemon("Mewtwo", 50000, 7500);
     } else {
-        var bossPokemon = BossPokemon("Rhydon", 18000, 4000);
+        bossPokemon = BossPokemon("Rhydon", 18000, 4000);
     }
     return Dungeon("Cerulean Cave Dungeon", pokemonList, 5, 2100, bossPokemon, 0, 8);   
 }
