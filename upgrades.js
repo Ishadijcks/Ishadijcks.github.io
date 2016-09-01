@@ -45,21 +45,21 @@ var initUpgrades = function(){
 	addUpgrade("Catch time upgrade I",2000, "catchTime",250,0,"Decrease the catch time by 250 milliseconds",null); 
 	addUpgrade("Catch time upgrade II",10000, "catchTime",250,2,"Decrease the catch time by 250 milliseconds",10); 
 	addUpgrade("Catch time upgrade III",25000, "catchTime",250,5,"Decrease the catch time by 250 milliseconds",11); 
-	addUpgrade("Catch time upgrade IV",75000, "catchTime",500,8,"Decrease the catch time by half a second",12); 
-	addUpgrade("Catch time upgrade V",1000000, "catchTime",500,15,"Decrease the catch time by half a second",13); 
+	addUpgrade("Catch time upgrade IV",75000, "catchTime",250,8,"Decrease the catch time by 250 milliseconds",12); 
+	addUpgrade("Catch time upgrade V",1000000, "catchTime",250,15,"Decrease the catch time by 250 milliseconds",13); 
 	addUpgrade("Money multiplier upgrade I",1500, "moneyMultiplier",0.25,0,"Gain 25% more money",null); 
 	addUpgrade("Money multiplier upgrade II",4000, "moneyMultiplier",0.30,3,"Gain 30% more money",15); 
 	addUpgrade("Money multiplier upgrade III",10000, "moneyMultiplier",0.35,6,"Gain 35% more money",16); 
 	addUpgrade("Money multiplier upgrade IV",25000, "moneyMultiplier",0.40,10,"Gain 40% more money",17); 
 	addUpgrade("Money multiplier upgrade V",50000, "moneyMultiplier",0.50,16,"Gain 50% more money",18); 
 	addUpgrade("Click multiplier upgrade I",100, "clickMultiplier",1,0,"Clicks do 100% more damage",null); 
-	addUpgrade("Click multiplier upgrade II",500, "clickMultiplier",2,2,"Clicks do 200% more damage",20); 
-	addUpgrade("Click multiplier upgrade III",1000, "clickMultiplier",2,5,"Clicks do 200% more damage",21); 
-	addUpgrade("Click multiplier upgrade IV",2500, "clickMultiplier",2,7,"Clicks do 200% more damage",22); 
+	addUpgrade("Click multiplier upgrade II",500, "clickMultiplier",1,2,"Clicks do 100% more damage",20); 
+	addUpgrade("Click multiplier upgrade III",1000, "clickMultiplier",1.5,5,"Clicks do 150% more damage",21); 
+	addUpgrade("Click multiplier upgrade IV",2500, "clickMultiplier",1.5,7,"Clicks do 150% more damage",22); 
 	addUpgrade("Click multiplier upgrade V",5000, "clickMultiplier",2,10,"Clicks do 200% more damage",23); 
-	addUpgrade("Pokemon attack upgrade I",50000, "attackMultiplier",0.3,16,"Your pokemon do 30% more damage",24); 
-	addUpgrade("Pokemon attack upgrade II",75000, "attackMultiplier",0.4,18,"Your pokemon do 40% more damage",25); 
-	addUpgrade("Pokemon attack upgrade III",75000, "attackMultiplier",0.4,20,"Your pokemon do 40% more damage",26); 
+	addUpgrade("Pokemon attack upgrade I",50000, "attackMultiplier",0.1,16,"Your pokemon do 10% more damage",24); 
+	addUpgrade("Pokemon attack upgrade II",75000, "attackMultiplier",0.15,18,"Your pokemon do 15% more damage",25); 
+	addUpgrade("Pokemon attack upgrade III",75000, "attackMultiplier",0.2,20,"Your pokemon do 20% more damage",26); 
 }
 
 

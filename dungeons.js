@@ -47,18 +47,17 @@ var DiglettsCaveDungeon = function(){
 
 var MtMoonDungeon = function() {
     var pokemonList = ["Sandshrew", "Clefairy", "Zubat", "Paras", "Geodude", "Pidgeotto"];
-
     if (Math.random() >= 0.5) {
-        var bossPokemon = BossPokemon("Kabuto", 4170);
+        var bossPokemon = BossPokemon("Kabuto", 4170, 500);
     } else {
-        var bossPokemon = BossPokemon("Omanyte", 4170);
+        var bossPokemon = BossPokemon("Omanyte", 4170, 500);
     }
     return Dungeon("Mt. Moon Dungeon", pokemonList, 5, 834, bossPokemon, 95, 1);
 }
 
 var RockTunnelDungeon = function(){
     var pokemonList = ["Zubat", "Geodude", "Machop"];
-    var bossPokemon = BossPokemon("Onix", 20585);
+    var bossPokemon = BossPokemon("Onix", 20585, 1000);
     return Dungeon("Rock Tunnel Dungeon", pokemonList, 5, 4117, bossPokemon, 500, 2);
 }
 
@@ -69,16 +68,16 @@ var PowerPlantDungeon = function(){
       chance = 0.5;
     }
     if( Math.random >= chance){
-        var bossPokemon = BossPokemon("Zapdos", 101302);
+        var bossPokemon = BossPokemon("Zapdos", 101302, 2500);
     } else {
-        var bossPokemon = BossPokemon("Electabuzz", 67535);
+        var bossPokemon = BossPokemon("Electabuzz", 67535, 1000);
     }
     return Dungeon("Power Plant Dungeon", pokemonList, 5, 13507, bossPokemon, 1000, 2);
 }
 
 var PokemonTowerDungeon = function(){
     var pokemonList = ["Gastly", "Haunter", "Cubone"];
-    var bossPokemon = BossPokemon("Marowak", 37615);
+    var bossPokemon = BossPokemon("Marowak", 37615, 2000);
     return Dungeon("Pokemon Tower Dungeon", pokemonList, 5, 7523, bossPokemon, 750, 2);
 }
 
@@ -89,9 +88,9 @@ var SeafoamIslandsDungeon = function(){
       chance = 0.5;
     }
     if( Math.random >= chance){
-        var bossPokemon = BossPokemon("Articuno", 129195);
+        var bossPokemon = BossPokemon("Articuno", 129195, 3000);
     } else {
-        var bossPokemon = BossPokemon("Seel", 86130);
+        var bossPokemon = BossPokemon("Seel", 86130, 2500);
     }
     return Dungeon("Seafoam Islands Dungeon", pokemonList, 5, 17226, bossPokemon, 1250, 6);
 }
@@ -109,9 +108,9 @@ var VictoryRoadDungeon = function(){
       chance = 0.5;
     }
     if( Math.random >= chance){
-        var bossPokemon = BossPokemon("Moltres", 184462);
+        var bossPokemon = BossPokemon("Moltres", 184462, 4000);
     } else {
-        var bossPokemon = BossPokemon("Machoke", 122975);
+        var bossPokemon = BossPokemon("Machoke", 122975, 2500);
     }
     return Dungeon("Victory Road Dungeon", pokemonList, 5, 24595, bossPokemon, 2000, 8);
 }
@@ -123,11 +122,16 @@ var CeruleanCaveDungeon = function(){
       chance = 0.5;
     }
     if( Math.random >= chance){
-        var bossPokemon = BossPokemon("Mewtwo", 215512);
+        var bossPokemon = BossPokemon("Mewtwo", 215512, 7500);
     } else {
-        var bossPokemon = BossPokemon("Rhydon", 143675);
+        var bossPokemon = BossPokemon("Rhydon", 143675, 4000);
     }
     return Dungeon("Cerulean Cave Dungeon", pokemonList, 5, 28735, bossPokemon, 2500, 8);
+
+var PokemonMansionDungeon = function(){
+    var pokemonList = ["Growlithe", "Vulpix", "Grimer", "Muk", "Koffing", "Weezing"];
+    var bossPokemon = BossPokemon("Magmar", 9000, 2500);
+    return Dungeon("Pokemon Mansion Dungeon", pokemonList, 5, 1650, bossPokemon, 0, 6);
 }
 
 var loadDungeon = function(townId) {
@@ -301,7 +305,7 @@ var updateDungeon = function() {
     html += "<div id='dungeonMap'></div>"
     if(!dungeonCanMove && curEnemy.alive){
         if(alreadyCaught(curEnemy.name)){
-            html += "<div id='dungeonEnemyInfo'><br>" +curEnemy.name + "<img id='alreadyCaughtImage' src='images/Pokeball.PNG'><br><img id='dungeonEnemy' src='images/pokemon/"+curEnemy.id+".png' ></div>";
+            html += "<div id='dungeonEnemyInfo'><br>" +curEnemy.name + " <img id='alreadyCaughtImage' src='images/Pokeball.PNG'><br><img id='dungeonEnemy' src='images/pokemon/"+curEnemy.id+".png' ></div>";
         } else {
             html += "<div id='dungeonEnemyInfo'><br>" +curEnemy.name + "<br><img id='dungeonEnemy' src='images/pokemon/"+curEnemy.id+".png' ></div>";
         }

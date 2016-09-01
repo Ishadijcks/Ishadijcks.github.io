@@ -38,9 +38,8 @@ var load = function(){
 	if (typeof savegame.evoExplain !== "undefined") player.evoExplain = savegame.evoExplain;
 	if (typeof savegame.mapExplain !== "undefined") player.mapExplain = savegame.mapExplain;
 	if (typeof savegame.townExplain !== "undefined") player.townExplain = savegame.townExplain;
-	if (typeof savegame.inventoryList !== "undefined") player.inventoryList = savegame.inventoryList;
 	if (typeof savegame.dungeonExplain !== "undefined") player.dungeonExplain = savegame.dungeonExplain;
-
+	if (typeof savegame.inventoryList !== "undefined") player.inventoryList = savegame.inventoryList;
 	if(player.version < version){
 		$('#changeLogModal').modal('show');
 	}

@@ -34,8 +34,8 @@ var player = {
 	evoExplain: 0,
 	mapExplain: 0,
 	townExplain: 0,
-	inventoryList: [],
 	dungeonExplain: 0,
+	inventoryList: []
 }
 
 var curEnemy = {
@@ -52,9 +52,6 @@ var curEnemy = {
 
 $(document).ready(function(){
 	//$('#changeLogModal').modal('show');
-
-    $('.tooltip').tooltipster();
-
 
 	if(localStorage.getItem("player") != null){
 		load();
@@ -75,7 +72,7 @@ $(document).ready(function(){
 	}
 
 	loadTowns();
-	hideAllViews();
+	hideAllViews()
 	$("#currentEnemy").show();
 
 
@@ -130,6 +127,13 @@ $(document).ready(function(){
 			}
 		}
 	});
+
+	$("body").on('click',".useItemButton", function(){
+		var id = this.id.substring(4);
+		activateItem(id);
+	});
+
+
 
 
 	$("body").on('click',".starter", function(){
@@ -370,13 +374,8 @@ var getBonusCatchrate = function(){
 }
 
 var getClickAttack = function(){
-	var totalMagnitude = 0;
-	for (var i = 0; i<player.inventoryList; i++){
-		if (player.inventoryList[i].inUse == 1 && player.inventoryList[i].use == "clickBoost"){
-			totalMagnitude += player.inventoryList[i].magnitude;
-		}
-	}
-	var clickAttack = Math.floor(player.clickAttack*(player.clickMultiplier+totalMagnitude));
+	var totalMagnitude = getItemBonus("clickBoost")
+	var clickAttack = Math.floor(player.clickAttack*player.clickMultiplier*totalMagnitude);
 	if(isActive("Poison Barb")){
 		clickAttack *= getOakItemBonus("Poison Barb");
 	}
@@ -384,16 +383,21 @@ var getClickAttack = function(){
 }
 
 var getPokemonAttack = function(){
-	var totalMagnitude = 0;
-	for (var i = 0; i<player.inventoryList; i++){
-		if (player.inventoryList[i].inUse == 1 && player.inventoryList[i].use == "attackBoost"){
-			totalMagnitude += player.inventoryList[i].magnitude;
-		}
-	}
-	var pokemonAttack = Math.floor(player.attack*(player.attackMultiplier+totalMagnitude));
+	var totalMagnitude = getItemBonus("attackBoost");
+	var pokemonAttack = Math.floor(player.attack*player.attackMultiplier*totalMagnitude);
 	return pokemonAttack;
 }
 
+var getItemBonus = function(type){
+	var totalMagnitude = 0;
+	for (var i = 0; i<player.inventoryList.length; i++){
+		if (player.inventoryList[i].inUse == 1 && player.inventoryList[i].use == type){
+			totalMagnitude += player.inventoryList[i].magnitude;
+		}
+	}
+	var totalMagnitude = Math.max(1, totalMagnitude);
+	return totalMagnitude;
+}
 var gainTokens = function(amount){
 	if(amount >= 1){
 		amount *= player.dungeonTokenMultiplier;
@@ -402,6 +406,10 @@ var gainTokens = function(amount){
 			money *= getOakItemBonus("Token Case")
 		}
 		amount = Math.floor(amount);
+
+		var totalMagnitude = getItemBonus("tokenBoost");
+		amount *= totalMagnitude;
+
 		player.dungeonTokens += amount
 		if(amount == 1){
 			log("You gained " + amount + " dungeon token!");
@@ -413,7 +421,8 @@ var gainTokens = function(amount){
 
 var gainMoney = function(money, message){
 	money *= player.moneyMultiplier;
-
+	var totalMagnitude = getItemBonus("coinBoost");
+	money *= totalMagnitude;
 	if(isActive("Amulet Coin")){
 		money *= getOakItemBonus("Amulet Coin")
 	}
@@ -434,6 +443,8 @@ var gainExp = function(exp){
 		exp *= pokedexBonusExp;
 
 		exp = Math.floor(exp);
+		var totalMagnitude = getItemBonus("expBoost");
+		exp *= totalMagnitude;
 
 		for( var i = 0; i<player.caughtPokemonList.length; i++){
 			var pokemonLevel = experienceToLevel(player.caughtPokemonList[i].experience, player.caughtPokemonList[i].levelType);
@@ -480,9 +491,9 @@ var enemyDefeated = function(){
 		player.routeKills[player.route]++
 		updateRoute();
 		var chance = Math.floor(Math.random()*100+1);
-			if (chance > 101){
+		if (chance < getItemChance(player.route)){
 				gainRandomItem(player.route);
-			}
+		}
 
 
 
@@ -643,7 +654,7 @@ var generatePokemon = function(route){
 	//console.log(pokemonList);
 	curEnemy.name = randomPokemon.name;
 	curEnemy.id = randomPokemon.id;
-	curEnemy.health = Math.max(Math.floor(Math.pow( (randomPokemon.health*Math.pow(route,1.75)*(Math.pow(player.caughtPokemonList.length-1),1.2)/8) ,1.15)) , 20) || 20;
+	curEnemy.health = Math.max(Math.floor(Math.pow( (randomPokemon.health*Math.pow(route,2.2)*(Math.pow(player.caughtPokemonList.length-1),1.2)/8) ,1.15)) , 20) || 20;
 	curEnemy.shiny = generateShiny();
 	curEnemy.maxHealth = curEnemy.health;
 	curEnemy.exp = Math.max(Math.floor(10*Math.pow(route ,1.1)), 10) || 10;
@@ -651,7 +662,7 @@ var generatePokemon = function(route){
 	curEnemy.catchRate = Math.floor(Math.pow(randomPokemon.catchRate,0.75)) + catchVariation;
 	curEnemy.alive = true;
 	var deviation = Math.floor(Math.random() * 51 ) - 25;
-	curEnemy.moneyReward = Math.max(10, 6 * route + 5*Math.pow(route,1.2) + deviation);
+	curEnemy.moneyReward = Math.max(10, 3 * route + 5*Math.pow(route,1.15) + deviation);
 	return randomPokemon;
 }
 
@@ -732,166 +743,4 @@ var testLegendary = function(tries){
 	console.log("Mew: "+mew);
 	console.log("Mewtwo: "+two);
 	console.log("False: "+fail);
-}
-
-var gainRandomItem = function(route){
-	if(route <= 25){
-		var possibleItems = itemsPerRoute[route];
-		var rand = Math.floor(Math.random()*possibleItems.length);
-		var randomItemName = possibleItems[rand];
-	} else {
-		var rand = Math.floor(Math.random()*itemList.length);
-		var randomItemName = itemList[rand].name;
-	}
-	var randomItem = getItemByName(randomItemName).id;
-	if (alreadyHaveItem(randomItemName)==true){
-		var itemNum = findItemInInventory(randomItemName);
-		player.inventoryList[itemNum].quantity++;
-	}
-	else{
-		var item = itemList[randomItem-1];
-		var itemObject = {id:item.id, name:item.name, quantity:1, type:item.type, use:item.use, unUse:item.unUse, time:item.time, timeleft:0, instant:item.instant, magnitude:item.magnitude, inUse:0};
-		player.inventoryList.push(itemObject);
-	}
-
-	$.notify("You got a "+randomItemName, 'success');
-
-	updateItems()
-}
-
-var gainItemByName = function(name){
-	if (alreadyHaveItem(name)==true){
-		var itemNum = findItemInInventory(name);
-		player.inventoryList[itemNum].quantity++;
-	}
-	else{
-		var item = getItemByName(name);
-		var itemObject = {id:item.id, name:item.name, quantity:1, type:item.type, use:item.use, unUse:item.unUse, time:item.time, timeleft:0, instant:item.instant, magnitude:item.magnitude, inUse:0};
-		player.inventoryList.push(itemObject);
-	}
-
-	$.notify("You got a "+name, 'success');
-
-	updateItems()
-}
-
-var getItemByName = function(name){
-	for( var i = 0; i<itemList.length; i++){
-		if(itemList[i].name == name){
-			return itemList[i];
-		}
-	}
-}
-
-var alreadyHaveItem = function(name){
-	if(isInventoryEmpty() == true){
-		return false;
-	}
-	else {
-		for (var i = 0; i<player.inventoryList.length; i++){
-			if(player.inventoryList[i] == undefined){
-				return false;
-			}
-			else if(player.inventoryList[i].name == name){
-				return true;
-			}
-			else if(i==player.inventoryList.length-1){
-				return false;
-			}
-		}
-	}
-}
-
-var findItemInInventory = function(name){
-	for(var i = 0; i<player.inventoryList.length; i++){
-		if(player.inventoryList[i].name == name){
-			return i;
-		}
-		else if(i==player.inventoryList.length-1){
-			return false;
-		}
-	}
-}
-
-var isInventoryEmpty = function(){
-	if (player.inventoryList.length == 0){
-		return true;
-	}
-	else {
-		for (var i = 0; i<player.inventoryList.length; i++){
-			if (player.inventoryList[i].quantity != 0){
-				return false;
-			}
-			else if(i == player.inventoryList.length-1){
-				return true;
-			}
-		}
-	}
-}
-
-var useItem = function(id){
-	if(player.inventoryList[id].use == null){
-		itemModalHtml = "";
-		itemModalHtml += "<div class='row'><p class='oakText'>This item has no effect and cannot be used.</p>";
-		$("#itemModalBody").html(itemModalHtml);
-		$("#itemModal").modal('show');
-		return false;
-	}
-	else if(player.inventoryList[id].quantity<=0){
-		itemModalHtml = "";
-		itemModalHtml += "<div class='row'><p class='oakText'>You don't have any of this item.</p>";
-		$("#itemModalBody").html(itemModalitemModalHtml);
-		$("#itemModal").modal('show');
-		return false;
-	}
-	else if(player.inventoryList[id].inUse==1){
-		itemModalHtml = "";
-		itemModalHtml += "<div class='row'><p class='oakText'>You are already using this item.</p>";
-		$("#itemModalBody").html(itemModalHtml);
-		$("#itemModal").modal('show');
-		return false;
-	}
-	else if(player.inventoryList[id].instant == 0){
-		itemChoiceModalResult = 0;
-		itemChoiceModalHtml = "";
-		itemChoiceModalHtml += "<div class='row'><p class='oakText'>Would you like to use a(n) "+player.inventoryList[id].name+"?</p></div>";
-		itemChoiceModalHtml += "<br><div class='row' align='center'><button id='itemModalClose' type='button' onclick='itemChoiceModalButton(1,"+id+")'>Yes</button>   <button id='itemModalClose' type='button' onclick='itemChoiceModalButton(0,"+id+")'>No</button></div>"
-		$("#itemChoiceModalBody").html(itemChoiceModalHtml);
-		$("#itemChoiceModal").modal('show');
-	}
-	else {
-		// instant item effects
-	}
-}
-
-var itemInterval = function(){
-	for (var i = 0; i<player.inventoryList.length; i++){
-		if (player.inventoryList[i].inUse == 1){
-			if (player.inventoryList[i].timeLeft != 0){
-				player.inventoryList[i].timeLeft--;
-			}
-			else{
-				player.inventoryList[i].inUse = 0;
-				$.notify("The effects of your "+player.inventoryList[i].name+" ran out.", "succes")
-			}
-			updateItems();
-			updateStats();
-		}
-	}
-}
-
-var itemChoiceModalButton = function(result, id){
-	item = player.inventoryList[id]
-	$('#itemChoiceModal').modal('hide');
-	if(result == 1){
-		item.timeLeft = item.time;
-		item.inUse = 1;
-		item.quantity--;
-		$.notify("You used a(n) "+item.name+".", "succes")
-		return true;
-	}
-	else{
-		return false;
-	}
-	updateAll();
 }
