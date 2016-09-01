@@ -643,9 +643,11 @@
 				<div class="row">
 					<div class="col-lg-12" id="navBar">
 						<button class="btn-success" id="badgeButton">Badges</button>
+						<button class="btn-warning" id="shardButton">Shards</button>
 						<button class="btn-danger" id="pokedexButton">Pokedex</button>
 						<button class="btn-info" id="changeLogButton">Changelog</button>
 						<button class="btn-danger" id="resetButton">Reset</button>
+
 					</div>
 				</div>
 				<!-- Starter Modal -->
@@ -704,6 +706,83 @@
 						</div>
 					</div>
 				</div>
+
+				<!-- Shards Modal -->
+				<div aria-labelledby="myModalLabel" class="modal fade" id="shardModal" role="dialog" tabindex="-1">
+					<div class="modal-dialog" id="shardModalDialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title" id="myModalLabel">Shards</h4>
+							</div>
+							<div class="modal-body" id="shardBody">
+								
+									<table class="shardTable">
+										<tr>
+											<td>Fire</td>
+											<td>Not very effective:</td>
+											<td>0.85x</td>
+											<td><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeUnlocked"></div><div class="col-sm-1 shardUpgradeUnlocked"></div><div class="col-sm-1 shardUpgradeUnlocked"></div></td>
+											<td class="shardColumn4">Buy!</td>
+										</tr>
+
+										<tr>
+											<td>100<img class="shardImage" id="normalShard" src="images/shards/1.png"></td>
+											<td>Normal:</td>
+											<td>1.45x</td>
+											<td><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeUnlocked"></div></td>
+											<td class="shardColumn4">Buy!</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td>Very effective:</td>
+											<td>1.8x</td>
+											<td><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeUnlocked"></div><div class="col-sm-1 shardUpgradeUnlocked"></div><div class="col-sm-1 shardUpgradeUnlocked"></div><div class="col-sm-1 shardUpgradeUnlocked"></div></td>
+											<td class="shardColumn4">Buy!</td>
+										</tr>
+
+									</table>
+<br><br><br>
+
+									<table class="shardTable">
+										<tr>
+											<td>Ice</td>
+											<td>Not very effective:</td>
+											<td>0.85x</td>
+											<td><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeUnlocked"></div><div class="col-sm-1 shardUpgradeUnlocked"></div><div class="col-sm-1 shardUpgradeUnlocked"></div></td>
+											<td class="shardColumn4">Buy!</td>
+										</tr>
+
+										<tr>
+											<td>100<img class="shardImage" id="normalShard" src="images/shards/1.png"></td>
+											<td>Normal:</td>
+											<td>1.45x</td>
+											<td><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeUnlocked"></div></td>
+											<td class="shardColumn4">Buy!</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td>Very effective:</td>
+											<td>1.8x</td>
+											<td><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeLocked"></div><div class="col-sm-1 shardUpgradeUnlocked"></div><div class="col-sm-1 shardUpgradeUnlocked"></div><div class="col-sm-1 shardUpgradeUnlocked"></div><div class="col-sm-1 shardUpgradeUnlocked"></div></td>
+											<td class="shardColumn4">Buy!</td>
+										</tr>
+
+
+									</table>									
+									<br><br><br>
+									<img class="shardImage" id="waterShard" src="images/shards/1.png">
+									<img class="shardImage" id="electricShard" src="images/shards/2.png">
+									<img class="shardImage" id="grassShard" src="images/shards/3.png">
+									<img class="shardImage" id="iceShard" src="images/shards/4.png">
+									<img class="shardImage" id="fightingShard" src="images/shards/5.png">
+									
+						
+								<br>
+							</div>
+						</div>
+					</div>
+				</div>
+
 
 				<!-- Badge Modal -->
 				<div aria-labelledby="myModalLabel" class="modal fade" id="badgeModal" role="dialog" tabindex="-1">
