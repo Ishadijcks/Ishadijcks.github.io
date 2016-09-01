@@ -1,19 +1,3 @@
-/* var Item = function(name,price,image,type,effect,time){
-
-	var temp = {
-		name: name,
-		price: price,
-		image: image,
-		type: type,
-		effect: effect,
-		time: time,
-		active: 0
-	}
-	return temp;
-} */
-
-// var xAttack = Item("X Attack", 500, "images/items/xattack.png", "attackBoost", 10, 180);
-// var xDefense = Item("X Defense", 500, "images/items/xdefense.png", "defenseBoost", 10, 180);
 var itemList = [
 {id:1, name:"Cheri Berry", price:100, use:null, unUse:null, time:0, type:"berry", instant:1, magnitude: 1},
 {id:2, name:"Chesto Berry", price:100, use:null, unUse:null, time:0, type:"berry", instant:1, magnitude: 1},
@@ -73,8 +57,6 @@ var gainRandomItem = function(route){
 	}
 	gainItemByName(randomItemName);
 
-	$.notify("You got a "+randomItemName, 'success');
-	
 	updateItems()
 }
 
@@ -116,7 +98,7 @@ var alreadyHaveItem = function(name){
 	if(isInventoryEmpty() == true){
 		return false;
 	}
-	else { 
+	else {
 		for (var i = 0; i<player.inventoryList.length; i++){
 			if(player.inventoryList[i] == undefined){
 				return false;

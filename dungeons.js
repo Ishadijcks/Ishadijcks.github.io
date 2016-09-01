@@ -127,6 +127,7 @@ var CeruleanCaveDungeon = function(){
         var bossPokemon = BossPokemon("Rhydon", 143675, 4000);
     }
     return Dungeon("Cerulean Cave Dungeon", pokemonList, 5, 28735, bossPokemon, 2500, 8);
+}
 
 var PokemonMansionDungeon = function(){
     var pokemonList = ["Growlithe", "Vulpix", "Grimer", "Muk", "Koffing", "Weezing"];
