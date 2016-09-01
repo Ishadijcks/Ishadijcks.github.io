@@ -264,7 +264,13 @@ $(document).ready(function(){
 		showPokedex();
 		$("#pokedexModal").modal("show");
 
-	})		
+	})	
+	
+	$("body").on('click', "#pokedexImage", function () {
+        var imgsrc=$(this).attr('src');
+        showSpecificPokemon1(imgsrc);
+        //alert(imgsrc);
+	})
 	
 	$("body").on('click',".oakItem", function(){
 		var id = this.id;
