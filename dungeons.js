@@ -42,7 +42,7 @@ var ViridianForestDungeon = function() {
 var DiglettsCaveDungeon = function(){
     var pokemonList = ["Diglett"];
     var bossPokemon = BossPokemon("Dugtrio", 6040, 400);
-    return Dungeon("Digletts Cave Dungeon", pokemonList, 5, 1208, bossPokemon, 75, 0);
+    return Dungeon("Digletts Cave Dungeon", pokemonList, 5, 1208, bossPokemon, 95, 0);
 }
 
 var MtMoonDungeon = function() {
@@ -52,7 +52,7 @@ var MtMoonDungeon = function() {
     } else {
         var bossPokemon = BossPokemon("Omanyte", 4170, 500);
     }
-    return Dungeon("Mt. Moon Dungeon", pokemonList, 5, 834, bossPokemon, 95, 1);
+    return Dungeon("Mt. Moon Dungeon", pokemonList, 5, 834, bossPokemon, 75, 1);
 }
 
 var RockTunnelDungeon = function(){
