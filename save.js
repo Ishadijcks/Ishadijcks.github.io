@@ -40,6 +40,11 @@ var load = function(){
 	if (typeof savegame.townExplain !== "undefined") player.townExplain = savegame.townExplain;
 	if (typeof savegame.dungeonExplain !== "undefined") player.dungeonExplain = savegame.dungeonExplain;
 	if (typeof savegame.inventoryList !== "undefined") player.inventoryList = savegame.inventoryList;
+	if (typeof savegame.typeShards !== "undefined") player.typeShards = savegame.typeShards;
+	if (typeof savegame.notEffectiveTypeBonus !== "undefined") player.notEffectiveTypeBonus = savegame.notEffectiveTypeBonus;
+	if (typeof savegame.normalEffectiveTypeBonus !== "undefined") player.normalEffectiveTypeBonus = savegame.normalEffectiveTypeBonus;
+	if (typeof savegame.veryEffectiveTypeBonus !== "undefined") player.veryEffectiveTypeBonus = savegame.veryEffectiveTypeBonus;
+
 	
 	if(player.version < version){
 		$('#changeLogModal').modal('show');
