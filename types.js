@@ -237,19 +237,18 @@ var showShardModal = function(){
 
 
 var gainShards = function(type, amount){
-	
 	player.typeShards[typeToNumber(type)] += amount;
 }
 
 var getNotEffective = function(type){
-	return Math.min(0.5 + player.notEffectiveTypeBonus[type]*0.05, 1);
+	return Math.min(0.5 + player.notEffectiveTypeBonus[type]*0.25, 3);
 }
 
 var getNormalEffective = function(type){
-	return Math.min(1 + player.normalEffectiveTypeBonus[type]*0.05, 1.5);
+	return Math.min(1 + player.normalEffectiveTypeBonus[type]*0.25, 3.5);
 }
 
 var getVeryEffective = function(type){
-	return Math.min(1.5 + player.veryEffectiveTypeBonus[type]*0.05, 2);
+	return Math.min(1.5 + player.veryEffectiveTypeBonus[type]*0.25, 4);
 }
 
