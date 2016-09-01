@@ -162,5 +162,21 @@ var pokedexInfo = [
         height: "2\'4\"",
         weight: "40.8 lbs.",
 		types: ["Normal"]
-    }
+    },
+	{
+		name: "Spearow",
+		species: "Tiny Bird Pok&eacute;mon",
+		description: "It busily flits around here and there. Even if it is frail, it can be a tough foe that uses Mirror Move.",
+		height: "1\'0\"",
+		weight: "4.4 lbs.",
+		types: ["Normal", "Flying"]
+	},
+	{
+		name: "Fearow",
+		species: "Beak Pok&eacute;mon",
+		description: "Its huge and magnificent wings can keep it aloft in the sky. It can remain flying a whole day without landing.",
+		height: "3\'11\"",
+		weight: "83.8 lbs.",
+		types: ["Normal", "Flying"],
+	}
 ];

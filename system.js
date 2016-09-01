@@ -613,7 +613,16 @@ var calculateAttack = function(){
 	return total;
 }
 
-
+var getType = function(id) {
+	var type = [];
+	console.log(pokedexInfo[id-1].types.length);
+	for(var i = 0; i < pokedexInfo[id-1].types.length; i++) {
+		console.log(pokedexInfo[0].types[0]);
+	type.push(pokedexInfo[id-1].types[i]);
+	}
+	console.log("done");
+	return type.toString();
+}
 
 var generatePokemon = function(route){
 	clicks = 0;

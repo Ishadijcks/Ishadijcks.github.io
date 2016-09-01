@@ -42,6 +42,7 @@ var showPokedex = function(){
 }
 
 var showSpecificPokemon1 = function (srcPath) {
+alert(getType(1));
 	html = "";
 	html += "<div class='row'>";
 	html += "<div class='col-md-2 col-md-offset-0'>";
