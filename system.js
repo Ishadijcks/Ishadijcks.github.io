@@ -35,7 +35,11 @@ var player = {
 	mapExplain: 0,
 	townExplain: 0,
 	dungeonExplain: 0,
-	inventoryList: []
+	inventoryList: [],
+	typeShards: Array.apply(null, Array(17)).map(Number.prototype.valueOf,0),
+	notEffectiveTypeBonus: Array.apply(null, Array(17)).map(Number.prototype.valueOf,0),
+	normalEffectiveTypeBonus: Array.apply(null, Array(17)).map(Number.prototype.valueOf,0),
+	veryEffectiveTypeBonus: Array.apply(null, Array(17)).map(Number.prototype.valueOf,0)
 }
 
 var curEnemy = {
@@ -46,7 +50,8 @@ var curEnemy = {
 	reward: 0,
 	alive: true,
 	route: 0,
-	catchRate: 0
+	catchRate: 0,
+	type: ""
 }
 
 
@@ -258,6 +263,11 @@ $(document).ready(function(){
 	$("body").on('click',"#badgeButton", function(){
 		$("#badgeModal").modal("show");
 		showGymBadges();
+	})
+
+		// Navbar Button controllers
+	$("body").on('click',"#shardButton", function(){
+		$("#shardModal").modal("show");
 	})
 
 	$("body").on('click',"#pokedexButton", function(){
@@ -489,6 +499,7 @@ var enemyDefeated = function(){
 		gainMoney(Math.floor(money), "You earned $");
 		gainExp(exp);
 		player.routeKills[player.route]++
+		gainShards(curEnemy.type,1);
 		updateRoute();
 		var chance = Math.floor(Math.random()*100+1);
 		if (chance < getItemChance(player.route)){
@@ -661,6 +672,7 @@ var generatePokemon = function(route){
 	var catchVariation = Math.floor(Math.random()*7-3);
 	curEnemy.catchRate = Math.floor(Math.pow(randomPokemon.catchRate,0.75)) + catchVariation;
 	curEnemy.alive = true;
+	curEnemy.type = randomPokemon.type;
 	var deviation = Math.floor(Math.random() * 51 ) - 25;
 	curEnemy.moneyReward = Math.max(10, 3 * route + 5*Math.pow(route,1.15) + deviation);
 	return randomPokemon;
