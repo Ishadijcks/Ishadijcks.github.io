@@ -25,21 +25,17 @@
     padding: 10px;
 }
 
-.shardUpgradeLocked{
+.shardUpgrade{
 	height: 25px;
 	width: 25px;
-	background-color:#f85858;
 	border: 1px solid black;
 	margin: 2px;
 }
 
-.shardUpgradeUnlocked{
-	height: 25px;
-	width:25px;
-	background-color:#b01818;
-	border: 1px solid black;
-	margin: 2px;
+.shardUpgradeLocked{
+	opacity:0.6;
 }
+
 
 
 .useItemButton {
