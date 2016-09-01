@@ -267,6 +267,7 @@ $(document).ready(function(){
 
 		// Navbar Button controllers
 	$("body").on('click',"#shardButton", function(){
+		showShardModal();
 		$("#shardModal").modal("show");
 	})
 

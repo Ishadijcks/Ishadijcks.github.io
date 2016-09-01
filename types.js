@@ -20,6 +20,11 @@ var FAIRY = 17;
 
 var typeEffectiveness = [];
 
+var numberToType = ["normal","fire","water","electric","grass","ice","fighting","poison","ground","flying","psychic","bug","rock",	"ghost","dragon","dark","steel","fairy"];
+
+var typeColorLocked = ["9da07d","f85858","6b94ff","ffc663","73e763","b5efef","e78c6b","c684ff","cead7b","4ac6ff","ffb5ad","cef77b","d6bd94","948cad","ce6363","7394b5","AAAAAA"];
+var typeColorUnlocked = ["595c3b","b10818","294a94","b57b31","4a944a","42a59c","b54a4a","7b42c6","946b4a","218cb5","ce6363","8cb521","a58c4a","737373","8c424a","4a6b84","737373"];
+
 var initTypeEffectiveness = function(){
 	typeEffectiveness = [];
 	for( var i = 0; i<17; i++){
@@ -83,20 +88,117 @@ var typeToNumber = function(type){
 }
 
 
+var buyUpgrade = function(type, eff){
+	switch(eff){
+		case 1:
+			buyNotUpgrade(type);
+			break;
+		case 2:
+			buyNormalUpgrade(type);
+			break;
+		case 3:
+			buyVeryUpgrade(type);
+			break;
+	}
+	initTypeEffectiveness();
+	showShardModal();
+}
+
+var buyNotUpgrade = function(type){
+	var cost = 500*(player.notEffectiveTypeBonus[type]+1);
+	if(player.typeShards[type] > cost && player.notEffectiveTypeBonus < 10){
+		player.typeShards[type] -= cost;
+		player.notEffectiveTypeBonus[type]++;
+	} else {
+		$.notify("You don't have enough " + numberToType[type] + " shards", "error");
+	}
+}
+
+var buyNormalUpgrade = function(type){
+	var cost = 500*(player.normalEffectiveTypeBonus[type]+1);
+	if(player.typeShards[type] > cost, && player.normalEffectiveTypeBonus < 10){
+		player.typeShards[type] -= cost;
+		player.normalEffectiveTypeBonus[type]++;
+	} else {
+		$.notify("You don't have enough " + numberToType[type] + " shards", "error");
+	}
+}
+
+var buyVeryUpgrade = function(type){
+	var cost = 500*(player.veryEffectiveTypeBonus[type]+1);
+	if(player.typeShards[type] > cost, && player.veryEffectiveTypeBonus < 10){
+		player.typeShards[type] -= cost;
+		player.veryEffectiveTypeBonus[type]++;
+	} else {
+		$.notify("You don't have enough " + numberToType[type] + " shards", "error");
+	}	
+}
+
+var showShardModal = function(){
+	var html = ""
+	for(var i = 0; i<17; i++){
+		html += "<table class=shardTable>";
+		html += "<tr> <td style='width:15%'>" +numberToType[i] + "</td><td>Not very effective:</td>";
+		html +=	"<td>" + getNotEffective(i) + "x</td>";
+		html += "<td style='width:50%'>";
+		for( var j = 0; j<player.notEffectiveTypeBonus[i]; j++){
+			html += "<div style='background-color:#" + typeColorUnlocked[i] + "' class='col-sm-1 shardUpgrade'></div>";
+		}
+		for(var j = player.notEffectiveTypeBonus[i]; j<10; j++){
+			html += "<div style='background-color:#" + typeColorLocked[i] + "' class='col-sm-1 shardUpgrade shardUpgradeLocked'></div>";	
+		}
+		html += "<td class='shardColumn4'><button class='tooltipShard' title='" +500*(player.notEffectiveTypeBonus[i]+1) + " " + numberToType[i] + " shards' onclick='buyUpgrade("+ i + "," + 1 +")'>Upgrade</button></td></td></tr>";
+
+		html +="<tr><td><img class= shardImage' id='normalShard' src='images/shards/" + i + ".png'> " + player.typeShards[i] + "</td>";
+		html +="<td>Normal:</td>";
+		html +="<td>"+getNormal(i)+"x</td>";
+		html +="<td style='width:50%'>";
+		for( var j = 0; j<player.normalEffectiveTypeBonus[i]; j++){
+			html += "<div <div style='background-color:#" + typeColorUnlocked[i] + "' class='col-sm-1 shardUpgrade'></div>";
+		}
+		for(var j = player.normalEffectiveTypeBonus[i]; j<10; j++){
+			html += "<div <div style='background-color:#" + typeColorLocked[i] + "' class='col-sm-1 shardUpgrade shardUpgradeLocked'></div>";
+		}
+		html += "<td class='shardColumn4'><button class='tooltipShard' title='" +500*(player.normalEffectiveTypeBonus[i]+1) + " " + numberToType[i] + " shards' onclick='buyUpgrade("+ i + "," + 2 +")'>Upgrade</button></td></td></tr>";
+
+		html +="<tr><td></td>";
+		html +="<td>Very effective:</td>";
+		html +="<td>"+getVeryEffective(i)+"x</td>";
+		html +="<td style='width:50%'>";
+		for( var j = 0; j<player.veryEffectiveTypeBonus[i]; j++){
+			html += "<div <div style='background-color:#" + typeColorUnlocked[i] + "' class='col-sm-1 shardUpgrade'></div>";
+		}
+		for(var j = player.veryEffectiveTypeBonus[i]; j<10; j++){
+			html += "<div <div style='background-color:#" + typeColorLocked[i] + "' class='col-sm-1 shardUpgrade shardUpgradeLocked'></div>";
+		}
+		html += "<td class='shardColumn4'><button class='tooltipShard' title='" +500*(player.veryEffectiveTypeBonus[i]+1) + " " + numberToType[i] + " shards' onclick='buyUpgrade("+ i + "," + 3 +")'>Upgrade</button></td></td></tr>";
+		html += "</table><br><br><br>";
+
+	}
+
+	$("#shardBody").html(html);
+
+	$(".tooltipShard").tooltipster({
+		position: "right",
+		delay:10
+	});
+}
+
+
 var gainShards = function(type, amount){
 	
 	player.typeShards[typeToNumber(type)] += amount;
 }
 
 var getNotEffective = function(type){
-	return Math.min(0.5 + player.notEffectiveTypeBonus[type], 1);
+	return Math.min(0.5 + player.notEffectiveTypeBonus[type]*0.05, 1);
 }
 
 var getNormal = function(type){
-	return Math.min(1 + player.normalEffectiveTypeBonus[type], 1.5);
+	return Math.min(1 + player.normalEffectiveTypeBonus[type]*0.05, 1.5);
 }
 
 var getVeryEffective = function(type){
-	return Math.min(1.5 + player.veryEffectiveTypeBonus[type], 2);
+	return Math.min(1.5 + player.veryEffectiveTypeBonus[type]*0.05, 2);
 }
 
