@@ -116,7 +116,7 @@ var buyNotUpgrade = function(type){
 
 var buyNormalUpgrade = function(type){
 	var cost = 500*(player.normalEffectiveTypeBonus[type]+1);
-	if(player.typeShards[type] > cost, && player.normalEffectiveTypeBonus < 10){
+	if(player.typeShards[type] > cost && player.normalEffectiveTypeBonus < 10){
 		player.typeShards[type] -= cost;
 		player.normalEffectiveTypeBonus[type]++;
 	} else {
@@ -126,7 +126,7 @@ var buyNormalUpgrade = function(type){
 
 var buyVeryUpgrade = function(type){
 	var cost = 500*(player.veryEffectiveTypeBonus[type]+1);
-	if(player.typeShards[type] > cost, && player.veryEffectiveTypeBonus < 10){
+	if(player.typeShards[type] > cost && player.veryEffectiveTypeBonus < 10){
 		player.typeShards[type] -= cost;
 		player.veryEffectiveTypeBonus[type]++;
 	} else {
