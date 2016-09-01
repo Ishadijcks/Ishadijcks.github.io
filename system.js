@@ -362,7 +362,7 @@ var experienceToLevel = function(exp,levelType){
 
 	}
 	exp *= mult;
-	return Math.min(100,Math.floor( Math.pow(20*exp,0.5)/(6*Math.sqrt(5))));
+	return Math.min(Math.min(100,Math.floor( Math.pow(20*exp,0.5)/(6*Math.sqrt(5)))), (1+player.gymBadges.length) * 10);
 }
 
 var getBonusCatchrate = function(){
