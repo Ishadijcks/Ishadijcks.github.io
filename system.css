@@ -3,6 +3,13 @@
 	width:25px;
 }
 
+.disabled {
+	opacity: 0.4;
+}
+
+.disabled:hover{
+	cursor:not-allowed;
+}
 .shardRow{
 	margin-left: 15px;
 }
