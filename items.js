@@ -26,6 +26,11 @@ var itemList = [
 {id:9, name:"Item Magnet", price:25000, use:"itemBoost", unUse:null, time:60, type:"combat", instant:0, magnitude: 2, flavorText: "Double your chance of getting items for 60 seconds!"},
 {id:10, name:"X Exp", price:25000, use:"expBoost", unUse:null, time:60, type:"combat", instant:0, magnitude: 2, flavorText: "Double the exp you earn for 60 seconds!"},
 {id:11, name:"Token Collector", price:25000, use:"tokenBoost", unUse:null, time:60, type:"combat", instant:0, magnitude: 2, flavorText: "Double the dungeon tokens you earn for 60 seconds!"},
+{id:12, name:"Thunder Stone", price:25000, use:"evolution", unUse:null, time: null, type:"evolution", instant:1, magnitude:0, flavorText: "A peculiar stone that makes certain species of Pokemon evolve. It has a thunderbolt pattern."},
+{id:13, name:"Fire Stone", price:25000, use:"evolution", unUse:null, time: null, type:"evolution", instant:1, magnitude:0, flavorText: "A peculiar stone that makes certain species of Pokemon evolve. It is colored orange."},
+{id:14, name:"Leaf Stone", price:25000, use:"evolution", unUse:null, time: null, type:"evolution", instant:1, magnitude:0, flavorText: "A peculiar stone that makes certain species of Pokemon evolve. It has a leaf pattern."},
+{id:15, name:"Water Stone", price:25000, use:"evolution", unUse:null, time: null, type:"evolution", instant:1, magnitude:0, flavorText: "A peculiar stone that makes certain species of Pokemon evolve. It is a clear light blue."},
+{id:16, name:"Moon Stone", price:25000, use:"evolution", unUse:null, time: null, type:"evolution", instant:1, magnitude:0, flavorText: "A peculiar stone that makes certain species of Pokemon evolve. It is as black as the night sky."},
 ]
 
 var itemsPerRoute = {
@@ -171,9 +176,15 @@ var itemInterval = function(){
 
 var activateItem = function(id){
 	item = player.inventoryList[getItemById(id)];
-
+	console.log(item);
 	// Item with a timer.
-	if(!isNaN(item.time)){
+
+	if(item.use === "evolution"){
+		item.quantity--;
+		useEvoStone(item.name);
+		updateItems();
+		updateStats();
+	} else if (!isNaN(item.time)){
 		if(item.quantity > 0){
 			item.timeLeft += item.time;
 			item.inUse = 1;
