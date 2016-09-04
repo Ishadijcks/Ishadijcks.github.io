@@ -235,6 +235,18 @@ var showShardModal = function(){
 	});
 }
 
+var getStoneEvolutionPokemon = function(type){
+	var possiblePokemon = [];
+	for( var i = 0; i <player.caughtPokemonList.length; i++){
+		if(isNaN(player.caughtPokemonList[i].evoLevel)){
+			if(player.caughtPokemonList[i].evoLevel.indexOf(type) !== -1 ){
+				console.log(i);
+				possiblePokemon.push(player.caughtPokemonList[i].name);
+			}
+		}
+	}
+	return possiblePokemon;
+}
 
 var gainShards = function(type, amount){
 	player.typeShards[typeToNumber(type)] += amount;
