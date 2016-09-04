@@ -154,7 +154,12 @@
 	cursor:pointer
 }
 
-
+.evoButton {
+	height: 96px !important;
+	border: 1px solid black;
+	background-color:white;
+	margin-bottom:50px;
+}
 
 
 #gymTrainer {

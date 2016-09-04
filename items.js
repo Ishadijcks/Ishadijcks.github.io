@@ -83,8 +83,7 @@ var gainRandomItem = function(route){
 	updateItems()
 }
 
-var gainItemByName = function(name){
-	console.log(name);
+var gainItemByName = function(name){ 
 	if (alreadyHaveItem(name)){
 		var itemNum = findItemInInventory(name);
 		player.inventoryList[itemNum].quantity++;
@@ -198,32 +197,56 @@ var activateItem = function(id){
 }
 
 var useEvoStone = function(item){
-	var html = "";
+	var html = "<div class='row'>";
 	var possibleEvolutions = getStoneEvolutionPokemon(item.name);
-	console.log(possibleEvolutions);
-	
 	$("#evoModal").modal("show");
 	for(var i = 0; i <possibleEvolutions.length; i++){
 		if (!possibleEvolutions[i].evolved){
+			var id = getPokemonByName(possibleEvolutions[i].name).id;
 			if(possibleEvolutions[i].name === "Eevee"){
 				if(item.name === "Thunder Stone"){
-					html += "<button data-pokemon='Jolteon' class='evoButton' id='evo" + item.id + "' >" + possibleEvolutions[i].name + "</button>";
+					html += "<div data-pokemon='Jolteon' class='evoButton col-sm-3 col-md-2 pokedexEntry' id='evo" + item.id + "'>";
+					html += "<img class='center-block' id='pokedexImage' src=images/pokemon/" + id + ".png >" + possibleEvolutions[i].name;
+					if (alreadyCaught("Jolteon")){
+						html += " <img id=alreadyCaughtImage src=images/Pokeball.PNG>";
+					}
 				}
 				else if(item.name === "Water Stone"){
-					html += "<button data-pokemon='Vaporeon' class='evoButton' id='evo" + item.id + "' >" + possibleEvolutions[i].name + "</button>";
+					html +="<div data-pokemon='Vaporeon' class='evoButton col-sm-3 col-md-2 pokedexEntry' id='evo" + item.id + "'>";
+					html += "<img class='center-block' id='pokedexImage' src=images/pokemon/" + id + ".png >" + possibleEvolutions[i].name;
+					if (alreadyCaught("Vaporeon")){
+						html += " <img id=alreadyCaughtImage src=images/Pokeball.PNG>";
+					}
 				}
 				else if(item.name === "Fire Stone"){
-					html += "<button data-pokemon='Flareon' class='evoButton' id='evo" + item.id + "' >" + possibleEvolutions[i].name + "</button>";
+					html += "<div data-pokemon='Flareon' class='evoButton col-sm-3 col-md-2 pokedexEntry' id='evo" + item.id + "'>";
+					html += "<img class='center-block' id='pokedexImage' src=images/pokemon/" + id + ".png >" + possibleEvolutions[i].name;
+					if (alreadyCaught("Flareon")){
+						html += " <img id=alreadyCaughtImage src=images/Pokeball.PNG>";
+					}
 				}
 			} else {
-				html += "<button data-pokemon='" + possibleEvolutions[i].evolution+ "' class='evoButton' id='evo" + item.id + "' >" + possibleEvolutions[i].name + "</button>";
+				html += "<div data-pokemon='" + possibleEvolutions[i].evolution + "' class='evoButton col-sm-3 col-md-2 pokedexEntry' id='evo" + item.id + "'>";
+				html += "<img class='center-block' id='pokedexImage' src=images/pokemon/" + id + ".png >" + possibleEvolutions[i].name;
 			}
+
+
+
+			
+			if (alreadyCaught(possibleEvolutions[i].evolution)){
+				html += " <img id=alreadyCaughtImage src=images/Pokeball.PNG>";
+			}
+			html += "</div>";
+
+
 		}
 	}
 	
+	html += "</div>";
 
 	$("#evoBody").html(html);
 	$("#evoTitle").html(item.name);
+	updateItems();
 }
 
 var activateEvoStone = function(pokemon, id){

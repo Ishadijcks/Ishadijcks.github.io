@@ -241,7 +241,6 @@ var getStoneEvolutionPokemon = function(type){
 	for( var i = 0; i <player.caughtPokemonList.length; i++){
 		if(isNaN(player.caughtPokemonList[i].evoLevel)){
 			if(player.caughtPokemonList[i].evoLevel.indexOf(type) !== -1 ){
-				console.log(i);
 				possiblePokemon.push(player.caughtPokemonList[i]);
 			}
 		}
