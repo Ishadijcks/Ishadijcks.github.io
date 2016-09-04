@@ -131,7 +131,7 @@ var pokemonList = [
 {id: 130, name: "Gyarados", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "water", attack: 125, route:null, health:100, levelType: "slow", experience: 10  },
 {id: 131, name: "Lapras", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "water", attack: 85, route:37, health:100, levelType: "slow", experience: 10  },
 {id: 132, name: "Ditto", catchRate: 35, evolution: null, evoLevel: null, evolved: 0, type: "normal", attack: 48, route:13, health:100, levelType: "medium fast", experience: 10  },
-{id: 133, name: "Eevee", catchRate: 45, evolution: "Vaporeon, Jolteon,Flareon", evoLevel: "Water Stone, Thunder Stone, Fire Stone", evolved: 0, type: "normal", attack: 55, route:36, health:100, levelType: "medium fast", experience: 10  },
+{id: 133, name: "Eevee", catchRate: 45, evolution: "Vaporeon, Jolteon, Flareon", evoLevel: "Water Stone, Thunder Stone, Fire Stone", evolved: 0, type: "normal", attack: 55, route:36, health:100, levelType: "medium fast", experience: 10  },
 {id: 134, name: "Vaporeon", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "water", attack: 110, route:null, health:100, levelType: "medium fast", experience: 10  },
 {id: 135, name: "Jolteon", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "electric", attack: 110, route:null, health:100, levelType: "medium fast", experience: 10  },
 {id: 136, name: "Flareon", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "fire", attack: 130, route:null, health:100, levelType: "medium fast", experience: 10  },
