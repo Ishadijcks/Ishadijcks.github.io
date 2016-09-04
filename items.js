@@ -197,3 +197,8 @@ var activateItem = function(id){
 	}
 
 }
+
+var useEvoStone = function(type){
+	var possibleEvolutions = getStoneEvolutionPokemon(type);
+	console.log(possibleEvolutions);
+}
