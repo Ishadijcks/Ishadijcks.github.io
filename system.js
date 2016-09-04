@@ -269,7 +269,6 @@ $(document).ready(function(){
 		// Navbar Button controllers
 	$("body").on('click',"#shardButton", function(){
 		showShardModal();
-		$("#shardModal").modal("show");
 	})
 
 	$("body").on('click',"#pokedexButton", function(){

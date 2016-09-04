@@ -161,6 +161,7 @@ var buyVeryUpgrade = function(type){
 }
 
 var showShardModal = function(){
+	$("#shardModal").modal("show");
 	var html = ""
 	for(var i = 0; i<17; i++){
 		html += "<table class=shardTable>";
