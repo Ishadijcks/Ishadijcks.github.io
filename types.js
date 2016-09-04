@@ -242,7 +242,7 @@ var getStoneEvolutionPokemon = function(type){
 		if(isNaN(player.caughtPokemonList[i].evoLevel)){
 			if(player.caughtPokemonList[i].evoLevel.indexOf(type) !== -1 ){
 				console.log(i);
-				possiblePokemon.push(player.caughtPokemonList[i].name);
+				possiblePokemon.push(player.caughtPokemonList[i]);
 			}
 		}
 	}

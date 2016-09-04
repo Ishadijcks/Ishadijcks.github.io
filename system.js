@@ -271,6 +271,12 @@ $(document).ready(function(){
 		showShardModal();
 	})
 
+	$("body").on('click',".evoButton", function(){
+		activateEvoStone(this.dataset.pokemon, this.id.substr(3));
+		$("#evoModal").modal("hide");
+	})
+
+
 	$("body").on('click',"#pokedexButton", function(){
 		showPokedex();
 		$("#pokedexModal").modal("show");
@@ -551,6 +557,7 @@ var enemyDefeated = function(){
 // Capture a pokemon by moving it to the player.caughtPokemonList
 // Pokemon are adressable by name
 var capturePokemon = function(name, shiny){
+	console.log(name);
 	var id = getPokemonByName(name).id-1;
 	player.catchNumbers[id]++;
 	if(!alreadyCaught(name)){

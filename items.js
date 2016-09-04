@@ -180,8 +180,7 @@ var activateItem = function(id){
 	// Item with a timer.
 
 	if(item.use === "evolution"){
-		item.quantity--;
-		useEvoStone(item.name);
+		useEvoStone(item);
 		updateItems();
 		updateStats();
 	} else if (!isNaN(item.time)){
@@ -198,7 +197,38 @@ var activateItem = function(id){
 
 }
 
-var useEvoStone = function(type){
-	var possibleEvolutions = getStoneEvolutionPokemon(type);
+var useEvoStone = function(item){
+	var html = "";
+	var possibleEvolutions = getStoneEvolutionPokemon(item.name);
 	console.log(possibleEvolutions);
+	
+	$("#evoModal").modal("show");
+	for(var i = 0; i <possibleEvolutions.length; i++){
+		if (!possibleEvolutions[i].evolved){
+			if(possibleEvolutions[i].name === "Eevee"){
+				if(item.name === "Thunder Stone"){
+					html += "<button data-pokemon='Jolteon' class='evoButton' id='evo" + item.id + "' >" + possibleEvolutions[i].name + "</button>";
+				}
+				else if(item.name === "Water Stone"){
+					html += "<button data-pokemon='Vaporeon' class='evoButton' id='evo" + item.id + "' >" + possibleEvolutions[i].name + "</button>";
+				}
+				else if(item.name === "Fire Stone"){
+					html += "<button data-pokemon='Flareon' class='evoButton' id='evo" + item.id + "' >" + possibleEvolutions[i].name + "</button>";
+				}
+			} else {
+				html += "<button data-pokemon='" + possibleEvolutions[i].evolution+ "' class='evoButton' id='evo" + item.id + "' >" + possibleEvolutions[i].name + "</button>";
+			}
+		}
+	}
+	
+
+	$("#evoBody").html(html);
+	$("#evoTitle").html(item.name);
+}
+
+var activateEvoStone = function(pokemon, id){
+	console.log(pokemon);
+	capturePokemon(pokemon, generateShiny());
+	var item = player.inventoryList[getItemById(id)];
+	item.quantity--;
 }
