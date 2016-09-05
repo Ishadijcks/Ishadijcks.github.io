@@ -29,14 +29,14 @@ var PewterCityGym = function(){
 	var pokemonList = [];
 	pokemonList.push(GymPokemon("Geodude", 550));
 	pokemonList.push(GymPokemon("Onix", 1110));
-	return Gym("Brock", "Pewter City Gym", pokemonList, "Boulder", 500, 0);
+	return Gym("Brock", "Pewter City Gym", pokemonList, "Boulder", 250, 0);
 }
 
 var CeruleanCityGym = function(){
 	var pokemonList = [];
 	pokemonList.push(GymPokemon("Staryu", 4000));
 	pokemonList.push(GymPokemon("Starmie", 6000));
-	return Gym("Misty", "Cerulean City Gym", pokemonList, "Cascade", 1000, 1);
+	return Gym("Misty", "Cerulean City Gym", pokemonList, "Cascade", 500, 1);
 }
 
 var VermillionCityGym = function(){
