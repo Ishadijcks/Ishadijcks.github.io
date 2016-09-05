@@ -37,13 +37,13 @@ var BossPokemon = function(name, health, exp) {
 var ViridianForestDungeon = function() {
     var pokemonList = ["Caterpie", "Metapod", "Weedle", "Kakuna", "Pidgey", "Pidgeotto"];
     var bossPokemon = BossPokemon("Pikachu", 510, 300);
-    return Dungeon("Viridian Forest Dungeon", pokemonList, 5, 102, bossPokemon, 50, 0);
+    return Dungeon("Viridian Forest Dungeon", pokemonList, 5, 102, bossPokemon, 50, 0, 1);
 }
 
 var DiglettsCaveDungeon = function(){
     var pokemonList = ["Diglett"];
     var bossPokemon = BossPokemon("Dugtrio", 6040, 400);
-    return Dungeon("Digletts Cave Dungeon", pokemonList, 5, 1208, bossPokemon, 95, 0);
+    return Dungeon("Digletts Cave Dungeon", pokemonList, 5, 1208, bossPokemon, 95, 0, 2);
 }
 
 var MtMoonDungeon = function() {
@@ -53,13 +53,13 @@ var MtMoonDungeon = function() {
     } else {
         var bossPokemon = BossPokemon("Omanyte", 4170, 500);
     }
-    return Dungeon("Mt. Moon Dungeon", pokemonList, 5, 834, bossPokemon, 75, 1);
+    return Dungeon("Mt. Moon Dungeon", pokemonList, 5, 834, bossPokemon, 75, 1, 4);
 }
 
 var RockTunnelDungeon = function(){
     var pokemonList = ["Zubat", "Geodude", "Machop"];
     var bossPokemon = BossPokemon("Onix", 20585, 1000);
-    return Dungeon("Rock Tunnel Dungeon", pokemonList, 5, 4117, bossPokemon, 500, 2);
+    return Dungeon("Rock Tunnel Dungeon", pokemonList, 5, 4117, bossPokemon, 500, 2, 5);
 }
 
 var PowerPlantDungeon = function(){
@@ -74,13 +74,13 @@ var PowerPlantDungeon = function(){
     } else {
         bossPokemon = BossPokemon("Electabuzz", 67535, 1000);
     }
-    return Dungeon("Power Plant Dungeon", pokemonList, 5, 13507, bossPokemon, 1000, 2);
+    return Dungeon("Power Plant Dungeon", pokemonList, 5, 13507, bossPokemon, 1000, 2, 8);
 }
 
 var PokemonTowerDungeon = function(){
     var pokemonList = ["Gastly", "Haunter", "Cubone"];
     var bossPokemon = BossPokemon("Marowak", 37615, 2000);
-    return Dungeon("Pokemon Tower Dungeon", pokemonList, 5, 7523, bossPokemon, 750, 2);
+    return Dungeon("Pokemon Tower Dungeon", pokemonList, 5, 7523, bossPokemon, 750, 2, 10);
 }
 
 var SeafoamIslandsDungeon = function(){
@@ -95,13 +95,13 @@ var SeafoamIslandsDungeon = function(){
     } else {
         bossPokemon = BossPokemon("Seel", 86130, 2500);
     }
-    return Dungeon("Seafoam Islands Dungeon", pokemonList, 5, 17226, bossPokemon, 1250, 6);
+    return Dungeon("Seafoam Islands Dungeon", pokemonList, 5, 17226, bossPokemon, 1250, 6, 15);
 }
 
 var PokemonMansionDungeon = function(){
     var pokemonList = ["Growlithe", "Vulpix", "Grimer", "Muk", "Koffing", "Weezing"];
     var bossPokemon = BossPokemon("Magmar", 88800);
-    return Dungeon("Pokemon Mansion Dungeon", pokemonList, 5, 17760, bossPokemon, 1500, 6);
+    return Dungeon("Pokemon Mansion Dungeon", pokemonList, 5, 17760, bossPokemon, 1500, 6, 16);
 }
 
 var VictoryRoadDungeon = function(){
@@ -131,14 +131,9 @@ var CeruleanCaveDungeon = function(){
     } else {
         bossPokemon = BossPokemon("Rhydon", 143675, 4000);
     }
-    return Dungeon("Cerulean Cave Dungeon", pokemonList, 5, 28735, bossPokemon, 2500, 8);
+    return Dungeon("Cerulean Cave Dungeon", pokemonList, 5, 28735, bossPokemon, 2500, 8, 20);
 }
 
-var PokemonMansionDungeon = function(){
-    var pokemonList = ["Growlithe", "Vulpix", "Grimer", "Muk", "Koffing", "Weezing"];
-    var bossPokemon = BossPokemon("Magmar", 9000, 2500);
-    return Dungeon("Pokemon Mansion Dungeon", pokemonList, 5, 1650, bossPokemon, 0, 6);
-}
 
 var loadDungeon = function(townId) {
         currentDungeon = getTown(townId).gym;
@@ -153,6 +148,7 @@ var loadDungeon = function(townId) {
         playerPosition = Math.floor(currentDungeon.size * currentDungeon.size / 2);
         currentDungeon.mapDiscovered[playerPosition] = 1;
         player.dungeonTokens -= currentDungeon.tokenCost;
+        currentDungeon.loot = [];
         dungeonCanMove = 1;
         updateDungeon();
         counter = setInterval(dungeonTimer, 100); //100 will  run it every 10th of a second
@@ -225,7 +221,6 @@ var moveToRoom = function(id) {
 var revealChests = function(){
     for(var i = 0; i<currentDungeon.map.length; i++){
         if(currentDungeon.map[i] == "Chest"){
-            console.log(i)
             currentDungeon.mapDiscovered[i] = 1;
         }
     }
@@ -248,14 +243,13 @@ var hideDungeonChest = function() {
 var openDungeonChest = function() {
     currentDungeon.chestsOpened++;
     currentDungeon.map[playerPosition] = "Empty";
-    console.log("chest openend: " + currentDungeon.chestsOpened );
-    if( currentDungeon.chestsOpened >= 1){
+    if( currentDungeon.chestsOpened >= 2){
         revealChests();
     }
-    if( currentDungeon.chestsOpened >= 2){
+    if( currentDungeon.chestsOpened >= 3){
         revealEverything();
     }
-    gainRandomItem(currentDungeon.itemRoute);
+    currentDungeon.loot.push(gainRandomItem(currentDungeon.itemRoute));
     hideDungeonChest();
     updateDungeonMap();
 
@@ -269,8 +263,6 @@ var dungeonTimer = function() {
             moveToTown(currentDungeon.name.slice(0, -8));
             currentDungeon.timeLeft = currentDungeon.timeLimit;
             $.notify("Train harder and try again!", 'error')
-            $.notify("You couldn't defeat " + currentDungeon.leaderName + " in time.", 'error');
-
         }
     }
     currentDungeon.timeLeft -= 10;
@@ -430,12 +422,12 @@ var dungeonDefeated = function() {
 
     log("Congratulations, you have cleared the " + currentDungeon.name + "!");
     inProgress = 0;
-    resetDungeon();
 
     var town = currentDungeon.name.slice(0, -8);
 
     moveToTown(town);
     showDungeonDefeated(town);
+    resetDungeon();
 
     updateAll();
 }
@@ -445,7 +437,6 @@ var resetDungeon = function() {
         clearInterval(counter);
         currentDungeon.timeLeft = currentDungeon.timeLimit;
         currentDungeon.pokemonDefeated = 0;
-        currentDungeon.loot = [];
         currentDungeon.mapDiscovered = [];
         currentDungeon.chestsOpened = 0;
     }
@@ -454,14 +445,13 @@ var resetDungeon = function() {
 var showDungeonDefeated = function() {
 
     html = "";
-
     html += "You have completed the " + currentDungeon.name + "!<br>";
-
-
-    html += "<br><br>Defeat this dungeon again to earn 10% of its original money reward!"
-
-
-
+    console.log(currentDungeon.loot);
+    
+    for(var i = 0; i < currentDungeon.loot.length; i++){
+        console.log(currentDungeon.loot[i]);
+        html += "<img class='smallImage' src=images/items/"+getItemByName(currentDungeon.loot[i]).id+".png>";
+    }
 
     $("#dungeonDefeatedBody").html(html);
     $("#dungeonModal").modal('show');
