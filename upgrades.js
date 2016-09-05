@@ -57,9 +57,6 @@ var initUpgrades = function(){
 	addUpgrade("Click multiplier upgrade III",1000, "clickMultiplier",1.5,5,"Clicks do 150% more damage",21); 
 	addUpgrade("Click multiplier upgrade IV",2500, "clickMultiplier",1.5,7,"Clicks do 150% more damage",22); 
 	addUpgrade("Click multiplier upgrade V",5000, "clickMultiplier",2,10,"Clicks do 200% more damage",23); 
-	addUpgrade("Pokemon attack upgrade I",50000, "attackMultiplier",0.1,16,"Your pokemon do 10% more damage",24); 
-	addUpgrade("Pokemon attack upgrade II",75000, "attackMultiplier",0.15,18,"Your pokemon do 15% more damage",25); 
-	addUpgrade("Pokemon attack upgrade III",75000, "attackMultiplier",0.2,20,"Your pokemon do 20% more damage",26); 
 }
 
 
