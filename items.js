@@ -60,9 +60,7 @@ var gainRandomItem = function(route){
 		var rand = Math.floor(Math.random()*itemList.length);
 		randomItemName = itemList[rand].name;
 	}
-	gainItemByName(randomItemName);
-
-	updateItems()
+	return gainItemByName(randomItemName);
 }
 
 var gainItemByName = function(name){ 
@@ -80,6 +78,7 @@ var gainItemByName = function(name){
 	$.notify("You got a "+name, 'success');
 
 	updateItems()
+	return name;
 }
 
 var getItemByName = function(name){
