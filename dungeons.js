@@ -65,13 +65,14 @@ var RockTunnelDungeon = function(){
 var PowerPlantDungeon = function(){
     var pokemonList = ["Pikachu", "Raichu", "Magnemite", "Magneton", "Grimer", "Muk", "Electrode"];
     var chance = 0.75;
+    var bossPokemon;
     if(isActive("Legendary Charm")){
       chance = 0.5;
     }
     if( Math.random >= chance){
-        var bossPokemon = BossPokemon("Zapdos", 101302, 2500);
+        bossPokemon = BossPokemon("Zapdos", 101302, 2500);
     } else {
-        var bossPokemon = BossPokemon("Electabuzz", 67535, 1000);
+        bossPokemon = BossPokemon("Electabuzz", 67535, 1000);
     }
     return Dungeon("Power Plant Dungeon", pokemonList, 5, 13507, bossPokemon, 1000, 2);
 }
@@ -85,13 +86,14 @@ var PokemonTowerDungeon = function(){
 var SeafoamIslandsDungeon = function(){
     var pokemonList = ["Zubat", "Golbat", "Psyduck", "Golduck", "Slowpoke", "Slowbro", "Shellder", "Krabby", "Horsea", "Staryu"];
     var chance = 0.75;
+    var bossPokemon;
     if(isActive("Legendary Charm")){
       chance = 0.5;
     }
     if( Math.random >= chance){
-        var bossPokemon = BossPokemon("Articuno", 129195, 3000);
+        bossPokemon = BossPokemon("Articuno", 129195, 3000);
     } else {
-        var bossPokemon = BossPokemon("Seel", 86130, 2500);
+        bossPokemon = BossPokemon("Seel", 86130, 2500);
     }
     return Dungeon("Seafoam Islands Dungeon", pokemonList, 5, 17226, bossPokemon, 1250, 6);
 }
@@ -105,13 +107,14 @@ var PokemonMansionDungeon = function(){
 var VictoryRoadDungeon = function(){
     var pokemonList = ["Zubat", "Golbat", "Machop", "Geodude", "Graveler", "Onix", "Marowak", "Venomoth"];
     var chance = 0.75;
+    var bossPokemon;
     if(isActive("Legendary Charm")){
       chance = 0.5;
     }
     if( Math.random >= chance){
-        var bossPokemon = BossPokemon("Moltres", 184462, 4000);
+        bossPokemon = BossPokemon("Moltres", 184462, 4000);
     } else {
-        var bossPokemon = BossPokemon("Machoke", 122975, 2500);
+        bossPokemon = BossPokemon("Machoke", 122975, 2500);
     }
     return Dungeon("Victory Road Dungeon", pokemonList, 5, 24595, bossPokemon, 2000, 8);
 }
@@ -119,13 +122,14 @@ var VictoryRoadDungeon = function(){
 var CeruleanCaveDungeon = function(){
     var pokemonList = ["Arbok", "Raichu", "Sandslash", "Golbat", "Parasect", "Venomoth", "Kadabra", "Magneton", "Dodrio", "Hypno", "Ditto", "Wigglytuff", "Electrode", "Marowak", "Chansey"];
     var chance = 0.75;
+    var bossPokemon;
     if(isActive("Legendary Charm")){
       chance = 0.5;
     }
     if( Math.random >= chance){
-        var bossPokemon = BossPokemon("Mewtwo", 215512, 7500);
+        bossPokemon = BossPokemon("Mewtwo", 215512, 7500);
     } else {
-        var bossPokemon = BossPokemon("Rhydon", 143675, 4000);
+        bossPokemon = BossPokemon("Rhydon", 143675, 4000);
     }
     return Dungeon("Cerulean Cave Dungeon", pokemonList, 5, 28735, bossPokemon, 2500, 8);
 }
