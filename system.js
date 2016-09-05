@@ -590,8 +590,8 @@ var capturePokemon = function(name, shiny){
 				console.log(currentDungeon);
 			}
 			var tokens = Math.floor(Math.pow(player.route,1.4) - player.route/2);
-			var deviation = Math.floor(Math.random() * 2 ) + 3000;
-			tokens += deviation
+			var deviation = Math.floor(Math.random() * 2 ) + 3;
+			tokens += deviation;
 			gainTokens(tokens);
 		}
 	}
