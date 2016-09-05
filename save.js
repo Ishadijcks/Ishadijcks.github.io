@@ -1,6 +1,6 @@
 			// Save and load functions
 
-// Saves the game by writing play to JSON and save it in localStorage			
+// Saves the game by writing play to JSON and save it in localStorage
 var save = function(){
 	localStorage.setItem("player", JSON.stringify(player));
 }
@@ -10,7 +10,7 @@ var save = function(){
 // Loads the game from localStorage and update favIcon to starter
 var load = function(){
 	var savegame = JSON.parse(localStorage.getItem("player"));
-	
+
 	if (typeof savegame.clickAttack !== "undefined") player.clickAttack = savegame.clickAttack;
 	if (typeof savegame.clickMultiplier !== "undefined") player.clickMultiplier = savegame.clickMultiplier;
 	if (typeof savegame.attack !== "undefined") player.attack = savegame.attack;
@@ -45,7 +45,6 @@ var load = function(){
 	if (typeof savegame.normalEffectiveTypeBonus !== "undefined") player.normalEffectiveTypeBonus = savegame.normalEffectiveTypeBonus;
 	if (typeof savegame.veryEffectiveTypeBonus !== "undefined") player.veryEffectiveTypeBonus = savegame.veryEffectiveTypeBonus;
 
-	
 	if(player.version < version){
 		$('#changeLogModal').modal('show');
 	}
@@ -53,10 +52,10 @@ var load = function(){
 
 
 	player.version = version;
-	
+
     var link = document.createElement('link');
     link.type = 'image/x-icon';
     link.rel = 'shortcut icon';
     link.href = 'images/'+player.starter+'.png';
     document.getElementsByTagName('head')[0].appendChild(link);
-}	
+}

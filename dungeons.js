@@ -36,87 +36,104 @@ var BossPokemon = function(name, health, exp) {
 
 var ViridianForestDungeon = function() {
     var pokemonList = ["Caterpie", "Metapod", "Weedle", "Kakuna", "Pidgey", "Pidgeotto"];
-    var bossPokemon = BossPokemon("Pikachu", 1000, 300);
-    return Dungeon("Viridian Forest Dungeon", pokemonList, 5, 100, bossPokemon, 25, 0, 1);
+    var bossPokemon = BossPokemon("Pikachu", 510, 300);
+    return Dungeon("Viridian Forest Dungeon", pokemonList, 5, 102, bossPokemon, 50, 0);
 }
 
 var DiglettsCaveDungeon = function(){
     var pokemonList = ["Diglett"];
-    var bossPokemon = BossPokemon("Dugtrio", 1500, 400);
-    return Dungeon("Digglets Cave Dungeon", pokemonList, 5, 150, bossPokemon, 50, 0, 2);   
+    var bossPokemon = BossPokemon("Dugtrio", 6040, 400);
+    return Dungeon("Digletts Cave Dungeon", pokemonList, 5, 1208, bossPokemon, 95, 0);
 }
 
 var MtMoonDungeon = function() {
     var pokemonList = ["Sandshrew", "Clefairy", "Zubat", "Paras", "Geodude", "Pidgeotto"];
-    var bossPokemon;
     if (Math.random() >= 0.5) {
-        bossPokemon = BossPokemon("Kabuto", 2000, 500);
+        var bossPokemon = BossPokemon("Kabuto", 4170, 500);
     } else {
-        bossPokemon = BossPokemon("Omanyte", 2000, 500);
+        var bossPokemon = BossPokemon("Omanyte", 4170, 500);
     }
-    return Dungeon("Mt. Moon Dungeon", pokemonList, 5, 250, bossPokemon, 200, 1, 4);
+    return Dungeon("Mt. Moon Dungeon", pokemonList, 5, 834, bossPokemon, 75, 1);
 }
 
 var RockTunnelDungeon = function(){
     var pokemonList = ["Zubat", "Geodude", "Machop"];
-    var bossPokemon = BossPokemon("Onix", 3000, 1000);
-    return Dungeon("Rock Tunnel Dungeon", pokemonList, 5, 400, bossPokemon, 500, 2, 5);   
+    var bossPokemon = BossPokemon("Onix", 20585, 1000);
+    return Dungeon("Rock Tunnel Dungeon", pokemonList, 5, 4117, bossPokemon, 500, 2);
 }
 
 var PowerPlantDungeon = function(){
     var pokemonList = ["Pikachu", "Raichu", "Magnemite", "Magneton", "Grimer", "Muk", "Electrode"];
-		var bossPokemon;
-    if( Math.random >= 0.75){
-        bossPokemon = BossPokemon("Zapdos", 15000, 2500);
-    } else {
-        bossPokemon = BossPokemon("Electabuzz", 5000, 1000);
+    var chance = 0.75;
+    if(isActive("Legendary Charm")){
+      chance = 0.5;
     }
-    return Dungeon("Power Plant Dungeon", pokemonList, 5, 800, bossPokemon, 2500, 2, 8);   
+    if( Math.random >= chance){
+        var bossPokemon = BossPokemon("Zapdos", 101302, 2500);
+    } else {
+        var bossPokemon = BossPokemon("Electabuzz", 67535, 1000);
+    }
+    return Dungeon("Power Plant Dungeon", pokemonList, 5, 13507, bossPokemon, 1000, 2);
 }
 
 var PokemonTowerDungeon = function(){
     var pokemonList = ["Gastly", "Haunter", "Cubone"];
-    var bossPokemon = BossPokemon("Marowak", 7000, 2000);
-    return Dungeon("Pokemon tower Dungeon", pokemonList, 5, 1200, bossPokemon, 3500, 2, 10);   
+    var bossPokemon = BossPokemon("Marowak", 37615, 2000);
+    return Dungeon("Pokemon Tower Dungeon", pokemonList, 5, 7523, bossPokemon, 750, 2);
 }
 
 var SeafoamIslandsDungeon = function(){
     var pokemonList = ["Zubat", "Golbat", "Psyduck", "Golduck", "Slowpoke", "Slowbro", "Shellder", "Krabby", "Horsea", "Staryu"];
-	var bossPokemon;
-    if( Math.random >= 0.75){
-        bossPokemon = BossPokemon("Articuno", 25000, 3000);
-    } else {
-        bossPokemon = BossPokemon("Seel", 8000, 2500);
+    var chance = 0.75;
+    if(isActive("Legendary Charm")){
+      chance = 0.5;
     }
-    return Dungeon("Seafoam Islands Dungeon", pokemonList, 5, 1500, bossPokemon, 5000, 6, 15);   
-}
-
-var VictoryRoadDungeon = function(){
-    var pokemonList = ["Zubat", "Golbat", "Machop", "Geodude", "Graveler", "Onix", "Marowak", "Venomoth"];
-	var bossPokemon;
-    if( Math.random >= 0.75){
-        bossPokemon = BossPokemon("Moltres", 30000, 4000);
+    if( Math.random >= chance){
+        var bossPokemon = BossPokemon("Articuno", 129195, 3000);
     } else {
-        bossPokemon = BossPokemon("Machoke", 10000, 2500);
+        var bossPokemon = BossPokemon("Seel", 86130, 2500);
     }
-    return Dungeon("Victory Road Dungeon", pokemonList, 5, 1800, bossPokemon, 10000, 8, 20);   
-}
-
-var CeruleanCaveDungeon = function(){
-    var pokemonList = ["Arbok", "Raichu", "Sandslash", "Golbat", "Parasect", "Venomoth", "Kadabra", "Magneton", "Dodrio", "Hypno", "Ditto", "Wigglytuff", "Electrode", "Marowak", "Chansey"];
-	var bossPokemon;
-    if( Math.random >= 0.75){
-        bossPokemon = BossPokemon("Mewtwo", 50000, 7500);
-    } else {
-        bossPokemon = BossPokemon("Rhydon", 18000, 4000);
-    }
-    return Dungeon("Cerulean Cave Dungeon", pokemonList, 5, 2100, bossPokemon, 0, 8, 24);   
+    return Dungeon("Seafoam Islands Dungeon", pokemonList, 5, 17226, bossPokemon, 1250, 6);
 }
 
 var PokemonMansionDungeon = function(){
     var pokemonList = ["Growlithe", "Vulpix", "Grimer", "Muk", "Koffing", "Weezing"];
-    var bossPokemon = BossPokemon("Magmar", 9000, 3000);
-    return Dungeon("Pokemon Mansion Dungeon", pokemonList, 5, 1650, bossPokemon, 0, 6, 16); 
+    var bossPokemon = BossPokemon("Magmar", 88800);
+    return Dungeon("Pokemon Mansion Dungeon", pokemonList, 5, 17760, bossPokemon, 1500, 6);
+}
+
+var VictoryRoadDungeon = function(){
+    var pokemonList = ["Zubat", "Golbat", "Machop", "Geodude", "Graveler", "Onix", "Marowak", "Venomoth"];
+    var chance = 0.75;
+    if(isActive("Legendary Charm")){
+      chance = 0.5;
+    }
+    if( Math.random >= chance){
+        var bossPokemon = BossPokemon("Moltres", 184462, 4000);
+    } else {
+        var bossPokemon = BossPokemon("Machoke", 122975, 2500);
+    }
+    return Dungeon("Victory Road Dungeon", pokemonList, 5, 24595, bossPokemon, 2000, 8);
+}
+
+var CeruleanCaveDungeon = function(){
+    var pokemonList = ["Arbok", "Raichu", "Sandslash", "Golbat", "Parasect", "Venomoth", "Kadabra", "Magneton", "Dodrio", "Hypno", "Ditto", "Wigglytuff", "Electrode", "Marowak", "Chansey"];
+    var chance = 0.75;
+    if(isActive("Legendary Charm")){
+      chance = 0.5;
+    }
+    if( Math.random >= chance){
+        var bossPokemon = BossPokemon("Mewtwo", 215512, 7500);
+    } else {
+        var bossPokemon = BossPokemon("Rhydon", 143675, 4000);
+    }
+    return Dungeon("Cerulean Cave Dungeon", pokemonList, 5, 28735, bossPokemon, 2500, 8);
+}
+
+var PokemonMansionDungeon = function(){
+    var pokemonList = ["Growlithe", "Vulpix", "Grimer", "Muk", "Koffing", "Weezing"];
+    var bossPokemon = BossPokemon("Magmar", 9000, 2500);
+    return Dungeon("Pokemon Mansion Dungeon", pokemonList, 5, 1650, bossPokemon, 0, 6);
 }
 
 var loadDungeon = function(townId) {
@@ -159,7 +176,7 @@ var createMap = function(size) {
     }
 
     map[center] = "Empty";
-    
+
     return map;
 }
 
@@ -260,7 +277,7 @@ var dungeonTimer = function() {
 //     $("#dungeonHealthDisplay").html("");
 //     $("#dungeonCatchDisplay").html("");
 //     $("#dungeonEnemyInfo").html("");
-//     $(".progress").hide();        
+//     $(".progress").hide();
 // }
 
 var hideHealthBar = function(){
@@ -279,7 +296,7 @@ var updateDungeon = function() {
         curEnemy.health = 0;
     }
 
-    
+
     hideAllViews();
     $("#dungeonView").show();
 
@@ -291,7 +308,7 @@ var updateDungeon = function() {
         if(alreadyCaught(curEnemy.name)){
             html += "<div id='dungeonEnemyInfo'><br>" +curEnemy.name + " <img id='alreadyCaughtImage' src='images/Pokeball.PNG'><br><img id='dungeonEnemy' src='images/pokemon/"+curEnemy.id+".png' ></div>";
         } else {
-            html += "<div id='dungeonEnemyInfo'><br>" +curEnemy.name + "<br><img id='dungeonEnemy' src='images/pokemon/"+curEnemy.id+".png' ></div>";            
+            html += "<div id='dungeonEnemyInfo'><br>" +curEnemy.name + "<br><img id='dungeonEnemy' src='images/pokemon/"+curEnemy.id+".png' ></div>";
         }
     }
 
@@ -301,13 +318,13 @@ var updateDungeon = function() {
     if(!dungeonCanMove && curEnemy.alive){
 
         html +=     "<span id='dungeonCatchDisplay'></span>";
-        
+
         html +=     "<span id='dungeonHealthDisplay'>"+curEnemy.health + "/" + curEnemy.maxHealth + "</span>";
-     
+
     }
 
 
-    $("#dungeonHealthBar").width(100*curEnemy.health/curEnemy.maxHealth+"%"); 
+    $("#dungeonHealthBar").width(100*curEnemy.health/curEnemy.maxHealth+"%");
     $("#dungeonTest").html(html);
 
 
