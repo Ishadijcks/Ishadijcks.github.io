@@ -67,7 +67,107 @@ var initTypeEffectiveness = function(){
 	typeEffectiveness[GRASS][DRAGON] = getNotEffective(GRASS);
 	typeEffectiveness[GRASS][STEEL] = getNotEffective(GRASS);
 
-	
+	typeEffectiveness[ICE][FIRE] = getNotEffective(ICE);
+	typeEffectiveness[ICE][WATER] = getNotEffective(ICE);
+	typeEffectiveness[ICE][GRASS] = getVeryEffective(ICE);
+	typeEffectiveness[ICE][ICE] = getNotEffective(ICE);
+	typeEffectiveness[ICE][GROUND] = getVeryEffective(ICE);
+	typeEffectiveness[ICE][FLYING] = getVeryEffective(ICE);
+	typeEffectiveness[ICE][DRAGON] = getVeryEffective(ICE);
+	typeEffectiveness[ICE][STEEL] = getNotEffective(ICE);
+
+	typeEffectiveness[FIGHTING][NORMAL] = getVeryEffective(FIGHTING);
+	typeEffectiveness[FIGHTING][ICE] = getVeryEffective(FIGHTING);
+	typeEffectiveness[FIGHTING][POISON] = getNotEffective(FIGHTING);
+	typeEffectiveness[FIGHTING][FLYING] = getNotEffective(FIGHTING);
+	typeEffectiveness[FIGHTING][PSYCHIC] = getNotEffective(FIGHTING);
+	typeEffectiveness[FIGHTING][BUG] = getNotEffective(FIGHTING);
+	typeEffectiveness[FIGHTING][ROCK] = getVeryEffective(FIGHTING);
+	typeEffectiveness[FIGHTING][GHOST] = 0
+	typeEffectiveness[FIGHTING][DARK] = getVeryEffective(FIGHTING);
+	typeEffectiveness[FIGHTING][STEEL] = getVeryEffective(FIGHTING);
+	typeEffectiveness[FIGHTING][FAIRY] = getNotEffective(FIGHTING);
+
+	typeEffectiveness[POISON][GRASS] = getVeryEffective(POISON);
+	typeEffectiveness[POISON][POISON] = getNotEffective(POISON);
+	typeEffectiveness[POISON][GROUND] = getNotEffective(POISON);
+	typeEffectiveness[POISON][ROCK] = getNotEffective(POISON);
+	typeEffectiveness[POISON][GHOST] = getNotEffective(POISON);
+	typeEffectiveness[POISON][STEEL] = 0
+	typeEffectiveness[POISON][FAIRY] = getVeryEffective(POISON);
+
+	typeEffectiveness[GROUND][FIRE] = getVeryEffective(GROUND);
+	typeEffectiveness[GROUND][ELECTRIC] = getVeryEffective(GROUND);
+	typeEffectiveness[GROUND][GRASS] = getNotEffective(GROUND);
+	typeEffectiveness[GROUND][POISON] = getVeryEffective(GROUND);
+	typeEffectiveness[GROUND][FLYING] = 0
+	typeEffectiveness[GROUND][BUG] = getNotEffective(GROUND);
+	typeEffectiveness[GROUND][ROCK] = getVeryEffective(GROUND);
+	typeEffectiveness[GROUND][STEEL] = getVeryEffective(GROUND);
+
+	typeEffectiveness[FLYING][ELECTRIC] = getNotEffective(FLYING);
+	typeEffectiveness[FLYING][GRASS] = getVeryEffective(FLYING);
+	typeEffectiveness[FLYING][FIGHTING] = getVeryEffective(FLYING);
+	typeEffectiveness[FLYING][BUG] = getVeryEffective(FLYING);
+	typeEffectiveness[FLYING][ROCK] = getNotEffective(FLYING);
+	typeEffectiveness[FLYING][STEEL] = getNotEffective(FLYING);
+
+	typeEffectiveness[PSYCHIC][FIGHTING] = getVeryEffective(PSYCHIC);
+	typeEffectiveness[PSYCHIC][POISON] = getVeryEffective(PSYCHIC);
+	typeEffectiveness[PSYCHIC][PSYCHIC] = getNotEffective(PSYCHIC);
+	typeEffectiveness[PSYCHIC][DARK] = 0
+	typeEffectiveness[PSYCHIC][STEEL] = getNotEffective(PSYCHIC);
+
+	typeEffectiveness[BUG][FIRE] = getNotEffective(BUG);
+	typeEffectiveness[BUG][GRASS] = getVeryEffective(BUG);
+	typeEffectiveness[BUG][FIGHTING] = getNotEffective(BUG);
+	typeEffectiveness[BUG][POISON] = getNotEffective(BUG);
+	typeEffectiveness[BUG][FLYING] = getNotEffective(BUG);
+	typeEffectiveness[BUG][PSYCHIC] = getVeryEffective(BUG);
+	typeEffectiveness[BUG][GHOST] = getNotEffective(BUG);
+	typeEffectiveness[BUG][DARK] = getVeryEffective(BUG);
+	typeEffectiveness[BUG][STEEL] = getNotEffective(BUG);
+	typeEffectiveness[BUG][FAIRY] = getNotEffective(BUG);
+
+	typeEffectiveness[ROCK][FIRE] = getVeryEffective(ROCK);
+	typeEffectiveness[ROCK][ICE] = getVeryEffective(ROCK);
+	typeEffectiveness[ROCK][FIGHTING] = getNotEffective(ROCK);
+	typeEffectiveness[ROCK][GROUND] = getNotEffective(ROCK);
+	typeEffectiveness[ROCK][FLYING] = getVeryEffective(ROCK);
+	typeEffectiveness[ROCK][BUG] = getVeryEffective(ROCK);
+	typeEffectiveness[ROCK][STEEL] = getNotEffective(ROCK);
+
+	typeEffectiveness[GHOST][NORMAL] = 0;
+	typeEffectiveness[GHOST][PSYCHIC] = getVeryEffective(GHOST);
+	typeEffectiveness[GHOST][GHOST] = getVeryEffective(GHOST);
+	typeEffectiveness[GHOST][DARK] = getNotEffective(GHOST);
+
+	typeEffectiveness[DRAGON][DRAGON] = getVeryEffective(DRAGON);
+	typeEffectiveness[DRAGON][STEEL] = getNotEffective(DRAGON);
+	typeEffectiveness[DRAGON][FAIRY] = 0;
+
+	typeEffectiveness[DARK][FIGHTING] = getNotEffective(DARK);
+	typeEffectiveness[DARK][PSYCHIC] = getVeryEffective(DARK);
+	typeEffectiveness[DARK][GHOST] = getVeryEffective(DARK);
+	typeEffectiveness[DARK][DARK] = getNotEffective(DARK);
+	typeEffectiveness[DARK][FAIRY] = getNotEffective(DARK);
+
+	typeEffectiveness[STEEL][FIRE] = getNotEffective(STEEL);
+	typeEffectiveness[STEEL][WATER] = getNotEffective(STEEL);
+	typeEffectiveness[STEEL][ELECTRIC] = getNotEffective(STEEL);
+	typeEffectiveness[STEEL][ICE] = getVeryEffective(STEEL);
+	typeEffectiveness[STEEL][ROCK] = getVeryEffective(STEEL);
+	typeEffectiveness[STEEL][STEEL] = getNotEffective(STEEL);
+	typeEffectiveness[STEEL][FAIRY] = getVeryEffective(STEEL);
+
+	typeEffectiveness[FAIRY][FIRE] = getNotEffective(FAIRY);
+	typeEffectiveness[FAIRY][FIGHTING] = getVeryffective(FAIRY);
+	typeEffectiveness[FAIRY][POISON] = getNotEffective(FAIRY);
+	typeEffectiveness[FAIRY][DRAGON] = getVeryEffective(FAIRY);
+	typeEffectiveness[FAIRY][DARK] = getVeryEffective(FAIRY);
+	typeEffectiveness[FAIRY][STEEL] = getNotEffective(FAIRY);
+
+
 }
 
 var typeToNumber = function(type){
