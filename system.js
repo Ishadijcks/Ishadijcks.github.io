@@ -43,19 +43,22 @@ var player = {
 }
 
 var curEnemy = {
-	name: "",
+	name: "Pidgey",
 	id: 0,
-	health: 0,
-	maxHealth: 0,
+	health: 30,
+	maxHealth: 30,
 	reward: 0,
 	alive: true,
 	route: 0,
-	catchRate: 0,
-	type: ""
+	catchRate: 20,
+	type: "normal",
+	exp: 1,
+	moneyReward: 1
 }
 
 
 $(document).ready(function(){
+	initTypeEffectiveness();
 	//$('#changeLogModal').modal('show');
 
 	if(localStorage.getItem("player") != null){
@@ -68,7 +71,6 @@ $(document).ready(function(){
 	}
 	initUpgrades();
 	initOakItems();
-	initTypeEffectiveness();
 	updateItems();
 	setInterval(itemInterval, 1000);
 	itemInterval();
@@ -441,15 +443,17 @@ var gainTokens = function(amount){
 }
 
 var gainMoney = function(money, message){
-	money *= player.moneyMultiplier;
-	var totalMagnitude = getItemBonus("coinBoost");
-	money *= totalMagnitude;
-	if(isActive("Amulet Coin")){
-		money *= getOakItemBonus("Amulet Coin")
+	if(!isNaN(money)){
+		money *= player.moneyMultiplier;
+		var totalMagnitude = getItemBonus("coinBoost");
+		money *= totalMagnitude;
+		if(isActive("Amulet Coin")){
+			money *= getOakItemBonus("Amulet Coin")
+		}
+		money = Math.floor(money);
+		player.money += money
+		log(message + money + "!");
 	}
-	money = Math.floor(money);
-	player.money += money
-	log(message + money + "!");
 }
 
 // All pokemon you have gain exp
@@ -623,7 +627,9 @@ var calculateAttack = function(){
 	for (var i = 0; i<player.caughtPokemonList.length; i++){
 
 		var level = experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType);
-		total += Math.ceil(level*(player.caughtPokemonList[i].attack)/100)* typeEffectiveness[typeToNumber(player.caughtPokemonList[i].type)][typeToNumber(curEnemy.type)];
+		if( curEnemy != "undefined"){
+			total += Math.ceil(level*(player.caughtPokemonList[i].attack)/100)* typeEffectiveness[typeToNumber(player.caughtPokemonList[i].type)][typeToNumber(curEnemy.type)];
+		}
 	}
 	player.attack = total;
 	player.clickAttack = player.caughtPokemonList.length;

@@ -108,6 +108,7 @@ var typeToNumber = function(type){
 			return 16;
 		case "fairy":
 			return 17;
+		default: return 0;
 	}
 }
 

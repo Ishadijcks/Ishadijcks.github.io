@@ -156,9 +156,7 @@ var itemInterval = function(){
 
 var activateItem = function(id){
 	item = player.inventoryList[getItemById(id)];
-	console.log(item);
 	// Item with a timer.
-
 	if(item.use === "evolution"){
 		useEvoStone(item);
 		updateItems();
