@@ -137,6 +137,11 @@
 	cursor:pointer;
 }
 
+.shardButton {
+	background-color: #42A160;
+	height: 25px;
+}
+
 #dungeonMap {
 	float:right;
 	margin-right: 5%;

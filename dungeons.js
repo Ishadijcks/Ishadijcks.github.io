@@ -288,6 +288,7 @@ var updateDungeon = function() {
 
     if (curEnemy.health == 0) {
         dungeonEnemyDefeated(currentDungeon);
+
     }
 
     updateDungeonMap();
@@ -335,6 +336,7 @@ var dungeonEnemyDefeated = function() {
     attackInterval = setInterval(pokemonsAttack,1000);
     canCatch = 1;
     if (curEnemy.alive) {
+        
         currentDungeon.map[playerPosition] = "Empty";
         var id = getPokemonByName(curEnemy.name).id - 1;
         player.defeatNumbers[id]++;
@@ -361,22 +363,19 @@ var dungeonEnemyDefeated = function() {
                     capturePokemon(curEnemy.name, curEnemy.shiny);
 
                 }
-
-
                 updateStats();
             }
             currentDungeon.pokemonDefeated++
-
-
             updateDungeon();
             // hideDungeonEnemy();
-            if(curEnemy.boss && !curEnemy.alive){
-                dungeonDefeated();
-            }
+
         }, player.catchTime);
         curEnemy.alive = false;
     }
 
+    if(bossDefeated()){
+        dungeonDefeated();
+    }
 
 }
 
