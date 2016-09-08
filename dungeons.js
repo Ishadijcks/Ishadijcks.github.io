@@ -201,17 +201,19 @@ var hideDungeonChest = function() {
 }
 
 var openDungeonChest = function() {
-    currentDungeon.chestsOpened++;
-    currentDungeon.map[playerPosition] = "Empty";
-    if( currentDungeon.chestsOpened >= 2){
-        revealChests();
+    if(currentDungeon.map[playerPosition] === "Chest"){
+        currentDungeon.chestsOpened++;
+        currentDungeon.map[playerPosition] = "Empty";
+        if( currentDungeon.chestsOpened >= 2){
+            revealChests();
+        }
+        if( currentDungeon.chestsOpened >= 3){
+            revealEverything();
+        }
+        currentDungeon.loot.push(gainRandomItem(currentDungeon.itemRoute));
+        hideDungeonChest();
+        updateDungeonMap();
     }
-    if( currentDungeon.chestsOpened >= 3){
-        revealEverything();
-    }
-    currentDungeon.loot.push(gainRandomItem(currentDungeon.itemRoute));
-    hideDungeonChest();
-    updateDungeonMap();
 
 }
 
@@ -378,6 +380,15 @@ var dungeonEnemyDefeated = function() {
 
 }
 
+var bossDefeated = function(){
+    for( var i = 0; i<currentDungeon.map.length; i++){
+        if (currentDungeon.map[i] === "Boss"){
+            return false;
+        }
+    }
+    return true;
+}
+
 var dungeonDefeated = function() {
 
     log("Congratulations, you have cleared the " + currentDungeon.name + "!");
@@ -435,7 +446,7 @@ var spawnDungeonBoss = function() {
     var bossPokemon = possibleBosses[Math.floor(Math.random()*possibleBosses.length)];
     curEnemy.name = bossPokemon.name;
     curEnemy.id = getPokemonByName(curEnemy.name).id;
-    curEnemy.health = Math.floor(bossPokemon.health * (1 + (chestsOpened) / 10));
+    curEnemy.health = Math.floor(bossPokemon.health * (1 + (currentDungeon.chestsOpened) / 10));
     curEnemy.maxHealth = curEnemy.health;
     curEnemy.reward = 0;
     curEnemy.alive = true;
