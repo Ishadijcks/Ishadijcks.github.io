@@ -49,6 +49,10 @@ var load = function(){
 		$('#changeLogModal').modal('show');
 	}
 
+	if(player.version < 0.6){
+		resetUpgrades();
+	}
+
 
 
 	player.version = version;
