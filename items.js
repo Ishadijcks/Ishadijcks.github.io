@@ -56,11 +56,8 @@ var gainRandomItem = function(route){
 		var possibleItems = itemsPerRoute[route];
 		var rand = Math.floor(Math.random()*possibleItems.length);
 		randomItemName = possibleItems[rand];
-	} else {
-		var rand = Math.floor(Math.random()*itemList.length);
-		randomItemName = itemList[rand].name;
+		return gainItemByName(randomItemName);
 	}
-	return gainItemByName(randomItemName);
 }
 
 var gainItemByName = function(name){ 
