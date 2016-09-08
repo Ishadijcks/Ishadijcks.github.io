@@ -338,6 +338,7 @@ var dungeonEnemyDefeated = function() {
     if (curEnemy.alive) {
         
         currentDungeon.map[playerPosition] = "Empty";
+
         var id = getPokemonByName(curEnemy.name).id - 1;
         player.defeatNumbers[id]++;
         setTimeout(function() {
@@ -368,14 +369,13 @@ var dungeonEnemyDefeated = function() {
             currentDungeon.pokemonDefeated++
             updateDungeon();
             // hideDungeonEnemy();
-
+            if(bossDefeated()){
+                dungeonDefeated();
+            }
         }, player.catchTime);
         curEnemy.alive = false;
     }
 
-    if(bossDefeated()){
-        dungeonDefeated();
-    }
 
 }
 
