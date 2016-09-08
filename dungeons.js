@@ -391,12 +391,12 @@ var bossDefeated = function(){
 var dungeonDefeated = function() {
 
     log("Congratulations, you have cleared the " + currentDungeon.name + "!");
+    showDungeonDefeated(town);
     inProgress = 0;
 
     var town = currentDungeon.name.slice(0, -8);
 
     moveToTown(town);
-    showDungeonDefeated(town);
     resetDungeon();
 
     updateAll();
@@ -413,15 +413,16 @@ var resetDungeon = function() {
 }
 
 var showDungeonDefeated = function() {
+    if(inProgress === 3){
+        html = "";
+        html += "You have completed the " + currentDungeon.name + "!<br>";
+        for(var i = 0; i < currentDungeon.loot.length; i++){
+            html += "<img class='smallImage' src=images/items/"+getItemByName(currentDungeon.loot[i]).id+".png>";
+        }
 
-    html = "";
-    html += "You have completed the " + currentDungeon.name + "!<br>";
-    for(var i = 0; i < currentDungeon.loot.length; i++){
-        html += "<img class='smallImage' src=images/items/"+getItemByName(currentDungeon.loot[i]).id+".png>";
+        $("#dungeonDefeatedBody").html(html);
+        $("#dungeonModal").modal('show');
     }
-
-    $("#dungeonDefeatedBody").html(html);
-    $("#dungeonModal").modal('show');
 }
 
 var alreadyGotBadge = function(badgeName) {
