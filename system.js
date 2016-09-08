@@ -382,7 +382,7 @@ var experienceToLevel = function(exp,levelType){
 
 	}
 	exp *= mult;
-	return Math.min(Math.min(100,Math.floor( Math.pow(20*exp,0.5)/(6*Math.sqrt(5)))), (1+player.gymBadges.length) * 10);
+	return Math.min(Math.min(100,Math.floor( Math.pow(20*exp,0.47)/(6*Math.sqrt(5)))), (1+player.gymBadges.length) * 10);
 }
 
 var getBonusCatchrate = function(){
@@ -589,10 +589,11 @@ var capturePokemon = function(name, shiny){
 				}
 			}
 		} else {
+			var route = player.route;
 			if(inProgress == 3){
-				console.log(currentDungeon);
+				route = currentDungeon.itemRoute;
 			}
-			var tokens = Math.floor(Math.pow(player.route,1.4) - player.route/2);
+			var tokens = Math.floor(Math.pow(route,1.4) - route/2);
 			var deviation = Math.floor(Math.random() * 2 ) + 3;
 			tokens += deviation;
 			gainTokens(tokens);
@@ -679,7 +680,7 @@ var generatePokemon = function(route){
 	curEnemy.health = Math.max(Math.floor(Math.pow( (randomPokemon.health*Math.pow(route,2.2)*(Math.pow(player.caughtPokemonList.length-1),1.2)/8) ,1.15)) , 20) || 20;
 	curEnemy.shiny = generateShiny();
 	curEnemy.maxHealth = curEnemy.health;
-	curEnemy.exp = Math.max(Math.floor(10*Math.pow(route ,1.1)), 10) || 10;
+	curEnemy.exp = Math.max(Math.floor(10*Math.pow(route ,1.2)), 10) || 10;
 	var catchVariation = Math.floor(Math.random()*7-3);
 	curEnemy.catchRate = Math.floor(Math.pow(randomPokemon.catchRate,0.75)) + catchVariation;
 	curEnemy.alive = true;
