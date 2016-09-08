@@ -85,7 +85,7 @@ var PokemonMansionDungeon = function(){
 var VictoryRoadDungeon = function(){
     var pokemonList = ["Zubat", "Golbat", "Machop", "Geodude", "Graveler", "Onix", "Marowak", "Venomoth"];
     var bossPokemon = [BossPokemon("Moltres", 184462, 4000), BossPokemon("Machoke", 122975, 2500), BossPokemon("Machoke", 122975, 2500), BossPokemon("Machoke", 122975, 2500)];
-    return Dungeon("Victory Road Dungeon", pokemonList, 5, 24595, bossPokemon, 2000, 8);
+    return Dungeon("Victory Road Dungeon", pokemonList, 5, 24595, bossPokemon, 2000, 8, 20);
 }
 
 var CeruleanCaveDungeon = function(){
