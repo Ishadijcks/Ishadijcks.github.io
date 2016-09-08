@@ -46,7 +46,6 @@ var showTown = function(town){
 	
 	var html = "";
 	html += "<h3 class='townName strokeme'>"+town.name;
-	console.log(town.gym.pokemons);
 	if(town.gym.bossPokemon != undefined){
 		if(allPokemonCaughtInDungeon(town.gym.pokemons, town.gym.bossPokemon.name)){
 		html += "<img id=alreadyCaughtImage src=images/Pokeball.PNG>";
@@ -55,7 +54,7 @@ var showTown = function(town){
 	html += "</h3>";
 	html += "<div class='row'>";
 	if(town.gym != null){
-		if(town.gym.bossPokemon != undefined){
+		if(town.gym.bossList != undefined){
 			oakExplainDungeons()
 			if(player.gymBadges.length >= town.gym.badgeReq){
 				html += "<button class='dungeon leftTownButton btn btn-primary col-sm-2' id='"+town.name+" Dungeon'>Dungeon<br>"+town.gym.tokenCost+" tokens</button>"
