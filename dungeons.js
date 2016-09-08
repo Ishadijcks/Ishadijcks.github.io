@@ -417,10 +417,7 @@ var showDungeonDefeated = function() {
 
     html = "";
     html += "You have completed the " + currentDungeon.name + "!<br>";
-    console.log(currentDungeon.loot);
-    
     for(var i = 0; i < currentDungeon.loot.length; i++){
-        console.log(currentDungeon.loot[i]);
         html += "<img class='smallImage' src=images/items/"+getItemByName(currentDungeon.loot[i]).id+".png>";
     }
 
