@@ -160,12 +160,12 @@ var initTypeEffectiveness = function(){
 	typeEffectiveness[STEEL][STEEL] = getNotEffective(STEEL);
 	typeEffectiveness[STEEL][FAIRY] = getVeryEffective(STEEL);
 
-	typeEffectiveness[FAIRY][FIRE] = getNotEffective(FAIRY);
-	typeEffectiveness[FAIRY][FIGHTING] = getVeryffective(FAIRY);
-	typeEffectiveness[FAIRY][POISON] = getNotEffective(FAIRY);
-	typeEffectiveness[FAIRY][DRAGON] = getVeryEffective(FAIRY);
-	typeEffectiveness[FAIRY][DARK] = getVeryEffective(FAIRY);
-	typeEffectiveness[FAIRY][STEEL] = getNotEffective(FAIRY);
+	// typeEffectiveness[FAIRY][FIRE] = getNotEffective(FAIRY);
+	// typeEffectiveness[FAIRY][FIGHTING] = getVeryffective(FAIRY);
+	// typeEffectiveness[FAIRY][POISON] = getNotEffective(FAIRY);
+	// typeEffectiveness[FAIRY][DRAGON] = getVeryEffective(FAIRY);
+	// typeEffectiveness[FAIRY][DARK] = getVeryEffective(FAIRY);
+	// typeEffectiveness[FAIRY][STEEL] = getNotEffective(FAIRY);
 
 
 }
