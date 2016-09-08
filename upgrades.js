@@ -111,6 +111,7 @@ var resetUpgrades = function(){
 	for( var i=0; i<player.upgradeList.length; i++){
 		player.upgradeList[i].bought = 0;
 	}
+	updateAll();
 }
 
 var boughtUpgrades = function(){
