@@ -54,7 +54,7 @@ var MtMoonDungeon = function() {
 
 var RockTunnelDungeon = function(){
     var pokemonList = ["Zubat", "Geodude", "Machop"];
-    var bossPokemon = BossPokemon("Onix", 20585, 1000);
+    var bossPokemon = [BossPokemon("Onix", 20585, 1000)];
     return Dungeon("Rock Tunnel Dungeon", pokemonList, 5, 4117, bossPokemon, 500, 2, 5);
 }
 
