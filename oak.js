@@ -154,6 +154,7 @@ var showOakItems = function(force){
 	if(lastNumberOfPokemon != player.caughtPokemonList.length || force){
 		lastNumberOfPokemon = player.caughtPokemonList.length;
 		html = "";
+		html += "<p style='text-align:center; width:47px; font-size:16px'>"+ getTotalActiveOakItems() + "/" + player.oakItemSlots + "</p>";
 		for( var i = 0; i< oakItemList.length; i++){
 			if( oakItemList[i].earned === 1){
 				if( oakItemList[i].active === 1){
