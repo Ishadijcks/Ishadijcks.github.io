@@ -99,11 +99,19 @@ var applyUpgrade = function(type, amount){
 		default:
 			$.notify("This should never happen, contact the developer immediately!", 'error');
 			break;
-
 	}	
-		
 }
 
+var resetUpgrades = function(){
+	player.catchBonus = 5;
+	player.expMultiplier = 1;
+	player.catchTime = 2000;
+	player.moneyMultiplier = 1;
+	player.clickMultiplier = 1;
+	for( var i=0; i<player.upgradeList.length; i++){
+		player.upgradeList[i].bought = 0;
+	}
+}
 
 var boughtUpgrades = function(){
 	var number = 0;
