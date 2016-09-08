@@ -103,7 +103,7 @@ var loadDungeon = function(townId) {
 
 
         currentDungeon.timeLeft = currentDungeon.timeLimit;
-
+        inProgress = 3;
         currentDungeon.map = createMap(currentDungeon.size);
         playerPosition = Math.floor(currentDungeon.size * currentDungeon.size / 2);
         currentDungeon.mapDiscovered[playerPosition] = 1;
