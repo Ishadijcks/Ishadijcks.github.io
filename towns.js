@@ -50,6 +50,7 @@ var showTown = function(town){
 		if(allPokemonCaughtInDungeon(town.gym.pokemons, town.gym.bossPokemon.name)){
 		html += "<img id=alreadyCaughtImage src=images/Pokeball.PNG>";
 		}
+		
 	}
 	html += "</h3>";
 	html += "<div class='row'>";
@@ -61,6 +62,7 @@ var showTown = function(town){
 			} else {
 				html += "<button class='wrongDungeon leftTownButton btn btn-primary disabled col-sm-2' id='"+town.name+" Dungeon'>Dungeon</button>"
 			}
+
 		}
 		else if (Array.isArray(town.gym)){
 			for(var i = 0; i<town.gym.length; i++){

@@ -49,6 +49,11 @@ var oakExplainDungeons = function(){
 	}
 }
 
+var oakExplainDungeonAgain = function(){
+	player.dungeonExplain = 0;
+	oakExplainDungeons();
+}
+
 
 var addOakItem = function(name, image, pokedexReq, flavorText, value){
 

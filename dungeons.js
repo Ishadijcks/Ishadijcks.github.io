@@ -84,13 +84,13 @@ var PokemonMansionDungeon = function(){
 
 var VictoryRoadDungeon = function(){
     var pokemonList = ["Zubat", "Golbat", "Machop", "Geodude", "Graveler", "Onix", "Marowak", "Venomoth"];
-    var bossPokemon = [("Moltres", 184462, 4000), ("Machoke", 122975, 2500), ("Machoke", 122975, 2500), ("Machoke", 122975, 2500)];
+    var bossPokemon = [BossPokemon("Moltres", 184462, 4000), BossPokemon("Machoke", 122975, 2500), BossPokemon("Machoke", 122975, 2500), BossPokemon("Machoke", 122975, 2500)];
     return Dungeon("Victory Road Dungeon", pokemonList, 5, 24595, bossPokemon, 2000, 8);
 }
 
 var CeruleanCaveDungeon = function(){
     var pokemonList = ["Arbok", "Raichu", "Sandslash", "Golbat", "Parasect", "Venomoth", "Kadabra", "Magneton", "Dodrio", "Hypno", "Ditto", "Wigglytuff", "Electrode", "Marowak", "Chansey"];
-    var bossPokemon = [("Mewtwo", 215512, 7500), ("Rhydon", 143675, 4000), ("Rhydon", 143675, 4000), ("Rhydon", 143675, 4000)];
+    var bossPokemon = [BossPokemon("Mewtwo", 215512, 7500), BossPokemon("Rhydon", 143675, 4000), BossPokemon("Rhydon", 143675, 4000), BossPokemon("Rhydon", 143675, 4000)];
     return Dungeon("Cerulean Cave Dungeon", pokemonList, 5, 28735, bossPokemon, 2500, 8, 20);
 }
 
