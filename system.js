@@ -251,6 +251,9 @@ $(document).ready(function(){
 			} else if(keyCode == 40){
 				moveToRoom(playerPosition+currentDungeon.size);
     			e.preventDefault();
+			} else if(keyCode == 32){
+				openDungeonChest();
+    			e.preventDefault();
 			}
 		}
 
