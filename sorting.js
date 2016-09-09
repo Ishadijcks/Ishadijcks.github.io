@@ -24,6 +24,15 @@ function compareByTimeStamp(a,b) {
   return 0;
 }
 
+function compareByRecent(a,b) {
+  if (a.timeStamp > b.timeStamp)
+    return -1;
+  if (a.timeStamp < b.timeStamp)
+    return 1;
+  return 0;
+}
+
+
 function compareByCatchRate(a,b) {
   if (a.catchRate < b.catchRate)
     return -1;
@@ -70,6 +79,9 @@ var sortChange = function() {
       break;
     case "time":
       player.caughtPokemonList.sort(compareByTimeStamp);
+      break;
+    case "recent":
+      player.caughtPokemonList.sort(compareByRecent);
       break;
     case "catchRate":
       player.caughtPokemonList.sort(compareByCatchRate);
