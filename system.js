@@ -69,6 +69,7 @@ $(document).ready(function(){
 	else {
 		$('#pickStarter').modal({backdrop: 'static', keyboard: false});
 	}
+	initTypeEffectiveness();
 	initUpgrades();
 	initOakItems();
 	updateItems();
