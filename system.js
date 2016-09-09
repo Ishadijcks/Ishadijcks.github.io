@@ -464,7 +464,7 @@ var gainExp = function(exp){
 			exp *= getOakItemBonus("Exp Share")
 		}
 
-		var pokedexBonusExp = pokedexBonus(player.defeatNumbers[curEnemy.id]);
+		var pokedexBonusExp = pokedexBonus(player.defeatNumbers[curEnemy.id-1]);
 		exp *= pokedexBonusExp;
 
 		exp = Math.floor(exp);
@@ -587,7 +587,6 @@ var capturePokemon = function(name, shiny){
 		if(shiny){
 			for( var i = 0; i<player.caughtPokemonList.length; i++){
 				if(player.caughtPokemonList[i].name == name){
-					console.log(name);
 					player.caughtPokemonList[i].shiny = 1;
 					$.notify("You have caught a shiny "+ name +"!", "succes")
 				}
@@ -642,9 +641,9 @@ var generatePokemon = function(route){
 	clicks = 0;
 	clearInterval(attackInterval);
 	attackInterval = setInterval(pokemonsAttack,1000);
-	var randomRoute = 0;
+	route = route || 1;
 	var decrease = 0;
-
+	var randomPokemon;
 	var legendary = generateLegendary();
 	if( legendary){
 		randomPokemon = getPokemonByName(legendary);
@@ -681,8 +680,10 @@ var generatePokemon = function(route){
 	}
 
 	//console.log(pokemonList);
+
 	curEnemy.name = randomPokemon.name;
 	curEnemy.id = randomPokemon.id;
+
 	curEnemy.health = Math.max(Math.floor(Math.pow( (randomPokemon.health*Math.pow(route,2.2)*(Math.pow(player.caughtPokemonList.length-1),1.2)/12) ,1.15)) , 20) || 20;
 	curEnemy.shiny = generateShiny();
 	curEnemy.maxHealth = curEnemy.health;
@@ -693,6 +694,7 @@ var generatePokemon = function(route){
 	curEnemy.type = randomPokemon.type;
 	var deviation = Math.floor(Math.random() * 51 ) - 25;
 	curEnemy.moneyReward = Math.max(10, 3 * route + 5*Math.pow(route,1.15) + deviation);
+
 	return randomPokemon;
 }
 
