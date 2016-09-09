@@ -241,16 +241,16 @@ $(document).ready(function(){
 	$(document).on("keydown", function (e) {
 		var keyCode = e.keyCode;
 		if(inProgress == 3){
-			if(keyCode == 38){
+			if(keyCode == 38 || keyCode == 87){
 				moveToRoom(playerPosition-currentDungeon.size);
 				e.preventDefault();
-			} else if(keyCode == 39){
+			} else if(keyCode == 39 || keyCode == 68){
 				moveToRoom(playerPosition+1);
 				e.preventDefault();
-			} else if(keyCode == 37){
+			} else if(keyCode == 37 || keyCode == 65){
 				moveToRoom(playerPosition-1);
 				e.preventDefault();
-			} else if(keyCode == 40){
+			} else if(keyCode == 40 || keyCode == 83){
 				moveToRoom(playerPosition+currentDungeon.size);
     			e.preventDefault();
 			} else if(keyCode == 32){
