@@ -158,24 +158,28 @@ var getOakItemBonus = function(oakItemName){
 var showOakItems = function(force){
 	if(lastNumberOfPokemon != player.caughtPokemonList.length || force){
 		lastNumberOfPokemon = player.caughtPokemonList.length;
-		html = "";
-		html += "<p style='text-align:center; width:47px; font-size:16px'>"+ getTotalActiveOakItems() + "/" + player.oakItemSlots + "</p>";
-		for( var i = 0; i< oakItemList.length; i++){
-			if( oakItemList[i].earned === 1){
-				if( oakItemList[i].active === 1){
-					html += "<div id=item"+i+" class='oakItem activeOakItem'><img title='"+ oakItemList[i].flavorText+ "' class='oakItemImage tooltipRight' src='"+ oakItemList[i].image +"'' /></div>"
-				} else {
-					html += "<div id=item"+i+" class='oakItem'><img title='"+ oakItemList[i].flavorText+ "' class='oakItemImage tooltipRight' src='"+ oakItemList[i].image +"'' /></div>"
+		if(player.caughtPokemonList.length >= 20){
+			html = "";
+			html += "<p style='text-align:center; width:47px; font-size:16px'>"+ getTotalActiveOakItems() + "/" + player.oakItemSlots + "</p>";
+			for( var i = 0; i< oakItemList.length; i++){
+				if( oakItemList[i].earned === 1){
+					if( oakItemList[i].active === 1){
+						html += "<div id=item"+i+" class='oakItem activeOakItem'><img title='"+ oakItemList[i].flavorText+ "' class='oakItemImage tooltipRight' src='"+ oakItemList[i].image +"'' /></div>"
+					} else {
+						html += "<div id=item"+i+" class='oakItem'><img title='"+ oakItemList[i].flavorText+ "' class='oakItemImage tooltipRight' src='"+ oakItemList[i].image +"'' /></div>"
+					}
 				}
 			}
-		}
 
 
-		$("#oakItemBody").html(html);	
 
-		$(".tooltipRight").tooltipster({
-			position: "right"
+			$("#oakItemBody").html(html);	
+
+			$(".tooltipRight").tooltipster({
+				position: "right"
 		});
+
+		}
 	}
 }
 

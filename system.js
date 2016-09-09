@@ -526,8 +526,10 @@ var enemyDefeated = function(){
 
 		setTimeout(function(){
 
-			if(alreadyCaught(curEnemy.name)){
-			$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=pokeball src=images/Pokeball.PNG>");
+			if(alreadyCaughtShiny(curEnemy.name)){
+				$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/shinypokemon/star.png><br><img id=pokeball src=images/Pokeball.PNG>");
+            } else if(alreadyCaught(curEnemy.name)){
+				$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=pokeball src=images/Pokeball.PNG>");
 			}
 			else{
 			$("#enemyInfo").html("<br>"+curEnemy.name+" <br><img id=pokeball src=images/Pokeball.PNG>");
@@ -614,6 +616,15 @@ var capturePokemon = function(name, shiny){
 var alreadyCaught = function(name){
 	for( var i = 0; i<player.caughtPokemonList.length; i++){
 		if (player.caughtPokemonList[i].name == name){
+			return true;
+		}
+	}
+	return false;
+}
+
+var alreadyCaughtShiny = function(name){
+	for( var i = 0; i<player.caughtPokemonList.length; i++){
+		if (player.caughtPokemonList[i].name == name && player.caughtPokemonList[i].shiny){
 			return true;
 		}
 	}

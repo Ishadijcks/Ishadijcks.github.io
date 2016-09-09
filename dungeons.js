@@ -263,7 +263,10 @@ var updateDungeon = function() {
     html += "<span id='dungeonTimer'>"+(currentDungeon.timeLeft / 100) + "/" + currentDungeon.timeLimit / 100+"</span>";
     html += "<div id='dungeonMap'></div>"
     if(!dungeonCanMove && curEnemy.alive){
-        if(alreadyCaught(curEnemy.name)){
+
+        if(alreadyCaughtShiny(curEnemy.name)){
+            html += "<div id='dungeonEnemyInfo'><br>" +curEnemy.name + " <img id='alreadyCaughtImage' src='images/shinypokemon/star.png'><br><img id='dungeonEnemy' src='images/pokemon/"+curEnemy.id+".png' ></div>";
+        } else if(alreadyCaught(curEnemy.name)){
             html += "<div id='dungeonEnemyInfo'><br>" +curEnemy.name + " <img id='alreadyCaughtImage' src='images/Pokeball.PNG'><br><img id='dungeonEnemy' src='images/pokemon/"+curEnemy.id+".png' ></div>";
         } else {
             html += "<div id='dungeonEnemyInfo'><br>" +curEnemy.name + "<br><img id='dungeonEnemy' src='images/pokemon/"+curEnemy.id+".png' ></div>";
@@ -342,6 +345,9 @@ var dungeonEnemyDefeated = function() {
         var id = getPokemonByName(curEnemy.name).id - 1;
         player.defeatNumbers[id]++;
         setTimeout(function() {
+            if(alreadyCaughtShiny(curEnemy.name)){
+                $("#dungeonEnemyInfo").html("<br>" + curEnemy.name + " <img id=alreadyCaughtImage src=images/shinypokemon/star.png><br><img id=dungeonPokeball src=images/Pokeball.PNG>");
+            }
             if (alreadyCaught(curEnemy.name)) {
                 $("#dungeonEnemyInfo").html("<br>" + curEnemy.name + " <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=dungeonPokeball src=images/Pokeball.PNG>");
             } else {

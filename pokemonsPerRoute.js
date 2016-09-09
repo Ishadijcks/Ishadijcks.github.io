@@ -115,3 +115,29 @@ var routeCompleted = function(route){
     }
     return true;
 }
+
+var routeCompletedShiny = function(route){
+    if(isActive("Normal Rod") && pokemonsPerRoute[route].water != undefined){
+        if(pokemonsPerRoute[route].land != undefined){
+            var possiblePokemon = pokemonsPerRoute[route].land.concat(pokemonsPerRoute[route].water);
+        } else {
+            var possiblePokemon = pokemonsPerRoute[route].water;
+        }
+    } 
+
+    else {
+        if(route == 19 || route == 20){
+            route = 18;
+        }
+        var possiblePokemon = pokemonsPerRoute[route].land;
+    }
+
+
+
+    for( var i = 0; i<possiblePokemon.length; i++){
+        if(!alreadyCaughtShiny(possiblePokemon[i])){
+            return false;
+        }
+    }
+    return true;
+}

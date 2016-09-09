@@ -148,7 +148,9 @@ var updateRoute = function(){
 	}
 
 	var html = "Route "+player.route;
-	if(routeCompleted(player.route)){
+	if (routeCompletedShiny(player.route)){
+		html += "<a title='You have caught all shiny Pokemon on this route!'><img id='alreadyCaughtImage' src='images/shinyPokemon/star.png'></a>";
+	} else if(routeCompleted(player.route)){
 		html += "<a title='You have caught all available Pokemon on this route!'><img id='alreadyCaughtImage' src='images/Pokeball.PNG'></a>";
 	}
 	html += "<br>" + Math.min(player.routeKillsNeeded, player.routeKills[player.route])+"/"+player.routeKillsNeeded;
@@ -208,7 +210,10 @@ var updateEnemy = function(){
     	if(curEnemy.shiny){
     		$("#enemyInfo").html("<br>"+curEnemy.name+" <img class='shinyEnemyStar' src='images/shinypokemon/star.png'><br><img id=enemy class='shinyFiller' src=images/shinypokemon/"+curEnemy.id+".png>");
     	} else {
-			if(alreadyCaught(curEnemy.name)){
+
+			if(alreadyCaughtShiny(curEnemy.name)){
+            	$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/shinypokemon/star.png><br><img id=enemy src=images/pokemon/"+curEnemy.id+".png>"); 
+            } else if(alreadyCaught(curEnemy.name)){
             	$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=enemy src=images/pokemon/"+curEnemy.id+".png>"); 
             } else {
             	$("#enemyInfo").html("<br>"+curEnemy.name+"<br><img id=enemy src=images/pokemon/"+curEnemy.id+".png>");
