@@ -46,9 +46,10 @@ var showTown = function(town){
 	
 	var html = "";
 	html += "<h3 class='townName strokeme'>"+town.name;
-	if(town.gym.bossPokemon != undefined){
-		if(allPokemonCaughtInDungeon(town.gym.pokemons, town.gym.bossPokemon.name)){
-		html += "<img id=alreadyCaughtImage src=images/Pokeball.PNG>";
+	if(town.gym.bossList != undefined){
+		console.log(town.gym.bossList);
+		if(allPokemonCaughtInDungeon(town.gym.pokemons, town.gym.bossList)){
+			html += " <img id=alreadyCaughtImage src=images/Pokeball.PNG>";
 		}
 		
 	}

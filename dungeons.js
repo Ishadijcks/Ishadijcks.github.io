@@ -480,7 +480,7 @@ var spawnDungeonPokemon = function() {
 var allPokemonCaughtInDungeon = function(pokemons, boss){
 
     for( var i = 0; i<boss.length; i++){
-        if(!alreadyCaught(boss[i])){
+        if(!alreadyCaught(boss[i].name)){
             return false;
         }
     }
