@@ -125,9 +125,9 @@ var updateStats = function(){
 		"<tr><th>Click attack</th><th>"+getClickAttack()+"</th></tr>" +
 		"<tr><th>Pokemon attack</th><th>"+getPokemonAttack()+"</th></tr>" +
 		"<tr><th>Exp multiplier</th><th>"+player.expMultiplier.toFixed(2)+"</th></tr>" +
+		"<tr><th>Money multiplier</th><th>"+player.moneyMultiplier.toFixed(2)+"</th></tr>" +
 		"<tr><th>Catch bonus</th><th>"+getBonusCatchrate()+"%</th></tr>" +
-		"<tr><th>Catch time</th><th>"+player.catchTime/1000+" sec</th></tr>" +
-		"<tr><th>Pokemon Caught</th><th>"+player.totalCaught+"</th></tr>");
+		"<tr><th>Catch time</th><th>"+player.catchTime/1000+" sec</th></tr>");
 //	$("#statBody").html("Stats<br><br>Money<br>Click attack<br>Pokemon attack<br>Exp multiplier<br>Catch bonus<br>Catch time<br>Route<br>Pokemon Caught");
 //	$("#statBoxStats").html("<br><br>$"+player.money+"<br>"+player.clickAttack*player.clickMultiplier+"<br>"+player.attack*player.attackMultiplier+"<br>"+player.expMultiplier.toFixed(2)+"x<br>"+player.catchBonus+"%<br>"+player.catchTime/1000+" sec<br>"+player.route+"<br>"+player.totalCaught);	
 }
