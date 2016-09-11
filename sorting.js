@@ -52,7 +52,7 @@ function compareByLevel(a,b) {
 function compareByAttack(a,b) {
 	var aAttack = experienceToLevel(a.experience,a.levelType)*a.attack/100;
 	var bAttack = experienceToLevel(b.experience,b.levelType)*b.attack/100;
-  if (aAttack> bAttack)
+  if (aAttack > bAttack)
     return -1;
   if (aAttack < bAttack)
     return 1;
@@ -72,9 +72,11 @@ var sortChange = function() {
       player.caughtPokemonList.sort(compareById);
       break;
     case "attack":
+      player.caughtPokemonList.sort(compareById);
       player.caughtPokemonList.sort(compareByAttack);
       break;
     case "level":
+      player.caughtPokemonList.sort(compareById);
       player.caughtPokemonList.sort(compareByLevel);
       break;
     case "time":
@@ -84,6 +86,7 @@ var sortChange = function() {
       player.caughtPokemonList.sort(compareByRecent);
       break;
     case "catchRate":
+      player.caughtPokemonList.sort(compareById);
       player.caughtPokemonList.sort(compareByCatchRate);
   }
   
