@@ -20,7 +20,7 @@ var showPokedex = function(){
 			} else {
 				html += "<img class='center-block' id='pokedexImage' src=images/pokemon/"+(i+1)+".png >";
 			}
-			html += "<div class='pokedexRank rank"+ Math.min(6,pokedexRank(player.defeatNumbers[i])) + "''><span class='pokedexRankText'>"+ Math.min(6,pokedexRank(player.defeatNumbers[i]))+ "</span></div>"
+			html += "<div title='You gain " + Math.min(6,pokedexRank(player.defeatNumbers[i]))*10 + "% more exp when defeating this Pokemon' class='pokedexRank rank"+ Math.min(6,pokedexRank(player.defeatNumbers[i])) + "''><span class='pokedexRankText'>"+ Math.min(6,pokedexRank(player.defeatNumbers[i]))+ "</span></div>"
 			
 			if( isShiny(pokemonList[i].name)){
 				html += "<span class='pokedexText'>"+ pokemonList[i].name + "</span><img class='shinyPokedexStar' src='images/shinypokemon/star.png'>";
