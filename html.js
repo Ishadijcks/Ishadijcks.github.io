@@ -149,7 +149,7 @@ var updateRoute = function(){
 
 	var html = "Route "+player.route;
 	if (routeCompletedShiny(player.route)){
-		html += "<a title='You have caught all shiny Pokemon on this route!'><img id='alreadyCaughtImage' src='images/shinypokemon/star.png'></a>";
+		html += "<a title='You have caught all shiny Pokemon on this route!'><img id='alreadyCaughtImage' src='images/shinyPokeball.PNG'></a>";
 	} else if(routeCompleted(player.route)){
 		html += "<a title='You have caught all available Pokemon on this route!'><img id='alreadyCaughtImage' src='images/Pokeball.PNG'></a>";
 	}
@@ -212,7 +212,7 @@ var updateEnemy = function(){
     	} else {
 
 			if(alreadyCaughtShiny(curEnemy.name)){
-            	$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/shinypokemon/star.png><br><img id=enemy src=images/pokemon/"+curEnemy.id+".png>"); 
+            	$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/shinyPokeball.png><br><img id=enemy src=images/pokemon/"+curEnemy.id+".png>"); 
             } else if(alreadyCaught(curEnemy.name)){
             	$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=enemy src=images/pokemon/"+curEnemy.id+".png>"); 
             } else {
