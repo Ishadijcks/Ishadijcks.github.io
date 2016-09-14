@@ -41,7 +41,7 @@ var oakExplainDungeons = function(){
 	if(!player.dungeonExplain){
 		html = "";
 		html += "<div class='row'><img class='oakImage' src='images/oak/oak.png'</div";
-		html += "<div class='row'><p class='oakText'>Move around in the dungeon to explore all the rooms!<br>You complete the dungeon when you have defeated the boss Pokemon!</p>";
+		html += "<div class='row'><p class='oakText'>Move around in the dungeon to explore all the rooms!<br>You complete the dungeon when you have defeated the boss Pokemon!<br>You can click, use WASD or use the arrow keys to navigate in the dungeon.</p>";
 		html += "<img class='oakImage' src=images/oak/dungeonExplain.png>";
 		$("#oakBody").html(html);
 		$("#oakModal").modal('show')
