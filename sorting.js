@@ -5,6 +5,12 @@ function compareByName(a,b) {
     return -1;
   if (a.name > b.name)
     return 1;
+  if(a.id > b.id){
+    return 1;
+  }
+  if(a.id < b.id){
+    return -1;
+  }
   return 0;
 }	
 
@@ -38,14 +44,32 @@ function compareByCatchRate(a,b) {
     return -1;
   if (a.catchRate > b.catchRate)
     return 1;
+  if(a.id > b.id){
+    return 1;
+  }
+  if(a.id < b.id){
+    return -1;
+  }
   return 0;
 }
 
 function compareByLevel(a,b) {
+  var aAttack = experienceToLevel(a.experience,a.levelType)*a.attack/100;
+  var bAttack = experienceToLevel(b.experience,b.levelType)*b.attack/100;
   if (experienceToLevel(a.experience,a.levelType) > experienceToLevel(b.experience,b.levelType))
     return -1;
   if (experienceToLevel(a.experience,a.levelType) < experienceToLevel(b.experience,b.levelType))
     return 1;
+  if (aAttack> bAttack)
+    return -1;
+  if (aAttack < bAttack)
+    return 1;
+  if(a.id > b.id){
+    return 1;
+  }
+  if(a.id < b.id){
+    return -1;
+  }
   return 0;
 }
 
@@ -56,6 +80,12 @@ function compareByAttack(a,b) {
     return -1;
   if (aAttack < bAttack)
     return 1;
+  if(a.id > b.id){
+    return 1;
+  }
+  if(a.id < b.id){
+    return -1;
+  }
   return 0;
 }
 
