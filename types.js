@@ -350,7 +350,9 @@ var getStoneEvolutionPokemon = function(type){
 }
 
 var gainShards = function(type, amount){
-	player.typeShards[typeToNumber(type)] += amount;
+	if(!isNaN(amount)){
+		player.typeShards[typeToNumber(type)] += amount;
+	}
 }
 
 var getNotEffective = function(type){
