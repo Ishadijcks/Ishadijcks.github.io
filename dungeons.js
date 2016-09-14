@@ -358,7 +358,7 @@ var dungeonEnemyDefeated = function() {
         }, 1);
 
         gainExp(curEnemy.exp);
-
+        gainShards(curEnemy.type, 3);
         dungeonCanMove = 1;
         var catchRate = curEnemy.catchRate + getBonusCatchrate();
         $("#dungeonCatchDisplay").html("Catch chance: " + Math.min(100, catchRate) + "%");
@@ -463,6 +463,14 @@ var spawnDungeonBoss = function() {
     curEnemy.boss = 1;
     curEnemy.catchRate = 10;
     curEnemy.shiny = generateShiny();
+
+    var possibleType = getPokemonByName(curEnemy.name).type;
+    if(possibleType != undefined){
+        curEnemy.type = possibleType;
+    } else {
+        curEnemy.type = 'normal';        
+    }
+
     curEnemy.exp = bossPokemon.exp;
     clearInterval(attackInterval);
     attackInterval = setInterval(pokemonsAttack, 1000);
@@ -484,6 +492,13 @@ var spawnDungeonPokemon = function() {
     curEnemy.shiny = generateShiny();
     curEnemy.boss = 0;
     curEnemy.exp = currentDungeon.baseHealth/4;
+
+    var possibleType = getPokemonByName(curEnemy.name).type;
+    if(possibleType != undefined){
+        curEnemy.type = possibleType;
+    } else {
+        curEnemy.type = 'normal';        
+    }
     clearInterval(attackInterval);
     attackInterval = setInterval(pokemonsAttack, 1000);
     updateDungeon();

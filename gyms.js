@@ -231,7 +231,7 @@ var gymEnemyDefeated = function(){
 
 	var id = getPokemonByName(curEnemy.name).id-1;
 	player.defeatNumbers[id]++;
-
+	gainShards(curEnemy.type, 3);
 	if(currentGym.pokemons[gymPokemonIndex] != null){
 		spawnGymPokemon(gymPokemonIndex);
 	}
@@ -314,6 +314,12 @@ var spawnGymPokemon = function(pokemonIndex){
 	curEnemy.alive = true;
 	curEnemy.route = 0;
 	curEnemy.catchRate = 0;
+	var possibleType = getPokemonByName(curEnemy.name).type;
+    if(possibleType != undefined){
+        curEnemy.type = possibleType;
+    } else {
+        curEnemy.type = 'normal';        
+    }
 	updateGym();
 }
 
