@@ -298,6 +298,7 @@ $(document).ready(function(){
 	$("body").on('click',"#resetButton", function(){
 		var input = prompt("Are you sure you want to delete your savefile?, enter 6 if you are!","9");
 		if (input == 6){
+			localStorage.removeItem("player");
 			localStorage.clear();
 			location.reload();
 		}
