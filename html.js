@@ -6,7 +6,7 @@ var logCount = 0;
 
 var log = function(text){
 	logCount++;
-	if(logCount > 500){
+	if(logCount > 250){
 		logCount = 0;
 		$("#console").html("");
 	}
