@@ -2,8 +2,14 @@
 		
 var specialLog = [];
 var completeLog = specialLog;
+var logCount = 0;
 
 var log = function(text){
+	logCount++;
+	if(logCount > 500){
+		logCount = 0;
+		$("#console").html("");
+	}
 	$("#console").append(text+"<br>");
 	var elem = document.getElementById('console');
 	elem.scrollTop = elem.scrollHeight;
