@@ -48,7 +48,6 @@ var showTown = function(town){
 	html += "<h3 class='townName strokeme'>"+town.name;
 	if(town.gym != null){	
 		if(town.gym.bossList != undefined){
-			console.log(town.gym.bossList);
 			if(allPokemonCaughtInDungeon(town.gym.pokemons, town.gym.bossList)){
 				html += " <img id=alreadyCaughtImage src=images/Pokeball.PNG>";
 			}

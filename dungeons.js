@@ -347,11 +347,12 @@ var dungeonEnemyDefeated = function() {
         setTimeout(function() {
             if(alreadyCaughtShiny(curEnemy.name)){
                 $("#dungeonEnemyInfo").html("<br>" + curEnemy.name + " <img id=alreadyCaughtImage src=images/shinyPokeball.PNG><br><img id=dungeonPokeball src=images/Pokeball.PNG>");
-            }
-            if (alreadyCaught(curEnemy.name)) {
-                $("#dungeonEnemyInfo").html("<br>" + curEnemy.name + " <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=dungeonPokeball src=images/Pokeball.PNG>");
             } else {
-                $("#dungeonEnemyInfo").html("<br>" + curEnemy.name + " <br><img id=dungeonPokeball src=images/Pokeball.PNG>");
+                if (alreadyCaught(curEnemy.name)) {
+                    $("#dungeonEnemyInfo").html("<br>" + curEnemy.name + " <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=dungeonPokeball src=images/Pokeball.PNG>");
+                } else {
+                    $("#dungeonEnemyInfo").html("<br>" + curEnemy.name + " <br><img id=dungeonPokeball src=images/Pokeball.PNG>");
+                }
             }
             player.pokeballs--;
         }, 1);
@@ -446,7 +447,12 @@ var spawnDungeonBoss = function() {
 
     hideDungeonChest();
     var possibleBosses = currentDungeon.bossList;
-    var bossPokemon = possibleBosses[Math.floor(Math.random()*possibleBosses.length)];
+    var bossPokemon;
+    if(isActive("Legendary Charm") && possibleBosses.length > 2){
+            bossPokemon = possibleBosses[Math.floor(Math.random()*possibleBosses.length-1)];
+    } else {
+        bossPokemon = possibleBosses[Math.floor(Math.random()*possibleBosses.length)];
+    }
     curEnemy.name = bossPokemon.name;
     curEnemy.id = getPokemonByName(curEnemy.name).id;
     curEnemy.health = Math.floor(bossPokemon.health * (1 + (currentDungeon.chestsOpened) / 10));
