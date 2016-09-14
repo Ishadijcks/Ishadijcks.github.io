@@ -529,7 +529,7 @@ var enemyDefeated = function(){
 		setTimeout(function(){
 
 			if(alreadyCaughtShiny(curEnemy.name)){
-				$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/shinyPokeball.PNG><br><img id=pokeball src=images/Pokeball.PNG>");
+				$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/shinyPokeball.png><br><img id=pokeball src=images/Pokeball.PNG>");
             } else if(alreadyCaught(curEnemy.name)){
 				$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=pokeball src=images/Pokeball.PNG>");
 			}
