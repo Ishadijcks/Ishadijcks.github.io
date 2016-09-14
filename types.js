@@ -41,13 +41,13 @@ var initTypeEffectiveness = function(){
 	typeEffectiveness[NORMAL][STEEL] = getNotEffective(NORMAL);
 	
 	typeEffectiveness[FIRE][FIRE] = getNotEffective(FIRE);
-	typeEffectiveness[FIRE][NORMAL] = getNotEffective(FIRE);
+	typeEffectiveness[FIRE][WATER] = getNotEffective(FIRE);
 	typeEffectiveness[FIRE][GRASS] = getVeryEffective(FIRE);
 	typeEffectiveness[FIRE][ICE] = getVeryEffective(FIRE);
 	typeEffectiveness[FIRE][BUG] = getVeryEffective(FIRE);
 	typeEffectiveness[FIRE][ROCK] = getNotEffective(FIRE);
-	typeEffectiveness[FIRE][STEEL] = getNotEffective(FIRE);
-	typeEffectiveness[FIRE][DRAGON] = getVeryEffective(FIRE);
+	typeEffectiveness[FIRE][DRAGON] = getNotEffective(FIRE);
+	typeEffectiveness[FIRE][STEEL] = getVeryEffective(FIRE);
 
 	typeEffectiveness[WATER][FIRE] = getVeryEffective(WATER);
 	typeEffectiveness[WATER][WATER] = getNotEffective(WATER);
@@ -55,6 +55,13 @@ var initTypeEffectiveness = function(){
 	typeEffectiveness[WATER][GROUND] = getVeryEffective(WATER);
 	typeEffectiveness[WATER][ROCK] = getVeryEffective(WATER);
 	typeEffectiveness[WATER][DRAGON] = getNotEffective(WATER);
+
+	typeEffectiveness[ELECTRIC][WATER] = getVeryEffective(ELECTRIC);
+	typeEffectiveness[ELECTRIC][ELECTRIC] = getNotEffective(ELECTRIC);
+	typeEffectiveness[ELECTRIC][GRASS] = getNotEffective(ELECTRIC);
+	typeEffectiveness[ELECTRIC][GROUND] = 0
+	typeEffectiveness[ELECTRIC][FLYING] = getVeryEffective(ELECTRIC);
+	typeEffectiveness[ELECTRIC][DRAGON] = getNotEffective(ELECTRIC);
 
 	typeEffectiveness[GRASS][FIRE] = getNotEffective(GRASS);
 	typeEffectiveness[GRASS][WATER] = getVeryEffective(GRASS);
