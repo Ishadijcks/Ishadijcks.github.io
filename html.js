@@ -218,7 +218,7 @@ var updateEnemy = function(){
     	} else {
 
 			if(alreadyCaughtShiny(curEnemy.name)){
-            	$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/shinyPokeball.png><br><img id=enemy src=images/pokemon/"+curEnemy.id+".png>"); 
+            	$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/shinyPokeball.PNG><br><img id=enemy src=images/pokemon/"+curEnemy.id+".png>"); 
             } else if(alreadyCaught(curEnemy.name)){
             	$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=enemy src=images/pokemon/"+curEnemy.id+".png>"); 
             } else {
