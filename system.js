@@ -721,29 +721,17 @@ var getPokemonByName = function(name){
 }
 
 var generateLegendary = function(){
-
 	if(player.route > 9){
-		var chance = Math.floor(Math.random()*500+1);
+		var chance;
+
 		if(isActive("Legendary Charm")){
-			chance /= getOakItemBonus("Legendary Charm")
+			chance = Math.floor(Math.random()*(5000 - player.route*100)/getOakItemBonus("Legendary Charm")+1);
+		} else {
+			chance = Math.floor(Math.random()*(5000 - player.route*100)+1);
 		}
-		if (chance < 3){
-			chance = Math.floor(Math.random()*100+1);
-			if(chance < 5){
-				return "Mew";
-			}
-			if(chance < 10){
-				return "Mewtwo";
-			}
-			if (chance < 40){
-				return "Articuno";
-			}
-			else if (chance <70){
-				return "Zapdos";
-			}
-			else if (chance <100){
-				return "Moltres";
-			}
+
+		if (chance <= 1){
+			return "Mew";
 		}
 		return false;
 	}
