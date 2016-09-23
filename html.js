@@ -238,4 +238,5 @@ var hideAllViews = function(){
 	$("#gymView").hide();
 	$("#townView").hide();
 	$("#dungeonView").hide();
+	$("#shopView").hide();
 }
