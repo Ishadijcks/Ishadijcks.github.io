@@ -209,7 +209,7 @@
 	text-align: center;
 }
 
-#townView {
+#townView, #shopView{
 	border: 1px solid black;
 	height: 250px;
 	margin-bottom: 20px;
@@ -246,6 +246,7 @@
 	overflow: auto;
 }
 
+
 .pokedexEntry {
 	height:175px;
 	border: 1px solid black;
@@ -256,6 +257,12 @@
 	padding-right: 0;
 	cursor: default;
 }
+
+.pokedexEntry:hover{
+	background-color:#DEDEDE; 	
+	cursor:pointer;
+}
+
 
 .pokedexRank {
 	position:absolute;
@@ -324,7 +331,7 @@ body {
 	margin-top: 15px;
 }
 
-table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView, #dungeonView {
+table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView, #shopView, #dungeonView {
 	background-color: white;
 }
 
@@ -515,6 +522,10 @@ g, rect {
 
 #enemy:hover{
 	cursor:pointer
+}
+
+.shopItem {
+	height: 96px !important;
 }
 
 #currentEnemy, #gymView, #dungeonView{
