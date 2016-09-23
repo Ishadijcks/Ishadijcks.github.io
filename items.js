@@ -75,6 +75,7 @@ var gainItemByName = function(name){
 	$.notify("You got a "+name, 'success');
 
 	updateItems()
+	save();
 	return name;
 }
 
