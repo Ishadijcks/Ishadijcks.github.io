@@ -44,6 +44,7 @@ var load = function(){
 	if (typeof savegame.notEffectiveTypeBonus !== "undefined") player.notEffectiveTypeBonus = savegame.notEffectiveTypeBonus;
 	if (typeof savegame.normalEffectiveTypeBonus !== "undefined") player.normalEffectiveTypeBonus = savegame.normalEffectiveTypeBonus;
 	if (typeof savegame.veryEffectiveTypeBonus !== "undefined") player.veryEffectiveTypeBonus = savegame.veryEffectiveTypeBonus;
+	if (typeof savegame.shopPriceDeviation !== "undefined") player.shopPriceDeviation = savegame.shopPriceDeviation;
 
 	if(player.version < version){
 		$('#changeLogModal').modal('show');
