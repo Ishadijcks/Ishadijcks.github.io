@@ -286,11 +286,6 @@ $(document).ready(function(){
 	$("body").on('click',"#pokedexButton", function(){
 		showPokedex();
 		$("#pokedexModal").modal("show");
-
-<<<<<<< HEAD
-	})
-
-=======
 	})	
 	
 	$("body").on('click', "#pokedexImage", function () {
@@ -299,7 +294,7 @@ $(document).ready(function(){
         //alert(imgsrc);
 	})
 	
->>>>>>> edd53e10802364f0db7f08d0e095bbfb0e1fe207
+
 	$("body").on('click',".oakItem", function(){
 		var id = this.id;
 		var itemId = id.substr(id.length - 1);
