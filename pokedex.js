@@ -14,7 +14,6 @@ var showPokedex = function(){
 	for( var i = 0; i<= max; i++){
 		html += "<div class='col-sm-3 col-md-2 pokedexEntry'>";
 		if( player.defeatNumbers[i] > 0 || player.catchNumbers[i] > 0){
-
 			if(isShiny(pokemonList[i].name)){
 				html += "<img class='center-block shinyFiller' id='pokedexImage' src=images/shinypokemon/"+(i+1)+".png >";
 			} else {
@@ -32,13 +31,49 @@ var showPokedex = function(){
 		}
 		else {
 			html += "<img class='center-block' id='unkownPokemonImage' src=images/unknownPokemon.png >";
-			html += "<p>"+(i+1)+"</p>"	
+			html += "<p>"+(i+1)+"</p>";
 		}
 		
 		
 		html += "</div>";
 	}
-	html += "</div>"
+	html += "</div>";
+	$("#pokedexBody").html(html);
+}
+
+var showSpecificPokemon1 = function (srcPath) {
+alert(getType(1));
+	html = "";
+	html += "<div class='row'>";
+	html += "<div class='col-md-2 col-md-offset-0'>";
+	var number;
+	if(srcPath.length == 20) {
+		number = srcPath.substring(15, 16);
+	} else if(srcPath.length == 21) {
+		number = srcPath.substring(15, 17);
+	} else {
+	    number = srcPath.substring(15, 18);
+    }
+	if(number.length == 1) {
+		html += "<p>No00"+ number + " " + pokemonList[number-1].name +"</p>";
+	} else if(number.length == 2) {
+		html += "<p>No0"+ number + " " +pokemonList[number-1].name +"</p>";
+	} else {
+		html += "<p>No"+ number + " " + pokemonList[number-1].name +"</p>";
+	}
+	html += "<p class='infoBlock'>"+ pokedexInfo[number-1].species +"</p>";
+	html += "<p class='infoBlock'>HT<span class='pokedexSize'> </span>"+ pokedexInfo[number-1].height +"</p>";
+	html += "<p class='infoBlock'>WT<span class='pokedexSize'></span>"+ pokedexInfo[number-1].weight +"</p>";
+
+	html += "</div>";
+	html += "<div class='col-md-2 col-md-offset-0'>";
+	html += "<img class='center-block-specific' id='pokedexImage' src='"+ srcPath+"'>";
+	html+= "<button class='btn-danger' id='pokedexButton'>Pokedex</button>";
+	html+=	"<button class='btn-info' id='nextPokedexPage'>Next</button>";
+	html += "</div>";
+		html += "</div>";
+	html += "<div class='row' id='borderDex'>";
+	html += "<p id='underBorder'>"+ pokedexInfo[number-1].description +"</p>";
 	$("#pokedexBody").html(html);
 }
 

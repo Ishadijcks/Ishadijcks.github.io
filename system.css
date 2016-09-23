@@ -241,9 +241,19 @@
 	width:100%;
 }
 
+#returnPokedex,#nextPokedexPage {
+	display: inline-block;
+	margin-bottom: 2px;
+}
+
 #pokedex{
 	width:70%;
 	overflow: auto;
+}
+
+
+.center-block#pokedexImage:hover {
+	cursor:pointer;
 }
 
 .pokedexEntry {
@@ -255,6 +265,22 @@
 	padding-left: 0;
 	padding-right: 0;
 	cursor: default;
+}
+
+.pokedexSize {
+    margin-left: 3em;
+}
+
+#borderDex {
+    border-top: solid;
+}
+
+#underBorder {
+    margin-top: 5px;
+}
+
+.infoBlock {
+    margin-bottom: 0px;
 }
 
 .pokedexRank {
@@ -311,6 +337,7 @@
 #pokedexImage {
 	text-align:auto;
 }
+
 
 .pokedexText {
 	margin-bottom: 3px;

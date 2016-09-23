@@ -287,8 +287,19 @@ $(document).ready(function(){
 		showPokedex();
 		$("#pokedexModal").modal("show");
 
+<<<<<<< HEAD
 	})
 
+=======
+	})	
+	
+	$("body").on('click', "#pokedexImage", function () {
+        var imgsrc=$(this).attr('src');
+        showSpecificPokemon1(imgsrc);
+        //alert(imgsrc);
+	})
+	
+>>>>>>> edd53e10802364f0db7f08d0e095bbfb0e1fe207
 	$("body").on('click',".oakItem", function(){
 		var id = this.id;
 		var itemId = id.substr(id.length - 1);
@@ -648,7 +659,16 @@ var calculateAttack = function(){
 	return total;
 }
 
-
+var getType = function(id) {
+	var type = [];
+	console.log(pokedexInfo[id-1].types.length);
+	for(var i = 0; i < pokedexInfo[id-1].types.length; i++) {
+		console.log(pokedexInfo[0].types[0]);
+	type.push(pokedexInfo[id-1].types[i]);
+	}
+	console.log("done");
+	return type.toString();
+}
 
 var generatePokemon = function(route){
 	clicks = 0;
