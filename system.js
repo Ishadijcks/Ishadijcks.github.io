@@ -235,6 +235,12 @@ $(document).ready(function(){
 		loadDungeon(id);
 	})
 
+	$("body").on('click',".shop", function(){
+		var id = this.id;
+		id = id.slice(0, -5);
+		loadShop(id);
+	})
+
 	$("body").on('click',".dungeonRoom", function(){
 		var id = parseInt(this.id.substring(4));
 		moveToRoom(id);
@@ -283,6 +289,9 @@ $(document).ready(function(){
 		$("#evoModal").modal("hide");
 	})
 
+	$("body").on('click',".shopItem", function(){
+		buyShopItem(this.dataset.itemname);
+	})
 
 	$("body").on('click',"#pokedexButton", function(){
 		showPokedex();
@@ -500,6 +509,7 @@ var enemyDefeated = function(){
 
 	canCatch = 1;
 	if (curEnemy.alive){
+		decreaseShopPriceDeviation();
 		log("You defeated the wild "+ curEnemy.name);
 
 
