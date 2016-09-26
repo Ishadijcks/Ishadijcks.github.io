@@ -37,19 +37,30 @@ var xAttack = ShopItem(6, "X Attack", 3000, 'money');
 var xClick = ShopItem(7, "X Click", 3000, 'money');
 
 var decreaseShopPriceDeviation = function(){
-	player.shopPriceDeviation = Math.max(1, player.shopPriceDeviation-0.01);
+	for( var i = 0; i<player.shopPriceDeviation.length; i++){
+		player.shopPriceDeviation[i] = Math.max(1, player.shopPriceDeviation[i]-0.01);
+	}
 	console.log(player.shopPriceDeviation);
+}
+
+var getShopPriceDeviation = function(itemName){
+	for( var i = 0; i<player.shopPriceDeviation.length; i++){
+		if(player.shopPriceDeviation[i] === itemName){
+			return player.shopPriceDeviation[i];
+		}
+	}
 }
 
 var buyShopItem = function(itemName){
 	var item;
 	console.log(itemName);
 	if(item = getShopItemByName(itemName)){
-		if(enoughResources(item.cost*player.shopPriceDeviation, item.costType)){
+		var id = item.id;
+		if(enoughResources(item.cost*player.shopPriceDeviation[id], item.costType)){
 		
-			payShopItem(item.cost*player.shopPriceDeviation, item.costType);
-			player.shopPriceDeviation = Math.floor(player.shopPriceDeviation * 1.05 * 100)/100;
-			console.log(player.shopPriceDeviation);
+			payShopItem(item.cost*player.shopPriceDeviation[id], item.costType);
+			player.shopPriceDeviation[id] = Math.floor(player.shopPriceDeviation[id] * 1.05 * 100)/100;
+			console.log(player.shopPriceDeviation[id]);
 			gainItemByName(item.name)
 			console.log(curShop);
 			loadShop(curShop.name);
@@ -91,7 +102,7 @@ var payShopItem = function(cost, costType){
 	}
 }
 
-var ViridianCityShop = function(){ return Shop("Viridian City", [xAttack]); }
+var ViridianCityShop = function(){ return Shop("Viridian City", [xAttack, fireStone]); }
 var PewterCityShop = function(){ return Shop("Pewter City", [xClick]); }
 
 	var curShop;
@@ -114,7 +125,8 @@ var showShop = function(shop){
 		console.log(items[i]);
 		html += "<div data-itemName='" + items[i].name + "' class='col-sm-3 col-md-2 pokedexEntry shopItem'>";
 		html += "<br><img class='center-block' src=images/items/" + items[i].id + ".png >" + items[i].name + "<br><br>";
-		html += "<p style='margin-top:15px'>" + (items[i].cost*player.shopPriceDeviation).toFixed(2) + "<br>";
+		console.log(player.shopPriceDeviation[getShopItemByName(items[i].name).id]);
+		html += "<p style='margin-top:15px'>" + (items[i].cost*player.shopPriceDeviation[getShopItemByName(items[i].name).id]).toFixed(0) + "<br>";
 		html += getFullResourceName(items[i].costType) + "</p>";
 		html += "</div>";
 	}

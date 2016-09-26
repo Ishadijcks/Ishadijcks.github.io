@@ -40,7 +40,7 @@ var player = {
 	notEffectiveTypeBonus: Array.apply(null, Array(17)).map(Number.prototype.valueOf,0),
 	normalEffectiveTypeBonus: Array.apply(null, Array(17)).map(Number.prototype.valueOf,0),
 	veryEffectiveTypeBonus: Array.apply(null, Array(17)).map(Number.prototype.valueOf,0),
-	shopPriceDeviation: 1
+	shopPriceDeviation: Array.apply(null, Array(17)).map(Number.prototype.valueOf,1),
 }
 
 var curEnemy = {
