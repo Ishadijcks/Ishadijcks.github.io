@@ -104,11 +104,11 @@ var showTown = function(town){
 }
 
 var loadTowns = function(){
-	addTown("Pewter City", PewterCityGym(), "images/gyms/pewtercity.png", null, [2]);
-	addTown("Cerulean City", CeruleanCityGym(), "images/gyms/ceruleancity.png", null, [4]);
+	addTown("Pewter City", PewterCityGym(), "images/gyms/pewtercity.png", PewterCityShop(), [2]);
+	addTown("Cerulean City", CeruleanCityGym(), "images/gyms/ceruleancity.png", CeruleanCityShop(), [4]);
 	addTown("Vermillion City",VermillionCityGym(), "images/gyms/vermillioncity.png", null, [6]);
 	addTown("Celadon City", CeladonCityGym(), "images/gyms/celadoncity.png", null, [8]);
-	addTown("Saffron City", SaffronCityGym(), "images/gyms/saffroncity.png", null, [5]);
+	addTown("Saffron City", SaffronCityGym(), "images/gyms/saffroncity.png", SaffronCityShop(), [5]);
 	addTown("Fuchsia City", FuchsiaCityGym(), "images/gyms/fuchsiacity.png", null, [18,15]);
 	addTown("Cinnabar Island", CinnabarIslandGym(), "images/gyms/cinnabarisland.png", null, [20]);
 	addTown("Viridian City", ViridianCityGym(), "images/gyms/viridiancity.png", ViridianCityShop(), [1]);
