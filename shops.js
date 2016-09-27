@@ -29,12 +29,17 @@ var Shop = function(name, itemList, shopChange){
 	return temp;
 }
 
-var fireStone = ShopItem(13, "Fire Stone", 3000, 'fire');
-var waterStone = ShopItem(15, "Water Stone", 3000, 'water');
-var leafStone = ShopItem(14, "Leaf Stone", 3000, 'grass');
-var thunderStone = ShopItem(12, "Thunder Stone", 3000, 'water');
 var xAttack = ShopItem(6, "X Attack", 3000, 'money');
 var xClick = ShopItem(7, "X Click", 3000, 'money');
+var luckyIncense = ShopItem(8, "Lucky Incense", 10000, 'money');
+var itemMagnet = ShopItem(9, "Item Magnet", 6000, 'money');
+var xExp = ShopItem(10, "X Exp", 15000, 'money' );
+var tokenCollector = ShopItem(11, "Token Collector", 2000, 'money');
+var thunderStone = ShopItem(12, "Thunder Stone", 3000, 'water');
+var fireStone = ShopItem(13, "Fire Stone", 3000, 'fire');
+var leafStone = ShopItem(14, "Leaf Stone", 3000, 'grass');
+var waterStone = ShopItem(15, "Water Stone", 3000, 'water');
+var moonStone = ShopItem(16, "Moon Stone", 25000, 'money');
 
 var decreaseShopPriceDeviation = function(){
 	for( var i = 0; i<player.shopPriceDeviation.length; i++){
@@ -76,6 +81,7 @@ var buyShopItem = function(itemName){
 }
 
 var enoughResources = function(cost, costType){
+	cost = Math.floor(cost);
 	if(costType === "money"){
 		return player.money >= cost;
 	}
@@ -87,11 +93,13 @@ var enoughResources = function(cost, costType){
 	} else {
 		console.log("Incorrect costType");
 		console.log(costType);
+		$.notify("You have found a bug, please take a screenshot of the console and send it to the developer", 'error');
 		return false;
 	}
 }
 
 var payShopItem = function(cost, costType){
+	cost = Math.floor(cost);
 	if(costType === "money"){
 		player.money -= cost;
 	}
@@ -102,9 +110,10 @@ var payShopItem = function(cost, costType){
 	}
 }
 
-var ViridianCityShop = function(){ return Shop("Viridian City", [xAttack, fireStone]); }
-var PewterCityShop = function(){ return Shop("Pewter City", [xClick]); }
-
+var ViridianCityShop = function(){ return Shop("Viridian City", [xAttack, fireStone, xExp, xClick]); }
+var PewterCityShop = function(){ return Shop("Pewter City", [xClick, moonStone]); }
+var SaffronCityShop = function(){ return Shop("Saffron City", [leafStone, waterStone]); }
+var CeruleanCityShop = function(){ return Shop("Cerulean City", [luckyIncense, thunderStone]) }
 	var curShop;
 
 var loadShop = function(shopName){
