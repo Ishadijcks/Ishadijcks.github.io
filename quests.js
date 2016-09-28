@@ -12,44 +12,40 @@ var addQuest = function(type, description, difficulty, minAmount, maxAmount, bas
 	questList.push(tempQuest);
 }
 
-var curQuest = {
-	type:"",
-	type2: "",
-	description: "",
-	difficulty: "",
-	progress: 0,
-	amount: "",
-	reward: "",
-}
+
+
+var questDifficultyName = ["EASY", "MEDIUM", "HARD", "IMPOSSIBLE"];
 
 var startQuest = function(quest){
-	curQuest.type = quest.type;
-	curQuest.description = quest.description;
-	curQuest.difficulty = quest.difficulty;
-	curQuest.amount = quest.minAmount + Math.floor(Math.random()*(quest.maxAmount-quest.minAmount)) + 1 // some math
-	console.log(curQuest.amount);
-	curQuest.reward = 3 // some math.
+	player.curQuest.progress = 0;
+	player.curQuest.type = quest.type;
+	player.curQuest.description = quest.description;
+	player.curQuest.difficulty = quest.difficulty;
+	player.curQuest.amount = quest.minAmount + Math.floor(Math.random()*(quest.maxAmount-quest.minAmount)) + 1 // some math
+	console.log(player.curQuest.amount);
+	player.curQuest.reward = 3 // some math.
 
 	switch(quest.type){
 		case "defeatPokemonRoute":
 		//Route to kill Pokémon on.
-			curQuest.type2 = Math.floor(Math.random()* quest.difficulty) + 1;
-			curQuest.description = "Defeat " + curQuest.amount + " Pokemon on route " + curQuest.type2 + ".";
+			player.curQuest.type2 = Math.floor(Math.random()* quest.difficulty) + 1;
+			player.curQuest.description = "Defeat " + player.curQuest.amount + " Pokemon on route " + player.curQuest.type2;
 			break;
 		case "findItems":
 		//Item id to find.
-			curQuest.type2 = Math.floor(Math.random()*itemList.length) + 1;
-			curQuest.description = "Find " + curQuest.amount + " " + getItemNameFromId(curQuest.type2) + ".";
+			player.curQuest.type2 = Math.floor(Math.random()*itemList.length) + 1;
+			player.curQuest.description = "Find " + player.curQuest.amount + " " + getItemNameFromId(player.curQuest.type2) + ".";
 		case "defeatPokemon":
-			curQuest.type2 = Math.floor(Math.random()*pokemonList.length) + 1;
-			curQuest.description = "Defeat " + curQuest.amount + " " + getPokemonById(curQuest.type2).name + ".";
+			player.curQuest.type2 = Math.floor(Math.random()*pokemonList.length) + 1;
+			player.curQuest.description = "Defeat " + player.curQuest.amount + " " + getPokemonById(player.curQuest.type2).name + ".";
 	}
 }
 
 var progressQuest = function(type, type2,  amount){
-	if(type === curQuest.type){
-		if(type2 === curQuest.type2){
-			curQuest.progress += amount;
+	if(type === player.curQuest.type){
+		if(type2 === player.curQuest.type2){
+			player.curQuest.progress += amount;
+			showCurQuest();
 		}
 	}
 }
@@ -63,7 +59,6 @@ addQuest('defeatPokemonRoute', 'Defeat x pokemon', EASY, 5, 20, 3);
 addQuest('defeatPokemonRoute', 'Defeat x pokemon', MEDIUM, 20, 40, 5);
 addQuest('findItems', 'Find x items', MEDIUM, 20, 40, 5);
 
-
 startQuest(questList[1]);
 
 var findItem = function(){
@@ -72,3 +67,32 @@ var findItem = function(){
 }
 
 
+var showCurQuest = function(){
+	var html = "";
+	html += "<div id='questTop'>";
+	html += 	"<h2 style='text-align:center; padding:5px'>" + player.curQuest.description + "</h2><div id='difficultyBlock'>" + questDifficultyName[player.curQuest.difficulty] + "</div>";
+	html += 	"<br>";
+	html += 	"<p style='text-align:center; margin-bottom:15px'>" + Math.min(player.curQuest.progress,player.curQuest.amount) + "/" + player.curQuest.amount + "</p>";
+	html += 	"<div class='row' id='questProgressRow'>";
+	html += 		"<div class='progress' id='questProgress'>"
+	html += 			"<div class='progress-bar progress-bar-danger' id='healthBar' style='width: " + Math.min(player.curQuest.progress,player.curQuest.amount) /player.curQuest.amount*100 + "%'>"
+	html += 				"<span class='sr-only'></span>";
+	html += 			"</div>";
+	html += 		"</div>";
+	html +=		"</div>";
+	html += 	"<div class='row' style='width:80%;margin-top:15px;'>"
+	html += 		"<p>Reward: " + player.curQuest.reward + " Quest tokens</p>";
+	html += 	"</div>";
+	html += 	"<div class='row' style='width:80%;margin-top:15px;'>"
+	html += 		"<button class='btn btn-success'>Complete Quest</button>";
+	html += 		"<button class='btn btn-danger'>Skip Quest</button> (500 tokens)";
+	html += 		"</div>";
+	html += 	"</div>"
+	html += "</div>";
+	html += "<div class= 'row' style='width:80%;margin-top:50px;'>"
+	html += 	"<p>Completed: 10</p>";
+	html += 	"<p>Today: 4</p>";
+	html += 	"<p>Maximum in 1 day: 4</p>";
+	html += "</div>";
+	$("#questBody").html(html);
+}

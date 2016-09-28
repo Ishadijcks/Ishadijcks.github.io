@@ -2,6 +2,13 @@
 	margin:auto;
 }
 
+#difficultyBlock {
+	border:1px solid black;
+	float: right;
+	text-align: center;
+	padding:5px;
+}
+
 #questModal {
 	width: 100%;	
 }
