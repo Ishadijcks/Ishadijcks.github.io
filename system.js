@@ -279,6 +279,12 @@ $(document).ready(function(){
 		showGymBadges();
 	})
 
+	// Navbar Button controllers
+	$("body").on('click',"#questButton", function(){
+		$("#questModal").modal("show");
+		//showQuests();
+	})
+
 		// Navbar Button controllers
 	$("body").on('click',"#shardButton", function(){
 		showShardModal();
