@@ -679,16 +679,42 @@
 
 				<!-- Quest Modal -->
 				<div aria-labelledby="myModalLabel" class="modal fade" id="questModal" role="dialog" tabindex="-1">
-					<div class="modal-dialog" role="document">
+					<div class="modal-dialog" role="document" style="width:55%">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h4 style='text-align:center' class="modal-title" id="questLabel">Random Quest</h4>
 							</div>
-							<div class="modal-body" id="questBody">
-								<div class="row" id="starterPokemons">
-									asdasdasdasdasd
+							<div class="modal-body" id="questBody" style="width: 80%;margin: auto;">
+								<div id='questTop'>
+									<h3 style='text-align:center'>Some quest description here like find 3 items</h3>
+									<br>
+									<p style='text-align:center; margin-bottom:15px'>134/200</p>
+										<div class="row" id="questProgressRow">
+											<div class="progress" id="questProgress">
+												<div class="progress-bar progress-bar-danger" id="healthBar" style="width: 80%">
+													<span class="sr-only"></span>
+												</div>	
+											</div>
+										</div>
+
+									<div class= 'row' style="width:80%;margin-top:15px;">
+										<p>Reward: 14 Quest tokens</p>
+									</div>
+
+									<div class= 'row' style="width:80%;margin-top:15px;">
+										<button class='btn btn-success'>Complete Quest</button>
+										<button class='btn btn-danger'>Skip Quest</button> (500 tokens)
+									</div>
 								</div>
+								
+								<div class= 'row' style="width:80%;margin-top:50px;">
+									<p>Completed: 10</p>
+									<p>Today: 4</p>
+									<p>Maximum in 1 day: 4</p>
+								</div>
+
 							</div>
+
 						</div>
 					</div>
 				</div>

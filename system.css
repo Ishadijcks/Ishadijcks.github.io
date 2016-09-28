@@ -1,3 +1,11 @@
+#questProgress{
+	margin:auto;
+}
+
+#questModal {
+	width: 100%;	
+}
+
 .shardImage {
 	height:25px;
 	width:25px;
