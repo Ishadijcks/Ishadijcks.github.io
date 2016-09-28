@@ -48,6 +48,7 @@ var load = function(){
 	if (typeof savegame.normalEffectiveTypeBonus !== "undefined") player.normalEffectiveTypeBonus = savegame.normalEffectiveTypeBonus;
 	if (typeof savegame.veryEffectiveTypeBonus !== "undefined") player.veryEffectiveTypeBonus = savegame.veryEffectiveTypeBonus;
 	if (typeof savegame.shopPriceDeviation !== "undefined") player.shopPriceDeviation = savegame.shopPriceDeviation;
+	if (typeof savegame.questPoints !== "undefined") player.questPoints = savegame.questPoints;
 	if (typeof savegame.curQuest !== "undefined") player.curQuest = savegame.curQuest;
 	if (typeof savegame.questSkipToday !== "undefined") player.questSkipToday = savegame.questSkipToday;
 	if (typeof savegame.questCompletedTotal !== "undefined") player.questCompletedTotal = savegame.questCompletedTotal;

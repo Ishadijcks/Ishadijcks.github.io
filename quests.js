@@ -39,6 +39,7 @@ var startQuest = function(quest){
 			player.curQuest.type2 = Math.floor(Math.random()*pokemonList.length) + 1;
 			player.curQuest.description = "Defeat " + player.curQuest.amount + " " + getPokemonById(player.curQuest.type2).name + ".";
 	}
+	showCurQuest();
 }
 
 var progressQuest = function(type, type2,  amount){
@@ -59,13 +60,34 @@ addQuest('defeatPokemonRoute', 'Defeat x pokemon', EASY, 5, 20, 3);
 addQuest('defeatPokemonRoute', 'Defeat x pokemon', MEDIUM, 20, 40, 5);
 addQuest('findItems', 'Find x items', MEDIUM, 20, 40, 5);
 
-startQuest(questList[1]);
+
 
 var findItem = function(){
 	//Normal stuff
 	progressQuest('findItem', item.id , 1);
 }
 
+var increaseQuestCount = function(){
+	player.questCompletedTotal++;
+	player.questCompletedToday++;
+	player.questCompletedDailyMax = Math.max(player.questCompletedDailyMax, player.questCompletedToday);
+}
+
+var completeQuest = function(){
+	if(questCompleted()){
+		increaseQuestCount();
+		gainQuestPoints(player.curQuest.reward)
+		startQuest(questList[1]);
+	}
+}
+
+var questCompleted = function(){
+	return player.curQuest.progress >= player.curQuest.amount;
+}
+
+var gainQuestPoints = function(amount){
+	player.questPoints += amount;
+}
 
 var showCurQuest = function(){
 	var html = "";
@@ -84,15 +106,22 @@ var showCurQuest = function(){
 	html += 		"<p>Reward: " + player.curQuest.reward + " Quest tokens</p>";
 	html += 	"</div>";
 	html += 	"<div class='row' style='width:80%;margin-top:15px;'>"
-	html += 		"<button class='btn btn-success'>Complete Quest</button>";
+	if(questCompleted()){
+		html += 		"<button onClick='completeQuest()' class='btn btn-success'>Complete Quest</button>";
+	} else {
+		html += 		"<button class='btn btn-success disabled'>Complete Quest</button>";
+	}
 	html += 		"<button class='btn btn-danger'>Skip Quest</button> (500 tokens)";
 	html += 		"</div>";
 	html += 	"</div>"
 	html += "</div>";
 	html += "<div class= 'row' style='width:80%;margin-top:50px;'>"
-	html += 	"<p>Completed: 10</p>";
-	html += 	"<p>Today: 4</p>";
-	html += 	"<p>Maximum in 1 day: 4</p>";
+	html += 	"<p>Completed: " + player.questCompletedTotal + "</p>";
+	html += 	"<p>Today: " + player.questCompletedToday + "</p>";
+	html += 	"<p>Maximum in 1 day: " + player.questCompletedDailyMax + "</p>";
 	html += "</div>";
 	$("#questBody").html(html);
 }
+
+
+startQuest(questList[1]);
