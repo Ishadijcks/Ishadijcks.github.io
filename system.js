@@ -5,6 +5,9 @@ var attackInterval;
 var maxClicks = 15;
 var clicks = 0;
 // Add new variables to the savefile!!
+
+var firstQuest = {progress: 0, type: "defeatPokemonRoute", description: "Defeat 30 Pokemon on route 1", difficulty: 1, amount: 30, type2: 1, reward: 5}
+
 var player = {
 	clickAttack: 1,
 	clickMultiplier: 1,
@@ -41,6 +44,11 @@ var player = {
 	normalEffectiveTypeBonus: Array.apply(null, Array(17)).map(Number.prototype.valueOf,0),
 	veryEffectiveTypeBonus: Array.apply(null, Array(17)).map(Number.prototype.valueOf,0),
 	shopPriceDeviation: Array.apply(null, Array(17)).map(Number.prototype.valueOf,1),
+	curQuest: firstQuest,
+	questSkipToday: 0,
+	questCompletedTotal: 0,
+	questCompletedToday: 0,
+	questCompletedDailyMax: 0
 }
 
 var curEnemy = {
@@ -282,7 +290,7 @@ $(document).ready(function(){
 	// Navbar Button controllers
 	$("body").on('click',"#questButton", function(){
 		$("#questModal").modal("show");
-		//showQuests();
+		showCurQuest();
 	})
 
 		// Navbar Button controllers
