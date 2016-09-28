@@ -1,8 +1,11 @@
 			// Save and load functions
+var canSave = 1;
 
 // Saves the game by writing play to JSON and save it in localStorage
 var save = function(){
-	localStorage.setItem("player", JSON.stringify(player));
+	if(canSave){
+		localStorage.setItem("player", JSON.stringify(player));
+	}
 }
 
 

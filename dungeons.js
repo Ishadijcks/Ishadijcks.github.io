@@ -449,10 +449,11 @@ var spawnDungeonBoss = function() {
     var possibleBosses = currentDungeon.bossList;
     var bossPokemon;
     if(isActive("Legendary Charm") && possibleBosses.length > 2){
-            bossPokemon = possibleBosses[Math.floor(Math.random()*possibleBosses.length-1)];
+            bossPokemon = possibleBosses[Math.floor(Math.random()*(possibleBosses.length-1))];
     } else {
         bossPokemon = possibleBosses[Math.floor(Math.random()*possibleBosses.length)];
     }
+
     curEnemy.name = bossPokemon.name;
     curEnemy.id = getPokemonByName(curEnemy.name).id;
     curEnemy.health = Math.floor(bossPokemon.health * (1 + (currentDungeon.chestsOpened) / 10));
