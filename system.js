@@ -515,6 +515,9 @@ var enemyDefeated = function(){
 
 	canCatch = 1;
 	if (curEnemy.alive){
+		progressQuest('defeatPokemonRoute', player.route , 1);
+		progressQuest('defeatPokemon', curEnemy.id, 1);
+
 		decreaseShopPriceDeviation();
 		log("You defeated the wild "+ curEnemy.name);
 
