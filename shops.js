@@ -45,7 +45,6 @@ var decreaseShopPriceDeviation = function(){
 	for( var i = 0; i<player.shopPriceDeviation.length; i++){
 		player.shopPriceDeviation[i] = Math.max(1, player.shopPriceDeviation[i]-0.01);
 	}
-	console.log(player.shopPriceDeviation);
 }
 
 var getShopPriceDeviation = function(itemName){
