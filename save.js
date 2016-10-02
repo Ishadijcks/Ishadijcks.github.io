@@ -54,6 +54,7 @@ var load = function(){
 	if (typeof savegame.questCompletedTotal !== "undefined") player.questCompletedTotal = savegame.questCompletedTotal;
 	if (typeof savegame.questCompletedToday !== "undefined") player.questCompletedToday = savegame.questCompletedToday;
 	if (typeof savegame.questCompletedDailyMax !== "undefined") player.questCompletedDailyMax = savegame.questCompletedDailyMax;
+	if (typeof savegame.questDifficulty !== "undefined") player.questDifficulty = savegame.questDifficulty;
 
 
 	if(player.version < version){

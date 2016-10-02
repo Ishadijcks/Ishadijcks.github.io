@@ -49,7 +49,8 @@ var player = {
 	questSkipToday: 0,
 	questCompletedTotal: 0,
 	questCompletedToday: 0,
-	questCompletedDailyMax: 0
+	questCompletedDailyMax: 0,
+	questDifficulty: 1,
 }
 
 var curEnemy = {
