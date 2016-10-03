@@ -21,8 +21,8 @@ var startQuest = function(quest){
 	player.curQuest.type = quest.type;
 	player.curQuest.description = quest.description;
 	player.curQuest.difficulty = quest.difficulty;
-	player.curQuest.amount = (quest.minAmount + Math.floor(Math.random()*(quest.maxAmount-quest.minAmount)) + 1)*player.questDifficulty; // some math
-	player.curQuest.reward = quest.baseReward; // some math.
+	player.curQuest.amount = Math.floor((quest.minAmount + Math.random()*(quest.maxAmount-quest.minAmount) + 1)*player.questDifficulty); // some math
+	player.curQuest.reward = Math.floor(quest.baseReward*player.questDifficulty); // some math.
 
 	switch(quest.type){
 		case "defeatPokemonRoute":
