@@ -96,45 +96,45 @@ var HARD = 2;
 var IMPOSSIBLE = 4;
 //				Type 			Description   Difficulty Min Max Reward
 
-// // Secondary routenumber
-// addQuest('defeatPokemonRoute', 'Defeat x pokemon', EASY, 10, 30, 3);
-// addQuest('defeatPokemonRoute', 'Defeat x pokemon', MEDIUM, 30, 50, 8);
-// addQuest('defeatPokemonRoute', 'Defeat x pokemon', HARD, 50, 80, 20);
-// addQuest('defeatPokemonRoute', 'Defeat x pokemon', IMPOSSIBLE, 80, 100, 50);
+// Secondary routenumber
+addQuest('defeatPokemonRoute', 'Defeat x pokemon', EASY, 10, 30, 3);
+addQuest('defeatPokemonRoute', 'Defeat x pokemon', MEDIUM, 30, 50, 8);
+addQuest('defeatPokemonRoute', 'Defeat x pokemon', HARD, 50, 80, 20);
+addQuest('defeatPokemonRoute', 'Defeat x pokemon', IMPOSSIBLE, 80, 100, 50);
 
-// // Secondary routenumber
-// addQuest('capturePokemonRoute', 'Capture x pokemon', EASY, 10, 30, 4);
-// addQuest('capturePokemonRoute', 'Capture x pokemon', MEDIUM, 30, 50, 10);
-// addQuest('capturePokemonRoute', 'Capture x pokemon', HARD, 50, 80, 25);
-// addQuest('capturePokemonRoute', 'Capture x pokemon', IMPOSSIBLE, 80, 100, 55);
+// Secondary routenumber
+addQuest('capturePokemonRoute', 'Capture x pokemon', EASY, 10, 30, 4);
+addQuest('capturePokemonRoute', 'Capture x pokemon', MEDIUM, 30, 50, 10);
+addQuest('capturePokemonRoute', 'Capture x pokemon', HARD, 50, 80, 25);
+addQuest('capturePokemonRoute', 'Capture x pokemon', IMPOSSIBLE, 80, 100, 55);
 
-// addQuest('findItems', 'Find x items', EASY, 1, 5, 5);
-// addQuest('findItems', 'Find x items', MEDIUM, 5, 10, 12);
-// addQuest('findItems', 'Find x items', HARD, 10, 15, 28);
-// addQuest('findItems', 'Find x items', IMPOSSIBLE, 20, 25, 60);
+addQuest('findItems', 'Find x items', EASY, 1, 5, 5);
+addQuest('findItems', 'Find x items', MEDIUM, 5, 10, 12);
+addQuest('findItems', 'Find x items', HARD, 10, 15, 28);
+addQuest('findItems', 'Find x items', IMPOSSIBLE, 20, 25, 60);
 
-// addQuest('gainMoney', 'Gain x money', EASY, 300, 500, 2)
-// addQuest('gainMoney', 'Gain x money', MEDIUM, 1000, 5000, 6)
-// addQuest('gainMoney', 'Gain x money', HARD, 10000, 20000, 15)
-// addQuest('gainMoney', 'Gain x money', IMPOSSIBLE, 25000, 50000, 20)
+addQuest('gainMoney', 'Gain x money', EASY, 300, 500, 2)
+addQuest('gainMoney', 'Gain x money', MEDIUM, 1000, 5000, 6)
+addQuest('gainMoney', 'Gain x money', HARD, 10000, 20000, 15)
+addQuest('gainMoney', 'Gain x money', IMPOSSIBLE, 25000, 50000, 20)
 
-// addQuest('gainTokens', 'Gain x tokens', EASY, 30, 50, 2)
-// addQuest('gainTokens', 'Gain x tokens', MEDIUM, 100, 500, 6)
-// addQuest('gainTokens', 'Gain x tokens', HARD, 1000, 2000, 15)
-// addQuest('gainTokens', 'Gain x tokens', IMPOSSIBLE, 2500, 5000, 20)
+addQuest('gainTokens', 'Gain x tokens', EASY, 30, 50, 2)
+addQuest('gainTokens', 'Gain x tokens', MEDIUM, 100, 500, 6)
+addQuest('gainTokens', 'Gain x tokens', HARD, 1000, 2000, 15)
+addQuest('gainTokens', 'Gain x tokens', IMPOSSIBLE, 2500, 5000, 20)
 
-// addQuest('captureShinies', 'Capture x shinies', HARD, 1, 1, 20)
-// addQuest('captureShinies', 'Capture x shinies', IMPOSSIBLE, 3, 3, 100)
+addQuest('captureShinies', 'Capture x shinies', HARD, 1, 1, 20)
+addQuest('captureShinies', 'Capture x shinies', IMPOSSIBLE, 3, 3, 100)
 
-// addQuest('clearDungeons', 'Clear x dungeons', EASY, 1, 5, 9)
-// addQuest('clearDungeons', 'Clear x dungeons', MEDIUM, 3, 8, 15)
-// addQuest('clearDungeons', 'Clear x dungeons', HARD, 5, 10, 28)
-// addQuest('clearDungeons', 'Clear x dungeons', IMPOSSIBLE, 15, 25, 60)
+addQuest('clearDungeons', 'Clear x dungeons', EASY, 1, 5, 9)
+addQuest('clearDungeons', 'Clear x dungeons', MEDIUM, 3, 8, 15)
+addQuest('clearDungeons', 'Clear x dungeons', HARD, 5, 10, 28)
+addQuest('clearDungeons', 'Clear x dungeons', IMPOSSIBLE, 15, 25, 60)
 
-// addQuest('clearGyms', 'Clear x gyms', EASY, 1, 5, 5)
-// addQuest('clearGyms', 'Clear x gyms', MEDIUM, 3, 10, 10)
-// addQuest('clearGyms', 'Clear x gyms', HARD, 1, 5, 23)
-// addQuest('clearGyms', 'Clear x gyms', IMPOSSIBLE, 1, 5, 55)
+addQuest('clearGyms', 'Clear x gyms', EASY, 1, 5, 5)
+addQuest('clearGyms', 'Clear x gyms', MEDIUM, 3, 10, 10)
+addQuest('clearGyms', 'Clear x gyms', HARD, 1, 5, 23)
+addQuest('clearGyms', 'Clear x gyms', IMPOSSIBLE, 1, 5, 55)
 
 addQuest('gainShards', 'Gain x shards', EASY, 25, 50, 5)
 addQuest('gainShards', 'Gain x shards', MEDIUM, 50, 100, 10)
