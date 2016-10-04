@@ -70,6 +70,10 @@ var startQuest = function(quest){
 			player.curQuest.type2 = "none";
 			player.curQuest.description = "Gain " + player.curQuest.amount + " tokens!";
 			break;
+		case "gainShards":
+			player.curQuest.type2 = "none";
+			player.curQuest.description = "Gain " + player.curQuest.amount + " shards (any type)";
+			break;
 	}
 	showCurQuest();
 }
@@ -127,10 +131,16 @@ var IMPOSSIBLE = 4;
 // addQuest('clearDungeons', 'Clear x dungeons', HARD, 5, 10, 28)
 // addQuest('clearDungeons', 'Clear x dungeons', IMPOSSIBLE, 15, 25, 60)
 
-addQuest('clearGyms', 'Clear x gyms', EASY, 1, 5, 5)
-addQuest('clearGyms', 'Clear x gyms', MEDIUM, 3, 10, 10)
-addQuest('clearGyms', 'Clear x gyms', HARD, 1, 5, 23)
-addQuest('clearGyms', 'Clear x gyms', IMPOSSIBLE, 1, 5, 55)
+// addQuest('clearGyms', 'Clear x gyms', EASY, 1, 5, 5)
+// addQuest('clearGyms', 'Clear x gyms', MEDIUM, 3, 10, 10)
+// addQuest('clearGyms', 'Clear x gyms', HARD, 1, 5, 23)
+// addQuest('clearGyms', 'Clear x gyms', IMPOSSIBLE, 1, 5, 55)
+
+addQuest('gainShards', 'Gain x shards', EASY, 25, 50, 5)
+addQuest('gainShards', 'Gain x shards', MEDIUM, 50, 100, 10)
+addQuest('gainShards', 'Gain x shards', HARD, 100, 150, 20)
+addQuest('gainShards', 'Gain x shards', IMPOSSIBLE, 250, 500, 40)
+
 
 
 

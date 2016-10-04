@@ -359,6 +359,7 @@ var getStoneEvolutionPokemon = function(type){
 var gainShards = function(type, amount){
 	if(!isNaN(amount)){
 		player.typeShards[typeToNumber(type)] += amount;
+		progressQuest('gainShards', "none" , amount);
 	}
 }
 
