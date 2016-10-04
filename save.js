@@ -56,7 +56,11 @@ var load = function(){
 		resetUpgrades();
 	}
 
-
+	for(var i = 0; i<player.caughtPokemonList.length; i++){
+		if(player.caughtPokemonList[i].evoLevel === "Trade"){
+			player.caughtPokemonList[i].evoLevel = "Trade Stone";
+		}
+	}
 
 	player.version = version;
 
