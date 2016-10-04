@@ -87,6 +87,9 @@ var enoughResources = function(cost, costType){
 	if(costType === "dungeon token"){
 		return player.dungeonTokens >= cost;
 	}
+	if(costType === "quest"){
+		return player.questPoints >= cost;
+	}
 	if(numberToType.indexOf(costType) !== -1){
 		return player.typeShards[typeToNumber(costType)] >= cost;
 	} else {
@@ -104,7 +107,11 @@ var payShopItem = function(cost, costType){
 	}
 	else if(costType === "dungeon token"){
 		player.dungeonTokens -= cost;
-	} else {
+	}
+	else if(costType === "quest"){
+		player.questPoints -= cost;
+	}
+	 else {
 		player.typeShards[typeToNumber(costType)] -= cost;
 	}
 }
