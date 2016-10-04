@@ -40,6 +40,8 @@ var fireStone = ShopItem(13, "Fire Stone", 3000, 'fire');
 var leafStone = ShopItem(14, "Leaf Stone", 3000, 'grass');
 var waterStone = ShopItem(15, "Water Stone", 3000, 'water');
 var moonStone = ShopItem(16, "Moon Stone", 25000, 'money');
+var tradeStone = ShopItem(17, "Trade Stone", 500, 'quest');
+
 
 var decreaseShopPriceDeviation = function(){
 	for( var i = 0; i<player.shopPriceDeviation.length; i++){
