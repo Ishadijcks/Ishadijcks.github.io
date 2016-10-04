@@ -25,6 +25,21 @@ var GymPokemon = function(name, health){
 	return temp;
 }
 
+
+var gymNameList = [];
+var getGymNames = function(){
+    gymNameList = [];
+    for( var i = 0; i<11; i++){
+    	if(townList[i].gym !== null ){
+    		if(townList[i].gym.town !== undefined){
+        		gymNameList.push(townList[i].gym.town);
+        	}
+    	}
+    }
+    return gymNameList;
+ }
+
+
 var PewterCityGym = function(){
 	var pokemonList = [];
 	pokemonList.push(GymPokemon("Geodude", 550));
@@ -253,6 +268,9 @@ var gymDefeated = function(){
 	else {
 		player.money += currentGym.moneyReward/10;
 	}
+
+
+    progressQuest('clearGyms', currentGym.town , 1);
 
 
 	var town = currentGym.town.slice(0,-4);

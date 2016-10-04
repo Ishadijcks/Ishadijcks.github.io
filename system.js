@@ -461,6 +461,7 @@ var gainTokens = function(amount){
 		var totalMagnitude = getItemBonus("tokenBoost");
 		amount *= totalMagnitude;
 
+		progressQuest('gainTokens', "none" , amount);
 		player.dungeonTokens += amount
 		if(amount == 1){
 			log("You gained " + amount + " dungeon token!");
@@ -479,6 +480,8 @@ var gainMoney = function(money, message){
 			money *= getOakItemBonus("Amulet Coin")
 		}
 		money = Math.floor(money);
+
+		progressQuest('gainMoney', "none" , money);
 		player.money += money
 		log(message + money + "!");
 	}
@@ -577,6 +580,7 @@ var enemyDefeated = function(){
 			var chance = Math.floor(Math.random()*100+1);
 			if(chance<=catchRate){
 				capturePokemon(curEnemy.name, curEnemy.shiny);
+				progressQuest('capturePokemonRoute', player.route , 1);
 
 			}
 
@@ -608,6 +612,7 @@ var capturePokemon = function(name, shiny){
 				player.caughtPokemonList.push(pokemonList[i]);
 				if(shiny){
 					$.notify("You have caught a shiny "+ name +"!", "succes")
+					progressQuest('captureShinies', "none" , 1);
 				}
 				calculateAttack();
 			}
@@ -623,6 +628,7 @@ var capturePokemon = function(name, shiny){
 				if(player.caughtPokemonList[i].name == name){
 					player.caughtPokemonList[i].shiny = 1;
 					$.notify("You have caught a shiny "+ name +"!", "succes")
+					progressQuest('captureShinies', "none" , 1);
 				}
 			}
 		} else {

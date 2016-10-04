@@ -34,6 +34,16 @@ var BossPokemon = function(name, health, exp) {
     return temp;
 }
 
+var dungeonNameList = [];
+
+var getDungeonNames = function(){
+    dungeonNameList = [];
+    for( var i = 16; i<townList.length; i++){
+        dungeonNameList.push(townList[i].gym.name);
+    }
+    return dungeonNameList;
+ }
+
 var ViridianForestDungeon = function() {
     var pokemonList = ["Caterpie", "Metapod", "Weedle", "Kakuna", "Pidgey", "Pidgeotto"];
     var bossPokemon = [BossPokemon("Pikachu", 510, 300)];
@@ -402,6 +412,8 @@ var dungeonDefeated = function() {
     inProgress = 0;
 
     var town = currentDungeon.name.slice(0, -8);
+
+    progressQuest('clearDungeons', currentDungeon.name , 1);
 
     moveToTown(town);
     resetDungeon();
