@@ -23,6 +23,7 @@ var startQuest = function(quest){
 	player.curQuest.difficulty = quest.difficulty;
 	player.curQuest.amount = Math.floor((quest.minAmount + Math.random()*(quest.maxAmount-quest.minAmount) + 1)*player.questDifficulty) + 1; // some math
 	player.curQuest.reward = Math.floor(quest.baseReward*player.questDifficulty); // some math.
+	player.curQuest.notified = 0;
 
 	switch(quest.type){
 		case "defeatPokemonRoute":
@@ -68,7 +69,7 @@ var startQuest = function(quest){
 			break;
 		case "gainTokens":
 			player.curQuest.type2 = "none";
-			player.curQuest.description = "Gain " + player.curQuest.amount + " tokens!";
+			player.curQuest.description = "Gain " + player.curQuest.amount + " dungeon tokens!";
 			break;
 		case "gainShards":
 			player.curQuest.type2 = "none";
@@ -86,6 +87,10 @@ var progressQuest = function(type, type2,  amount){
 		if(type2 === player.curQuest.type2 || type2 === "none"){
 			player.curQuest.progress += amount;
 			showCurQuest();
+			if(player.curQuest.progress > player.curQuest.amount && !player.curQuest.notified){
+				$.notify("Your random quest is ready to be completed!", "success");
+				player.curQuest.notified = 1;
+			}
 		}
 	}
 }
@@ -114,9 +119,9 @@ addQuest('findItems', 'Find x items', HARD, 10, 15, 28);
 addQuest('findItems', 'Find x items', IMPOSSIBLE, 20, 25, 60);
 
 addQuest('gainMoney', 'Gain x money', EASY, 300, 500, 2)
-addQuest('gainMoney', 'Gain x money', MEDIUM, 1000, 5000, 6)
-addQuest('gainMoney', 'Gain x money', HARD, 10000, 20000, 15)
-addQuest('gainMoney', 'Gain x money', IMPOSSIBLE, 25000, 50000, 20)
+addQuest('gainMoney', 'Gain x money', MEDIUM, 2500, 7000, 6)
+addQuest('gainMoney', 'Gain x money', HARD, 15000, 25000, 15)
+addQuest('gainMoney', 'Gain x money', IMPOSSIBLE, 50000, 100000, 30)
 
 addQuest('gainTokens', 'Gain x tokens', EASY, 30, 50, 2)
 addQuest('gainTokens', 'Gain x tokens', MEDIUM, 100, 500, 6)
@@ -169,18 +174,32 @@ var gainQuestPoints = function(amount){
 	player.questPoints += amount;
 }
 
-var getSkipPrice = function(){
-	return Math.floor(5*player.questSkipToday^1.1);	
+var getSkipPriceQuest = function(){
+	return Math.floor(5*Math.pow(player.questSkipToday,1.1));	
 }
 
-var skipQuest = function(){
-	var cost = getSkipPrice();
-	if( canSkipQuest()){	
+var skipQuestQuest = function(){
+	var cost = getSkipPriceQuest();
+	if( canSkipQuestQuest()){	
 		player.questPoints -= cost;
 		player.questSkipToday++;
 		player.questDifficulty *= 0.8;
 		startRandomQuest();
 
+	}
+}
+
+var getSkipPriceMoney = function(){
+	return Math.floor(Math.pow(500*player.questSkipToday,1.5));	
+}
+
+var skipQuestMoney = function(){
+	var cost = getSkipPriceMoney();
+	if( canSkipQuestMoney()){	
+		player.money -= cost;
+		player.questSkipToday++;
+		player.questDifficulty *= 0.8;
+		startRandomQuest();
 	}
 }
 
@@ -212,8 +231,12 @@ var getQuestsByDifficulty = function(difficulty){
 	}
 }
 
-var canSkipQuest = function(){
-	return player.questPoints >= getSkipPrice();
+var canSkipQuestQuest = function(){
+	return player.questPoints >= getSkipPriceQuest();
+}
+
+var canSkipQuestMoney = function(){
+	return player.money >= getSkipPriceMoney();
 }
 
 var showCurQuest = function(){
@@ -228,7 +251,7 @@ var showCurQuest = function(){
 	html += 				"<span class='sr-only'></span>";
 	html += 			"</div>";
 	html += 		"</div>";
-	html += 		"<p>All progresss needs to be made after the quest has started.</p>";
+	html += 		"<p>All progress needs to be made after the quest has started.</p>";
 	html +=		"</div>";
 	html += 	"<div class='row' style='width:80%;margin-top:15px;'>"
 	html += 		"<p>Reward: " + player.curQuest.reward + " Quest points</p>";
@@ -240,10 +263,15 @@ var showCurQuest = function(){
 		html += 		"<button class='btn btn-success disabled'>Complete Quest</button>";
 	}
 
-	if(canSkipQuest()){
-		html += 		"<button onClick='skipQuest()' class='btn btn-danger'>Skip Quest</button> (" + getSkipPrice() + " points)";
+	if(canSkipQuestQuest()){
+		html += 		"<button onClick='skipQuestQuest()' class='btn btn-danger'>Skip Quest</button> (" + getSkipPriceQuest() + " points)";
 	} else {
-		html += 		"<button class='btn btn-danger disabled'>Skip Quest</button> (" + getSkipPrice() + " points)";
+		html += 		"<button class='btn btn-danger disabled'>Skip Quest</button> (" + getSkipPriceQuest() + " points)";
+	}
+	if(canSkipQuestMoney()){
+		html += 		"<button onClick='skipQuestMoney()' class='btn btn-danger'>Skip Quest</button> ($" + getSkipPriceMoney() + ")";
+	} else {
+		html += 		"<button class='btn btn-danger disabled'>Skip Quest</button> (" + getSkipPriceMoney + " points)";
 	}
 	html += 		"</div>";
 	html += 	"</div>"
