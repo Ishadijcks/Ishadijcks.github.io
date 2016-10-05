@@ -35,13 +35,17 @@ var luckyIncense = ShopItem(8, "Lucky Incense", 10000, 'money');
 var itemMagnet = ShopItem(9, "Item Magnet", 6000, 'money');
 var xExp = ShopItem(10, "X Exp", 15000, 'money' );
 var tokenCollector = ShopItem(11, "Token Collector", 2000, 'money');
-var thunderStone = ShopItem(12, "Thunder Stone", 3000, 'electric');
+var thunderStone = ShopItem(12, "Thunder Stone", 1500, 'electric');
 var fireStone = ShopItem(13, "Fire Stone", 3000, 'fire');
-var leafStone = ShopItem(14, "Leaf Stone", 3000, 'grass');
-var waterStone = ShopItem(15, "Water Stone", 3000, 'water');
+var leafStone = ShopItem(14, "Leaf Stone", 1000, 'grass');
+var waterStone = ShopItem(15, "Water Stone", 5000, 'water');
 var moonStone = ShopItem(16, "Moon Stone", 25000, 'money');
-var tradeStone = ShopItem(17, "Trade Stone", 5, 'quest');
-
+var tradeStone = ShopItem(17, "Trade Stone", 300, 'quest');
+var eevee = ShopItem(18, "Eevee", 2000, 'quest');
+var porygon = ShopItem(19, "Porygon", 750, 'quest');
+var mrMime = ShopItem(20, "Mr. Mime", 2500, 'quest');
+var jynx = ShopItem(21, "Jynx", 5000, 'quest');
+var lickitung = ShopItem(22, "Lickitung", 500, 'quest');
 
 var decreaseShopPriceDeviation = function(){
 	for( var i = 0; i<player.shopPriceDeviation.length; i++){
@@ -118,10 +122,16 @@ var payShopItem = function(cost, costType){
 	}
 }
 
-var ViridianCityShop = function(){ return Shop("Viridian City", [xAttack, fireStone, xExp, xClick]); }
-var PewterCityShop = function(){ return Shop("Pewter City", [xClick, moonStone]); }
-var SaffronCityShop = function(){ return Shop("Saffron City", [leafStone, waterStone]); }
-var CeruleanCityShop = function(){ return Shop("Cerulean City", [luckyIncense, thunderStone, tradeStone]) }
+var ViridianCityShop = function(){ return Shop("Viridian City", [xAttack, xClick]); }
+var PewterCityShop = function(){ return Shop("Pewter City", [tokenCollector, xExp]); }
+var CeruleanCityShop = function(){ return Shop("Cerulean City", [waterStone, xAttack]) }
+var SaffronCityShop = function(){ return Shop("Saffron City", [moonStone, xClick, leafStone]); }
+var LavenderTownShop = function(){ return Shop("Lavender Town", [itemMagnet, luckyIncense]) }
+var CeladonCityShop = function(){ return Shop("Celadon City", [eevee, porygon, jynx, mrMime, lickitung]) }
+var VermillionCityShop = function(){ return Shop("Vermillion City", [thunderStone, xExp]) }
+var FuchsiaCityShop = function(){ return Shop("Fuchsia City", [tradeStone, xExp]) }
+var CinnabarIslandShop = function(){ return Shop("Cinnabar Island"), [fireStone]}
+
 	var curShop;
 
 var loadShop = function(shopName){
@@ -138,7 +148,6 @@ var showShop = function(shop){
 	html += "<h3 class='townName'>" + shop.name + " Shop</h3>"
 	html += "<div class='row'>";
 	for(var i = 0; i<items.length; i++){
-		console.log(items[i]);
 		html += "<div data-itemName='" + items[i].name + "' class='col-sm-3 col-md-2 pokedexEntry shopItem'>";
 		html += "<br><img class='center-block' src=images/items/" + items[i].id + ".png >" + items[i].name + "<br><br>";
 		html += "<p style='margin-top:15px'>" + (items[i].cost*player.shopPriceDeviation[getShopItemByName(items[i].name).id]).toFixed(0) + "<br>";

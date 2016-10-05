@@ -6,7 +6,7 @@ var maxClicks = 15;
 var clicks = 0;
 // Add new variables to the savefile!!
 
-var firstQuest = {progress: 0, type: "defeatPokemonRoute", description: "Defeat 30 Pokemon on route 1", difficulty: 1, amount: 30, type2: 1, reward: 5}
+var firstQuest = {progress: 0, type: "defeatPokemonRoute", description: "Defeat 30 Pokemon on route 1", difficulty: 1, amount: 30, type2: 1, reward: 5, notified:0}
 
 var player = {
 	clickAttack: 1,
