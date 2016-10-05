@@ -51,7 +51,9 @@ var player = {
 	questCompletedToday: 0,
 	questCompletedDailyMax: 0,
 	questDifficulty: 1,
-	lastSeen: new Date().getDate()
+	lastSeen: new Date().getDate(),
+	eggList: [null, null, null, null],
+	eggSlots: [1]
 }
 
 var curEnemy = {
@@ -530,6 +532,7 @@ var enemyDefeated = function(){
 
 	canCatch = 1;
 	if (curEnemy.alive){
+		progressEgg(player.route);
 		progressQuest('defeatPokemonRoute', player.route , 1);
 		progressQuest('defeatPokemon', curEnemy.id, 1);
 

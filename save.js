@@ -61,6 +61,8 @@ var load = function(){
 	if (typeof savegame.questCompletedDailyMax !== "undefined") player.questCompletedDailyMax = savegame.questCompletedDailyMax;
 	if (typeof savegame.questDifficulty !== "undefined") player.questDifficulty = savegame.questDifficulty;
 	if (typeof savegame.lastSeen !== "undefined") player.lastSeen = savegame.lastSeen;
+	if (typeof savegame.eggList !== "undefined") player.eggList = savegame.eggList;
+	if (typeof savegame.eggSlots !== "undefined") player.eggSlots = savegame.eggSlots;
 
 
 	if(player.version < version){
