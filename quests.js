@@ -299,5 +299,5 @@ var showCurQuest = function(){
 
 	$("#questCounterTitle").html(player.curQuest.description);
 	$("#smallQuestBar").width(player.curQuest.progress/player.curQuest.amount*100 + "%");
-	$("#questCounterProgress").html(player.curQuest.progress +"/" + player.curQuest.amount)
+	$("#questCounterProgress").html(Math.min(player.curQuest.amount, player.curQuest.progress) +"/" + player.curQuest.amount)
 }	
