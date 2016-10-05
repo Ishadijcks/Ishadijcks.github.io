@@ -39,6 +39,8 @@ var startQuest = function(quest){
 			break;
 		case "captureShinies":
 			player.curQuest.type2 = "none";
+			player.curQuest.amount = 1;
+			player.curQuest.reward = 100;
 			player.curQuest.description = "Capture " + player.curQuest.amount + " shinies";
 			break;
 		case "findItems":
@@ -293,4 +295,9 @@ var showCurQuest = function(){
 	html += 	"<p>Maximum in 1 day: " + player.questCompletedDailyMax + "</p>";
 	html += "</div>";
 	$("#questBody").html(html);
+
+
+	$("#questCounterTitle").html(player.curQuest.description);
+	$("#smallQuestBar").width(player.curQuest.progress/player.curQuest.amount*100 + "%");
+	$("#questCounterProgress").html(player.curQuest.progress +"/" + player.curQuest.amount)
 }	
