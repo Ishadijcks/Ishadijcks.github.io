@@ -429,14 +429,14 @@ var getClickAttack = function(){
 	if(isActive("Poison Barb")){
 		clickAttack *= getOakItemBonus("Poison Barb");
 	}
-	return clickAttack;
+	return Math.max(1, clickAttack);
 }
 
 var getPokemonAttack = function(){
 	var totalMagnitude = getItemBonus("attackBoost");
 	calculateAttack();
 	var pokemonAttack = Math.floor(player.attack*player.attackMultiplier*totalMagnitude);
-	return pokemonAttack;
+	return Math.max(1, pokemonAttack);
 }
 
 var getItemBonus = function(type){
@@ -681,7 +681,7 @@ var calculateAttack = function(){
 	}
 	player.attack = total;
 	player.clickAttack = player.caughtPokemonList.length;
-	return total;
+	return Math.max(total,1);
 }
 
 
