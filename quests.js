@@ -268,22 +268,26 @@ var showCurQuest = function(){
 	} else {
 		html += 		"<button class='btn btn-success disabled'>Complete Quest</button>";
 	}
-
+	html += 	"</div>";
+	html += 	"<div class='row' style='width:80%;margin-top:15px;'>"
 	if(canSkipQuestQuest()){
 		html += 		"<button onClick='skipQuestQuest()' class='btn btn-danger'>Skip Quest</button> (" + getSkipPriceQuest() + " points)";
 	} else {
 		html += 		"<button class='btn btn-danger disabled'>Skip Quest</button> (" + getSkipPriceQuest() + " points)";
 	}
+	html += 	"</div>";
+	html += 	"<div class='row' style='width:80%;margin-top:15px;'>"
 	if(canSkipQuestMoney()){
 		html += 		"<button onClick='skipQuestMoney()' class='btn btn-danger'>Skip Quest</button> ($" + getSkipPriceMoney() + ")";
 	} else {
 		html += 		"<button class='btn btn-danger disabled'>Skip Quest</button> (" + getSkipPriceMoney + " points)";
 	}
+	
 	html += 		"</div>";
 	html += 	"</div>"
 	html += "</div>";
 	html += "<div class= 'row' style='width:80%;margin-top:50px;'>"
-	html += 	"<p>Quest difficulty: " + player.questDifficulty + "</p>";
+	// html += 	"<p>Quest difficulty: " + player.questDifficulty + "</p>";
 	html += 	"<p>Quest points: " + player.questPoints + "</p>";
 	html += 	"<p>Quests  completed: " + player.questCompletedTotal + "</p>";
 	html += 	"<p>Completed today: " + player.questCompletedToday + "</p>";
