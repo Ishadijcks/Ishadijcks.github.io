@@ -130,7 +130,7 @@ var LavenderTownShop = function(){ return Shop("Lavender Town", [itemMagnet, luc
 var CeladonCityShop = function(){ return Shop("Celadon City", [eevee, porygon, jynx, mrMime, lickitung]) }
 var VermillionCityShop = function(){ return Shop("Vermillion City", [thunderStone, xExp]) }
 var FuchsiaCityShop = function(){ return Shop("Fuchsia City", [tradeStone, xExp]) }
-var CinnabarIslandShop = function(){ return Shop("Cinnabar Island"), [fireStone]}
+var CinnabarIslandShop = function(){ return Shop("Cinnabar Island", [fireStone])}
 
 	var curShop;
 
