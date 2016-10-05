@@ -182,7 +182,7 @@ var skipQuestQuest = function(){
 	if( canSkipQuestQuest()){	
 		player.questPoints -= cost;
 		player.questSkipToday++;
-		player.questDifficulty *= 0.8;
+		player.questDifficulty *= 0.65;
 		startRandomQuest();
 
 	}
