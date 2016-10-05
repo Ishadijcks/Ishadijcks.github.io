@@ -128,8 +128,7 @@ addQuest('gainTokens', 'Gain x tokens', MEDIUM, 100, 500, 6)
 addQuest('gainTokens', 'Gain x tokens', HARD, 1000, 2000, 15)
 addQuest('gainTokens', 'Gain x tokens', IMPOSSIBLE, 2500, 5000, 20)
 
-addQuest('captureShinies', 'Capture x shinies', HARD, 1, 1, 20)
-addQuest('captureShinies', 'Capture x shinies', IMPOSSIBLE, 3, 3, 100)
+addQuest('captureShinies', 'Capture x shinies', IMPOSSIBLE, 1, 1, 80)
 
 addQuest('clearDungeons', 'Clear x dungeons', EASY, 1, 5, 9)
 addQuest('clearDungeons', 'Clear x dungeons', MEDIUM, 3, 8, 15)
