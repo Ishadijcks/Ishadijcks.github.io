@@ -40,7 +40,7 @@ var fireStone = ShopItem(13, "Fire Stone", 3000, 'fire');
 var leafStone = ShopItem(14, "Leaf Stone", 3000, 'grass');
 var waterStone = ShopItem(15, "Water Stone", 3000, 'water');
 var moonStone = ShopItem(16, "Moon Stone", 25000, 'money');
-var tradeStone = ShopItem(17, "Trade Stone", 500, 'quest');
+var tradeStone = ShopItem(17, "Trade Stone", 5, 'quest');
 
 
 var decreaseShopPriceDeviation = function(){
@@ -121,7 +121,7 @@ var payShopItem = function(cost, costType){
 var ViridianCityShop = function(){ return Shop("Viridian City", [xAttack, fireStone, xExp, xClick]); }
 var PewterCityShop = function(){ return Shop("Pewter City", [xClick, moonStone]); }
 var SaffronCityShop = function(){ return Shop("Saffron City", [leafStone, waterStone]); }
-var CeruleanCityShop = function(){ return Shop("Cerulean City", [luckyIncense, thunderStone]) }
+var CeruleanCityShop = function(){ return Shop("Cerulean City", [luckyIncense, thunderStone, tradeStone]) }
 	var curShop;
 
 var loadShop = function(shopName){
@@ -135,14 +135,12 @@ var showShop = function(shop){
 	var items = shop.itemList;
 	hideAllViews();
 	var html = "";
-	console.log(shop);
 	html += "<h3 class='townName'>" + shop.name + " Shop</h3>"
 	html += "<div class='row'>";
 	for(var i = 0; i<items.length; i++){
 		console.log(items[i]);
 		html += "<div data-itemName='" + items[i].name + "' class='col-sm-3 col-md-2 pokedexEntry shopItem'>";
 		html += "<br><img class='center-block' src=images/items/" + items[i].id + ".png >" + items[i].name + "<br><br>";
-		console.log(player.shopPriceDeviation[getShopItemByName(items[i].name).id]);
 		html += "<p style='margin-top:15px'>" + (items[i].cost*player.shopPriceDeviation[getShopItemByName(items[i].name).id]).toFixed(0) + "<br>";
 		html += getFullResourceName(items[i].costType) + "</p>";
 		html += "</div>";
@@ -173,6 +171,9 @@ var getFullResourceName = function(type){
 	}
 	if(type === "dungeon token"){
 		return "tokens";
+	}
+	if(type === "quest"){
+		return "quest points";
 	}
 	return type + " shards";
 }

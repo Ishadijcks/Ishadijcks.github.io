@@ -42,7 +42,7 @@ var startQuest = function(quest){
 			break;
 		case "findItems":
 			player.curQuest.type2 = "none";
-			player.curQuest.description = "Find " + player.curQuest.amount + "items";
+			player.curQuest.description = "Find " + player.curQuest.amount + " items";
 			break;
 		case "clearDungeons":
 			var dungeonNameList = getDungeonNames();
@@ -79,9 +79,9 @@ var startQuest = function(quest){
 }
 
 var progressQuest = function(type, type2,  amount){
-	console.log(type);
-	console.log(type2);
-	console.log(player.curQuest);
+	// console.log(type);
+	// console.log(type2);
+	// console.log(player.curQuest);
 	if(type === player.curQuest.type){
 		if(type2 === player.curQuest.type2 || type2 === "none"){
 			player.curQuest.progress += amount;

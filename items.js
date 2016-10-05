@@ -77,6 +77,7 @@ var gainItemByName = function(name){
 
 	updateItems()
 	save();
+	progressQuest("findItems", "none", 1);
 	return name;
 }
 
