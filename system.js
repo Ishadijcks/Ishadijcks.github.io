@@ -51,7 +51,7 @@ var player = {
 	questCompletedToday: 0,
 	questCompletedDailyMax: 0,
 	questDifficulty: 1,
-	lastSeen: new Date()
+	lastSeen: new Date().getDate()
 }
 
 var curEnemy = {
