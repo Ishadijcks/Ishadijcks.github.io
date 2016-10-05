@@ -237,6 +237,7 @@ $(document).ready(function(){
 	$("body").on('click',".gym", function(){
 		var id = this.id;
 		id = id.slice(0, -4);
+		$("#gymModal").modal('hide');
 		loadGym(id);
 	})
 

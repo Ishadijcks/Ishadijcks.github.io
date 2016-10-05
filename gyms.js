@@ -308,6 +308,10 @@ var showGymDefeated = function(first, town){
 		html += "Prize money: " + currentGym.moneyReward+ " x 10% = $"+ currentGym.moneyReward/10;
 	}
 
+	if(!e4){
+		html += "<div class='row'><button class='gym leftTownButton btn btn-primary col-sm-2' id='"+town+" Gym'>Retry!</button></div>"
+	}
+
 
 
 	$("#gymDefeatedBody").html(html);
