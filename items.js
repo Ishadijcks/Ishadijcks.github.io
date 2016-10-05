@@ -57,27 +57,43 @@ var gainRandomItem = function(route){
 		var possibleItems = itemsPerRoute[route];
 		var rand = Math.floor(Math.random()*possibleItems.length);
 		randomItemName = possibleItems[rand];
+		progressQuest("findItems", "none", 1);
 		return gainItemByName(randomItemName);
 	}
 }
 
-var gainItemByName = function(name){ 
-	if (alreadyHaveItem(name)){
-		var itemNum = findItemInInventory(name);
-		player.inventoryList[itemNum].quantity++;
+var isPokemon = function(name){
+	for(var i = 0; i<pokemonList.length; i++){
+		if(pokemonList[i].name === name){
+			return true;
+		}
 	}
-	else{
+	return false;
+}
 
-		var item = getItemByName(name);
-		var itemObject = {id:item.id, name:item.name, quantity:1, type:item.type, use:item.use, unUse:item.unUse, time:item.time, timeLeft:0, instant:item.instant, magnitude:item.magnitude, inUse:0, flavorText:item.flavorText};
-		player.inventoryList.push(itemObject);
+var gainItemByName = function(name){
+	if(isPokemon(name)){
+		capturePokemon(name);
+		$.notify("You bought "+name, 'success');
+	} else {
+		if (alreadyHaveItem(name)){
+			var itemNum = findItemInInventory(name);
+			player.inventoryList[itemNum].quantity++;
+		}
+		else{
+
+			var item = getItemByName(name);
+			var itemObject = {id:item.id, name:item.name, quantity:1, type:item.type, use:item.use, unUse:item.unUse, time:item.time, timeLeft:0, instant:item.instant, magnitude:item.magnitude, inUse:0, flavorText:item.flavorText};
+			player.inventoryList.push(itemObject);
+		}
+
+		$.notify("You got a "+name, 'success');
+
+		updateItems()
+	
+		
 	}
-
-	$.notify("You got a "+name, 'success');
-
-	updateItems()
 	save();
-	progressQuest("findItems", "none", 1);
 	return name;
 }
 
@@ -229,8 +245,8 @@ var useEvoStone = function(item){
 }
 
 var activateEvoStone = function(pokemon, id){
-	console.log(pokemon);
 	capturePokemon(pokemon, generateShiny());
 	var item = player.inventoryList[getItemById(id)];
 	item.quantity--;
+	updateItems();
 }
