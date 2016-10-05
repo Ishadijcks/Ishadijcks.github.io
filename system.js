@@ -630,6 +630,10 @@ var capturePokemon = function(name, shiny){
 					player.caughtPokemonList[i].shiny = 1;
 					$.notify("You have caught a shiny "+ name +"!", "succes")
 					progressQuest('captureShinies', "none" , 1);
+					var tokens = Math.floor(Math.pow(route,1.4) - route/2);
+					var deviation = Math.floor(Math.random() * 2 ) + 3;
+					tokens += deviation;
+					gainTokens(tokens);
 				}
 			}
 		} else {
