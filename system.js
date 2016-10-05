@@ -1,4 +1,4 @@
-var version = "0.61"
+var version = "0.7"
 var inProgress = 1;
 var canCatch = 1;
 var attackInterval;
