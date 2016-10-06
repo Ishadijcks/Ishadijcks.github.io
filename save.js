@@ -72,7 +72,7 @@ var load = function(){
 	}
 
 	if(player.version < 0.71){
-		questSkipToday = Math.max(0, questSkipToday-4);
+		player.questSkipToday = Math.max(0, player.questSkipToday-4);
 	}
 
 	for(var i = 0; i<player.caughtPokemonList.length; i++){
