@@ -53,7 +53,7 @@ var player = {
 	questDifficulty: 1,
 	lastSeen: new Date().getDate(),
 	eggList: [null, null, null, null],
-	eggSlots: [1]
+	eggSlots: 1
 }
 
 var curEnemy = {

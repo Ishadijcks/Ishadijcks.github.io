@@ -23,7 +23,13 @@ var initPossibleEggs = function(){
 var gainEgg = function(egg){
 	for(var i = 0; i<player.eggSlots; i++){
 		if(player.eggList[i] === null){
-			player.eggList[i] = egg;
+			var tempEgg = {
+				type: egg.type,
+				steps: egg.steps,
+				progress: 0,
+				pokemon: egg.pokemon
+			}
+			player.eggList[i] = tempEgg;
 			return;
 		}
 	}
@@ -33,12 +39,11 @@ var gainEgg = function(egg){
 var progressEgg = function(amount){
 	for(var i = 0; i<player.eggList.length; i++){
 		if(player.eggList[i] !== null){
-			console.log(i);
 			player.eggList[i].progress += amount;
 		}
 	}
 	checkEggHatch();
-	showEggs();
+	// showEggs();
 }
 
 var checkEggHatch = function(){
@@ -64,7 +69,12 @@ var showEggs = function(){
 	for(var i = 0; i<player.eggList.length; i++){
 		var html = ""
 		if(player.eggList[i] !== null){
-			html += "<img class='egg' src=images/breeding/egg.png>"
+			html += "<img class='egg' src=images/breeding/egg.png>";
+			html += "<div class='progress eggProgress' style='width: 80%; margin:auto'>";
+			html += 	"<div class='progress-bar progress-bar-success' style='width: " + player.eggList[i].progress/player.eggList[i].steps*100 + "%'>";
+			html += 		"<span class='sr-only'></span>";
+			html +=		"</div>";
+			html += "</div>";
 		}
 		$("#egg"+i).html(html)
 	}
