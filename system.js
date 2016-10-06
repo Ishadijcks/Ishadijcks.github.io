@@ -356,6 +356,7 @@ $(document).ready(function(){
 	log("Have fun!");
 
 	showCurQuest();
+	showEggs();
 });
 
 

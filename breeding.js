@@ -43,7 +43,7 @@ var progressEgg = function(amount){
 		}
 	}
 	checkEggHatch();
-	// showEggs();
+	showEggs();
 }
 
 var checkEggHatch = function(){
@@ -65,6 +65,19 @@ var hatchEgg = function(egg){
 	showEggs();
 }
 
+var buyEggSlot = function(i){
+	if(canBuyEggSlot(i)){
+		player.money -= eggSlotPrice[i];
+		player.eggSlots++;
+		showEggs();
+		save();	
+	}
+}
+
+var canBuyEggSlot = function(i){
+	return player.money >= eggSlotPrice[i];
+}
+
 var showEggs = function(){
 	for(var i = 0; i<player.eggList.length; i++){
 		var html = ""
@@ -75,6 +88,12 @@ var showEggs = function(){
 			html += 		"<span class='sr-only'></span>";
 			html +=		"</div>";
 			html += "</div>";
+		} else {
+			if( i == player.eggSlots && canBuyEggSlot(i)){
+				html += "<button class='egg btn btn-info' onClick='buyEggSlot("+i+")'>$" + eggSlotPrice[i] + "</p><p>Egg slot</p>";
+			} else if (i > player.eggSlots){
+				html += "<button class='egg btn btn-info disabled'>$" + eggSlotPrice[i] + "</p><p>Egg slot</p>";
+			}
 		}
 		$("#egg"+i).html(html)
 	}
