@@ -90,9 +90,9 @@ var showEggs = function(){
 			html += "</div>";
 		} else {
 			if( i == player.eggSlots && canBuyEggSlot(i)){
-				html += "<button class='egg btn btn-info' onClick='buyEggSlot("+i+")'>$" + eggSlotPrice[i] + "</p><p>Egg slot</p>";
+				html += "<br><button class='egg btn btn-info' onClick='buyEggSlot("+i+")'>$" + eggSlotPrice[i] + "</p><p>Egg slot</p>";
 			} else if (i > player.eggSlots){
-				html += "<button class='egg btn btn-info disabled'>$" + eggSlotPrice[i] + "</p><p>Egg slot</p>";
+				html += "<br><button class='egg btn btn-info disabled'>$" + eggSlotPrice[i] + "</p><p>Egg slot</p>";
 			}
 		}
 		$("#egg"+i).html(html)
