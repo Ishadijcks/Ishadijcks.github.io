@@ -18,6 +18,7 @@ var initPossibleEggs = function(){
 	var grassEggs = ["Bulbasaur", "Oddish", "Paras", "Bellsprout"];
 	var fightEggs = ["Hitmonlee", "Hitmonchan", "Machop", "Mankey"];
 	var electricEggs = ["Magnemite", "Pikachu", "Voltorb", "Electabuzz"];
+	var dragonEggs = ["Dratini", "Dragonair", "Dragonite"];
 }
 
 var gainEgg = function(egg){
