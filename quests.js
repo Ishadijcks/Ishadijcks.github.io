@@ -39,6 +39,8 @@ var startQuest = function(quest){
 			break;
 		case "captureShinies":
 			player.curQuest.type2 = "none";
+			player.curQuest.amount = 1;
+			player.curQuest.reward = 100;
 			player.curQuest.description = "Capture " + player.curQuest.amount + " shinies";
 			break;
 		case "findItems":
@@ -128,18 +130,17 @@ addQuest('gainTokens', 'Gain x tokens', MEDIUM, 100, 500, 6)
 addQuest('gainTokens', 'Gain x tokens', HARD, 1000, 2000, 15)
 addQuest('gainTokens', 'Gain x tokens', IMPOSSIBLE, 2500, 5000, 20)
 
-addQuest('captureShinies', 'Capture x shinies', HARD, 1, 1, 20)
-addQuest('captureShinies', 'Capture x shinies', IMPOSSIBLE, 3, 3, 100)
+addQuest('captureShinies', 'Capture x shinies', IMPOSSIBLE, 1, 1, 80)
 
 addQuest('clearDungeons', 'Clear x dungeons', EASY, 1, 5, 9)
 addQuest('clearDungeons', 'Clear x dungeons', MEDIUM, 3, 8, 15)
-addQuest('clearDungeons', 'Clear x dungeons', HARD, 5, 10, 28)
-addQuest('clearDungeons', 'Clear x dungeons', IMPOSSIBLE, 15, 25, 60)
+// addQuest('clearDungeons', 'Clear x dungeons', HARD, 5, 10, 28)
+// addQuest('clearDungeons', 'Clear x dungeons', IMPOSSIBLE, 15, 25, 60)
 
 addQuest('clearGyms', 'Clear x gyms', EASY, 1, 5, 5)
 addQuest('clearGyms', 'Clear x gyms', MEDIUM, 3, 10, 10)
-addQuest('clearGyms', 'Clear x gyms', HARD, 1, 5, 23)
-addQuest('clearGyms', 'Clear x gyms', IMPOSSIBLE, 1, 5, 55)
+// addQuest('clearGyms', 'Clear x gyms', HARD, 1, 5, 23)
+// addQuest('clearGyms', 'Clear x gyms', IMPOSSIBLE, 1, 5, 55)
 
 addQuest('gainShards', 'Gain x shards', EASY, 25, 50, 5)
 addQuest('gainShards', 'Gain x shards', MEDIUM, 50, 100, 10)
@@ -183,7 +184,7 @@ var skipQuestQuest = function(){
 	if( canSkipQuestQuest()){	
 		player.questPoints -= cost;
 		player.questSkipToday++;
-		player.questDifficulty *= 0.8;
+		player.questDifficulty *= 0.65;
 		startRandomQuest();
 
 	}
@@ -280,7 +281,7 @@ var showCurQuest = function(){
 	if(canSkipQuestMoney()){
 		html += 		"<button onClick='skipQuestMoney()' class='btn btn-danger'>Skip Quest</button> ($" + getSkipPriceMoney() + ")";
 	} else {
-		html += 		"<button class='btn btn-danger disabled'>Skip Quest</button> (" + getSkipPriceMoney + " points)";
+		html += 		"<button class='btn btn-danger disabled'>Skip Quest</button> (" + getSkipPriceMoney() + " points)";
 	}
 	
 	html += 		"</div>";
@@ -294,4 +295,9 @@ var showCurQuest = function(){
 	html += 	"<p>Maximum in 1 day: " + player.questCompletedDailyMax + "</p>";
 	html += "</div>";
 	$("#questBody").html(html);
+
+
+	$("#questCounterTitle").html(player.curQuest.description);
+	$("#smallQuestBar").width(player.curQuest.progress/player.curQuest.amount*100 + "%");
+	$("#questCounterProgress").html(Math.min(player.curQuest.amount, player.curQuest.progress) +"/" + player.curQuest.amount)
 }	

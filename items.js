@@ -245,8 +245,22 @@ var useEvoStone = function(item){
 }
 
 var activateEvoStone = function(pokemon, id){
-	capturePokemon(pokemon, generateShiny());
+	capturePokemon(pokemon, generateStoneShiny());
 	var item = player.inventoryList[getItemById(id)];
 	item.quantity--;
 	updateItems();
+}
+
+var generateStoneShiny = function(){
+	var chance = 2048;
+	if(isActive("Shiny Charm")){
+		chance /= getOakItemBonus("Shiny Charm");
+	}
+	var number = Math.floor(Math.random()*chance) + 1;
+
+	if(number <= 1){
+		console.log("Shiny!!!");
+		return 1;
+	}
+	return 0;
 }

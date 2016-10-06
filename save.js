@@ -73,6 +73,10 @@ var load = function(){
 		resetUpgrades();
 	}
 
+	if(player.version < 0.71){
+		player.questSkipToday = Math.max(0, player.questSkipToday-4);
+	}
+
 	for(var i = 0; i<player.caughtPokemonList.length; i++){
 		if(player.caughtPokemonList[i].evoLevel === "Trade"){
 			player.caughtPokemonList[i].evoLevel = "Trade Stone";

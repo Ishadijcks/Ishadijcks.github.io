@@ -889,7 +889,7 @@
 												<h4>Chat</h4>
 											</li>
 													<li>PokeClicker now has a chat!</li>
-													<li><a href="https://kiwiirc.com/client/irc.freenode.net/pokeclicker">Join here</a></li>
+													<li><a target="_blank" href="https://kiwiirc.com/client/irc.freenode.net/pokeclicker">Join here</a></li>
 													<li>I am in this chat almost 24/7, so it's the perfect way to contact me!</li>
 											<br>
 										</ul>
@@ -1459,7 +1459,13 @@
 
 				<div class="row">
 					<div id="questCounter">
-						
+						<p id="questCounterTitle">Quest title</p>
+						<div class="progress smallProgress" style='width: 80%; margin:auto'>
+							<div class="progress-bar progress-bar-danger" id="smallQuestBar" style="width: 30%">
+								<span class="sr-only"></span>
+							</div>
+						</div>
+						<h5 id="questCounterProgress">3/10</h5>
 					</div>
 				</div>
 
@@ -1482,8 +1488,6 @@
 						</table>
 					</div>
 				</div>
-
-
 			</div>
 			<div class="col-sm-1" id="oakItemBody"></div>
 		</div>

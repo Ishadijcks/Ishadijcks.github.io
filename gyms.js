@@ -264,9 +264,11 @@ var gymDefeated = function(){
 	if(first){
 		player.gymBadges.push(currentGym.badgeReward);
 		player.money += currentGym.moneyReward;
+		progressQuest('gainMoney', "none" , currentGym.moneyReward);
 	}
 	else {
 		player.money += currentGym.moneyReward/10;
+		progressQuest('gainMoney', "none" , currentGym.moneyReward/10);
 	}
 
 
@@ -306,6 +308,10 @@ var showGymDefeated = function(first, town){
 	} else {
 		html += "You have defeated " + currentGym.leaderName+" again!<br>" ;
 		html += "Prize money: " + currentGym.moneyReward+ " x 10% = $"+ currentGym.moneyReward/10;
+	}
+
+	if(!e4){
+		html += "<div class='row'><button class='gym leftTownButton btn btn-primary col-sm-2' id='"+town+" Gym'>Retry!</button></div>"
 	}
 
 
