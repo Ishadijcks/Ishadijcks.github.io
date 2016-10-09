@@ -207,6 +207,7 @@ var skipQuestMoney = function(){
 var dailyReset = function(){
 	player.questSkipToday = 0;
 	player.questDifficulty = 1;
+	player.questCompletedToday = 0;
 	console.log("Rise and shine, it's a new day!");
 }
 
