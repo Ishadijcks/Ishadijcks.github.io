@@ -89,7 +89,7 @@ var progressQuest = function(type, type2,  amount){
 		if(type2 === player.curQuest.type2 || type2 === "none"){
 			player.curQuest.progress += amount;
 			showCurQuest();
-			if(player.curQuest.progress > player.curQuest.amount && !player.curQuest.notified){
+			if(player.curQuest.progress >= player.curQuest.amount && !player.curQuest.notified){
 				$.notify("Your random quest is ready to be completed!", "success");
 				player.curQuest.notified = 1;
 			}
@@ -207,6 +207,7 @@ var skipQuestMoney = function(){
 var dailyReset = function(){
 	player.questSkipToday = 0;
 	player.questDifficulty = 1;
+	player.questCompletedToday = 0;
 	console.log("Rise and shine, it's a new day!");
 }
 

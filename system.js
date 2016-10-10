@@ -117,6 +117,23 @@ $(document).ready(function(){
 		}
 	});
 
+	$("body").on('click',"#healthBar", function(){
+		clicks++;
+		if(clicks < maxClicks){
+			if (curEnemy.alive && inProgress != 0){
+				if(curEnemy.health > 0){
+					curEnemy.health -= getClickAttack();
+				}
+
+				else {
+					curEnemy.health = 0;
+				}
+
+				updateEnemy();
+			}
+		}
+	});
+
 	$("body").on('click',"#gymEnemy", function(){
 		clicks++;
 		if(clicks < maxClicks){
