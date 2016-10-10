@@ -326,6 +326,10 @@ $(document).ready(function(){
 		$("#evoModal").modal("hide");
 	})
 
+	$("body").on('click',".breedPokemon", function(){
+		breedPokemon(this.dataset.pokemon);
+	})
+
 	$("body").on('click',".shopItem", function(){
 		buyShopItem(this.dataset.itemname);
 	})
@@ -553,7 +557,7 @@ var enemyDefeated = function(){
 
 	canCatch = 1;
 	if (curEnemy.alive){
-		progressEgg(player.route);
+		progressEgg(Math.floor(Math.sqrt(player.route)));
 		progressQuest('defeatPokemonRoute', player.route , 1);
 		progressQuest('defeatPokemon', curEnemy.id, 1);
 
@@ -782,6 +786,14 @@ var getPokemonByName = function(name){
 	for( var i = 0; i<pokemonList.length; i++){
 		if(pokemonList[i].name == name){
 			return pokemonList[i];
+		}
+	}
+}
+
+var getCaughtPokemonByName = function(name){
+	for( var i = 0; i<player.caughtPokemonList.length; i++){
+		if(player.caughtPokemonList[i].name == name){
+			return player.caughtPokemonList[i];
 		}
 	}
 }
