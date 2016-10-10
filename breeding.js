@@ -19,6 +19,21 @@ var initPossibleEggs = function(){
 	var fightEggs = ["Hitmonlee", "Hitmonchan", "Machop", "Mankey"];
 	var electricEggs = ["Magnemite", "Pikachu", "Voltorb", "Electabuzz"];
 	var dragonEggs = ["Dratini", "Dragonair", "Dragonite"];
+	possibleEggs[FIRE] = fireEggs;
+	possibleEggs[WATER] = waterEggs;
+	possibleEggs[GRASS] = grassEggs;
+	possibleEggs[FIGHTING] = fightEggs;
+	possibleEggs[ELECTRIC] = electricEggs;
+	possibleEggs[DRAGON] = dragonEggs;
+}
+
+var gainRandomEgg = function(type){
+	var num = typeToNumber(type);
+	console.log(num);
+	var eggs = possibleEggs[num];
+	console.log(eggs);
+	var eggName = eggs[Math.floor(Math.random()*(eggs.length-1))];
+	gainEgg(Egg(type, 5000, eggName));
 }
 
 var gainEgg = function(egg){
@@ -31,10 +46,11 @@ var gainEgg = function(egg){
 				pokemon: egg.pokemon
 			}
 			player.eggList[i] = tempEgg;
+				showEggs();
 			return;
 		}
 	}
-	showEggs();
+
 }
 
 var progressEgg = function(amount){
@@ -83,7 +99,7 @@ var showEggs = function(){
 	for(var i = 0; i<player.eggList.length; i++){
 		var html = ""
 		if(player.eggList[i] !== null){
-			html += "<img class='egg' src=images/breeding/egg.png>";
+			html += "<img class='egg' src=images/breeding/egg" + player.eggList[i].type + ".png>";
 			html += "<div class='progress eggProgress' style='width: 80%; margin:auto'>";
 			html += 	"<div class='progress-bar progress-bar-success' style='width: " + player.eggList[i].progress/player.eggList[i].steps*100 + "%'>";
 			html += 		"<span class='sr-only'></span>";

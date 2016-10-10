@@ -372,6 +372,7 @@ $(document).ready(function(){
 	log("Defeat 10 pokemon on a route to get access to the next");
 	log("Have fun!");
 
+	initPossibleEggs();
 	showCurQuest();
 	showEggs();
 });
