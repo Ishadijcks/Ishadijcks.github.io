@@ -58,7 +58,10 @@ var showTown = function(town){
 	html += "</h3>";
 	html += "<div class='row'>";
 
-	if(town.shop != null){
+	if(town.shop === "mom"){
+		html += "<button onClick='showMom()' class='mom leftTownButton btn btn-primary col-sm-2' id='"+town.name+" mom'>Mom</button>";
+
+	} else if(town.shop != null){
 		html += "<button class='shop leftTownButton btn btn-primary col-sm-2' id='"+town.name+" Shop'>Shop</button>";
 		html += "</div><div class='row'>";
 	}
@@ -112,7 +115,7 @@ var loadTowns = function(){
 	addTown("Fuchsia City", FuchsiaCityGym(), "images/gyms/fuchsiacity.png", FuchsiaCityShop(), [18,15]);
 	addTown("Cinnabar Island", CinnabarIslandGym(), "images/gyms/cinnabarisland.png", CinnabarIslandShop(), [20]);
 	addTown("Viridian City", ViridianCityGym(), "images/gyms/viridiancity.png", ViridianCityShop(), [1]);
-	addTown("Pallet Town", null, "images/gyms/pallettown.png", null, []);
+	addTown("Pallet Town", null, "images/gyms/pallettown.png", "mom", []);
 	addTown("Lavender Town", null, "images/gyms/lavendertown.png", LavenderTownShop(), [7,10]);
 	addTown("Indigo Plateau", [EliteLorelei(), EliteBruno(), EliteAgatha(), EliteLance(), Champion()], "images/gyms/indigoplateau.png", null, [23]);
 	addTown("Elite Lorelei", EliteLorelei(), null, null, null);
