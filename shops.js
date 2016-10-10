@@ -46,6 +46,7 @@ var porygon = ShopItem(19, "Porygon", 750, 'quest');
 var mrMime = ShopItem(20, "Mr. Mime", 2500, 'quest');
 var jynx = ShopItem(21, "Jynx", 5000, 'quest');
 var lickitung = ShopItem(22, "Lickitung", 500, 'quest');
+var fireEgg = ShopItem(23, "Fire Egg", 10, 'quest');
 
 var decreaseShopPriceDeviation = function(){
 	for( var i = 0; i<player.shopPriceDeviation.length; i++){
@@ -130,7 +131,7 @@ var LavenderTownShop = function(){ return Shop("Lavender Town", [itemMagnet, luc
 var CeladonCityShop = function(){ return Shop("Celadon City", [eevee, porygon, jynx, mrMime, lickitung]) }
 var VermillionCityShop = function(){ return Shop("Vermillion City", [thunderStone, xExp]) }
 var FuchsiaCityShop = function(){ return Shop("Fuchsia City", [tradeStone, xExp]) }
-var CinnabarIslandShop = function(){ return Shop("Cinnabar Island", [fireStone])}
+var CinnabarIslandShop = function(){ return Shop("Cinnabar Island", [fireStone, fireEgg])}
 
 	var curShop;
 

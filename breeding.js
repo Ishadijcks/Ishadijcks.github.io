@@ -78,7 +78,7 @@ var checkEggHatch = function(){
 var hatchEgg = function(egg){
 	$.notify("You hatched a " + egg.pokemon, 'success');
 	progressQuest('breedPokemon', "none", 1);
-	capturePokemon(egg.pokemon);
+	capturePokemon(egg.pokemon, generateStoneShiny());
 	showEggs();
 }
 
