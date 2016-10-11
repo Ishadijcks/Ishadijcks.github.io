@@ -28,7 +28,7 @@ var initPossibleEggs = function(){
 }
 
 var gainRandomEgg = function(type){
-	if(type = "random"){
+	if(type === "random"){
 		var eggs = [];
 		for(var i = 0; i<possibleEggs.length; i++){
 			for( var j = 0; j<possibleEggs[i].length; j++){
@@ -37,12 +37,12 @@ var gainRandomEgg = function(type){
 		} 
 		var eggName = eggs[Math.floor(Math.random()*(eggs.length-1))];
 		var type = getPokemonByName(eggName).type;
-		gainEgg(Egg(type, getSteps(pokemonName), eggName));
+		gainEgg(Egg(type, getSteps(eggName), eggName));
 	} else {
 		var num = typeToNumber(type);
 		var eggs = possibleEggs[num];
 		var eggName = eggs[Math.floor(Math.random()*(eggs.length-1))];
-		gainEgg(Egg(type, getSteps(pokemonName), eggName));
+		gainEgg(Egg(type, getSteps(eggName), eggName));
 	}
 }
 
