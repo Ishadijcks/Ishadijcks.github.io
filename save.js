@@ -86,6 +86,9 @@ var load = function(){
 		dailyReset();
 	}
 
+	if(player.attackMultiplier > 1){
+		resetUpgrades();
+	}
 
 	player.version = version;
 
