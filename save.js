@@ -88,7 +88,7 @@ var load = function(){
 		dailyReset();
 	}
 
-
+	player.catchTime = Math.max(player.catchTime,750);
 	player.version = version;
 
     var link = document.createElement('link');
