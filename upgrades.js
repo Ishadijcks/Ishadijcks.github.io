@@ -109,9 +109,8 @@ var resetUpgrades = function(){
 	player.moneyMultiplier = 1;
 	player.clickMultiplier = 1;
 	player.attackMultiplier = 1;
-	for( var i=0; i<player.upgradeList.length; i++){
-		player.upgradeList[i].bought = 0;
-	}
+	player.upgradeList = [];
+	initUpgrades();
 	updateAll();
 }
 
