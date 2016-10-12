@@ -224,7 +224,7 @@ var updateGym = function(){
     if (curEnemy.alive){
 
     	if(alreadyCaughtShiny(curEnemy.name)){
-    		 $("#gymEnemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/shinypokemon/star.png><br><img id=gymEnemy src=images/pokemon/"+curEnemy.id+".png>");
+    		 $("#gymEnemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/shinyPokeball.PNG><br><img id=gymEnemy src=images/pokemon/"+curEnemy.id+".png>");
     	} else if(alreadyCaught(curEnemy.name)){
             $("#gymEnemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=gymEnemy src=images/pokemon/"+curEnemy.id+".png>");
         }
