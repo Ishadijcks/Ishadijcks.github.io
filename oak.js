@@ -95,6 +95,7 @@ var initOakItems = function(){
 	addOakItem("Exp Share", "images/oak/expShare.png", 60, "Gain 25% more exp from wild Pokemon", 1.25);
 	addOakItem("Legendary Charm", "images/oak/pokeDoll.png", 70, "50% more chance to encounter a legendary Pokemon", 1.5);
 	addOakItem("Shiny Charm", "images/oak/shinyCharm.png", 80, "100% more chance to encounter a shiny Pokemon", 2);
+	addOakItem("Token Case", "images/oak/coinCase.png", 90, "Gain 50% more dungeon tokens", 1.5);
 	checkOakItems(1);
 	showOakItems(1);
 }

@@ -482,7 +482,7 @@ var gainTokens = function(amount){
 		amount *= player.dungeonTokenMultiplier;
 
 		if(isActive("Token Case")){
-			money *= getOakItemBonus("Token Case")
+			amount *= getOakItemBonus("Token Case")
 		}
 		amount = Math.floor(amount);
 
