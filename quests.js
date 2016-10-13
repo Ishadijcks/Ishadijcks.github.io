@@ -91,6 +91,7 @@ var progressQuest = function(type, type2,  amount){
 			showCurQuest();
 			if(player.curQuest.progress >= player.curQuest.amount && !player.curQuest.notified){
 				$.notify("Your random quest is ready to be completed!", "success");
+				notifyMe("You can complete your quest");
 				player.curQuest.notified = 1;
 			}
 		}
