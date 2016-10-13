@@ -7,6 +7,16 @@ var clicks = 0;
 // Add new variables to the savefile!!
 
 var firstQuest = {progress: 0, type: "defeatPokemonRoute", description: "Defeat 30 Pokemon on route 1", difficulty: 1, amount: 30, type2: 1, reward: 5, notified:0}
+var automator = {
+	dungeonDelay: 2000,
+	gymDelay: 3000,
+	dungeonChestOpener: 0,
+	dungeonOrientation: 0,
+	active:0,
+	gymDefeated:0,
+	dungeonDefeated:0,
+	curPlace: ""
+}
 
 var player = {
 	clickAttack: 1,
@@ -53,7 +63,8 @@ var player = {
 	questDifficulty: 1,
 	lastSeen: new Date().getDate(),
 	eggList: [null, null, null, null],
-	eggSlots: 1
+	eggSlots: 1,
+	automator: automator
 }
 
 var curEnemy = {

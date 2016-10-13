@@ -169,6 +169,7 @@ var Champion = function(){
 
 
 var loadGym = function(townId){
+	player.automator.gymDefeated = 0;
 	clearInterval(counter);
 	gymPokemonIndex = 0;
 	currentGym = getTown(townId).gym;
@@ -279,6 +280,7 @@ var gymDefeated = function(){
 
 	moveToTown(town);
 	showGymDefeated(first, town);
+	player.automator.gymDefeated = 1;
 
 	updateAll();
 }
