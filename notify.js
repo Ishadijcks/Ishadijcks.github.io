@@ -21,6 +21,8 @@ function notifyMe(string) {
     notification.onclick = function () {
       window.open("http://ishadijcks.github.io/");      
     };
+
+    setTimeout(function() { notification.close() }, 2000);
     
   }
 
