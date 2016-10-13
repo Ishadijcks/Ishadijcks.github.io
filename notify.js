@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     Notification.requestPermission();
 });
 
-function notifyMe() {
+function notifyMe(string) {
   if (!Notification) {
     alert('Desktop notifications not available in your browser. Try Chromium.'); 
     return;
@@ -14,12 +14,12 @@ function notifyMe() {
     Notification.requestPermission();
   else {
     var notification = new Notification('Notification title', {
-      icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
-      body: "Hey there! You've been notified!",
+      icon: "images/" + player.starter + ".png",
+      body: string,
     });
 
     notification.onclick = function () {
-      window.open("http://stackoverflow.com/a/13328397/1269037");      
+      window.open("http://ishadijcks.github.io/");      
     };
     
   }
