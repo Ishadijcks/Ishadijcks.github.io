@@ -13,9 +13,9 @@ function notifyMe(string) {
   if (Notification.permission !== "granted")
     Notification.requestPermission();
   else {
-    var notification = new Notification('Notification title', {
+    var notification = new Notification(string, {
       icon: "images/" + player.starter + ".png",
-      body: string,
+      body: "Click here to play!",
     });
 
     notification.onclick = function () {
