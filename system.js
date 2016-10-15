@@ -415,32 +415,35 @@ var pokemonsAttack = function(){
 
 // Takes the experience and returns the level it is
 var experienceToLevel = function(exp,levelType){
-	var mult;
+	var level;
 
 	switch(levelType){
 	case "slow":
-		mult = 0.8;
+		level = Math.pow(exp*4/5, 1/3);
 		break;
 	case "medium slow":
-		mult = 0.9;
-		break;
-	case "medium":
-		mult = 1.0;
+		var y;
+		for (var x = 1; x <= 100; x++){
+			y=6/5*Math.pow(x, 3)-15*Math.pow(x, 2)+100*x-140
+			if (exp >= y){
+				level = x
+			} else {
+				break;
+			}
+
+		}
 		break;
 	case "medium fast":
-		mult = 1.1;
+		level = Math.pow(exp, 1/3);
 		break;
 	case "fast":
-		mult = 1.2;
+		level = Math.pow(exp * 5 / 4, 1/3);
 		break;
 	default:
-
-		mult = 1;
+		level = Math.pow(30*exp,0.475)/(6*Math.sqrt(5));
 		break;
-
 	}
-	exp *= mult;
-	return Math.max(1, Math.min(Math.min(100,Math.floor( Math.pow(30*exp,0.475)/(6*Math.sqrt(5)))), (1+player.gymBadges.length) * 10));
+	return Math.max(1, Math.min(100,Math.floor(level)));
 }
 
 var getBonusCatchrate = function(){
@@ -516,25 +519,32 @@ var gainMoney = function(money, message){
 }
 
 // All pokemon you have gain exp
-var gainExp = function(exp){
+var gainExp = function(exp,level,trainer){
 	if(!isNaN(exp)){
-		exp *= player.expMultiplier
+		console.log(level);
+		console.log(exp);
+		var multiplier = player.expMultiplier;
+		var oakBonus = 1;
 		if(isActive("Exp Share")){
-			exp *= getOakItemBonus("Exp Share")
+			oakBonus = getOakItemBonus("Exp Share");
 		}
 
 		var pokedexBonusExp = pokedexBonus(player.defeatNumbers[curEnemy.id-1]);
-		exp *= pokedexBonusExp;
-
-		exp = Math.floor(exp);
 		var totalMagnitude = getItemBonus("expBoost");
-		exp *= totalMagnitude;
+
+		var trainerBonus = 1;
+		if(trainer == true) {
+			trainerBonus = 1.5;
+		}
+
+
+		var expTotal = Math.floor((exp * trainerBonus * oakBonus * level * multiplier * totalMagnitude) / 7);
+		//realgame formula: (trainerbonus * baseexp * luckyeggbonus * affectionbonus * level * tradedbonus * unevolvedbonus) / (7 * outofbattlepenalty)
+		console.log(expTotal)
 
 		for( var i = 0; i<player.caughtPokemonList.length; i++){
 			var pokemonLevel = experienceToLevel(player.caughtPokemonList[i].experience, player.caughtPokemonList[i].levelType);
-			if(pokemonLevel < (1+player.gymBadges.length) * 10){
-				player.caughtPokemonList[i].experience+= exp;
-			}
+			player.caughtPokemonList[i].experience+= expTotal;
 		}
 		checkEvolution();
 	} else {
@@ -572,11 +582,11 @@ var enemyDefeated = function(){
 
 		var money = curEnemy.moneyReward;
 		var exp = curEnemy.exp;
-
+		var level = player.route * 2; 
 
 
 		gainMoney(Math.floor(money), "You earned $");
-		gainExp(exp);
+		gainExp(exp,level,false);
 		player.routeKills[player.route]++
 		gainShards(curEnemy.type,1);
 		updateRoute();
@@ -769,7 +779,7 @@ var generatePokemon = function(route){
 	curEnemy.health = Math.max(Math.floor(Math.pow( (randomPokemon.health*Math.pow(route,2.2)*(Math.pow(player.caughtPokemonList.length-1),1.2)/12) ,1.15)) , 20) || 20;
 	curEnemy.shiny = generateShiny();
 	curEnemy.maxHealth = curEnemy.health;
-	curEnemy.exp = Math.max(Math.floor(20*Math.pow(route ,1.2)) + 20, 10) || 10;
+	curEnemy.exp = randomPokemon.baseXpGain;
 	var catchVariation = Math.floor(Math.random()*7-3);
 	curEnemy.catchRate = Math.floor(Math.pow(randomPokemon.catchRate,0.75)) + catchVariation;
 	curEnemy.alive = true;
