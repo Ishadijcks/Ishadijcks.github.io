@@ -3,7 +3,7 @@ var counter;
 var playerPosition;
 var dungeonCanMove = 0;
 
-var Dungeon = function(name, pokemons, size, baseHealth, bossList, tokenCost, badgeReq, itemRoute) {
+var Dungeon = function(name, pokemons, size, baseHealth, bossList, tokenCost, badgeReq, itemRoute, level) {
     var temp = {
         name: name,
         pokemonDefeated: 0,
@@ -19,17 +19,18 @@ var Dungeon = function(name, pokemons, size, baseHealth, bossList, tokenCost, ba
         timeLeft: 60 * 100,
         chestsOpened: 0,
         loot: [],
-        itemRoute: itemRoute
+        itemRoute: itemRoute,
+        level: level
     }
     return temp;
 }
 
-var BossPokemon = function(name, health, exp) {
+var BossPokemon = function(name, health, level) {
     var temp = {
         name: name,
         health: health,
         maxHealth: health,
-        exp: exp
+        level: level
     }
     return temp;
 }
@@ -46,62 +47,62 @@ var getDungeonNames = function(){
 
 var ViridianForestDungeon = function() {
     var pokemonList = ["Caterpie", "Metapod", "Weedle", "Kakuna", "Pidgey", "Pidgeotto"];
-    var bossPokemon = [BossPokemon("Pikachu", 510, 300)];
-    return Dungeon("Viridian Forest Dungeon", pokemonList, 5, 102, bossPokemon, 50, 0, 1);
+    var bossPokemon = [BossPokemon("Pikachu", 510, 7)];
+    return Dungeon("Viridian Forest Dungeon", pokemonList, 5, 102, bossPokemon, 50, 0, 1, 5);
 }
 
 var DiglettsCaveDungeon = function(){
     var pokemonList = ["Diglett"];
-    var bossPokemon = [BossPokemon("Dugtrio", 6040, 400)];
-    return Dungeon("Digletts Cave Dungeon", pokemonList, 5, 1208, bossPokemon, 95, 0, 2);
+    var bossPokemon = [BossPokemon("Dugtrio", 6040, 31)];
+    return Dungeon("Digletts Cave Dungeon", pokemonList, 5, 1208, bossPokemon, 95, 0, 2, 22);
 }
 
 var MtMoonDungeon = function() {
     var pokemonList = ["Sandshrew", "Clefairy", "Zubat", "Paras", "Geodude", "Pidgeotto"];
-    var bossPokemon = [BossPokemon("Kabuto", 4170, 500), BossPokemon("Omanyte", 4170, 500)];
-    return Dungeon("Mt. Moon Dungeon", pokemonList, 5, 834, bossPokemon, 75, 1, 4);
+    var bossPokemon = [BossPokemon("Kabuto", 4170, 12), BossPokemon("Omanyte", 4170, 12)];
+    return Dungeon("Mt. Moon Dungeon", pokemonList, 5, 834, bossPokemon, 75, 1, 4, 10);
 }
 
 var RockTunnelDungeon = function(){
     var pokemonList = ["Zubat", "Geodude", "Machop"];
-    var bossPokemon = [BossPokemon("Onix", 20585, 1000)];
-    return Dungeon("Rock Tunnel Dungeon", pokemonList, 5, 4117, bossPokemon, 500, 2, 5);
+    var bossPokemon = [BossPokemon("Onix", 20585, 17)];
+    return Dungeon("Rock Tunnel Dungeon", pokemonList, 5, 4117, bossPokemon, 500, 2, 5, 15);
 }
 
 var PowerPlantDungeon = function(){
     var pokemonList = ["Pikachu", "Raichu", "Magnemite", "Magneton", "Grimer", "Muk", "Electrode"];
-    var bossPokemon = [BossPokemon("Zapdos", 101302, 2500), BossPokemon("Electabuzz", 67535, 1000), BossPokemon("Electabuzz", 67535, 1000), BossPokemon("Electabuzz", 67535, 1000)];
-    return Dungeon("Power Plant Dungeon", pokemonList, 5, 13507, bossPokemon, 1000, 2, 8);
+    var bossPokemon = [BossPokemon("Zapdos", 101302, 50), BossPokemon("Electabuzz", 67535, 35), BossPokemon("Electabuzz", 67535, 35), BossPokemon("Electabuzz", 67535, 35)];
+    return Dungeon("Power Plant Dungeon", pokemonList, 5, 13507, bossPokemon, 1000, 2, 8, 25);
 }
 
 var PokemonTowerDungeon = function(){
     var pokemonList = ["Gastly", "Haunter", "Cubone"];
-    var bossPokemon = [BossPokemon("Marowak", 37615, 2000)];
-    return Dungeon("Pokemon Tower Dungeon", pokemonList, 5, 7523, bossPokemon, 750, 2, 10);
+    var bossPokemon = [BossPokemon("Marowak", 37615, 30)];
+    return Dungeon("Pokemon Tower Dungeon", pokemonList, 5, 7523, bossPokemon, 750, 2, 10, 20);
 }
 
 var SeafoamIslandsDungeon = function(){
     var pokemonList = ["Zubat", "Golbat", "Psyduck", "Golduck", "Slowpoke", "Slowbro", "Shellder", "Krabby", "Horsea", "Staryu"];
-    var bossPokemon = [ BossPokemon("Articuno", 129195, 3000) , BossPokemon("Seel", 86130, 2500), BossPokemon("Seel", 86130, 2500), BossPokemon("Seel", 86130, 2500)];
-    return Dungeon("Seafoam Islands Dungeon", pokemonList, 5, 17226, bossPokemon, 1250, 6, 15);
+    var bossPokemon = [ BossPokemon("Articuno", 129195, 50) , BossPokemon("Seel", 86130, 35), BossPokemon("Seel", 86130, 35), BossPokemon("Seel", 86130, 35)];
+    return Dungeon("Seafoam Islands Dungeon", pokemonList, 5, 17226, bossPokemon, 1250, 6, 15, 30);
 }
 
 var PokemonMansionDungeon = function(){
     var pokemonList = ["Growlithe", "Vulpix", "Grimer", "Muk", "Koffing", "Weezing"];
-    var bossPokemon = [BossPokemon("Magmar", 88800)];
-    return Dungeon("Pokemon Mansion Dungeon", pokemonList, 5, 17760, bossPokemon, 1500, 6, 16);
+    var bossPokemon = [BossPokemon("Magmar", 88800, 40)];
+    return Dungeon("Pokemon Mansion Dungeon", pokemonList, 5, 17760, bossPokemon, 1500, 6, 16, 35);
 }
 
 var VictoryRoadDungeon = function(){
     var pokemonList = ["Zubat", "Golbat", "Machop", "Geodude", "Graveler", "Onix", "Marowak", "Venomoth"];
-    var bossPokemon = [BossPokemon("Moltres", 184462, 4000), BossPokemon("Machoke", 122975, 2500), BossPokemon("Machoke", 122975, 2500), BossPokemon("Machoke", 122975, 2500)];
-    return Dungeon("Victory Road Dungeon", pokemonList, 5, 24595, bossPokemon, 2000, 8, 20);
+    var bossPokemon = [BossPokemon("Moltres", 184462, 50), BossPokemon("Machoke", 122975, 42), BossPokemon("Machoke", 122975, 42), BossPokemon("Machoke", 122975, 42)];
+    return Dungeon("Victory Road Dungeon", pokemonList, 5, 24595, bossPokemon, 2000, 8, 20, 40);
 }
 
 var CeruleanCaveDungeon = function(){
     var pokemonList = ["Arbok", "Raichu", "Sandslash", "Golbat", "Parasect", "Venomoth", "Kadabra", "Magneton", "Dodrio", "Hypno", "Ditto", "Wigglytuff", "Electrode", "Marowak", "Chansey"];
-    var bossPokemon = [BossPokemon("Mewtwo", 215512, 7500), BossPokemon("Rhydon", 143675, 4000), BossPokemon("Rhydon", 143675, 4000), BossPokemon("Rhydon", 143675, 4000)];
-    return Dungeon("Cerulean Cave Dungeon", pokemonList, 5, 28735, bossPokemon, 2500, 8, 20);
+    var bossPokemon = [BossPokemon("Mewtwo", 215512, 70), BossPokemon("Rhydon", 143675, 60), BossPokemon("Rhydon", 143675, 60), BossPokemon("Rhydon", 143675, 60)];
+    return Dungeon("Cerulean Cave Dungeon", pokemonList, 5, 28735, bossPokemon, 2500, 8, 20, 55);
 }
 
 
@@ -367,7 +368,7 @@ var dungeonEnemyDefeated = function() {
             player.pokeballs--;
         }, 1);
 
-        gainExp(curEnemy.exp);
+        gainExp(curEnemy.exp,curEnemy.level,false);
         gainShards(curEnemy.type, 3);
         dungeonCanMove = 1;
         var catchRate = curEnemy.catchRate + getBonusCatchrate();
@@ -476,6 +477,8 @@ var spawnDungeonBoss = function() {
     curEnemy.boss = 1;
     curEnemy.catchRate = 10;
     curEnemy.shiny = generateShiny();
+    curEnemy.exp = getPokemonByName(curEnemy.name).baseXpGain;
+    curEnemy.level = bossPokemon.level;
 
     var possibleType = getPokemonByName(curEnemy.name).type;
     if(possibleType != undefined){
@@ -484,7 +487,6 @@ var spawnDungeonBoss = function() {
         curEnemy.type = 'normal';        
     }
 
-    curEnemy.exp = bossPokemon.exp;
     clearInterval(attackInterval);
     attackInterval = setInterval(pokemonsAttack, 1000);
     updateDungeon();
@@ -504,7 +506,8 @@ var spawnDungeonPokemon = function() {
     curEnemy.catchRate = 20;
     curEnemy.shiny = generateShiny();
     curEnemy.boss = 0;
-    curEnemy.exp = currentDungeon.baseHealth/4;
+    curEnemy.exp = getPokemonByName(curEnemy.name).baseXpGain;
+    curEnemy.level = currentDungeon.level;
 
     var possibleType = getPokemonByName(curEnemy.name).type;
     if(possibleType != undefined){
