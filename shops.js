@@ -1,4 +1,5 @@
 var shopItemList = [];
+var buyAmount = 1;
 
 var ShopItem = function(id, name, cost, costType) {
     var temp = {
@@ -64,16 +65,13 @@ var getShopPriceDeviation = function(itemName){
 
 var buyShopItem = function(itemName){
 	var item;
-	console.log(itemName);
 	if(item = getShopItemByName(itemName)){
 		var id = item.id;
 		if(enoughResources(item.cost*player.shopPriceDeviation[id], item.costType)){
 		
 			payShopItem(item.cost*player.shopPriceDeviation[id], item.costType);
 			player.shopPriceDeviation[id] = Math.floor(player.shopPriceDeviation[id] * 1.05 * 100)/100;
-			console.log(player.shopPriceDeviation[id]);
 			gainItemByName(item.name)
-			console.log(curShop);
 			loadShop(curShop.name);
 			updateStats();
 		} else {
@@ -84,6 +82,21 @@ var buyShopItem = function(itemName){
 			$.notify(string);
 		}
 	}
+}
+
+var getItemPrice = function(itemCost, deviation, amount){
+	var total = 0;
+	for(var i = 0; i<amount;i++){
+		total += itemCost*deviation;
+		deviation*=1.05;
+	}
+	return total;
+}
+
+
+var changeBuyAmount = function(amount){
+	buyAmount = amount; 
+	loadShop(curShop.name);
 }
 
 var enoughResources = function(cost, costType){
@@ -133,10 +146,9 @@ var VermillionCityShop = function(){ return Shop("Vermillion City", [thunderSton
 var FuchsiaCityShop = function(){ return Shop("Fuchsia City", [tradeStone, xExp]) }
 var CinnabarIslandShop = function(){ return Shop("Cinnabar Island", [fireStone, fireEgg])}
 
-	var curShop;
+var curShop;
 
 var loadShop = function(shopName){
-
 	if(curShop = getShop(shopName)){
 		showShop(curShop);
 	}
@@ -148,18 +160,26 @@ var showShop = function(shop){
 	var html = "";
 	html += "<h3 class='townName'>" + shop.name + " Shop</h3>"
 	html += "<div class='row'>";
+	html += 	"<button onClick='changeBuyAmount(1)' id='buyAmount_1' class='btn btn-info shopBuyAmount'>1x</button>";
+	html += 	"<button onClick='changeBuyAmount(10)' id='buyAmount_10' class='btn btn-info shopBuyAmount'>10x</button>";
+	html += 	"<button onClick='changeBuyAmount(100)' id='buyAmount_100' class='btn btn-info shopBuyAmount'>100x</button>";
+	html += 	"<button onClick='changeBuyAmount(1000)' id='buyAmount_1000' class='btn btn-info shopBuyAmount'>1000x</button>";
+	html += "</div>";
+	html += "<div class='row'>";
 	for(var i = 0; i<items.length; i++){
 		html += "<div data-itemName='" + items[i].name + "' class='col-sm-3 col-md-2 pokedexEntry shopItem'>";
-		html += "<br><img class='center-block' src=images/items/" + items[i].id + ".png >" + items[i].name;
-		console.log(shop.name);
-		console.log(items[i].name);
+		html += "<br>";
+		html += "<img class='center-block' src=images/items/" + items[i].id + ".png >" + items[i].name;
 		if(shop.name === "Celadon City"){
 			if(alreadyCaught(items[i].name)){
 				html += "<img id=alreadyCaughtImage src=images/Pokeball.PNG>";
 			}
 		}
 
-		html += "<br><br>";
+		html += "<br>";
+		if(items[i].name.length < 15){
+			html += "<br>";
+		}
 		html += "<p style='margin-top:15px'>" + (items[i].cost*player.shopPriceDeviation[getShopItemByName(items[i].name).id]).toFixed(0);
 		html += "<br>";
 		html += getFullResourceName(items[i].costType) + "</p>";
@@ -174,6 +194,7 @@ var showShop = function(shop){
 	});
 
 	$("#shopView").show();
+	$("#buyAmount_"+buyAmount).css("background-color", "#47962A");
 }
 
 var getShop = function(townName){

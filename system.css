@@ -1,5 +1,14 @@
 .eggProgress {
 	width:80%;
+}
+
+.shopBuyAmount {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.shopBuyAmountActive {
+	background-color: #2D748C;
 
 }
 
