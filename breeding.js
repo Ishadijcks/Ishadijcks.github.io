@@ -108,6 +108,15 @@ var breedPokemon = function(pokemonName){
 	save();
 }
 
+var breedSlotLeft = function(){
+	for(var i = 0; i<player.eggSlots; i++){
+		if(player.eggList[i] === null){
+			return true;
+		}
+	}
+	return false;
+}
+
 var progressEgg = function(amount){
 	for(var i = 0; i<player.eggList.length; i++){
 		if(player.eggList[i] !== null){
@@ -174,9 +183,6 @@ var showEggs = function(){
 		position: "top"
 	});
 }
-
-var pikachuEgg = Egg('electric', 1000, "Pikachu");
-gainEgg(pikachuEgg);
 
 var showMom = function(){
 	var html = "<div class='row'>";

@@ -17,7 +17,13 @@ var itemList = [
 {id:16, name:"Moon Stone", price:25000, use:"evolution", unUse:null, time: null, type:"evolution", instant:1, magnitude:0, flavorText: "A peculiar stone that makes certain species of Pokemon evolve. It is as black as the night sky."},
 {id:17, name:"Trade Stone", price:25000, use:"evolution", unUse:null, time: null, type:"evolution", instant:1, magnitude:0, flavorText: "A peculiar stone that makes certain species of Pokemon evolve. It looks very lonely."},
 {id:23, name:"Fire Egg", price:25000, use:"breeding", unUse:null, time: null, type:"fire", instant:1, magnitude:0, flavorText: "A fire egg."},
+{id:24, name:"Water Egg", price:25000, use:"breeding", unUse:null, time: null, type:"water", instant:1, magnitude:0, flavorText: "A water egg."},
+{id:25, name:"Grass Egg", price:25000, use:"breeding", unUse:null, time: null, type:"grass", instant:1, magnitude:0, flavorText: "A grass egg."},
+{id:26, name:"Fighting Egg", price:25000, use:"breeding", unUse:null, time: null, type:"fighting", instant:1, magnitude:0, flavorText: "A fighting egg."},
+{id:27, name:"Electric Egg", price:25000, use:"breeding", unUse:null, time: null, type:"electric", instant:1, magnitude:0, flavorText: "An electric egg."},
+{id:28, name:"Dragon Egg", price:25000, use:"breeding", unUse:null, time: null, type:"dragon", instant:1, magnitude:0, flavorText: "A dragon egg."},
 ]
+
 
 var itemsPerRoute = {
 	1: ["X Attack", "X Click", "X Attack", "X Click", "X Attack", "X Click", "Lucky Incense"],
@@ -179,10 +185,14 @@ var activateItem = function(id){
 		updateItems();
 		updateStats();
 	} else if (item.use === "breeding"){
-		gainRandomEgg(item.type);
-		item.quantity--;
-		updateItems();
-		updateStats();
+		if(breedSlotLeft()){
+			gainRandomEgg(item.type);
+			item.quantity--;
+			updateItems();
+			updateStats();
+		} else {
+			$.notify("Your hatchery is full");
+		}
 	} else if (!isNaN(item.time)){
 		if(item.quantity > 0){
 			item.timeLeft += item.time;
