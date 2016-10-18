@@ -10,7 +10,7 @@ var Egg = function(type, steps, pokemon){
 
 var possibleEggs = Array.apply(null, Array(17)).map(Number.prototype.valueOf,0);
 
-var eggSlotPrice = [0, 25000, 100000, 1000000];
+var eggSlotPrice = [0, 500, 1000, 2500];
 
 var initPossibleEggs = function(){
 	var fireEggs = ["Charmander", "Vulpix", "Growlithe", "Ponyta"];
@@ -54,7 +54,7 @@ var gainPokemonEgg = function(pokemonName){
 var getSteps = function(pokemonName){
 	var pokemon = getPokemonByName(pokemonName);
 	if( pokemon.steps === undefined){
-		return 2000;
+		return 1000;
 	} else {
 		return pokemon.steps;
 	}
@@ -99,7 +99,7 @@ var breedPokemon = function(pokemonName){
 			}
 			showMom();
 			$.notify("You start breeding...", "success");
-			$.notify("You release your " + pokemonName, "success");
+			$.notify("You leave your " + pokemonName + " with your mom", "success");
 			save();
 			return;
 		}
@@ -139,7 +139,7 @@ var hatchEgg = function(egg){
 
 var buyEggSlot = function(i){
 	if(canBuyEggSlot(i)){
-		player.money -= eggSlotPrice[i];
+		player.questPoints -= eggSlotPrice[i];
 		player.eggSlots++;
 		showEggs();
 		save();	
@@ -147,7 +147,7 @@ var buyEggSlot = function(i){
 }
 
 var canBuyEggSlot = function(i){
-	return player.money >= eggSlotPrice[i];
+	return player.questPoints >= eggSlotPrice[i];
 }
 
 var showEggs = function(){
@@ -162,9 +162,9 @@ var showEggs = function(){
 			html += "</div>";
 		} else {
 			if( i == player.eggSlots && canBuyEggSlot(i)){
-				html += "<br><button class='egg btn btn-info' onClick='buyEggSlot("+i+")'>$" + eggSlotPrice[i] + "</p><p>Egg slot</p>";
-			} else if (i > player.eggSlots){
-				html += "<br><button class='egg btn btn-info disabled'>$" + eggSlotPrice[i] + "</p><p>Egg slot</p>";
+				html += "<br><button class='egg btn btn-info' onClick='buyEggSlot("+i+")'>" + eggSlotPrice[i] + " QP</p><p>Egg slot</p>";
+			} else if (i >= player.eggSlots){
+				html += "<br><button class='egg btn btn-info disabled'>" + eggSlotPrice[i] + " QP</p><p>Egg slot</p>";
 			}
 		}
 		$("#egg"+i).html(html)
