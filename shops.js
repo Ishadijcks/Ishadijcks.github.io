@@ -46,7 +46,12 @@ var porygon = ShopItem(19, "Porygon", 750, 'quest');
 var mrMime = ShopItem(20, "Mr. Mime", 2500, 'quest');
 var jynx = ShopItem(21, "Jynx", 5000, 'quest');
 var lickitung = ShopItem(22, "Lickitung", 500, 'quest');
-var fireEgg = ShopItem(23, "Fire Egg", 10, 'quest');
+var fireEgg = ShopItem(23, "Fire Egg", 250, 'quest');
+var waterEgg = ShopItem(24, "Water Egg", 250, 'quest');
+var grassEgg = ShopItem(25, "Grass Egg", 250, 'quest');
+var fightingEgg = ShopItem(26, "Fighting Egg", 150, 'quest');
+var electricEgg = ShopItem(27, "Electric Egg", 100, 'quest');
+var dragonEgg = ShopItem(28, "Dragon Egg", 500, 'quest');
 
 var decreaseShopPriceDeviation = function(){
 	for( var i = 0; i<player.shopPriceDeviation.length; i++){
@@ -64,16 +69,12 @@ var getShopPriceDeviation = function(itemName){
 
 var buyShopItem = function(itemName){
 	var item;
-	console.log(itemName);
 	if(item = getShopItemByName(itemName)){
 		var id = item.id;
 		if(enoughResources(item.cost*player.shopPriceDeviation[id], item.costType)){
-		
 			payShopItem(item.cost*player.shopPriceDeviation[id], item.costType);
 			player.shopPriceDeviation[id] = Math.floor(player.shopPriceDeviation[id] * 1.05 * 100)/100;
-			console.log(player.shopPriceDeviation[id]);
 			gainItemByName(item.name)
-			console.log(curShop);
 			loadShop(curShop.name);
 			updateStats();
 		} else {
@@ -125,12 +126,12 @@ var payShopItem = function(cost, costType){
 
 var ViridianCityShop = function(){ return Shop("Viridian City", [xAttack, xClick]); }
 var PewterCityShop = function(){ return Shop("Pewter City", [tokenCollector, xExp]); }
-var CeruleanCityShop = function(){ return Shop("Cerulean City", [waterStone, xAttack]) }
-var SaffronCityShop = function(){ return Shop("Saffron City", [moonStone, xClick, leafStone]); }
-var LavenderTownShop = function(){ return Shop("Lavender Town", [itemMagnet, luckyIncense]) }
+var CeruleanCityShop = function(){ return Shop("Cerulean City", [waterStone, xAttack, waterEgg]) }
+var SaffronCityShop = function(){ return Shop("Saffron City", [moonStone, xClick, leafStone, fightingEgg]); }
+var LavenderTownShop = function(){ return Shop("Lavender Town", [itemMagnet, luckyIncense, grassEgg]) }
 var CeladonCityShop = function(){ return Shop("Celadon City", [eevee, porygon, jynx, mrMime, lickitung]) }
-var VermillionCityShop = function(){ return Shop("Vermillion City", [thunderStone, xExp]) }
-var FuchsiaCityShop = function(){ return Shop("Fuchsia City", [tradeStone, xExp]) }
+var VermillionCityShop = function(){ return Shop("Vermillion City", [thunderStone, xExp, electricEgg]) }
+var FuchsiaCityShop = function(){ return Shop("Fuchsia City", [tradeStone, xExp, dragonEgg]) }
 var CinnabarIslandShop = function(){ return Shop("Cinnabar Island", [fireStone, fireEgg])}
 
 	var curShop;
