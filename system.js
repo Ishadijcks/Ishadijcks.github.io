@@ -53,7 +53,8 @@ var player = {
 	questDifficulty: 1,
 	lastSeen: new Date().getDate(),
 	eggList: [null, null, null, null],
-	eggSlots: 0
+	eggSlots: 0,
+	shinyPoints: 0,
 }
 
 var curEnemy = {
@@ -665,6 +666,9 @@ var capturePokemon = function(name, shiny){
 		if(shiny){
 			for( var i = 0; i<player.caughtPokemonList.length; i++){
 				if(player.caughtPokemonList[i].name == name){
+					if(player.caughtPokemonList[i].shiny){
+						player.shinyPoints++;
+					}
 					player.caughtPokemonList[i].shiny = 1;
 					$.notify("You have caught a shiny "+ name +"!", "succes")
 					progressQuest('captureShinies', "none" , 1);

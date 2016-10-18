@@ -63,6 +63,7 @@ var load = function(){
 	if (typeof savegame.lastSeen !== "undefined") player.lastSeen = savegame.lastSeen;
 	if (typeof savegame.eggList !== "undefined") player.eggList = savegame.eggList;
 	if (typeof savegame.eggSlots !== "undefined") player.eggSlots = savegame.eggSlots;
+	if (typeof savegame.shinyPoints !== "undefined") player.shinyPoints = savegame.shinyPoints;
 
 
 	if(player.version < version){
