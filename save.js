@@ -88,6 +88,11 @@ var load = function(){
 		dailyReset();
 	}
 
+
+	if(player.attackMultiplier > 1){
+		resetUpgrades();
+	}
+
 	player.catchTime = Math.max(player.catchTime,750);
 	player.version = version;
 

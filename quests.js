@@ -91,6 +91,7 @@ var progressQuest = function(type, type2,  amount){
 			showCurQuest();
 			if(player.curQuest.progress >= player.curQuest.amount && !player.curQuest.notified){
 				$.notify("Your random quest is ready to be completed!", "success");
+				notifyMe("You can complete your quest");
 				player.curQuest.notified = 1;
 			}
 		}
@@ -255,7 +256,7 @@ var showCurQuest = function(){
 	html += 	"<p style='text-align:center; margin-bottom:15px'>" + Math.min(player.curQuest.progress,player.curQuest.amount) + "/" + player.curQuest.amount + "</p>";
 	html += 	"<div class='row' id='questProgressRow'>";
 	html += 		"<div class='progress' id='questProgress'>"
-	html += 			"<div class='progress-bar progress-bar-danger' id='healthBar' style='width: " + Math.min(player.curQuest.progress,player.curQuest.amount) /player.curQuest.amount*100 + "%'>"
+	html += 			"<div class='progress-bar progress-bar-success' id='healthBar' style='width: " + Math.min(player.curQuest.progress,player.curQuest.amount) /player.curQuest.amount*100 + "%'>"
 	html += 				"<span class='sr-only'></span>";
 	html += 			"</div>";
 	html += 		"</div>";
