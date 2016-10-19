@@ -148,6 +148,6 @@ var pokemonList = [
 {id: 147, name: "Dratini", catchRate: 45, evolution: "Dragonair", evoLevel: 30, evolved: 0, type: "dragon", attack: 64, route:36, health:100, levelType: "slow", experience: 0, baseXpGain: 60 , steps:3000  },
 {id: 148, name: "Dragonair", catchRate: 45, evolution: "Dragonite", evoLevel: 55, evolved: 0, type: "dragon", attack: 84, route:null, health:100, levelType: "slow", experience: 0, baseXpGain: 147, steps:2000  },
 {id: 149, name: "Dragonite", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "dragon", attack: 134, route:null, health:100, levelType: "slow", experience: 0, baseXpGain: 270 , steps:1250  },
-{id: 150, name: "Mewtwo", catchRate: 3, evolution: null, evoLevel: null, evolved: 0, type: "psychic", attack: 154, route:100, health:100, levelType: "slow", experience: 0, baseXpGain: 306 , steps:300  },
+{id: 150, name: "Mewtwo", catchRate: 3, evolution: null, evoLevel: null, evolved: 0, type: "psychic", attack: 154, route:100, health:100, levelType: "slow", experience: 0, baseXpGain: 306 , steps:3000  },
 {id: 151, name: "Mew", catchRate: 45, evolution: null, evoLevel: null, evolved: 0, type: "psychic", attack: 100, route:100, health:100, levelType: "medium slow", experience: 0, baseXpGain: 270, steps:6000  },
 ];

@@ -539,8 +539,6 @@ var gainExp = function(exp,level,trainer){
 
 		var expTotal = Math.floor((exp * trainerBonus * oakBonus * level * multiplier * totalMagnitude) / 7);
 		//realgame formula: (trainerbonus * baseexp * luckyeggbonus * affectionbonus * level * tradedbonus * unevolvedbonus) / (7 * outofbattlepenalty)
-		console.log(expTotal)
-
 		for( var i = 0; i<player.caughtPokemonList.length; i++){
 			var pokemonLevel = experienceToLevel(player.caughtPokemonList[i].experience, player.caughtPokemonList[i].levelType);
 			player.caughtPokemonList[i].experience+= expTotal;
