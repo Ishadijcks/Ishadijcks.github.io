@@ -35,6 +35,14 @@ function compareByRecent(a,b) {
     return -1;
   if (a.timeStamp < b.timeStamp)
     return 1;
+  if (a.timeStamp == b.timeStamp){
+    if(a.id > b.id){
+      return 1;
+    }
+    if(a.id < b.id){
+      return -1;
+    }
+  }
   return 0;
 }
 
