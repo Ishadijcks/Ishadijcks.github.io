@@ -19,13 +19,17 @@ var showCurMine = function(){
 	for(var i = 0; i<curMine.length; i++){
 		html += "<div class='row'>";
 		for(var j = 0; j<curMine[0].length; j++){
-			html += mineSquare(curMine[i][j]);
+			html += mineSquare(curMine[i][j], i, j);
 		}
 		html += "</div>";
 	}
 	$("#mineBody").html(html);
 }
 
-var mineSquare = function(i){
-	return "<div class='col-sm-1 mineSquare'>" + i + "</div>";
+var mineSquare = function(amount, i, j){
+	return "<div data-i='" + i + "' data-j='" + j + "' class='col-sm-1 mineSquare'>" + amount + "</div>";
+}
+
+var squareClicker = function(i, j){
+	console.log(i + ", " + j);
 }

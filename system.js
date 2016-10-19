@@ -54,7 +54,9 @@ var player = {
 	lastSeen: new Date().getDate(),
 	eggList: [null, null, null, null],
 	eggSlots: 0,
-	shinyPoints: 0,
+	totalBred: 0,
+	shinyPoints: 0
+
 }
 
 var curEnemy = {
@@ -334,6 +336,10 @@ $(document).ready(function(){
 
 	$("body").on('click',".breedPokemon", function(){
 		breedPokemon(this.dataset.pokemon);
+	})
+
+	$("body").on('click',".mineSquare", function(){
+		squareClicked(this.dataset.i, this.dataset.j);
 	})
 
 	$("body").on('click',".shopItem", function(){
