@@ -118,6 +118,9 @@ var breedSlotLeft = function(){
 }
 
 var progressEgg = function(amount){
+	if(isActive("Blaze Cassette")){
+		amount *= getOakItemBonus("Blaze Cassette");
+	}
 	for(var i = 0; i<player.eggList.length; i++){
 		if(player.eggList[i] !== null){
 			player.eggList[i].progress += amount;
