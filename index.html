@@ -28,6 +28,7 @@
 	<script src="quests.js"></script>
 	<script src="breeding.js"></script>
 	<script src="types.js"></script>
+	<script src="mining.js"></script>
 	
 	<!-- Latest compiled and minified CSS -->
 	<link href="bootstrap.css" rel="stylesheet"><!-- Optional theme -->
@@ -659,6 +660,7 @@
 						<button class="btn-danger" id="resetButton">Reset</button>
 						<a style="text-decoration:none; color:white;" href="https://reddit.com/r/pokeclicker" target="_blank"><button class="btn-info" id="subredditButton">Subreddit</button></a>
 						<a style="text-decoration:none; color:white;" href="http://kiwiirc.com/client/irc.freenode.net/pokeclicker" target="_blank"><button class="btn-success" id="chatButton">Chat</button></a>
+						<button class="btn-info" id="mineButton">Mine</button>
 						
 
 					</div>
@@ -744,6 +746,22 @@
 						</div>
 					</div>
 				</div>
+
+
+				<div aria-labelledby="myModalLabel" class="modal fade noselect" id="mineModal" role="dialog" style="cursor:default" tabindex="-1">
+					<div class="modal-dialog" role="document" style="width:55%">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 style='text-align:center' class="modal-title" id="mineLabel">Underground</h4>
+							</div>
+							<div class="modal-body" id="mineBody" style="width: 80%;margin: auto;">
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+
 
 				<!-- Gym completed Modal -->
 				<div aria-labelledby="myModalLabel" class="modal fade" id="gymModal" role="dialog" tabindex="-1">

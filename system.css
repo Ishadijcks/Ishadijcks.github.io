@@ -1,8 +1,14 @@
+.mineSquare {
+	border:1px solid black;
+	height: 25px;
+	width:25px;
+	text-align: center;
+}
+
 .eggProgress {
 	width:80%;
 
 }
-
 
 #eggTable {
 	height:300px;

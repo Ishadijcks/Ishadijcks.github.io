@@ -317,6 +317,11 @@ $(document).ready(function(){
 		showCurQuest();
 	})
 
+	$("body").on('click',"#mineButton", function(){
+		$("#mineModal").modal("show");
+		showCurMine();
+	})
+
 		// Navbar Button controllers
 	$("body").on('click',"#shardButton", function(){
 		showShardModal();
