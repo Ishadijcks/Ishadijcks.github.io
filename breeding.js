@@ -145,7 +145,7 @@ var checkEggHatch = function(){
 var hatchEgg = function(egg){
 	$.notify("You hatched a " + egg.pokemon, 'success');
 	progressQuest('breedPokemon', "none", 1);
-	capturePokemon(egg.pokemon, generateStoneShiny());
+	capturePokemon(egg.pokemon, generateEggShiny());
 	showEggs();
 }
 
@@ -217,4 +217,18 @@ var showMom = function(){
 var canBreed = function(pokemon){
 	var pokemonLevel = experienceToLevel(pokemon.experience, pokemon.levelType);
 	return pokemonLevel >= 100 && !pokemon.shiny;
+}
+
+var generateEggShiny = function(){
+	var chance = 1024;
+	if(isActive("Shiny Charm")){
+		chance /= getOakItemBonus("Shiny Charm");
+	}
+	var number = Math.floor(Math.random()*chance) + 1;
+
+	if(number <= 1){
+		console.log("Shiny!!!");
+		return 1;
+	}
+	return 0;
 }
