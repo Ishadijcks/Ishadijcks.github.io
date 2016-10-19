@@ -84,6 +84,10 @@ var load = function(){
 		}
 	}
 
+	if( player.version < 0.8){
+		resetXp();
+	}
+	
 	var date = new Date();
 	if(date.getDate() !== player.lastSeen){
 		dailyReset();
@@ -102,4 +106,12 @@ var load = function(){
     link.rel = 'shortcut icon';
     link.href = 'images/'+player.starter+'.png';
     document.getElementsByTagName('head')[0].appendChild(link);
+}
+
+
+var resetXp = function(){
+	for( var i = 0; i<player.caughtPokemonList.length; i++){
+		player.caughtPokemonList[i].experience = 0;
+	}
+	$.notify("Your exp has been reset for balancing purposes.")
 }
