@@ -203,6 +203,12 @@ var skipQuestMoney = function(){
 	}
 }
 
+var dailyReset = function(){
+	player.questSkipToday = 0;
+	player.questDifficulty = 1;
+	console.log("Rise and shine, it's a new day!");
+}
+
 var startRandomQuest = function(){
 	var possibleQuests = getQuestsByDifficulty(player.questDifficulty);
 	var random = Math.floor(Math.random() * possibleQuests.length);

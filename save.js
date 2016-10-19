@@ -3,6 +3,11 @@ var canSave = 1;
 
 // Saves the game by writing play to JSON and save it in localStorage
 var save = function(){
+	var date = new Date();
+	if(date.getDate() !== player.lastSeen.getDate()){
+		dailyReset();
+	}
+	player.lastSeen = new Date();
 	if(canSave){
 		localStorage.setItem("player", JSON.stringify(player));
 	}
@@ -55,6 +60,7 @@ var load = function(){
 	if (typeof savegame.questCompletedToday !== "undefined") player.questCompletedToday = savegame.questCompletedToday;
 	if (typeof savegame.questCompletedDailyMax !== "undefined") player.questCompletedDailyMax = savegame.questCompletedDailyMax;
 	if (typeof savegame.questDifficulty !== "undefined") player.questDifficulty = savegame.questDifficulty;
+	if (typeof savegame.lastSeen !== "undefined") player.lastSeen = savegame.lastSeen;
 
 
 	if(player.version < version){
@@ -69,6 +75,11 @@ var load = function(){
 		if(player.caughtPokemonList[i].evoLevel === "Trade"){
 			player.caughtPokemonList[i].evoLevel = "Trade Stone";
 		}
+	}
+
+	var date = new Date();
+	if(date.getDate() !== player.lastSeen.getDate()){
+		dailyReset();
 	}
 
 	player.version = version;
