@@ -22,6 +22,7 @@ var itemList = [
 {id:26, name:"Fighting Egg", price:25000, use:"breeding", unUse:null, time: null, type:"fighting", instant:1, magnitude:0, flavorText: "A fighting egg."},
 {id:27, name:"Electric Egg", price:25000, use:"breeding", unUse:null, time: null, type:"electric", instant:1, magnitude:0, flavorText: "An electric egg."},
 {id:28, name:"Dragon Egg", price:25000, use:"breeding", unUse:null, time: null, type:"dragon", instant:1, magnitude:0, flavorText: "A dragon egg."},
+{id:29, name:"Random Egg", price:25000, use:"breeding", unUse:null, time: null, type:"random", instant:1, magnitude:0, flavorText: "An egg of a random type."},
 ]
 
 

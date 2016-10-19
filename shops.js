@@ -50,8 +50,9 @@ var fireEgg = ShopItem(23, "Fire Egg", 250, 'quest');
 var waterEgg = ShopItem(24, "Water Egg", 250, 'quest');
 var grassEgg = ShopItem(25, "Grass Egg", 250, 'quest');
 var fightingEgg = ShopItem(26, "Fighting Egg", 150, 'quest');
-var electricEgg = ShopItem(27, "Electric Egg", 100, 'quest');
+var electricEgg = ShopItem(27, "Electric Egg", 150, 'quest');
 var dragonEgg = ShopItem(28, "Dragon Egg", 500, 'quest');
+var randomEgg = ShopItem(29, "Random Egg", 100, 'quest');
 
 var decreaseShopPriceDeviation = function(){
 	for( var i = 0; i<player.shopPriceDeviation.length; i++){
@@ -124,7 +125,7 @@ var payShopItem = function(cost, costType){
 	}
 }
 
-var ViridianCityShop = function(){ return Shop("Viridian City", [xAttack, xClick]); }
+var ViridianCityShop = function(){ return Shop("Viridian City", [xAttack, xClick, randomEgg]); }
 var PewterCityShop = function(){ return Shop("Pewter City", [tokenCollector, xExp]); }
 var CeruleanCityShop = function(){ return Shop("Cerulean City", [waterStone, xAttack, waterEgg]) }
 var SaffronCityShop = function(){ return Shop("Saffron City", [moonStone, xClick, leafStone, fightingEgg]); }
