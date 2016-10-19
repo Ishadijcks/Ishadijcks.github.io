@@ -64,6 +64,7 @@ var load = function(){
 	if (typeof savegame.eggList !== "undefined") player.eggList = savegame.eggList;
 	if (typeof savegame.eggSlots !== "undefined") player.eggSlots = savegame.eggSlots;
 	if (typeof savegame.shinyPoints !== "undefined") player.shinyPoints = savegame.shinyPoints;
+	if (typeof savegame.totalBred !== "undefined") player.totalBred = savegame.totalBred;
 
 
 	if(player.version < version){
