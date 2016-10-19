@@ -77,6 +77,10 @@ var startQuest = function(quest){
 			player.curQuest.type2 = "none";
 			player.curQuest.description = "Gain " + player.curQuest.amount + " shards (any type)";
 			break;
+		case "breedPokemon":
+			player.curQuest.type2 = "none";
+			player.curQuest.description = "Breed " + player.curQuest.amount + " Pokemon";
+			break;
 	}
 	showCurQuest();
 }
@@ -147,6 +151,12 @@ addQuest('gainShards', 'Gain x shards', EASY, 25, 50, 5)
 addQuest('gainShards', 'Gain x shards', MEDIUM, 50, 100, 10)
 addQuest('gainShards', 'Gain x shards', HARD, 100, 150, 20)
 addQuest('gainShards', 'Gain x shards', IMPOSSIBLE, 250, 500, 40)
+
+addQuest('breedPokemon', 'Breed x Pokemon', EASY, 1, 3, 5)
+addQuest('breedPokemon', 'Breed x Pokemon', MEDIUM, 3, 7, 11)
+addQuest('breedPokemon', 'Breed x Pokemon', HARD, 7, 10, 25)
+addQuest('breedPokemon', 'Breed x Pokemon', IMPOSSIBLE, 15, 20, 52);
+
 
 
 
