@@ -54,7 +54,7 @@ var gainPokemonEgg = function(pokemonName){
 var getSteps = function(pokemonName){
 	var pokemon = getPokemonByName(pokemonName);
 	if( pokemon.steps === undefined){
-		return 1000;
+		return 500;
 	} else {
 		return pokemon.steps;
 	}

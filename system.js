@@ -522,8 +522,6 @@ var gainMoney = function(money, message){
 // All pokemon you have gain exp
 var gainExp = function(exp,level,trainer){
 	if(!isNaN(exp)){
-		console.log(level);
-		console.log(exp);
 		var multiplier = player.expMultiplier;
 		var oakBonus = 1;
 		if(isActive("Exp Share")){
