@@ -167,7 +167,7 @@ var showEggs = function(){
 		var html = ""
 		if(player.eggList[i] !== null){
 			html += "<img title='" + player.eggList[i].type + "' class='egg tooltipUp' src=images/breeding/egg" + player.eggList[i].type + ".png>";
-			html += "<div class='progress eggProgress' style='width: 80%; margin:auto'>";
+			html += "<div title='" + player.eggList[i].progress + "/" + player.eggList[i].steps + "' class='progress eggProgress tooltipEggProgress' style='width: 80%; margin:auto'>";
 			html += 	"<div class='progress-bar progress-bar-success' style='width: " + player.eggList[i].progress/player.eggList[i].steps*100 + "%'>";
 			html += 		"<span class='sr-only'></span>";
 			html +=		"</div>";
@@ -184,6 +184,10 @@ var showEggs = function(){
 
 	$(".tooltipUp").tooltipster({
 		position: "top"
+	});
+
+	$(".tooltipEggProgress").tooltipster({
+		position: "bottom"
 	});
 }
 
