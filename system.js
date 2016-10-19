@@ -54,6 +54,7 @@ var player = {
 	lastSeen: new Date().getDate(),
 	eggList: [null, null, null, null],
 	eggSlots: 0,
+	totalBred: 0
 	shinyPoints: 0,
 }
 

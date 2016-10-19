@@ -146,6 +146,7 @@ var hatchEgg = function(egg){
 	$.notify("You hatched a " + egg.pokemon, 'success');
 	progressQuest('breedPokemon', "none", 1);
 	capturePokemon(egg.pokemon, generateEggShiny());
+	player.totalBred++;
 	showEggs();
 }
 
