@@ -312,8 +312,12 @@ var showGymDefeated = function(first, town){
 		html += "Prize money: " + currentGym.moneyReward+ " x 10% = $"+ currentGym.moneyReward/10;
 	}
 
+	console.log(town);
+	console.log(currentGym);
 	if(!e4){
-		html += "<div class='row'><button class='gym leftTownButton btn btn-primary col-sm-2' id='"+town+" Gym'>Retry!</button></div>"
+		html += "<div class='row'><button class='gym leftTownButton btn btn-primary col-sm-2' id='"+town+" Gym'>Retry!</button></div>";
+	} else {
+		html += "<div class='row'><button class='gym leftTownButton btn btn-primary col-sm-2' id='"+currentGym.leaderName+" Gym'>Retry!</button></div>";
 	}
 
 
