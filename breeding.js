@@ -3,7 +3,8 @@ var Egg = function(type, steps, pokemon){
 		type:type,
 		steps:steps,
 		progress: 0,
-		pokemon:pokemon
+		pokemon:pokemon,
+		notified: 0,
 	}
 	return temp;
 }
@@ -126,7 +127,7 @@ var progressEgg = function(amount){
 			player.eggList[i].progress += amount;
 		}
 	}
-	// checkEggHatch();
+	checkEggHatch();
 	showEggs();
 }
 
@@ -135,8 +136,11 @@ var checkEggHatch = function(){
 		var egg = player.eggList[i];
 		if(egg !== null){
 			if( egg.progress >= egg.steps){
-				hatchEgg(egg);
-				player.eggList[i] = null;
+				if(!egg.notify){
+					egg.notify = 1;
+					$.notify("One of your eggs is ready to hatch!", "success");
+					notifyMe("One of your eggs is ready to hatch!");
+				}
 			}
 		}
 	}
