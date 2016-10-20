@@ -1,7 +1,36 @@
+.rock5 {
+	background-image: url('images/mine/rock5.png');
+}
+
+.rock4 {
+	background-image: url('images/mine/rock4.png');
+}
+
+.rock3 {
+	background-image: url('images/mine/rock3.png');
+}
+
+.rock2 {
+	background-image: url('images/mine/rock2.png');
+}
+
+.rock1 {
+	background-image: url('images/mine/rock1.png');
+}
+
+.rock0 {
+	background-image: url('images/mine/rock0.png');
+}
+
+.mineReward {
+	background-color:red;
+}
+
 .mineSquare {
-	border:1px solid black;
-	height: 25px;
-	width:25px;
+	height:32px;
+	width:32px !important;
+	margin: 0px !important;
+	padding:0px !important;
 	text-align: center;
 }
 
