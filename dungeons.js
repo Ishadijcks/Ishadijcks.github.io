@@ -108,6 +108,7 @@ var CeruleanCaveDungeon = function(){
 
 var loadDungeon = function(townId) {
         currentDungeon = getTown(townId).gym;
+        $("#dungeonModal").modal('hide');
     if( player.dungeonTokens >= currentDungeon.tokenCost){
         curEnemy.alive = false;
         clearInterval(counter);
@@ -439,6 +440,9 @@ var showDungeonDefeated = function() {
         for(var i = 0; i < currentDungeon.loot.length; i++){
             html += "<img class='smallImage' src=images/items/"+getItemByName(currentDungeon.loot[i]).id+".png>";
         }
+        html += "<div class='row'>"
+        html +=     "<button class='dungeon leftTownButton btn btn-primary col-sm-2' id='" + currentDungeon.name + "'>Retry!<br>"+currentDungeon.tokenCost+" tokens</button>"
+        html += "</div>"
 
         $("#dungeonDefeatedBody").html(html);
         $("#dungeonModal").modal('show');
