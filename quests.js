@@ -79,7 +79,7 @@ var startQuest = function(quest){
 			break;
 		case "breedPokemon":
 			player.curQuest.type2 = "none";
-			player.curQuest.description = "Breed " + player.curQuest.amount + " Pokemon";
+			player.curQuest.description = "Hatch " + player.curQuest.amount + " eggs";
 			break;
 	}
 	showCurQuest();
