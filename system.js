@@ -74,6 +74,9 @@ var curEnemy = {
 
 
 $(document).ready(function(){
+	if(!(document.domain === "ishadijcks.github.io" || document.domain === "")){
+		$("#siteModal").modal('show')
+	}
 	initTypeEffectiveness();
 	//$('#changeLogModal').modal('show');
 
