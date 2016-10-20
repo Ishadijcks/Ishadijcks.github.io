@@ -243,13 +243,13 @@ $(document).ready(function(){
 		moveToRoute(routeNumber);
 	})
 
-	$("svg").on('click',"rect", function(){
+	$("svg").on('click touchstart',"rect", function(){
 		var id = this.id;
 		routeNumber = idToRoute(id);
 		moveToRoute(routeNumber);
 	})
 
-	$("svg").on('click',".city", function(){
+	$("svg").on('click touchstart',".city", function(){
 		var id = this.id;
 		moveToTown(id);
 	})
@@ -262,7 +262,7 @@ $(document).ready(function(){
 		loadGym(id);
 	})
 
-	$("body").on('click',".dungeon", function(){
+	$("body").on('click touchstart',".dungeon", function(){
 		var id = this.id;
 		id = id.slice(0, -8);
 		loadDungeon(id);
