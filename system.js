@@ -274,7 +274,7 @@ $(document).ready(function(){
 		loadShop(id);
 	})
 
-	$("body").on('click',".dungeonRoom", function(){
+	$("body").on('click touchstart',".dungeonRoom", function(){
 		var id = parseInt(this.id.substring(4));
 		moveToRoom(id);
 	})
