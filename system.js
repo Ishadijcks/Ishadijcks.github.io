@@ -170,7 +170,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$("body").on('click',".useItemButton", function(){
+	$("body").on('click touchstart',".useItemButton", function(){
 		var id = this.id.substring(4);
 		activateItem(id);
 	});
