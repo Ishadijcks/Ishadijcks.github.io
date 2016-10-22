@@ -80,7 +80,9 @@ var buyShopItem = function(itemName){
 			updateStats();
 		} else {
 			var string = "You don't have enough " + item.costType;
-			if(item.costType !== "money" && item.costType !== "dungeon tokens"){
+			if( item.costType === "quest"){
+				string += " quest points";
+			} else if(item.costType !== "money" && item.costType !== "dungeon tokens"){
 				string += " shards";
 			}
 			$.notify(string);
@@ -194,6 +196,9 @@ var getFullResourceName = function(type){
 	if(type === "dungeon token"){
 		return "tokens";
 	}
+
+	console.log(type);
+
 	if(type === "quest"){
 		return "quest points";
 	}
