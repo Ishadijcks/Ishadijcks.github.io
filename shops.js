@@ -81,7 +81,7 @@ var buyShopItem = function(itemName){
 		} else {
 			var string = "You don't have enough " + item.costType;
 			if( item.costType === "quest"){
-				string += " quest points";
+				string += " points";
 			} else if(item.costType !== "money" && item.costType !== "dungeon tokens"){
 				string += " shards";
 			}
