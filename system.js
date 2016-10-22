@@ -649,6 +649,7 @@ var capturePokemon = function(name, shiny){
 			if (pokemonList[i].name == name){
 				pokemonList[i].timeStamp = Math.floor(Date.now() / 1000);
 				pokemonList[i].shiny = shiny;
+				pokemonList[i].experience = 0;
 				player.caughtPokemonList.push(pokemonList[i]);
 				if(shiny){
 					$.notify("You have caught a shiny "+ name +"!", "succes")
