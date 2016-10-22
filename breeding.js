@@ -91,6 +91,9 @@ var releasePokemon = function(pokemonName){
 }
 
 var breedPokemon = function(pokemonName){
+	if(pokemonName === "Farfetch"){
+		pokemonName = "Farfetch'd";
+	}
 	for(var i = 0; i<player.eggSlots; i++){
 		if(player.eggList[i] === null){
 			var pokemon = getCaughtPokemonByName(pokemonName);
