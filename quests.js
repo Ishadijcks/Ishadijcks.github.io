@@ -293,7 +293,7 @@ var showCurQuest = function(){
 	if(canSkipQuestMoney()){
 		html += 		"<button onClick='skipQuestMoney()' class='btn btn-danger'>Skip Quest</button> ($" + getSkipPriceMoney() + ")";
 	} else {
-		html += 		"<button class='btn btn-danger disabled'>Skip Quest</button> (" + getSkipPriceMoney() + " points)";
+		html += 		"<button class='btn btn-danger disabled'>Skip Quest</button> ($" + getSkipPriceMoney() + ")";
 	}
 	
 	html += 		"</div>";
