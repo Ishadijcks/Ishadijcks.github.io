@@ -1,20 +1,69 @@
+var mineItemList = [];
+
+var addMineItem = function(name, id, space){
+	var temp = {
+		name: name,
+		id: id,
+		space: space
+	}
+	mineItemList.push(temp);
+}
+
 var curMine = {
-	itemSelected: 0,
+	itemSelected: 1,
 	grid: [],
 	sizeX: 25,
 	sizeY: 12,
 	rewardGrid: []
 }
 
-var redShard = {
-	id: 1,
-	space:	[[1,1,1], [1,1], [1,1,1]]
-}
+addMineItem("Helix Fossil", 1, [[0,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1]]);
+addMineItem("Dome Fossil", 2, [[2,2,2,2,2], [2,2,2,2,2], [2,2,2,2,2], [0,2,2,2,0]]);
+addMineItem("Old Amber", 3, [[0,3,3,3], [3,3,3,3], [3,3,3,3], [3,3,3,0]]);
+addMineItem("Root Fossil", 4, [[0,0,4,4,4], [0,0,4,4,4], [4,0,0,4,4], [4,4,4,4,4], [0,4,4,4,0]]);
+addMineItem("Claw Fossil", 5, [[5,5,5,0,0], [5,5,5,5,0], [0,5,5,5,5], [0,0,0,5,5]]);
+addMineItem("Armor Fossil", 6, [[0,6,6,6,0], [0,6,6,6,0], [6,6,6,6,6], [0,6,6,6,0]]);
+addMineItem("Skull Fossil", 7, [[7,7,7,7], [7,7,7,7], [7,7,7,7], [0,7,7,0]]);
+addMineItem("Rare Bone", 8, [[8,0,0,0,0,8], [8,8,8,8,8,8], [8,0,0,0,0,8]]);
+addMineItem("Star Piece", 9, [[0,9,0,], [9,9,9], [0,9,0]]);
+addMineItem("Revive", 10, [[0,10,0], [10,10,10,], [0,10,0]]);
+addMineItem("Max Revive", 11, [[11,11,11], [11,11,11], [11,11,11]]);
+addMineItem("Iron Ball", 12, [[12,12,12], [12,12,12], [12,12,12]]);
+addMineItem("Heart Scale", 13, [[13,0], [13,13]]);
+addMineItem("Light Clay", 14, [[14,0,14,0], [14,14,14,0], [14,14,14,14], [0,14,0,14]]);
+addMineItem("Odd Keystone", 15, [[15,15,15,15], [15,15,15,15], [15,15,15,15], [15,15,15,15]]);
+addMineItem("Hard Stone", 16, [[16,16],[16,16]]);
+addMineItem("Fire Stone", 17, [[17,17,17], [17,17,17], [17,17,17]]);
+addMineItem("Water Stone", 18, [[18,18,18], [18,18,18], [18,18,0]]);
+addMineItem("Thunder Stone", 19, [[0,19,19], [19,19,19], [19,19,0]]);
+addMineItem("Leaf Stone", 20, [[0,20,0], [20,20,20], [20,20,20], [0,20,0]]);
 
-var blockReward2 = {
-	id: 2,
-	space:	[[1,1,1,1,1], [1,1,1,1,1]]
-}
+addMineItem("Moon Stone", 21, [[0,21,21,21], [21,21,21,0]]);
+addMineItem("Sun Stone", 22, [[0,22,0,], [22,22,22], [22,22,22]]);
+addMineItem("Oval Stone", 23, [[23,23,23], [23,23,23], [23,23,23]]);
+addMineItem("Everstone", 24, [[24,24,24], [24,24,24]]);
+addMineItem("Smooth Rock", 25, [[25,25,25], [25,25,25], [25,25,25]]);
+addMineItem("Heat Rock", 26, [[26,26,26], [26,26,26]]);
+addMineItem("Icy Rock", 27, [[27,27,27], [27,27,27], [27,27,27]]);
+addMineItem("Damp Rock", 28, [[28,28,28], [28,28,28], [28,0,28]]);
+
+addMineItem("Draco Plate", 29, [[29,29,29,29], [29,29,29,29], [29,29,29,29]]);
+addMineItem("Dread Plate", 30, [[30,30,30,30], [30,30,30,30], [30,30,30,30]]);
+addMineItem("Earth Plate", 31, [[31,31,31,31], [31,31,31,31], [31,31,31,31]]);
+addMineItem("Fist Plate", 32, [[32,32,32,32], [32,32,32,32], [32,32,32,32]]);
+addMineItem("Flame Plate", 33, [[33,33,33,33], [33,33,33,33], [33,33,33,33]]);
+addMineItem("Icicle Plate", 34, [[34,34,34,34], [34,34,34,34], [34,34,34,34]]);
+addMineItem("Insect Plate", 35, [[35,35,35,35], [35,35,35,35], [35,35,35,35]]);
+addMineItem("Iron Plate", 36, [[36,36,36,36], [36,36,36,36], [36,36,36,36]]);
+addMineItem("Meadow Plate", 37, [[37,37,37,37], [37,37,37,37], [37,37,37,37]]);
+addMineItem("Mind Plate", 38, [[38,38,38,38], [38,38,38,38], [38,38,38,38]]);
+addMineItem("Sky Plate", 39, [[39,39,39,39], [39,39,39,39], [39,39,39,39]]);
+addMineItem("Splash Plate", 40, [[40,40,40,40], [40,40,40,40], [40,40,40,40]]);
+addMineItem("Spooky Plate", 41, [[41,41,41,41], [41,41,41,41], [41,41,41,41]]);
+addMineItem("Stone Plate", 42, [[42,42,42,42], [42,42,42,42], [42,42,42,42]]);
+addMineItem("Toxic Plate", 43, [[43,43,43,43], [43,43,43,43], [43,43,43,43]]);
+addMineItem("Zap Plate", 44, [[44,44,44,44], [44,44,44,44], [44,44,44,44]]);
+//addMineItem("", , [[,,,,], [,,,,], [,,,,], [,,,,]]);
 
 var loadMine = function(){
 	curMine.grid = [];
@@ -22,7 +71,7 @@ var loadMine = function(){
 		var row = [];
 		var rewardRow = [];
 		for(var j = 0; j<curMine.sizeX; j++){
-			row.push(Math.floor(Math.random()*5)+1);
+			row.push(Math.floor(Math.random()*1)+0);
 			rewardRow.push(0);
 		}
 	curMine.grid.push(row);
@@ -37,17 +86,19 @@ var addReward = function(x, y, reward){
 	for(var i = 0; i<reward.space.length; i++){
 		for( var j = 0; j<reward.space[i].length; j++){
 			console.log(j + ", " + i);
-			curMine.rewardGrid[i+y][j+x] = {
-				x: i,
-				y: j,
-				value: reward.space[i][j]
-			};
+			if(reward.space[i][j] !== 0){
+				curMine.rewardGrid[i+y][j+x] = {
+					x: j,
+					y: i,
+					value: reward.space[i][j]
+				};
+			}
 		}
 	}
 }
 
-addReward(3, 3, redShard)
-addReward(12, 8, blockReward2)
+addReward(3, 3, mineItemList[29]);
+
 
 var showCurMine = function(){
 	var html = "";
@@ -71,8 +122,9 @@ var setItemSelected = function(x){
 }
 
 var mineSquare = function(amount, i, j){
+
 	if(curMine.rewardGrid[i][j] != 0 && curMine.grid[i][j] === 0){
-		return "<img src='images/mine/"+ curMine.rewardGrid[i][j].value + "" + curMine.rewardGrid[i][j].y + "" + curMine.rewardGrid[i][j].x + ".png' class='col-sm-1 mineReward mineSquare' data-i='" + i + "' data-j='" + j + "'>";
+		return "<img src='images/mine/"+ curMine.rewardGrid[i][j].value + "/" + curMine.rewardGrid[i][j].value + "-" + curMine.rewardGrid[i][j].y + "-" + curMine.rewardGrid[i][j].x + ".png' class='col-sm-1 mineReward mineSquare' data-i='" + i + "' data-j='" + j + "'>";
 	} else {
 		return "<div class='col-sm-1 rock" + Math.max(amount,0) + " mineSquare' data-i='" + i + "' data-j='" + j + "'></div>";
 	}
@@ -94,7 +146,6 @@ var hammer = function(x,y){
 	}
 	for(var i = -1; i < 2; i++){
 		for(var j = -1; j < 2; j++){
-			console.log(normalizeX(x+i) + "," + normalizeY(y+j))
 			curMine.grid[normalizeY(x+i)][normalizeX(y+j)] = Math.max(0, curMine.grid[normalizeY(x+i)][normalizeX(y+j)]-1);
 		}
 	}
