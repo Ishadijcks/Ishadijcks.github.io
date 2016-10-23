@@ -6,9 +6,9 @@ var curMine = {
 	rewardGrid: []
 }
 
-var blockReward = {
+var redShard = {
 	id: 1,
-	space:	[[1,1,1], [1,1,1], [1,1,1], [1,1,1]]
+	space:	[[1,1,1], [1,1], [1,1,1]]
 }
 
 var blockReward2 = {
@@ -35,14 +35,18 @@ loadMine();
 var addReward = function(x, y, reward){
 	console.log(reward);
 	for(var i = 0; i<reward.space.length; i++){
-		for( var j = 0; j<reward.space[0].length; j++){
+		for( var j = 0; j<reward.space[i].length; j++){
 			console.log(j + ", " + i);
-			curMine.rewardGrid[i+y][j+x] = reward.space[i][j];
+			curMine.rewardGrid[i+y][j+x] = {
+				x: i,
+				y: j,
+				value: reward.space[i][j]
+			};
 		}
 	}
 }
 
-addReward(3, 3, blockReward)
+addReward(3, 3, redShard)
 addReward(12, 8, blockReward2)
 
 var showCurMine = function(){
@@ -68,7 +72,7 @@ var setItemSelected = function(x){
 
 var mineSquare = function(amount, i, j){
 	if(curMine.rewardGrid[i][j] != 0 && curMine.grid[i][j] === 0){
-		return "<div class='col-sm-1 mineReward mineSquare' data-i='" + i + "' data-j='" + j + "'></div>";
+		return "<img src='images/mine/"+ curMine.rewardGrid[i][j].value + "" + curMine.rewardGrid[i][j].y + "" + curMine.rewardGrid[i][j].x + ".png' class='col-sm-1 mineReward mineSquare' data-i='" + i + "' data-j='" + j + "'>";
 	} else {
 		return "<div class='col-sm-1 rock" + Math.max(amount,0) + " mineSquare' data-i='" + i + "' data-j='" + j + "'></div>";
 	}
