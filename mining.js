@@ -1,10 +1,12 @@
 var mineItemList = [];
 
-var addMineItem = function(name, id, space){
+var addMineItem = function(name, id, space, value, valueType){
 	var temp = {
 		name: name,
 		id: id,
-		space: space
+		space: space,
+		value: value || 1,
+		valueType: valueType || "mine"
 	}
 	mineItemList.push(temp);
 }
@@ -55,22 +57,22 @@ addMineItem("Heat Rock", 26, [[26,26,26], [26,26,26]]);
 addMineItem("Icy Rock", 27, [[27,27,27], [27,27,27], [27,27,27]]);
 addMineItem("Damp Rock", 28, [[28,28,28], [28,28,28], [28,0,28]]);
 
-addMineItem("Draco Plate", 29, [[29,29,29,29], [29,29,29,29], [29,29,29,29]]);
-addMineItem("Dread Plate", 30, [[30,30,30,30], [30,30,30,30], [30,30,30,30]]);
-addMineItem("Earth Plate", 31, [[31,31,31,31], [31,31,31,31], [31,31,31,31]]);
-addMineItem("Fist Plate", 32, [[32,32,32,32], [32,32,32,32], [32,32,32,32]]);
-addMineItem("Flame Plate", 33, [[33,33,33,33], [33,33,33,33], [33,33,33,33]]);
-addMineItem("Icicle Plate", 34, [[34,34,34,34], [34,34,34,34], [34,34,34,34]]);
-addMineItem("Insect Plate", 35, [[35,35,35,35], [35,35,35,35], [35,35,35,35]]);
-addMineItem("Iron Plate", 36, [[36,36,36,36], [36,36,36,36], [36,36,36,36]]);
-addMineItem("Meadow Plate", 37, [[37,37,37,37], [37,37,37,37], [37,37,37,37]]);
-addMineItem("Mind Plate", 38, [[38,38,38,38], [38,38,38,38], [38,38,38,38]]);
-addMineItem("Sky Plate", 39, [[39,39,39,39], [39,39,39,39], [39,39,39,39]]);
-addMineItem("Splash Plate", 40, [[40,40,40,40], [40,40,40,40], [40,40,40,40]]);
-addMineItem("Spooky Plate", 41, [[41,41,41,41], [41,41,41,41], [41,41,41,41]]);
-addMineItem("Stone Plate", 42, [[42,42,42,42], [42,42,42,42], [42,42,42,42]]);
-addMineItem("Toxic Plate", 43, [[43,43,43,43], [43,43,43,43], [43,43,43,43]]);
-addMineItem("Zap Plate", 44, [[44,44,44,44], [44,44,44,44], [44,44,44,44]]);
+addMineItem("Draco Plate", 29, [[29,29,29,29], [29,29,29,29], [29,29,29,29]], 25, "dragon");
+addMineItem("Dread Plate", 30, [[30,30,30,30], [30,30,30,30], [30,30,30,30]], 25, "dark");
+addMineItem("Earth Plate", 31, [[31,31,31,31], [31,31,31,31], [31,31,31,31]], 25, "ground");
+addMineItem("Fist Plate", 32, [[32,32,32,32], [32,32,32,32], [32,32,32,32]], 25, "fighting");
+addMineItem("Flame Plate", 33, [[33,33,33,33], [33,33,33,33], [33,33,33,33]], 25, "fire");
+addMineItem("Icicle Plate", 34, [[34,34,34,34], [34,34,34,34], [34,34,34,34]], 25, "ice");
+addMineItem("Insect Plate", 35, [[35,35,35,35], [35,35,35,35], [35,35,35,35]], 25, "bug");
+addMineItem("Iron Plate", 36, [[36,36,36,36], [36,36,36,36], [36,36,36,36]], 25, "steel");
+addMineItem("Meadow Plate", 37, [[37,37,37,37], [37,37,37,37], [37,37,37,37]], 25, "grass");
+addMineItem("Mind Plate", 38, [[38,38,38,38], [38,38,38,38], [38,38,38,38]], 25, "psychic");
+addMineItem("Sky Plate", 39, [[39,39,39,39], [39,39,39,39], [39,39,39,39]], 25, "flying");
+addMineItem("Splash Plate", 40, [[40,40,40,40], [40,40,40,40], [40,40,40,40]], 25, "water");
+addMineItem("Spooky Plate", 41, [[41,41,41,41], [41,41,41,41], [41,41,41,41]], 25, "ghost");
+addMineItem("Stone Plate", 42, [[42,42,42,42], [42,42,42,42], [42,42,42,42]], 25, "rock");
+addMineItem("Toxic Plate", 43, [[43,43,43,43], [43,43,43,43], [43,43,43,43]], 25, "poison");
+addMineItem("Zap Plate", 44, [[44,44,44,44], [44,44,44,44], [44,44,44,44]], 25, "electric");
 //addMineItem("", , [[,,,,], [,,,,], [,,,,], [,,,,]]);
 
 var loadMine = function(){
@@ -110,7 +112,9 @@ var gainMineItem = function(id){
 		var tempItem = {
 			name: item.name,
 			amount: 1,
-			id: id
+			id: id,
+			value: item.value,
+			valueType: item.valueType
 		}
 		player.mineInventory.push(tempItem);
 	} else {
@@ -121,23 +125,73 @@ var gainMineItem = function(id){
 var showMineItems = function(){
 	var html = "";
 	html += "<table class='table'><tbody><tr>";
-	for( var i = 0; i<player.mineInventory.length; i++){
+	if( isMineInventoryEmpty()){
 		html += "<tr>";
-		html += 	"<td><img class='mineInventoryItem' src='images/mine/" + player.mineInventory[i].id + ".png'</td>";
-		html += 	"<td>" + player.mineInventory[i].name + "</td>";
- 		html += 	"<td>" + player.mineInventory[i].amount + "</td>";
-		html += 	"<td>Sell</td>";
+		html += 	"<td>Your mine inventory is empty...</td>";
 		html += "</tr>";
+	} else {
+		for( var i = 0; i<player.mineInventory.length; i++){
+			if(player.mineInventory[i].amount > 0){
+				html += "<tr>";
+				html += 	"<td><img class='mineInventoryItem' src='images/mine/" + player.mineInventory[i].id + ".png'</td>";
+				html += 	"<td>" + player.mineInventory[i].name + "</td>";
+		 		html += 	"<td>" + player.mineInventory[i].amount + "</td>";
+		 		var resourceName = getFullResourceName(player.mineInventory[i].valueType);
+		 		if(player.mineInventory[i].value === 1){
+		 			resourceName = resourceName.substring(0, resourceName.length - 1);
+		 		}
+				html += 	"<td><button title='" + player.mineInventory[i].value + " " + resourceName + "'class='btn btn-success tooltipRightMine' onClick='sellMineItem(" + player.mineInventory[i].id + ")'>Sell</button></td>";
+				html += "</tr>";
+			}
+		}
 	}
 
-
-	
-	
 	html +="</tbody></table>";
-
-
-
 	$("#treasuresBody").html(html);
+	$("#diamondCounter").html(player.mineCoins);
+
+	$(".tooltipRightMine").tooltipster({
+		position: "right"
+	});
+
+}
+
+var isMineInventoryEmpty = function(){
+	for( var i = 0; i<player.mineInventory.length; i++){
+		if(player.mineInventory[i].amount > 0){
+			return false;
+		}
+	}
+	return true;
+}
+
+var sellMineItem = function(id){
+	for( var i = 0; i< player.mineInventory.length; i++){
+		if(player.mineInventory[i].id === id){
+			if(player.mineInventory[i].amount > 0){
+				player.mineInventory[i].amount--;
+				gainMainItemProfit(player.mineInventory[i].value, player.mineInventory[i].valueType);
+			}
+		}
+	}
+	showMineItems();
+}
+
+var gainMainItemProfit = function(value, valueType){
+	if( valueType === "money"){
+		player.money += value;
+	} else if( valueType === "mine"){
+		gainMineCoins(value);
+	} else{
+		gainShards(valueType, value);
+		console.log(valueType);
+		console.log(value);
+	}
+}
+
+
+var gainMineCoins = function(x){
+	player.mineCoins += x;
 }
 
 var alreadyHasMineItem = function(id){
@@ -214,7 +268,7 @@ var checkItemsRevealed = function(){
 
 var checkMineCompleted = function(){
 	if(curMine.itemsFound >= curMine.itemsBuried){
-		setTimeout(mineCompleted, 3000);
+		setTimeout(mineCompleted, 2000);
 	}
 }
 
@@ -259,6 +313,7 @@ var showCurMine = function(){
 	html += curMine.itemsFound + "/" + curMine.itemsBuried;
 	html += "</div>";
 	$("#mineBody").html(html);
+	$("#diamondCounter").html(player.mineCoins);
 }
 
 var setItemSelected = function(x){

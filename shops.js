@@ -197,5 +197,8 @@ var getFullResourceName = function(type){
 	if(type === "quest"){
 		return "quest points";
 	}
+	if(type === "mine"){
+		return "diamonds";
+	}
 	return type + " shards";
 }
