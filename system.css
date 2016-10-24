@@ -1,3 +1,7 @@
+.mineInventoryItem {
+	width: 50px;
+}
+
 .rock5 {
 	background-image: url('images/mine/rock5.png');
 }
@@ -32,6 +36,14 @@
 	margin: 0px !important;
 	padding:0px !important;
 	text-align: center;
+}
+
+.hammerSelected {
+	cursor:url('images/mine/hammer.png'),auto;
+}
+
+.chisselSelected {
+	cursor:url('images/mine/chissel.png'),auto;
 }
 
 .eggProgress {

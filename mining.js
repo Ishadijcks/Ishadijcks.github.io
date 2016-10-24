@@ -14,8 +14,16 @@ var curMine = {
 	grid: [],
 	sizeX: 25,
 	sizeY: 12,
-	rewardGrid: []
+	rewardGrid: [],
+	itemsFound: 0,
+	itemsBuried: 0,
+	rewardNumbers: [],
+	maxItems: 3,
+	layersCleared: 0,
+	totalItemsFound: 0
 }
+
+var toolName = ["chissel", "hammer"];
 
 addMineItem("Helix Fossil", 1, [[0,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1]]);
 addMineItem("Dome Fossil", 2, [[2,2,2,2,2], [2,2,2,2,2], [2,2,2,2,2], [0,2,2,2,0]]);
@@ -122,11 +130,11 @@ var setItemSelected = function(x){
 }
 
 var mineSquare = function(amount, i, j){
-
 	if(curMine.rewardGrid[i][j] != 0 && curMine.grid[i][j] === 0){
-		return "<img src='images/mine/"+ curMine.rewardGrid[i][j].value + "/" + curMine.rewardGrid[i][j].value + "-" + curMine.rewardGrid[i][j].y + "-" + curMine.rewardGrid[i][j].x + ".png' class='col-sm-1 mineReward mineSquare' data-i='" + i + "' data-j='" + j + "'>";
+		curMine.rewardGrid[i][j].revealed = 1;
+		return "<img src='images/mine/"+ curMine.rewardGrid[i][j].value + "/" + curMine.rewardGrid[i][j].value + "-" + curMine.rewardGrid[i][j].y + "-" + curMine.rewardGrid[i][j].x + ".png' class='col-sm-1 mineReward mineSquare "+ toolName[curMine.itemSelected] + "Selected' data-i='" + i + "' data-j='" + j + "'>";
 	} else {
-		return "<div class='col-sm-1 rock" + Math.max(amount,0) + " mineSquare' data-i='" + i + "' data-j='" + j + "'></div>";
+		return "<div class='col-sm-1 rock" + Math.max(amount,0) + " mineSquare "+ toolName[curMine.itemSelected] + "Selected' data-i='" + i + "' data-j='" + j + "'></div>";
 	}
 }
 
