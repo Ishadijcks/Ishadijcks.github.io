@@ -374,7 +374,7 @@ var dungeonEnemyDefeated = function() {
         dungeonCanMove = 1;
         var catchRate = curEnemy.catchRate + getBonusCatchrate();
         $("#dungeonCatchDisplay").html("Catch chance: " + Math.min(100, catchRate) + "%");
-
+        progressEgg(Math.floor(Math.sqrt(currentDungeon.itemRoute)));
         setTimeout(function() {
             if (canCatch) {
 
