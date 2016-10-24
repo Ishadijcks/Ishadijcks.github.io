@@ -75,6 +75,7 @@ var gainEgg = function(egg){
 			return;
 		}
 	}
+	save();
 }
 
 var releasePokemon = function(pokemonName){
