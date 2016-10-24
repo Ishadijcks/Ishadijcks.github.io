@@ -55,8 +55,8 @@ var player = {
 	eggList: [null, null, null, null],
 	eggSlots: 0,
 	totalBred: 0,
-	shinyPoints: 0
-
+	shinyPoints: 0,
+	mineInventory: []
 }
 
 var curEnemy = {
