@@ -65,6 +65,7 @@ var load = function(){
 	if (typeof savegame.eggSlots !== "undefined") player.eggSlots = savegame.eggSlots;
 	if (typeof savegame.shinyPoints !== "undefined") player.shinyPoints = savegame.shinyPoints;
 	if (typeof savegame.mineInventory !== "undefined") player.mineInventory = savegame.mineInventory;
+	if (typeof savegame.mineCoins !== "undefined") player.mineCoins = savegame.mineCoins;
 
 
 	if(player.version < version){
