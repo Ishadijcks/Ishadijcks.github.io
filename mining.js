@@ -85,7 +85,7 @@ var loadMine = function(){
 		var row = [];
 		var rewardRow = [];
 		for(var j = 0; j<curMine.sizeX; j++){
-			row.push(Math.floor(Math.random()*5)+1);
+			row.push(Math.min(5, Math.max(1, Math.floor(Math.random()*2+Math.random()*3)+1)));
 			rewardRow.push(0);
 		}
 	curMine.grid.push(row);
