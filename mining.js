@@ -75,38 +75,170 @@ addMineItem("Zap Plate", 44, [[44,44,44,44], [44,44,44,44], [44,44,44,44]]);
 
 var loadMine = function(){
 	curMine.grid = [];
+	curMine.rewardGrid = [];
+	curMine.itemsFound = 0;
+	curMine.itemsBuried = 0;
+	curMine.rewardNumbers = [];
 	for( var i = 0; i<curMine.sizeY; i++){
 		var row = [];
 		var rewardRow = [];
 		for(var j = 0; j<curMine.sizeX; j++){
-			row.push(Math.floor(Math.random()*1)+0);
+			row.push(Math.floor(Math.random()*5)+1);
 			rewardRow.push(0);
 		}
 	curMine.grid.push(row);
 	curMine.rewardGrid.push(rewardRow);
 	}
+	
+	for( var i = 0; i<curMine.maxItems; i++){
+		var x = getRandomCoord(curMine.sizeX);
+		var y = getRandomCoord(curMine.sizeY);
+		var item = getRandomMineItem();
+		var res = canAddReward(x,y,item)
+		if(res){
+			addReward(x,y,item);
+		}
+	}
+	showCurMine();
 }
 
-loadMine();
+var gainMineItem = function(id){
+	console.log(id);
+	var index = alreadyHasMineItem(id);
+	if( index == -1){	
+		var item = mineItemList[id-1];
+		var tempItem = {
+			name: item.name,
+			amount: 1,
+			id: id
+		}
+		player.mineInventory.push(tempItem);
+	} else {
+		player.mineInventory[index].amount++;
+	}
+}
+
+var showMineItems = function(){
+	var html = "";
+	html += "<table class='table'><tbody><tr>";
+	for( var i = 0; i<player.mineInventory.length; i++){
+		html += "<tr>";
+		html += 	"<td><img class='mineInventoryItem' src='images/mine/" + player.mineInventory[i].id + ".png'</td>";
+		html += 	"<td>" + player.mineInventory[i].name + "</td>";
+ 		html += 	"<td>" + player.mineInventory[i].amount + "</td>";
+		html += 	"<td>Sell</td>";
+		html += "</tr>";
+	}
+
+
+	
+	
+	html +="</tbody></table>";
+
+
+
+	$("#treasuresBody").html(html);
+}
+
+var alreadyHasMineItem = function(id){
+	var name = mineItemList[id-1].name;
+	for( var i = 0; i<player.mineInventory.length; i++){
+		if(player.mineInventory[i].name === name){
+			return i;
+		}
+	}
+	return -1;
+}
+
+var getRandomMineItem = function(){
+	var index = Math.floor(Math.random()*(mineItemList.length-1)+1);
+	return mineItemList[index] || mineItemList[0];
+}
+
+var getRandomCoord = function(max){
+	return Math.floor(Math.random()*(max-3)) + 1;
+}
 
 var addReward = function(x, y, reward){
-	console.log(reward);
 	for(var i = 0; i<reward.space.length; i++){
 		for( var j = 0; j<reward.space[i].length; j++){
-			console.log(j + ", " + i);
 			if(reward.space[i][j] !== 0){
 				curMine.rewardGrid[i+y][j+x] = {
 					x: j,
 					y: i,
-					value: reward.space[i][j]
+					value: reward.space[i][j],
+					revealed: 0
 				};
 			}
 		}
 	}
+	curMine.itemsBuried++;
+	curMine.rewardNumbers.push(reward.id);
 }
 
-addReward(3, 3, mineItemList[29]);
 
+var canAddReward = function(x, y, reward){
+	if(y+reward.space.length >= curMine.sizeY || x+reward.space[0].length >= curMine.sizeX){
+		return false;
+	}
+	for(var i = 0; i<reward.space.length; i++){
+		for( var j = 0; j<reward.space[i].length; j++){
+			if(reward.space[i][j] !== 0){
+				if(curMine.rewardGrid[i+y][j+x] !== 0){
+					return false;
+				}
+			}
+		}
+	}
+	return true;
+}
+
+// addReward(3, 3, mineItemList[19]);
+// addReward(8, 5, mineItemList[24]);
+// addReward(10, 1, mineItemList[40]);
+// addReward(20, 6, mineItemList[1]);
+
+var checkItemsRevealed = function(){
+	for(var i = 0; i<curMine.rewardNumbers.length; i++){
+		if(checkItemRevealed(curMine.rewardNumbers[i])){
+			gainMineItem(curMine.rewardNumbers[i]);
+			curMine.itemsFound++;
+			curMine.rewardNumbers.splice(i,1);
+			i--;
+			$.notify("You dug an item", "success");
+			curMine.totalItemsFound++;
+			checkMineCompleted();
+		}
+	}
+}
+
+var checkMineCompleted = function(){
+	if(curMine.itemsFound >= curMine.itemsBuried){
+		setTimeout(mineCompleted, 3000);
+	}
+}
+
+var mineCompleted = function(){
+	$.notify("You dig deeper...", "");
+	curMine.layersCleared++;
+	loadMine();
+}
+
+var checkItemRevealed = function(number){
+	for(var i = 0; i<curMine.sizeX; i++){
+		for(var j = 0; j<curMine.sizeY; j++){
+			// console.log(i + "," + j);
+			if(curMine.rewardGrid[j][i] != 0){
+				if(curMine.rewardGrid[j][i].value == number){
+					if(curMine.rewardGrid[j][i].revealed === 0){
+						return false
+					}
+				}
+			}
+		}
+	}
+	return true;
+}
 
 var showCurMine = function(){
 	var html = "";
@@ -121,12 +253,17 @@ var showCurMine = function(){
 	html += "<div class='row'>";
 	html += 	"<button onClick='setItemSelected(1)' class='btn btn-succes'>Hammer</button>";
 	html += 	"<button onClick='setItemSelected(0)' class='btn btn-succes'>Chisel</button>";	
-	html += "</row>";
+	html += "</div>";
+
+	html += "<div class='row'>";
+	html += curMine.itemsFound + "/" + curMine.itemsBuried;
+	html += "</div>";
 	$("#mineBody").html(html);
 }
 
 var setItemSelected = function(x){
 	curMine.itemSelected = x;
+	showCurMine();
 }
 
 var mineSquare = function(amount, i, j){
@@ -146,6 +283,9 @@ var squareClicked = function(i, j){
 	} else {
 		chisel(i,j);
 	}
+	showCurMine();
+	checkItemsRevealed();
+	showCurMine();
 }
 
 var hammer = function(x,y){
@@ -157,12 +297,10 @@ var hammer = function(x,y){
 			curMine.grid[normalizeY(x+i)][normalizeX(y+j)] = Math.max(0, curMine.grid[normalizeY(x+i)][normalizeX(y+j)]-1);
 		}
 	}
-	showCurMine();
 }
 
 var chisel = function(x,y){
 	curMine.grid[normalizeY(x)][normalizeX(y)] = Math.max(0, curMine.grid[normalizeY(x)][normalizeX(y)]-2);
-	showCurMine();
 }
 
 var normalizeX = function(x){
@@ -172,3 +310,6 @@ var normalizeX = function(x){
 var normalizeY = function(y){
 	return Math.min(curMine.sizeY-1, Math.max(0, y));
 }
+
+
+loadMine();

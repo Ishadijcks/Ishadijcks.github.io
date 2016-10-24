@@ -752,12 +752,26 @@
 					<div class="modal-dialog" role="document" style="width:55%">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h4 style='text-align:center' class="modal-title" id="mineLabel">Underground</h4>
-							</div>
-							<div class="modal-body" id="mineBody" style="width: 80%;margin: auto;">
+								<ul class="nav nav-tabs">
+										<li class="active"><a data-toggle="tab" href="#dig">Dig</a></li>
+										<li><a data-toggle="tab" onClick='showMineItems()' href="#treasures">Treasures</a></li>
+										<li><a data-toggle="tab" href="#upgrades">Upgrades</a></li>
+										<li><a data-toggle="tab" href="#stats">Stats</a></li>
+								</ul>
 
+								<div class="tab-content">
+								 	<div id="dig" class="tab-pane fade in active">
+										<div class="modal-body" id="mineBody" style="width: 80%;margin: auto;"></div>
+								 	</div>
+								 	<div id="treasures" class="tab-pane fade">
+								 		<div class="modal-body" id="treasuresBody" style="width: 80%;margin: auto;"></div>
+									</div>
+								 	<div id="upgrades" class="tab-pane fade">
+									</div>
+								 	<div id="stats" class="tab-pane fade">
+									</div>
+								</div>
 							</div>
-
 						</div>
 					</div>
 				</div>
