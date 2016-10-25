@@ -301,6 +301,12 @@ $(document).ready(function(){
 				openDungeonChest();
     			e.preventDefault();
 			}
+		} else if(inProgress === 0){
+			if(keyCode == 32){
+				$(".dungeon").click()
+				$(".gym").click()
+				e.preventDefault();
+			}
 		}
 
 	});
