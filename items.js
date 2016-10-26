@@ -82,7 +82,7 @@ var isPokemon = function(name){
 var gainItemByName = function(name){
 	if(isPokemon(name)){
 		capturePokemon(name);
-		$.notify("You bought "+name, 'success');
+		$.notify("You got a "+name, 'success');
 	} else {
 		if (alreadyHaveItem(name)){
 			var itemNum = findItemInInventory(name);
