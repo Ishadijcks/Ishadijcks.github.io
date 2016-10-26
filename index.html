@@ -762,7 +762,17 @@
 
 								<div class="tab-content">
 								 	<div id="dig" class="tab-pane fade in active">
-										<div class="modal-body" id="mineBody" style="width: 80%;margin: auto;"></div>
+										<div class="modal-body"  style="width: 80%;margin: auto;">
+											<div class='row' style="text-align:center;">
+												<div class='progress' style="margin-bottom:10px">
+  													<div id='mineEnergyBar' class='progress-bar progress-bar-warning' role='progressbar' aria-valuenow='70' aria-valuemin='0' aria-valuemax='100' style='width:80%'>
+  													</div>
+												</div>
+  												<span id='energyDisplay' style='color:black;'>1/2</span>
+											</div>
+											<div id="mineBody"></div>
+
+										</div>
 								 	</div>
 								 	<div id="treasures" class="tab-pane fade">
 								 		<div class="modal-body" id="treasuresBody" style="width: 80%;margin: auto;"></div>

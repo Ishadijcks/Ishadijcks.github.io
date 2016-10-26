@@ -1,5 +1,10 @@
 var mineItemList = [];
 
+
+var gainMineEnergy = function(){
+	curMine.energy = Math.min(curMine.maxEnergy, curMine.energy+1);
+}
+
 var addMineItem = function(name, id, space, value, valueType){
 	var temp = {
 		name: name,
@@ -24,13 +29,28 @@ var curMine = {
 	layersCleared: 0,
 	totalItemsFound: 0,
 	energy: 50,
+	energyTick: 60,
 	maxEnergy:50,
-	energyRegen: 60,
+	energyRegen: 6,
 	energyRefills: 1,
 	chisselEnergy: 1,
-	hammerEnergy: 5,
+	hammerEnergy: 3,
 }
 
+
+var updateMineEnergy = function(){
+	if(curMine.energy < curMine.maxEnergy){
+		curMine.energyTick--;
+		if(curMine.energyTick <= 0){
+			curMine.energyTick = curMine.energyRegen;
+			gainMineEnergy();
+		}
+		$("#energyDisplay").html(curMine.energy + "/" + curMine.maxEnergy + " <img src='images/mine/flash.png'> (next: " + curMine.energyTick + "s)");
+		$("#mineEnergyBar").width( curMine.energy/curMine.maxEnergy*100 + "%");
+	}
+}
+
+var energyInterval = setInterval(updateMineEnergy, 1000);
 var toolName = ["chissel", "hammer"];
 
 addMineItem("Helix Fossil", 1, [[0,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1]], 3);
@@ -205,8 +225,6 @@ var gainMainItemProfit = function(value, valueType){
 		gainMineCoins(value);
 	} else{
 		gainShards(valueType, value);
-		console.log(valueType);
-		console.log(value);
 	}
 }
 
@@ -325,12 +343,6 @@ var checkItemRevealed = function(number){
 
 var showCurMine = function(){
 	var html = "";
-	html += "<div class='row'>";
-	html += 	"<div class='progress'>"
-  	html += 		"<div id='mineEnergyBar' class='progress-bar' role='progressbar' aria-valuenow='70' aria-valuemin='0' aria-valuemax='100' style='width:" + curMine.energy/curMine.maxEnergy*100 + "%'>";
-  	html += "	</div>"
-	html += "</div>"
-
 
 	html += "</div>";
 	for(var i = 0; i<curMine.grid.length; i++){
@@ -342,14 +354,16 @@ var showCurMine = function(){
 	}
 
 	html += "<div class='row'>";
-	html += 	"<button onClick='setItemSelected(1)' class='btn btn-succes'>Hammer</button>";
-	html += 	"<button onClick='setItemSelected(0)' class='btn btn-succes'>Chisel</button>";	
+	html += 	"<button onClick='setItemSelected(1)' class='btn btn-succes'>Hammer (" + curMine.hammerEnergy + " energy)</button>";
+	html += 	"<button onClick='setItemSelected(0)' class='btn btn-succes'>Chisel (" + curMine.chisselEnergy + " energy)</button>";	
 	html += "</div>";
 
 	html += "<div class='row'>";
 	html += curMine.itemsFound + "/" + curMine.itemsBuried;
 	html += "</div>";
 	$("#mineBody").html(html);
+	$("#energyDisplay").html(curMine.energy + "/" + curMine.maxEnergy + " <img src='images/mine/flash.png'>(next: " + curMine.energyTick + "s)");
+	$("#mineEnergyBar").width( curMine.energy/curMine.maxEnergy*100 + "%");
 	$("#diamondCounter").html(player.mineCoins);
 }
 
