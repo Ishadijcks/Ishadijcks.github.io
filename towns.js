@@ -107,6 +107,7 @@ var showTown = function(town){
 }
 
 var loadTowns = function(){
+	townList = [];
 	addTown("Pewter City", PewterCityGym(), "images/gyms/pewtercity.png", PewterCityShop(), [2]);
 	addTown("Cerulean City", CeruleanCityGym(), "images/gyms/ceruleancity.png", CeruleanCityShop(), [4]);
 	addTown("Vermillion City",VermillionCityGym(), "images/gyms/vermillioncity.png", VermillionCityShop(), [6]);
