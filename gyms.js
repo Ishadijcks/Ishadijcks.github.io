@@ -13,7 +13,7 @@ var Gym = function(leaderName,town,pokemons,badgeReward,moneyReward,badgeReq){
 		timeLimit: 30*100,
 		timeLeft: 30*100
 	}
-	return temp;
+	return temp; // Test comment to see if commits are being received
 }
 
 var GymPokemon = function(name, health, level){
