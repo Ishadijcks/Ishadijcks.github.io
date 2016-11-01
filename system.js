@@ -74,12 +74,14 @@ var player = {
 	energyTick: 60,
 	maxEnergy:50,
 	energyRegen: 60,
+	energyGain: 3,
 	energyRefills: 1,
 	chisselEnergy: 1,
 	hammerEnergy: 3,
 	maxEnergyUpgrades: 0,
 	energyRegenUpgrades: 0,
-	maxItemsUpgrades: 0
+	maxItemsUpgrades: 0,
+	energyGainUpgrades: 0
 	}
 }
 

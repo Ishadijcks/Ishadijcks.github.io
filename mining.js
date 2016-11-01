@@ -2,7 +2,7 @@ var mineItemList = [];
 
 
 var gainMineEnergy = function(){
-	player.curMine.energy = Math.min(player.curMine.maxEnergy, player.curMine.energy+1);
+	player.curMine.energy = Math.min(player.curMine.maxEnergy, player.curMine.energy+player.curMine.energyGain);
 }
 
 var addMineItem = function(name, id, space, value, valueType){
@@ -196,8 +196,17 @@ var showMineUpgrades = function(){
 
 	html += "<div class='row'>";
 	html += "Energy regen time: " + player.curMine.energyRegen + " (-1) ";
-	if (player.curMine.maxItems < 25){
+	if (player.curMine.energyRegenUpgrades < 30){
 		html += "<button class='tooltipMineUpgrade' title='" + getEnergyRegenUpgradeCost() + " diamonds' onclick='upgradeEnergyRegen()'>Upgrade</button>";
+	} else {
+		html += "<button class='disabled'>Max</button>";
+	}
+	html += "</div>";
+
+	html += "<div class='row'>";
+	html += "Energy gain: " + player.curMine.energyGain + " (+1) ";
+	if (player.curMine.energyGainUpgrades < 17){
+		html += "<button class='tooltipMineUpgrade' title='" + getEnergyGainUpgradeCost() + " diamonds' onclick='upgradeEnergyGain()'>Upgrade</button>";
 	} else {
 		html += "<button class='disabled'>Max</button>";
 	}
@@ -257,6 +266,20 @@ var upgradeEnergyRegen = function(){
 	showMineUpgrades();
 }
 
+var getEnergyGainUpgradeCost = function(){
+	return 100 * (player.curMine.energyGainUpgrades + 1);
+}
+
+var upgradeEnergyGain = function(){
+	if(player.mineCoins >= getEnergyGainUpgradeCost()){
+		player.mineCoins -= getEnergyGainUpgradeCost();
+		player.curMine.energyGainUpgrades += 1;
+		player.curMine.energyGain += 1;
+	} else {
+		$.notify("You don't have enough diamonds");
+	}
+	showMineUpgrades();
+}
 
 
 var isMineInventoryEmpty = function(){
