@@ -285,14 +285,14 @@ var showShardModal = function(){
 		
 		html += "<td class='shardColumn4'>";
 		if (player.notEffectiveTypeBonus[i] < 10){
-			html += "<button class='tooltipShard' title='" +250*(player.notEffectiveTypeBonus[i]+1) + " " + numberToType[i] + " shards' onclick='buyUpgrade("+ i + "," + 1 +")'>Upgrade</button>";
+			html += "<button class='tooltipShard' title='" + numberWithCommas(250*(player.notEffectiveTypeBonus[i]+1)) + " " + numberToType[i] + " shards' onclick='buyUpgrade("+ i + "," + 1 +")'>Upgrade</button>";
 		} else {
 			html += "<button class='disabled'>Upgrade</button>";
 		}
 
 		html += "</td></td></tr>";
 
-		html +="<tr><td><img class= shardImage' id='normalShard' src='images/shards/" + i + ".png'> " + player.typeShards[i] + "</td>";
+		html +="<tr><td><img class= shardImage' id='normalShard' src='images/shards/" + i + ".png'> " + numberWithCommas(player.typeShards[i]) + "</td>";
 		html +="<td>Normal:</td>";
 		html +="<td>"+getNormalEffective(i).toFixed(2)+"x</td>";
 		html +="<td style='width:50%'>";
@@ -305,7 +305,7 @@ var showShardModal = function(){
 		
 		html += "<td class='shardColumn4'>";
 		if (player.normalEffectiveTypeBonus[i] < 10){
-			html += "<button class='tooltipShard' title='" +250*(player.normalEffectiveTypeBonus[i]+1) + " " + numberToType[i] + " shards' onclick='buyUpgrade("+ i + "," + 2 +")'>Upgrade</button>";
+			html += "<button class='tooltipShard' title='" + numberWithCommas(250*(player.normalEffectiveTypeBonus[i]+1)) + " " + numberToType[i] + " shards' onclick='buyUpgrade("+ i + "," + 2 +")'>Upgrade</button>";
 		} else {
 			html += "<button class='disabled'>Upgrade</button>";
 		}
@@ -325,7 +325,7 @@ var showShardModal = function(){
 		
 		html += "<td class='shardColumn4'>";
 		if (player.veryEffectiveTypeBonus[i] < 10){
-			html += "<button class='tooltipShard' title='" +250*(player.veryEffectiveTypeBonus[i]+1) + " " + numberToType[i] + " shards' onclick='buyUpgrade("+ i + "," + 3 +")'>Upgrade</button>";
+			html += "<button class='tooltipShard' title='" + numberWithCommas(250*(player.veryEffectiveTypeBonus[i]+1)) + " " + numberToType[i] + " shards' onclick='buyUpgrade("+ i + "," + 3 +")'>Upgrade</button>";
 		} else {
 			html += "<button class='disabled'>Upgrade</button>";
 		}
