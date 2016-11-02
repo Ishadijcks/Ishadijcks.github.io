@@ -28,10 +28,10 @@ var updateUpgrades = function(){
 			
 			var upgrade = player.upgradeList[i];
 			if(player.money > upgrade.cost){
-				$("#upgradeBox").append("<button type=button id=Upgrade"+upgrade.id+" title=s class='upgradeBoxes btn btn-primary col-sm-12'>"+upgrade.name+"<br>Cost: "+upgrade.cost+"</button>");
+				$("#upgradeBox").append("<button type=button id=Upgrade"+upgrade.id+" title=s class='upgradeBoxes btn btn-primary col-sm-12'>"+upgrade.name+"<br>Cost: "+ numberWithCommas(upgrade.cost) +"</button>");
 			}
 			else {
-				$("#upgradeBox").append("<button type=button id=Upgrade"+upgrade.id+" title=s class='upgradeBoxes disabled btn btn-primary col-sm-12'>"+upgrade.name+"<br>Cost: "+upgrade.cost+"</button>");	
+				$("#upgradeBox").append("<button type=button id=Upgrade"+upgrade.id+" title=s class='upgradeBoxes disabled btn btn-primary col-sm-12'>"+upgrade.name+"<br>Cost: "+ numberWithCommas(upgrade.cost) +"</button>");	
 			}
 			document.getElementById("Upgrade"+upgrade.id).title = upgrade.flavorText;
 		}
@@ -126,11 +126,11 @@ var updateItems = function(){
 
 // Update the stats
 var updateStats = function(){
-	$("#statBody").html("<tr><th>Money</th><th>$"+player.money+"</th></tr>" +
-		"<tr><th>Dungeon Tokens</th><th>"+player.dungeonTokens+"</th></tr>" +
-		"<tr><th>Quest points</th><th>"+player.questPoints+"</th></tr>" +
-		"<tr><th>Click attack</th><th>"+getClickAttack()+"</th></tr>" +
-		"<tr><th>Pokemon attack</th><th>"+getPokemonAttack()+"</th></tr>" +
+	$("#statBody").html("<tr><th>Money</th><th>$"+numberWithCommas(player.money)+"</th></tr>" +
+		"<tr><th>Dungeon Tokens</th><th>"+numberWithCommas(player.dungeonTokens)+"</th></tr>" +
+		"<tr><th>Quest points</th><th>"+numberWithCommas(player.questPoints)+"</th></tr>" +
+		"<tr><th>Click attack</th><th>"+numberWithCommas(getClickAttack())+"</th></tr>" +
+		"<tr><th>Pokemon attack</th><th>"+numberWithCommas(getPokemonAttack())+"</th></tr>" +
 		"<tr><th>Exp multiplier</th><th>"+player.expMultiplier.toFixed(2)+"</th></tr>" +
 		"<tr><th>Money multiplier</th><th>"+player.moneyMultiplier.toFixed(2)+"</th></tr>" +
 		"<tr><th>Catch bonus</th><th>"+getBonusCatchrate()+"%</th></tr>" +
