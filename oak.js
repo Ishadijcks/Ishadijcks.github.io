@@ -104,21 +104,22 @@ var activateOakItem = function(id){
 	if(player.oakItemSlots == 1){
 		deactivateAllOakItems();
 		oakItemList[id].active = 1;
-		player.oakItemsEquipped.push(oakItemList[id]);
+		player.oakItemsEquipped.push(oakItemList[id].name);
 	}
 	
 	else if(player.oakItemSlots == 2){
 		if(oakItemList[id].active == 1){
 			oakItemList[id].active = 0;
 			for(var i = 0; i < player.oakItemsEquipped.length; i++){
-				if(player.oakItemsEquipped[i].name === oakItemList[id].name){
+				if(player.oakItemsEquipped[i] === oakItemList[id].name){
 					player.oakItemsEquipped.splice(i, 1);
+					i--;
 				}
 			}
 		} else {
 			if (getTotalActiveOakItems() < player.oakItemSlots){
 				oakItemList[id].active = 1;
-				player.oakItemsEquipped.push(oakItemList[id]);
+				player.oakItemsEquipped.push(oakItemList[id].name);
 			} else {
 				$.notify("You can only have " + player.oakItemSlots + " Oak items active at the same time", "error" );
 			}
@@ -133,6 +134,7 @@ var activateOakItem = function(id){
 
 var getTotalActiveOakItems = function(){
 	var count = 0;
+	
 	for( var i = 0; i< oakItemList.length; i++){
 		if (oakItemList[i].active == 1){
 			count++;
@@ -145,7 +147,7 @@ var deactivateAllOakItems = function(){
 	for( var i = 0; i< oakItemList.length; i++){
 		oakItemList[i].active = 0;
 	}
-  player.oakItemsEquipped = [];
+	player.oakItemsEquipped = [];
 }
 
 var isActive = function(oakItemName){
@@ -169,7 +171,7 @@ var showOakItems = function(force){
 	if(player.oakItemsEquipped.length > 0) {
 		for (var i = 0; i < player.oakItemsEquipped.length; i++){
 			for (var j = 0; j < oakItemList.length; j++){
-				if (player.oakItemsEquipped[i].name === oakItemList[j].name){
+				if (player.oakItemsEquipped[i] === oakItemList[j].name){
 					oakItemList[j].active = 1;
 				}
 			}
