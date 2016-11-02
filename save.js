@@ -65,6 +65,7 @@ var load = function(){
 	if (typeof savegame.eggSlots !== "undefined") player.eggSlots = savegame.eggSlots;
 	if (typeof savegame.shinyPoints !== "undefined") player.shinyPoints = savegame.shinyPoints;
 	if (typeof savegame.totalBred !== "undefined") player.totalBred = savegame.totalBred;
+	if (typeof savegame.oakItemsEquipped !== "undefined") player.oakItemsEquipped = savegame.oakItemsEquipped;
 
 
 	if(player.version < version){
