@@ -56,6 +56,7 @@ var player = {
 	eggSlots: 0,
 	totalBred: 0,
 	shinyPoints: 0,
+	oakItemsEquipped: [],
 }
 
 var curEnemy = {
