@@ -104,14 +104,21 @@ var activateOakItem = function(id){
 	if(player.oakItemSlots == 1){
 		deactivateAllOakItems();
 		oakItemList[id].active = 1;
+		player.oakItemsEquipped.push(oakItemList[id]);
 	}
 	
 	else if(player.oakItemSlots == 2){
 		if(oakItemList[id].active == 1){
 			oakItemList[id].active = 0;
+			for(var i = 0; i < player.oakItemsEquipped.length; i++){
+				if(player.oakItemsEquipped[i].name === oakItemList[id].name){
+					player.oakItemsEquipped.splice(i, 1);
+				}
+			}
 		} else {
 			if (getTotalActiveOakItems() < player.oakItemSlots){
 				oakItemList[id].active = 1;
+				player.oakItemsEquipped.push(oakItemList[id]);
 			} else {
 				$.notify("You can only have " + player.oakItemSlots + " Oak items active at the same time", "error" );
 			}
@@ -138,6 +145,7 @@ var deactivateAllOakItems = function(){
 	for( var i = 0; i< oakItemList.length; i++){
 		oakItemList[i].active = 0;
 	}
+  player.oakItemsEquipped = [];
 }
 
 var isActive = function(oakItemName){
@@ -157,6 +165,17 @@ var getOakItemBonus = function(oakItemName){
 }
 
 var showOakItems = function(force){
+	
+	if(player.oakItemsEquipped.length > 0) {
+		for (var i = 0; i < player.oakItemsEquipped.length; i++){
+			for (var j = 0; j < oakItemList.length; j++){
+				if (player.oakItemsEquipped[i].name === oakItemList[j].name){
+					oakItemList[j].active = 1;
+				}
+			}
+		}
+	}
+	
 	if(lastNumberOfPokemon != player.caughtPokemonList.length || force){
 		lastNumberOfPokemon = player.caughtPokemonList.length;
 		if(player.caughtPokemonList.length >= 20){
