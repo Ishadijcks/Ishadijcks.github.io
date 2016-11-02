@@ -46,6 +46,22 @@ function compareByRecent(a,b) {
   return 0;
 }
 
+function compareByShiny(a,b) {
+  if (a.shiny > b.shiny)
+    return -1;
+  if (a.shiny < b.shiny)
+    return 1;
+  if (a.shiny == b.shiny){
+    if(a.id > b.id){
+      return 1;
+    }
+    if(a.id < b.id){
+      return -1;
+    }
+  }
+  return 0;
+}
+
 
 function compareByCatchRate(a,b) {
   if (a.catchRate < b.catchRate)
@@ -123,6 +139,8 @@ var sortChange = function() {
       break;
     case "catchRate":
       player.caughtPokemonList.sort(compareByCatchRate);
+    case "shiny":
+      player.caughtPokemonList.sort(compareByShiny);
   }
   
   updateCaughtList();

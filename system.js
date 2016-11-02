@@ -231,6 +231,8 @@ $(document).ready(function(){
 		updateCaughtList();
 	})
 
+
+
 	$("body").on('click',"#AttackCaughtPokemon", function(){
 		player.caughtPokemonList.sort(compareByAttack);
 		updateCaughtList();
