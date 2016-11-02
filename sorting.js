@@ -47,9 +47,9 @@ function compareByRecent(a,b) {
 }
 
 function compareByShiny(a,b) {
-  if (a.shiny > b.shiny)
+  if (a.shiny > b.shiny || b.shiny === undefined)
     return -1;
-  if (a.shiny < b.shiny)
+  if (a.shiny < b.shiny || a.shiny === undefined)
     return 1;
   if (a.shiny == b.shiny){
     if(a.id > b.id){
@@ -118,6 +118,7 @@ var sortChange = function() {
     var selectBox = document.getElementById("sortBox");
   
     var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+  console.log(selectedValue);
   switch(selectedValue){
     case "name": 
       player.caughtPokemonList.sort(compareByName);
@@ -139,8 +140,10 @@ var sortChange = function() {
       break;
     case "catchRate":
       player.caughtPokemonList.sort(compareByCatchRate);
+      break;
     case "shiny":
       player.caughtPokemonList.sort(compareByShiny);
+          break;
   }
   
   updateCaughtList();
