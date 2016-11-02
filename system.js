@@ -673,6 +673,9 @@ var capturePokemon = function(name, shiny){
 					if(player.caughtPokemonList[i].shiny){
 						player.shinyPoints++;
 					}
+					if(pokemonList[i].shiny === 0 || pokemonList[i].shiny === undefined) {
+						pokemonList[i].timeStamp = Math.floor(Date.now() / 1000);
+					}
 					player.caughtPokemonList[i].shiny = 1;
 					$.notify("You have caught a shiny "+ name +"!", "succes")
 					progressQuest('captureShinies', "none" , 1);
