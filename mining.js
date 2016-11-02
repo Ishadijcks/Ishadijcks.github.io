@@ -34,10 +34,10 @@ var toolName = ["chissel", "hammer"];
 addMineItem("Helix Fossil", 1, [[0,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1]], 3);
 addMineItem("Dome Fossil", 2, [[2,2,2,2,2], [2,2,2,2,2], [2,2,2,2,2], [0,2,2,2,0]], 3);
 addMineItem("Old Amber", 3, [[0,3,3,3], [3,3,3,3], [3,3,3,3], [3,3,3,0]], 4);
-addMineItem("Root Fossil", 4, [[0,0,4,4,4], [0,0,4,4,4], [4,0,0,4,4], [4,4,4,4,4], [0,4,4,4,0]], 3);
-addMineItem("Claw Fossil", 5, [[5,5,5,0,0], [5,5,5,5,0], [0,5,5,5,5], [0,0,0,5,5]], 3);
-addMineItem("Armor Fossil", 6, [[0,6,6,6,0], [0,6,6,6,0], [6,6,6,6,6], [0,6,6,6,0]], 3);
-addMineItem("Skull Fossil", 7, [[7,7,7,7], [7,7,7,7], [7,7,7,7], [0,7,7,0]], 3);
+// addMineItem("Root Fossil", 4, [[0,0,4,4,4], [0,0,4,4,4], [4,0,0,4,4], [4,4,4,4,4], [0,4,4,4,0]], 3);
+// addMineItem("Claw Fossil", 5, [[5,5,5,0,0], [5,5,5,5,0], [0,5,5,5,5], [0,0,0,5,5]], 3);
+// addMineItem("Armor Fossil", 6, [[0,6,6,6,0], [0,6,6,6,0], [6,6,6,6,6], [0,6,6,6,0]], 3);
+// addMineItem("Skull Fossil", 7, [[7,7,7,7], [7,7,7,7], [7,7,7,7], [0,7,7,0]], 3);
 addMineItem("Rare Bone", 8, [[8,0,0,0,0,8], [8,8,8,8,8,8], [8,0,0,0,0,8]], 2);
 addMineItem("Star Piece", 9, [[0,9,0,], [9,9,9], [0,9,0]], 3);
 addMineItem("Revive", 10, [[0,10,0], [10,10,10,], [0,10,0]]);
@@ -447,7 +447,7 @@ var showCurMine = function(){
 	html += player.curMine.itemsFound + "/" + player.curMine.itemsBuried;
 	html += "</div>";
 	$("#mineBody").html(html);
-	$("#energyDisplay").html(player.curMine.energy + "/" + player.curMine.maxEnergy + " <img src='images/mine/flash.png'>(next: " + player.curMine.energyTick + "s)");
+	$("#energyDisplay").html(player.curMine.energy + "/" + player.curMine.maxEnergy + " <img src='images/mine/flash.png'> (next: " + player.curMine.energyTick + "s)");
 	$("#mineEnergyBar").width( player.curMine.energy/player.curMine.maxEnergy*100 + "%");
 	$("#diamondCounter").html(player.mineCoins);
 }
@@ -494,9 +494,11 @@ var hammer = function(x,y){
 }
 
 var chisel = function(x,y){
-	if(player.curMine.energy >= player.curMine.chisselEnergy){
-		player.curMine.grid[normalizeY(x)][normalizeX(y)] = Math.max(0, player.curMine.grid[normalizeY(x)][normalizeX(y)]-3);
-		player.curMine.energy -= player.curMine.chisselEnergy;
+	if(player.curMine.grid[x][y] > 0) {
+		if (player.curMine.energy >= player.curMine.chisselEnergy) {
+			player.curMine.grid[normalizeY(x)][normalizeX(y)] = Math.max(0, player.curMine.grid[normalizeY(x)][normalizeX(y)] - 3);
+			player.curMine.energy -= player.curMine.chisselEnergy;
+		}
 	}
 }
 

@@ -52,6 +52,17 @@ var gainPokemonEgg = function(pokemonName){
 	gainEgg(Egg(pokemon.type, getSteps(pokemonName), pokemonName));
 }
 
+var gainMineEgg = function(pokemonName){
+    var type = "amber";
+    if(pokemonName === "Kabuto"){
+        type = "dome";
+    } else if(pokemonName === "Omanye"){
+        type = "helix";
+    }
+	var pokemon = getPokemonByName(pokemonName);
+	gainEgg(Egg(, getSteps(pokemonName), pokemonName));
+}
+
 var getSteps = function(pokemonName){
 	var pokemon = getPokemonByName(pokemonName);
 	if( pokemon.steps === undefined){
