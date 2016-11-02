@@ -870,3 +870,11 @@ var testLegendary = function(tries){
 	console.log("Mewtwo: "+two);
 	console.log("False: "+fail);
 }
+
+var numberWithCommas = function(x){
+	return Number(x).toLocaleString('en');
+}
+
+var numberNoCommas = function(x){
+	return parseFloat(String(x).replace(/,/g, ''));
+}
