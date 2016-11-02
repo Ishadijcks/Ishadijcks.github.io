@@ -1,8 +1,11 @@
+.starter {
+    cursor:pointer;
+}
+
 .eggProgress {
 	width:80%;
 
 }
-
 
 #eggTable {
 	height:300px;
