@@ -22,7 +22,7 @@ function notifyMe(string) {
       window.open("http://ishadijcks.github.io/");      
     };
 
-    setTimeout(function() { notification.close() }, 2000);
+    setTimeout(function() { notification.close() }, 3000);
     
   }
 

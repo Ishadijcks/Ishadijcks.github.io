@@ -79,7 +79,7 @@ var startQuest = function(quest){
 			break;
 		case "breedPokemon":
 			player.curQuest.type2 = "none";
-			player.curQuest.description = "Breed " + player.curQuest.amount + " Pokemon";
+			player.curQuest.description = "Hatch " + player.curQuest.amount + " eggs";
 			break;
 	}
 	showCurQuest();
@@ -152,10 +152,10 @@ addQuest('gainShards', 'Gain x shards', MEDIUM, 50, 100, 10)
 addQuest('gainShards', 'Gain x shards', HARD, 100, 150, 20)
 addQuest('gainShards', 'Gain x shards', IMPOSSIBLE, 250, 500, 40)
 
-addQuest('breedPokemon', 'Breed x Pokemon', EASY, 1, 3, 5)
-addQuest('breedPokemon', 'Breed x Pokemon', MEDIUM, 3, 7, 11)
-addQuest('breedPokemon', 'Breed x Pokemon', HARD, 7, 10, 25)
-addQuest('breedPokemon', 'Breed x Pokemon', IMPOSSIBLE, 15, 20, 52);
+// addQuest('breedPokemon', 'Breed x Pokemon', EASY, 1, 3, 5)
+// addQuest('breedPokemon', 'Breed x Pokemon', MEDIUM, 3, 7, 11)
+addQuest('breedPokemon', 'Breed x Pokemon', HARD, 3, 7, 25)
+addQuest('breedPokemon', 'Breed x Pokemon', IMPOSSIBLE, 5, 10, 52);
 
 
 
@@ -293,7 +293,7 @@ var showCurQuest = function(){
 	if(canSkipQuestMoney()){
 		html += 		"<button onClick='skipQuestMoney()' class='btn btn-danger'>Skip Quest</button> ($" + getSkipPriceMoney() + ")";
 	} else {
-		html += 		"<button class='btn btn-danger disabled'>Skip Quest</button> (" + getSkipPriceMoney() + " points)";
+		html += 		"<button class='btn btn-danger disabled'>Skip Quest</button> ($" + getSkipPriceMoney() + ")";
 	}
 	
 	html += 		"</div>";

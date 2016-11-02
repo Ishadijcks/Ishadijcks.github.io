@@ -3,7 +3,8 @@ var Egg = function(type, steps, pokemon){
 		type:type,
 		steps:steps,
 		progress: 0,
-		pokemon:pokemon
+		pokemon:pokemon,
+		notified: 0,
 	}
 	return temp;
 }
@@ -74,6 +75,7 @@ var gainEgg = function(egg){
 			return;
 		}
 	}
+	save();
 }
 
 var releasePokemon = function(pokemonName){
@@ -90,6 +92,9 @@ var releasePokemon = function(pokemonName){
 }
 
 var breedPokemon = function(pokemonName){
+	if(pokemonName === "Farfetch"){
+		pokemonName = "Farfetch'd";
+	}
 	for(var i = 0; i<player.eggSlots; i++){
 		if(player.eggList[i] === null){
 			var pokemon = getCaughtPokemonByName(pokemonName);
@@ -135,17 +140,23 @@ var checkEggHatch = function(){
 		var egg = player.eggList[i];
 		if(egg !== null){
 			if( egg.progress >= egg.steps){
-				hatchEgg(egg);
-				player.eggList[i] = null;
+				if(!egg.notify){
+					egg.notify = 1;
+					$.notify("One of your eggs is ready to hatch!", "success");
+					notifyMe("One of your eggs is ready to hatch!");
+				}
 			}
 		}
 	}
 }
 
-var hatchEgg = function(egg){
+var hatchEgg = function(i){
+	var egg = player.eggList[i];
+	player.eggList[i] = null;
 	$.notify("You hatched a " + egg.pokemon, 'success');
 	progressQuest('breedPokemon', "none", 1);
 	capturePokemon(egg.pokemon, generateEggShiny());
+	player.totalBred++;
 	showEggs();
 }
 
@@ -166,8 +177,16 @@ var showEggs = function(){
 	for(var i = 0; i<player.eggList.length; i++){
 		var html = ""
 		if(player.eggList[i] !== null){
-			html += "<img title='" + player.eggList[i].type + "' class='egg tooltipUp' src=images/breeding/egg" + player.eggList[i].type + ".png>";
-			html += "<div title='" + player.eggList[i].progress + "/" + player.eggList[i].steps + "' class='progress eggProgress tooltipEggProgress' style='width: 80%; margin:auto'>";
+			if( player.eggList[i].progress >= player.eggList[i].steps){
+				html += "<img style='cursor:pointer;' onClick='hatchEgg(" + i + ")' title='" + player.eggList[i].type + "' class='egg tooltipUp' src=images/breeding/egg" + player.eggList[i].type + ".png>"
+			} else{
+				html += "<img title='" + player.eggList[i].type + "' class='egg tooltipUp' src=images/breeding/egg" + player.eggList[i].type + ".png>";
+			}
+			if(player.eggList[i].progress < player.eggList[i].steps){
+				html += "<div title='" + player.eggList[i].progress + "/" + player.eggList[i].steps + "' class='progress eggProgress tooltipEggProgress' style='width: 80%; margin:auto'>";
+			} else {
+				html += "<div title='Click on the egg to hatch it!' class='progress eggProgress tooltipEggProgress' style='width: 80%; margin:auto'>";
+			}
 			html += 	"<div class='progress-bar progress-bar-success' style='width: " + player.eggList[i].progress/player.eggList[i].steps*100 + "%'>";
 			html += 		"<span class='sr-only'></span>";
 			html +=		"</div>";

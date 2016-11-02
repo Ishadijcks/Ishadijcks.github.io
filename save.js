@@ -67,6 +67,8 @@ var load = function(){
 	if (typeof savegame.mineInventory !== "undefined") player.mineInventory = savegame.mineInventory;
 	if (typeof savegame.mineCoins !== "undefined") player.mineCoins = savegame.mineCoins;
 	if (typeof savegame.curMine !== "undefined") player.curMine = savegame.curMine;
+	if (typeof savegame.totalBred !== "undefined") player.totalBred = savegame.totalBred;
+	if (typeof savegame.oakItemsEquipped !== "undefined") player.oakItemsEquipped = savegame.oakItemsEquipped;
 
 
 

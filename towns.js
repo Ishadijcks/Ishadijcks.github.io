@@ -79,7 +79,11 @@ var showTown = function(town){
 		else if (Array.isArray(town.gym)){
 			for(var i = 0; i<town.gym.length; i++){
 				if(player.gymBadges.length >= town.gym[i].badgeReq){
-					html += "<button class='gym leftTownButton btn btn-primary col-sm-2' id='"+town.gym[i].leaderName + " Gym'>"+town.gym[i].leaderName+"</button>"
+					var buttonType = 'primary'
+					if(alreadyGotBadge(town.gym[i].badgeReward)){
+						buttonType = 'success';
+					}
+					html += "<button class='gym leftTownButton btn btn-" + buttonType + " col-sm-2' id='"+town.gym[i].leaderName + " Gym'>"+town.gym[i].leaderName+"</button>"
 					html += "</div><div class='row'>";
 				}
 				else {
@@ -90,7 +94,11 @@ var showTown = function(town){
 		}
 		else {
 			if(player.gymBadges.length >= town.gym.badgeReq){
-				html += "<button class='gym leftTownButton btn btn-primary col-sm-2' id='"+town.name+" Gym'>Gym</button>"
+				var buttonType = 'primary'
+				if(alreadyGotBadge(town.gym.badgeReward)){
+					buttonType = 'success';
+				}
+				html += "<button class='gym leftTownButton btn btn-" + buttonType +  " col-sm-2' id='"+town.name+" Gym'>Gym</button>"
 			} else {
 				html += "<button class='wrongGym leftTownButton btn btn-primary disabled col-sm-2' id='"+town.name+" Gym'>Gym</button>"
 			}
@@ -107,6 +115,7 @@ var showTown = function(town){
 }
 
 var loadTowns = function(){
+	townList = [];
 	addTown("Pewter City", PewterCityGym(), "images/gyms/pewtercity.png", PewterCityShop(), [2]);
 	addTown("Cerulean City", CeruleanCityGym(), "images/gyms/ceruleancity.png", CeruleanCityShop(), [4]);
 	addTown("Vermillion City",VermillionCityGym(), "images/gyms/vermillioncity.png", VermillionCityShop(), [6]);

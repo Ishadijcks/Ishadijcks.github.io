@@ -81,8 +81,8 @@ var player = {
 	maxEnergyUpgrades: 0,
 	energyRegenUpgrades: 0,
 	maxItemsUpgrades: 0,
-	energyGainUpgrades: 0
-	}
+	energyGainUpgrades: 0,
+	oakItemsEquipped: []
 }
 
 var curEnemy = {
@@ -101,6 +101,9 @@ var curEnemy = {
 
 
 $(document).ready(function(){
+	if(!(document.domain === "ishadijcks.github.io" || document.domain === "")){
+		$("#siteModal").modal('show')
+	}
 	initTypeEffectiveness();
 	//$('#changeLogModal').modal('show');
 
@@ -197,7 +200,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$("body").on('click',".useItemButton", function(){
+	$("body").on('click touchstart',".useItemButton", function(){
 		var id = this.id.substring(4);
 		activateItem(id);
 	});
@@ -270,13 +273,13 @@ $(document).ready(function(){
 		moveToRoute(routeNumber);
 	})
 
-	$("svg").on('click',"rect", function(){
+	$("svg").on('click touchstart',"rect", function(){
 		var id = this.id;
 		routeNumber = idToRoute(id);
 		moveToRoute(routeNumber);
 	})
 
-	$("svg").on('click',".city", function(){
+	$("svg").on('click touchstart',".city", function(){
 		var id = this.id;
 		moveToTown(id);
 	})
@@ -289,7 +292,7 @@ $(document).ready(function(){
 		loadGym(id);
 	})
 
-	$("body").on('click',".dungeon", function(){
+	$("body").on('click touchstart',".dungeon", function(){
 		var id = this.id;
 		id = id.slice(0, -8);
 		loadDungeon(id);
@@ -301,7 +304,7 @@ $(document).ready(function(){
 		loadShop(id);
 	})
 
-	$("body").on('click',".dungeonRoom", function(){
+	$("body").on('click touchstart',".dungeonRoom", function(){
 		var id = parseInt(this.id.substring(4));
 		moveToRoom(id);
 	})
@@ -682,6 +685,7 @@ var capturePokemon = function(name, shiny){
 			if (pokemonList[i].name == name){
 				pokemonList[i].timeStamp = Math.floor(Date.now() / 1000);
 				pokemonList[i].shiny = shiny;
+				pokemonList[i].experience = 0;
 				player.caughtPokemonList.push(pokemonList[i]);
 				if(shiny){
 					$.notify("You have caught a shiny "+ name +"!", "succes")
