@@ -566,13 +566,10 @@ var showCurMine = function(){
 	}
 
 	html += "<div class='row'>";
-	html += 	"<button onClick='setItemSelected(1)' class='btn btn-succes'>Hammer (" + player.curMine.hammerEnergy + " energy)</button>";
-	html += 	"<button onClick='setItemSelected(0)' class='btn btn-succes'>Chisel (" + player.curMine.chisselEnergy + " energy)</button>";	
-	html += "</div>";
-
-	html += "<div class='row'>";
-	html += player.curMine.itemsFound + "/" + player.curMine.itemsBuried;
-	html += "</div>";
+	html += 	"<button onClick='setItemSelected(1)' class='btn btn-danger'>Hammer (" + player.curMine.hammerEnergy + " energy)</button>";
+    html += 	"<button onClick='setItemSelected(0)' class='btn btn-info'>Chisel (" + player.curMine.chisselEnergy + " energy)</button>";
+    html +=     "<h3>" + player.curMine.itemsFound + "/" + player.curMine.itemsBuried + " items found </h3>";
+    html += "</div>";
 	$("#mineBody").html(html);
 	$("#energyDisplay").html(player.curMine.energy + "/" + player.curMine.maxEnergy + " <img src='images/mine/flash.png'> (next: " + player.curMine.energyTick + "s)");
 	$("#mineEnergyBar").width( player.curMine.energy/player.curMine.maxEnergy*100 + "%");
