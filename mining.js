@@ -531,12 +531,13 @@ var checkItemsRevealed = function(){
 			i--;
 			$.notify("You dug an item", "success");
 			player.curMine.totalItemsFound++;
-			checkMineCompleted();
 		}
 	}
+	checkMineCompleted();
 }
 
 var checkMineCompleted = function(){
+
 	if(player.curMine.itemsFound >= player.curMine.itemsBuried){
 		setTimeout(mineCompleted, 1500);
 	}
