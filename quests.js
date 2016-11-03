@@ -29,13 +29,13 @@ var startQuest = function(quest){
 		case "defeatPokemonRoute":
 		//Route to defeat Pokémon on.
 			player.curQuest.type2 = Math.max(1, Math.min(25, Math.floor(5* Math.random()) + (quest.difficulty )*5));
-			player.curQuest.description = "Defeat " + player.curQuest.amount + " Pokemon on route " + player.curQuest.type2;
+			player.curQuest.description = "Defeat " + numberWithCommas(player.curQuest.amount) + " Pokemon on route " + player.curQuest.type2;
 			break;
 
 		case "capturePokemonRoute":
 		//Route to capture Pokémon on.
 			player.curQuest.type2 = Math.max(1, Math.min(25, Math.floor(5* Math.random()) + (quest.difficulty )*5));
-			player.curQuest.description = "Capture " + player.curQuest.amount + " Pokemon on route " + player.curQuest.type2;
+			player.curQuest.description = "Capture " + numberWithCommas(player.curQuest.amount) + " Pokemon on route " + player.curQuest.type2;
 			break;
 		case "captureShinies":
 			player.curQuest.type2 = "none";
@@ -59,23 +59,23 @@ var startQuest = function(quest){
 			break;
 		case "defeatPokemon":
 			player.curQuest.type2 = Math.floor(Math.random()*pokemonList.length) + 1;
-			player.curQuest.description = "Defeat " + player.curQuest.amount + " " + getPokemonById(player.curQuest.type2).name;
+			player.curQuest.description = "Defeat " + numberWithCommas(player.curQuest.amount) + " " + getPokemonById(player.curQuest.type2).name;
 			break;
 		case "gainMoney":
 			player.curQuest.type2 = "none";
-			player.curQuest.description = "Gain " + player.curQuest.amount + " money!";
+			player.curQuest.description = "Gain " + numberWithCommas(player.curQuest.amount) + " money!";
 			break;
 		case "gainExp":
 			player.curQuest.type2 = "none";
-			player.curQuest.description = "Gain " + player.curQuest.amount + " exp!";
+			player.curQuest.description = "Gain " + numberWithCommas(player.curQuest.amount) + " exp!";
 			break;
 		case "gainTokens":
 			player.curQuest.type2 = "none";
-			player.curQuest.description = "Gain " + player.curQuest.amount + " dungeon tokens!";
+			player.curQuest.description = "Gain " + numberWithCommas(player.curQuest.amount) + " dungeon tokens!";
 			break;
 		case "gainShards":
 			player.curQuest.type2 = "none";
-			player.curQuest.description = "Gain " + player.curQuest.amount + " shards (any type)";
+			player.curQuest.description = "Gain " + numberWithCommas(player.curQuest.amount) + " shards (any type)";
 			break;
 		case "breedPokemon":
 			player.curQuest.type2 = "none";
