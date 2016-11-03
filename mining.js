@@ -635,7 +635,7 @@ var hammer = function(x,y){
 var chisel = function(x,y){
 	if(player.curMine.grid[x][y] > 0) {
 		if (player.curMine.energy >= player.curMine.chisselEnergy) {
-			player.curMine.grid[normalizeY(x)][normalizeX(y)] = Math.max(0, player.curMine.grid[normalizeY(x)][normalizeX(y)] - 3);
+			player.curMine.grid[normalizeY(x)][normalizeX(y)] = Math.max(0, player.curMine.grid[normalizeY(x)][normalizeX(y)] - 2);
 			player.curMine.energy -= player.curMine.chisselEnergy;
 		}
 	}
