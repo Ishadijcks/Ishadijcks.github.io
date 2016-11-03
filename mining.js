@@ -82,7 +82,11 @@ var useDailyDeal = function(id){
 
 
 var gainMineEnergy = function(){
-	player.curMine.energy = Math.min(player.curMine.maxEnergy, player.curMine.energy+player.curMine.energyGain);
+    var multiplier = 1;
+    if(isActive("Cell Battery")){
+        multiplier = getOakItemBonus("Cell Battery");
+    }
+	player.curMine.energy = Math.min(player.curMine.maxEnergy, player.curMine.energy+ (multiplier*player.curMine.energyGain));
 }
 
 var addMineItem = function(name, id, space, value, valueType){
@@ -103,7 +107,7 @@ var updateMineEnergy = function(){
 			player.curMine.energyTick = player.curMine.energyRegen;
 			gainMineEnergy();
 		}
-		$("#energyDisplay").html(player.curMine.energy + "/" + player.curMine.maxEnergy + " <img src='images/mine/flash.png'> (next: " + player.curMine.energyTick + "s)");
+		$("#energyDisplay").html(Math.floor(player.curMine.energy) + "/" + player.curMine.maxEnergy + " <img src='images/mine/flash.png'> (next: " + player.curMine.energyTick + "s)");
 		$("#mineEnergyBar").width( player.curMine.energy/player.curMine.maxEnergy*100 + "%");
 	}
 }
@@ -571,7 +575,7 @@ var showCurMine = function(){
     html +=     "<h3>" + player.curMine.itemsFound + "/" + player.curMine.itemsBuried + " items found </h3>";
     html += "</div>";
 	$("#mineBody").html(html);
-	$("#energyDisplay").html(player.curMine.energy + "/" + player.curMine.maxEnergy + " <img src='images/mine/flash.png'> (next: " + player.curMine.energyTick + "s)");
+	$("#energyDisplay").html(Math.floor(player.curMine.energy) + "/" + player.curMine.maxEnergy + " <img src='images/mine/flash.png'> (next: " + player.curMine.energyTick + "s)");
 	$("#mineEnergyBar").width( player.curMine.energy/player.curMine.maxEnergy*100 + "%");
 	$("#diamondCounter").html(player.mineCoins);
 }

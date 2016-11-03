@@ -96,6 +96,7 @@ var initOakItems = function(){
 	addOakItem("Legendary Charm", "images/oak/pokeDoll.png", 70, "50% more chance to encounter a legendary Pokemon", 1.5);
 	addOakItem("Shiny Charm", "images/oak/shinyCharm.png", 80, "Double the chance to encounter a shiny Pokemon", 2);
 	addOakItem("Blaze Cassette", "images/oak/blazeCassette.png", 90, "Your eggs will hatch twice as fast!", 2);
+	addOakItem("Cell Battery", "images/oak/cellBattery.png", 10, "Regenerate 50% more mining energy!", 1.5);
 	checkOakItems(1);
 	showOakItems(1);
 }
