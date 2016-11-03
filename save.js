@@ -16,64 +16,117 @@ var save = function(){
 
 
 // Loads the game from localStorage and update favIcon to starter
-var load = function(){
-	var savegame = JSON.parse(localStorage.getItem("player"));
+var load = function(savegame){
 
-	if (typeof savegame.clickAttack !== "undefined") player.clickAttack = savegame.clickAttack;
-	if (typeof savegame.clickMultiplier !== "undefined") player.clickMultiplier = savegame.clickMultiplier;
-	if (typeof savegame.attack !== "undefined") player.attack = savegame.attack;
-	if (typeof savegame.attackMultiplier !== "undefined") player.attackMultiplier = savegame.attackMultiplier;
-	if (typeof savegame.money !== "undefined") player.money = savegame.money;
-	if (typeof savegame.moneyMultiplier !== "undefined") player.moneyMultiplier = savegame.moneyMultiplier;
-	if (typeof savegame.dungeonTokens !== "undefined") player.dungeonTokens = savegame.dungeonTokens;
-	if (typeof savegame.dungeonTokenMultiplier !== "undefined") player.dungeonTokenMultiplier = savegame.dungeonTokenMultiplier;
-	if (typeof savegame.expMultiplier !== "undefined") player.expMultiplier = savegame.expMultiplier;
-	if (typeof savegame.catchBonus !== "undefined") player.catchBonus = savegame.catchBonus;
-	if (typeof savegame.route !== "undefined") player.route = savegame.route;
-	if (typeof savegame.pokeballs !== "undefined") player.pokeballs = savegame.pokeballs;
-	if (typeof savegame.catchTime !== "undefined") player.catchTime = savegame.catchTime;
-	if (typeof savegame.caughtPokemonList !== "undefined") player.caughtPokemonList = savegame.caughtPokemonList;
-	if (typeof savegame.routeKills !== "undefined") player.routeKills = savegame.routeKills;
-	if (typeof savegame.starter !== "undefined") player.starter = savegame.starter;
-	if (typeof savegame.upgradeList !== "undefined") player.upgradeList = savegame.upgradeList;
-	if (typeof savegame.gymBadges !== "undefined") player.gymBadges = savegame.gymBadges;
-	if (typeof savegame.totalCaught !== "undefined") player.totalCaught = savegame.totalCaught;
-	if (typeof savegame.version !== "undefined") player.version = savegame.version;
-	if (typeof savegame.routeKillsNeeded !== "undefined") player.routeKillsNeeded = savegame.routeKillsNeeded;
-	if (typeof savegame.catchNumbers !== "undefined") player.catchNumbers = savegame.catchNumbers;
-	if (typeof savegame.defeatNumbers !== "undefined") player.defeatNumbers = savegame.defeatNumbers;
-	if (typeof savegame.oakItemSlots !== "undefined") player.oakItemSlots = savegame.oakItemSlots;
-	if (typeof savegame.evoExplain !== "undefined") player.evoExplain = savegame.evoExplain;
-	if (typeof savegame.mapExplain !== "undefined") player.mapExplain = savegame.mapExplain;
-	if (typeof savegame.townExplain !== "undefined") player.townExplain = savegame.townExplain;
-	if (typeof savegame.dungeonExplain !== "undefined") player.dungeonExplain = savegame.dungeonExplain;
-	if (typeof savegame.inventoryList !== "undefined") player.inventoryList = savegame.inventoryList;
-	if (typeof savegame.typeShards !== "undefined") player.typeShards = savegame.typeShards;
-	if (typeof savegame.notEffectiveTypeBonus !== "undefined") player.notEffectiveTypeBonus = savegame.notEffectiveTypeBonus;
-	if (typeof savegame.normalEffectiveTypeBonus !== "undefined") player.normalEffectiveTypeBonus = savegame.normalEffectiveTypeBonus;
-	if (typeof savegame.veryEffectiveTypeBonus !== "undefined") player.veryEffectiveTypeBonus = savegame.veryEffectiveTypeBonus;
-	if (typeof savegame.shopPriceDeviation !== "undefined") player.shopPriceDeviation = savegame.shopPriceDeviation;
-	if (typeof savegame.questPoints !== "undefined") player.questPoints = savegame.questPoints;
-	if (typeof savegame.curQuest !== "undefined") player.curQuest = savegame.curQuest;
-	if (typeof savegame.questSkipToday !== "undefined") player.questSkipToday = savegame.questSkipToday;
-	if (typeof savegame.questCompletedTotal !== "undefined") player.questCompletedTotal = savegame.questCompletedTotal;
-	if (typeof savegame.questCompletedToday !== "undefined") player.questCompletedToday = savegame.questCompletedToday;
-	if (typeof savegame.questCompletedDailyMax !== "undefined") player.questCompletedDailyMax = savegame.questCompletedDailyMax;
-	if (typeof savegame.questDifficulty !== "undefined") player.questDifficulty = savegame.questDifficulty;
-	if (typeof savegame.lastSeen !== "undefined") player.lastSeen = savegame.lastSeen;
-	if (typeof savegame.eggList !== "undefined") player.eggList = savegame.eggList;
-	if (typeof savegame.eggSlots !== "undefined") player.eggSlots = savegame.eggSlots;
-	if (typeof savegame.shinyPoints !== "undefined") player.shinyPoints = savegame.shinyPoints;
-	if (typeof savegame.mineInventory !== "undefined") player.mineInventory = savegame.mineInventory;
-	if (typeof savegame.mineCoins !== "undefined") player.mineCoins = savegame.mineCoins;
-	if (typeof savegame.curMine !== "undefined") player.curMine = savegame.curMine;
-	if (typeof savegame.totalBred !== "undefined") player.totalBred = savegame.totalBred;
-	if (typeof savegame.oakItemsEquipped !== "undefined") player.oakItemsEquipped = savegame.oakItemsEquipped;
-	if (typeof savegame.dailyDeals !== "undefined") player.dailyDeals = savegame.dailyDeals;
+	if ((typeof savegame.clickAttack == "undefined") 
+	|| (typeof savegame.clickMultiplier == "undefined") 
+	|| (typeof savegame.attack == "undefined") 
+	|| (typeof savegame.attackMultiplier == "undefined") 
+	|| (typeof savegame.money == "undefined") 
+	|| (typeof savegame.moneyMultiplier == "undefined") 
+	|| (typeof savegame.dungeonTokens == "undefined") 
+	|| (typeof savegame.dungeonTokenMultiplier == "undefined") 
+	|| (typeof savegame.expMultiplier == "undefined") 
+	|| (typeof savegame.catchBonus == "undefined") 
+	|| (typeof savegame.route == "undefined") 
+	|| (typeof savegame.pokeballs == "undefined") 
+	|| (typeof savegame.catchTime == "undefined") 
+	|| (typeof savegame.caughtPokemonList == "undefined") 
+	|| (typeof savegame.routeKills == "undefined") 
+	|| (typeof savegame.starter == "undefined") 
+	|| (typeof savegame.upgradeList == "undefined") 
+	|| (typeof savegame.gymBadges == "undefined") 
+	|| (typeof savegame.totalCaught == "undefined") 
+	|| (typeof savegame.version == "undefined") 
+	|| (typeof savegame.routeKillsNeeded == "undefined") 
+	|| (typeof savegame.catchNumbers == "undefined") 
+	|| (typeof savegame.defeatNumbers == "undefined") 
+	|| (typeof savegame.oakItemSlots == "undefined") 
+	|| (typeof savegame.evoExplain == "undefined") 
+	|| (typeof savegame.mapExplain == "undefined") 
+	|| (typeof savegame.townExplain == "undefined") 
+	|| (typeof savegame.dungeonExplain == "undefined") 
+	|| (typeof savegame.inventoryList == "undefined") 
+	|| (typeof savegame.typeShards == "undefined") 
+	|| (typeof savegame.notEffectiveTypeBonus == "undefined") 
+	|| (typeof savegame.normalEffectiveTypeBonus == "undefined") 
+	|| (typeof savegame.veryEffectiveTypeBonus == "undefined") 
+	|| (typeof savegame.shopPriceDeviation == "undefined") 
+	|| (typeof savegame.questPoints == "undefined") 
+	|| (typeof savegame.curQuest == "undefined") 
+	|| (typeof savegame.questSkipToday == "undefined") 
+	|| (typeof savegame.questCompletedTotal == "undefined") 
+	|| (typeof savegame.questCompletedToday == "undefined") 
+	|| (typeof savegame.questCompletedDailyMax == "undefined") 
+	|| (typeof savegame.questDifficulty == "undefined") 
+	|| (typeof savegame.lastSeen == "undefined") 
+	|| (typeof savegame.eggList == "undefined") 
+	|| (typeof savegame.eggSlots == "undefined") 
+	|| (typeof savegame.shinyPoints == "undefined") 
+	|| (typeof savegame.mineInventory == "undefined") 
+	|| (typeof savegame.mineCoins == "undefined") 
+	|| (typeof savegame.curMine == "undefined") 
+	|| (typeof savegame.totalBred == "undefined") 
+	|| (typeof savegame.oakItemsEquipped == "undefined") 
+	|| (typeof savegame.dailyDeals == "undefined")) {
+		return "undefined"
+	}
 
-    if(player.starter === "none"){
-        $("#pickStarter").modal('show');
-    }
+	player.clickAttack = savegame.clickAttack;
+	player.clickMultiplier = savegame.clickMultiplier;
+	player.attack = savegame.attack;
+	player.attackMultiplier = savegame.attackMultiplier;
+	player.money = savegame.money;
+	player.moneyMultiplier = savegame.moneyMultiplier;
+	player.dungeonTokens = savegame.dungeonTokens;
+	player.dungeonTokenMultiplier = savegame.dungeonTokenMultiplier;
+	player.expMultiplier = savegame.expMultiplier;
+	player.catchBonus = savegame.catchBonus;
+	player.route = savegame.route;
+	player.pokeballs = savegame.pokeballs;
+	player.catchTime = savegame.catchTime;
+	player.caughtPokemonList = savegame.caughtPokemonList;
+	player.routeKills = savegame.routeKills;
+	player.starter = savegame.starter;
+	player.upgradeList = savegame.upgradeList;
+	player.gymBadges = savegame.gymBadges;
+	player.totalCaught = savegame.totalCaught;
+	player.version = savegame.version;
+	player.routeKillsNeeded = savegame.routeKillsNeeded;
+	player.catchNumbers = savegame.catchNumbers;
+	player.defeatNumbers = savegame.defeatNumbers;
+	player.oakItemSlots = savegame.oakItemSlots;
+	player.evoExplain = savegame.evoExplain;
+	player.mapExplain = savegame.mapExplain;
+	player.townExplain = savegame.townExplain;
+	player.dungeonExplain = savegame.dungeonExplain;
+	player.inventoryList = savegame.inventoryList;
+	player.typeShards = savegame.typeShards;
+	player.notEffectiveTypeBonus = savegame.notEffectiveTypeBonus;
+	player.normalEffectiveTypeBonus = savegame.normalEffectiveTypeBonus;
+	player.veryEffectiveTypeBonus = savegame.veryEffectiveTypeBonus;
+	player.shopPriceDeviation = savegame.shopPriceDeviation;
+	player.questPoints = savegame.questPoints;
+	player.curQuest = savegame.curQuest;
+	player.questSkipToday = savegame.questSkipToday;
+	player.questCompletedTotal = savegame.questCompletedTotal;
+	player.questCompletedToday = savegame.questCompletedToday;
+	player.questCompletedDailyMax = savegame.questCompletedDailyMax;
+	player.questDifficulty = savegame.questDifficulty;
+	player.lastSeen = savegame.lastSeen;
+	player.eggList = savegame.eggList;
+	player.eggSlots = savegame.eggSlots;
+	player.shinyPoints = savegame.shinyPoints;
+	player.mineInventory = savegame.mineInventory;
+	player.mineCoins = savegame.mineCoins;
+	player.curMine = savegame.curMine;
+	player.totalBred = savegame.totalBred;
+	player.oakItemsEquipped = savegame.oakItemsEquipped;
+	player.dailyDeals = savegame.dailyDeals;
+
+	if(player.starter === "none"){
+		$("#pickStarter").modal('show');
+	}
 
 	if(player.version < version){
 		$('#changeLogModal').modal('show');
@@ -110,41 +163,46 @@ var load = function(){
 	player.catchTime = Math.max(player.catchTime,750);
 	player.version = version;
 
-    var link = document.createElement('link');
-    link.type = 'image/x-icon';
-    link.rel = 'shortcut icon';
-    link.href = 'images/'+player.starter+'.png';
-    document.getElementsByTagName('head')[0].appendChild(link);
+	var link = document.createElement('link');
+	link.type = 'image/x-icon';
+	link.rel = 'shortcut icon';
+	link.href = 'images/'+player.starter+'.png';
+	document.getElementsByTagName('head')[0].appendChild(link);
 }
 
 var exportSave = function(){
-    $("#exportBody").html("<textarea id='saveCode' style='width:100%; height:500px'>"+btoa(JSON.stringify(player))+"</textarea>");
+	$("#exportBody").html("<textarea id='saveCode' style='width:100%; height:500px'>"+btoa(JSON.stringify(player))+"</textarea>");
 	$("#exportModal").modal('show');
 }
 
 var importSave = function(){
-    var save = prompt("Paste your savefile here");
-    console.log(save);
-    if(save) {
-        var decoded = atob(save)
-        console.log(decoded);
-        if (decoded) {
-            localStorage.setItem("player", decoded);
-            canSave = 0;
-            location.reload();
-        } else {
-            $.notfiy("This is not a valid savefile", "error")
-        }
-    }
+	var save = prompt("Paste your savefile here");
+	console.log(save);
+	if(save) {
+		var decoded = atob(save)
+		console.log(decoded);
+		if (decoded) {
+			var saveCheck = load(decoded)
+			if (saveCheck !== "undefined") {
+				localStorage.setItem("player", decoded);
+				canSave = 0;
+				location.reload();
+			} else {
+				$.notfiy("This is not a valid savefile", "error")
+			}
+		} else {
+			$.notfiy("This is not a valid savefile", "error")
+		}
+	}
 }
 
 var confirmReset = function() {
-    var input = prompt("Are you sure you want to delete your savefile?, enter 6 if you are!", "9");
-    if (input == 6) {
-        canSave = 0;
-        localStorage.clear();
-        location.reload();
-    }
+	var input = prompt("Are you sure you want to delete your savefile?, enter 6 if you are!", "9");
+	if (input == 6) {
+		canSave = 0;
+		localStorage.clear();
+		location.reload();
+	}
 }
 
 var resetXp = function(){
