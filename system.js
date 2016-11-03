@@ -110,7 +110,8 @@ $(document).ready(function(){
 	//$('#changeLogModal').modal('show');
 
 	if(localStorage.getItem("player") != null){
-		load();
+		var savegame = JSON.parse(localStorage.getItem("player"));
+		load(savegame);
 		generatePokemon(player.route);
 	}
 
