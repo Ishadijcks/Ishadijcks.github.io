@@ -53,18 +53,22 @@ var gainPokemonEgg = function(pokemonName){
 }
 
 var gainMineEgg = function(itemId){
-    sellMineItem(itemId);
-    var type = "amber";
-    var pokemonName = "Aerodactyl";
-    if(itemId === 1){
-        type = "helix";
-        pokemonName = "Omanyte";
-    } else if(itemId === 2){
-        type = "dome";
-        pokemonName = "Kabuto";
+    if(breedSlotLeft()) {
+        sellMineItem(itemId);
+        var type = "amber";
+        var pokemonName = "Aerodactyl";
+        if (itemId === 1) {
+            type = "helix";
+            pokemonName = "Omanyte";
+        } else if (itemId === 2) {
+            type = "dome";
+            pokemonName = "Kabuto";
+        }
+        var pokemon = getPokemonByName(pokemonName);
+        gainEgg(Egg(type, getSteps(pokemonName), pokemonName));
+    } else {
+        $.notify("Your hatchery is full");
     }
-	var pokemon = getPokemonByName(pokemonName);
-	gainEgg(Egg(type, getSteps(pokemonName), pokemonName));
 }
 
 var getSteps = function(pokemonName){
