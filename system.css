@@ -1,0 +1,684 @@
+.modal-dialog{
+    position: relative;
+    display: table; //This is important
+    overflow-y: auto;
+    overflow-x: auto;
+    width: auto;
+    min-width: 1032px;
+}
+
+.mineInventoryItem {
+	width: 50px;
+}
+
+.rock5 {
+	background-image: url('images/mine/rock5.png');
+}
+
+.rock4 {
+	background-image: url('images/mine/rock4.png');
+}
+
+.rock3 {
+	background-image: url('images/mine/rock3.png');
+}
+
+.rock2 {
+	background-image: url('images/mine/rock2.png');
+}
+
+.rock1 {
+	background-image: url('images/mine/rock1.png');
+}
+
+.rock0 {
+	background-image: url('images/mine/rock0.png');
+}
+
+.mineReward {
+	background-image: url('images/mine/rock0.png');
+}
+
+.mineSquare {
+	height:32px;
+	width:32px !important;
+	margin: 0px !important;
+	padding:0px !important;
+	text-align: center;
+}
+
+.hammerSelected {
+	cursor:url('images/mine/hammer.png'),auto;
+}
+
+.chisselSelected {
+    cursor: url('images/mine/chissel.png'), auto;
+}
+.starter {
+    cursor:pointer;
+}
+
+.eggProgress {
+	width:80%;
+
+}
+
+#eggTable {
+	height:300px;
+}
+
+#eggs {
+	height:300px;
+	overflow:hidden;
+	background-color:white;
+	border:1px solid black;
+	margin-bottom: 20px;
+}
+
+.egg {
+	display:block;
+	width:80%;
+	margin:auto;
+}
+
+.eggSlot{
+	height:150px;
+	width:50%;
+}
+
+#questCounter {
+	background-color:white;
+	border:1px solid black;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+#questProgress{
+	margin:auto;
+}
+
+#difficultyBlock {
+	border:1px solid black;
+	float: right;
+	text-align: center;
+	padding:5px;
+}
+
+#questModal {
+	width: 100%;	
+}
+
+.shardImage {
+	height:25px;
+	width:25px;
+}
+
+.disabled {
+	opacity: 0.4;
+}
+
+.disabled:hover{
+	cursor:not-allowed;
+}
+.shardRow{
+	margin-left: 15px;
+}
+
+#shardModalDialog{
+	width:40%;
+}
+
+.shardTable{
+	width:100%;
+}
+
+.shardColumn4 {
+	text-align: right;
+}
+
+.shardText{
+	display: table-cell;
+    vertical-align: middle;
+    padding: 10px;
+}
+
+.shardUpgrade{
+	height: 25px;
+	width: 25px;
+	border: 1px solid black;
+	margin: 2px;
+}
+
+.shardUpgradeLocked{
+	opacity:0.6;
+}
+
+
+
+.useItemButton {
+	float:right;
+	border:1px solid black;
+	background-color: #6BA82A;
+	width: 40px;
+	text-align: center;
+}
+
+.useItemButtonEmpty {
+	float:right;
+	border:1px solid black;
+	background-color: red;
+	width: 40px;
+	text-align: center;	
+}
+
+.oakImage {
+	display: block;
+	height:150px;
+	width:auto;
+	 margin-left: auto;
+    margin-right: auto;
+}
+
+.oakItem{
+	height:50px;
+	width: 50px;
+	background-color:white;
+	border: 3px solid black;
+	margin-bottom:5px;
+}
+
+.shinyFiller {
+	padding:16px;
+}
+
+.oakItemImage {
+	margin-top:9px;
+	display:block;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+.activeOakItem {
+	border: 3px solid red !important;
+}
+
+.oakText {
+	text-align:center;
+	width:80%;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+#evolutionImage {
+	width:85%;
+}
+
+.dungeonRoom {
+	height:20px;
+	border:1px solid black;
+	margin:3px;
+}
+
+.playerRoom {
+	background-color: green;
+}
+
+.bossRoom {
+	background-color: purple;
+}
+
+.chestRoom {
+	background-color: orange;
+}
+
+.enemyRoom {
+	background-color: red;
+}
+
+.emptyRoom {
+	background-color: white;
+}
+
+.undiscoveredRoom {
+	background-color: black
+}
+
+#chestImage:hover {
+	cursor:pointer;
+}
+
+.shardButton {
+	background-color: #42A160;
+	height: 25px;
+}
+
+#dungeonExplainButton{
+	height:25px;
+	width:25px;
+	border:1px solid black;
+}
+
+#dungeonMap {
+	float:right;
+	margin-right: 5%;
+	padding-bottom: 5px;
+	padding-left: 20px;
+	padding-right: 10px;
+	border-bottom: 1px solid black;
+}
+
+#dungeonEnemy:hover{
+	cursor:pointer
+}
+
+#gymEnemy:hover{
+	cursor:pointer
+}
+
+.evoButton {
+	height: 96px !important;
+	border: 1px solid black;
+	background-color:white;
+	margin-bottom:50px;
+}
+
+
+#gymTrainer {
+	float:right;
+	margin-right: 15%;
+	padding-bottom: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-bottom: 1px solid black;
+}
+
+.defeatPokeball {
+	opacity: 0.3
+}
+
+.shinyPokedexStar {
+	height:25px;
+	width:25px;
+	position:absolute;
+	top:93px;
+}
+
+.shinyEnemyStar{
+	height:25px;
+	width: 25px;
+	position:relative;
+	top:-3px;
+}
+
+.gymPokeball {
+	margin-left:1px;
+	margin-right: 1px;
+}
+
+#gymDefeatedBody, #dungeonDefeatedBody{
+	text-align: center;
+}
+
+#townView, #shopView{
+	border: 1px solid black;
+	height: 250px;
+	margin-bottom: 20px;
+}
+
+.townName {
+	text-align:center;
+}
+
+.leftTownButton {
+	margin-left: 2%;
+	margin-bottom: 5px;
+}
+
+.rightTownButton {
+	margin-right: 2%;
+}
+
+.strokeme {
+    color: white;
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;  
+}
+
+#pokedexModal{
+	width:100%;
+}
+
+#pokedex{
+	width:70%;
+	overflow: auto;
+}
+
+
+.pokedexEntry {
+	height:175px;
+	border: 1px solid black;
+	margin: 2%;
+	width:16%;
+	text-align: center;
+	padding-left: 0;
+	padding-right: 0;
+	cursor: default;
+}
+
+.pokedexEntry:hover{
+	background-color:#DEDEDE; 	
+	cursor:pointer;
+}
+
+
+.pokedexRank {
+	position:absolute;
+	top:0px;
+	right:0px;
+	border-left:1px solid black;
+	border-bottom:1px solid black;
+	text-align:center;
+	display: inline-block;
+	height:30px;
+	line-height: 30px;
+	width:30px;
+}
+
+
+
+.rank0 {
+	background-color: #F1F8E9;
+}
+
+.rank1 {
+	background-color: #DCEDC8;
+}
+
+.rank2 {
+	background-color: #C5E1A5;
+}
+
+.rank3 {
+	background-color: #AED581;
+}
+
+.rank4 {
+	background-color: #9CCC65;
+}
+
+.rank5 {
+	background-color: #8BC34A;
+}
+
+.rank6 {
+	background-color: #7CB342;
+}
+
+
+#unkownPokemonImage{
+	height:96px;
+	width:96px;
+	margin-top:30px;
+	margin-bottom: 19px;
+}
+
+#pokedexImage {
+	text-align:auto;
+}
+
+.pokedexText {
+	margin-bottom: 3px;
+}
+
+body {
+	background-image: url('http://i.imgur.com/O7ZWigt.png'); 
+}
+
+.container-fluid{
+	margin-top: 15px;
+}
+
+table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView, #shopView, #dungeonView {
+	background-color: white;
+}
+
+#navBar{
+	border: 1px solid black;
+
+	bottom:0px;
+}
+
+#leftColumn {
+	margin-right: 7.5px;
+	padding-right: 25px;
+}
+
+#rightColumn {
+	margin-left: 7.5px;
+}
+
+#righterColumn {
+	margin-left: 7.5px;
+	padding-left: 25px;
+}
+
+.pokeBadge{
+	opacity:0.10;
+}
+
+#map {
+	cursor:default;
+	border: 1px solid black;
+	font-size:17px;
+}
+
+#pokemonTable {
+	margin-bottom:0px;
+}
+
+#pokemons {
+	height:300px;
+	overflow:auto;
+	background-color:white;
+	border:1px solid black;
+	margin-bottom: 20px;
+}
+
+#items {
+	height:300px;
+	overflow:auto;
+	background-color:white;
+	border:1px solid black;
+	margin-bottom: 20px;
+}
+
+#pokeball {
+	-webkit-animation:spinleft 1s linear infinite;
+    -moz-animation:spinleft 1s linear infinite;
+    animation:spinleft 1s linear infinite;
+
+    height:76px;
+    width:76px;
+
+}
+
+#dungeonPokeball {
+	-webkit-animation:spinleft 1s linear infinite;
+    -moz-animation:spinleft 1s linear infinite;
+    animation:spinleft 1s linear infinite;
+    margin: 20px;
+    height:76px;
+    width:76px;
+
+}
+
+
+@-moz-keyframes spinleft { 100% { -moz-transform: rotate(20deg); } }
+@-webkit-keyframes spinleft { 100% { -webkit-transform: rotate(20deg); } }
+
+    @keyframes spinleft { 
+        0% { 
+            transform: rotate(0deg); 
+        }
+        15% { 
+            transform: rotate(10deg); 
+        }
+        30% { 
+            transform: rotate(0deg); 
+        }
+        50% {
+        	transform: rotate (0deg);
+        }
+        65% { 
+            transform: rotate(-10deg); 
+        }
+        80% { 
+            transform: rotate(0deg); 
+        }
+    }
+
+
+
+#upgradeBox{
+	text-align:center;
+	border: 1px solid black;
+}
+
+.smallImage{
+	max-height: 40px;
+	height: auto;
+	width: auto;
+	margin: -7px;
+	margin-right: 0;
+}
+
+.smallShinyImage{
+	max-height: 40px;
+	height: auto;
+	width: auto;
+	padding: 4.33px;
+	margin: -7px;
+	margin-right: 0	
+}
+
+.smallImage:hover{
+	position:relative;
+	
+}
+
+.upgradeBoxes{
+	position:relative;
+	margin-top:2px;
+	margin-bottom:2px;
+}
+
+image {
+	cursor: default
+}
+
+g, rect {
+	cursor:pointer;
+}
+
+#statDiv {
+	height:320px;
+	overflow:auto;
+	background-color:white;
+	border:1px solid black;
+	margin-bottom: 20px;
+	padding:0;
+
+}
+
+#mapDiv {
+	padding-left:0px;
+	padding-right: 0px;
+}
+
+#statTable {
+	margin-bottom:0px;
+}
+
+.container {
+	width:100% !important
+}
+
+#alreadyCaughtImage{
+	height:16px;
+	width:16px;
+}
+#myModalLabel{
+	text-align:center;
+}
+
+#changeLogModal .modal-dialog
+{
+    width: 1000px;
+}
+
+#starterPokemons{
+	text-align:center;
+}
+
+#console{
+	border: 1px solid black;
+	height:198px;
+	overflow: scroll;
+	margin-bottom: 10px;
+}
+
+#enemy:hover{
+	cursor:pointer
+}
+
+.shopItem {
+	height: 96px !important;
+}
+
+#currentEnemy, #gymView, #dungeonView{
+	border: 1px solid black;
+	text-align:center;
+	height: 250px;
+	margin-bottom: 20px;
+}
+
+#pokemons table{
+	display: block;
+}
+
+#pokemons thead{
+	min-width: 100%;
+	display: table;
+}
+
+#pokemons tbody{
+	min-width: 100%;
+	display: table;
+}
+
+#pokemons th{
+	width: 25%;
+	text-align: center;
+	vertical-align: middle !important;
+}
+
+#pokemons th:first-child{
+	width: 50%;
+	text-align: left;
+
+}
+
+/* http://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting-using-css */
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;           /* Non-prefixed version, currently
+                                 not supported by any browser */
+}
+
