@@ -652,7 +652,6 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-12" id="navBar">
-						<button class="btn-success" id="badgeButton">Badges</button>
 						<button class="btn-warning" id="shardButton">Shards</button>
 						<button class="btn-success" id="questButton">Quest</button>
 						<button class="btn-danger" id="pokedexButton">Pokedex</button>
@@ -922,16 +921,15 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<ul class="nav nav-tabs">
-									<li class="active"><a onClick='showPokedex()' data-toggle="tab" href="#Pokedex">Pokedex</a></li>
+									<li class="active"><a onClick='showPokedex()' data-toggle="tab" href="#PokedexTab">Pokedex</a></li>
 									<li><a data-toggle="tab" onClick='showGymBadges()' href="#badgesTab">Badges</a></li>
 								</ul>
-
 								<div class="tab-content">
-									<div id="Pokedex" class="tab-pane fade">
-										<div class="modal-body" id="pokedexBody"></div>
+									<div id="PokedexTab" class="tab-pane fade active in">
+										<div id="pokedexBody"></div>
 									</div>
 									<div id="badgesTab" class="tab-pane fade">
-										<div class="modal-body" id="myModalBody" style="width:50%; margin:auto">
+										<div id="myModalBody" style="width:50%; margin:auto">
 											<div class="row" id="badges">
 												<img class="pokeBadge col-sm-3" id="BoulderBadge" src="images/gyms/badges/BoulderBadge.png">
 												<img class="pokeBadge col-sm-3" id="CascadeBadge" src="images/gyms/badges/CascadeBadge.png">
