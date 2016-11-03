@@ -487,6 +487,10 @@ var addReward = function(x, y, reward){
 
 
 var canAddReward = function(x, y, reward){
+    console.log(reward.id);
+    if(alreadyHasRewardId(reward.id)){
+        return false;
+    }
 	if(y+reward.space.length >= player.curMine.sizeY || x+reward.space[0].length >= player.curMine.sizeX){
 		return false;
 	}
@@ -500,6 +504,17 @@ var canAddReward = function(x, y, reward){
 		}
 	}
 	return true;
+}
+
+var alreadyHasRewardId = function(id){
+    for(var i = 0; i<player.curMine.rewardGrid.length; i++){
+        for(var j = 0; j<player.curMine.rewardGrid[0].length; j++){
+            if(player.curMine.rewardGrid[i][j].value === id){
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 // addReward(3, 3, mineItemList[19]);
