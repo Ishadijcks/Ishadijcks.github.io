@@ -1,4 +1,84 @@
 var mineItemList = [];
+var addDailyDeal = function(item1, amount1, item2, amount2){
+    var temp = {
+        item1: item1,
+        amount1: amount1,
+        item2: item2,
+        amount2: amount2
+    }
+    player.curMine.dailyDeals.push(temp);
+}
+
+var generateDailyDeals = function(){
+    player.curMine.dailyDeals = [];
+    var d = new Date();
+    var seed1 = Number(d.getDay() + "" + d.getMonth() + "" + d.getYear());
+    var seed2 = Number(d.getMonth() + "" + d.getYear() + "" + d.getMonth());
+    var seed3 = Number(d.getMonth() + "" + d.getDay() + "" + d.getYear());
+    var seed4 = Number(d.getYear() + "" + d.getMonth() + "" + d.getDay());
+    generateDailyDeal(seed1, seed2, seed3, seed4);
+    seed1 = Number(d.getDay() + "" + d.getYear() + "" + d.getMonth());
+    seed2 = Number(d.getDay() + "" + d.getMonth() + "" + d.getYear());
+    seed3 = Number(d.getYear() + "" + d.getMonth() + "" + d.getDay());
+    seed4 = Number(d.getMonth() + "" + d.getYear() + "" + d.getYear());
+    generateDailyDeal(seed1, seed2, seed3, seed4);
+    seed1 = Number(d.getMonth() + "" + d.getYear() + "" + d.getMonth());
+    seed2 = Number(d.getYear() + "" + d.getDay() + "" + d.getYear());
+    seed3 = Number(d.getYear() + "" + d.getMonth() + "" + d.getYear());
+    seed4 = Number(d.getMonth() + "" + d.getYear() + "" + d.getYear());
+    generateDailyDeal(seed1, seed2, seed3, seed4);
+}
+
+var reverseDailyDealExists = function(item1, item2){
+    for(var i = 0; i<player.curMine.dailyDeals.length; i++){
+        if(player.curMine.dailyDeals[i].item1.name === item2.name && player.curMine.dailyDeals[i].item2.name === item1.name){
+            return true;
+        }
+    }
+    return false;
+}
+
+var generateDailyDeal = function(seed1, seed2, seed3, seed4){
+    var x1 = Math.sin(seed1++) * 10000;
+    x1 = x1 - Math.floor(x1);
+    var item1 = mineItemList[Math.floor(mineItemList.length*x1)];
+
+    var x2 = Math.sin(seed2++) * 10000;
+    x2 = x2 - Math.floor(x2);
+    var amount1 = Math.floor(3 * x2) + 1;
+
+    var x3 = Math.sin(seed3++) * 10000;
+    x3 = x3 - Math.floor(x3);
+    var item2 = mineItemList[Math.floor(mineItemList.length*x3)];
+
+    var x4 = Math.sin(seed4++) * 10000;
+    x4 = x4 - Math.floor(x4);
+    var amount2 = Math.floor(3 * x4) + 1;
+    if(item1.name !== item2.name && !reverseDailyDealExists(item1,item2)) {
+        addDailyDeal(item1, amount1, item2, amount2);
+    }
+}
+
+var canUseDailyDeal = function(id){
+    var deal = player.curMine.dailyDeals[id];
+    var index = alreadyHasMineItem(deal.item1.id);
+    if(index === -1){
+        return false;
+    }
+    return player.mineInventory[index].amount >= deal.amount1
+}
+
+var useDailyDeal = function(id){
+    var deal = player.curMine.dailyDeals[id];
+    var index = alreadyHasMineItem(deal.item1.id);
+    if(player.mineInventory[index].amount >= deal.amount1){
+        player.mineInventory[index].amount -= deal.amount1;
+        for( var i = 0; i<deal.amount2; i++){
+            gainMineItem(deal.item2.id);
+        }
+    }
+    showDailyDeals();
+}
 
 
 var gainMineEnergy = function(){
@@ -38,29 +118,29 @@ addMineItem("Old Amber", 3, [[0,3,3,3], [3,3,3,3], [3,3,3,3], [3,3,3,0]], 0);
 // addMineItem("Claw Fossil", 5, [[5,5,5,0,0], [5,5,5,5,0], [0,5,5,5,5], [0,0,0,5,5]], 3);
 // addMineItem("Armor Fossil", 6, [[0,6,6,6,0], [0,6,6,6,0], [6,6,6,6,6], [0,6,6,6,0]], 3);
 // addMineItem("Skull Fossil", 7, [[7,7,7,7], [7,7,7,7], [7,7,7,7], [0,7,7,0]], 3);
-addMineItem("Rare Bone", 8, [[8,0,0,0,0,8], [8,8,8,8,8,8], [8,0,0,0,0,8]], 2);
-addMineItem("Star Piece", 9, [[0,9,0,], [9,9,9], [0,9,0]], 3);
-addMineItem("Revive", 10, [[0,10,0], [10,10,10,], [0,10,0]]);
-addMineItem("Max Revive", 11, [[11,11,11], [11,11,11], [11,11,11]], 2);
-addMineItem("Iron Ball", 12, [[12,12,12], [12,12,12], [12,12,12]]);
-addMineItem("Heart Scale", 13, [[13,0], [13,13]], 5);
-addMineItem("Light Clay", 14, [[14,0,14,0], [14,14,14,0], [14,14,14,14], [0,14,0,14]]);
-addMineItem("Odd Keystone", 15, [[15,15,15,15], [15,15,15,15], [15,15,15,15], [15,15,15,15]]);
-addMineItem("Hard Stone", 16, [[16,16],[16,16]]);
+addMineItem("Rare Bone", 8, [[8,0,0,0,0,8], [8,8,8,8,8,8], [8,0,0,0,0,8]], 3);
+addMineItem("Star Piece", 9, [[0,9,0,], [9,9,9], [0,9,0]], 5);
+addMineItem("Revive", 10, [[0,10,0], [10,10,10,], [0,10,0]], 2);
+addMineItem("Max Revive", 11, [[11,11,11], [11,11,11], [11,11,11]], 4);
+addMineItem("Iron Ball", 12, [[12,12,12], [12,12,12], [12,12,12]], 2);
+addMineItem("Heart Scale", 13, [[13,0], [13,13]], 10);
+addMineItem("Light Clay", 14, [[14,0,14,0], [14,14,14,0], [14,14,14,14], [0,14,0,14]], 2);
+addMineItem("Odd Keystone", 15, [[15,15,15,15], [15,15,15,15], [15,15,15,15], [15,15,15,15]], 6);
+addMineItem("Hard Stone", 16, [[16,16],[16,16]], 4);
 
 addMineItem("Fire Stone", 17, [[17,17,17], [17,17,17], [17,17,17]]);
 addMineItem("Water Stone", 18, [[18,18,18], [18,18,18], [18,18,0]]);
 addMineItem("Thunder Stone", 19, [[0,19,19], [19,19,19], [19,19,0]]);
 addMineItem("Leaf Stone", 20, [[0,20,0], [20,20,20], [20,20,20], [0,20,0]]);
 
-addMineItem("Moon Stone", 21, [[0,21,21,21], [21,21,21,0]], 2);
-addMineItem("Sun Stone", 22, [[0,22,0,], [22,22,22], [22,22,22]], 2);
-addMineItem("Oval Stone", 23, [[23,23,23], [23,23,23], [23,23,23]]);
-addMineItem("Everstone", 24, [[24,24,24], [24,24,24]]);
-addMineItem("Smooth Rock", 25, [[25,25,25], [25,25,25], [25,25,25]]);
-addMineItem("Heat Rock", 26, [[26,26,26], [26,26,26]]);
-addMineItem("Icy Rock", 27, [[27,27,27], [27,27,27], [27,27,27]]);
-addMineItem("Damp Rock", 28, [[28,28,28], [28,28,28], [28,0,28]]);
+addMineItem("Moon Stone", 21, [[0,21,21,21], [21,21,21,0]], 4);
+addMineItem("Sun Stone", 22, [[0,22,0,], [22,22,22], [22,22,22]], 4);
+addMineItem("Oval Stone", 23, [[23,23,23], [23,23,23], [23,23,23]], 3);
+addMineItem("Everstone", 24, [[24,24,24], [24,24,24]], 3);
+addMineItem("Smooth Rock", 25, [[25,25,25], [25,25,25], [25,25,25]], 2);
+addMineItem("Heat Rock", 26, [[26,26,26], [26,26,26]], 2);
+addMineItem("Icy Rock", 27, [[27,27,27], [27,27,27], [27,27,27]], 2);
+addMineItem("Damp Rock", 28, [[28,28,28], [28,28,28], [28,0,28]], 2);
 
 addMineItem("Draco Plate", 29, [[29,29,29,29], [29,29,29,29], [29,29,29,29]], 25, "dragon");
 addMineItem("Dread Plate", 30, [[30,30,30,30], [30,30,30,30], [30,30,30,30]], 25, "dark");
@@ -174,6 +254,36 @@ var showMineItems = function(){
 	$(".tooltipRightMine").tooltipster({
 		position: "right"
 	});
+}
+
+var showDailyDeals = function(){
+    var html = "";
+    html += "<table class='table'><tbody>";
+    for( var i = 0; i<player.curMine.dailyDeals.length; i++){
+        var amountOwned = 0;
+        if(alreadyHasMineItem(player.curMine.dailyDeals[i].item1.id) != -1) {
+            amountOwned = player.mineInventory[alreadyHasMineItem(player.curMine.dailyDeals[i].item1.id)].amount;
+        }
+        html += "<tr>";
+        html += 	"<td><img class='mineInventoryItem' src='images/mine/" + player.curMine.dailyDeals[i].item1.id + ".png'>(" + amountOwned + ")</td>";
+        html += 	"<td>" + player.curMine.dailyDeals[i].item1.name + "</td>";
+        html += 	"<td>" + player.curMine.dailyDeals[i].amount1 + "</td>";
+        html += 	"<td><img src='images/mine/rightArrow.png'></td>";
+        html += 	"<td>" + player.curMine.dailyDeals[i].amount2 + "</td>";
+        html += 	"<td>" + player.curMine.dailyDeals[i].item2.name + "</td>";
+        html += 	"<td><img class='mineInventoryItem' src='images/mine/" + player.curMine.dailyDeals[i].item2.id + ".png'</td>";
+        if(canUseDailyDeal(i)){
+            html += 	"<td><button class='btn btn-info' onClick='useDailyDeal(" + i + ")'>Trade</button></td>";
+        } else {
+            html += 	"<td><button class='btn btn-info disabled'>Trade</button></td>";
+        }
+        html += "</tr>";
+    }
+
+
+    html +="</tbody></table>";
+    $("#dailyDealsBody").html(html);
+
 }
 
 var isMineEgg = function(itemName){

@@ -69,6 +69,7 @@ var load = function(){
 	if (typeof savegame.curMine !== "undefined") player.curMine = savegame.curMine;
 	if (typeof savegame.totalBred !== "undefined") player.totalBred = savegame.totalBred;
 	if (typeof savegame.oakItemsEquipped !== "undefined") player.oakItemsEquipped = savegame.oakItemsEquipped;
+	if (typeof savegame.dailyDeals !== "undefined") player.dailyDeals = savegame.dailyDeals;
 
 
 

@@ -82,8 +82,9 @@ var player = {
         energyRegenUpgrades: 0,
         maxItemsUpgrades: 0,
         energyGainUpgrades: 0,
-        oakItemsEquipped: []
-    }
+        dailyDeals: [],
+    },
+	oakItemsEquipped: []
 }
 
 var curEnemy = {
@@ -421,6 +422,7 @@ $(document).ready(function(){
 	initPossibleEggs();
 	showCurQuest();
 	showEggs();
+	generateDailyDeals();
 });
 
 
