@@ -219,7 +219,8 @@ var mineItemIsStone = function(itemName){
 	return	itemName == "Fire Stone" ||
 			itemName == "Water Stone" ||
 			itemName == "Thunder Stone" ||
-			itemName == "Leaf Stone";
+			itemName == "Leaf Stone" ||
+            itemName == "Moon Stone";
 }
 
 var showMineItems = function(){
