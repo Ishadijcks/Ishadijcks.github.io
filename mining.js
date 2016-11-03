@@ -31,9 +31,9 @@ var updateMineEnergy = function(){
 var energyInterval = setInterval(updateMineEnergy, 1000);
 var toolName = ["chissel", "hammer"];
 
-addMineItem("Helix Fossil", 1, [[0,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1]], 3);
-addMineItem("Dome Fossil", 2, [[2,2,2,2,2], [2,2,2,2,2], [2,2,2,2,2], [0,2,2,2,0]], 3);
-addMineItem("Old Amber", 3, [[0,3,3,3], [3,3,3,3], [3,3,3,3], [3,3,3,0]], 4);
+addMineItem("Helix Fossil", 1, [[0,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1]], 0);
+addMineItem("Dome Fossil", 2, [[2,2,2,2,2], [2,2,2,2,2], [2,2,2,2,2], [0,2,2,2,0]], 0);
+addMineItem("Old Amber", 3, [[0,3,3,3], [3,3,3,3], [3,3,3,3], [3,3,3,0]], 0);
 // addMineItem("Root Fossil", 4, [[0,0,4,4,4], [0,0,4,4,4], [4,0,0,4,4], [4,4,4,4,4], [0,4,4,4,0]], 3);
 // addMineItem("Claw Fossil", 5, [[5,5,5,0,0], [5,5,5,5,0], [0,5,5,5,5], [0,0,0,5,5]], 3);
 // addMineItem("Armor Fossil", 6, [[0,6,6,6,0], [0,6,6,6,0], [6,6,6,6,6], [0,6,6,6,0]], 3);
@@ -151,14 +151,18 @@ var showMineItems = function(){
 			if(player.mineInventory[i].amount > 0){
 				html += "<tr>";
 				html += 	"<td><img class='mineInventoryItem' src='images/mine/" + player.mineInventory[i].id + ".png'</td>";
-				html += 	"<td>" + player.mineInventory[i].name + "</td>";
+		 		html += 	"<td>" + player.mineInventory[i].name + "</td>";
 		 		html += 	"<td>" + player.mineInventory[i].amount + "</td>";
 		 		var resourceName = getFullResourceName(player.mineInventory[i].valueType);
 		 		if(player.mineInventory[i].value === 1){
 		 			resourceName = resourceName.substring(0, resourceName.length - 1);
 		 		}
-				html += 	"<td><button title='" + player.mineInventory[i].value + " " + resourceName + "'class='btn btn-success tooltipRightMine' onClick='sellMineItem(" + player.mineInventory[i].id + ")'>Sell</button></td>";
-				html += "</tr>";
+		 		if(isMineEgg(player.mineInventory[i].name)){
+                    html += "<td><button title='You can breed this item, I wonder what will happen...' class='btn btn-success tooltipRightMine' onClick='gainMineEgg(" + player.mineInventory[i].id + ")'>Breed</button></td>";
+                } else {
+                    html += "<td><button title='" + player.mineInventory[i].value + " " + resourceName + "'class='btn btn-success tooltipRightMine' onClick='sellMineItem(" + player.mineInventory[i].id + ")'>Sell</button></td>";
+                }
+                html += "</tr>";
 			}
 		}
 	}
@@ -170,6 +174,12 @@ var showMineItems = function(){
 	$(".tooltipRightMine").tooltipster({
 		position: "right"
 	});
+}
+
+var isMineEgg = function(itemName){
+	return itemName === "Dome Fossil" ||
+			itemName === "Helix Fossil" ||
+			itemName === "Old Amber"
 }
 
 var showMineUpgrades = function(){

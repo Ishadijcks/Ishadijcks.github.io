@@ -196,9 +196,6 @@ var getFullResourceName = function(type){
 	if(type === "dungeon token"){
 		return "tokens";
 	}
-
-	console.log(type);
-
 	if(type === "quest"){
 		return "quest points";
 	}

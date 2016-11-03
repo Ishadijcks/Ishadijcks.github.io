@@ -52,15 +52,19 @@ var gainPokemonEgg = function(pokemonName){
 	gainEgg(Egg(pokemon.type, getSteps(pokemonName), pokemonName));
 }
 
-var gainMineEgg = function(pokemonName){
+var gainMineEgg = function(itemId){
+    sellMineItem(itemId);
     var type = "amber";
-    if(pokemonName === "Kabuto"){
-        type = "dome";
-    } else if(pokemonName === "Omanye"){
+    var pokemonName = "Aerodactyl";
+    if(itemId === 1){
         type = "helix";
+        pokemonName = "Omanyte";
+    } else if(itemId === 2){
+        type = "dome";
+        pokemonName = "Kabuto";
     }
 	var pokemon = getPokemonByName(pokemonName);
-	gainEgg(Egg(, getSteps(pokemonName), pokemonName));
+	gainEgg(Egg(type, getSteps(pokemonName), pokemonName));
 }
 
 var getSteps = function(pokemonName){
@@ -164,7 +168,7 @@ var checkEggHatch = function(){
 var hatchEgg = function(i){
 	var egg = player.eggList[i];
 	player.eggList[i] = null;
-	$.notify("You hatched a " + egg.pokemon, 'success');
+	$.notify("You hatched " + egg.pokemon, 'success');
 	progressQuest('breedPokemon', "none", 1);
 	capturePokemon(egg.pokemon, generateEggShiny());
 	player.totalBred++;
