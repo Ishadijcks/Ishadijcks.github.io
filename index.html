@@ -660,7 +660,7 @@
 						<button class="btn-danger" id="resetButton">Reset</button>
 						<a style="text-decoration:none; color:white;" href="https://reddit.com/r/pokeclicker" target="_blank"><button class="btn-info" id="subredditButton">Subreddit</button></a>
 						<a style="text-decoration:none; color:white;" href="http://kiwiirc.com/client/irc.freenode.net/pokeclicker" target="_blank"><button class="btn-success" id="chatButton">Chat</button></a>
-						<button class="btn-info" id="mineButton">Mine</button>
+						<button class="btn-info" id="mineButton">Underground</button>
 						
 
 					</div>
@@ -785,9 +785,11 @@
 										<div class="modal-body" id="helpBody" style="width: 80%;margin: auto;">
 											<h4>In the underground you can mine for hidden treasures.</h4>
 											<h4>Select the Hammer or the Chisel and click on the wall.</h4>
-											<h4>The Hammer is better at for large areas, while the Chisel is better for small areas.</h4>
+											<h4>The Hammer is better for large areas, while the Chisel is better for small areas.</h4>
 											<h4>Sell your treasures for shards or diamonds!</h4>
 											<h4>You can use your diamonds to buy all kinds of upgrades!</h4>
+											<h4>Every day you can trade your found items.</h4>
+											<h4>Check the Daily Deals tab!</h4>
 										</div>
 									</div>
 									<div id="dailyDeals" class="tab-pane fade">
@@ -888,21 +890,7 @@
 							<div class="modal-header">
 								<h4 class="modal-title" id="myModalLabel">Badges</h4>
 							</div>
-							<div class="modal-body" id="myModalBody">
-								<div class="row" id="badges">
-									<img class="pokeBadge col-sm-3" id="BoulderBadge" src="images/gyms/badges/BoulderBadge.png">
-									<img class="pokeBadge col-sm-3" id="CascadeBadge" src="images/gyms/badges/CascadeBadge.png">
-									<img class="pokeBadge col-sm-3" id="ThunderBadge" src="images/gyms/badges/ThunderBadge.png">
-									<img class="pokeBadge col-sm-3" id="RainbowBadge" src="images/gyms/badges/RainbowBadge.png">
-								</div>
-								<br>
-								<div class="row" id="badges2">
-									<img class="pokeBadge col-sm-3" id="SoulBadge" src="images/gyms/badges/SoulBadge.png">
-									<img class="pokeBadge col-sm-3" id="MarshBadge" src="images/gyms/badges/MarshBadge.png">
-									<img class="pokeBadge col-sm-3" id="VolcanoBadge" src="images/gyms/badges/VolcanoBadge.png">
-									<img class="pokeBadge col-sm-3" id="EarthBadge" src="images/gyms/badges/EarthBadge.png">
-								</div>
-							</div>
+
 						</div>
 					</div>
 				</div>
@@ -933,13 +921,35 @@
 					<div class="modal-dialog" role="document" id="pokedex">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h4 class="modal-title" id="myModalLabel">Pokedex</h4>
-							</div>
-							<div class="modal-body">
-								<div class="entry-content"  id="pokedexBody">
-								Will be implemented soon!
+								<ul class="nav nav-tabs">
+									<li class="active"><a onClick='showPokedex()' data-toggle="tab" href="#Pokedex">Pokedex</a></li>
+									<li><a data-toggle="tab" onClick='showGymBadges()' href="#badgesTab">Badges</a></li>
+								</ul>
+
+								<div class="tab-content">
+									<div id="Pokedex" class="tab-pane fade">
+										<div class="modal-body" id="pokedexBody"></div>
+									</div>
+									<div id="badgesTab" class="tab-pane fade">
+										<div class="modal-body" id="myModalBody" style="width:50%; margin:auto">
+											<div class="row" id="badges">
+												<img class="pokeBadge col-sm-3" id="BoulderBadge" src="images/gyms/badges/BoulderBadge.png">
+												<img class="pokeBadge col-sm-3" id="CascadeBadge" src="images/gyms/badges/CascadeBadge.png">
+												<img class="pokeBadge col-sm-3" id="ThunderBadge" src="images/gyms/badges/ThunderBadge.png">
+												<img class="pokeBadge col-sm-3" id="RainbowBadge" src="images/gyms/badges/RainbowBadge.png">
+											</div>
+											<br>
+											<div class="row" id="badges2">
+												<img class="pokeBadge col-sm-3" id="SoulBadge" src="images/gyms/badges/SoulBadge.png">
+												<img class="pokeBadge col-sm-3" id="MarshBadge" src="images/gyms/badges/MarshBadge.png">
+												<img class="pokeBadge col-sm-3" id="VolcanoBadge" src="images/gyms/badges/VolcanoBadge.png">
+												<img class="pokeBadge col-sm-3" id="EarthBadge" src="images/gyms/badges/EarthBadge.png">
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
+
 						</div>
 					</div>
 				</div><!-- changelog Modal -->

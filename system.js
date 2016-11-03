@@ -378,9 +378,8 @@ $(document).ready(function(){
 	})
 
 	$("body").on('click',"#pokedexButton", function(){
-		showPokedex();
 		$("#pokedexModal").modal("show");
-
+		showPokedex();
 	})
 
 	$("body").on('click',".oakItem", function(){

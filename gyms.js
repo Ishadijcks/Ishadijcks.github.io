@@ -362,6 +362,6 @@ var spawnGymPokemon = function(pokemonIndex){
 
 var showGymBadges = function() {
 	for (var i = 0; i<player.gymBadges.length; i++){
-			$("#"+player.gymBadges[i]+"Badge").fadeTo("slow",1);
-		}
+		$("#"+player.gymBadges[i]+"Badge").fadeTo("slow",1);
+	}
 }

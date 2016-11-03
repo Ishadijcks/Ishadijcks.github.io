@@ -294,43 +294,47 @@ var isMineEgg = function(itemName){
 
 var showMineUpgrades = function(){
 	var html = "";
-
-	html += "<div class='row'>";
-	html += "Max energy: " + player.curMine.maxEnergy + " (+10) ";
+    html += "<table class='table'><tbody>";
+	html += "<tr>";
+	html += "<td>Max energy: " + player.curMine.maxEnergy + "</td>";
+    html += "<td style='width:50%'>(+10)</td>";
 	if (player.curMine.maxEnergyUpgrades < 10){
-		html += "<button class='tooltipMineUpgrade' title='" + getMaxEnergyUpgradeCost() + " diamonds' onclick='upgradeMaxEnergy()'>Upgrade</button>";
+		html += "<td><button class='tooltipMineUpgrade btn btn-success' title='" + getMaxEnergyUpgradeCost() + " diamonds' onclick='upgradeMaxEnergy()'>Upgrade</button></td>";
 	} else {
-		html += "<button class='disabled'>Max</button>";
+		html += "<td><button class='disabled btn btn-success'>Max</button></td>";
 	}
-	html += "</div>";
+	html += "</tr>";
 
 
-	html += "<div class='row'>";
-	html += "Max items: " + player.curMine.maxItems + " (+1) ";
+	html += "<tr>";
+	html += "<td>Max items: " + player.curMine.maxItems + "</td>";
+    html += "<td>(+1)</td>";
 	if (player.curMine.maxItems < 7){
-		html += "<button class='tooltipMineUpgrade' title='" + getMaxItemUpgradeCost() + " diamonds' onclick='upgradeMaxItems()'>Upgrade</button>";
+		html += "<td><button class='tooltipMineUpgrade btn btn-success' title='" + getMaxItemUpgradeCost() + " diamonds' onclick='upgradeMaxItems()'>Upgrade</button></td>";
 	} else {
-		html += "<button class='disabled'>Max</button>";
+		html += "<td><button class='disabled  btn btn-success'>Max</button></td>";
 	}
-	html += "</div>";
+	html += "</tr>";
 
-	html += "<div class='row'>";
-	html += "Energy regen time: " + player.curMine.energyRegen + " (-1) ";
-	if (player.curMine.energyRegenUpgrades < 30){
-		html += "<button class='tooltipMineUpgrade' title='" + getEnergyRegenUpgradeCost() + " diamonds' onclick='upgradeEnergyRegen()'>Upgrade</button>";
+	html += "<tr>";
+	html += "<td>Energy regen time: " + player.curMine.energyRegen + "</td> ";
+    html += "<td>(-1)</td>";
+	if (player.curMine.energyRegenUpgrades < 20){
+		html += "<td><button class='tooltipMineUpgrade btn btn-success' title='" + getEnergyRegenUpgradeCost() + " diamonds' onclick='upgradeEnergyRegen()'>Upgrade</button></td>";
 	} else {
-		html += "<button class='disabled'>Max</button>";
+		html += "<td><button class='disabled btn btn-success'>Max</button></td>";
 	}
-	html += "</div>";
+	html += "</tr>";
 
-	html += "<div class='row'>";
-	html += "Energy gain: " + player.curMine.energyGain + " (+1) ";
+	html += "<tr>";
+	html += "<td>Energy gain: " + player.curMine.energyGain + "</td>";
+    html += "<td>(+1)</td>";
 	if (player.curMine.energyGainUpgrades < 17){
-		html += "<button class='tooltipMineUpgrade' title='" + getEnergyGainUpgradeCost() + " diamonds' onclick='upgradeEnergyGain()'>Upgrade</button>";
+		html += "<td><button class='tooltipMineUpgrade btn btn-success' title='" + getEnergyGainUpgradeCost() + " diamonds' onclick='upgradeEnergyGain()'>Upgrade</button></td>";
 	} else {
-		html += "<button class='disabled'>Max</button>";
+		html += "<td><button class='disabled btn btn-success'>Max</button></td>";
 	}
-	html += "</div>";
+	html += "</tr>";
 
 	$("#upgradesBody").html(html);
 	$("#diamondCounter").html(player.mineCoins);
@@ -424,6 +428,8 @@ var sellMineItem = function(id){
 }
 
 var gainMainItemProfit = function(value, valueType){
+    console.log(value);
+    console.log(valueType);
 	if( valueType === "money"){
 		player.money += value;
 	} else if( valueType === "mine"){
@@ -435,6 +441,7 @@ var gainMainItemProfit = function(value, valueType){
 
 
 var gainMineCoins = function(x){
+    console.log(x);
 	player.mineCoins += x;
 }
 
