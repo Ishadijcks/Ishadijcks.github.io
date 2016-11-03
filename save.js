@@ -66,9 +66,7 @@ var load = function(savegame){
 	|| (typeof savegame.mineInventory == "undefined") 
 	|| (typeof savegame.mineCoins == "undefined") 
 	|| (typeof savegame.curMine == "undefined") 
-	|| (typeof savegame.totalBred == "undefined") 
-	|| (typeof savegame.oakItemsEquipped == "undefined") 
-	|| (typeof savegame.dailyDeals == "undefined")) {
+	|| (typeof savegame.totalBred == "undefined")) {
 		return "undefined"
 	}
 
@@ -121,8 +119,8 @@ var load = function(savegame){
 	player.mineCoins = savegame.mineCoins;
 	player.curMine = savegame.curMine;
 	player.totalBred = savegame.totalBred;
-	player.oakItemsEquipped = savegame.oakItemsEquipped;
-	player.dailyDeals = savegame.dailyDeals;
+	if (typeof savegame.oakItemsEquipped !== "undefined") player.oakItemsEquipped = savegame.oakItemsEquipped;
+	if (typeof savegame.dailyDeals !== "undefined") player.dailyDeals = savegame.dailyDeals;
 
 	if(player.starter === "none"){
 		$("#pickStarter").modal('show');
@@ -177,21 +175,19 @@ var exportSave = function(){
 
 var importSave = function(){
 	var save = prompt("Paste your savefile here");
-	console.log(save);
 	if(save) {
-		var decoded = atob(save)
-		console.log(decoded);
+		var decoded = atob(save);
 		if (decoded) {
-			var saveCheck = load(decoded)
+			var saveCheck = load(JSON.parse(decoded));
 			if (saveCheck !== "undefined") {
 				localStorage.setItem("player", decoded);
 				canSave = 0;
 				location.reload();
 			} else {
-				$.notfiy("This is not a valid savefile", "error")
+				$.notify("This is not a valid savefile", "error");
 			}
 		} else {
-			$.notfiy("This is not a valid savefile", "error")
+			$.notify("This is not a valid savefile", "error");
 		}
 	}
 }
