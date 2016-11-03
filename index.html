@@ -657,7 +657,7 @@
 						<button class="btn-success" id="questButton">Quest</button>
 						<button class="btn-danger" id="pokedexButton">Pokedex</button>
 						<button class="btn-info" id="changeLogButton">Changelog</button>
-						<button class="btn-danger" id="resetButton">Reset</button>
+						<button class="btn-danger" onClick="$('#saveModal').modal('show'); exportSave()" id="resetButton">Reset</button>
 						<a style="text-decoration:none; color:white;" href="https://reddit.com/r/pokeclicker" target="_blank"><button class="btn-info" id="subredditButton">Subreddit</button></a>
 						<a style="text-decoration:none; color:white;" href="http://kiwiirc.com/client/irc.freenode.net/pokeclicker" target="_blank"><button class="btn-success" id="chatButton">Chat</button></a>
 						<button class="btn-info" id="mineButton">Underground</button>
@@ -958,7 +958,7 @@
 
 
 
-                <div aria-labelledby="myModalLabel" class="modal fade" id="exportModal" role="dialog" tabindex="-1">
+                <div aria-labelledby="myModalLabel" class="modal fade" id="saveModal" role="dialog" tabindex="-1">
                     <div class="modal-dialog" role="document" id="saveFile">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -969,14 +969,19 @@
                                 </ul>
                                 <div class="tab-content">
                                     <div id="export" class="tab-pane fade active in">
-                                        Save this string in a textfile on your computer.
+                                        Save this string in a textfile on your computer.<br>
                                         <div id="exportBody"></div>
                                     </div>
                                     <div id="import" class="tab-pane">
-                                        <div id="importBody"></div>
+                                        <div id="importBody">
+                                            <button class="btn btn-info" onClick="importSave()">Import</button>
+                                        </div>
                                     </div>
                                     <div id="reset" class="tab-pane">
-                                        <div id="resetBody"></div>
+                                        <div id="resetBody">
+                                            <h2 style="color:red">You do not get any rewards for resetting your savefile</h2>
+                                            <button onClick="confirmReset()">Reset</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

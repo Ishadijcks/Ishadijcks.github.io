@@ -122,12 +122,26 @@ var exportSave = function(){
 
 var importSave = function(){
     var save = prompt("Paste your savefile here");
-    var decoded = atob(save)
-    localStorage.setItem("player",decoded);
-    canSave = 0;
-    location.reload();
+    if(save) {
+        var decoded = atob(save)
+        if (decoded) {
+            localStorage.setItem("player", decoded);
+            canSave = 0;
+            location.reload();
+        } else {
+            $.notfiy("This is not a valid savefile", "error")
+        }
+    }
 }
 
+var confirmReset = function() {
+    var input = prompt("Are you sure you want to delete your savefile?, enter 6 if you are!", "9");
+    if (input == 6) {
+        canSave = 0;
+        localStorage.clear();
+        location.reload();
+    }
+}
 
 var resetXp = function(){
 	for( var i = 0; i<player.caughtPokemonList.length; i++){
