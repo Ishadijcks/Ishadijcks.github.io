@@ -43,7 +43,10 @@
 }
 
 .chisselSelected {
-	cursor:url('images/mine/chissel.png'),auto;
+    cursor: url('images/mine/chissel.png'), auto;
+}
+.starter {
+    cursor:pointer;
 }
 
 .eggProgress {

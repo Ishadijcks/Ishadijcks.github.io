@@ -263,7 +263,7 @@ var showCurQuest = function(){
 	html += "<div id='questTop'>";
 	html += 	"<h2 style='text-align:center; padding:5px'>" + player.curQuest.description + "</h2><div id='difficultyBlock'>" + questDifficultyName[player.curQuest.difficulty] + "</div>";
 	html += 	"<br>";
-	html += 	"<p style='text-align:center; margin-bottom:15px'>" + Math.min(player.curQuest.progress,player.curQuest.amount) + "/" + player.curQuest.amount + "</p>";
+	html += 	"<p style='text-align:center; margin-bottom:15px'>" + numberWithCommas(Math.min(player.curQuest.progress,player.curQuest.amount)) + "/" + numberWithCommas(player.curQuest.amount) + "</p>";
 	html += 	"<div class='row' id='questProgressRow'>";
 	html += 		"<div class='progress' id='questProgress'>"
 	html += 			"<div class='progress-bar progress-bar-success' id='healthBar' style='width: " + Math.min(player.curQuest.progress,player.curQuest.amount) /player.curQuest.amount*100 + "%'>"
@@ -273,7 +273,7 @@ var showCurQuest = function(){
 	html += 		"<p>All progress needs to be made after the quest has started.</p>";
 	html +=		"</div>";
 	html += 	"<div class='row' style='width:80%;margin-top:15px;'>"
-	html += 		"<p>Reward: " + player.curQuest.reward + " Quest points</p>";
+	html += 		"<p>Reward: " + numberWithCommas(player.curQuest.reward) + " Quest points</p>";
 	html += 	"</div>";
 	html += 	"<div class='row' style='width:80%;margin-top:15px;'>"
 	if(questCompleted()){
@@ -284,16 +284,16 @@ var showCurQuest = function(){
 	html += 	"</div>";
 	html += 	"<div class='row' style='width:80%;margin-top:15px;'>"
 	if(canSkipQuestQuest()){
-		html += 		"<button onClick='skipQuestQuest()' class='btn btn-danger'>Skip Quest</button> (" + getSkipPriceQuest() + " points)";
+		html += 		"<button onClick='skipQuestQuest()' class='btn btn-danger'>Skip Quest</button> (" + numberWithCommas(getSkipPriceQuest()) + " points)";
 	} else {
-		html += 		"<button class='btn btn-danger disabled'>Skip Quest</button> (" + getSkipPriceQuest() + " points)";
+		html += 		"<button class='btn btn-danger disabled'>Skip Quest</button> (" + numberWithCommas(getSkipPriceQuest()) + " points)";
 	}
 	html += 	"</div>";
 	html += 	"<div class='row' style='width:80%;margin-top:15px;'>"
 	if(canSkipQuestMoney()){
-		html += 		"<button onClick='skipQuestMoney()' class='btn btn-danger'>Skip Quest</button> ($" + getSkipPriceMoney() + ")";
+		html += 		"<button onClick='skipQuestMoney()' class='btn btn-danger'>Skip Quest</button> ($" + numberWithCommas(getSkipPriceMoney()) + ")";
 	} else {
-		html += 		"<button class='btn btn-danger disabled'>Skip Quest</button> ($" + getSkipPriceMoney() + ")";
+		html += 		"<button class='btn btn-danger disabled'>Skip Quest</button> ($" + numberWithCommas(getSkipPriceMoney()) + ")";
 	}
 	
 	html += 		"</div>";
@@ -301,8 +301,8 @@ var showCurQuest = function(){
 	html += "</div>";
 	html += "<div class= 'row' style='width:80%;margin-top:50px;'>"
 	// html += 	"<p>Quest difficulty: " + player.questDifficulty + "</p>";
-	html += 	"<p>Quest points: " + player.questPoints + "</p>";
-	html += 	"<p>Quests  completed: " + player.questCompletedTotal + "</p>";
+	html += 	"<p>Quest points: " + numberWithCommas(player.questPoints) + "</p>";
+	html += 	"<p>Quests  completed: " + numberWithCommas(player.questCompletedTotal) + "</p>";
 	html += 	"<p>Completed today: " + player.questCompletedToday + "</p>";
 	html += 	"<p>Maximum in 1 day: " + player.questCompletedDailyMax + "</p>";
 	html += "</div>";

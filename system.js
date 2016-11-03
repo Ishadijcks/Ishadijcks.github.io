@@ -259,6 +259,8 @@ $(document).ready(function(){
 		updateCaughtList();
 	})
 
+
+
 	$("body").on('click',"#AttackCaughtPokemon", function(){
 		player.caughtPokemonList.sort(compareByAttack);
 		updateCaughtList();
@@ -708,6 +710,9 @@ var capturePokemon = function(name, shiny){
 					if(player.caughtPokemonList[i].shiny){
 						player.shinyPoints++;
 					}
+					if(player.caughtPokemonList[i].shiny === 0 || player.caughtPokemonList[i].shiny === undefined) {
+						player.caughtPokemonList[i].timeStamp = Math.floor(Date.now() / 1000);
+					}
 					player.caughtPokemonList[i].shiny = 1;
 					$.notify("You have caught a shiny "+ name +"!", "succes")
 					progressQuest('captureShinies', "none" , 1);
@@ -906,4 +911,12 @@ var testLegendary = function(tries){
 	console.log("Mew: "+mew);
 	console.log("Mewtwo: "+two);
 	console.log("False: "+fail);
+}
+
+var numberWithCommas = function(x){
+	return Number(x).toLocaleString('en');
+}
+
+var numberNoCommas = function(x){
+	return parseFloat(String(x).replace(/,/g, ''));
 }

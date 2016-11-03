@@ -46,6 +46,22 @@ function compareByRecent(a,b) {
   return 0;
 }
 
+function compareByShiny(a,b) {
+  if (a.shiny > b.shiny || b.shiny === undefined)
+    return -1;
+  if (a.shiny < b.shiny || a.shiny === undefined)
+    return 1;
+  if (a.shiny == b.shiny){
+    if(a.timeStamp > b.timeStamp){
+      return -1;
+    }
+    if(a.timeStamp < b.timeStamp){
+      return 1;
+    }
+  }
+  return 0;
+}
+
 
 function compareByCatchRate(a,b) {
   if (a.catchRate < b.catchRate)
@@ -100,7 +116,6 @@ function compareByAttack(a,b) {
 
 var sortChange = function() {
     var selectBox = document.getElementById("sortBox");
-  
     var selectedValue = selectBox.options[selectBox.selectedIndex].value;
   switch(selectedValue){
     case "name": 
@@ -123,6 +138,10 @@ var sortChange = function() {
       break;
     case "catchRate":
       player.caughtPokemonList.sort(compareByCatchRate);
+      break;
+    case "shiny":
+      player.caughtPokemonList.sort(compareByShiny);
+          break;
   }
   
   updateCaughtList();
