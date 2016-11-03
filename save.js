@@ -29,7 +29,7 @@ var load = function(){
 	if (typeof savegame.dungeonTokenMultiplier !== "undefined") player.dungeonTokenMultiplier = savegame.dungeonTokenMultiplier;
 	if (typeof savegame.expMultiplier !== "undefined") player.expMultiplier = savegame.expMultiplier;
 	if (typeof savegame.catchBonus !== "undefined") player.catchBonus = savegame.catchBonus;
-	if (typeof savegame.route !== "undefined") player.route = savegame.route;
+	if (typeof savegame.route !== "undefined") player.route = Math.min(25,savegame.route);
 	if (typeof savegame.pokeballs !== "undefined") player.pokeballs = savegame.pokeballs;
 	if (typeof savegame.catchTime !== "undefined") player.catchTime = savegame.catchTime;
 	if (typeof savegame.caughtPokemonList !== "undefined") player.caughtPokemonList = savegame.caughtPokemonList;
