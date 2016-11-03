@@ -233,6 +233,7 @@ var showMom = function(){
 	var html = "<div class='row'>";
 	html += "<p>Breed your level 100 Pokemon.</p>";
 	html += "<p>You lose your Pokemon, but gain an egg with the same Pokemon</p>";
+    html += "<p>Hatched Pokemon have a big chance to be shiny!</p>"
 	html += "<p>Defeat wild Pokemon to hatch your eggs.</p>";
 	html += "<p>Click on a Pokemon to breed them!</p>"
 	html += "</div>";
