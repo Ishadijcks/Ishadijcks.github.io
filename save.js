@@ -71,7 +71,9 @@ var load = function(){
 	if (typeof savegame.oakItemsEquipped !== "undefined") player.oakItemsEquipped = savegame.oakItemsEquipped;
 	if (typeof savegame.dailyDeals !== "undefined") player.dailyDeals = savegame.dailyDeals;
 
-
+    if(player.starter === "none"){
+        $("#pickStarter").modal('show');
+    }
 
 	if(player.version < version){
 		$('#changeLogModal').modal('show');
@@ -116,14 +118,16 @@ var load = function(){
 }
 
 var exportSave = function(){
-    $("#exportBody").html("<textarea id='saveCode' style='width:100%'>"+btoa(JSON.stringify(player))+"</textarea>");
+    $("#exportBody").html("<textarea id='saveCode' style='width:100%; height:500px'>"+btoa(JSON.stringify(player))+"</textarea>");
 	$("#exportModal").modal('show');
 }
 
 var importSave = function(){
     var save = prompt("Paste your savefile here");
+    console.log(save);
     if(save) {
         var decoded = atob(save)
+        console.log(decoded);
         if (decoded) {
             localStorage.setItem("player", decoded);
             canSave = 0;
