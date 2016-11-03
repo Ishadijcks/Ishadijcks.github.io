@@ -198,7 +198,6 @@ var gainMineItem = function(id){
 	var index = alreadyHasMineItem(id);
 	if( index == -1){	
 		var item = getMineItemById(id);
-		console.log(item);
 		if(mineItemIsStone(item.name)){
 			gainItemByName(item.name);
 		} else {
@@ -432,8 +431,6 @@ var sellMineItem = function(id){
 }
 
 var gainMainItemProfit = function(value, valueType){
-    console.log(value);
-    console.log(valueType);
 	if( valueType === "money"){
 		player.money += value;
 	} else if( valueType === "mine"){
@@ -445,7 +442,6 @@ var gainMainItemProfit = function(value, valueType){
 
 
 var gainMineCoins = function(x){
-    console.log(x);
 	player.mineCoins += x;
 }
 
@@ -487,7 +483,6 @@ var addReward = function(x, y, reward){
 
 
 var canAddReward = function(x, y, reward){
-    console.log(reward.id);
     if(alreadyHasRewardId(reward.id)){
         return false;
     }
