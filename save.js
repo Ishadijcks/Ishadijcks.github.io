@@ -115,6 +115,19 @@ var load = function(){
     document.getElementsByTagName('head')[0].appendChild(link);
 }
 
+var exportSave = function(){
+    $("#exportBody").html("<textarea id='saveCode' style='width:100%'>"+btoa(JSON.stringify(player))+"</textarea>");
+	$("#exportModal").modal('show');
+}
+
+var importSave = function(){
+    var save = prompt("Paste your savefile here");
+    var decoded = atob(save)
+    localStorage.setItem("player",decoded);
+    canSave = 0;
+    location.reload();
+}
+
 
 var resetXp = function(){
 	for( var i = 0; i<player.caughtPokemonList.length; i++){

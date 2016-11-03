@@ -952,10 +952,42 @@
 									</div>
 								</div>
 							</div>
-
 						</div>
 					</div>
-				</div><!-- changelog Modal -->
+				</div>
+
+
+
+                <div aria-labelledby="myModalLabel" class="modal fade" id="exportModal" role="dialog" tabindex="-1">
+                    <div class="modal-dialog" role="document" id="saveFile">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a onClick='exportSave()' data-toggle="tab" href="#export">Export Save</a></li>
+                                    <li><a data-toggle="tab" href="#import">Import Save</a></li>
+                                    <li><a data-toggle="tab" href="#reset">Reset</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="export" class="tab-pane fade active in">
+                                        Save this string in a textfile on your computer.
+                                        <div id="exportBody"></div>
+                                    </div>
+                                    <div id="import" class="tab-pane">
+                                        <div id="importBody"></div>
+                                    </div>
+                                    <div id="reset" class="tab-pane">
+                                        <div id="resetBody"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            <!-- changelog Modal -->
 				<div aria-labelledby="myModalLabel" class="modal fade" id="changeLogModal" role="dialog" tabindex="-1">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
