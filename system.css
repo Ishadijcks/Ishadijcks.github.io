@@ -1,3 +1,7 @@
+.vertical-midle {
+	vertical-align: middle !important;
+}
+
 .modal-dialog{
     position: relative;
     display: table; //This is important
@@ -46,6 +50,10 @@
 	padding:0px !important;
 	text-align: center;
 }
+.mineSquare:hover {
+    border: 1px solid red;
+}
+
 
 .hammerSelected {
 	cursor:url('images/mine/hammer.png'),auto;

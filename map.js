@@ -67,7 +67,7 @@ var moveToRoute = function(route){
 	$("#catchDisplay").html("");	
 
 	
-		if(!isNaN(route)){
+		if(!isNaN(route) && !(route == player.route && inProgress === 1)){
 			inProgress = 1;
 			hideAllViews()
 			resetDungeon();

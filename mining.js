@@ -198,7 +198,6 @@ var gainMineItem = function(id){
 	var index = alreadyHasMineItem(id);
 	if( index == -1){	
 		var item = getMineItemById(id);
-		console.log(item);
 		if(mineItemIsStone(item.name)){
 			gainItemByName(item.name);
 		} else {
@@ -220,31 +219,33 @@ var mineItemIsStone = function(itemName){
 	return	itemName == "Fire Stone" ||
 			itemName == "Water Stone" ||
 			itemName == "Thunder Stone" ||
-			itemName == "Leaf Stone";
+			itemName == "Leaf Stone" ||
+            itemName == "Moon Stone";
 }
 
 var showMineItems = function(){
 	var html = "";
 	html += "<table class='table'><tbody><tr>";
 	if( isMineInventoryEmpty()){
-		html += "<tr>";
+		html += "<tr class='vertical-midle'>";
 		html += 	"<td>Your mine inventory is empty...</td>";
 		html += "</tr>";
 	} else {
 		for( var i = 0; i<player.mineInventory.length; i++){
 			if(player.mineInventory[i].amount > 0){
 				html += "<tr>";
-				html += 	"<td><img class='mineInventoryItem' src='images/mine/" + player.mineInventory[i].id + ".png'</td>";
-		 		html += 	"<td>" + player.mineInventory[i].name + "</td>";
-		 		html += 	"<td>" + player.mineInventory[i].amount + "</td>";
+				html += 	"<td class='vertical-midle'><img class='mineInventoryItem' src='images/mine/" + player.mineInventory[i].id + ".png'>(" + player.mineInventory[i].amount + ")</td>";
+		 		html += 	"<td class='vertical-midle'>" + player.mineInventory[i].name + "</td>";
 		 		var resourceName = getFullResourceName(player.mineInventory[i].valueType);
 		 		if(player.mineInventory[i].value === 1){
 		 			resourceName = resourceName.substring(0, resourceName.length - 1);
 		 		}
 		 		if(isMineEgg(player.mineInventory[i].name)){
-                    html += "<td><button title='You can breed this item, I wonder what will happen...' class='btn btn-success tooltipRightMine' onClick='gainMineEgg(" + player.mineInventory[i].id + ")'>Breed</button></td>";
+		 			html += "<td></td>";
+                    html += "<td class='vertical-midle'><button title='You can breed this item, I wonder what will happen...' class='btn btn-success tooltipRightMine' onClick='gainMineEgg(" + player.mineInventory[i].id + ")'>Breed</button></td>";
                 } else {
-                    html += "<td><button title='" + player.mineInventory[i].value + " " + resourceName + "'class='btn btn-success tooltipRightMine' onClick='sellMineItem(" + player.mineInventory[i].id + ")'>Sell</button></td>";
+                	html += "<td class='vertical-midle'>" + player.mineInventory[i].value + " " + resourceName + "</td>";
+                    html += "<td class='vertical-midle'><button class='btn btn-success tooltipRightMine' onClick='sellMineItem(" + player.mineInventory[i].id + ")'>Sell</button></td>";
                 }
                 html += "</tr>";
 			}
@@ -269,17 +270,17 @@ var showDailyDeals = function(){
             amountOwned = player.mineInventory[alreadyHasMineItem(player.curMine.dailyDeals[i].item1.id)].amount;
         }
         html += "<tr>";
-        html += 	"<td><img class='mineInventoryItem' src='images/mine/" + player.curMine.dailyDeals[i].item1.id + ".png'>(" + amountOwned + ")</td>";
-        html += 	"<td>" + player.curMine.dailyDeals[i].item1.name + "</td>";
-        html += 	"<td>" + player.curMine.dailyDeals[i].amount1 + "</td>";
-        html += 	"<td><img src='images/mine/rightArrow.png'></td>";
-        html += 	"<td>" + player.curMine.dailyDeals[i].amount2 + "</td>";
-        html += 	"<td>" + player.curMine.dailyDeals[i].item2.name + "</td>";
-        html += 	"<td><img class='mineInventoryItem' src='images/mine/" + player.curMine.dailyDeals[i].item2.id + ".png'</td>";
+        html += 	"<td class='vertical-midle'><img class='mineInventoryItem' src='images/mine/" + player.curMine.dailyDeals[i].item1.id + ".png'>(" + amountOwned + ")</td>";
+        html += 	"<td class='vertical-midle'>" + player.curMine.dailyDeals[i].item1.name + "</td>";
+        html += 	"<td class='vertical-midle'>" + player.curMine.dailyDeals[i].amount1 + "</td>";
+        html += 	"<td class='vertical-midle'><img src='images/mine/rightArrow.png'></td>";
+        html += 	"<td class='vertical-midle'>" + player.curMine.dailyDeals[i].amount2 + "</td>";
+        html += 	"<td class='vertical-midle'>" + player.curMine.dailyDeals[i].item2.name + "</td>";
+        html += 	"<td class='vertical-midle'><img class='mineInventoryItem' src='images/mine/" + player.curMine.dailyDeals[i].item2.id + ".png'</td>";
         if(canUseDailyDeal(i)){
-            html += 	"<td><button class='btn btn-info' onClick='useDailyDeal(" + i + ")'>Trade</button></td>";
+            html += 	"<td class='vertical-midle'><button class='btn btn-info' onClick='useDailyDeal(" + i + ")'>Trade</button></td>";
         } else {
-            html += 	"<td><button class='btn btn-info disabled'>Trade</button></td>";
+            html += 	"<td class='vertical-midle'><button class='btn btn-info disabled'>Trade</button></td>";
         }
         html += "</tr>";
     }
@@ -300,43 +301,47 @@ var showMineUpgrades = function(){
 	var html = "";
     html += "<table class='table'><tbody>";
 	html += "<tr>";
-	html += "<td>Max energy: " + player.curMine.maxEnergy + "</td>";
-    html += "<td style='width:50%'>(+10)</td>";
+	html += "<td class='vertical-midle'>Max energy: " + player.curMine.maxEnergy + "</td>";
+    html += "<td class='vertical-midle' style='width:50%'>(+10)</td>";
+	html += "<td class='vertical-midle'>" + getMaxEnergyUpgradeCost() + " diamonds</td>"
 	if (player.curMine.maxEnergyUpgrades < 10){
-		html += "<td><button class='tooltipMineUpgrade btn btn-success' title='" + getMaxEnergyUpgradeCost() + " diamonds' onclick='upgradeMaxEnergy()'>Upgrade</button></td>";
+		html += "<td class='vertical-midle'><button class='tooltipMineUpgrade btn btn-success' onclick='upgradeMaxEnergy()'>Upgrade</button></td>";
 	} else {
-		html += "<td><button class='disabled btn btn-success'>Max</button></td>";
+		html += "<td class='vertical-midle'><button class='disabled btn btn-success'>Max</button></td>";
 	}
 	html += "</tr>";
 
 
 	html += "<tr>";
-	html += "<td>Max items: " + player.curMine.maxItems + "</td>";
-    html += "<td>(+1)</td>";
+	html += "<td class='vertical-midle'>Max items: " + player.curMine.maxItems + "</td>";
+    html += "<td class='vertical-midle'>(+1)</td>";
+	html += "<td class='vertical-midle'>" + getMaxItemUpgradeCost() + " diamonds</td>"
 	if (player.curMine.maxItems < 7){
-		html += "<td><button class='tooltipMineUpgrade btn btn-success' title='" + getMaxItemUpgradeCost() + " diamonds' onclick='upgradeMaxItems()'>Upgrade</button></td>";
+		html += "<td class='vertical-midle'><button class='tooltipMineUpgrade btn btn-success' onclick='upgradeMaxItems()'>Upgrade</button></td>";
 	} else {
-		html += "<td><button class='disabled  btn btn-success'>Max</button></td>";
+		html += "<td class='vertical-midle'><button class='disabled  btn btn-success'>Max</button></td>";
 	}
 	html += "</tr>";
 
 	html += "<tr>";
-	html += "<td>Energy regen time: " + player.curMine.energyRegen + "</td> ";
-    html += "<td>(-1)</td>";
+	html += "<td class='vertical-midle'>Energy regen time: " + player.curMine.energyRegen + "</td> ";
+    html += "<td class='vertical-midle'>(-1)</td>";
+	html += "<td class='vertical-midle'>" + getEnergyRegenUpgradeCost() + " diamonds</td>"
 	if (player.curMine.energyRegenUpgrades < 20){
-		html += "<td><button class='tooltipMineUpgrade btn btn-success' title='" + getEnergyRegenUpgradeCost() + " diamonds' onclick='upgradeEnergyRegen()'>Upgrade</button></td>";
+		html += "<td class='vertical-midle'><button class='tooltipMineUpgrade btn btn-success' onclick='upgradeEnergyRegen()'>Upgrade</button></td>";
 	} else {
-		html += "<td><button class='disabled btn btn-success'>Max</button></td>";
+		html += "<td class='vertical-midle'><button class='disabled btn btn-success'>Max</button></td>";
 	}
 	html += "</tr>";
 
 	html += "<tr>";
-	html += "<td>Energy gain: " + player.curMine.energyGain + "</td>";
-    html += "<td>(+1)</td>";
+	html += "<td class='vertical-midle'>Energy gain: " + player.curMine.energyGain + "</td>";
+    html += "<td class='vertical-midle'>(+1)</td>";
+	html += "<td class='vertical-midle'>" + getEnergyGainUpgradeCost() + " diamonds</td>"
 	if (player.curMine.energyGainUpgrades < 17){
-		html += "<td><button class='tooltipMineUpgrade btn btn-success' title='" + getEnergyGainUpgradeCost() + " diamonds' onclick='upgradeEnergyGain()'>Upgrade</button></td>";
+		html += "<td class='vertical-midle'><button class='tooltipMineUpgrade btn btn-success' onclick='upgradeEnergyGain()'>Upgrade</button></td>";
 	} else {
-		html += "<td><button class='disabled btn btn-success'>Max</button></td>";
+		html += "<td class='vertical-midle'><button class='disabled btn btn-success'>Max</button></td>";
 	}
 	html += "</tr>";
 
@@ -432,8 +437,6 @@ var sellMineItem = function(id){
 }
 
 var gainMainItemProfit = function(value, valueType){
-    console.log(value);
-    console.log(valueType);
 	if( valueType === "money"){
 		player.money += value;
 	} else if( valueType === "mine"){
@@ -445,7 +448,6 @@ var gainMainItemProfit = function(value, valueType){
 
 
 var gainMineCoins = function(x){
-    console.log(x);
 	player.mineCoins += x;
 }
 
@@ -487,7 +489,6 @@ var addReward = function(x, y, reward){
 
 
 var canAddReward = function(x, y, reward){
-    console.log(reward.id);
     if(alreadyHasRewardId(reward.id)){
         return false;
     }
@@ -531,12 +532,13 @@ var checkItemsRevealed = function(){
 			i--;
 			$.notify("You dug an item", "success");
 			player.curMine.totalItemsFound++;
-			checkMineCompleted();
 		}
 	}
+	checkMineCompleted();
 }
 
 var checkMineCompleted = function(){
+
 	if(player.curMine.itemsFound >= player.curMine.itemsBuried){
 		setTimeout(mineCompleted, 1500);
 	}
@@ -639,7 +641,7 @@ var hammer = function(x,y){
 var chisel = function(x,y){
 	if(player.curMine.grid[x][y] > 0) {
 		if (player.curMine.energy >= player.curMine.chisselEnergy) {
-			player.curMine.grid[normalizeY(x)][normalizeX(y)] = Math.max(0, player.curMine.grid[normalizeY(x)][normalizeX(y)] - 3);
+			player.curMine.grid[normalizeY(x)][normalizeX(y)] = Math.max(0, player.curMine.grid[normalizeY(x)][normalizeX(y)] - 2);
 			player.curMine.energy -= player.curMine.chisselEnergy;
 		}
 	}
