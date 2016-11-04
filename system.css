@@ -1,3 +1,7 @@
+.vertical-midle {
+	vertical-align: middle !important;
+}
+
 .modal-dialog{
     position: relative;
     display: table; //This is important
