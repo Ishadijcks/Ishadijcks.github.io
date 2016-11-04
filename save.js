@@ -126,16 +126,21 @@ var importSave = function(){
     var save = prompt("Paste your savefile here");
     console.log(save);
     if(save) {
-        var decoded = atob(save)
-        console.log(decoded);
-        if (decoded) {
-            localStorage.setItem("player", decoded);
-            canSave = 0;
-            location.reload();
-        } else {
-            $.notfiy("This is not a valid savefile", "error")
-        }
-    }
+		try {
+			var decoded = atob(save)
+			JSON.parse(decoded);
+			if (decoded) {
+				localStorage.setItem("player", decoded);
+				canSave = 0;
+				location.reload();
+			} else {
+				$.notfiy("This is not a valid savefile", "error")
+			}
+        } catch(err){
+			$.notify("This is not a valid savefile");
+		}
+
+	}
 }
 
 var confirmReset = function() {
