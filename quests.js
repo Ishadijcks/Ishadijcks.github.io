@@ -230,7 +230,7 @@ var startRandomQuest = function(){
 }
 
 var getQuestsByDifficulty = function(difficulty){
-	difficulty = Math.min(5, Math.round(difficulty)-1);
+	difficulty = Math.min(4, Math.floor(Math.sqrt(difficulty)));
 	var list = [];
 	for( var i = 0; i<questList.length; i++){
 		if( questList[i].difficulty === difficulty){
