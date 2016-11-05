@@ -346,6 +346,11 @@ $(document).ready(function(){
 		showGymBadges();
 	})
 
+	$("body").on('click',"#farmButton", function(){
+		$("#farmModal").modal("show");
+		showFarm();
+	})
+
 	// Navbar Button controllers
 	$("body").on('click',"#questButton", function(){
 		$("#questModal").modal("show");

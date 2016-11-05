@@ -657,6 +657,7 @@
 						<button class="btn-warning" id="shardButton">Shards</button>
 						<button class="btn-success" id="questButton">Quest</button>
 						<button class="btn-danger" id="pokedexButton">Pokedex</button>
+                        <button class="btn-success" id="farmButton">Farm</button>
 						<button class="btn-info" id="changeLogButton">Changelog</button>
 						<button class="btn-danger" onClick="$('#saveModal').modal('show'); exportSave()" id="resetButton">Save</button>
 						<a style="text-decoration:none; color:white;" href="https://reddit.com/r/pokeclicker" target="_blank"><button class="btn-info" id="subredditButton">Subreddit</button></a>
@@ -872,6 +873,20 @@
 						</div>
 					</div>
 				</div>
+
+                <!-- Frm Modal -->
+                <div aria-labelledby="myModalLabel" class="modal fade" id="farmModal" role="dialog" tabindex="-1">
+                    <div class="modal-dialog" id="farmModalDialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" >Farm</h4>
+                            </div>
+                            <div class="modal-body" style="text-align:center" id="farmBody">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 				<!-- Evolution Modal -->
 				<div aria-labelledby="myModalLabel" class="modal fade" id="evoModal" role="dialog" tabindex="-1">
