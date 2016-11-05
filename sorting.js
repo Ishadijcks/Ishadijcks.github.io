@@ -52,12 +52,7 @@ function compareByShiny(a,b) {
   if (a.shiny < b.shiny || a.shiny === undefined)
     return 1;
   if (a.shiny == b.shiny){
-    if(a.timeStamp > b.timeStamp){
-      return -1;
-    }
-    if(a.timeStamp < b.timeStamp){
-      return 1;
-    }
+    return compareByRecent(a,b);
   }
   return 0;
 }
