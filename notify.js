@@ -1,8 +1,10 @@
 // request permission on page load
 document.addEventListener('DOMContentLoaded', function () {
-  if (Notification.permission !== "granted")
-    Notification.requestPermission();
+  // if (Notification.permission !== "granted")
+  //   Notification.requestPermission();
 });
+
+
 
 function notifyMe(string) {
   if (!Notification) {
@@ -10,8 +12,8 @@ function notifyMe(string) {
     return;
   }
 
-  if (Notification.permission !== "granted")
-    Notification.requestPermission();
+  // if (Notification.permission !== "granted")
+  //   Notification.requestPermission();
   else {
     var notification = new Notification(string, {
       icon: "images/" + player.starter + ".png",
