@@ -5,13 +5,7 @@ function compareByName(a,b) {
     return -1;
   if (a.name > b.name)
     return 1;
-  if(a.id > b.id){
-    return 1;
-  }
-  if(a.id < b.id){
-    return -1;
-  }
-  return 0;
+  return compareById(a, b);
 }	
 
 function compareById(a,b) {
@@ -36,12 +30,7 @@ function compareByRecent(a,b) {
   if (a.timeStamp < b.timeStamp)
     return 1;
   if (a.timeStamp == b.timeStamp){
-    if(a.id > b.id){
-      return 1;
-    }
-    if(a.id < b.id){
-      return -1;
-    }
+    return compareById(a,b)
   }
   return 0;
 }
@@ -63,13 +52,7 @@ function compareByCatchRate(a,b) {
     return -1;
   if (a.catchRate > b.catchRate)
     return 1;
-  if(a.id > b.id){
-    return 1;
-  }
-  if(a.id < b.id){
-    return -1;
-  }
-  return 0;
+  return compareById(a,b);
 }
 
 function compareByLevel(a,b) {
@@ -83,13 +66,7 @@ function compareByLevel(a,b) {
     return -1;
   if (aAttack < bAttack)
     return 1;
-  if(a.id > b.id){
-    return 1;
-  }
-  if(a.id < b.id){
-    return -1;
-  }
-  return 0;
+  return compareById(a,b)
 }
 
 function compareByAttack(a,b) {
