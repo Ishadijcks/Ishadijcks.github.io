@@ -233,7 +233,7 @@ var getQuestsByDifficulty = function(difficulty){
 	difficulty = Math.min(5, Math.round(difficulty)-1);
 	var list = [];
 	for( var i = 0; i<questList.length; i++){
-		if( questList[i].difficulty === difficulty){
+		if( questList[i].difficulty === difficulty && questList[i].type !== player.curQuest.type){
 			list.push(questList[i]);
 		} else {
 			var random = Math.floor(Math.random()*100 + 1);
