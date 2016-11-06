@@ -94,8 +94,8 @@ var addMineItem = function(name, id, space, value, valueType){
 		name: name,
 		id: id,
 		space: space,
-		value: value || 1,
-		valueType: valueType || "mine"
+		value: typeof(value) === 'undefined' ? 1 : value,
+		valueType: typeof(valueType) === 'undefined' ? "mine" : valueType
 	}
 	mineItemList.push(temp);
 }
