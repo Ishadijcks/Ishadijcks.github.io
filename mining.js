@@ -196,20 +196,21 @@ var loadMine = function(){
 
 var gainMineItem = function(id){
 	var index = alreadyHasMineItem(id);
+	var item = getMineItemById(id);
+	if(mineItemIsStone(item.name)){
+		gainItemByName(item.name);
+		return;
+	}
 	if( index == -1){	
-		var item = getMineItemById(id);
-		if(mineItemIsStone(item.name)){
-			gainItemByName(item.name);
-		} else {
-			var tempItem = {
-				name: item.name,
-				amount: 1,
-				id: id,
-				value: item.value,
-				valueType: item.valueType
-			}
-			player.mineInventory.push(tempItem);
+
+		var tempItem = {
+			name: item.name,
+			amount: 1,
+			id: id,
+			value: item.value,
+			valueType: item.valueType
 		}
+		player.mineInventory.push(tempItem);
 	} else {
 		player.mineInventory[index].amount++;
 	}
