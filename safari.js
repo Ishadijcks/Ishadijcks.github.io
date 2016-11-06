@@ -17,10 +17,10 @@ var loadSafari = function(){
         }
         safari.grid.push(row);
     }
-    for( var i = 0; i<4; i++) {
+    for( var i = 0; i<1; i++) {
         var x = getRandomCoord(safari.sizeX - 1);
         var y = getRandomCoord(safari.sizeY - 1);
-        var item = i % 2 === 0 ? waterBody() : sandBody();
+        var item = i % 1 !== 0 ? waterBody() : sandBody();
         var res = canAddBody(x, y, item);
         if (res) {
             addBody(x, y, item);
@@ -51,10 +51,10 @@ var safariSquare = function(id){
 }
 
 var addBody = function(x, y, body){
-    for(var i = 0; i<body.space.length; i++){
-        for( var j = 0; j<body.space[i].length; j++){
-            if(body.space[i][j] !== 0){
-                safari.grid[i+y][j+x] = body.space[i][j];
+    for(var i = 0; i<body.length; i++){
+        for( var j = 0; j<body[i].length; j++){
+            if(body[i][j] !== 0){
+                safari.grid[i+y][j+x] = body[i][j];
             }
         }
     }
@@ -95,42 +95,90 @@ var waterBody = function() {
         }
         body.push(row);
     }
-    return {
-        space: body
-    };
+    return body;
 }
 
 var sandBody = function() {
-    var x = Math.floor(Math.random() * 4) + 3;
-    var y = Math.floor(Math.random() * 4) + 3;
+    var x = Math.floor(Math.random() * 3) + 3;
+    var y = Math.floor(Math.random() * 3) + 3;
     var body = [];
+
+    // Fill it with blanks
     for (var i = 0; i < y; i++) {
         var row = [];
         for (var j = 0; j < x; j++) {
-            row.push(12)
+            row.push(15);
         }
         body.push(row);
     }
 
+    // Roughen the eddges
     for (var i = 0; i < y; i++) {
-        var row = [];
         for (var j = 0; j < x; j++) {
             var adj = adjacentBodyParts(j,i,body);
             if(adj < 4) {
                 var random = Math.floor(Math.random() * 100) + 1;
                 if (15 * adj < random) {
-                    console.log("(" + j + ", " + i + ")");
-                    console.log(adj);
+                    // console.log("(" + j + ", " + i + ")");
+                    // console.log(adj);
                     body[i][j] = 10;
                 }
             }
         }
     }
 
+    // Shift downwards
+    // body.push(Array.apply(null, Array(x)).map(Number.prototype.valueOf,0))
+    // for (var i = 0; i < y; i++) {
+    //     for (var j = 0; j < x; j++) {
+    //         if( i > 0){
+    //             // console.log(body[i][j])
+    //             if(body[i][j] !== 15 ){
+    //                 body[i][j] = body[i-1][j];
+    //                 console.log("updated");
+    //             }
+    //         }
+    //     }
+    //     // body[i].push(0);
+    // }
+    //
+    // // Shift to the right
+    // for (var i = 0; i < y; i++) {
+    //     for (var j = 0; j < x; j++) {
+    //         if( j > 0){
+    //             if(body[i][j] !== 15 ){
+    //                 body[i][j] = body[i][j-1];
+    //                 console.log("updated2");
+    //             }
+    //         }
+    //     }
+    //     body[i].push(body[i][j-1]);
+    //     console.log(body[i][j-1]);
+    // }
 
-    return {
-        space: body
-    };
+
+    return body;
+}
+
+var dilate = function(body){
+    for (var i=0; i<body.length; i++){
+        for (var j=0; j<body[i].length; j++){
+            if (body[i][j] == 10){
+                if (i>0 && body[i-1][j]==0) body[i-1][j] = 2;
+                if (j>0 && body[i][j-1]==0) body[i][j-1] = 2;
+                if (i+1<body.length && body[i+1][j]==0) body[i+1][j] = 2;
+                if (j+1<body[i].length && body[i][j+1]==0) body[i][j+1] = 2;
+            }
+        }
+    }
+    for (var i=0; i<body.length; i++){
+        for (var j=0; j<body[i].length; j++){
+            if (body[i][j] == 2){
+                body[i][j] = 10;
+            }
+        }
+    }
+    return body;
 }
 
 var adjacentBodyParts = function(x, y, body){
@@ -145,13 +193,12 @@ var adjacentBodyParts = function(x, y, body){
 }
 
 var canAddBody = function(x, y, body){
-    console.log(body);
-    if(y+body.space.length > safari.sizeY || x+body.space[0].length > safari.sizeX){
+    if(y+body.length > safari.sizeY || x+body[0].length > safari.sizeX){
         return false;
     }
-    for(var i = 0; i<body.space.length; i++){
-        for( var j = 0; j<body.space[i].length; j++){
-            if(body.space[i][j] !== 0){
+    for(var i = 0; i<body.length; i++){
+        for( var j = 0; j<body[i].length; j++){
+            if(body[i][j] !== 0){
                 if(safari.grid[i+y][j+x] !== 0){
                     console.log(i+y);
                     console.log(j+x);
