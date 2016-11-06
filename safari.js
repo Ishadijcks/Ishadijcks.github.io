@@ -121,64 +121,137 @@ var sandBody = function() {
                 if (15 * adj < random) {
                     // console.log("(" + j + ", " + i + ")");
                     // console.log(adj);
-                    body[i][j] = 10;
+                    body[i][j] = 0;
                 }
             }
         }
     }
 
     // Shift downwards
-    // body.push(Array.apply(null, Array(x)).map(Number.prototype.valueOf,0))
-    // for (var i = 0; i < y; i++) {
-    //     for (var j = 0; j < x; j++) {
-    //         if( i > 0){
-    //             // console.log(body[i][j])
-    //             if(body[i][j] !== 15 ){
-    //                 body[i][j] = body[i-1][j];
-    //                 console.log("updated");
-    //             }
-    //         }
-    //     }
-    //     // body[i].push(0);
-    // }
-    //
-    // // Shift to the right
-    // for (var i = 0; i < y; i++) {
-    //     for (var j = 0; j < x; j++) {
-    //         if( j > 0){
-    //             if(body[i][j] !== 15 ){
-    //                 body[i][j] = body[i][j-1];
-    //                 console.log("updated2");
-    //             }
-    //         }
-    //     }
-    //     body[i].push(body[i][j-1]);
-    //     console.log(body[i][j-1]);
-    // }
+    body.push(Array.apply(null, Array(x)).map(Number.prototype.valueOf,0))
+    for (var i = 0; i < y; i++) {
+        for (var j = 0; j < x; j++) {
+            if( i > 0){
+                // console.log(body[i][j])
+                if(body[i][j] !== 15 ){
+                    body[i][j] = body[i-1][j];
+                    console.log("updated");
+                }
+            }
+        }
+        // body[i].push(0);
+    }
+
+    // Shift to the right
+    for (var i = 0; i < y; i++) {
+        for (var j = 0; j < x; j++) {
+            if( j > 0){
+                if(body[i][j] !== 15 ){
+                    body[i][j] = body[i][j-1];
+                    console.log("updated2");
+                }
+            }
+        }
+        body[i].push(body[i][j-1]);
+        console.log(body[i][j-1]);
+    }
 
 
+    return edgeDetect(body);
+}
+
+var edgeDetect = function(body){
+    for (var i = 0; i < body.length; i++) {
+        for (var j = 0; j < body[i].length; j++) {
+            if(body[i][j] === 15) {
+                body[i][j] = getSandNumber(getTileNeighbours(j,i,body));
+            }
+        }
+    }
     return body;
 }
 
-var dilate = function(body){
-    for (var i=0; i<body.length; i++){
-        for (var j=0; j<body[i].length; j++){
-            if (body[i][j] == 10){
-                if (i>0 && body[i-1][j]==0) body[i-1][j] = 2;
-                if (j>0 && body[i][j-1]==0) body[i][j-1] = 2;
-                if (i+1<body.length && body[i+1][j]==0) body[i+1][j] = 2;
-                if (j+1<body[i].length && body[i][j+1]==0) body[i][j+1] = 2;
-            }
-        }
+var getTileNeighbours = function(x, y, body){
+    console.log("(" + x + ", " + y + ")");
+    var ret = ["N", "E", "S", "W"];
+    var cross = ["NE", "SE", "SW", "NW"]
+    if (x === 0){
+        ret[3] = false;
+    } else {
+        ret[3] = body[y][x-1] !== 0;
     }
-    for (var i=0; i<body.length; i++){
-        for (var j=0; j<body[i].length; j++){
-            if (body[i][j] == 2){
-                body[i][j] = 10;
-            }
-        }
+    if (y === 0){
+        ret[0] = false;
+    } else {
+        ret[0] = body[y-1][x] !== 0;
     }
-    return body;
+    if (x === body[0].length-1){
+        ret[1] = false;
+    } else {
+        ret[1] = body[y][x+1] !== 0;
+    }
+
+    if (y === body.length-1){
+        ret[2] = false;
+    } else {
+        ret[2] = body[y+1][x] !== 0 && body[y+1][x] !== undefined ;
+    }
+
+    if(ret.equals([true, true, true, true])){
+        cross[0] = body[y-1][x+1] !== 0;
+        cross[1] = body[y+1][x+1] !== 0;
+        cross[2] = body[y-1][x-1] !== 0;
+        cross[3] = body[y+1][x-1] !== 0;
+    }
+    return {
+        plus: ret,
+        cross: cross
+    };
+}
+
+var getSandNumber = function(neighbours){
+    var plus = neighbours.plus;
+    var cross = neighbours.cross;
+    if(plus.equals([false, true, true, false])){
+        return 11;
+    }
+    if(plus.equals([false, true, true, true])){
+        return 12;
+    }
+    if(plus.equals([false, false, true, true])){
+        return 13;
+    }
+    if(plus.equals([true, true, true, false])){
+        return 14;
+    }
+    if(plus.equals([true, true, true, true])){
+        if(!cross[0]){
+            return 21;
+        }
+        if(!cross[1]){
+            return 22;
+        }
+        if(!cross[2]){
+            return 23;
+        }
+        if(!cross[3]){
+            return 24;
+        }
+        return 15;
+    }
+    if(plus.equals([true, false, true, true])){
+        return 16;
+    }
+    if(plus.equals([true, true, false, false])){
+        return 17;
+    }
+    if(plus.equals([true, true, false, true])){
+        return 18;
+    }
+    if(plus.equals([true, false, false, true])){
+        return 19;
+    }
+    return -1;
 }
 
 var adjacentBodyParts = function(x, y, body){
@@ -205,6 +278,30 @@ var canAddBody = function(x, y, body){
                     return false;
                 }
             }
+        }
+    }
+    return true;
+}
+
+Array.prototype.equals = function (array) {
+    // if the other array is a falsy value, return
+    if (!array)
+        return false;
+
+    // compare lengths - can save a lot of time
+    if (this.length != array.length)
+        return false;
+
+    for (var i = 0, l=this.length; i < l; i++) {
+        // Check if we have nested arrays
+        if (this[i] instanceof Array && array[i] instanceof Array) {
+            // recurse into the nested arrays
+            if (!this[i].equals(array[i]))
+                return false;
+        }
+        else if (this[i] != array[i]) {
+            // Warning - two different object instances will never be equal: {x:20} != {x:20}
+            return false;
         }
     }
     return true;
