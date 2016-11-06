@@ -10,9 +10,9 @@ var safari = {
 }
 
 var loadSafari = function(){
-    for( var i = 0; i<player.curMine.sizeY; i++){
+    for( var i = 0; i<safari.sizeY; i++){
         var row = [];
-        for(var j = 0; j<player.curMine.sizeX; j++){
+        for(var j = 0; j<safari.curMine.sizeX; j++){
             row.push(0);
         }
         safari.grid.push(row);
