@@ -50,8 +50,17 @@
 	padding:0px !important;
 	text-align: center;
 }
-.mineSquare:hover {
-    border: 1px solid red;
+.mineSquare:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.mineSquare:hover:after {
+	border: 1px solid red;
 }
 
 
