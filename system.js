@@ -352,6 +352,11 @@ $(document).ready(function(){
 		showCurQuest();
 	})
 
+	$("body").on('click',"#safariButton", function(){
+		$("#safariModal").modal("show");
+		showSafari();
+	})
+
 	$("body").on('click',"#mineButton", function(){
 		$("#mineModal").modal("show");
 		showCurMine();
@@ -415,6 +420,7 @@ $(document).ready(function(){
 	showCurQuest();
 	showEggs();
 	generateDailyDeals();
+	loadSafari();
 });
 
 
