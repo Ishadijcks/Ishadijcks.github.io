@@ -1,3 +1,27 @@
+.farmPlot {
+    width:100px;
+    height:100px;
+    margin:10px;
+    background-image: url('images/farm/soil.png');
+}
+
+#farmBody {
+    margin: 0 auto;
+}
+
+.selectedBerry {
+    background-color: grey;
+}
+
+.berrySlot {
+    border:1px solid black;
+    height:24px;
+    width:24px;
+    text-align: center;
+    margin-left:10px;
+    margin-right:10px;
+}
+
 .vertical-midle {
 	vertical-align: middle !important;
 }
