@@ -96,6 +96,10 @@ var load = function(){
 	if( player.version < 0.8){
 		resetXp();
 	}
+
+	if( player.version < 0.91) {
+		correctFossils();
+	}
 	
 	var date = new Date();
 	if(date.getDate() !== player.lastSeen){
@@ -157,4 +161,12 @@ var resetXp = function(){
 		player.caughtPokemonList[i].experience = 0;
 	}
 	$.notify("Your exp has been reset for balancing purposes.")
+}
+
+var correctFossils = function() {
+	for ( var i = 0; i<player.mineInventory.length; i++) {
+		if (player.mineInventory[i].id < 4 && player.mineInventory[i].value != 0) {
+			player.mineInventory[i].value = 0;
+		}
+	}
 }
