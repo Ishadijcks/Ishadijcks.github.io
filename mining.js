@@ -54,7 +54,7 @@ var generateDailyDeal = function(seed1, seed2, seed3, seed4){
     var x4 = Math.sin(seed4++) * 10000;
     x4 = x4 - Math.floor(x4);
     var amount2 = Math.floor(3 * x4) + 1;
-    if(item1.name !== item2.name && !reverseDailyDealExists(item1,item2)) {
+    if(item1.name !== item2.name && !reverseDailyDealExists(item1,item2) && !mineItemIsStone(item1.name)) {
         addDailyDeal(item1, amount1, item2, amount2);
     }
 }
