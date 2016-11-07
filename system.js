@@ -1,4 +1,4 @@
-var version = "0.91"
+var version = "0.92"
 var inProgress = 1;
 var canCatch = 1;
 var attackInterval;
@@ -758,7 +758,7 @@ var calculateAttack = function(){
 
 		var level = experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType);
 		if( curEnemy != "undefined"){
-			total += Math.ceil(level*(player.caughtPokemonList[i].attack)/100)* typeEffectiveness[typeToNumber(player.caughtPokemonList[i].type)][typeToNumber(curEnemy.type)];
+			total += Math.ceil(level*(player.caughtPokemonList[i].attack)/100)* damageModifier(player.caughtPokemonList[i], curEnemy);
 		}
 	}
 	player.attack = total;
@@ -766,7 +766,18 @@ var calculateAttack = function(){
 	return Math.max(total,1);
 }
 
-
+var damageModifier(attacker, defender) {
+	res = 0
+	for (var i = 0; i<attacker.type.length; i++) {
+		tmp = 1
+		for (var j = 0; j<defender.type.length; j++) {
+			tmp *= typeEffectiveness[typeToNumber(attacker.type[i])][typeToNumber(defender.type[j])];
+		}
+		res += tmp
+	}
+	res /= attacker.type.length;
+	return res
+}
 
 var generatePokemon = function(route){
 	clicks = 0;
