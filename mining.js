@@ -1,4 +1,5 @@
 var mineItemList = [];
+var loadingNew = false;
 var addDailyDeal = function(item1, amount1, item2, amount2){
     var temp = {
         item1: item1,
@@ -544,8 +545,9 @@ var checkItemsRevealed = function(){
 
 var checkMineCompleted = function(){
 
-	if(player.curMine.itemsFound >= player.curMine.itemsBuried){
+	if(player.curMine.itemsFound >= player.curMine.itemsBuried && !loadingNew){
 		setTimeout(mineCompleted, 1500);
+		loadingNew = true;
 	}
 }
 
@@ -553,6 +555,7 @@ var mineCompleted = function(){
 	$.notify("You dig deeper...", "");
 	player.curMine.layersCleared++;
 	loadMine();
+	loadingNew = false;
 }
 
 var getMineItemById = function(id){
