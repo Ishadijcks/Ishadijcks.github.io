@@ -370,7 +370,7 @@ var dungeonEnemyDefeated = function() {
         }, 1);
 
         gainExp(curEnemy.exp,curEnemy.level,false);
-        gainShards(curEnemy.type, 3);
+        gainShards(curEnemy.type[0], 3);
         dungeonCanMove = 1;
         var catchRate = curEnemy.catchRate + getBonusCatchrate();
         $("#dungeonCatchDisplay").html("Catch chance: " + Math.min(100, catchRate) + "%");
@@ -488,7 +488,7 @@ var spawnDungeonBoss = function() {
     if(possibleType != undefined){
         curEnemy.type = possibleType;
     } else {
-        curEnemy.type = 'normal';        
+        curEnemy.type = ['normal'];        
     }
 
     clearInterval(attackInterval);
@@ -517,7 +517,7 @@ var spawnDungeonPokemon = function() {
     if(possibleType != undefined){
         curEnemy.type = possibleType;
     } else {
-        curEnemy.type = 'normal';        
+        curEnemy.type = ['normal'];        
     }
     clearInterval(attackInterval);
     attackInterval = setInterval(pokemonsAttack, 1000);
