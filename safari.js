@@ -200,8 +200,8 @@ var getTileNeighbours = function(x, y, body){
     if(ret.equals([true, true, true, true])){
         cross[0] = body[y-1][x+1] !== 0;
         cross[1] = body[y+1][x+1] !== 0;
-        cross[2] = body[y-1][x-1] !== 0;
-        cross[3] = body[y+1][x-1] !== 0;
+        cross[2] = body[y+1][x-1] !== 0;
+        cross[3] = body[y-1][x-1] !== 0;
     }
     return {
         plus: ret,
@@ -225,6 +225,7 @@ var getSandNumber = function(neighbours){
         return 14;
     }
     if(plus.equals([true, true, true, true])){
+        console.log(cross);
         if(!cross[0]){
             return 21;
         }
