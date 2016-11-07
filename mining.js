@@ -197,6 +197,7 @@ var loadMine = function(){
 		}
 	}
 	showCurMine();
+	loadingNewMine = false;
 }
 
 var gainMineItem = function(id){
@@ -555,7 +556,6 @@ var mineCompleted = function(){
 	$.notify("You dig deeper...", "");
 	player.curMine.layersCleared++;
 	loadMine();
-	loadingNewMine = false;
 }
 
 var getMineItemById = function(id){
