@@ -178,7 +178,7 @@ var initTypeEffectiveness = function(){
 }
 
 var typeToNumber = function(type){
-	switch(type.toLowerCase) {
+	switch(type.toLowerCase()) {
 		case "normal":
 			return 0;
 		case "fire":
