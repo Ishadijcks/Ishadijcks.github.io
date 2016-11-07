@@ -543,16 +543,17 @@ var checkItemsRevealed = function(){
 }
 
 var checkMineCompleted = function(){
-
 	if(player.curMine.itemsFound >= player.curMine.itemsBuried){
 		setTimeout(mineCompleted, 1500);
 	}
 }
 
 var mineCompleted = function(){
-	$.notify("You dig deeper...", "");
-	player.curMine.layersCleared++;
-	loadMine();
+	if(player.curMine.itemsFound >= player.curMine.itemsBuried){
+		$.notify("You dig deeper...", "");
+		player.curMine.layersCleared++;
+		loadMine();
+	}
 }
 
 var getMineItemById = function(id){
