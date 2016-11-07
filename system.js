@@ -39,10 +39,10 @@ var player = {
 	townExplain: 0,
 	dungeonExplain: 0,
 	inventoryList: [],
-	typeShards: Array.apply(null, Array(17)).map(Number.prototype.valueOf,0),
-	notEffectiveTypeBonus: Array.apply(null, Array(17)).map(Number.prototype.valueOf,0),
-	normalEffectiveTypeBonus: Array.apply(null, Array(17)).map(Number.prototype.valueOf,0),
-	veryEffectiveTypeBonus: Array.apply(null, Array(17)).map(Number.prototype.valueOf,0),
+	typeShards: Array.apply(null, Array(18)).map(Number.prototype.valueOf,0),
+	notEffectiveTypeBonus: Array.apply(null, Array(18)).map(Number.prototype.valueOf,0),
+	normalEffectiveTypeBonus: Array.apply(null, Array(18)).map(Number.prototype.valueOf,0),
+	veryEffectiveTypeBonus: Array.apply(null, Array(18)).map(Number.prototype.valueOf,0),
 	shopPriceDeviation: Array.apply(null, Array(100)).map(Number.prototype.valueOf,1),
 	questPoints:0,
 	curQuest: firstQuest,
@@ -766,17 +766,17 @@ var calculateAttack = function(){
 	return Math.max(total,1);
 }
 
-var damageModifier(attacker, defender) {
-	res = 0
+var damageModifier = function(attacker, defender) {
+	res = 0;
 	for (var i = 0; i<attacker.type.length; i++) {
-		tmp = 1
+		tmp = 1;
 		for (var j = 0; j<defender.type.length; j++) {
 			tmp *= typeEffectiveness[typeToNumber(attacker.type[i])][typeToNumber(defender.type[j])];
 		}
-		res += tmp
+		res += tmp;
 	}
 	res /= attacker.type.length;
-	return res
+	return res;
 }
 
 var generatePokemon = function(route){

@@ -27,9 +27,9 @@ var typeColorUnlocked = ["595c3b","b10818","294a94","b57b31","4a944a","42a59c","
 
 var initTypeEffectiveness = function(){
 	typeEffectiveness = [];
-	for( var i = 0; i<17; i++){
+	for( var i = 0; i<18; i++){
 		var row = [];
-		for(var j = 0; j<17; j++){
+		for(var j = 0; j<18; j++){
 			row.push(getNormalEffective(i));
 		}
 	typeEffectiveness.push(row);
@@ -168,7 +168,7 @@ var initTypeEffectiveness = function(){
 	typeEffectiveness[STEEL][FAIRY] = getVeryEffective(STEEL);
 
 	typeEffectiveness[FAIRY][FIRE] = getNotEffective(FAIRY);
-	typeEffectiveness[FAIRY][FIGHTING] = getVeryffective(FAIRY);
+	typeEffectiveness[FAIRY][FIGHTING] = getVeryEffective(FAIRY);
 	typeEffectiveness[FAIRY][POISON] = getNotEffective(FAIRY);
 	typeEffectiveness[FAIRY][DRAGON] = getVeryEffective(FAIRY);
 	typeEffectiveness[FAIRY][DARK] = getVeryEffective(FAIRY);
