@@ -100,6 +100,10 @@ var load = function(){
 	if( player.version < 0.91) {
 		correctFossils();
 	}
+
+	if(player.version < 0.92) {
+		updateTypes();
+	}
 	
 	var date = new Date();
 	if(date.getDate() !== player.lastSeen){
@@ -168,5 +172,11 @@ var correctFossils = function() {
 		if (player.mineInventory[i].id < 4 && player.mineInventory[i].value != 0) {
 			player.mineInventory[i].value = 0;
 		}
+	}
+}
+
+var updateTypes = function() {
+	for( var i = 0; i<player.caughtPokemonList.length; i++) {
+		player.caughtPokemonList[i].type = getPokemonByName(player.caughtPokemonList[i].name).type;
 	}
 }
