@@ -10,6 +10,7 @@ var safari = {
 }
 
 var loadSafari = function(){
+    safari.grid = [];
     for( var i = 0; i<safari.sizeY; i++){
         var row = [];
         for(var j = 0; j<safari.sizeX; j++){
@@ -17,18 +18,32 @@ var loadSafari = function(){
         }
         safari.grid.push(row);
     }
-    for( var i = 0; i<1; i++) {
-        var x = getRandomCoord(safari.sizeX - 1);
-        var y = getRandomCoord(safari.sizeY - 1);
-        var item = i % 1 !== 0 ? waterBody() : sandBody();
-        var res = canAddBody(x, y, item);
-        if (res) {
-            addBody(x, y, item);
-        } else {
-            console.log("(" + x + ", " + y + ")");
-        }
-    }
+    addRandomBody(fenceBody(), 'fence');
+    addRandomBody(waterBody(), 'water');
+    addRandomBody(sandBody(), 'sand');
+    addRandomBody(waterBody(), 'water');
+    addRandomBody(waterBody(), 'water');
+    addRandomBody(sandBody(), 'sand');
+    addRandomBody(sandBody(), 'sand');
+    addRandomBody(grassBody(), 'grass');
+    addRandomBody(grassBody(), 'grass');
+    addRandomBody(grassBody(), 'grass');
+    addRandomBody(grassBody(), 'grass');
+    addRandomBody(grassBody(), 'grass');
     showSafari();
+}
+
+var addRandomBody = function(body, type){
+    var x = getRandomCoord(safari.sizeX - 2);
+    var y = getRandomCoord(safari.sizeY - 2);
+    if(type === 'fence'){
+        x -= 3;
+        y -= 3;
+    }
+    var res = canAddBody(x, y, body);
+    if (res || type === 'grass') {
+        addBody(x, y, body);
+    }
 }
 
 var showSafari = function(){
@@ -54,15 +69,24 @@ var addBody = function(x, y, body){
     for(var i = 0; i<body.length; i++){
         for( var j = 0; j<body[i].length; j++){
             if(body[i][j] !== 0){
-                safari.grid[i+y][j+x] = body[i][j];
+                if( (i + y) <safari.sizeY && (j + x) < safari.sizeX) {
+                    if (safari.grid[i + y][j + x] === 0) {
+                        safari.grid[i + y][j + x] = body[i][j];
+                    }
+                }
             }
         }
     }
 }
 
+var fenceBody = function(){
+    var grass = sandBody(7,7);
+    return edgeDetect(grass, 'fence');
+}
+
 var waterBody = function() {
-    var x = Math.floor(Math.random() * 4) + 2;
-    var y = Math.floor(Math.random() * 4) + 2;
+    var x = Math.floor(Math.random() * 3) + 3;
+    var y = Math.floor(Math.random() * 3) + 3;
     var body = [];
     for (var i = 0; i < y; i++) {
         var row = [];
@@ -98,110 +122,115 @@ var waterBody = function() {
     return body;
 }
 
-var sandBody = function() {
-    var x = Math.floor(Math.random() * 3) + 3;
-    var y = Math.floor(Math.random() * 3) + 3;
+var grassBody = function(){
+    var x = Math.floor(Math.random() * 3) + 4;
+    var y = Math.floor(Math.random() * 3) + 4;
     var body = [];
-
-    // Fill it with blanks
     for (var i = 0; i < y; i++) {
         var row = [];
         for (var j = 0; j < x; j++) {
-            row.push(15);
+            if(j < x*2/3-1) {
+                row.push(10);
+            } else {
+                row.push(0);
+            }
         }
+        shuffle(row);
         body.push(row);
     }
 
-    // Roughen the eddges
-    for (var i = 0; i < y; i++) {
-        for (var j = 0; j < x; j++) {
-            var adj = adjacentBodyParts(j,i,body);
-            if(adj < 4) {
-                var random = Math.floor(Math.random() * 100) + 1;
-                if (15 * adj < random) {
-                    // console.log("(" + j + ", " + i + ")");
-                    // console.log(adj);
-                    body[i][j] = 0;
-                }
-            }
-        }
-    }
+    body = fillHoles(body);
 
-    // Shift downwards
-    body.push(Array.apply(null, Array(x)).map(Number.prototype.valueOf,0))
-    for (var i = 0; i < y; i++) {
-        for (var j = 0; j < x; j++) {
-            if( i > 0){
-                // console.log(body[i][j])
-                if(body[i][j] !== 15 ){
-                    body[i][j] = body[i-1][j];
-                    console.log("updated");
-                }
-            }
-        }
-        // body[i].push(0);
-    }
-
-    // Shift to the right
-    for (var i = 0; i < y; i++) {
-        for (var j = 0; j < x; j++) {
-            if( j > 0){
-                if(body[i][j] !== 15 ){
-                    body[i][j] = body[i][j-1];
-                    console.log("updated2");
-                }
-            }
-        }
-        body[i].push(body[i][j-1]);
-        console.log(body[i][j-1]);
-    }
-
-
-    return edgeDetect(body);
+    return body;
 }
 
-var edgeDetect = function(body){
-    for (var i = 0; i < body.length; i++) {
-        for (var j = 0; j < body[i].length; j++) {
-            if(body[i][j] === 15) {
-                body[i][j] = getSandNumber(getTileNeighbours(j,i,body));
+var fillHoles = function(body){
+    for(var i = 0; i<body.length; i++){
+        for(var j = 0; j<body[0].length; j++){
+            if(body[i][j] === 0) {
+                if (i !== 0 && i !== body.length - 1) {
+                    if (body[i - 1][j] === 10 && body[i + 1][j] === 10) {
+                        body[i][j] = 10;
+                    }
+                }
+            }
+        }
+    }
+
+    for(var i = 0; i<body.length; i++){
+        for(var j = 0; j<body[0].length; j++){
+            if(body[i][j] === 0) {
+
+                if (j !== 0 && j !== body[0].length - 1) {
+                    if (body[i][j-1] === 10 && body[i][j+1] === 10) {
+                        body[i][j] = 10;
+                    }
+                }
             }
         }
     }
     return body;
 }
 
-var getTileNeighbours = function(x, y, body){
-    console.log("(" + x + ", " + y + ")");
+
+var sandBody = function(x, y) {
+    if ( x === undefined) {
+        var x = Math.floor(Math.random() * 3) + 3;
+    }
+    if ( y === undefined) {
+        var y = Math.floor(Math.random() * 3) + 3;
+    }
+    var body = generateCube(x,y, 'sand');
+    return edgeDetect(body,'sand');
+}
+
+var edgeDetect = function(body, type){
+    for (var i = 0; i < body.length; i++) {
+        for (var j = 0; j < body[i].length; j++) {
+            if( type === 'sand') {
+                if (body[i][j] === 15) {
+                    body[i][j] = getSandNumber(getTileNeighbours(j, i, body));
+                }
+            } else if( type === 'fence') {
+                if (body[i][j] !== 0) {
+                    body[i][j] = getFenceNumber(getTileNeighbours(j, i, body));
+                }
+            }
+        }
+    }
+    return body;
+}
+
+var getTileNeighbours = function(x, y, body) {
     var ret = ["N", "E", "S", "W"];
     var cross = ["NE", "SE", "SW", "NW"]
-    if (x === 0){
+    if (x === 0) {
         ret[3] = false;
     } else {
-        ret[3] = body[y][x-1] !== 0;
+        ret[3] = body[y][x - 1] !== 0;
     }
-    if (y === 0){
+    if (y === 0) {
         ret[0] = false;
     } else {
-        ret[0] = body[y-1][x] !== 0;
+        ret[0] = body[y - 1][x] !== 0;
     }
-    if (x === body[0].length-1){
+    if (x === body[0].length - 1) {
         ret[1] = false;
     } else {
-        ret[1] = body[y][x+1] !== 0;
+        ret[1] = body[y][x + 1] !== 0;
     }
 
-    if (y === body.length-1){
+    if (y === body.length - 1) {
         ret[2] = false;
     } else {
-        ret[2] = body[y+1][x] !== 0 && body[y+1][x] !== undefined ;
+        ret[2] = body[y + 1][x] !== 0 && body[y + 1][x] !== undefined;
     }
 
-    if(ret.equals([true, true, true, true])){
-        cross[0] = body[y-1][x+1] !== 0;
-        cross[1] = body[y+1][x+1] !== 0;
-        cross[2] = body[y+1][x-1] !== 0;
-        cross[3] = body[y-1][x-1] !== 0;
+    if (ret.equals([true, true, true, true])) {
+        cross[0] = body[y - 1][x + 1] !== 0;
+        cross[1] = body[y + 1][x + 1] !== 0;
+        cross[2] = body[y + 1][x - 1] !== 0;
+        cross[3] = body[y - 1][x - 1] !== 0;
     }
     return {
         plus: ret,
@@ -225,7 +254,6 @@ var getSandNumber = function(neighbours){
         return 14;
     }
     if(plus.equals([true, true, true, true])){
-        console.log(cross);
         if(!cross[0]){
             return 21;
         }
@@ -252,8 +280,95 @@ var getSandNumber = function(neighbours){
     if(plus.equals([true, false, false, true])){
         return 19;
     }
-    return -1;
+    return 10;
 }
+
+var getFenceNumber = function(neighbours){
+    var plus = neighbours.plus;
+    var cross = neighbours.cross;
+    if(plus.equals([false, true, true, false])){
+        return 25;
+    }
+    if(plus.equals([false, true, true, true])){
+        return 26;
+    }
+    if(plus.equals([false, false, true, true])){
+        return 27;
+    }
+    if(plus.equals([true, true, true, false])){
+        return 28;
+    }
+    if(plus.equals([true, true, true, true])){
+        if(!cross[0]){
+            return 33;
+        }
+        if(!cross[1]){
+            return 34;
+        }
+        if(!cross[2]){
+            return 35;
+        }
+        if(!cross[3]){
+            return 36;
+        }
+        return 10;
+    }
+    if(plus.equals([true, false, true, true])){
+        return 29;
+    }
+    if(plus.equals([true, true, false, false])){
+        return 30;
+    }
+    if(plus.equals([true, true, false, true])){
+        return 31;
+    }
+    if(plus.equals([true, false, false, true])){
+        return 32;
+    }
+    return 10;
+}
+
+var addCoord = function(from, dir){
+    var res = [];
+    res.push(from[0] + dir[0]);
+    res.push(from[1] + dir[1]);
+    return res;
+}
+
+var generateCube = function(sizeX, sizeY, type){
+    var body = [];
+    for (var i = 0; i < sizeY; i++) {
+        var row = [];
+        for (var j = 0; j < sizeX; j++) {
+            row.push(0);
+        }
+        body.push(row);
+    }
+
+    var amount = type === 'sand' ? 20 : 5
+    for (var i = 0; i<amount; i++){
+        var x = Math.floor(Math.random()*(sizeX-2));
+        var y = Math.floor(Math.random()*(sizeY-2));
+        body =addCube(x,y,body);
+    }
+    return body;
+}
+
+var addCube = function(x, y, body){
+    if (Math.random() >= 0.5){
+        body[y+2][x] = 15;
+        body[y+2][x+1] = 15;
+        body[y][x+2] = 15;
+        body[y+1][x+2] = 15;
+        body[y+2][x+2] = 15;
+    }
+    body[y][x] = 15;
+    body[y+1][x] = 15;
+    body[y][x+1] = 15;
+    body[y+1][x+1] = 15;
+    return body;
+}
+
 
 var adjacentBodyParts = function(x, y, body){
     var total = 4;
@@ -274,8 +389,6 @@ var canAddBody = function(x, y, body){
         for( var j = 0; j<body[i].length; j++){
             if(body[i][j] !== 0){
                 if(safari.grid[i+y][j+x] !== 0){
-                    console.log(i+y);
-                    console.log(j+x);
                     return false;
                 }
             }
