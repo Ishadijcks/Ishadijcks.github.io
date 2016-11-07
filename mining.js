@@ -1,4 +1,5 @@
 var mineItemList = [];
+var loadingNewMine = false;
 var addDailyDeal = function(item1, amount1, item2, amount2){
     var temp = {
         item1: item1,
@@ -196,6 +197,7 @@ var loadMine = function(){
 		}
 	}
 	showCurMine();
+	loadingNewMine = false;
 }
 
 var gainMineItem = function(id){
@@ -544,8 +546,9 @@ var checkItemsRevealed = function(){
 
 var checkMineCompleted = function(){
 
-	if(player.curMine.itemsFound >= player.curMine.itemsBuried){
+	if(player.curMine.itemsFound >= player.curMine.itemsBuried && !loadingNewMine){
 		setTimeout(mineCompleted, 1500);
+		loadingNewMine = true;
 	}
 }
 
