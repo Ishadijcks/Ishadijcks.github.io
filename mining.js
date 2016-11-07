@@ -87,6 +87,10 @@ var gainMineEnergy = function(){
         multiplier = getOakItemBonus("Cell Battery");
     }
 	player.curMine.energy = Math.min(player.curMine.maxEnergy, player.curMine.energy+ (multiplier*player.curMine.energyGain));
+	if(player.curMine.energy === player.curMine.maxEnergy){
+		$.notify("Your mining energy has reached maximum capacity!", "success");
+		notifyMe("You mining energy has reached maximum capacity!");
+	}
 }
 
 var addMineItem = function(name, id, space, value, valueType){
