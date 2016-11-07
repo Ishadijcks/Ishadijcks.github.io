@@ -19,7 +19,8 @@ function notifyMe(string) {
     });
 
     notification.onclick = function () {
-      window.open("http://ishadijcks.github.io/");      
+		window.focus();
+		notification.close();
     };
 
     setTimeout(function() { notification.close() }, 3000);
