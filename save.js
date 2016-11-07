@@ -103,6 +103,9 @@ var load = function(){
 
 	if(player.version < 0.92) {
 		updateTypes();
+		player.notEffectiveTypeBonus.push(0);
+		player.normalEffectiveTypeBonus.push(0);
+		player.veryEffectiveTypeBonus.push(0);
 	}
 	
 	var date = new Date();
