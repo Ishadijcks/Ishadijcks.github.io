@@ -337,19 +337,19 @@ $(document).ready(function(){
 		} else if(inProgress == 4){
 			if(keyCode == 38 || keyCode == 87){
 				safari.movingY = -1;
-				safariMove('up')
+				safariMove('up');
 				e.preventDefault();
 			} else if(keyCode == 39 || keyCode == 68){
 				safari.movingX = 1;
-				safariMove('right')
+				safariMove('right');
 				e.preventDefault();
 			} else if(keyCode == 37 || keyCode == 65){
 				safari.movingX = -1;
-				safariMove('left')
+				safariMove('left');
 				e.preventDefault();
 			} else if(keyCode == 40 || keyCode == 83){
 				safari.movingY = 1;
-				safariMove('down')
+				safariMove('down');
 				e.preventDefault();
 			} else if(keyCode == 32){
 				e.preventDefault();
