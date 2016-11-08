@@ -578,7 +578,9 @@ var gainExp = function(exp,level,trainer){
 		//realgame formula: (trainerbonus * baseexp * luckyeggbonus * affectionbonus * level * tradedbonus * unevolvedbonus) / (7 * outofbattlepenalty)
 		for( var i = 0; i<player.caughtPokemonList.length; i++){
 			var pokemonLevel = experienceToLevel(player.caughtPokemonList[i].experience, player.caughtPokemonList[i].levelType);
-			player.caughtPokemonList[i].experience+= expTotal;
+			if( pokemonLevel < (player.gymBadges.length+2)*10) {
+				player.caughtPokemonList[i].experience += expTotal;
+			}
 		}
 		checkEvolution();
 	} else {
