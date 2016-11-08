@@ -271,7 +271,7 @@ var buyVeryUpgrade = function(type){
 var showShardModal = function(){
 	$("#shardModal").modal("show");
 	var html = ""
-	for(var i = 0; i<17; i++){
+	for(var i = 0; i<18; i++){
 		html += "<table class=shardTable>";
 		html += "<tr> <td style='width:15%'>" +numberToType[i] + "</td><td>Not very effective:</td>";
 		html +=	"<td>" + getNotEffective(i).toFixed(2) + "x</td>";
