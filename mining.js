@@ -1,4 +1,5 @@
 var mineItemList = [];
+var loadingNewMine = false;
 var addDailyDeal = function(item1, amount1, item2, amount2){
     var temp = {
         item1: item1,
@@ -54,7 +55,7 @@ var generateDailyDeal = function(seed1, seed2, seed3, seed4){
     var x4 = Math.sin(seed4++) * 10000;
     x4 = x4 - Math.floor(x4);
     var amount2 = Math.floor(3 * x4) + 1;
-    if(item1.name !== item2.name && !reverseDailyDealExists(item1,item2)) {
+    if(item1.name !== item2.name && !reverseDailyDealExists(item1,item2) && !mineItemIsStone(item1.name)) {
         addDailyDeal(item1, amount1, item2, amount2);
     }
 }
@@ -87,6 +88,10 @@ var gainMineEnergy = function(){
         multiplier = getOakItemBonus("Cell Battery");
     }
 	player.curMine.energy = Math.min(player.curMine.maxEnergy, player.curMine.energy+ (multiplier*player.curMine.energyGain));
+	if(player.curMine.energy === player.curMine.maxEnergy){
+		$.notify("Your mining energy has reached maximum capacity!", "success");
+		notifyMe("You mining energy has reached maximum capacity!");
+	}
 }
 
 var addMineItem = function(name, id, space, value, valueType){
@@ -192,6 +197,7 @@ var loadMine = function(){
 		}
 	}
 	showCurMine();
+	loadingNewMine = false;
 }
 
 var gainMineItem = function(id){
@@ -540,8 +546,9 @@ var checkItemsRevealed = function(){
 
 var checkMineCompleted = function(){
 
-	if(player.curMine.itemsFound >= player.curMine.itemsBuried){
+	if(player.curMine.itemsFound >= player.curMine.itemsBuried && !loadingNewMine){
 		setTimeout(mineCompleted, 1500);
+		loadingNewMine = true;
 	}
 }
 
