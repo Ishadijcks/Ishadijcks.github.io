@@ -8,6 +8,7 @@
 	<script src="jquery.js"></script>
 	<script type="text/javascript" src="tooltipster/dist/js/tooltipster.bundle.min.js"></script>
 	<link href="tooltipster/dist/css/tooltipster.bundle.min.css" rel="stylesheet" type="text/css">
+	<script src="motio.js"></script>
 	<script src="pokemonList.js"></script>
 	<script src="dungeons.js"></script>
 	<script src="system.js"></script>
@@ -29,6 +30,7 @@
 	<script src="breeding.js"></script>
 	<script src="types.js"></script>
 	<script src="mining.js"></script>
+	<script src="safari.js"></script>
 	
 	<!-- Latest compiled and minified CSS -->
 	<link href="bootstrap.css" rel="stylesheet"><!-- Optional theme -->
@@ -57,7 +59,6 @@
 
 </head>
 <body>
-
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<div class="col-lg-2 col-lg-offset-2 col-sm-4" id="leftColumn">
@@ -657,6 +658,7 @@
 						<button class="btn-success" id="questButton">Quest</button>
 						<button class="btn-danger" id="pokedexButton">Pokedex</button>
 						<button class="btn-info" id="changeLogButton">Changelog</button>
+						<button class="btn-info" id="safariButton">Safari</button>
 						<button class="btn-danger" onClick="$('#saveModal').modal('show'); exportSave()" id="resetButton">Save</button>
 						<a style="text-decoration:none; color:white;" href="https://reddit.com/r/pokeclicker" target="_blank"><button class="btn-info" id="subredditButton">Subreddit</button></a>
 						<a style="text-decoration:none; color:white;" href="http://kiwiirc.com/client/irc.freenode.net/pokeclicker" target="_blank"><button class="btn-success" id="chatButton">Chat</button></a>
@@ -698,10 +700,20 @@
 								<h4 style='text-align:center' class="modal-title">Breeding</h4>
 							</div>
 							<div class="modal-body" id="breedingBody" style="width: 80%;margin: auto;">
-
-
 							</div>
+						</div>
+					</div>
+				</div>
 
+				<!-- Safari Modal -->
+				<div aria-labelledby="myModalLabel" class="modal fade noselect" id="safariModal" role="dialog" style="cursor:default" tabindex="-1">
+					<div class="modal-dialog" role="document" style="width:55%">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 style='text-align:center' class="modal-title">Safari Zone</h4>
+							</div>
+							<div class="modal-body" id="safariBody" style="width: 80%;margin: auto;">
+							</div>
 						</div>
 					</div>
 				</div>

@@ -1,3 +1,32 @@
+.sprite {
+	width: 32px;
+	height: 32px;
+	background: url('images/safari/walkDown.png');
+
+}
+
+#sprite {
+    position: relative;
+    z-index: 999999;
+}
+
+.moveUp{
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -ms-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+    top: -32px !important;
+}
+
+.safariSquare {
+    height:32px;
+    width:32px !important;
+    margin: 0px !important;
+    padding:0px !important;
+    text-align: center;
+}
+
 .vertical-midle {
 	vertical-align: middle !important;
 }
