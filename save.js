@@ -71,6 +71,7 @@ var load = function(){
 	if (typeof savegame.oakItemsEquipped !== "undefined") player.oakItemsEquipped = savegame.oakItemsEquipped;
 	if (typeof savegame.dailyDeals !== "undefined") player.dailyDeals = savegame.dailyDeals;
 	if (typeof savegame.gymsDefeated !== "undefined") player.gymsDefeated = savegame.gymsDefeated;
+	if (typeof savegame.dungeonsDefeated !== "undefined") player.dungeonsDefeated = savegame.dungeonsDefeated;
 
     if(player.starter === "none"){
         $("#pickStarter").modal('show');
