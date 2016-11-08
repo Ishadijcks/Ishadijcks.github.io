@@ -767,16 +767,15 @@ var calculateAttack = function(){
 }
 
 var damageModifier = function(attacker, defender) {
-	res = 0;
+	var tmp = 0;
 	for (var i = 0; i<attacker.type.length; i++) {
-		tmp = 1;
 		for (var j = 0; j<defender.type.length; j++) {
-			tmp *= typeEffectiveness[typeToNumber(attacker.type[i])][typeToNumber(defender.type[j])];
+			tmp += typeEffectiveness[typeToNumber(attacker.type[i])][typeToNumber(defender.type[j])];
 		}
-		res += tmp;
 	}
-	res /= attacker.type.length;
-	return res;
+	
+	tmp /= attacker.type.length * defender.type.length
+	return tmp;
 }
 
 var generatePokemon = function(route){
