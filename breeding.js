@@ -262,7 +262,7 @@ var canBreed = function(pokemon){
 	return pokemonLevel >= 100 && !pokemon.shiny;
 }
 
-var generateEggShiny = function(){
+var generateEggShiny = function(egg){
 	var chance = 1024;
 	chance /= 1 + (egg.shinySteps||0)/egg.steps;
 // 	if(isActive("Shiny Charm")){
