@@ -373,6 +373,22 @@ $(document).ready(function(){
 				openDungeonChest();
     			e.preventDefault();
 			}
+		} else if(inProgress == 4){
+			if(keyCode == 38 || keyCode == 87){
+				safariMove('up')
+				e.preventDefault();
+			} else if(keyCode == 39 || keyCode == 68){
+				safariMove('right')
+				e.preventDefault();
+			} else if(keyCode == 37 || keyCode == 65){
+				safariMove('left')
+				e.preventDefault();
+			} else if(keyCode == 40 || keyCode == 83){
+				safariMove('down')
+				e.preventDefault();
+			} else if(keyCode == 32){
+				e.preventDefault();
+			}
 		}
 
 	});
