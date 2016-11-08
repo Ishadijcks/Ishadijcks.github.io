@@ -13,7 +13,8 @@ var safari = {
     },
     isMoving:0,
     movingX: 0,
-    movingY: 0
+    movingY: 0,
+    lastDirection: "up"
 }
 
 var element;
@@ -106,10 +107,8 @@ var safariMove = function(direction){
         });
         sprite.play();
 
-        if (safari.movingY === -1) {
-
-
-
+        if (direction === "up") {
+            $(".sprite").css('background',  "url('images/safari/walkup.png')");
             safari.isMoving = 1;
             safari.player.y--;
             $('#sprite').animate({
@@ -120,18 +119,21 @@ var safariMove = function(direction){
                 sprite.pause()
             });
         } else if (direction === "right") {
+            $(".sprite").css('background',  "url('images/safari/walkright.png')");
             safari.isMoving = 1;
             safari.player.x++;
             $('#sprite').animate({
                 left: "+=32" //moves up
             }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x-1)+"-"+(safari.player.y)).html(""); sprite.pause()});
         } else if (direction === "down") {
+            $(".sprite").css('background',  "url('images/safari/walkdown.png')");
             safari.isMoving = 1;
             safari.player.y++;
             $('#sprite').animate({
                 top: "+=32" //moves up
             }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x)+"-"+(safari.player.y-1)).html(""); sprite.pause()});
         } else if (direction === "left") {
+            $(".sprite").css('background',  "url('images/safari/walkleft.png')");
             safari.isMoving = 1;
             safari.player.x--;
             $('#sprite').animate({
@@ -139,12 +141,14 @@ var safariMove = function(direction){
             }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x+1)+"-"+(safari.player.y)).html(""); sprite.pause()});
         }
         // updatePlayer();
+        safari.lastDirection = direction;
     }
 }
 
 var updatePlayer = function(){
     safari.isMoving = 0;
     $("#safari-"+safari.player.x+"-"+safari.player.y).html("<div id='sprite' class='sprite'></div>");
+    $(".sprite").css('background',  "url('images/safari/walk" + safari.lastDirection + ".png')");
 
 }
 
