@@ -450,7 +450,7 @@ var gainMainItemProfit = function(value, valueType){
 	} else if( valueType === "mine"){
 		gainMineCoins(value);
 	} else{
-		gainShards(valueType, value);
+		gainShards([valueType], value);
 	}
 }
 
