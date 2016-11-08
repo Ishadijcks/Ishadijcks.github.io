@@ -639,12 +639,18 @@ var hammer = function(x,y){
 		if(x < 0 || y < 0){
 			return;
 		}
+		var hasMined = false;
 		for(var i = -1; i < 2; i++){
 			for(var j = -1; j < 2; j++){
+				if(player.curMine.grid[normalizeY(x+i)][normalizeX(y+j)] > 0){
+					hasMined = true;
+				}
 				player.curMine.grid[normalizeY(x+i)][normalizeX(y+j)] = Math.max(0, player.curMine.grid[normalizeY(x+i)][normalizeX(y+j)]-1);
 			}
 		}
-		player.curMine.energy -= player.curMine.hammerEnergy
+		if(hasMined) {
+			player.curMine.energy -= player.curMine.hammerEnergy
+		}
 	}
 }
 
