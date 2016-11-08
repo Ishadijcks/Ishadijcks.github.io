@@ -1,15 +1,25 @@
 var safari = {
     grid: [],
     sizeX: 25,
-    sizeY: 25,
+    sizeY: 10,
     maxItems: 3,
     layersCleared: 0,
     totalItemsFound: 0,
     energy: 50,
     maxEnergy: 50,
+    player: {
+        x: 12,
+        y: 9
+    },
+    isMoving:0,
 }
 
+var element;
+var sprite;
+
+
 var loadSafari = function(){
+    inProgress = 4;
     safari.grid = [];
     for( var i = 0; i<safari.sizeY; i++){
         var row = [];
@@ -18,31 +28,31 @@ var loadSafari = function(){
         }
         safari.grid.push(row);
     }
-    addRandomBody(fenceBody(), 'fence');
-    addRandomBody(waterBody(), 'water');
-    addRandomBody(sandBody(), 'sand');
-    addRandomBody(waterBody(), 'water');
-    addRandomBody(waterBody(), 'water');
-    addRandomBody(sandBody(), 'sand');
-    addRandomBody(treeBody(), 'tree');
-    addRandomBody(treeBody(), 'tree');
-    addRandomBody(treeBody(), 'tree');
-    addRandomBody(treeBody(), 'tree');
-    addRandomBody(treeBody(), 'tree');
-    addRandomBody(fenceBody(), 'fence');
-    addRandomBody(sandBody(), 'sand');
-    addRandomBody(fenceBody(), 'fence');
-    addRandomBody(waterBody(), 'water');
-    addRandomBody(sandBody(), 'sand');
-    addRandomBody(waterBody(), 'water');
-    addRandomBody(waterBody(), 'water');
-    addRandomBody(sandBody(), 'sand');
-    addRandomBody(sandBody(), 'sand');
-    addRandomBody(grassBody(), 'grass');
-    addRandomBody(grassBody(), 'grass');
-    addRandomBody(grassBody(), 'grass');
-    addRandomBody(grassBody(), 'grass');
 
+    addRandomBody(fenceBody(), 'fence');
+    addRandomBody(waterBody(), 'water');
+    addRandomBody(sandBody(), 'sand');
+    addRandomBody(waterBody(), 'water');
+    addRandomBody(waterBody(), 'water');
+    addRandomBody(sandBody(), 'sand');
+    addRandomBody(treeBody(), 'tree');
+    addRandomBody(treeBody(), 'tree');
+    addRandomBody(treeBody(), 'tree');
+    addRandomBody(treeBody(), 'tree');
+    addRandomBody(treeBody(), 'tree');
+    addRandomBody(fenceBody(), 'fence');
+    addRandomBody(sandBody(), 'sand');
+    addRandomBody(fenceBody(), 'fence');
+    addRandomBody(waterBody(), 'water');
+    addRandomBody(sandBody(), 'sand');
+    addRandomBody(waterBody(), 'water');
+    addRandomBody(waterBody(), 'water');
+    addRandomBody(sandBody(), 'sand');
+    addRandomBody(sandBody(), 'sand');
+    addRandomBody(grassBody(), 'grass');
+    addRandomBody(grassBody(), 'grass');
+    addRandomBody(grassBody(), 'grass');
+    addRandomBody(grassBody(), 'grass');
     showSafari();
 }
 
@@ -66,16 +76,72 @@ var showSafari = function(){
     for(var i = 0; i<safari.grid.length; i++){
         html += "<div class='row'>";
         for(var j = 0; j<safari.grid[0].length; j++){
-            html += safariSquare(safari.grid[i][j]);
+            html += safariSquare(safari.grid[i][j], j, i);
         }
         html += "</div>";
     }
 
     $("#safariBody").html(html);
+    updatePlayer();
+
+    // Sprite
+    element = document.querySelector('#sprite');
+    sprite = new Motio(element, {
+        fps: 10,
+        frames: 2
+    });
 }
 
-var safariSquare = function(id){
-    return "<div style=background-image:url('images/safari/"+ id + ".png') class='col-sm-1 safariSquare'></div>";
+var safariMove = function(direction){
+    console.log(safari.player.x+"-"+safari.player.y);
+    if(!safari.isMoving) {
+        // Sprite
+        var element = document.querySelector('#sprite');
+        var sprite = new Motio(element, {
+            fps: 5,
+            frames: 2
+        });
+        sprite.play();
+
+
+        if (direction === "up") {
+            safari.isMoving = 1;
+            safari.player.y--;
+            $('#sprite').animate({
+                top: "-=32" //moves up
+            }, 250, "linear", function(){updatePlayer(); $("#safari-"+safari.player.x+"-"+(safari.player.y+1)).html(""); sprite.pause()});
+        } else if (direction === "right") {
+            safari.isMoving = 1;
+            safari.player.x++;
+            $('#sprite').animate({
+                left: "+=32" //moves up
+            }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x-1)+"-"+(safari.player.y)).html(""); sprite.pause()});
+        } else if (direction === "down") {
+            safari.isMoving = 1;
+            safari.player.y++;
+            $('#sprite').animate({
+                top: "+=32" //moves up
+            }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x)+"-"+(safari.player.y-1)).html(""); sprite.pause()});
+        } else if (direction === "left") {
+            safari.isMoving = 1;
+            safari.player.x--;
+            $('#sprite').animate({
+                left: "-=32" //moves up
+            }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x+1)+"-"+(safari.player.y)).html(""); sprite.pause()});
+        }
+        // updatePlayer();
+    }
+}
+
+var updatePlayer = function(){
+    console.log(safari.isMoving);
+    safari.isMoving = 0;
+    $("#safari-"+safari.player.x+"-"+safari.player.y).html("<div id='sprite' class='sprite'></div>");
+
+}
+
+var safariSquare = function(id, j, i){
+    return "<div id='safari-"+j+"-"+i+"' style=background-image:url('images/safari/"+ id + ".png') class='col-sm-1 safariSquare'></div>";
 }
 
 var addBody = function(x, y, body){
