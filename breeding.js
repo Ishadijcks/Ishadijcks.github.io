@@ -149,8 +149,11 @@ var progressEgg = function(amount){
 	}
 	for(var i = 0; i<player.eggList.length; i++){
 		if(player.eggList[i] !== null){
-			if(isActive("Shiny Charm"))
+			if(player.eggList[i].shinySteps == null)
+				player.eggList[i].shinySteps = isActive("Shiny Charm") ? player.eggList[i].steps  : 0;
+			if(isActive("Shiny Charm")){
 				player.eggList[i].shinySteps = (player.eggList[i].shinySteps||0) + amount;
+			}
 			player.eggList[i].progress += amount;
 		}
 	}
