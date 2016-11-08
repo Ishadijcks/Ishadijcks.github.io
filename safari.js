@@ -96,7 +96,6 @@ var showSafari = function(){
 }
 
 var safariMove = function(direction){
-    console.log(safari.player.x+"-"+safari.player.y);
     if(!safari.isMoving) {
 
         // Sprite
@@ -107,9 +106,10 @@ var safariMove = function(direction){
         });
         sprite.play();
 
-        if (direction === "up") {
+        if (direction === "up" && canMoveSafari(safari.player.x,safari.player.y-1)) {
             $(".sprite").css('background',  "url('images/safari/walkup.png')");
             safari.isMoving = 1;
+
             safari.player.y--;
             $('#sprite').animate({
                 top: "-=32" //moves up
@@ -118,32 +118,45 @@ var safariMove = function(direction){
                 $("#safari-" + safari.player.x + "-" + (safari.player.y + 1)).html("");
                 sprite.pause()
             });
-        } else if (direction === "right") {
+        } else if (direction === "right" && canMoveSafari(safari.player.x+1,safari.player.y)) {
             $(".sprite").css('background',  "url('images/safari/walkright.png')");
             safari.isMoving = 1;
             safari.player.x++;
             $('#sprite').animate({
                 left: "+=32" //moves up
             }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x-1)+"-"+(safari.player.y)).html(""); sprite.pause()});
-        } else if (direction === "down") {
+        } else if (direction === "down" && canMoveSafari(safari.player.x,safari.player.y+1)) {
             $(".sprite").css('background',  "url('images/safari/walkdown.png')");
             safari.isMoving = 1;
             safari.player.y++;
             $('#sprite').animate({
                 top: "+=32" //moves up
             }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x)+"-"+(safari.player.y-1)).html(""); sprite.pause()});
-        } else if (direction === "left") {
+        } else if (direction === "left" && canMoveSafari(safari.player.x-1,safari.player.y)) {
             $(".sprite").css('background',  "url('images/safari/walkleft.png')");
             safari.isMoving = 1;
             safari.player.x--;
             $('#sprite').animate({
                 left: "-=32" //moves up
             }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x+1)+"-"+(safari.player.y)).html(""); sprite.pause()});
+        } else {
+            sprite.pause();
         }
         // updatePlayer();
         safari.lastDirection = direction;
     }
 }
+
+var canMoveSafari = function(x,y){
+    for(var i = 0; i<legalBlock.length; i++){
+        if(safari.grid[y][x] === legalBlock[i]){
+            return true;
+        }
+    }
+    return false;
+}
+
+var legalBlock = [0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
 
 var updatePlayer = function(){
     safari.isMoving = 0;
@@ -171,8 +184,23 @@ var addBody = function(x, y, body){
 }
 
 var fenceBody = function(){
-    var grass = sandBody(7,7, 'fence');
-    return edgeDetect(grass, 'fence');
+    var body = sandBody(7,7, 'fence');
+    return openFence(edgeDetect(body, 'fence'));
+}
+
+var openFence = function(body){
+    var options = [26, 28, 29, 31];
+    var pick = options[Math.floor(Math.random()*options.length)];
+    console.log(pick);
+    for(var i = 0; i<body.length; i++){
+        for(var j = 0; j<body[0].length; j++){
+            if(body[i][j] === pick){
+                body[i][j] = 0;
+                return body;
+            }
+        }
+    }
+    return body;
 }
 
 var waterBody = function() {
