@@ -334,22 +334,48 @@ $(document).ready(function(){
 			}
 		} else if(inProgress == 4){
 			if(keyCode == 38 || keyCode == 87){
+				safari.movingY = -1;
 				safariMove('up')
 				e.preventDefault();
 			} else if(keyCode == 39 || keyCode == 68){
+				safari.movingX = 1;
 				safariMove('right')
 				e.preventDefault();
 			} else if(keyCode == 37 || keyCode == 65){
+				safari.movingX = -1;
 				safariMove('left')
 				e.preventDefault();
 			} else if(keyCode == 40 || keyCode == 83){
+				safari.movingY = 1;
 				safariMove('down')
 				e.preventDefault();
 			} else if(keyCode == 32){
 				e.preventDefault();
 			}
 		}
+	console.log(safari.movingX);
+	console.log(safari.movingY);
+	});
 
+	$(document).on("keyup", function (e) {
+		var keyCode = e.keyCode;
+		if(inProgress == 4){
+			if(keyCode == 38 || keyCode == 87){
+				safari.movingY = 0;
+				e.preventDefault();
+			} else if(keyCode == 39 || keyCode == 68){
+				safari.movingX = 0;
+				e.preventDefault();
+			} else if(keyCode == 37 || keyCode == 65){
+				safari.movingX = 0;
+				e.preventDefault();
+			} else if(keyCode == 40 || keyCode == 83){
+				safari.movingY = 0;
+				e.preventDefault();
+			} else if(keyCode == 32){
+				e.preventDefault();
+			}
+		}
 	});
 
 	$("body").on('click',".wrongGym", function(){

@@ -12,6 +12,8 @@ var safari = {
         y: 9
     },
     isMoving:0,
+    movingX: 0,
+    movingY: 0
 }
 
 var element;
@@ -98,43 +100,45 @@ var safariMove = function(direction){
         // Sprite
         var element = document.querySelector('#sprite');
         var sprite = new Motio(element, {
-            fps: 5,
-            frames: 2
+            fps: 12,
+            frames: 3
         });
         sprite.play();
+        if (safari.movingY === -1) {
 
-
-        if (direction === "up") {
             safari.isMoving = 1;
             safari.player.y--;
             $('#sprite').animate({
                 top: "-=32" //moves up
-            }, 250, "linear", function(){updatePlayer(); $("#safari-"+safari.player.x+"-"+(safari.player.y+1)).html(""); sprite.pause()});
+            }, 250, "linear", function () {
+                updatePlayer();
+                $("#safari-" + safari.player.x + "-" + (safari.player.y + 1)).html("");
+                
+            });
         } else if (direction === "right") {
             safari.isMoving = 1;
             safari.player.x++;
             $('#sprite').animate({
                 left: "+=32" //moves up
-            }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x-1)+"-"+(safari.player.y)).html(""); sprite.pause()});
+            }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x-1)+"-"+(safari.player.y)).html(""); });
         } else if (direction === "down") {
             safari.isMoving = 1;
             safari.player.y++;
             $('#sprite').animate({
                 top: "+=32" //moves up
-            }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x)+"-"+(safari.player.y-1)).html(""); sprite.pause()});
+            }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x)+"-"+(safari.player.y-1)).html(""); });
         } else if (direction === "left") {
             safari.isMoving = 1;
             safari.player.x--;
             $('#sprite').animate({
                 left: "-=32" //moves up
-            }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x+1)+"-"+(safari.player.y)).html(""); sprite.pause()});
+            }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x+1)+"-"+(safari.player.y)).html(""); });
         }
         // updatePlayer();
     }
 }
 
 var updatePlayer = function(){
-    console.log(safari.isMoving);
     safari.isMoving = 0;
     $("#safari-"+safari.player.x+"-"+safari.player.y).html("<div id='sprite' class='sprite'></div>");
 
