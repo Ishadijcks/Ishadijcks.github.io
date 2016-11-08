@@ -360,7 +360,7 @@ var gainShards = function(type, amount){
 	if(!isNaN(amount)){
 		var typeNum = 0;
 		if (type.length == 2) {
-			typeNum = Math.floor(Math.random()*2 + 1);
+			typeNum = Math.floor(Math.random()*2);
 		}
 		player.typeShards[typeToNumber(type[typeNum])] += amount;
 		progressQuest('gainShards', "none" , amount);
