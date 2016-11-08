@@ -1,7 +1,7 @@
 var safari = {
     grid: [],
     sizeX: 25,
-    sizeY: 12,
+    sizeY: 25,
     maxItems: 3,
     layersCleared: 0,
     totalItemsFound: 0,
@@ -24,12 +24,25 @@ var loadSafari = function(){
     addRandomBody(waterBody(), 'water');
     addRandomBody(waterBody(), 'water');
     addRandomBody(sandBody(), 'sand');
+    addRandomBody(treeBody(), 'tree');
+    addRandomBody(treeBody(), 'tree');
+    addRandomBody(treeBody(), 'tree');
+    addRandomBody(treeBody(), 'tree');
+    addRandomBody(treeBody(), 'tree');
+    addRandomBody(fenceBody(), 'fence');
+    addRandomBody(sandBody(), 'sand');
+    addRandomBody(fenceBody(), 'fence');
+    addRandomBody(waterBody(), 'water');
+    addRandomBody(sandBody(), 'sand');
+    addRandomBody(waterBody(), 'water');
+    addRandomBody(waterBody(), 'water');
+    addRandomBody(sandBody(), 'sand');
     addRandomBody(sandBody(), 'sand');
     addRandomBody(grassBody(), 'grass');
     addRandomBody(grassBody(), 'grass');
     addRandomBody(grassBody(), 'grass');
     addRandomBody(grassBody(), 'grass');
-    addRandomBody(grassBody(), 'grass');
+
     showSafari();
 }
 
@@ -37,8 +50,8 @@ var addRandomBody = function(body, type){
     var x = getRandomCoord(safari.sizeX - 2);
     var y = getRandomCoord(safari.sizeY - 2);
     if(type === 'fence'){
-        x -= 3;
-        y -= 3;
+        x = Math.max(0, x-3);
+        y = Math.max(0, y-3);
     }
     var res = canAddBody(x, y, body);
     if (res || type === 'grass') {
@@ -80,7 +93,7 @@ var addBody = function(x, y, body){
 }
 
 var fenceBody = function(){
-    var grass = sandBody(7,7);
+    var grass = sandBody(7,7, 'fence');
     return edgeDetect(grass, 'fence');
 }
 
@@ -172,15 +185,18 @@ var fillHoles = function(body){
     return body;
 }
 
+var treeBody = function(){
+    return [[37,38,39],[40,41,42],[43,44,45],[46,47,48]];
+}
 
-var sandBody = function(x, y) {
+var sandBody = function(x, y, type) {
     if ( x === undefined) {
         var x = Math.floor(Math.random() * 3) + 3;
     }
     if ( y === undefined) {
         var y = Math.floor(Math.random() * 3) + 3;
     }
-    var body = generateCube(x,y, 'sand');
+    var body = generateCube(x,y, type);
     return edgeDetect(body,'sand');
 }
 
@@ -345,7 +361,7 @@ var generateCube = function(sizeX, sizeY, type){
         body.push(row);
     }
 
-    var amount = type === 'sand' ? 20 : 5
+    var amount = type === 'fence' ? 20 : 4
     for (var i = 0; i<amount; i++){
         var x = Math.floor(Math.random()*(sizeX-2));
         var y = Math.floor(Math.random()*(sizeY-2));
@@ -387,10 +403,14 @@ var canAddBody = function(x, y, body){
     }
     for(var i = 0; i<body.length; i++){
         for( var j = 0; j<body[i].length; j++){
-            if(body[i][j] !== 0){
-                if(safari.grid[i+y][j+x] !== 0){
-                    return false;
+            if( (i + y) <safari.sizeY && (j + x) < safari.sizeX) {
+                if (body[i][j] !== 0) {
+                    if (safari.grid[i + y][j + x] !== 0) {
+                        return false;
+                    }
                 }
+            } else {
+                return false;
             }
         }
     }
