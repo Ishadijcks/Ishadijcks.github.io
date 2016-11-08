@@ -502,7 +502,7 @@ var spawnDungeonBoss = function() {
     if(possibleType != undefined){
         curEnemy.type = possibleType;
     } else {
-        curEnemy.type = 'normal';        
+        curEnemy.type = ['normal'];        
     }
 
     clearInterval(attackInterval);
@@ -531,7 +531,7 @@ var spawnDungeonPokemon = function() {
     if(possibleType != undefined){
         curEnemy.type = possibleType;
     } else {
-        curEnemy.type = 'normal';        
+        curEnemy.type = ['normal'];        
     }
     clearInterval(attackInterval);
     attackInterval = setInterval(pokemonsAttack, 1000);

@@ -27,9 +27,9 @@ var typeColorUnlocked = ["595c3b","b10818","294a94","b57b31","4a944a","42a59c","
 
 var initTypeEffectiveness = function(){
 	typeEffectiveness = [];
-	for( var i = 0; i<17; i++){
+	for( var i = 0; i<18; i++){
 		var row = [];
-		for(var j = 0; j<17; j++){
+		for(var j = 0; j<18; j++){
 			row.push(getNormalEffective(i));
 		}
 	typeEffectiveness.push(row);
@@ -167,18 +167,18 @@ var initTypeEffectiveness = function(){
 	typeEffectiveness[STEEL][STEEL] = getNotEffective(STEEL);
 	typeEffectiveness[STEEL][FAIRY] = getVeryEffective(STEEL);
 
-	// typeEffectiveness[FAIRY][FIRE] = getNotEffective(FAIRY);
-	// typeEffectiveness[FAIRY][FIGHTING] = getVeryffective(FAIRY);
-	// typeEffectiveness[FAIRY][POISON] = getNotEffective(FAIRY);
-	// typeEffectiveness[FAIRY][DRAGON] = getVeryEffective(FAIRY);
-	// typeEffectiveness[FAIRY][DARK] = getVeryEffective(FAIRY);
-	// typeEffectiveness[FAIRY][STEEL] = getNotEffective(FAIRY);
+	typeEffectiveness[FAIRY][FIRE] = getNotEffective(FAIRY);
+	typeEffectiveness[FAIRY][FIGHTING] = getVeryEffective(FAIRY);
+	typeEffectiveness[FAIRY][POISON] = getNotEffective(FAIRY);
+	typeEffectiveness[FAIRY][DRAGON] = getVeryEffective(FAIRY);
+	typeEffectiveness[FAIRY][DARK] = getVeryEffective(FAIRY);
+	typeEffectiveness[FAIRY][STEEL] = getNotEffective(FAIRY);
 
 
 }
 
 var typeToNumber = function(type){
-	switch(type) {
+	switch(type.toLowerCase()) {
 		case "normal":
 			return 0;
 		case "fire":
@@ -271,7 +271,7 @@ var buyVeryUpgrade = function(type){
 var showShardModal = function(){
 	$("#shardModal").modal("show");
 	var html = ""
-	for(var i = 0; i<17; i++){
+	for(var i = 0; i<18; i++){
 		html += "<table class=shardTable>";
 		html += "<tr> <td style='width:15%'>" +numberToType[i] + "</td><td>Not very effective:</td>";
 		html +=	"<td>" + getNotEffective(i).toFixed(2) + "x</td>";
@@ -358,7 +358,11 @@ var getStoneEvolutionPokemon = function(type){
 
 var gainShards = function(type, amount){
 	if(!isNaN(amount)){
-		player.typeShards[typeToNumber(type)] += amount;
+		var typeNum = 0;
+		if (type.length == 2) {
+			typeNum = Math.floor(Math.random()*2);
+		}
+		player.typeShards[typeToNumber(type[typeNum])] += amount;
 		progressQuest('gainShards', "none" , amount);
 	}
 }

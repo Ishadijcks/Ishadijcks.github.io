@@ -356,7 +356,7 @@ var spawnGymPokemon = function(pokemonIndex){
     if(possibleType != undefined){
         curEnemy.type = possibleType;
     } else {
-        curEnemy.type = 'normal';        
+        curEnemy.type = ['normal'];        
     }
 	updateGym();
 }

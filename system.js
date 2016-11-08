@@ -1,4 +1,4 @@
-var version = "0.91"
+var version = "0.92"
 var inProgress = 1;
 var canCatch = 1;
 var attackInterval;
@@ -39,10 +39,10 @@ var player = {
 	townExplain: 0,
 	dungeonExplain: 0,
 	inventoryList: [],
-	typeShards: Array.apply(null, Array(17)).map(Number.prototype.valueOf,0),
-	notEffectiveTypeBonus: Array.apply(null, Array(17)).map(Number.prototype.valueOf,0),
-	normalEffectiveTypeBonus: Array.apply(null, Array(17)).map(Number.prototype.valueOf,0),
-	veryEffectiveTypeBonus: Array.apply(null, Array(17)).map(Number.prototype.valueOf,0),
+	typeShards: Array.apply(null, Array(18)).map(Number.prototype.valueOf,0),
+	notEffectiveTypeBonus: Array.apply(null, Array(18)).map(Number.prototype.valueOf,0),
+	normalEffectiveTypeBonus: Array.apply(null, Array(18)).map(Number.prototype.valueOf,0),
+	veryEffectiveTypeBonus: Array.apply(null, Array(18)).map(Number.prototype.valueOf,0),
 	shopPriceDeviation: Array.apply(null, Array(100)).map(Number.prototype.valueOf,1),
 	questPoints:0,
 	curQuest: firstQuest,
@@ -763,7 +763,7 @@ var calculateAttack = function(){
 
 		var level = experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType);
 		if( curEnemy != "undefined"){
-			total += Math.ceil(level*(player.caughtPokemonList[i].attack)/100)* typeEffectiveness[typeToNumber(player.caughtPokemonList[i].type)][typeToNumber(curEnemy.type)];
+			total += Math.ceil(level*(player.caughtPokemonList[i].attack)/100)* damageModifier(player.caughtPokemonList[i], curEnemy);
 		}
 	}
 	player.attack = total;
@@ -771,7 +771,17 @@ var calculateAttack = function(){
 	return Math.max(total,1);
 }
 
-
+var damageModifier = function(attacker, defender) {
+	var tmp = 0;
+	for (var i = 0; i<attacker.type.length; i++) {
+		for (var j = 0; j<defender.type.length; j++) {
+			tmp += typeEffectiveness[typeToNumber(attacker.type[i])][typeToNumber(defender.type[j])];
+		}
+	}
+	
+	tmp /= attacker.type.length * defender.type.length
+	return tmp;
+}
 
 var generatePokemon = function(route){
 	clicks = 0;

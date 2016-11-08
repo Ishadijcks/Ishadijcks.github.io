@@ -167,6 +167,7 @@ addMineItem("Spooky Plate", 41, [[41,41,41,41], [41,41,41,41], [41,41,41,41]], 2
 addMineItem("Stone Plate", 42, [[42,42,42,42], [42,42,42,42], [42,42,42,42]], 25, "rock");
 addMineItem("Toxic Plate", 43, [[43,43,43,43], [43,43,43,43], [43,43,43,43]], 25, "poison");
 addMineItem("Zap Plate", 44, [[44,44,44,44], [44,44,44,44], [44,44,44,44]], 25, "electric");
+addMineItem("Pixie Plate", 45, [[45,45,45,45], [45,45,45,45], [45,45,45,45]], 25, "fairy");
 
 //addMineItem("", , [[,,,,], [,,,,], [,,,,], [,,,,]]);
 
@@ -449,7 +450,7 @@ var gainMainItemProfit = function(value, valueType){
 	} else if( valueType === "mine"){
 		gainMineCoins(value);
 	} else{
-		gainShards(valueType, value);
+		gainShards([valueType], value);
 	}
 }
 
