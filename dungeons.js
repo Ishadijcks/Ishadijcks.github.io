@@ -387,20 +387,22 @@ var dungeonEnemyDefeated = function() {
         $("#dungeonCatchDisplay").html("Catch chance: " + Math.min(100, catchRate) + "%");
         progressEgg(Math.floor(Math.sqrt(currentDungeon.itemRoute)));
         setTimeout(function() {
-            if (canCatch) {
+            if (inProgress != 0) {
+                if (canCatch) {
 
-                var chance = Math.floor(Math.random() * 100 + 1);
-                if (chance <= catchRate) {
-                    capturePokemon(curEnemy.name, curEnemy.shiny);
+                    var chance = Math.floor(Math.random() * 100 + 1);
+                    if (chance <= catchRate) {
+                        capturePokemon(curEnemy.name, curEnemy.shiny);
 
+                    }
+                    updateStats();
                 }
-                updateStats();
-            }
-            currentDungeon.pokemonDefeated++
-            updateDungeon();
-            // hideDungeonEnemy();
-            if(bossDefeated()){
-                dungeonDefeated();
+                currentDungeon.pokemonDefeated++
+                updateDungeon();
+                // hideDungeonEnemy();
+                if(bossDefeated()){
+                    dungeonDefeated();
+                }
             }
         }, player.catchTime);
         curEnemy.alive = false;
