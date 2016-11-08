@@ -3,7 +3,8 @@ var Egg = function(type, steps, pokemon){
 		type:type,
 		steps:steps,
 		progress: 0,
-		pokemon:pokemon,
+		shinyProgress: 0,
+		pokemon:pokemon ,
 		notified: 0,
 	}
 	return temp;
@@ -87,6 +88,7 @@ var gainEgg = function(egg){
 				type: egg.type,
 				steps: egg.steps,
 				progress: 0,
+				shinyProgress: 0,
 				pokemon: egg.pokemon
 			}
 			player.eggList[i] = tempEgg;
@@ -147,6 +149,10 @@ var progressEgg = function(amount){
 	}
 	for(var i = 0; i<player.eggList.length; i++){
 		if(player.eggList[i] !== null){
+			if(player.eggList[i].progress < player.eggList[i].steps && isActive("Shiny Charm")){
+				//Prevent the egg from having more shinyProgress then steps if amount would go over the max (eg if progress is 499 and steps is 5 the egg doesn't get 504 shinyprogress)
+				player.eggList[i].shinyProgress = Math.max(player.eggList[i].steps, player.eggList[i].shinyProgress + amount);
+			}
 			player.eggList[i].progress += amount;
 		}
 	}
@@ -258,10 +264,10 @@ var canBreed = function(pokemon){
 	return pokemonLevel >= 100 && !pokemon.shiny;
 }
 
-var generateEggShiny = function(){
+var generateEggShiny = function(egg){
 	var chance = 1024;
 	if(isActive("Shiny Charm")){
-		chance /= getOakItemBonus("Shiny Charm");
+		chance /= getOakItemBonus("Shiny Charm") - (1-(egg.shinyProgress/egg.progress));
 	}
 	var number = Math.floor(Math.random()*chance) + 1;
 
@@ -270,4 +276,4 @@ var generateEggShiny = function(){
 		return 1;
 	}
 	return 0;
-}
+};
