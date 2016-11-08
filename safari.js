@@ -97,6 +97,7 @@ var showSafari = function(){
 var safariMove = function(direction){
     console.log(safari.player.x+"-"+safari.player.y);
     if(!safari.isMoving) {
+
         // Sprite
         var element = document.querySelector('#sprite');
         var sprite = new Motio(element, {
@@ -104,7 +105,10 @@ var safariMove = function(direction){
             frames: 3
         });
         sprite.play();
+
         if (safari.movingY === -1) {
+
+
 
             safari.isMoving = 1;
             safari.player.y--;
@@ -113,26 +117,26 @@ var safariMove = function(direction){
             }, 250, "linear", function () {
                 updatePlayer();
                 $("#safari-" + safari.player.x + "-" + (safari.player.y + 1)).html("");
-                
+                sprite.pause()
             });
         } else if (direction === "right") {
             safari.isMoving = 1;
             safari.player.x++;
             $('#sprite').animate({
                 left: "+=32" //moves up
-            }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x-1)+"-"+(safari.player.y)).html(""); });
+            }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x-1)+"-"+(safari.player.y)).html(""); sprite.pause()});
         } else if (direction === "down") {
             safari.isMoving = 1;
             safari.player.y++;
             $('#sprite').animate({
                 top: "+=32" //moves up
-            }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x)+"-"+(safari.player.y-1)).html(""); });
+            }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x)+"-"+(safari.player.y-1)).html(""); sprite.pause()});
         } else if (direction === "left") {
             safari.isMoving = 1;
             safari.player.x--;
             $('#sprite').animate({
                 left: "-=32" //moves up
-            }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x+1)+"-"+(safari.player.y)).html(""); });
+            }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x+1)+"-"+(safari.player.y)).html(""); sprite.pause()});
         }
         // updatePlayer();
     }
