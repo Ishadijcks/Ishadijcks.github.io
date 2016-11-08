@@ -252,7 +252,7 @@ var gymEnemyDefeated = function(){
 
 	var id = getPokemonByName(curEnemy.name).id-1;
 	player.defeatNumbers[id]++;
-	gainShards(curEnemy.type[0], 3);
+	gainShards(curEnemy.type, 3);
 	gainExp(curEnemy.exp, curEnemy.level, true);
 	if(currentGym.pokemons[gymPokemonIndex] != null){
 		spawnGymPokemon(gymPokemonIndex);

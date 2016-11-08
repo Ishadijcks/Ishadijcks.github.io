@@ -620,7 +620,7 @@ var enemyDefeated = function(){
 		gainMoney(Math.floor(money), "You earned $");
 		gainExp(exp,level,false);
 		player.routeKills[player.route]++
-		gainShards(curEnemy.type[0],1);
+		gainShards(curEnemy.type,1);
 		updateRoute();
 		var chance = Math.floor(Math.random()*100+1);
 		if (chance < getItemChance(player.route)){

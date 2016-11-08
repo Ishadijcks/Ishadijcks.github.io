@@ -370,7 +370,7 @@ var dungeonEnemyDefeated = function() {
         }, 1);
 
         gainExp(curEnemy.exp,curEnemy.level,false);
-        gainShards(curEnemy.type[0], 3);
+        gainShards(curEnemy.type, 3);
         dungeonCanMove = 1;
         var catchRate = curEnemy.catchRate + getBonusCatchrate();
         $("#dungeonCatchDisplay").html("Catch chance: " + Math.min(100, catchRate) + "%");
