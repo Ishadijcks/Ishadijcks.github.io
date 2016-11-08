@@ -11,7 +11,6 @@ var addDailyDeal = function(item1, amount1, item2, amount2){
 }
 
 var seededRand = function(seed) {
-	console.log(seed);
 	return (seed*9301 + 49297) % 233280;
 }
 
@@ -55,6 +54,7 @@ var generateDailyDeal = function(seed){
     var x4 = s/233280;
     var amount2 = Math.floor(3 * x4) + 1;
     s = seededRand(s);
+    
     if(item1.name !== item2.name && !reverseDailyDealExists(item1,item2) && !mineItemIsStone(item1.name)) {
         addDailyDeal(item1, amount1, item2, amount2);
     }
