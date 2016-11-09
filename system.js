@@ -89,6 +89,9 @@ var player = {
 	oakItemsEquipped: [],
 	gymsDefeated: Array.apply(null, Array(15)).map(Number.prototype.valueOf,0),
 	dungeonsDefeated: Array.apply(null, Array(15)).map(Number.prototype.valueOf,0),
+	dateStarted: new Date(),
+	timePlayed: 0,
+	lastSaved: new Date().getTime(),
 }
 
 var curEnemy = {

@@ -11,6 +11,10 @@ var save = function(){
 	if(canSave){
 		localStorage.setItem("player", JSON.stringify(player));
 	}
+
+	var tmp = new Date().getTime();
+	player.timePlayed += tmp - player.lastSaved;
+	player.lastSaved = tmp;
 }
 
 
@@ -25,6 +29,7 @@ var load = function(){
 	}
 
 	player.route = Math.min(25,player.route);
+	player.lastSaved = new Date().getTime();
 
     if(player.starter === "none"){
         $("#pickStarter").modal('show');
