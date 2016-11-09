@@ -489,6 +489,7 @@ var gainMainItemProfit = function(value, valueType){
 
 var gainMineCoins = function(x){
 	player.mineCoins += x;
+	player.totalMineCoins += x;
 }
 
 var alreadyHasMineItem = function(id){

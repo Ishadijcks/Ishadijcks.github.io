@@ -66,6 +66,7 @@ var gainRandomItem = function(route){
 		var rand = Math.floor(Math.random()*possibleItems.length);
 		randomItemName = possibleItems[rand];
 		progressQuest("findItems", "none", 1);
+		player.totalItemsFound++;
 		return gainItemByName(randomItemName);
 	}
 }
