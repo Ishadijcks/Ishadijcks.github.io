@@ -73,10 +73,10 @@ var gainMineEgg = function(itemId){
 
 var getSteps = function(pokemonName){
 	var pokemon = getPokemonByName(pokemonName);
-	if( pokemon.steps === undefined){
+	if( pokemon.eggCycles === undefined){
 		return 500;
 	} else {
-		return pokemon.steps;
+		return pokemon.eggCycles * 40;
 	}
 }
 
