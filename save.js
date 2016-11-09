@@ -113,11 +113,6 @@ var load = function(){
 		resetUpgrades();
 	}
 
-	if (typeof(player.curMine.maxDailyDeals) === 'undefined') {
-		player.curMine.maxDailyDeals = 3;
-		player.curMine.maxDailyDealUpgrades = 0;
-	}
-
 	player.catchTime = Math.max(player.catchTime,750);
 	player.version = version;
 
