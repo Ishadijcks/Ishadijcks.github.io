@@ -23,7 +23,7 @@ var load = function(){
 	for (var property in savegame) {
 		if (typeof savegame[property] !== 'undefined') player[property] = savegame[property];
 	}
-	
+
 
     if(player.starter === "none"){
         $("#pickStarter").modal('show');
@@ -41,11 +41,7 @@ var load = function(){
 		player.questSkipToday = Math.max(0, player.questSkipToday-4);
 	}
 
-	for(var i = 0; i<player.caughtPokemonList.length; i++){
-		if(player.caughtPokemonList[i].evoLevel === "Trade"){
-			player.caughtPokemonList[i].evoLevel = "Trade Stone";
-		}
-	}
+
 
 	if( player.version < 0.8){
 		resetXp();
@@ -53,6 +49,13 @@ var load = function(){
 
 	if( player.version < 0.91) {
 		correctFossils();
+
+		//Not changed in this version, but definitely before this one
+		for(var i = 0; i<player.caughtPokemonList.length; i++){
+			if(player.caughtPokemonList[i].evoLevel === "Trade"){
+				player.caughtPokemonList[i].evoLevel = "Trade Stone";
+			}
+		}
 	}
 	
 	var date = new Date();
