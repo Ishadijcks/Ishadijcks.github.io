@@ -16,13 +16,12 @@ var seededRand = function(seed) {
 
 var generateDailyDeals = function(){
     player.curMine.dailyDeals = [];
-    var maxDeals = 3;
     var d = new Date();
 
     var dateSeed = Number(d.getDate() + "" + d.getMonth() + "" + d.getYear());
     var seed = seededRand(dateSeed);
 
-    for (var i=0; i<maxDeals; i++) {
+    for (var i=0; i<player.curMine.maxDailyDeals; i++) {
     	seed = generateDailyDeal(seed);
     }
 }
