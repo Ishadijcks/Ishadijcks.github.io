@@ -396,6 +396,7 @@ var upgradeMaxDailyDeals = function(){
 		player.mineCoins -= getMaxDailyDealUpgradeCost();
 		player.curMine.maxDailyDealUpgrades += 1;
 		player.curMine.maxDailyDeals += 1;
+		generateDailyDeals();
 	} else {
 		$.notify("You don't have enough diamonds")
 	}
