@@ -24,6 +24,7 @@ var load = function(){
 		if (typeof savegame[property] !== 'undefined') player[property] = savegame[property];
 	}
 
+	player.route = Math.min(25,player.route);
 
     if(player.starter === "none"){
         $("#pickStarter").modal('show');
