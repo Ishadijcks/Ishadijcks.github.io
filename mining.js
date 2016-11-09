@@ -19,7 +19,7 @@ var generateDailyDeals = function(){
     var maxDeals = 3;
     var d = new Date();
 
-    var dateSeed = Number(d.getDate() + "" + d.getMonth() + "" + d.getYear());
+    var dateSeed = Number(d.getYear()*d.getDate() + 1000*d.getMonth() + 100000*d.getDate());
     var seed = seededRand(dateSeed);
 
     for (var i=0; i<maxDeals; i++) {
