@@ -6,7 +6,10 @@ var pokemonList = [
         "evolution":"Ivysaur",
         "evoLevel":16,
         "evolved":0,
-        "type":"grass",
+        "type":[
+            "Grass",
+            "Poison"
+        ],
         "attack":65,
         "route":100,
         "health":100,
@@ -22,7 +25,10 @@ var pokemonList = [
         "evolution":"Venusaur",
         "evoLevel":32,
         "evolved":0,
-        "type":"grass",
+        "type":[
+            "Grass",
+            "Poison"
+        ],
         "attack":80,
         "route":null,
         "health":100,
@@ -38,7 +44,10 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"grass",
+        "type":[
+            "Grass",
+            "Poison"
+        ],
         "attack":100,
         "route":null,
         "health":100,
@@ -54,14 +63,16 @@ var pokemonList = [
         "evolution":"Charmeleon",
         "evoLevel":16,
         "evolved":0,
-        "type":"fire",
+        "type":[
+            "Fire"
+        ],
         "attack":60,
         "route":100,
         "health":100,
         "levelType":"medium slow",
         "experience":0,
         "baseXpGain":62,
-        "eggCycles":""
+        "eggCycles":20
     },
     {
         "id":5,
@@ -70,7 +81,9 @@ var pokemonList = [
         "evolution":"Charizard",
         "evoLevel":36,
         "evolved":0,
-        "type":"fire",
+        "type":[
+            "Fire"
+        ],
         "attack":80,
         "route":null,
         "health":100,
@@ -86,7 +99,10 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"fire",
+        "type":[
+            "Fire",
+            "Flying"
+        ],
         "attack":105,
         "route":null,
         "health":100,
@@ -102,7 +118,9 @@ var pokemonList = [
         "evolution":"Wartortle",
         "evoLevel":16,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water"
+        ],
         "attack":50,
         "route":100,
         "health":100,
@@ -118,14 +136,16 @@ var pokemonList = [
         "evolution":"Blastoise",
         "evoLevel":36,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water"
+        ],
         "attack":65,
         "route":null,
         "health":100,
         "levelType":"medium slow",
         "experience":0,
         "baseXpGain":142,
-        "eggCycles":""
+        "eggCycles":20
     },
     {
         "id":9,
@@ -134,14 +154,16 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water"
+        ],
         "attack":85,
         "route":null,
         "health":100,
         "levelType":"medium slow",
         "experience":0,
         "baseXpGain":239,
-        "eggCycles":""
+        "eggCycles":20
     },
     {
         "id":10,
@@ -150,14 +172,16 @@ var pokemonList = [
         "evolution":"Metapod",
         "evoLevel":7,
         "evolved":0,
-        "type":"bug",
+        "type":[
+            "Bug"
+        ],
         "attack":30,
         "route":2,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":39,
-        "eggCycles":20
+        "eggCycles":10
     },
     {
         "id":11,
@@ -166,14 +190,16 @@ var pokemonList = [
         "evolution":"Butterfree",
         "evoLevel":10,
         "evolved":0,
-        "type":"bug",
+        "type":[
+            "Bug"
+        ],
         "attack":25,
         "route":24,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":72,
-        "eggCycles":20
+        "eggCycles":10
     },
     {
         "id":12,
@@ -182,14 +208,17 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"bug",
+        "type":[
+            "Bug",
+            "Flying"
+        ],
         "attack":90,
         "route":null,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":173,
-        "eggCycles":20
+        "eggCycles":10
     },
     {
         "id":13,
@@ -198,14 +227,17 @@ var pokemonList = [
         "evolution":"Kakuna",
         "evoLevel":7,
         "evolved":0,
-        "type":"bug",
+        "type":[
+            "Bug",
+            "Poison"
+        ],
         "attack":35,
         "route":2,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":39,
-        "eggCycles":""
+        "eggCycles":10
     },
     {
         "id":14,
@@ -214,7 +246,10 @@ var pokemonList = [
         "evolution":"Beedrill",
         "evoLevel":10,
         "evolved":0,
-        "type":"bug",
+        "type":[
+            "Bug",
+            "Poison"
+        ],
         "attack":25,
         "route":24,
         "health":100,
@@ -230,7 +265,10 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"bug",
+        "type":[
+            "Bug",
+            "Poison"
+        ],
         "attack":90,
         "route":null,
         "health":100,
@@ -246,14 +284,17 @@ var pokemonList = [
         "evolution":"Pidgeotto",
         "evoLevel":18,
         "evolved":0,
-        "type":"flying",
+        "type":[
+            "Normal",
+            "Flying"
+        ],
         "attack":45,
         "route":1,
         "health":100,
         "levelType":"medium slow",
         "experience":0,
         "baseXpGain":50,
-        "eggCycles":10
+        "eggCycles":15
     },
     {
         "id":17,
@@ -262,14 +303,17 @@ var pokemonList = [
         "evolution":"Pidgeot",
         "evoLevel":36,
         "evolved":0,
-        "type":"flying",
+        "type":[
+            "Normal",
+            "Flying"
+        ],
         "attack":60,
         "route":24,
         "health":100,
         "levelType":"medium slow",
         "experience":0,
         "baseXpGain":122,
-        "eggCycles":10
+        "eggCycles":15
     },
     {
         "id":18,
@@ -278,14 +322,17 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"flying",
+        "type":[
+            "Normal",
+            "Flying"
+        ],
         "attack":80,
         "route":null,
         "health":100,
         "levelType":"medium slow",
         "experience":0,
         "baseXpGain":211,
-        "eggCycles":10
+        "eggCycles":15
     },
     {
         "id":19,
@@ -294,14 +341,16 @@ var pokemonList = [
         "evolution":"Raticate",
         "evoLevel":20,
         "evolved":0,
-        "type":"normal",
+        "type":[
+            "Normal"
+        ],
         "attack":56,
         "route":1,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":51,
-        "eggCycles":10
+        "eggCycles":15
     },
     {
         "id":20,
@@ -310,14 +359,16 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"normal",
+        "type":[
+            "Normal"
+        ],
         "attack":81,
         "route":16,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":145,
-        "eggCycles":""
+        "eggCycles":15
     },
     {
         "id":21,
@@ -326,7 +377,10 @@ var pokemonList = [
         "evolution":"Fearow",
         "evoLevel":20,
         "evolved":0,
-        "type":"flying",
+        "type":[
+            "Normal",
+            "Flying"
+        ],
         "attack":60,
         "route":3,
         "health":100,
@@ -342,7 +396,10 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"flying",
+        "type":[
+            "Normal",
+            "Flying"
+        ],
         "attack":90,
         "route":9,
         "health":100,
@@ -358,14 +415,16 @@ var pokemonList = [
         "evolution":"Arbok",
         "evoLevel":22,
         "evolved":0,
-        "type":"poison",
+        "type":[
+            "Poison"
+        ],
         "attack":60,
         "route":4,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":58,
-        "eggCycles":15
+        "eggCycles":20
     },
     {
         "id":24,
@@ -374,14 +433,16 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"poison",
+        "type":[
+            "Poison"
+        ],
         "attack":85,
         "route":23,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":153,
-        "eggCycles":""
+        "eggCycles":20
     },
     {
         "id":25,
@@ -390,14 +451,16 @@ var pokemonList = [
         "evolution":"Raichu",
         "evoLevel":"Thunder Stone",
         "evolved":0,
-        "type":"electric",
+        "type":[
+            "Electric"
+        ],
         "attack":55,
         "route":25,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":105,
-        "eggCycles":15
+        "eggCycles":20
     },
     {
         "id":26,
@@ -406,14 +469,16 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"electric",
+        "type":[
+            "Electric"
+        ],
         "attack":90,
         "route":null,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":214,
-        "eggCycles":15
+        "eggCycles":20
     },
     {
         "id":27,
@@ -422,14 +487,16 @@ var pokemonList = [
         "evolution":"Sandslash",
         "evoLevel":22,
         "evolved":0,
-        "type":"ground",
+        "type":[
+            "Ground"
+        ],
         "attack":75,
         "route":3,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":60,
-        "eggCycles":15
+        "eggCycles":20
     },
     {
         "id":28,
@@ -438,14 +505,16 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"ground",
+        "type":[
+            "Ground"
+        ],
         "attack":100,
         "route":23,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":158,
-        "eggCycles":15
+        "eggCycles":20
     },
     {
         "id":29,
@@ -454,14 +523,15 @@ var pokemonList = [
         "evolution":"Nidorina",
         "evoLevel":16,
         "evolved":0,
-        "type":"poison",
+        "type":[
+            "Poison"
+        ],
         "attack":47,
         "route":2,
         "health":100,
         "levelType":"medium slow",
         "experience":0,
-        "baseXpGain":55,
-        "eggCycles":20
+        "baseXpGain":55
     },
     {
         "id":30,
@@ -470,7 +540,9 @@ var pokemonList = [
         "evolution":"Nidoqueen",
         "evoLevel":"Moon Stone",
         "evolved":0,
-        "type":"poison",
+        "type":[
+            "Poison"
+        ],
         "attack":62,
         "route":9,
         "health":100,
@@ -486,7 +558,10 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"poison",
+        "type":[
+            "Poison",
+            "Ground"
+        ],
         "attack":92,
         "route":null,
         "health":100,
@@ -502,14 +577,15 @@ var pokemonList = [
         "evolution":"Nidorino",
         "evoLevel":16,
         "evolved":0,
-        "type":"poison",
+        "type":[
+            "Poison"
+        ],
         "attack":57,
         "route":2,
         "health":100,
         "levelType":"medium slow",
         "experience":0,
-        "baseXpGain":55,
-        "eggCycles":20
+        "baseXpGain":55
     },
     {
         "id":33,
@@ -518,7 +594,9 @@ var pokemonList = [
         "evolution":"Nidoking",
         "evoLevel":"Moon Stone",
         "evolved":0,
-        "type":"poison",
+        "type":[
+            "Poison"
+        ],
         "attack":72,
         "route":9,
         "health":100,
@@ -534,7 +612,10 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"poison",
+        "type":[
+            "Poison",
+            "Ground"
+        ],
         "attack":102,
         "route":null,
         "health":100,
@@ -550,7 +631,9 @@ var pokemonList = [
         "evolution":"Clefable",
         "evoLevel":"Moon Stone",
         "evolved":0,
-        "type":"normal",
+        "type":[
+            "Fairy"
+        ],
         "attack":60,
         "route":25,
         "health":100,
@@ -566,7 +649,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"normal",
+        "type":[
+            "Fairy"
+        ],
         "attack":95,
         "route":null,
         "health":100,
@@ -582,7 +667,9 @@ var pokemonList = [
         "evolution":"Ninetales",
         "evoLevel":"Fire Stone",
         "evolved":0,
-        "type":"fire",
+        "type":[
+            "Fire"
+        ],
         "attack":50,
         "route":7,
         "health":100,
@@ -598,7 +685,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"fire",
+        "type":[
+            "Fire"
+        ],
         "attack":81,
         "route":null,
         "health":100,
@@ -614,7 +703,10 @@ var pokemonList = [
         "evolution":"Wigglytuff",
         "evoLevel":"Moon Stone",
         "evolved":0,
-        "type":"normal",
+        "type":[
+            "Normal",
+            "Fairy"
+        ],
         "attack":45,
         "route":3,
         "health":100,
@@ -630,7 +722,10 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"normal",
+        "type":[
+            "Normal",
+            "Fairy"
+        ],
         "attack":85,
         "route":null,
         "health":100,
@@ -646,14 +741,17 @@ var pokemonList = [
         "evolution":"Golbat",
         "evoLevel":22,
         "evolved":0,
-        "type":"poison",
+        "type":[
+            "Poison",
+            "Flying"
+        ],
         "attack":45,
         "route":26,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":49,
-        "eggCycles":20
+        "eggCycles":15
     },
     {
         "id":42,
@@ -662,14 +760,17 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"poison",
+        "type":[
+            "Poison",
+            "Flying"
+        ],
         "attack":80,
         "route":null,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":159,
-        "eggCycles":20
+        "eggCycles":15
     },
     {
         "id":43,
@@ -678,7 +779,10 @@ var pokemonList = [
         "evolution":"Gloom",
         "evoLevel":21,
         "evolved":0,
-        "type":"grass",
+        "type":[
+            "Grass",
+            "Poison"
+        ],
         "attack":75,
         "route":5,
         "health":100,
@@ -694,7 +798,10 @@ var pokemonList = [
         "evolution":"Vileplume",
         "evoLevel":"Leaf Stone",
         "evolved":0,
-        "type":"grass",
+        "type":[
+            "Grass",
+            "Poison"
+        ],
         "attack":85,
         "route":12,
         "health":100,
@@ -710,7 +817,10 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"grass",
+        "type":[
+            "Grass",
+            "Poison"
+        ],
         "attack":110,
         "route":null,
         "health":100,
@@ -726,7 +836,10 @@ var pokemonList = [
         "evolution":"Parasect",
         "evoLevel":24,
         "evolved":0,
-        "type":"grass",
+        "type":[
+            "Bug",
+            "Grass"
+        ],
         "attack":70,
         "route":27,
         "health":100,
@@ -742,14 +855,17 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"grass",
+        "type":[
+            "Bug",
+            "Grass"
+        ],
         "attack":95,
         "route":null,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":142,
-        "eggCycles":15
+        "eggCycles":20
     },
     {
         "id":48,
@@ -758,14 +874,17 @@ var pokemonList = [
         "evolution":"Venomoth",
         "evoLevel":31,
         "evolved":0,
-        "type":"grass",
+        "type":[
+            "Bug",
+            "Poison"
+        ],
         "attack":55,
         "route":12,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":61,
-        "eggCycles":15
+        "eggCycles":20
     },
     {
         "id":49,
@@ -774,7 +893,10 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"grass",
+        "type":[
+            "Bug",
+            "Poison"
+        ],
         "attack":90,
         "route":14,
         "health":100,
@@ -790,7 +912,9 @@ var pokemonList = [
         "evolution":"Dugtrio",
         "evoLevel":26,
         "evolved":0,
-        "type":"ground",
+        "type":[
+            "Ground"
+        ],
         "attack":55,
         "route":28,
         "health":100,
@@ -806,7 +930,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"ground",
+        "type":[
+            "Ground"
+        ],
         "attack":80,
         "route":null,
         "health":100,
@@ -822,7 +948,9 @@ var pokemonList = [
         "evolution":"Persian",
         "evoLevel":28,
         "evolved":0,
-        "type":"normal",
+        "type":[
+            "Normal"
+        ],
         "attack":45,
         "route":5,
         "health":100,
@@ -838,7 +966,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"normal",
+        "type":[
+            "Normal"
+        ],
         "attack":70,
         "route":null,
         "health":100,
@@ -854,7 +984,9 @@ var pokemonList = [
         "evolution":"Golduck",
         "evoLevel":33,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water"
+        ],
         "attack":65,
         "route":4,
         "health":100,
@@ -870,7 +1002,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water"
+        ],
         "attack":95,
         "route":6,
         "health":100,
@@ -886,7 +1020,9 @@ var pokemonList = [
         "evolution":"Primeape",
         "evoLevel":28,
         "evolved":0,
-        "type":"fighting",
+        "type":[
+            "Fighting"
+        ],
         "attack":80,
         "route":3,
         "health":100,
@@ -902,7 +1038,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"fighting",
+        "type":[
+            "Fighting"
+        ],
         "attack":105,
         "route":23,
         "health":100,
@@ -918,7 +1056,9 @@ var pokemonList = [
         "evolution":"Arcanine",
         "evoLevel":"Fire Stone",
         "evolved":0,
-        "type":"fire",
+        "type":[
+            "Fire"
+        ],
         "attack":70,
         "route":7,
         "health":100,
@@ -934,7 +1074,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"fire",
+        "type":[
+            "Fire"
+        ],
         "attack":110,
         "route":null,
         "health":100,
@@ -950,7 +1092,9 @@ var pokemonList = [
         "evolution":"Poliwhirl",
         "evoLevel":25,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water"
+        ],
         "attack":50,
         "route":4,
         "health":100,
@@ -966,7 +1110,9 @@ var pokemonList = [
         "evolution":"Poliwrath",
         "evoLevel":"Water Stone",
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water"
+        ],
         "attack":65,
         "route":10,
         "health":100,
@@ -982,7 +1128,10 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water",
+            "Fighting"
+        ],
         "attack":95,
         "route":null,
         "health":100,
@@ -998,7 +1147,9 @@ var pokemonList = [
         "evolution":"Kadabra",
         "evoLevel":16,
         "evolved":0,
-        "type":"psychic",
+        "type":[
+            "Psychic"
+        ],
         "attack":105,
         "route":5,
         "health":100,
@@ -1014,7 +1165,9 @@ var pokemonList = [
         "evolution":"Alakazam",
         "evoLevel":"Trade Stone",
         "evolved":0,
-        "type":"psychic",
+        "type":[
+            "Psychic"
+        ],
         "attack":120,
         "route":8,
         "health":100,
@@ -1030,7 +1183,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"psychic",
+        "type":[
+            "Psychic"
+        ],
         "attack":135,
         "route":null,
         "health":100,
@@ -1046,7 +1201,9 @@ var pokemonList = [
         "evolution":"Machoke",
         "evoLevel":28,
         "evolved":0,
-        "type":"fighting",
+        "type":[
+            "Fighting"
+        ],
         "attack":80,
         "route":10,
         "health":100,
@@ -1062,7 +1219,9 @@ var pokemonList = [
         "evolution":"Machamp",
         "evoLevel":"Trade Stone",
         "evolved":0,
-        "type":"fighting",
+        "type":[
+            "Fighting"
+        ],
         "attack":100,
         "route":null,
         "health":100,
@@ -1078,7 +1237,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"fighting",
+        "type":[
+            "Fighting"
+        ],
         "attack":130,
         "route":null,
         "health":100,
@@ -1094,7 +1255,10 @@ var pokemonList = [
         "evolution":"Weepinbell",
         "evoLevel":21,
         "evolved":0,
-        "type":"grass",
+        "type":[
+            "Grass",
+            "Poison"
+        ],
         "attack":75,
         "route":5,
         "health":100,
@@ -1110,7 +1274,10 @@ var pokemonList = [
         "evolution":"Victreebel",
         "evoLevel":"Leaf Stone",
         "evolved":0,
-        "type":"grass",
+        "type":[
+            "Grass",
+            "Poison"
+        ],
         "attack":90,
         "route":12,
         "health":100,
@@ -1126,7 +1293,10 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"grass",
+        "type":[
+            "Grass",
+            "Poison"
+        ],
         "attack":105,
         "route":null,
         "health":100,
@@ -1142,14 +1312,17 @@ var pokemonList = [
         "evolution":"Tentacruel",
         "evoLevel":30,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water",
+            "Poison"
+        ],
         "attack":50,
         "route":11,
         "health":100,
         "levelType":"slow",
         "experience":0,
         "baseXpGain":67,
-        "eggCycles":""
+        "eggCycles":20
     },
     {
         "id":73,
@@ -1158,7 +1331,10 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water",
+            "Poison"
+        ],
         "attack":80,
         "route":19,
         "health":100,
@@ -1174,14 +1350,17 @@ var pokemonList = [
         "evolution":"Graveler",
         "evoLevel":25,
         "evolved":0,
-        "type":"rock",
+        "type":[
+            "Rock",
+            "Ground"
+        ],
         "attack":80,
         "route":18,
         "health":100,
         "levelType":"medium slow",
         "experience":0,
         "baseXpGain":60,
-        "eggCycles":20
+        "eggCycles":15
     },
     {
         "id":75,
@@ -1190,14 +1369,17 @@ var pokemonList = [
         "evolution":"Golem",
         "evoLevel":"Trade Stone",
         "evolved":0,
-        "type":"rock",
+        "type":[
+            "Rock",
+            "Ground"
+        ],
         "attack":95,
         "route":null,
         "health":100,
         "levelType":"medium slow",
         "experience":0,
         "baseXpGain":137,
-        "eggCycles":20
+        "eggCycles":15
     },
     {
         "id":76,
@@ -1206,14 +1388,17 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"rock",
+        "type":[
+            "Rock",
+            "Ground"
+        ],
         "attack":120,
         "route":null,
         "health":100,
         "levelType":"medium slow",
         "experience":0,
         "baseXpGain":218,
-        "eggCycles":20
+        "eggCycles":15
     },
     {
         "id":77,
@@ -1222,7 +1407,9 @@ var pokemonList = [
         "evolution":"Rapidash",
         "evoLevel":40,
         "evolved":0,
-        "type":"fire",
+        "type":[
+            "Fire"
+        ],
         "attack":85,
         "route":17,
         "health":100,
@@ -1238,7 +1425,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"fire",
+        "type":[
+            "Fire"
+        ],
         "attack":100,
         "route":null,
         "health":100,
@@ -1254,7 +1443,10 @@ var pokemonList = [
         "evolution":"Slowbro",
         "evoLevel":37,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water",
+            "Psychic"
+        ],
         "attack":65,
         "route":10,
         "health":100,
@@ -1270,7 +1462,10 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water",
+            "Psychic"
+        ],
         "attack":100,
         "route":12,
         "health":100,
@@ -1286,14 +1481,17 @@ var pokemonList = [
         "evolution":"Magneton",
         "evoLevel":30,
         "evolved":0,
-        "type":"electric",
+        "type":[
+            "Electric",
+            "Steel"
+        ],
         "attack":95,
         "route":10,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":65,
-        "eggCycles":15
+        "eggCycles":20
     },
     {
         "id":82,
@@ -1302,14 +1500,17 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"electric",
+        "type":[
+            "Electric",
+            "Steel"
+        ],
         "attack":120,
         "route":null,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":163,
-        "eggCycles":15
+        "eggCycles":20
     },
     {
         "id":83,
@@ -1318,14 +1519,17 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"normal",
+        "type":[
+            "Normal",
+            "Flying"
+        ],
         "attack":65,
         "route":12,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":123,
-        "eggCycles":15
+        "eggCycles":20
     },
     {
         "id":84,
@@ -1334,7 +1538,10 @@ var pokemonList = [
         "evolution":"Dodrio",
         "evoLevel":31,
         "evolved":0,
-        "type":"normal",
+        "type":[
+            "Normal",
+            "Flying"
+        ],
         "attack":85,
         "route":16,
         "health":100,
@@ -1350,7 +1557,10 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"normal",
+        "type":[
+            "Normal",
+            "Flying"
+        ],
         "attack":110,
         "route":17,
         "health":100,
@@ -1366,7 +1576,9 @@ var pokemonList = [
         "evolution":"Dewgong",
         "evoLevel":34,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water"
+        ],
         "attack":45,
         "route":30,
         "health":100,
@@ -1382,7 +1594,10 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water",
+            "Ice"
+        ],
         "attack":70,
         "route":null,
         "health":100,
@@ -1398,14 +1613,16 @@ var pokemonList = [
         "evolution":"Muk",
         "evoLevel":38,
         "evolved":0,
-        "type":"poison",
+        "type":[
+            "Poison"
+        ],
         "attack":80,
         "route":31,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":65,
-        "eggCycles":""
+        "eggCycles":20
     },
     {
         "id":89,
@@ -1414,7 +1631,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"poison",
+        "type":[
+            "Poison"
+        ],
         "attack":105,
         "route":null,
         "health":100,
@@ -1430,7 +1649,9 @@ var pokemonList = [
         "evolution":"Cloyster",
         "evoLevel":"Water Stone",
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water"
+        ],
         "attack":65,
         "route":6,
         "health":100,
@@ -1446,7 +1667,10 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water",
+            "Ice"
+        ],
         "attack":95,
         "route":null,
         "health":100,
@@ -1462,7 +1686,10 @@ var pokemonList = [
         "evolution":"Haunter",
         "evoLevel":25,
         "evolved":0,
-        "type":"ghost",
+        "type":[
+            "Ghost",
+            "Poison"
+        ],
         "attack":100,
         "route":32,
         "health":100,
@@ -1478,7 +1705,10 @@ var pokemonList = [
         "evolution":"Gengar",
         "evoLevel":"Trade Stone",
         "evolved":0,
-        "type":"ghost",
+        "type":[
+            "Ghost",
+            "Poison"
+        ],
         "attack":115,
         "route":null,
         "health":100,
@@ -1494,7 +1724,10 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"ghost",
+        "type":[
+            "Ghost",
+            "Poison"
+        ],
         "attack":130,
         "route":null,
         "health":100,
@@ -1510,14 +1743,17 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"rock",
+        "type":[
+            "Rock",
+            "Ground"
+        ],
         "attack":45,
         "route":32,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":77,
-        "eggCycles":20
+        "eggCycles":25
     },
     {
         "id":96,
@@ -1526,7 +1762,9 @@ var pokemonList = [
         "evolution":"Hypno",
         "evoLevel":26,
         "evolved":0,
-        "type":"psychic",
+        "type":[
+            "Psychic"
+        ],
         "attack":48,
         "route":11,
         "health":100,
@@ -1542,7 +1780,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"psychic",
+        "type":[
+            "Psychic"
+        ],
         "attack":73,
         "route":null,
         "health":100,
@@ -1558,7 +1798,9 @@ var pokemonList = [
         "evolution":"Kingler",
         "evoLevel":28,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water"
+        ],
         "attack":105,
         "route":4,
         "health":100,
@@ -1574,7 +1816,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water"
+        ],
         "attack":130,
         "route":10,
         "health":100,
@@ -1590,7 +1834,9 @@ var pokemonList = [
         "evolution":"Electrode",
         "evoLevel":30,
         "evolved":0,
-        "type":"electric",
+        "type":[
+            "Electric"
+        ],
         "attack":55,
         "route":10,
         "health":100,
@@ -1606,7 +1852,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"electric",
+        "type":[
+            "Electric"
+        ],
         "attack":80,
         "route":null,
         "health":100,
@@ -1622,7 +1870,10 @@ var pokemonList = [
         "evolution":"Exeggutor",
         "evoLevel":"Leaf Stone",
         "evolved":0,
-        "type":"grass",
+        "type":[
+            "Grass",
+            "Psychic"
+        ],
         "attack":60,
         "route":32,
         "health":100,
@@ -1638,14 +1889,17 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"grass",
+        "type":[
+            "Grass",
+            "Psychic"
+        ],
         "attack":125,
         "route":null,
         "health":100,
         "levelType":"slow",
         "experience":0,
         "baseXpGain":182,
-        "eggCycles":""
+        "eggCycles":20
     },
     {
         "id":104,
@@ -1654,14 +1908,16 @@ var pokemonList = [
         "evolution":"Marowak",
         "evoLevel":28,
         "evolved":0,
-        "type":"ground",
+        "type":[
+            "Ground"
+        ],
         "attack":50,
         "route":33,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":64,
-        "eggCycles":25
+        "eggCycles":20
     },
     {
         "id":105,
@@ -1670,7 +1926,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"ground",
+        "type":[
+            "Ground"
+        ],
         "attack":80,
         "route":null,
         "health":100,
@@ -1686,14 +1944,16 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"fighting",
+        "type":[
+            "Fighting"
+        ],
         "attack":120,
         "route":34,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":159,
-        "eggCycles":20
+        "eggCycles":25
     },
     {
         "id":107,
@@ -1702,14 +1962,16 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"fighting",
+        "type":[
+            "Fighting"
+        ],
         "attack":105,
         "route":34,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":159,
-        "eggCycles":20
+        "eggCycles":25
     },
     {
         "id":108,
@@ -1718,7 +1980,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"normal",
+        "type":[
+            "Normal"
+        ],
         "attack":60,
         "route":33,
         "health":100,
@@ -1734,7 +1998,9 @@ var pokemonList = [
         "evolution":"Weezing",
         "evoLevel":35,
         "evolved":0,
-        "type":"poison",
+        "type":[
+            "Poison"
+        ],
         "attack":65,
         "route":31,
         "health":100,
@@ -1750,7 +2016,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"poison",
+        "type":[
+            "Poison"
+        ],
         "attack":90,
         "route":null,
         "health":100,
@@ -1766,7 +2034,10 @@ var pokemonList = [
         "evolution":"Rhydon",
         "evoLevel":42,
         "evolved":0,
-        "type":"ground",
+        "type":[
+            "Ground",
+            "Rock"
+        ],
         "attack":85,
         "route":35,
         "health":100,
@@ -1782,7 +2053,10 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"ground",
+        "type":[
+            "Ground",
+            "Rock"
+        ],
         "attack":130,
         "route":null,
         "health":100,
@@ -1798,14 +2072,16 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"normal",
+        "type":[
+            "Normal"
+        ],
         "attack":35,
         "route":30,
         "health":100,
         "levelType":"fast",
         "experience":0,
         "baseXpGain":395,
-        "eggCycles":20
+        "eggCycles":40
     },
     {
         "id":114,
@@ -1814,7 +2090,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"grass",
+        "type":[
+            "Grass"
+        ],
         "attack":100,
         "route":21,
         "health":100,
@@ -1830,14 +2108,16 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"normal",
+        "type":[
+            "Normal"
+        ],
         "attack":95,
         "route":35,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":172,
-        "eggCycles":25
+        "eggCycles":20
     },
     {
         "id":116,
@@ -1846,14 +2126,16 @@ var pokemonList = [
         "evolution":"Seadra",
         "evoLevel":32,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water"
+        ],
         "attack":70,
         "route":10,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":59,
-        "eggCycles":25
+        "eggCycles":20
     },
     {
         "id":117,
@@ -1862,7 +2144,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water"
+        ],
         "attack":95,
         "route":12,
         "health":100,
@@ -1878,7 +2162,9 @@ var pokemonList = [
         "evolution":"Seaking",
         "evoLevel":33,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water"
+        ],
         "attack":67,
         "route":4,
         "health":100,
@@ -1894,7 +2180,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water"
+        ],
         "attack":92,
         "route":4,
         "health":100,
@@ -1910,7 +2198,9 @@ var pokemonList = [
         "evolution":"Starmie",
         "evoLevel":"Water Stone",
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water"
+        ],
         "attack":70,
         "route":19,
         "health":100,
@@ -1926,7 +2216,10 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water",
+            "Psychic"
+        ],
         "attack":100,
         "route":null,
         "health":100,
@@ -1942,14 +2235,17 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"psychic",
+        "type":[
+            "Psychic",
+            "Fairy"
+        ],
         "attack":100,
         "route":36,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":161,
-        "eggCycles":40
+        "eggCycles":25
     },
     {
         "id":123,
@@ -1958,14 +2254,17 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"grass",
+        "type":[
+            "Bug",
+            "Flying"
+        ],
         "attack":110,
         "route":35,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":100,
-        "eggCycles":20
+        "eggCycles":25
     },
     {
         "id":124,
@@ -1974,14 +2273,17 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"psychic",
+        "type":[
+            "Ice",
+            "Psychic"
+        ],
         "attack":115,
         "route":36,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":159,
-        "eggCycles":20
+        "eggCycles":25
     },
     {
         "id":125,
@@ -1990,14 +2292,16 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"electric",
+        "type":[
+            "Electric"
+        ],
         "attack":95,
         "route":36,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":172,
-        "eggCycles":""
+        "eggCycles":25
     },
     {
         "id":126,
@@ -2006,14 +2310,16 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"fire",
+        "type":[
+            "Fire"
+        ],
         "attack":100,
         "route":37,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":173,
-        "eggCycles":20
+        "eggCycles":25
     },
     {
         "id":127,
@@ -2022,14 +2328,16 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"grass",
+        "type":[
+            "Bug"
+        ],
         "attack":125,
         "route":37,
         "health":100,
         "levelType":"slow",
         "experience":0,
         "baseXpGain":175,
-        "eggCycles":20
+        "eggCycles":25
     },
     {
         "id":128,
@@ -2038,7 +2346,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"normal",
+        "type":[
+            "Normal"
+        ],
         "attack":100,
         "route":38,
         "health":100,
@@ -2054,14 +2364,16 @@ var pokemonList = [
         "evolution":"Gyarados",
         "evoLevel":20,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water"
+        ],
         "attack":15,
         "route":4,
         "health":100,
         "levelType":"slow",
         "experience":0,
         "baseXpGain":40,
-        "eggCycles":20
+        "eggCycles":5
     },
     {
         "id":130,
@@ -2070,14 +2382,17 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water",
+            "Flying"
+        ],
         "attack":125,
         "route":null,
         "health":100,
         "levelType":"slow",
         "experience":0,
         "baseXpGain":189,
-        "eggCycles":20
+        "eggCycles":5
     },
     {
         "id":131,
@@ -2086,14 +2401,17 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water",
+            "Ice"
+        ],
         "attack":85,
         "route":37,
         "health":100,
         "levelType":"slow",
         "experience":0,
         "baseXpGain":187,
-        "eggCycles":20
+        "eggCycles":40
     },
     {
         "id":132,
@@ -2102,14 +2420,16 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"normal",
+        "type":[
+            "Normal"
+        ],
         "attack":48,
         "route":13,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":101,
-        "eggCycles":25
+        "eggCycles":20
     },
     {
         "id":133,
@@ -2118,14 +2438,16 @@ var pokemonList = [
         "evolution":"Vaporeon, Jolteon, Flareon",
         "evoLevel":"Water Stone, Thunder Stone, Fire Stone",
         "evolved":0,
-        "type":"normal",
+        "type":[
+            "Normal"
+        ],
         "attack":55,
         "route":36,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":65,
-        "eggCycles":25
+        "eggCycles":35
     },
     {
         "id":134,
@@ -2134,14 +2456,16 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"water",
+        "type":[
+            "Water"
+        ],
         "attack":110,
         "route":null,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":184,
-        "eggCycles":25
+        "eggCycles":35
     },
     {
         "id":135,
@@ -2150,14 +2474,16 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"electric",
+        "type":[
+            "Electric"
+        ],
         "attack":110,
         "route":null,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":184,
-        "eggCycles":25
+        "eggCycles":35
     },
     {
         "id":136,
@@ -2166,14 +2492,16 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"fire",
+        "type":[
+            "Fire"
+        ],
         "attack":130,
         "route":null,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":184,
-        "eggCycles":25
+        "eggCycles":35
     },
     {
         "id":137,
@@ -2182,14 +2510,16 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"normal",
+        "type":[
+            "Normal"
+        ],
         "attack":85,
         "route":38,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":79,
-        "eggCycles":25
+        "eggCycles":20
     },
     {
         "id":138,
@@ -2198,14 +2528,17 @@ var pokemonList = [
         "evolution":"Omastar",
         "evoLevel":40,
         "evolved":0,
-        "type":"rock",
+        "type":[
+            "Rock",
+            "Water"
+        ],
         "attack":90,
         "route":39,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":71,
-        "eggCycles":""
+        "eggCycles":30
     },
     {
         "id":139,
@@ -2214,14 +2547,17 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"rock",
+        "type":[
+            "Rock",
+            "Water"
+        ],
         "attack":115,
         "route":null,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":173,
-        "eggCycles":20
+        "eggCycles":30
     },
     {
         "id":140,
@@ -2230,14 +2566,17 @@ var pokemonList = [
         "evolution":"Kabutops",
         "evoLevel":40,
         "evolved":0,
-        "type":"rock",
+        "type":[
+            "Rock",
+            "Water"
+        ],
         "attack":80,
         "route":39,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":71,
-        "eggCycles":5
+        "eggCycles":30
     },
     {
         "id":141,
@@ -2246,14 +2585,17 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"rock",
+        "type":[
+            "Rock",
+            "Water"
+        ],
         "attack":115,
         "route":null,
         "health":100,
         "levelType":"medium fast",
         "experience":0,
         "baseXpGain":173,
-        "eggCycles":5
+        "eggCycles":30
     },
     {
         "id":142,
@@ -2262,14 +2604,17 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"rock",
+        "type":[
+            "Rock",
+            "Flying"
+        ],
         "attack":105,
         "route":39,
         "health":100,
         "levelType":"slow",
         "experience":0,
         "baseXpGain":180,
-        "eggCycles":""
+        "eggCycles":30
     },
     {
         "id":143,
@@ -2278,7 +2623,9 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"normal",
+        "type":[
+            "Normal"
+        ],
         "attack":110,
         "route":16,
         "health":100,
@@ -2294,14 +2641,17 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"ice",
+        "type":[
+            "Ice",
+            "Flying"
+        ],
         "attack":95,
         "route":100,
         "health":100,
         "levelType":"slow",
         "experience":0,
         "baseXpGain":261,
-        "eggCycles":20
+        "eggCycles":80
     },
     {
         "id":145,
@@ -2310,14 +2660,17 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"electric",
+        "type":[
+            "Electric",
+            "Flying"
+        ],
         "attack":125,
         "route":100,
         "health":100,
         "levelType":"slow",
         "experience":0,
         "baseXpGain":261,
-        "eggCycles":35
+        "eggCycles":80
     },
     {
         "id":146,
@@ -2326,14 +2679,17 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"fire",
+        "type":[
+            "Fire",
+            "Flying"
+        ],
         "attack":125,
         "route":100,
         "health":100,
         "levelType":"slow",
         "experience":0,
         "baseXpGain":261,
-        "eggCycles":35
+        "eggCycles":80
     },
     {
         "id":147,
@@ -2342,14 +2698,16 @@ var pokemonList = [
         "evolution":"Dragonair",
         "evoLevel":30,
         "evolved":0,
-        "type":"dragon",
+        "type":[
+            "Dragon"
+        ],
         "attack":64,
         "route":36,
         "health":100,
         "levelType":"slow",
         "experience":0,
         "baseXpGain":60,
-        "eggCycles":35
+        "eggCycles":40
     },
     {
         "id":148,
@@ -2358,14 +2716,16 @@ var pokemonList = [
         "evolution":"Dragonite",
         "evoLevel":55,
         "evolved":0,
-        "type":"dragon",
+        "type":[
+            "Dragon"
+        ],
         "attack":84,
         "route":null,
         "health":100,
         "levelType":"slow",
         "experience":0,
         "baseXpGain":147,
-        "eggCycles":35
+        "eggCycles":40
     },
     {
         "id":149,
@@ -2374,14 +2734,17 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"dragon",
+        "type":[
+            "Dragon",
+            "Flying"
+        ],
         "attack":134,
         "route":null,
         "health":100,
         "levelType":"slow",
         "experience":0,
         "baseXpGain":270,
-        "eggCycles":20
+        "eggCycles":40
     },
     {
         "id":150,
@@ -2390,14 +2753,16 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"psychic",
+        "type":[
+            "Psychic"
+        ],
         "attack":154,
         "route":100,
         "health":100,
         "levelType":"slow",
         "experience":0,
         "baseXpGain":306,
-        "eggCycles":30
+        "eggCycles":120
     },
     {
         "id":151,
@@ -2406,13 +2771,15 @@ var pokemonList = [
         "evolution":null,
         "evoLevel":null,
         "evolved":0,
-        "type":"psychic",
+        "type":[
+            "Psychic"
+        ],
         "attack":100,
         "route":100,
         "health":100,
         "levelType":"medium slow",
         "experience":0,
         "baseXpGain":270,
-        "eggCycles":30
+        "eggCycles":120
     }
 ];
