@@ -531,7 +531,8 @@ var pokemonList = [
         "health":100,
         "levelType":"medium slow",
         "experience":0,
-        "baseXpGain":55
+        "baseXpGain":55,
+        "eggCycles":20
     },
     {
         "id":30,
@@ -585,7 +586,8 @@ var pokemonList = [
         "health":100,
         "levelType":"medium slow",
         "experience":0,
-        "baseXpGain":55
+        "baseXpGain":55,
+        "eggCycles":20
     },
     {
         "id":33,
