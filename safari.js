@@ -1,7 +1,7 @@
 var safari = {
     grid: [],
     sizeX: 25,
-    sizeY: 10,
+    sizeY: 21,
     maxItems: 3,
     layersCleared: 0,
     totalItemsFound: 0,
@@ -9,7 +9,7 @@ var safari = {
     maxEnergy: 50,
     player: {
         x: 12,
-        y: 9
+        y: 20
     },
     isMoving:0,
     movingX: 0,
@@ -24,6 +24,8 @@ var sprite;
 var loadSafari = function(){
     inProgress = 4;
     safari.grid = [];
+    safari.player.x = 12;
+    safari.player.y = 20
     for( var i = 0; i<safari.sizeY; i++){
         var row = [];
         for(var j = 0; j<safari.sizeX; j++){
@@ -121,6 +123,7 @@ var safariMove = function(direction){
         } else if (direction === "right" && canMoveSafari(safari.player.x+1,safari.player.y)) {
             $(".sprite").css('background',  "url('images/safari/walkright.png')");
             safari.isMoving = 1;
+            safari.lastDirection = direction;
             safari.player.x++;
             $('#sprite').animate({
                 left: "+=32" //moves up
@@ -142,7 +145,6 @@ var safariMove = function(direction){
         } else {
             sprite.pause();
         }
-        // updatePlayer();
         safari.lastDirection = direction;
     }
 }
