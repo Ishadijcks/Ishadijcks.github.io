@@ -32,21 +32,36 @@ var showStats = function(){
     html += "<div class='row'>";
 
     var gymList = getGymNames();
-    html += addStatTableHead("Gyms");
+    html += addStatTableHead("Gyms Defeated");
     for(var i = 0; i < gymList.length; i++){
         html += addStatTableRow(gymList[i].slice(0, -4), player.gymsDefeated[i]);
     }
-
     html += addStatTableFooter();
 
+    
+
     var dungeonList = getDungeonNames();
-    html += addStatTableHead("Dungeons", 2);
+    html += addStatTableHead("Dungeons Cleared", 2);
     for(var i = 0; i < dungeonList.length; i++){
         html += addStatTableRow(dungeonList[i].slice(0, -8), player.dungeonsDefeated[i]);
     }
-
-
     html += addStatTableFooter();
+
+    html += addStatTableHead("Elite Four", 1);
+    html +=     addStatTableRow("Elite Lorelei", player.gymsDefeated[8]);
+    html +=     addStatTableRow("Elite Bruno", player.gymsDefeated[9]);
+    html +=     addStatTableRow("Elite Agatha", player.gymsDefeated[10]);
+    html +=     addStatTableRow("Elite Lance", player.gymsDefeated[11]);
+    html +=     addStatTableRow("Champion", player.gymsDefeated[12]);
+    html += addStatTableFooter();
+
+    html += addStatTableHead("Pokemons Defeated per route", 2);
+    for(var i = 1; i < 26; i++){
+        html += addStatTableRow(i, player.routeKills[i]);
+    }
+    html += addStatTableFooter();
+
+
     $("#statsBody").html(html);
 }
 
