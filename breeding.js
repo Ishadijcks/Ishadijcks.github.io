@@ -37,13 +37,13 @@ var gainRandomEgg = function(type){
 				eggs.push(possibleEggs[i][j]);
 			}
 		} 
-		var eggName = eggs[Math.floor(Math.random()*(eggs.length-1))];
+		var eggName = eggs[Math.floor(Math.random()*(eggs.length))];
 		var type = getPokemonByName(eggName).type;
 		gainEgg(Egg(type, getSteps(eggName), eggName));
 	} else {
 		var num = typeToNumber(type);
 		var eggs = possibleEggs[num];
-		var eggName = eggs[Math.floor(Math.random()*(eggs.length-1))];
+		var eggName = eggs[Math.floor(Math.random()*(eggs.length))];
 		gainEgg(Egg(type, getSteps(eggName), eggName));
 	}
 }

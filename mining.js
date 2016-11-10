@@ -16,13 +16,12 @@ var seededRand = function(seed) {
 
 var generateDailyDeals = function(){
     player.curMine.dailyDeals = [];
-    var maxDeals = 3;
     var d = new Date();
 
-    var dateSeed = Number(d.getDay() + d.getMonth() + "" + d.getYear());
+    var dateSeed = Number(d.getYear()*d.getDate() + 1000*d.getMonth() + 100000*d.getDate());
     var seed = seededRand(dateSeed);
 
-    for (var i=0; i<maxDeals; i++) {
+    for (var i=0; i<player.curMine.maxDailyDeals; i++) {
     	seed = generateDailyDeal(seed);
     }
 }
@@ -312,10 +311,11 @@ var showMineUpgrades = function(){
 	html += "<tr>";
 	html += "<td class='vertical-midle'>Max energy: " + player.curMine.maxEnergy + "</td>";
     html += "<td class='vertical-midle' style='width:50%'>(+10)</td>";
-	html += "<td class='vertical-midle'>" + getMaxEnergyUpgradeCost() + " diamonds</td>"
 	if (player.curMine.maxEnergyUpgrades < 10){
+		html += "<td class='vertical-midle'>" + getMaxEnergyUpgradeCost() + " diamonds</td>"
 		html += "<td class='vertical-midle'><button class='tooltipMineUpgrade btn btn-success' onclick='upgradeMaxEnergy()'>Upgrade</button></td>";
 	} else {
+		html += "<td></td>";
 		html += "<td class='vertical-midle'><button class='disabled btn btn-success'>Max</button></td>";
 	}
 	html += "</tr>";
@@ -324,10 +324,11 @@ var showMineUpgrades = function(){
 	html += "<tr>";
 	html += "<td class='vertical-midle'>Max items: " + player.curMine.maxItems + "</td>";
     html += "<td class='vertical-midle'>(+1)</td>";
-	html += "<td class='vertical-midle'>" + getMaxItemUpgradeCost() + " diamonds</td>"
 	if (player.curMine.maxItems < 7){
+		html += "<td class='vertical-midle'>" + getMaxItemUpgradeCost() + " diamonds</td>"
 		html += "<td class='vertical-midle'><button class='tooltipMineUpgrade btn btn-success' onclick='upgradeMaxItems()'>Upgrade</button></td>";
 	} else {
+		html += "<td></td>";
 		html += "<td class='vertical-midle'><button class='disabled  btn btn-success'>Max</button></td>";
 	}
 	html += "</tr>";
@@ -335,10 +336,11 @@ var showMineUpgrades = function(){
 	html += "<tr>";
 	html += "<td class='vertical-midle'>Energy regen time: " + player.curMine.energyRegen + "</td> ";
     html += "<td class='vertical-midle'>(-1)</td>";
-	html += "<td class='vertical-midle'>" + getEnergyRegenUpgradeCost() + " diamonds</td>"
 	if (player.curMine.energyRegenUpgrades < 20){
+		html += "<td class='vertical-midle'>" + getEnergyRegenUpgradeCost() + " diamonds</td>"
 		html += "<td class='vertical-midle'><button class='tooltipMineUpgrade btn btn-success' onclick='upgradeEnergyRegen()'>Upgrade</button></td>";
 	} else {
+		html += "<td></td>";
 		html += "<td class='vertical-midle'><button class='disabled btn btn-success'>Max</button></td>";
 	}
 	html += "</tr>";
@@ -346,10 +348,23 @@ var showMineUpgrades = function(){
 	html += "<tr>";
 	html += "<td class='vertical-midle'>Energy gain: " + player.curMine.energyGain + "</td>";
     html += "<td class='vertical-midle'>(+1)</td>";
-	html += "<td class='vertical-midle'>" + getEnergyGainUpgradeCost() + " diamonds</td>"
 	if (player.curMine.energyGainUpgrades < 17){
+		html += "<td class='vertical-midle'>" + getEnergyGainUpgradeCost() + " diamonds</td>"
 		html += "<td class='vertical-midle'><button class='tooltipMineUpgrade btn btn-success' onclick='upgradeEnergyGain()'>Upgrade</button></td>";
 	} else {
+		html += "<td></td>";
+		html += "<td class='vertical-midle'><button class='disabled btn btn-success'>Max</button></td>";
+	}
+	html += "</tr>";
+
+	html += "<tr>";
+	html += "<td class='vertical-midle'>Max Daily Deals: " + player.curMine.maxDailyDeals + "</td>";
+    html += "<td class='vertical-midle'>(+1)</td>";
+	if (player.curMine.maxDailyDealUpgrades < 2){
+		html += "<td class='vertical-midle'>" + getMaxDailyDealUpgradeCost() + " diamonds</td>"
+		html += "<td class='vertical-midle'><button class='tooltipMineUpgrade btn btn-success' onclick='upgradeMaxDailyDeals()'>Upgrade</button></td>";
+	} else {
+		html += "<td></td>";
 		html += "<td class='vertical-midle'><button class='disabled btn btn-success'>Max</button></td>";
 	}
 	html += "</tr>";
@@ -373,6 +388,22 @@ var upgradeMaxEnergy = function(){
 		player.curMine.maxEnergy += 10;
 	} else {
 		$.notify("You don't have enough diamonds");
+	}
+	showMineUpgrades();
+}
+
+var getMaxDailyDealUpgradeCost = function(){
+	return 150 * (player.curMine.maxDailyDealUpgrades + 1);
+}
+
+var upgradeMaxDailyDeals = function(){
+	if (player.mineCoins >= getMaxDailyDealUpgradeCost()){
+		player.mineCoins -= getMaxDailyDealUpgradeCost();
+		player.curMine.maxDailyDealUpgrades += 1;
+		player.curMine.maxDailyDeals += 1;
+		generateDailyDeals();
+	} else {
+		$.notify("You don't have enough diamonds")
 	}
 	showMineUpgrades();
 }
@@ -639,12 +670,18 @@ var hammer = function(x,y){
 		if(x < 0 || y < 0){
 			return;
 		}
+		var hasMined = false;
 		for(var i = -1; i < 2; i++){
 			for(var j = -1; j < 2; j++){
+				if(player.curMine.grid[normalizeY(x+i)][normalizeX(y+j)] > 0){
+					hasMined = true;
+				}
 				player.curMine.grid[normalizeY(x+i)][normalizeX(y+j)] = Math.max(0, player.curMine.grid[normalizeY(x+i)][normalizeX(y+j)]-1);
 			}
 		}
-		player.curMine.energy -= player.curMine.hammerEnergy
+		if(hasMined) {
+			player.curMine.energy -= player.curMine.hammerEnergy
+		}
 	}
 }
 
