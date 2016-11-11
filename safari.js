@@ -14,7 +14,11 @@ var safari = {
     isMoving:0,
     movingX: 0,
     movingY: 0,
-    lastDirection: "up"
+    lastDirection: "up",
+    offset: {
+        top: 0,
+        left: 0
+    }
 }
 
 var element;
@@ -89,7 +93,7 @@ var showSafari = function(){
     }
 
     $("#safariBody").html(html);
-    updatePlayer();
+    addPlayer();
 
 
     // Sprite
@@ -109,7 +113,7 @@ var safariStep = function(direction, frame) {
 
     if (canMoveSafari(safari.player.x + safari.movingX, safari.player.y + safari.movingY)) {
         var next = $("#safari-" + (safari.player.x + safari.movingX) + "-" + (safari.player.y + safari.movingY)).offset();
-        offset = {
+        safari.offset = {
             top: next.top - origin.top,
             left: next.left - origin.left
         }
@@ -117,7 +121,7 @@ var safariStep = function(direction, frame) {
         $(".sprite").css("background", "url('images/safari/walk"+direction+".png')");
         safari.player.x += safari.movingX;
         safari.player.y += safari.movingY;
-        $('#sprite').animate(offset, 250, "linear", function() {
+        $('#sprite').animate(safari.offset, 250, "linear", function() {
             safari.isMoving = 0;
             if(walking){ safariStep(direction,frame) }
         });
@@ -156,10 +160,11 @@ var canMoveSafari = function(x,y){
 
 var legalBlock = [0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
 
-var updatePlayer = function(){
-    $("#safari-"+safari.player.x+"-"+safari.player.y).html("<div id='sprite' class='sprite'></div>");
+var addPlayer = function(){
+    $("#safari-12-20").html("<div id='sprite' class='sprite'></div>");
     $(".sprite").css('background',  "url('images/safari/walk" + safari.lastDirection + ".png')");
     $(".sprite").css('position', 'absolute');
+    $(".sprite").animate(safari.offset,0)
     safari.isMoving = 0;
 
 }
