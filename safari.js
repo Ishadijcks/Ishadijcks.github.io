@@ -126,7 +126,8 @@ var safariStep = function(direction, frame) {
             if(walking){ safariStep(direction,frame) }
         });
     } else {
-        sprite.pause();
+        $(".sprite").css("background", "url('images/safari/walk"+direction+".png')");
+        sprite.toStart();
         safari.isMoving = 0;
     }
 }
