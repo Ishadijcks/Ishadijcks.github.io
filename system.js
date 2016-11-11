@@ -380,11 +380,13 @@ $(document).ready(function(){
 					e.preventDefault();
 				}
 			}
-			if(!walking) {
+			if(!walking && !safari.isMoving) {
 				if(keyCode == 38 || keyCode == 87){
+					console.log(walking + " and " + safari.isMoving)
 					walking = true;
 					safari.movingY = -1;
 					safariMove('up');
+					console.log("going up")
 				} else if(keyCode == 39 || keyCode == 68){
 					walking = true;
 					safari.movingX = 1;
