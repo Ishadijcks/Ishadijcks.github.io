@@ -374,43 +374,54 @@ $(document).ready(function(){
     			e.preventDefault();
 			}
 		} else if(inProgress == 4){
-			if(keyCode == 38 || keyCode == 87){
-				safari.movingY = -1;
-				safariMove('up')
-				e.preventDefault();
-			} else if(keyCode == 39 || keyCode == 68){
-				safari.movingX = 1;
-				safariMove('right')
-				e.preventDefault();
-			} else if(keyCode == 37 || keyCode == 65){
-				safari.movingX = -1;
-				safariMove('left')
-				e.preventDefault();
-			} else if(keyCode == 40 || keyCode == 83){
-				safari.movingY = 1;
-				safariMove('down')
-				e.preventDefault();
-			} else if(keyCode == 32){
-				e.preventDefault();
+			var keys = [38,87,39,68,37,65,40,83,32];
+			for (var i=0; i<keys.length; i++) {
+				if (keyCode == keys[i]) {
+					e.preventDefault();
+				}
+			}
+			if(!walking) {
+				if(keyCode == 38 || keyCode == 87){
+					walking = true;
+					safari.movingY = -1;
+					safariMove('up');
+				} else if(keyCode == 39 || keyCode == 68){
+					walking = true;
+					safari.movingX = 1;
+					safariMove('right');
+				} else if(keyCode == 37 || keyCode == 65){
+					walking = true;
+					safari.movingX = -1;
+					safariMove('left');
+				} else if(keyCode == 40 || keyCode == 83){
+					walking = true;
+					safari.movingY = 1;
+					safariMove('down');
+				} else if(keyCode == 32){
+				}
 			}
 		}
-	console.log(safari.movingX);
-	console.log(safari.movingY);
+	//console.log(safari.movingX);
+	//console.log(safari.movingY);
 	});
 
 	$(document).on("keyup", function (e) {
 		var keyCode = e.keyCode;
 		if(inProgress == 4){
 			if(keyCode == 38 || keyCode == 87){
+				walking = false;
 				safari.movingY = 0;
 				e.preventDefault();
 			} else if(keyCode == 39 || keyCode == 68){
+				walking = false;
 				safari.movingX = 0;
 				e.preventDefault();
 			} else if(keyCode == 37 || keyCode == 65){
+				walking = false;
 				safari.movingX = 0;
 				e.preventDefault();
 			} else if(keyCode == 40 || keyCode == 83){
+				walking = false;
 				safari.movingY = 0;
 				e.preventDefault();
 			} else if(keyCode == 32){
