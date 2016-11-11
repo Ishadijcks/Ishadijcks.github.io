@@ -158,17 +158,13 @@ var safariStep = function(direction, frame) {
         safari.player.y += safari.movingY;
         $('#sprite').animate(safari.offset, 250, "linear", function() {
             safari.isMoving = 0;
-            if(walking){ 
-                if (!checkBattle()){
-                    direction = safari.nextDirection;
-                    safariStep(safari.nextDirection,frame);
-                } 
-            }
+            if(walking){ if (!checkBattle()){safariStep(safari.nextDirection,frame)} }
         });
     } else {
         $(".sprite").css("background", "url('images/safari/walk"+direction+".png')");
         sprite.toStart();
         safari.isMoving = 0;
+        walking = false;
     }
 
 var checkBattle = function(){
