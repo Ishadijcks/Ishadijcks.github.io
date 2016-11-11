@@ -101,11 +101,7 @@ var showSafari = function(){
 }
 
 var safariStep = function(direction, frame) {
-    var element = document.querySelector('#sprite');
-    var sprite = new Motio(element, {
-        fps: 8,
-        frames: 4
-    });
+    sprite.to(frame,true)
     frame = (frame+2)%4;
     sprite.to(frame);
 
@@ -136,7 +132,13 @@ var safariMove = function(direction){
     if(!safari.isMoving) {
         var frame = 0;
         origin = $("#safari-12-20").offset();
-        
+
+
+        element = document.querySelector('#sprite');
+        sprite = new Motio(element, {
+            fps: 8,
+            frames: 4
+        });
         safariStep(direction, frame);
         
         safari.lastDirection = direction;
