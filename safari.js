@@ -136,7 +136,7 @@ var showSafari = function(){
 <<<<<<< 40c47970def9c594ba8be677de16e650320a4bcb
 var safariStep = function(direction, frame) {
     safari.lastDirection = direction;
-    
+
     sprite.to(frame,true)
     frame = (frame+2)%4;
     sprite.to(frame);
@@ -157,9 +157,13 @@ var safariStep = function(direction, frame) {
         safari.player.x += safari.movingX;
         safari.player.y += safari.movingY;
         $('#sprite').animate(safari.offset, 250, "linear", function() {
-            direction = safari.nextDirection;
             safari.isMoving = 0;
-            if(walking){ if (!checkBattle()){safariStep(safari.nextDirection,frame)} }
+            if(walking){ 
+                if (!checkBattle()){
+                    direction = safari.nextDirection;
+                    safariStep(safari.nextDirection,frame);
+                } 
+            }
         });
     } else {
         $(".sprite").css("background", "url('images/safari/walk"+direction+".png')");
