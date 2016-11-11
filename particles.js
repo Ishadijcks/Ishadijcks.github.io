@@ -20,11 +20,11 @@ var afterCatch = function(succ) {
 			height: 0,
 			width: 0
 		}, 1000);
-		setTimeout(()=>{p.remove();},750)
+		setTimeout(function(){p.remove();},750)
 	} else {
 		// flyingPokeball.fadeOut(200);
 		flyingPokeball.animate({top:flyingPokeball.offset().top+50,opacity:0},200);
-		setTimeout(()=>{p.remove();},200)
+		setTimeout(function(){p.remove();},200)
 	}
 }
 
@@ -33,12 +33,12 @@ var dropParticle = function(html, pos, target, time = 2) {
 	p.offset(pos);
 	p[0].style.transition = 'left ' + time + 's linear, top ' + time + 's cubic-bezier(0.6, -0.3, 0.7, 0)';
 	p.offset(target);
-	setTimeout(() => { p.fadeOut() }, time * 1000 - 200);
-	setTimeout(() => { p.remove() }, time * 1000);
+	setTimeout(function(){ p.fadeOut() }, time * 1000 - 200);
+	setTimeout(function(){ p.remove() }, time * 1000);
 };
 
 var dropMoneyParticle = function(amt) {
-	setTimeout(() => {
+	setTimeout(function(){
 		dropParticle('<b class="particle moneyParticle">$' + amt + '</b>', {
 				left: $('#catchDisplay').offset().left - 50,
 				top: $('#catchDisplay').offset().top - 30
@@ -56,7 +56,7 @@ var dropTokenParticle = function(amt) {
 }
 
 var dropItemParticle = function(item) {
-	setTimeout(() => {
+	setTimeout(function(){
 		dropParticle('<b class="particle itemParticle"><img class="smallImage" src="images/items/' + item + '.png"></b>', {
 				left: $('#dungeonTimer:visible,#catchDisplay:visible').offset().left + $('#dungeonTimer:visible,#catchDisplay:visible').width(),
 				top: $('#dungeonTimer:visible,#catchDisplay:visible').offset().top
