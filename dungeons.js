@@ -282,7 +282,13 @@ var updateDungeon = function() {
     $("#dungeonView").show();
 
     var html = "";
-    html += "<div id='dungeonName'>"+currentDungeon.name.slice(0, -8)+"</div>";
+    html += "<div id='dungeonName'>"+currentDungeon.name.slice(0, -8);
+    if (dungeonCompletedShiny(currentDungeon)){
+        html += "<a title='You have caught all shiny Pokemon on this route!'><img id='alreadyCaughtImage' src='images/shinyPokeball.PNG'></a>";
+    } else if(dungeonCompleted(currentDungeon)){
+        html += "<a title='You have caught all available Pokemon on this route!'><img id='alreadyCaughtImage' src='images/Pokeball.PNG'></a>";
+    }
+    html += "</div>"
     html += "<span id='dungeonTimer'>"+(currentDungeon.timeLeft / 100) + "/" + currentDungeon.timeLimit / 100+"</span>";
     html += "<div id='dungeonMap'></div>"
     if(!dungeonCanMove && curEnemy.alive){
@@ -548,6 +554,40 @@ var spawnDungeonPokemon = function() {
     clearInterval(attackInterval);
     attackInterval = setInterval(pokemonsAttack, 1000);
     updateDungeon();
+}
+
+var dungeonCompleted = function(dungeon){
+
+    for (var i=0; i<dungeon.pokemons.length; i++) {
+        if(!alreadyCaught(dungeon.pokemons[i])) {
+            return false;
+        }
+    }
+
+    for (var i=0; i<dungeon.bossList.length; i++) {
+        if(!alreadyCaught(dungeon.bossList[i].name)) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+var dungeonCompletedShiny = function(dungeon){
+
+    for (var i=0; i<dungeon.pokemons.length; i++) {
+        if(!alreadyCaughtShiny(dungeon.pokemons[i])) {
+            return false;
+        }
+    }
+
+    for (var i=0; i<dungeon.bossList.length; i++) {
+        if(!alreadyCaughtShiny(dungeon.bossList[i].name)) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 var allPokemonCaughtInDungeon = function(pokemons, boss){
