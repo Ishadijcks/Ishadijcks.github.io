@@ -231,7 +231,7 @@ var safariMove = function(direction){
 
 var canMoveSafari = function(x,y){
     for(var i = 0; i<legalBlock.length; i++){
-        if(safari.grid[y][x] === legalBlock[i]){
+        if(safari.grid[y] && safari.grid[y][x] === legalBlock[i]){
             return true;
         }
     }
