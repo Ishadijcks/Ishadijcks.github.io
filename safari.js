@@ -135,7 +135,7 @@ var safariStep = function(direction, frame) {
         safari.player.y += safari.movingY;
         $('#sprite').animate(safari.offset, 250, "linear", function() {
             safari.isMoving = 0;
-            if(walking){ safariStep(direction,frame) }
+            if(walking){ if (!checkBattle()){safariStep(direction,frame)} }
         });
     } else {
         $(".sprite").css("background", "url('images/safari/walk"+direction+".png')");
@@ -149,7 +149,9 @@ var checkBattle = function(){
     }
     if(battle){
         loadBattle();
+        return true;
     }
+    return false;
 }
 
 var loadBattle = function(){
