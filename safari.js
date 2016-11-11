@@ -15,10 +15,21 @@ var safari = {
     movingX: 0,
     movingY: 0,
     lastDirection: "up",
+<<<<<<< 40c47970def9c594ba8be677de16e650320a4bcb
     offset: {
         top: 0,
         left: 0
     }
+=======
+    inBattle: 0,
+    eating: 0,
+    enemy: {
+    name: "",
+    catchFactor: 0,
+    angry: 0,
+    },
+
+>>>>>>> Battle start.
 }
 
 var element;
@@ -104,6 +115,7 @@ var showSafari = function(){
     });
 }
 
+<<<<<<< 40c47970def9c594ba8be677de16e650320a4bcb
 var safariStep = function(direction, frame) {
     sprite.to(frame,true)
     frame = (frame+2)%4;
@@ -130,10 +142,52 @@ var safariStep = function(direction, frame) {
         sprite.toStart();
         safari.isMoving = 0;
     }
+=======
+var checkBattle = function(){
+    if(safari.grid[safari.player.y][safari.player.x] === 10){
+        var battle = Math.random() <= 1;
+    }
+    if(battle){
+        loadBattle();
+    }
+}
+
+var loadBattle = function(){
+    safari.enemy.name = "Pinsir";
+    safari.enemy.catchFactor = getPokemonByName(safari.enemy.name).catchRate;
+    safari.enemy.angry = 0;
+    safari.enemy.eating = 0;
+    safari.inBattle = 1;
+    $.notify("Battle");
+    showBattle();
+}
+
+var showBattle = function(){
+    var html =  "<div id='battleBars'>";
+    for( var i = 0; i<10; i++){
+        html += "<div id=battleBar"+i + " class='row battleBar'></div>";
+    }
+
+    html += "</div>";
+    $("#safariBody").html(html);
+
+        $(".battleBar").animate({
+            width: "100%"
+        }, 1000, "linear");
+
+
+
+}
+
+var endBattle = function(){
+    safari.inBattle = 0;
+    showSafari();
+>>>>>>> Battle start.
 }
 
 var safariMove = function(direction){
     if(!safari.isMoving) {
+<<<<<<< 40c47970def9c594ba8be677de16e650320a4bcb
         var frame = 0;
         origin = $("#safari-12-20").offset();
 
@@ -142,6 +196,13 @@ var safariMove = function(direction){
         sprite = new Motio(element, {
             fps: 8,
             frames: 4
+=======
+        // Sprite
+        var element = document.querySelector('#sprite');
+        var sprite = new Motio(element, {
+            fps: 12,
+            frames: 3
+>>>>>>> Battle start.
         });
         safariStep(direction, frame);
         
@@ -163,10 +224,14 @@ var legalBlock = [0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
 var addPlayer = function(){
     $("#safari-12-20").html("<div id='sprite' class='sprite'></div>");
     $(".sprite").css('background',  "url('images/safari/walk" + safari.lastDirection + ".png')");
+<<<<<<< 40c47970def9c594ba8be677de16e650320a4bcb
     $(".sprite").css('position', 'absolute');
     $(".sprite").animate(safari.offset,0)
     safari.isMoving = 0;
 
+=======
+    checkBattle();
+>>>>>>> Battle start.
 }
 
 var safariSquare = function(id, j, i){
@@ -195,7 +260,6 @@ var fenceBody = function(){
 var openFence = function(body){
     var options = [26, 28, 29, 31];
     var pick = options[Math.floor(Math.random()*options.length)];
-    console.log(pick);
     for(var i = 0; i<body.length; i++){
         for(var j = 0; j<body[0].length; j++){
             if(body[i][j] === pick){
@@ -494,7 +558,6 @@ var addCube = function(x, y, body){
     body[y+1][x+1] = 15;
     return body;
 }
-
 
 var adjacentBodyParts = function(x, y, body){
     var total = 4;
