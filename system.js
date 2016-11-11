@@ -344,18 +344,22 @@ $(document).ready(function(){
 			if(!walking && !safari.isMoving) {
 				if(keyCode == 38 || keyCode == 87){
 					walking = true;
+					safari.movingX = 0;
 					safari.movingY = -1;
 					safariMove('up');
 				} else if(keyCode == 39 || keyCode == 68){
 					walking = true;
 					safari.movingX = 1;
+					safari.movingY = 0;
 					safariMove('right');
 				} else if(keyCode == 37 || keyCode == 65){
 					walking = true;
 					safari.movingX = -1;
+					safari.movingY = 0;
 					safariMove('left');
 				} else if(keyCode == 40 || keyCode == 83){
 					walking = true;
+					safari.movingX = 0;
 					safari.movingY = 1;
 					safariMove('down');
 				} else if(keyCode == 32){
