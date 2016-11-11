@@ -590,22 +590,6 @@ var dungeonCompletedShiny = function(dungeon){
     return true;
 }
 
-var allPokemonCaughtInDungeon = function(pokemons, boss){
-
-    for( var i = 0; i<boss.length; i++){
-        if(!alreadyCaught(boss[i].name)){
-            return false;
-        }
-    }
-    
-    for( var i = 0; i<pokemons.length; i++){
-        if(!alreadyCaught(pokemons[i])){
-            return false;
-        }
-    }
-    return true;
-}
-
 /**
  * Shuffles array in place.
  * @param {Array} a items The array containing the items.
