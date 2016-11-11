@@ -14,7 +14,15 @@ var safari = {
     isMoving:0,
     movingX: 0,
     movingY: 0,
-    lastDirection: "up"
+    lastDirection: "up",
+    inBattle: 0,
+    eating: 0,
+    enemy: {
+    name: "",
+    catchFactor: 0,
+    angry: 0,
+    },
+
 }
 
 var element;
@@ -97,9 +105,49 @@ var showSafari = function(){
     });
 }
 
+var checkBattle = function(){
+    if(safari.grid[safari.player.y][safari.player.x] === 10){
+        var battle = Math.random() <= 1;
+    }
+    if(battle){
+        loadBattle();
+    }
+}
+
+var loadBattle = function(){
+    safari.enemy.name = "Pinsir";
+    safari.enemy.catchFactor = getPokemonByName(safari.enemy.name).catchRate;
+    safari.enemy.angry = 0;
+    safari.enemy.eating = 0;
+    safari.inBattle = 1;
+    $.notify("Battle");
+    showBattle();
+}
+
+var showBattle = function(){
+    var html =  "<div id='battleBars'>";
+    for( var i = 0; i<10; i++){
+        html += "<div id=battleBar"+i + " class='row battleBar'></div>";
+    }
+
+    html += "</div>";
+    $("#safariBody").html(html);
+
+        $(".battleBar").animate({
+            width: "100%"
+        }, 1000, "linear");
+
+
+
+}
+
+var endBattle = function(){
+    safari.inBattle = 0;
+    showSafari();
+}
+
 var safariMove = function(direction){
     if(!safari.isMoving) {
-
         // Sprite
         var element = document.querySelector('#sprite');
         var sprite = new Motio(element, {
@@ -164,7 +212,7 @@ var updatePlayer = function(){
     safari.isMoving = 0;
     $("#safari-"+safari.player.x+"-"+safari.player.y).html("<div id='sprite' class='sprite'></div>");
     $(".sprite").css('background',  "url('images/safari/walk" + safari.lastDirection + ".png')");
-
+    checkBattle();
 }
 
 var safariSquare = function(id, j, i){
@@ -193,7 +241,6 @@ var fenceBody = function(){
 var openFence = function(body){
     var options = [26, 28, 29, 31];
     var pick = options[Math.floor(Math.random()*options.length)];
-    console.log(pick);
     for(var i = 0; i<body.length; i++){
         for(var j = 0; j<body[0].length; j++){
             if(body[i][j] === pick){
@@ -492,7 +539,6 @@ var addCube = function(x, y, body){
     body[y+1][x+1] = 15;
     return body;
 }
-
 
 var adjacentBodyParts = function(x, y, body){
     var total = 4;

@@ -332,7 +332,7 @@ $(document).ready(function(){
 				openDungeonChest();
     			e.preventDefault();
 			}
-		} else if(inProgress == 4){
+		} else if(inProgress == 4 && !safari.inBattle){
 			if(keyCode == 38 || keyCode == 87){
 				safari.movingY = -1;
 				safariMove('up')
@@ -353,8 +353,6 @@ $(document).ready(function(){
 				e.preventDefault();
 			}
 		}
-	console.log(safari.movingX);
-	console.log(safari.movingY);
 	});
 
 	$(document).on("keyup", function (e) {
