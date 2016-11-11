@@ -161,10 +161,10 @@ var safariStep = function(direction, frame) {
             if(walking){ if (!checkBattle()){safariStep(safari.nextDirection,frame)} }
         });
     } else {
+        walking = true;
         $(".sprite").css("background", "url('images/safari/walk"+direction+".png')");
-        sprite.toStart();
+        sprite.toStart(function(){walking = false});
         safari.isMoving = 0;
-        walking = false;
     }
 
 var checkBattle = function(){
