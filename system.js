@@ -344,25 +344,27 @@ $(document).ready(function(){
 			if(!walking && !safari.isMoving) {
 				if(keyCode == 38 || keyCode == 87){
 					walking = true;
-					safari.movingX = 0;
-					safari.movingY = -1;
 					safariMove('up');
 				} else if(keyCode == 39 || keyCode == 68){
 					walking = true;
-					safari.movingX = 1;
-					safari.movingY = 0;
 					safariMove('right');
 				} else if(keyCode == 37 || keyCode == 65){
 					walking = true;
-					safari.movingX = -1;
-					safari.movingY = 0;
 					safariMove('left');
 				} else if(keyCode == 40 || keyCode == 83){
 					walking = true;
-					safari.movingX = 0;
-					safari.movingY = 1;
 					safariMove('down');
 				} else if(keyCode == 32){
+				}
+			} else {
+				if(keyCode == 38 || keyCode == 87 ){
+					setNextDirection('up');
+				} else if(keyCode == 39 || keyCode == 68 ){
+					setNextDirection('right');
+				} else if(keyCode == 37 || keyCode == 65 ){
+					setNextDirection('left');
+				} else if(keyCode == 40 || keyCode == 83 ){
+					setNextDirection('down');
 				}
 			}
 		}
@@ -373,20 +375,18 @@ $(document).ready(function(){
 		var keyCode = e.keyCode;
 		if(inProgress == 4){
 			if(keyCode == 38 || keyCode == 87){
-				walking = false;
-				safari.movingY = 0;
+				console.log("last: " + safari.lastDirection);
+				console.log("next: " + safari.nextDirection);
+				if(safari.nextDirection == safari.lastDirection){walking = false};
 				e.preventDefault();
 			} else if(keyCode == 39 || keyCode == 68){
-				walking = false;
-				safari.movingX = 0;
+				if(safari.nextDirection == safari.lastDirection){walking = false};
 				e.preventDefault();
 			} else if(keyCode == 37 || keyCode == 65){
-				walking = false;
-				safari.movingX = 0;
+				if(safari.nextDirection == safari.lastDirection){walking = false};
 				e.preventDefault();
 			} else if(keyCode == 40 || keyCode == 83){
-				walking = false;
-				safari.movingY = 0;
+				if(safari.nextDirection == safari.lastDirection){walking = false};
 				e.preventDefault();
 			} else if(keyCode == 32){
 				e.preventDefault();
@@ -480,6 +480,13 @@ $(document).ready(function(){
 	generateDailyDeals();
 	loadSafari();
 });
+
+var setNextDirection = function(direction) {
+	if(direction != safari.lastDirection){
+		safari.nextDirection = direction;
+		walking = true;
+	}
+}
 
 
 // Update all functions and save
