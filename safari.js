@@ -19,6 +19,7 @@ var safari = {
 
 var element;
 var sprite;
+var walking = false;
 
 
 var loadSafari = function(){
@@ -97,55 +98,76 @@ var showSafari = function(){
     });
 }
 
+var safariStep = function(direction, frame) {
+    var element = document.querySelector('#sprite');
+    var sprite = new Motio(element, {
+        fps: 8,
+        frames: 4
+    });
+    frame = (frame+2)%4;
+    sprite.to(frame);
+
+    if (direction === "up" && canMoveSafari(safari.player.x,safari.player.y-1)) {
+        $(".sprite").css('background',  "url('images/safari/walkup.png')");
+        safari.isMoving = 1;
+
+        safari.player.y--;
+        $('#sprite').animate({
+            top: "-=32" //moves up
+        }, 250, "linear", function () {
+            updatePlayer();
+            $("#safari-" + safari.player.x + "-" + (safari.player.y + 1)).html("");
+            if(walking){safariStep(direction, frame)}
+        });
+    } else if (direction === "right" && canMoveSafari(safari.player.x+1,safari.player.y)) {
+        $(".sprite").css('background',  "url('images/safari/walkright.png')");
+        safari.isMoving = 1;
+        safari.lastDirection = direction;
+        safari.player.x++;
+        $('#sprite').animate({
+            left: "+=32" //moves up
+        }, 250, "linear", function(){
+            updatePlayer();
+            $("#safari-"+(safari.player.x-1)+"-"+(safari.player.y)).html(""); 
+            if(walking){safariStep(direction, frame)}
+            });
+    } else if (direction === "down" && canMoveSafari(safari.player.x,safari.player.y+1)) {
+        $(".sprite").css('background',  "url('images/safari/walkdown.png')");
+        safari.isMoving = 1;
+        safari.player.y++;
+        $('#sprite').animate({
+            top: "+=32" //moves up
+        }, 250, "linear", function(){
+            updatePlayer();
+            $("#safari-"+(safari.player.x)+"-"+(safari.player.y-1)).html("");
+            if(walking){safariStep(direction, frame)}
+        });
+    } else if (direction === "left" && canMoveSafari(safari.player.x-1,safari.player.y)) {
+        $(".sprite").css('background',  "url('images/safari/walkleft.png')");
+        safari.isMoving = 1;
+        safari.player.x--;
+    $('#sprite').animate({
+            left: "-=32" //moves up
+        }, 250, "linear", function(){
+            updatePlayer();
+            $("#safari-"+(safari.player.x+1)+"-"+(safari.player.y)).html("")
+            if(walking){safariStep(direction, frame)}
+        });
+    } else {
+        sprite.pause();
+    }
+}
+
 var safariMove = function(direction){
     if(!safari.isMoving) {
 
-        // Sprite
-        var element = document.querySelector('#sprite');
-        var sprite = new Motio(element, {
-            fps: 12,
-            frames: 3
-        });
-        sprite.play();
+        var frame = 0
+        
 
-        if (direction === "up" && canMoveSafari(safari.player.x,safari.player.y-1)) {
-            $(".sprite").css('background',  "url('images/safari/walkup.png')");
-            safari.isMoving = 1;
-
-            safari.player.y--;
-            $('#sprite').animate({
-                top: "-=32" //moves up
-            }, 250, "linear", function () {
-                updatePlayer();
-                $("#safari-" + safari.player.x + "-" + (safari.player.y + 1)).html("");
-                sprite.pause()
-            });
-        } else if (direction === "right" && canMoveSafari(safari.player.x+1,safari.player.y)) {
-            $(".sprite").css('background',  "url('images/safari/walkright.png')");
-            safari.isMoving = 1;
-            safari.lastDirection = direction;
-            safari.player.x++;
-            $('#sprite').animate({
-                left: "+=32" //moves up
-            }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x-1)+"-"+(safari.player.y)).html(""); sprite.pause()});
-        } else if (direction === "down" && canMoveSafari(safari.player.x,safari.player.y+1)) {
-            $(".sprite").css('background',  "url('images/safari/walkdown.png')");
-            safari.isMoving = 1;
-            safari.player.y++;
-            $('#sprite').animate({
-                top: "+=32" //moves up
-            }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x)+"-"+(safari.player.y-1)).html(""); sprite.pause()});
-        } else if (direction === "left" && canMoveSafari(safari.player.x-1,safari.player.y)) {
-            $(".sprite").css('background',  "url('images/safari/walkleft.png')");
-            safari.isMoving = 1;
-            safari.player.x--;
-            $('#sprite').animate({
-                left: "-=32" //moves up
-            }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x+1)+"-"+(safari.player.y)).html(""); sprite.pause()});
-        } else {
-            sprite.pause();
-        }
+        safariStep(direction, frame);
+        
         safari.lastDirection = direction;
+        safari.isMoving = 0;
     }
 }
 
