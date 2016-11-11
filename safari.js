@@ -15,6 +15,10 @@ var safari = {
     movingX: 0,
     movingY: 0,
     lastDirection: "up",
+    offset: {
+        top: 0,
+        left: 0
+    },
     inBattle: 0,
     eating: 0,
     enemy: {
@@ -22,11 +26,12 @@ var safari = {
     catchFactor: 0,
     angry: 0,
     },
-
 }
 
 var element;
 var sprite;
+var walking = false;
+var origin;
 
 
 var loadSafari = function(){
@@ -95,7 +100,8 @@ var showSafari = function(){
     }
 
     $("#safariBody").html(html);
-    updatePlayer();
+    addPlayer();
+
 
     // Sprite
     element = document.querySelector('#sprite');
@@ -105,13 +111,44 @@ var showSafari = function(){
     });
 }
 
+
+var safariStep = function(direction, frame) {
+    sprite.to(frame,true)
+    frame = (frame+2)%4;
+    sprite.to(frame);
+
+    safari.isMoving = 1;
+
+    if (canMoveSafari(safari.player.x + safari.movingX, safari.player.y + safari.movingY)) {
+        var next = $("#safari-" + (safari.player.x + safari.movingX) + "-" + (safari.player.y + safari.movingY)).offset();
+        safari.offset = {
+            top: next.top - origin.top,
+            left: next.left - origin.left
+        }
+
+        $(".sprite").css("background", "url('images/safari/walk"+direction+".png')");
+        safari.player.x += safari.movingX;
+        safari.player.y += safari.movingY;
+        $('#sprite').animate(safari.offset, 250, "linear", function() {
+            safari.isMoving = 0;
+            if(walking){ if (!checkBattle()){safariStep(direction,frame)} }
+        });
+    } else {
+        $(".sprite").css("background", "url('images/safari/walk"+direction+".png')");
+        sprite.toStart();
+        safari.isMoving = 0;
+    }
+}
+
 var checkBattle = function(){
     if(safari.grid[safari.player.y][safari.player.x] === 10){
         var battle = Math.random() <= 1;
     }
     if(battle){
         loadBattle();
+        return true;
     }
+    return false;
 }
 
 var loadBattle = function(){
@@ -148,51 +185,16 @@ var endBattle = function(){
 
 var safariMove = function(direction){
     if(!safari.isMoving) {
-        // Sprite
-        var element = document.querySelector('#sprite');
-        var sprite = new Motio(element, {
-            fps: 12,
-            frames: 3
+        var frame = 0;
+        origin = $("#safari-12-20").offset();
+
+        element = document.querySelector('#sprite');
+        sprite = new Motio(element, {
+            fps: 8,
+            frames: 4
         });
-        sprite.play();
-
-        if (direction === "up" && canMoveSafari(safari.player.x,safari.player.y-1)) {
-            $(".sprite").css('background',  "url('images/safari/walkup.png')");
-            safari.isMoving = 1;
-
-            safari.player.y--;
-            $('#sprite').animate({
-                top: "-=32" //moves up
-            }, 250, "linear", function () {
-                updatePlayer();
-                $("#safari-" + safari.player.x + "-" + (safari.player.y + 1)).html("");
-                sprite.pause()
-            });
-        } else if (direction === "right" && canMoveSafari(safari.player.x+1,safari.player.y)) {
-            $(".sprite").css('background',  "url('images/safari/walkright.png')");
-            safari.isMoving = 1;
-            safari.lastDirection = direction;
-            safari.player.x++;
-            $('#sprite').animate({
-                left: "+=32" //moves up
-            }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x-1)+"-"+(safari.player.y)).html(""); sprite.pause()});
-        } else if (direction === "down" && canMoveSafari(safari.player.x,safari.player.y+1)) {
-            $(".sprite").css('background',  "url('images/safari/walkdown.png')");
-            safari.isMoving = 1;
-            safari.player.y++;
-            $('#sprite').animate({
-                top: "+=32" //moves up
-            }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x)+"-"+(safari.player.y-1)).html(""); sprite.pause()});
-        } else if (direction === "left" && canMoveSafari(safari.player.x-1,safari.player.y)) {
-            $(".sprite").css('background',  "url('images/safari/walkleft.png')");
-            safari.isMoving = 1;
-            safari.player.x--;
-            $('#sprite').animate({
-                left: "-=32" //moves up
-            }, 250, "linear", function(){updatePlayer(); $("#safari-"+(safari.player.x+1)+"-"+(safari.player.y)).html(""); sprite.pause()});
-        } else {
-            sprite.pause();
-        }
+        safariStep(direction, frame);
+        
         safari.lastDirection = direction;
     }
 }
@@ -208,10 +210,15 @@ var canMoveSafari = function(x,y){
 
 var legalBlock = [0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
 
+var addPlayer = function(){
+    $("#safari-12-20").html("<div id='sprite' class='sprite'></div>");
+    $(".sprite").css('background',  "url('images/safari/walk" + safari.lastDirection + ".png')");
+    $(".sprite").css('position', 'absolute');
+    $(".sprite").animate(safari.offset,0)
+}
+
 var updatePlayer = function(){
     safari.isMoving = 0;
-    $("#safari-"+safari.player.x+"-"+safari.player.y).html("<div id='sprite' class='sprite'></div>");
-    $(".sprite").css('background',  "url('images/safari/walk" + safari.lastDirection + ".png')");
     checkBattle();
 }
 
