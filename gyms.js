@@ -265,6 +265,7 @@ var gymEnemyDefeated = function(){
 var gymDefeated = function(){
 	clearInterval(counter);
 	log("Congratulations, you have defeated "+ currentGym.leaderName+"!");
+	player.gymsDefeated[currentGym.badgeReq]++;
 	inProgress = 0;
 	currentGym.timeLeft = currentGym.timeLimit;
 	var first = !alreadyGotBadge(currentGym.badgeReward);

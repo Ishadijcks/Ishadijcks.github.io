@@ -1,4 +1,5 @@
 var mineItemList = [];
+var loadingNewMine = false;
 var addDailyDeal = function(item1, amount1, item2, amount2){
     var temp = {
         item1: item1,
@@ -9,24 +10,21 @@ var addDailyDeal = function(item1, amount1, item2, amount2){
     player.curMine.dailyDeals.push(temp);
 }
 
+var seededRand = function(seed) {
+	return (seed*9301 + 49297) % 233280;
+}
+
 var generateDailyDeals = function(){
     player.curMine.dailyDeals = [];
+    var maxDeals = 3;
     var d = new Date();
-    var seed1 = Number(d.getDay() + "" + d.getMonth() + "" + d.getYear());
-    var seed2 = Number(d.getMonth() + "" + d.getYear() + "" + d.getMonth());
-    var seed3 = Number(d.getMonth() + "" + d.getDay() + "" + d.getYear());
-    var seed4 = Number(d.getYear() + "" + d.getMonth() + "" + d.getDay());
-    generateDailyDeal(seed1, seed2, seed3, seed4);
-    seed1 = Number(d.getDay() + "" + d.getYear() + "" + d.getMonth());
-    seed2 = Number(d.getDay() + "" + d.getMonth() + "" + d.getYear());
-    seed3 = Number(d.getYear() + "" + d.getMonth() + "" + d.getDay());
-    seed4 = Number(d.getMonth() + "" + d.getYear() + "" + d.getYear());
-    generateDailyDeal(seed1, seed2, seed3, seed4);
-    seed1 = Number(d.getMonth() + "" + d.getYear() + "" + d.getMonth());
-    seed2 = Number(d.getYear() + "" + d.getDay() + "" + d.getYear());
-    seed3 = Number(d.getYear() + "" + d.getMonth() + "" + d.getYear());
-    seed4 = Number(d.getMonth() + "" + d.getYear() + "" + d.getYear());
-    generateDailyDeal(seed1, seed2, seed3, seed4);
+
+    var dateSeed = Number(d.getDay() + d.getMonth() + "" + d.getYear());
+    var seed = seededRand(dateSeed);
+
+    for (var i=0; i<maxDeals; i++) {
+    	seed = generateDailyDeal(seed);
+    }
 }
 
 var reverseDailyDealExists = function(item1, item2){
@@ -38,25 +36,30 @@ var reverseDailyDealExists = function(item1, item2){
     return false;
 }
 
-var generateDailyDeal = function(seed1, seed2, seed3, seed4){
-    var x1 = Math.sin(seed1++) * 10000;
-    x1 = x1 - Math.floor(x1);
+var generateDailyDeal = function(seed){
+	var s = seed;
+
+    var x1 = s/233280;
     var item1 = mineItemList[Math.floor(mineItemList.length*x1)];
+    s = seededRand(s);
 
-    var x2 = Math.sin(seed2++) * 10000;
-    x2 = x2 - Math.floor(x2);
+    var x2 = s/233280
     var amount1 = Math.floor(3 * x2) + 1;
+    s = seededRand(s);
 
-    var x3 = Math.sin(seed3++) * 10000;
-    x3 = x3 - Math.floor(x3);
+    var x3 = s/233280;
     var item2 = mineItemList[Math.floor(mineItemList.length*x3)];
+    s = seededRand(s);
 
-    var x4 = Math.sin(seed4++) * 10000;
-    x4 = x4 - Math.floor(x4);
+    var x4 = s/233280;
     var amount2 = Math.floor(3 * x4) + 1;
-    if(item1.name !== item2.name && !reverseDailyDealExists(item1,item2)) {
+    s = seededRand(s);
+    
+    if(item1.name !== item2.name && !reverseDailyDealExists(item1,item2) && !mineItemIsStone(item1.name)) {
         addDailyDeal(item1, amount1, item2, amount2);
     }
+
+    return s;
 }
 
 var canUseDailyDeal = function(id){
@@ -87,6 +90,10 @@ var gainMineEnergy = function(){
         multiplier = getOakItemBonus("Cell Battery");
     }
 	player.curMine.energy = Math.min(player.curMine.maxEnergy, player.curMine.energy+ (multiplier*player.curMine.energyGain));
+	if(player.curMine.energy === player.curMine.maxEnergy){
+		$.notify("Your mining energy has reached maximum capacity!", "success");
+		notifyMe("You mining energy has reached maximum capacity!");
+	}
 }
 
 var addMineItem = function(name, id, space, value, valueType){
@@ -94,8 +101,8 @@ var addMineItem = function(name, id, space, value, valueType){
 		name: name,
 		id: id,
 		space: space,
-		value: value || 1,
-		valueType: valueType || "mine"
+		value: typeof(value) === 'undefined' ? 1 : value,
+		valueType: typeof(valueType) === 'undefined' ? "mine" : valueType
 	}
 	mineItemList.push(temp);
 }
@@ -192,6 +199,7 @@ var loadMine = function(){
 		}
 	}
 	showCurMine();
+	loadingNewMine = false;
 }
 
 var gainMineItem = function(id){
@@ -540,8 +548,9 @@ var checkItemsRevealed = function(){
 
 var checkMineCompleted = function(){
 
-	if(player.curMine.itemsFound >= player.curMine.itemsBuried){
+	if(player.curMine.itemsFound >= player.curMine.itemsBuried && !loadingNewMine){
 		setTimeout(mineCompleted, 1500);
+		loadingNewMine = true;
 	}
 }
 

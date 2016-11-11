@@ -70,6 +70,8 @@ var load = function(){
 	if (typeof savegame.totalBred !== "undefined") player.totalBred = savegame.totalBred;
 	if (typeof savegame.oakItemsEquipped !== "undefined") player.oakItemsEquipped = savegame.oakItemsEquipped;
 	if (typeof savegame.dailyDeals !== "undefined") player.dailyDeals = savegame.dailyDeals;
+	if (typeof savegame.gymsDefeated !== "undefined") player.gymsDefeated = savegame.gymsDefeated;
+	if (typeof savegame.dungeonsDefeated !== "undefined") player.dungeonsDefeated = savegame.dungeonsDefeated;
 
     if(player.starter === "none"){
         $("#pickStarter").modal('show');
@@ -95,6 +97,10 @@ var load = function(){
 
 	if( player.version < 0.8){
 		resetXp();
+	}
+
+	if( player.version < 0.91) {
+		correctFossils();
 	}
 	
 	var date = new Date();
@@ -157,4 +163,12 @@ var resetXp = function(){
 		player.caughtPokemonList[i].experience = 0;
 	}
 	$.notify("Your exp has been reset for balancing purposes.")
+}
+
+var correctFossils = function() {
+	for ( var i = 0; i<player.mineInventory.length; i++) {
+		if (player.mineInventory[i].id < 4 && player.mineInventory[i].value != 0) {
+			player.mineInventory[i].value = 0;
+		}
+	}
 }

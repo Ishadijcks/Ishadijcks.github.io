@@ -25,6 +25,17 @@ var Dungeon = function(name, pokemons, size, baseHealth, bossList, tokenCost, ba
     return temp;
 }
 
+var getDungeonId = function(dungeonName){
+    var dungeonList = getDungeonNames();
+    for( var i = 0; i<dungeonList.length; i++){
+        if(dungeonList[i] === dungeonName){
+            return i;
+        }
+    }
+    return -1;
+}
+
+
 var BossPokemon = function(name, health, level) {
     var temp = {
         name: name,
@@ -412,7 +423,10 @@ var dungeonDefeated = function() {
     log("Congratulations, you have cleared the " + currentDungeon.name + "!");
     showDungeonDefeated(town);
     inProgress = 0;
-
+    var index = getDungeonId(currentDungeon.name);
+    if(index !== -1){
+        player.dungeonsDefeated[index]++;
+    }
     var town = currentDungeon.name.slice(0, -8);
 
     progressQuest('clearDungeons', currentDungeon.name , 1);
