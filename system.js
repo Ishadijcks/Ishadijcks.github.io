@@ -366,8 +366,7 @@ $(document).ready(function(){
 				}
 			}
 		}
-	//console.log(safari.movingX);
-	//console.log(safari.movingY);
+
 	});
 
 	$(document).on("keyup", function (e) {

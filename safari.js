@@ -18,7 +18,14 @@ var safari = {
     offset: {
         top: 0,
         left: 0
-    }
+    },
+    inBattle: 0,
+    eating: 0,
+    enemy: {
+    name: "",
+    catchFactor: 0,
+    angry: 0,
+    },
 }
 
 var element;
@@ -104,6 +111,7 @@ var showSafari = function(){
     });
 }
 
+
 var safariStep = function(direction, frame) {
     sprite.to(frame,true)
     frame = (frame+2)%4;
@@ -132,11 +140,51 @@ var safariStep = function(direction, frame) {
     }
 }
 
+var checkBattle = function(){
+    if(safari.grid[safari.player.y][safari.player.x] === 10){
+        var battle = Math.random() <= 1;
+    }
+    if(battle){
+        loadBattle();
+    }
+}
+
+var loadBattle = function(){
+    safari.enemy.name = "Pinsir";
+    safari.enemy.catchFactor = getPokemonByName(safari.enemy.name).catchRate;
+    safari.enemy.angry = 0;
+    safari.enemy.eating = 0;
+    safari.inBattle = 1;
+    $.notify("Battle");
+    showBattle();
+}
+
+var showBattle = function(){
+    var html =  "<div id='battleBars'>";
+    for( var i = 0; i<10; i++){
+        html += "<div id=battleBar"+i + " class='row battleBar'></div>";
+    }
+
+    html += "</div>";
+    $("#safariBody").html(html);
+
+        $(".battleBar").animate({
+            width: "100%"
+        }, 1000, "linear");
+
+
+
+}
+
+var endBattle = function(){
+    safari.inBattle = 0;
+    showSafari();
+}
+
 var safariMove = function(direction){
     if(!safari.isMoving) {
         var frame = 0;
         origin = $("#safari-12-20").offset();
-
 
         element = document.querySelector('#sprite');
         sprite = new Motio(element, {
@@ -165,8 +213,11 @@ var addPlayer = function(){
     $(".sprite").css('background',  "url('images/safari/walk" + safari.lastDirection + ".png')");
     $(".sprite").css('position', 'absolute');
     $(".sprite").animate(safari.offset,0)
-    safari.isMoving = 0;
+}
 
+var updatePlayer = function(){
+    safari.isMoving = 0;
+    checkBattle();
 }
 
 var safariSquare = function(id, j, i){
@@ -195,7 +246,6 @@ var fenceBody = function(){
 var openFence = function(body){
     var options = [26, 28, 29, 31];
     var pick = options[Math.floor(Math.random()*options.length)];
-    console.log(pick);
     for(var i = 0; i<body.length; i++){
         for(var j = 0; j<body[0].length; j++){
             if(body[i][j] === pick){
@@ -494,7 +544,6 @@ var addCube = function(x, y, body){
     body[y+1][x+1] = 15;
     return body;
 }
-
 
 var adjacentBodyParts = function(x, y, body){
     var total = 4;
