@@ -287,13 +287,23 @@ var updateDungeon = function() {
     html += "<div id='dungeonMap'></div>"
     if(!dungeonCanMove && curEnemy.alive){
 
-        if(alreadyCaughtShiny(curEnemy.name)){
-            html += "<div id='dungeonEnemyInfo'><br>" +curEnemy.name + " <img id='alreadyCaughtImage' src='images/shinyPokeball.PNG'><br><img id='dungeonEnemy' src='images/pokemon/"+curEnemy.id+".png' ></div>";
-        } else if(alreadyCaught(curEnemy.name)){
-            html += "<div id='dungeonEnemyInfo'><br>" +curEnemy.name + " <img id='alreadyCaughtImage' src='images/Pokeball.PNG'><br><img id='dungeonEnemy' src='images/pokemon/"+curEnemy.id+".png' ></div>";
+        html += "<div id='dungeonEnemyInfo'><br>" + curEnemy.name;
+
+        if(curEnemy.shiny){
+            html += "<img class='shinyEnemyStar' src='images/shinypokemon/star.png'><br><img id=dungeonEnemy class='shinyFiller' src='images/shinypokemon/"+curEnemy.id+".png' >";
         } else {
-            html += "<div id='dungeonEnemyInfo'><br>" +curEnemy.name + "<br><img id='dungeonEnemy' src='images/pokemon/"+curEnemy.id+".png' ></div>";
+
+            if(alreadyCaughtShiny(curEnemy.name)){
+                html += "<img id=alreadyCaughtImage src=images/shinyPokeball.PNG><br><img id=dungeonEnemy src='images/pokemon/"+curEnemy.id+".png' >"; 
+            } else if(alreadyCaught(curEnemy.name)){
+                html += "<img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=dungeonEnemy src='images/pokemon/"+curEnemy.id+".png' >"; 
+            } else {
+                html += "<br><img id=dungeonEnemy src='images/pokemon/"+curEnemy.id+".png' >";
+            }           
         }
+
+        html += "</div>";
+
     }
 
     if(currentDungeon.map[playerPosition] == "Chest"){
