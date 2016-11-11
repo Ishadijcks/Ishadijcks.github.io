@@ -81,10 +81,16 @@ var getSteps = function(pokemonName){
 }
 
 var gainEgg = function(egg){
+	var eggType;
+	if (egg.type[0] == 'Normal' && egg.type.length == 2) {
+		eggType = egg.type[1];
+	} else {
+		eggType = egg.type[0];
+	}
 	for(var i = 0; i<player.eggSlots; i++){
 		if(player.eggList[i] === null){
 			var tempEgg = {
-				type: egg.type,
+				type: eggType,
 				steps: egg.steps,
 				progress: 0,
 				pokemon: egg.pokemon
@@ -197,9 +203,9 @@ var showEggs = function(){
 		var html = ""
 		if(player.eggList[i] !== null){
 			if( player.eggList[i].progress >= player.eggList[i].steps){
-				html += "<img style='cursor:pointer;' onClick='hatchEgg(" + i + ")' title='" + player.eggList[i].type + "' class='egg tooltipUp' src=images/breeding/egg" + player.eggList[i].type + ".png>"
+				html += "<img style='cursor:pointer;' onClick='hatchEgg(" + i + ")' title='" + player.eggList[i].type + "' class='egg tooltipUp' src=images/breeding/egg" + player.eggList[i].type.toLowerCase() + ".png>"
 			} else{
-				html += "<img title='" + player.eggList[i].type + "' class='egg tooltipUp' src=images/breeding/egg" + player.eggList[i].type + ".png>";
+				html += "<img title='" + player.eggList[i].type + "' class='egg tooltipUp' src=images/breeding/egg" + player.eggList[i].type.toLowerCase() + ".png>";
 			}
 			if(player.eggList[i].progress < player.eggList[i].steps){
 				html += "<div title='" + player.eggList[i].progress + "/" + player.eggList[i].steps + "' class='progress eggProgress tooltipEggProgress' style='width: 80%; margin:auto'>";
