@@ -152,6 +152,7 @@ var safariStep = function(direction, frame) {
         });
     } else {
         sprite.pause();
+        safari.isMoving = 0;
     }
 }
 
