@@ -49,10 +49,11 @@ var showTown = function(town){
 
 	if(town.gym != null){	
 		if(town.gym.bossList != undefined){
-			if(allPokemonCaughtInDungeon(town.gym.pokemons, town.gym.bossList)){
-				html += " <img id=alreadyCaughtImage src=images/Pokeball.PNG>";
-			}
-			
+			if (dungeonCompletedShiny(town.gym)){
+                html += "<a title='You have caught all shiny Pokemon on this route!'><img id='alreadyCaughtImage' src='images/shinyPokeball.PNG'></a>";
+            } else if(dungeonCompleted(town.gym)){
+                html += "<a title='You have caught all available Pokemon on this route!'><img id='alreadyCaughtImage' src='images/Pokeball.PNG'></a>";
+            }			
 		}
 	}
 	html += "</h3>";
