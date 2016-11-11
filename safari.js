@@ -112,14 +112,11 @@ var safariStep = function(direction, frame) {
     safari.isMoving = 1;
 
     if (canMoveSafari(safari.player.x + safari.movingX, safari.player.y + safari.movingY)) {
-
-
         var next = $("#safari-" + (safari.player.x + safari.movingX) + "-" + (safari.player.y + safari.movingY)).offset();
         offset = {
             top: next.top - origin.top,
             left: next.left - origin.left
         }
-        console.log(offset)
 
         $(".sprite").css("background", "url('images/safari/walk"+direction+".png')");
         safari.player.x += safari.movingX;
@@ -136,8 +133,7 @@ var safariStep = function(direction, frame) {
 
 var safariMove = function(direction){
     if(!safari.isMoving) {
-        var frame = 0
-
+        var frame = 0;
         origin = $("#safari-12-20").offset();
         
         safariStep(direction, frame);
