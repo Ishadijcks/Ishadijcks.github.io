@@ -20,6 +20,7 @@ var safari = {
 var element;
 var sprite;
 var walking = false;
+var origin;
 
 
 var loadSafari = function(){
@@ -90,6 +91,7 @@ var showSafari = function(){
     $("#safariBody").html(html);
     updatePlayer();
 
+
     // Sprite
     element = document.querySelector('#sprite');
     sprite = new Motio(element, {
@@ -109,46 +111,22 @@ var safariStep = function(direction, frame) {
 
     safari.isMoving = 1;
 
-    if (direction === "up" && canMoveSafari(safari.player.x,safari.player.y-1)) {
-        $(".sprite").css('background',  "url('images/safari/walkup.png')");
-        safari.player.y--;
-        $('#sprite').animate({
-            top: "-=32" //moves up
-        }, 250, "linear", function () {
-            updatePlayer();
-            $("#safari-" + safari.player.x + "-" + (safari.player.y + 1)).html("");
-            if(walking){safariStep(direction, frame)}
-        });
-    } else if (direction === "right" && canMoveSafari(safari.player.x+1,safari.player.y)) {
-        $(".sprite").css('background',  "url('images/safari/walkright.png')");
-        safari.lastDirection = direction;
-        safari.player.x++;
-        $('#sprite').animate({
-            left: "+=32" //moves up
-        }, 250, "linear", function(){
-            updatePlayer();
-            $("#safari-"+(safari.player.x-1)+"-"+(safari.player.y)).html(""); 
-            if(walking){safariStep(direction, frame)}
-        });
-    } else if (direction === "down" && canMoveSafari(safari.player.x,safari.player.y+1)) {
-        $(".sprite").css('background',  "url('images/safari/walkdown.png')");
-        safari.player.y++;
-        $('#sprite').animate({
-            top: "+=32" //moves up
-        }, 250, "linear", function(){
-            updatePlayer();
-            $("#safari-"+(safari.player.x)+"-"+(safari.player.y-1)).html("");
-            if(walking){safariStep(direction, frame)}
-        });
-    } else if (direction === "left" && canMoveSafari(safari.player.x-1,safari.player.y)) {
-        $(".sprite").css('background',  "url('images/safari/walkleft.png')");
-        safari.player.x--;
-    $('#sprite').animate({
-            left: "-=32" //moves up
-        }, 250, "linear", function(){
-            updatePlayer();
-            $("#safari-"+(safari.player.x+1)+"-"+(safari.player.y)).html("")
-            if(walking){safariStep(direction, frame)}
+    if (canMoveSafari(safari.player.x + safari.movingX, safari.player.y + safari.movingY)) {
+
+
+        var next = $("#safari-" + (safari.player.x + safari.movingX) + "-" + (safari.player.y + safari.movingY)).offset();
+        offset = {
+            top: next.top - origin.top,
+            left: next.left - origin.left
+        }
+        console.log(offset)
+
+        $(".sprite").css("background", "url('images/safari/walk"+direction+".png')");
+        safari.player.x += safari.movingX;
+        safari.player.y += safari.movingY;
+        $('#sprite').animate(offset, 250, "linear", function() {
+            safari.isMoving = 0;
+            if(walking){ safariStep(direction,frame) }
         });
     } else {
         sprite.pause();
@@ -159,6 +137,8 @@ var safariStep = function(direction, frame) {
 var safariMove = function(direction){
     if(!safari.isMoving) {
         var frame = 0
+
+        origin = $("#safari-12-20").offset();
         
         safariStep(direction, frame);
         
@@ -180,6 +160,7 @@ var legalBlock = [0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
 var updatePlayer = function(){
     $("#safari-"+safari.player.x+"-"+safari.player.y).html("<div id='sprite' class='sprite'></div>");
     $(".sprite").css('background',  "url('images/safari/walk" + safari.lastDirection + ".png')");
+    $(".sprite").css('position', 'absolute');
     safari.isMoving = 0;
 
 }
