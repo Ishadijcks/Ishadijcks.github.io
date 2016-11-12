@@ -522,7 +522,6 @@ var setNextDirection = function(direction) {
 		safari.nextDirection = direction;
 		safari.walking[direction] = 1;
 		walking = true;
-		console.log(queue)
 	}
 }
 
