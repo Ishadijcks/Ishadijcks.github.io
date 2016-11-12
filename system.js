@@ -375,8 +375,6 @@ $(document).ready(function(){
 		var keyCode = e.keyCode;
 		if(inProgress == 4){
 			if(keyCode == 38 || keyCode == 87){
-				console.log("last: " + safari.lastDirection);
-				console.log("next: " + safari.nextDirection);
 				if(safari.nextDirection == safari.lastDirection){walking = false};
 				e.preventDefault();
 			} else if(keyCode == 39 || keyCode == 68){
