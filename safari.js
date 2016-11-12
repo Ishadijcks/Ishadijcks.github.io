@@ -165,7 +165,7 @@ var safariStep = function(direction) {
         safari.player.y += safari.movingY;
         $('#sprite').animate(safari.offset, 250, "linear", function() {
             safari.isMoving = 0;
-            if(walking){ if (!checkBattle()){safariStep(safari.nextDirection)} }
+            if(walking){ if (!checkBattle() && queue[0]){safariStep(queue[0])} }
         });
     } else {
         $(".sprite").css("background", "url('images/safari/walk"+direction+".png')");
