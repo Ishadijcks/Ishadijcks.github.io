@@ -373,11 +373,12 @@ $(document).ready(function(){
 			if (dir) {
 				safari.walking[dir] = 0;
 				for (var i=0; i<queue.length; i++) {
-					if (queue[0] == dir) {
-						queue.shift();
+					if (queue[i] == dir) {
+						queue.splice(i, 1);
 					}
 				};
-				if (tmp == 1){ walking = false };
+				console.log(safari.walking);
+				if (!queue[0]){ walking = false };
 				e.preventDefault();
 			} else if(keyCode == 32){
 				e.preventDefault();
@@ -496,7 +497,11 @@ var getDirectionFromCode = function(code) {
 var setNextDirection = function(direction) {
 	if(direction != safari.lastDirection){
 		if (queue[0] != direction) {
-			queue.unshift(direction);
+			if (queue.length == 1){
+				queue.unshift(direction);
+			} else {
+				queue[0] = direction;
+			}
 		};
 		safari.nextDirection = direction;
 		safari.walking[direction] = 1;
