@@ -27,6 +27,13 @@ var safari = {
     catchFactor: 0,
     angry: 0,
     },
+    frame: 0,
+    walking: {
+        up: 0,
+        right: 0,
+        left: 0,
+        down: 0,
+    },
 }
 
 var element;
@@ -133,13 +140,13 @@ var showSafari = function(){
     });
 }
 
-<<<<<<< 40c47970def9c594ba8be677de16e650320a4bcb
-var safariStep = function(direction, frame) {
+var safariStep = function(direction) {
     safari.lastDirection = direction;
 
-    sprite.to(frame,true)
-    frame = (frame+2)%4;
-    sprite.to(frame);
+    //sprite.to(safari.frame,true);
+    //frame = (frame+2)%4;
+    //sprite.to(frame);
+    sprite.toggle();
     directionOffset = getXY(direction);
     safari.movingX = directionOffset.x;
     safari.movingY = directionOffset.y;
@@ -158,14 +165,14 @@ var safariStep = function(direction, frame) {
         safari.player.y += safari.movingY;
         $('#sprite').animate(safari.offset, 250, "linear", function() {
             safari.isMoving = 0;
-            if(walking){ if (!checkBattle()){safariStep(safari.nextDirection,frame)} }
+            if(walking){ if (!checkBattle()){safariStep(safari.nextDirection)} }
         });
     } else {
-        walking = true;
         $(".sprite").css("background", "url('images/safari/walk"+direction+".png')");
-        sprite.toStart(function(){walking = false});
+        sprite.toStart();
         safari.isMoving = 0;
     }
+}
 
 var checkBattle = function(){
     if(safari.grid[safari.player.y][safari.player.x] === 10){
@@ -222,8 +229,18 @@ var safariMove = function(direction){
         sprite = new Motio(element, {
             fps: 8,
             frames: 4
+        }).on('frame', function() {
+            if (sprite.frame%2 == 0) {
+                sprite.pause();
+                safari.frame = sprite.frame;
+            }
         });
-        safariStep(direction, frame);
+        if (safari.frame == 2) {
+            sprite.to(2, true, function(){safariStep(direction)});
+        }
+        else {
+            safariStep(direction);
+        }
         
         safari.lastDirection = direction;
     }
