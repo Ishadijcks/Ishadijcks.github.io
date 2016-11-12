@@ -344,15 +344,19 @@ $(document).ready(function(){
 			if(!walking && !safari.isMoving) {
 				if(keyCode == 38 || keyCode == 87){
 					walking = true;
+					safari.walking.up = 1;
 					safariMove('up');
 				} else if(keyCode == 39 || keyCode == 68){
 					walking = true;
+					safari.walking.right = 1;
 					safariMove('right');
 				} else if(keyCode == 37 || keyCode == 65){
 					walking = true;
+					safari.walking.left = 1;
 					safariMove('left');
 				} else if(keyCode == 40 || keyCode == 83){
 					walking = true;
+					safari.walking.down = 1;
 					safariMove('down');
 				} else if(keyCode == 32){
 				}
@@ -374,17 +378,25 @@ $(document).ready(function(){
 	$(document).on("keyup", function (e) {
 		var keyCode = e.keyCode;
 		if(inProgress == 4){
+			var tmp = 0;
+			for (dir in safari.walking) {
+				tmp += safari.walking[dir];
+			};
 			if(keyCode == 38 || keyCode == 87){
-				if(safari.nextDirection == safari.lastDirection){walking = false};
+				safari.walking.up = 0;
+				if (tmp == 1){ walking = false };
 				e.preventDefault();
 			} else if(keyCode == 39 || keyCode == 68){
-				if(safari.nextDirection == safari.lastDirection){walking = false};
+				safari.walking.right = 0;
+				if (tmp == 1){ walking = false };
 				e.preventDefault();
 			} else if(keyCode == 37 || keyCode == 65){
-				if(safari.nextDirection == safari.lastDirection){walking = false};
+				safari.walking.left = 0;
+				if (tmp == 1){ walking = false };
 				e.preventDefault();
 			} else if(keyCode == 40 || keyCode == 83){
-				if(safari.nextDirection == safari.lastDirection){walking = false};
+				safari.walking.down = 0;
+				if (tmp == 1){ walking = false };
 				e.preventDefault();
 			} else if(keyCode == 32){
 				e.preventDefault();
@@ -482,6 +494,7 @@ $(document).ready(function(){
 var setNextDirection = function(direction) {
 	if(direction != safari.lastDirection){
 		safari.nextDirection = direction;
+		safari.walking[direction] = 1;
 		walking = true;
 	}
 }
