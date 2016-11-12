@@ -381,42 +381,19 @@ $(document).ready(function(){
 					e.preventDefault();
 				}
 			}
+			var dir = getDirectionFromCode(keyCode);
 			if(!walking && !safari.isMoving) {
-				if(keyCode == 38 || keyCode == 87){
+				if (dir) {
 					queue = [];
 					walking = true;
-					safari.walking.up = 1;
-					queue.unshift("up");
-					safariMove('up');
-				} else if(keyCode == 39 || keyCode == 68){
-					queue = [];
-					walking = true;
-					safari.walking.right = 1;
-					queue.unshift("right");
-					safariMove('right');
-				} else if(keyCode == 37 || keyCode == 65){
-					queue = [];
-					walking = true;
-					safari.walking.left = 1;
-					queue.unshift("left");
-					safariMove('left');
-				} else if(keyCode == 40 || keyCode == 83){
-					queue = [];
-					walking = true;
-					safari.walking.down = 1;
-					queue.unshift("down");
-					safariMove('down');
+					safari.walking[dir] = 1;
+					queue.unshift(dir);
+					safariMove(dir);
 				} else if(keyCode == 32){
 				}
 			} else {
-				if(keyCode == 38 || keyCode == 87 ){
-					setNextDirection('up');
-				} else if(keyCode == 39 || keyCode == 68 ){
-					setNextDirection('right');
-				} else if(keyCode == 37 || keyCode == 65 ){
-					setNextDirection('left');
-				} else if(keyCode == 40 || keyCode == 83 ){
-					setNextDirection('down');
+				if(dir) {
+					setNextDirection(dir)
 				}
 			}
 		}
@@ -425,41 +402,16 @@ $(document).ready(function(){
 	$(document).on("keyup", function (e) {
 		var keyCode = e.keyCode;
 		if(inProgress == 4){
+			var dir = getDirectionFromCode(keyCode);
 			var tmp = 0;
-			for (dir in safari.walking) {
-				tmp += safari.walking[dir];
+			for (key in safari.walking) {
+				tmp += safari.walking[key];
 			};
-			if(keyCode == 38 || keyCode == 87){
-				safari.walking.up = 0;
+			
+			if (dir) {
+				safari.walking[dir] = 0;
 				for (var i=0; i<queue.length; i++) {
-					if (queue[0] == "up") {
-						queue.shift();
-					}
-				};
-				if (tmp == 1){ walking = false };
-				e.preventDefault();
-			} else if(keyCode == 39 || keyCode == 68){
-				safari.walking.right = 0;
-				for (var i=0; i<queue.length; i++) {
-					if (queue[0] == "right") {
-						queue.shift();
-					}
-				};
-				if (tmp == 1){ walking = false };
-				e.preventDefault();
-			} else if(keyCode == 37 || keyCode == 65){
-				safari.walking.left = 0;
-				for (var i=0; i<queue.length; i++) {
-					if (queue[0] == "left") {
-						queue.shift();
-					}
-				};
-				if (tmp == 1){ walking = false };
-				e.preventDefault();
-			} else if(keyCode == 40 || keyCode == 83){
-				safari.walking.down = 0;
-				for (var i=0; i<queue.length; i++) {
-					if (queue[0] == "down") {
+					if (queue[0] == dir) {
 						queue.shift();
 					}
 				};
@@ -580,6 +532,7 @@ $(document).ready(function(){
 	loadSafari();
 });
 
+<<<<<<< 1c4306505a04fff1f4736b4a53446f460f0d9bc2
 var safelyOpen = function(modalFunc){
 	if (fadingModal == false){
 		fadingModal = true;
@@ -623,6 +576,25 @@ var showPokedexModal = function(){
 var showQuestModal = function(){
 	$("#questModal").modal("show");
 	showCurQuest();
+}
+
+var getDirectionFromCode = function(code) {
+	switch(code){
+		case 38:
+		case 87:
+			return "up";
+		case 39:
+		case 68:
+			return "right";
+		case 37:
+		case 65:
+			return "left";
+		case 40:
+		case 83:
+			return "down";
+		default:
+			return false;
+	}
 }
 
 var setNextDirection = function(direction) {
