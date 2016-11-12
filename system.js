@@ -386,7 +386,6 @@ $(document).ready(function(){
 				if (dir) {
 					queue = [];
 					walking = true;
-					safari.walking[dir] = 1;
 					queue.unshift(dir);
 					safariMove(dir);
 				} else if(keyCode == 32){
@@ -403,19 +402,13 @@ $(document).ready(function(){
 		var keyCode = e.keyCode;
 		if(inProgress == 4){
 			var dir = getDirectionFromCode(keyCode);
-			var tmp = 0;
-			for (key in safari.walking) {
-				tmp += safari.walking[key];
-			};
 			
 			if (dir) {
-				safari.walking[dir] = 0;
 				for (var i=0; i<queue.length; i++) {
 					if (queue[i] == dir) {
 						queue.splice(i, 1);
 					}
 				};
-				console.log(safari.walking);
 				if (!queue[0]){ walking = false };
 				e.preventDefault();
 			} else if(keyCode == 32){
@@ -608,7 +601,6 @@ var setNextDirection = function(direction) {
 			}
 		};
 		safari.nextDirection = direction;
-		safari.walking[direction] = 1;
 		walking = true;
 	}
 }
