@@ -4,6 +4,7 @@ var canCatch = 1;
 var attackInterval;
 var maxClicks = 15;
 var clicks = 0;
+var queue = [];
 // Add new variables to the savefile!!
 
 var firstQuest = {progress: 0, type: "defeatPokemonRoute", description: "Defeat 30 Pokemon on route 1", difficulty: 1, amount: 30, type2: 1, reward: 5, notified:0}
@@ -345,18 +346,22 @@ $(document).ready(function(){
 				if(keyCode == 38 || keyCode == 87){
 					walking = true;
 					safari.walking.up = 1;
+					queue.unshift("up");
 					safariMove('up');
 				} else if(keyCode == 39 || keyCode == 68){
 					walking = true;
 					safari.walking.right = 1;
+					queue.unshift("right");
 					safariMove('right');
 				} else if(keyCode == 37 || keyCode == 65){
 					walking = true;
 					safari.walking.left = 1;
+					queue.unshift("left");
 					safariMove('left');
 				} else if(keyCode == 40 || keyCode == 83){
 					walking = true;
 					safari.walking.down = 1;
+					queue.unshift("down");
 					safariMove('down');
 				} else if(keyCode == 32){
 				}
@@ -384,18 +389,38 @@ $(document).ready(function(){
 			};
 			if(keyCode == 38 || keyCode == 87){
 				safari.walking.up = 0;
+				for (var i=0; i<queue.length; i++) {
+					if (queue[i] == "up") {
+						queue.splice(i);
+					}
+				};
 				if (tmp == 1){ walking = false };
 				e.preventDefault();
 			} else if(keyCode == 39 || keyCode == 68){
 				safari.walking.right = 0;
+				for (var i=0; i<queue.length; i++) {
+					if (queue[i] == "right") {
+						queue.splice(i);
+					}
+				};
 				if (tmp == 1){ walking = false };
 				e.preventDefault();
 			} else if(keyCode == 37 || keyCode == 65){
 				safari.walking.left = 0;
+				for (var i=0; i<queue.length; i++) {
+					if (queue[i] == "left") {
+						queue.splice(i);
+					}
+				};
 				if (tmp == 1){ walking = false };
 				e.preventDefault();
 			} else if(keyCode == 40 || keyCode == 83){
 				safari.walking.down = 0;
+				for (var i=0; i<queue.length; i++) {
+					if (queue[i] == "down") {
+						queue.splice(i);
+					}
+				};
 				if (tmp == 1){ walking = false };
 				e.preventDefault();
 			} else if(keyCode == 32){
@@ -493,9 +518,11 @@ $(document).ready(function(){
 
 var setNextDirection = function(direction) {
 	if(direction != safari.lastDirection){
+		queue.unshift(direction);
 		safari.nextDirection = direction;
 		safari.walking[direction] = 1;
 		walking = true;
+		console.log(queue)
 	}
 }
 
