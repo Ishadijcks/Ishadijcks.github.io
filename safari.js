@@ -170,8 +170,16 @@ var safariStep = function(direction) {
         });
     } else {
         $(".sprite").css("background", "url('images/safari/walk"+direction+".png')");
+        queue = []
         sprite.toStart();
         safari.isMoving = 0;
+        setTimeout(function(){
+            walking = false;
+            if(queue[0]){ 
+                walking = true;
+                safariStep(queue[0]);
+            }
+        }, 250);
     }
 }
 
