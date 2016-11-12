@@ -28,12 +28,6 @@ var safari = {
     angry: 0,
     },
     frame: 0,
-    walking: {
-        up: 0,
-        right: 0,
-        left: 0,
-        down: 0,
-    },
 }
 
 var element;
