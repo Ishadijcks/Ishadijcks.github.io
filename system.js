@@ -526,7 +526,6 @@ $(document).ready(function(){
 	loadSafari();
 });
 
-<<<<<<< 1c4306505a04fff1f4736b4a53446f460f0d9bc2
 var safelyOpen = function(modalFunc){
 	if (fadingModal == false){
 		fadingModal = true;
