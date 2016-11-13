@@ -20,12 +20,13 @@ var safari = {
         top: 0,
         left: 0
     },
+    balls: 30,
     inBattle: 0,
-    eating: 0,
     enemy: {
     name: "",
     catchFactor: 0,
     angry: 0,
+    eating: 0,
     },
     frame: 0,
 }
@@ -156,6 +157,7 @@ var safariStep = function(direction) {
         safari.player.x += safari.movingX;
         safari.player.y += safari.movingY;
         $('#sprite').animate(safari.offset, 250, "linear", function() {
+            checkBattle();
             safari.isMoving = 0;
             if(walking){ if (!checkBattle() && queue[0]){safariStep(queue[0])} }
         });
@@ -191,24 +193,52 @@ var loadBattle = function(){
     safari.enemy.eating = 0;
     safari.inBattle = 1;
     $.notify("Battle");
-    showBattle();
+    showBattleBars();
 }
 
-var showBattle = function(){
-    var html =  "<div id='battleBars'>";
+var showBattleBars = function(){
+    var html =  "<div id='battleBars' class='container-fluid'>";
     for( var i = 0; i<10; i++){
         html += "<div id=battleBar"+i + " class='row battleBar'></div>";
     }
 
     html += "</div>";
     $("#safariBody").html(html);
-
         $(".battleBar").animate({
-            width: "100%"
+            width: "50%"
         }, 1000, "linear");
+    showBattle();
+}
 
+var showBattle = function(){
+    var enemy = getPokemonByName(safari.enemy.name || "Pinsir");
+    var html = "";
+    html += "<div class='row safariEnemyRow'>";
+    html +=     "<div class='col-sm-2 col-sm-offset-8 safariEnemy'><img src='images/pokemon/" + enemy.id + ".png'></div>";
+    html += "</div>";
+    html += "<div class='row'>";
+    html +=     "<div class='col-sm-2 col-sm-offset-3 safariPlayer'>";
+    html +=         "<img src='images/safari/playerBack.png'>"
+    html +=     "</div>";
+    html += "</div>";
 
+    html += "<div class='row'>";
+    html +=     "<div class='col-sm-12' id='battleConsole'>";
+    html +=         "<div class='col-sm-6'>"
+    html +=             "<h4>Heyo some text!</h4>"
+    html +=         "</div>";
+    html +=     "<div class='col-sm-4 col-sm-offset-2 safariOptions'>";
+    html +=             "<div class='col-sm-6 safariOption'><button class='btn btn-info safariButton'>Ball (" + safari.balls + ")</button></div>";
+    html +=             "<div class='col-sm-6 safariOption'><button class='btn btn-info safariButton'>Bait</button></div>";
+    html +=             "<div class='col-sm-6 safariOption'><button class='btn btn-info safariButton'>Rock</button></div>";
+    html +=             "<div class='col-sm-6 safariOption'><button class='btn btn-info safariButton'>Run</button></div>";
+    html +=     "</div>";
 
+    html += "</div>";
+
+    $("#safariBody").html(html);
+    $("#safariBody").css("background-image", "url('images/safari/safariBattle.png')");
+    $("#safariBody").css("background-size", "100% auto");
 }
 
 var endBattle = function(){
@@ -264,7 +294,6 @@ var addPlayer = function(){
 
 var updatePlayer = function(){
     safari.isMoving = 0;
-    checkBattle();
 }
 
 var safariSquare = function(id, j, i){

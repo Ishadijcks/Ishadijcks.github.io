@@ -1,7 +1,37 @@
+.safariEnemyRow {
+    margin-bottom:186px;
+}
+
+#battleConsole {
+    background-image: url('images/safari/battleText.png');
+    background-size: 100%;
+    height:100px;
+    font-family: "Pokemon FireLeaf", "Helvetica Neue";
+    color:white;
+}
+
+.safariButton {
+    width:100%;
+}
+.safariOptions {
+    text-align:center;
+    margin-top:6px;
+}
+
+.safariOption {
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+.safariPlayer{
+
+}
+
 .battleBar {
 	width:0%;
 	height: 50px;
 	background-color:black;
+	float:left;
 }
 
 .battleBar:nth-of-type(even){
@@ -12,7 +42,6 @@
 	width: 32px;
 	height: 32px;
 	background: url('images/safari/walkDown.png');
-
 }
 
 #sprite {
