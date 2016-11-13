@@ -315,9 +315,20 @@ var throwBall = function() {
     if(!safari.battleBusy) {
         safari.balls--;
         showBattle();
-        updateSafariBattleText("You throw a ball... (fancy animation #AegyoPls)");
+        updateSafariBattleText("You throw a ball... (fancy animation #DimavaPls)");
         safari.battleBusy = 1;
-        dropParticle('<img src=images/safari/pokeball.png>', $('#safariPlayer').offset(), $('#safariEnemy').offset(), 0.75, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
+        var enemy = $('#safariEnemy').offset();
+        enemy.left += 48;
+        var p = dropParticle('<img src=images/safari/pokeball.png>', $('#safariPlayer').offset(), enemy, 0.75, 'cubic-bezier(0,0,0.4,1)', true).css('z-index',9999);
+
+        setTimeout(function() {
+        	$('#safariEnemy').addClass('safariCapture')
+        }, 750);
+
+        setTimeout(function() {
+        	$('#safariEnemy > img').css('opacity', '0');
+        }, 1500)
+
         setTimeout(function () {
             var random = Math.random();
             var index = Math.floor(random*4);
@@ -325,10 +336,17 @@ var throwBall = function() {
                 captureSafariPokemon(safari.enemy.name);
                 endBattle();
             } else {
-                updateSafariBattleText(safariCatchMessages[index]);
-                setTimeout(safariEnemyTurn,1000);
+            	//Dimava pls help
+            	//p.addClass('bounce');
+            	setTimeout(function() {
+        			$('#safariEnemy > img').css('opacity', '1');
+            		$('#safariEnemy').removeClass('safariCapture');
+                	updateSafariBattleText(safariCatchMessages[index]);
+                	setTimeout(safariEnemyTurn,1000);
+                	p.remove();
+                }, 1000 + index*500);
             }
-        }, 1500)
+        }, 1600)
     }
 }
 
@@ -789,18 +807,20 @@ Array.prototype.equals = function (array) {
     return true;
 }
 
-var dropParticle = function(html, pos, target, time = 2, top) {
+var dropParticle = function(html, pos, target, time = 2, top, persistentParticle) {
     var p = $('<ptcl>').html(html).children().appendTo('body');
     p.css('position','absolute')
     p.offset(pos);
     if (!top) top = 'cubic-bezier(0.6, -0.3, 0.7, 0)';
     p[0].style.transition = 'left ' + time + 's linear, top ' + time + 's '+top;
     p.offset(target);
-    setTimeout(function() {
-        p.fadeOut()
-    }, time * 1000 - 200);
-    setTimeout(function() {
-        p.remove()
-    }, time * 1000);
+    if (!persistentParticle) {
+    	setTimeout(function() {
+        	p.fadeOut()
+    	}, time * 1000 - 200);
+    	setTimeout(function() {
+        	p.remove()
+    	}, time * 1000);
+    }
     return p;
 };
