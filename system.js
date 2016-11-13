@@ -466,8 +466,6 @@ $(document).ready(function(){
 	loadSafari();
 });
 
-38,87,39,68,37,65,40,83,32
-
 var getDirectionFromCode = function(code) {
 	switch(code){
 		case 38:
