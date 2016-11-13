@@ -35,6 +35,7 @@ var dropParticle = function(html, pos, target, time = 2) {
 	p.offset(target);
 	setTimeout(function(){ p.fadeOut() }, time * 1000 - 200);
 	setTimeout(function(){ p.remove() }, time * 1000);
+	return p;
 };
 
 var dropMoneyParticle = function(amt) {
