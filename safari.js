@@ -191,7 +191,7 @@ var checkBattle = function(){
 var loadBattle = function(){
     safari.enemy.name = "Pinsir";
     safari.enemy.catchFactor = getPokemonByName(safari.enemy.name).catchRate * 100/1275;
-    safari.enemy.escapeFactor = 5;
+    safari.enemy.escapeFactor = 10;
     safari.enemy.angry = 0;
     safari.enemy.eating = 0;
     safari.inBattle = 1;
@@ -199,7 +199,7 @@ var loadBattle = function(){
     showBattleBars();
 }
 
-var gainSafariCatchFactor = function(){
+var getSafariCatchFactor = function(){
     if(safari.enemy.eating > 0) {
         return safari.enemy.catchFactor / 2;
     }
@@ -210,7 +210,7 @@ var gainSafariCatchFactor = function(){
     return safari.enemy.catchFactor;
 }
 
-var gainSafariEscapeFactor = function(){
+var getSafariEscapeFactor = function(){
     if(safari.enemy.eating > 0) {
         return safari.enemy.escapeFactor / 4;
     }
@@ -270,7 +270,7 @@ var safariEnemyTurn = function(){
     // Enemy turn to flee;
     console.log("Enemy turn");
     var random = Math.floor(Math.random()*100);
-    if( random < 5*gainSafariEscapeFactor()){
+    if( random < 5*getSafariEscapeFactor()){
         updateSafariBattleText(safari.enemy.name + " has fled.");
         setTimeout(endBattle, 1000);
     } else if(safari.enemy.eating > 0) {
@@ -284,7 +284,8 @@ var safariEnemyTurn = function(){
         updateSafariBattleText("What will you do?");
         safari.battleBusy = 0;
     }, 1500);
-
+    console.log(getSafariCatchFactor()*1275/100);
+    console.log(getSafariEscapeFactor()*5 + "%");
 }
 
 var endBattle = function(){
@@ -320,7 +321,7 @@ var throwBall = function() {
         setTimeout(function () {
             var random = Math.random();
             var index = Math.floor(random*4);
-            if (1 < random){
+            if (random*100 < getSafariCatchFactor()*1275/100){
                 captureSafariPokemon(safari.enemy.name);
                 endBattle();
             } else {
@@ -332,7 +333,6 @@ var throwBall = function() {
 }
 
 var throwRock = function(){
-    console.log(safari.battleBusy);
     if(!safari.battleBusy) {
         updateSafariBattleText("You throw a rock at " + safari.enemy.name + "... (fancy animation #AegyoPls)");
         safari.battleBusy = 1;
@@ -344,7 +344,6 @@ var throwRock = function(){
 }
 
 var throwBait = function(){
-    console.log(safari.battleBusy);
     if(!safari.battleBusy){
         updateSafariBattleText("You throw some bait at " + safari.enemy.name + "... (fancy animation #AegyoPls)");
         safari.battleBusy = 1;
