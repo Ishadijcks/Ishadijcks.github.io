@@ -28,12 +28,6 @@ var safari = {
     angry: 0,
     },
     frame: 0,
-    walking: {
-        up: 0,
-        right: 0,
-        left: 0,
-        down: 0,
-    },
 }
 
 var element;
@@ -144,9 +138,6 @@ var showSafari = function(){
 var safariStep = function(direction) {
     safari.lastDirection = direction;
 
-    //sprite.to(safari.frame,true);
-    //frame = (frame+2)%4;
-    //sprite.to(frame);
     sprite.toggle();
     directionOffset = getXY(direction);
     safari.movingX = directionOffset.x;
@@ -170,12 +161,11 @@ var safariStep = function(direction) {
         });
     } else {
         $(".sprite").css("background", "url('images/safari/walk"+direction+".png')");
-        queue = []
-        sprite.toStart();
-        safari.isMoving = 0;
         setTimeout(function(){
             walking = false;
-            if(queue[0]){ 
+            safari.isMoving = 0;
+            if(queue[0]){
+                safari.isMoving = 1;
                 walking = true;
                 safariStep(queue[0]);
             }

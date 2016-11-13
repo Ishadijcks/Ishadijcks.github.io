@@ -342,42 +342,18 @@ $(document).ready(function(){
 					e.preventDefault();
 				}
 			}
+			var dir = getDirectionFromCode(keyCode);
 			if(!walking && !safari.isMoving) {
-				if(keyCode == 38 || keyCode == 87){
+				if (dir) {
 					queue = [];
 					walking = true;
-					safari.walking.up = 1;
-					queue.unshift("up");
-					safariMove('up');
-				} else if(keyCode == 39 || keyCode == 68){
-					queue = [];
-					walking = true;
-					safari.walking.right = 1;
-					queue.unshift("right");
-					safariMove('right');
-				} else if(keyCode == 37 || keyCode == 65){
-					queue = [];
-					walking = true;
-					safari.walking.left = 1;
-					queue.unshift("left");
-					safariMove('left');
-				} else if(keyCode == 40 || keyCode == 83){
-					queue = [];
-					walking = true;
-					safari.walking.down = 1;
-					queue.unshift("down");
-					safariMove('down');
+					queue.unshift(dir);
+					safariMove(dir);
 				} else if(keyCode == 32){
 				}
 			} else {
-				if(keyCode == 38 || keyCode == 87 ){
-					setNextDirection('up');
-				} else if(keyCode == 39 || keyCode == 68 ){
-					setNextDirection('right');
-				} else if(keyCode == 37 || keyCode == 65 ){
-					setNextDirection('left');
-				} else if(keyCode == 40 || keyCode == 83 ){
-					setNextDirection('down');
+				if(dir) {
+					setNextDirection(dir)
 				}
 			}
 		}
@@ -387,45 +363,15 @@ $(document).ready(function(){
 	$(document).on("keyup", function (e) {
 		var keyCode = e.keyCode;
 		if(inProgress == 4){
-			var tmp = 0;
-			for (dir in safari.walking) {
-				tmp += safari.walking[dir];
-			};
-			if(keyCode == 38 || keyCode == 87){
-				safari.walking.up = 0;
+			var dir = getDirectionFromCode(keyCode);
+			
+			if (dir) {
 				for (var i=0; i<queue.length; i++) {
-					if (queue[0] == "up") {
-						queue.shift();
+					if (queue[i] == dir) {
+						queue.splice(i, 1);
 					}
 				};
-				if (tmp == 1){ walking = false };
-				e.preventDefault();
-			} else if(keyCode == 39 || keyCode == 68){
-				safari.walking.right = 0;
-				for (var i=0; i<queue.length; i++) {
-					if (queue[0] == "right") {
-						queue.shift();
-					}
-				};
-				if (tmp == 1){ walking = false };
-				e.preventDefault();
-			} else if(keyCode == 37 || keyCode == 65){
-				safari.walking.left = 0;
-				for (var i=0; i<queue.length; i++) {
-					if (queue[0] == "left") {
-						queue.shift();
-					}
-				};
-				if (tmp == 1){ walking = false };
-				e.preventDefault();
-			} else if(keyCode == 40 || keyCode == 83){
-				safari.walking.down = 0;
-				for (var i=0; i<queue.length; i++) {
-					if (queue[0] == "down") {
-						queue.shift();
-					}
-				};
-				if (tmp == 1){ walking = false };
+				if (!queue[0]){ walking = false };
 				e.preventDefault();
 			} else if(keyCode == 32){
 				e.preventDefault();
@@ -520,13 +466,35 @@ $(document).ready(function(){
 	loadSafari();
 });
 
+var getDirectionFromCode = function(code) {
+	switch(code){
+		case 38:
+		case 87:
+			return "up";
+		case 39:
+		case 68:
+			return "right";
+		case 37:
+		case 65:
+			return "left";
+		case 40:
+		case 83:
+			return "down";
+		default:
+			return false;
+	}
+}
+
 var setNextDirection = function(direction) {
 	if(direction != safari.lastDirection){
 		if (queue[0] != direction) {
-			queue.unshift(direction);
+			if (queue.length == 1){
+				queue.unshift(direction);
+			} else {
+				queue[0] = direction;
+			}
 		};
 		safari.nextDirection = direction;
-		safari.walking[direction] = 1;
 		walking = true;
 	}
 }
