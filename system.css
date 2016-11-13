@@ -11,7 +11,7 @@
     margin-bottom:186px;
 }
 
-.safariEnemy {
+#safariEnemy {
     position: relative;
     top:15px;
 }
@@ -37,7 +37,7 @@
     margin-bottom:5px;
 }
 
-.safariPlayer{
+#safariPlayer{
 
 }
 
