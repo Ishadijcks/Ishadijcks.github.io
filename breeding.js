@@ -177,6 +177,7 @@ var hatchEgg = function(i){
 	capturePokemon(egg.pokemon, generateEggShiny());
 	player.totalBred++;
 	showEggs();
+	save();
 }
 
 var buyEggSlot = function(i){
