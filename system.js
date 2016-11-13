@@ -359,6 +359,16 @@ $(document).ready(function(){
 		showCurQuest();
 	})
 
+	$("body").on('click',"#questCounter", function(){
+		// No action when completing quest
+		if(!questCompleted()/*already false*/ && !(player.curQuest.progress==0 && $('#smallQuestBar').width()>0)){
+			$("#questModal").modal("show");
+			showCurQuest();
+		} else if(questCompleted()) {
+			completeQuest();
+		}
+	})
+
 	$("body").on('click',"#mineButton", function(){
 		$("#mineModal").modal("show");
 		showCurMine();
@@ -609,7 +619,7 @@ var enemyDefeated = function(){
 
 	canCatch = 1;
 	if (curEnemy.alive){
-		progressEgg(Math.floor(Math.sqrt(player.route)));
+		progressEgg(Math.floor(Math.sqrt(player.route)*100)/100);
 		progressQuest('defeatPokemonRoute', player.route , 1);
 		progressQuest('defeatPokemon', curEnemy.id, 1);
 
@@ -639,6 +649,7 @@ var enemyDefeated = function(){
 
 
 
+		var catchRate = curEnemy.catchRate + getBonusCatchrate() -10;
 
 		setTimeout(function(){
 
@@ -650,11 +661,10 @@ var enemyDefeated = function(){
 			else{
 			$("#enemyInfo").html("<br>"+curEnemy.name+" <br><img id=pokeball src=images/Pokeball.PNG>");
 			}
+			$("#catchDisplay").html("Catch chance: "+Math.min(100,catchRate) + "%");
 			player.pokeballs--;
 		}, 1);
 
-		var catchRate = curEnemy.catchRate + getBonusCatchrate() -10;
-		$("#catchDisplay").html("Catch chance: "+Math.min(100,catchRate) + "%");
 
 		setTimeout(function(){
 		if(canCatch){

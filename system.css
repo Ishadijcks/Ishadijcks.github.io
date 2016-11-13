@@ -178,6 +178,7 @@
 	background-color: #6BA82A;
 	width: 40px;
 	text-align: center;
+	cursor: pointer;
 }
 
 .useItemButtonEmpty {
@@ -207,6 +208,10 @@
 .shinyFiller {
 	padding:16px;
 }
+
+/*.shinyFiller, .smallShinyImage {
+	background: rgba(255,255,196,0.5); /*change to image*
+}*/
 
 .oakItemImage {
 	margin-top:9px;
@@ -512,6 +517,14 @@ table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView, #shop
 	margin-bottom: 20px;
 }
 
+#itemTable {
+	margin-bottom: 0px;
+}
+
+#items .tooltipItem {
+	cursor: help;
+}
+
 #pokeball {
 	-webkit-animation:spinleft 1s linear infinite;
     -moz-animation:spinleft 1s linear infinite;
@@ -601,7 +614,7 @@ g, rect {
 }
 
 #statDiv {
-	height:320px;
+	max-height:320px;
 	overflow:auto;
 	background-color:white;
 	border:1px solid black;
