@@ -239,11 +239,11 @@ var showBattle = function(){
     var enemy = getPokemonByName(safari.enemy.name || "Pinsir");
     var html = "";
     html += "<div class='row safariEnemyRow'>";
-    html +=     "<div class='col-sm-2 col-sm-offset-8 safariEnemy'><img src='images/pokemon/" + enemy.id + ".png'></div>";
+    html +=     "<div class='col-sm-2 col-sm-offset-8' id='safariEnemy'><img src='images/pokemon/" + enemy.id + ".png'></div>";
     html += "</div>";
     html += "<div class='row'>";
-    html +=     "<div class='col-sm-2 col-sm-offset-3 safariPlayer'>";
-    html +=         "<img src='images/safari/playerBack.png'>"
+    html +=     "<div class='col-sm-2 col-sm-offset-3'>";
+    html +=         "<img id='safariPlayer' src='images/safari/playerBack.png'>"
     html +=     "</div>";
     html += "</div>";
 
@@ -268,22 +268,23 @@ var showBattle = function(){
 
 var safariEnemyTurn = function(){
     // Enemy turn to flee;
-    safari.battleBusy = 0;
+    console.log("Enemy turn");
     var random = Math.floor(Math.random()*100);
-    console.log(5*gainSafariEscapeFactor());
     if( random < 5*gainSafariEscapeFactor()){
         updateSafariBattleText(safari.enemy.name + " has fled.");
         setTimeout(endBattle, 1000);
     } else if(safari.enemy.eating > 0) {
-        updateSafariBattleText(safari.enemy.name + "is eating.");
-    } else if(safari.enemy.eating > 0) {
-        updateSafariBattleText(safari.enemy.name + "is watching carefully.");
+        updateSafariBattleText(safari.enemy.name + " is eating.");
+    } else if(safari.enemy.angry > 0) {
+        updateSafariBattleText(safari.enemy.name + " is watching carefully.");
     }
     safari.enemy.eating = Math.max(0, safari.enemy.eating-1);
     safari.enemy.angry = Math.max(0, safari.enemy.angry-1);
     setTimeout(function(){
         updateSafariBattleText("What will you do?");
+        safari.battleBusy = 0;
     }, 1500);
+
 }
 
 var endBattle = function(){
@@ -315,6 +316,7 @@ var throwBall = function() {
         showBattle();
         updateSafariBattleText("You throw a ball... (fancy animation #AegyoPls)");
         safari.battleBusy = 1;
+        dropParticle('<img src=images/safari/pokeball.png>', $('#safariPlayer').offset(), $('#safariEnemy').offset(), 0.75, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
         setTimeout(function () {
             var random = Math.random();
             var index = Math.floor(random*4);
@@ -331,12 +333,12 @@ var throwBall = function() {
 
 var throwRock = function(){
     console.log(safari.battleBusy);
-    if(!safari.battleBusy){
-        // Rock math.
+    if(!safari.battleBusy) {
         updateSafariBattleText("You throw a rock at " + safari.enemy.name + "... (fancy animation #AegyoPls)");
         safari.battleBusy = 1;
-        safari.enemy.angry = Math.max(safari.enemy.angry, Math.floor(Math.random()*5 + 2))
+        safari.enemy.angry = Math.max(safari.enemy.angry, Math.floor(Math.random() * 5 + 2))
         safari.enemy.eating = 0;
+        dropParticle('<img src=images/safari/rock.png>', $('#safariPlayer').offset(), $('#safariEnemy').offset(), 1, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
         setTimeout(safariEnemyTurn, 1500);
     }
 }
@@ -344,11 +346,11 @@ var throwRock = function(){
 var throwBait = function(){
     console.log(safari.battleBusy);
     if(!safari.battleBusy){
-        // Bait math.
         updateSafariBattleText("You throw some bait at " + safari.enemy.name + "... (fancy animation #AegyoPls)");
         safari.battleBusy = 1;
         safari.enemy.eating = Math.max(safari.enemy.eating, Math.floor(Math.random()*5 + 2))
         safari.enemy.angry = 0;
+        dropParticle('<img src=images/safari/bait.png>', $('#safariPlayer').offset(), $('#safariEnemy').offset(), 1, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
         setTimeout(safariEnemyTurn, 1500);
     }
 }
@@ -787,3 +789,19 @@ Array.prototype.equals = function (array) {
     }
     return true;
 }
+
+var dropParticle = function(html, pos, target, time = 2, top) {
+    var p = $('<ptcl>').html(html).children().appendTo('body');
+    p.css('position','absolute')
+    p.offset(pos);
+    if (!top) top = 'cubic-bezier(0.6, -0.3, 0.7, 0)';
+    p[0].style.transition = 'left ' + time + 's linear, top ' + time + 's '+top;
+    p.offset(target);
+    setTimeout(function() {
+        p.fadeOut()
+    }, time * 1000 - 200);
+    setTimeout(function() {
+        p.remove()
+    }, time * 1000);
+    return p;
+};
