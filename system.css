@@ -207,11 +207,8 @@
 
 .shinyFiller {
 	padding:16px;
+	background: url("images/shinyFiller.png");
 }
-
-/*.shinyFiller, .smallShinyImage {
-	background: rgba(255,255,196,0.5); /*change to image*
-}*/
 
 .oakItemImage {
 	margin-top:9px;
@@ -591,7 +588,8 @@ table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView, #shop
 	width: auto;
 	padding: 4.33px;
 	margin: -7px;
-	margin-right: 0	
+	margin-right: 0;
+	background: url("images/smallShinyBackground.png");
 }
 
 .smallImage:hover{
