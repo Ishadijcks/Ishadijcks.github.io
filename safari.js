@@ -23,12 +23,15 @@ var safari = {
     balls: 30,
     inBattle: 0,
     enemy: {
-    name: "",
-    catchFactor: 0,
-    angry: 0,
-    eating: 0,
+        name: "",
+        catchFactor: 0,
+        angry: 0,
+        eating: 0,
+        escapeFactor: 0
     },
+    escapes: 0,
     frame: 0,
+    battleBusy: 0
 }
 
 var element;
@@ -187,12 +190,35 @@ var checkBattle = function(){
 
 var loadBattle = function(){
     safari.enemy.name = "Pinsir";
-    safari.enemy.catchFactor = getPokemonByName(safari.enemy.name).catchRate;
+    safari.enemy.catchFactor = getPokemonByName(safari.enemy.name).catchRate * 100/1275;
+    safari.enemy.escapeFactor = 5;
     safari.enemy.angry = 0;
     safari.enemy.eating = 0;
     safari.inBattle = 1;
     $.notify("Battle");
     showBattleBars();
+}
+
+var gainSafariCatchFactor = function(){
+    if(safari.enemy.eating > 0) {
+        return safari.enemy.catchFactor / 2;
+    }
+    if(safari.enemy.angry > 0) {
+        return safari.enemy.catchFactor * 2;
+    }
+
+    return safari.enemy.catchFactor;
+}
+
+var gainSafariEscapeFactor = function(){
+    if(safari.enemy.eating > 0) {
+        return safari.enemy.escapeFactor / 4;
+    }
+    if(safari.enemy.angry > 0) {
+        return safari.enemy.escapeFactor * 2;
+    }
+
+    return safari.enemy.escapeFactor;
 }
 
 var showBattleBars = function(){
@@ -224,13 +250,13 @@ var showBattle = function(){
     html += "<div class='row'>";
     html +=     "<div class='col-sm-12' id='battleConsole'>";
     html +=         "<div class='col-sm-6'>"
-    html +=             "<h4>Heyo some text!</h4>"
+    html +=             "<h3 id='safariBattleText'>What will you do?</h3>"
     html +=         "</div>";
     html +=     "<div class='col-sm-4 col-sm-offset-2 safariOptions'>";
-    html +=             "<div class='col-sm-6 safariOption'><button class='btn btn-info safariButton'>Ball (" + safari.balls + ")</button></div>";
-    html +=             "<div class='col-sm-6 safariOption'><button class='btn btn-info safariButton'>Bait</button></div>";
-    html +=             "<div class='col-sm-6 safariOption'><button class='btn btn-info safariButton'>Rock</button></div>";
-    html +=             "<div class='col-sm-6 safariOption'><button class='btn btn-info safariButton'>Run</button></div>";
+    html +=             "<div class='col-sm-6 safariOption'><button onClick='throwBall()' class='btn btn-info safariButton'>Ball (" + safari.balls + ")</button></div>";
+    html +=             "<div class='col-sm-6 safariOption'><button onClick='throwBait()' class='btn btn-info safariButton'>Bait</button></div>";
+    html +=             "<div class='col-sm-6 safariOption'><button onClick='throwRock()' class='btn btn-info safariButton'>Rock</button></div>";
+    html +=             "<div class='col-sm-6 safariOption'><button onClick='safariRun()' class='btn btn-info safariButton'>Run</button></div>";
     html +=     "</div>";
 
     html += "</div>";
@@ -240,10 +266,99 @@ var showBattle = function(){
     $("#safariBody").css("background-size", "100% auto");
 }
 
+var safariEnemyTurn = function(){
+    // Enemy turn to flee;
+    safari.battleBusy = 0;
+    var random = Math.floor(Math.random()*100);
+    console.log(5*gainSafariEscapeFactor());
+    if( random < 5*gainSafariEscapeFactor()){
+        updateSafariBattleText(safari.enemy.name + " has fled.");
+        setTimeout(endBattle, 1000);
+    } else if(safari.enemy.eating > 0) {
+        updateSafariBattleText(safari.enemy.name + "is eating.");
+    } else if(safari.enemy.eating > 0) {
+        updateSafariBattleText(safari.enemy.name + "is watching carefully.");
+    }
+    safari.enemy.eating = Math.max(0, safari.enemy.eating-1);
+    safari.enemy.angry = Math.max(0, safari.enemy.angry-1);
+    setTimeout(function(){
+        updateSafariBattleText("What will you do?");
+    }, 1500);
+}
+
 var endBattle = function(){
     safari.inBattle = 0;
+    safari.battleBusy = 0;
     showSafari();
+    $("#safariBody").css("background-image", "none");
 }
+
+var safariRun = function(){
+    if(Math.random()*100 < (30 + 15*safari.escapes)){
+        updateSafariBattleText("You flee.");
+        setTimeout(endBattle, 1500);
+    } else {
+        updateSafariBattleText("You can't escape...");
+        setTimeout(safariEnemyTurn, 1000);
+    }
+}
+
+var updateSafariBattleText = function(text){
+    $("#safariBattleText").html(text);
+}
+
+var safariCatchMessages = ["Oh, no!<br>The Pokemon broke free!", "Aww! It appeared to be caught!", "Aargh! Almost had it!", "Shoot! It was so close, too!"]
+
+var throwBall = function() {
+    if(!safari.battleBusy) {
+        safari.balls--;
+        showBattle();
+        updateSafariBattleText("You throw a ball... (fancy animation #AegyoPls)");
+        safari.battleBusy = 1;
+        setTimeout(function () {
+            var random = Math.random();
+            var index = Math.floor(random*4);
+            if (1 < random){
+                captureSafariPokemon(safari.enemy.name);
+                endBattle();
+            } else {
+                updateSafariBattleText(safariCatchMessages[index]);
+                setTimeout(safariEnemyTurn,1000);
+            }
+        }, 1500)
+    }
+}
+
+var throwRock = function(){
+    console.log(safari.battleBusy);
+    if(!safari.battleBusy){
+        // Rock math.
+        updateSafariBattleText("You throw a rock at " + safari.enemy.name + "... (fancy animation #AegyoPls)");
+        safari.battleBusy = 1;
+        safari.enemy.angry = Math.max(safari.enemy.angry, Math.floor(Math.random()*5 + 2))
+        safari.enemy.eating = 0;
+        setTimeout(safariEnemyTurn, 1500);
+    }
+}
+
+var throwBait = function(){
+    console.log(safari.battleBusy);
+    if(!safari.battleBusy){
+        // Bait math.
+        updateSafariBattleText("You throw some bait at " + safari.enemy.name + "... (fancy animation #AegyoPls)");
+        safari.battleBusy = 1;
+        safari.enemy.eating = Math.max(safari.enemy.eating, Math.floor(Math.random()*5 + 2))
+        safari.enemy.angry = 0;
+        setTimeout(safariEnemyTurn, 1500);
+    }
+}
+
+
+var captureSafariPokemon = function(pokemonName){
+    updateSafariBattleText("GOTCHA!<br>" + pokemonName + " was caught!");
+    // capturePokemon(pokemonName);
+}
+
 
 var safariMove = function(direction){
     safari.nextDirection = direction;

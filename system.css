@@ -1,12 +1,26 @@
+@font-face {
+    font-family: 'pokefont';
+    src: url('fonts/pkmnfl.eot'); /* IE9 Compat Modes */
+    src: url('fonts/pkmnfl.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('fonts/pkmnfl.woff') format('woff'), /* Pretty Modern Browsers */
+    url('fonts/pkmnfl.ttf')  format('truetype'), /* Safari, Android, iOS */
+    url('fonts/pkmnfl.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
 .safariEnemyRow {
     margin-bottom:186px;
+}
+
+.safariEnemy {
+    position: relative;
+    top:15px;
 }
 
 #battleConsole {
     background-image: url('images/safari/battleText.png');
     background-size: 100%;
     height:100px;
-    font-family: "Pokemon FireLeaf", "Helvetica Neue";
+    font-family: 'pokefont', Helvetica Neue, serif;
     color:white;
 }
 
