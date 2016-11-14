@@ -316,9 +316,20 @@ var throwBall = function() {
     if(!safari.battleBusy) {
         safari.balls--;
         showBattle();
-        updateSafariBattleText("You throw a ball... (fancy animation #AegyoPls)");
+        updateSafariBattleText("You throw a ball... (fancy animation #DimavaPls)");
         safari.battleBusy = 1;
-        dropParticle('<img src=images/safari/pokeball.png>', $('#safariPlayer').offset(), $('#safariEnemy').offset(), 0.75, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
+        var enemy = $('#safariEnemy').offset();
+        enemy.left += 48;
+        var p = dropParticle('<img src=images/safari/pokeball.png>', $('#safariPlayer').offset(), enemy, 0.75, 'cubic-bezier(0,0,0.4,1)', true).css('z-index',9999);
+
+        setTimeout(function() {
+        	$('#safariEnemy').addClass('safariCapture')
+        }, 750);
+
+        setTimeout(function() {
+        	$('#safariEnemy > img').css('opacity', '0');
+        }, 1500)
+
         setTimeout(function () {
             var random = Math.random();
             var index = Math.floor(random*4);
@@ -326,10 +337,17 @@ var throwBall = function() {
                 captureSafariPokemon(safari.enemy.name);
                 endBattle();
             } else {
-                updateSafariBattleText(safariCatchMessages[index]);
-                setTimeout(safariEnemyTurn,1000);
+            	//Dimava pls help
+            	//p.addClass('bounce');
+            	setTimeout(function() {
+        			$('#safariEnemy > img').css('opacity', '1');
+            		$('#safariEnemy').removeClass('safariCapture');
+                	updateSafariBattleText(safariCatchMessages[index]);
+                	setTimeout(safariEnemyTurn,1000);
+                	p.remove();
+                }, 1000 + index*500);
             }
-        }, 1500)
+        }, 1600)
     }
 }
 
@@ -339,8 +357,34 @@ var throwRock = function(){
         safari.battleBusy = 1;
         safari.enemy.angry = Math.max(safari.enemy.angry, Math.floor(Math.random() * 5 + 2))
         safari.enemy.eating = 0;
-        dropParticle('<img src=images/safari/rock.png>', $('#safariPlayer').offset(), $('#safariEnemy').offset(), 1, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
-        setTimeout(safariEnemyTurn, 1500);
+        var enemy = $('#safariEnemy').offset();
+        enemy.left += 40;
+        enemy.top += 10
+        dropParticle('<img src=images/safari/rock.png>', $('#safariPlayer').offset(), enemy, 0.8, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
+        setTimeout(function(){
+        	var hitSplash = $('<ptcl>').html("<img src=images/safari/hit.png>").children().appendTo('body');
+        	hitSplash.offset(enemy).css({'opacity': 0.8, 'z-index': 9998});
+        	hitSplash.fadeOut(400, function(){hitSplash.remove();});
+        	setTimeout(function(){
+        		var newOffset = {
+        			top: enemy.top + 4,
+        			left: enemy.left - 20
+        		}
+        		var ang = $('<ptcl>').html("<img src=images/safari/angry.png>").children().appendTo('body');
+    			ang.css('position','absolute').css('z-index', 9999);
+    			ang.offset(newOffset);
+        		ang.addClass('pulse');
+        		setTimeout(function(){
+        			newOffset.top -= 10;
+        			newOffset.left += 60;
+        			ang.offset(newOffset);
+        			setTimeout(function(){
+        				ang.remove();
+        			},350)
+        		},350);
+        	},300);
+        },800);
+        setTimeout(safariEnemyTurn, 2000);
     }
 }
 
@@ -350,7 +394,10 @@ var throwBait = function(){
         safari.battleBusy = 1;
         safari.enemy.eating = Math.max(safari.enemy.eating, Math.floor(Math.random()*5 + 2))
         safari.enemy.angry = 0;
-        dropParticle('<img src=images/safari/bait.png>', $('#safariPlayer').offset(), $('#safariEnemy').offset(), 1, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
+        var enemy = $('#safariEnemy').offset();
+        enemy.left += 40;
+        enemy.top += 10
+        dropParticle('<img src=images/safari/bait.png>', $('#safariPlayer').offset(), enemy, 1, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
         setTimeout(safariEnemyTurn, 1500);
     }
 }
@@ -792,18 +839,20 @@ Array.prototype.equals = function (array) {
     return true;
 }
 
-var dropParticle = function(html, pos, target, time = 2, top) {
+var dropParticle = function(html, pos, target, time = 2, top, persistentParticle) {
     var p = $('<ptcl>').html(html).children().appendTo('body');
     p.css('position','absolute')
     p.offset(pos);
     if (!top) top = 'cubic-bezier(0.6, -0.3, 0.7, 0)';
     p[0].style.transition = 'left ' + time + 's linear, top ' + time + 's '+top;
     p.offset(target);
-    setTimeout(function() {
-        p.fadeOut()
-    }, time * 1000 - 200);
-    setTimeout(function() {
-        p.remove()
-    }, time * 1000);
+    if (!persistentParticle) {
+    	setTimeout(function() {
+        	p.fadeOut()
+    	}, time * 1000 - 200);
+    	setTimeout(function() {
+        	p.remove()
+    	}, time * 1000);
+    }
     return p;
 };
