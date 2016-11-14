@@ -8,7 +8,7 @@ var addQuest = function(type, description, difficulty, minAmount, randomAmount, 
 		randomAmount: randomAmount,
 		baseReward: (baseReward || 1) * (rewardMultiplier || 1),
 		hardness: hardness || 0,
-		type2: type2 || "none";
+		type2: type2 || "none"
 	};
 	questList.push(tempQuest);
 }
@@ -19,14 +19,15 @@ var addQuests = function(type, description, quests) {
 		addQuest(type, description, q[0], q[1], q[2], q[3], q[4]);
 	}
 }
-
 var questDifficultyName = ["EASY", "MEDIUM", "HARD", "HARDER", "IMPOSSIBLE"];
 var questPointsPerKillInAverageZone = 0.2;
-var startQuest = function(quest) {
+var startQuest = function(quest, forsed) {
 	var curQuest = player.curQuest;
+	curQuest.template = quest;
 	curQuest.progress = 0;
 	curQuest.type = quest.type;
 	curQuest.difficulty = quest.difficulty;
+	curQuest.hardness = quest.hardness;
 	curQuest.amount = Math.ceil(quest.minAmount + Math.random() * quest.randomAmount * (1 + player.questDifficulty)); // some math
 	curQuest.notified = 0;
 	curQuest.type2 = quest.type2;
@@ -35,43 +36,54 @@ var startQuest = function(quest) {
 		case "defeatPokemonRoute":
 			//Route to defeat Pokémon on.
 			curQuest.type2 = Math.min(Math.floor(5 * Math.random() + quest.hardness), 25) || 1;
-			if(!accessToRoute(curQuest.type2)) return startRandomQuest(); //restart
+			if (!accessToRoute(curQuest.type2) && !forsed) return startRandomQuest(); //restart
 			break;
 		case "capturePokemonRoute":
 			//Route to capture Pokémon on.
 			curQuest.type2 = Math.min(Math.floor(5 * Math.random() + quest.hardness), 25) || 1;
-			if(!accessToRoute(curQuest.type2)) return startRandomQuest(); //restart
-			break;
-		case "captureShinies":
-			curQuest.amount = 1;
-			curQuest.reward = 100;
-			break;
-		case "findItems":
+			if (!accessToRoute(curQuest.type2) && !forsed) return startRandomQuest(); //restart
 			break;
 		case "clearDungeons":
 			var dungeonNameList = getDungeonNames();
-			curQuest.type2 = dungeonNameList[Math.floor(Math.min(dungeonNameList.length - 1, curQuest.hardness + Math.random() * 3))];
+			//curQuest.type2 = dungeonNameList[Math.floor(Math.min(dungeonNameList.length - 1, curQuest.hardness + Math.random() * 3))]; type2 is constant
+			if (!accessToTown(townList.filter(function(e) {
+					return e.gym && e.gym.town == s;
+				})[0].reqRoutes) && !forsed) return startRandomQuest(); //restart
 			break;
 		case "clearGyms":
 			var gymNameList = getGymNames();
-			curQuest.type2 = gymNameList[Math.floor(Math.min(gymNameList.length - 1, curQuest.hardness + Math.random() * 3))];
+			// curQuest.type2 = gymNameList[Math.floor(Math.min(gymNameList.length - 1, curQuest.hardness + Math.random() * 3))]; type2 is constant
+			if (!accessToTown(townList.filter(function(e) {
+					return e.gym && e.gym.town == s;
+				})[0].reqRoutes) && !forsed) return startRandomQuest(); //restart
 			break;
 		case "defeatPokemon":
 			curQuest.type2 = Math.floor(Math.random() * pokemonList.length) + 1;
 			curQuest.description = "Defeat " + numberWithCommas(curQuest.amount) + " " + getPokemonById(curQuest.type2).name;
 			break;
+		case "captureShinies":
+			break;
+		case "findItems":
+			if (curQuest.amount > player.totalItemsFound / 3 + 20 && !forsed) return startRandomQuest(); //restart
+			break;
 		case "gainMoney":
+			if (curQuest.amount > player.totalMoney / 3 + 1000 && !forsed) return startRandomQuest(); //restart
 			break;
 		case "gainTokens":
+			if (curQuest.amount > player.totalDungeonTokens / 3 + 1000 && !forsed) return startRandomQuest(); //restart
 			break;
 		case "gainShards":
+			if (curQuest.amount > player.totalMoney / 3 + 300 && !forsed) return startRandomQuest(); //restart
 			break;
 		case "breedPokemon":
+			if (curQuest.amount > player.totalBred / 3 + 4 && !forsed) return startRandomQuest(); //restart
 			break;
 	}
-	curQuest.description = quest.description.replace(/\$(\w*);/g,function(s,a){return curQuest[a];});
+	curQuest.description = quest.description.replace(/\$(\w*);/g, function(s, a) {
+		return curQuest[a];
+	});
 	curQuest.reward = Math.floor(quest.baseReward * curQuest.amount * (0.9 + Math.random() * 0.2) * questPointsPerKillInAverageZone); // some math.
-	if(curQuest.amount==0||curQuest.reward==0){
+	if ((curQuest.amount == 0 || curQuest.reward == 0) && !forsed) {
 		return startRandomQuest();
 	}
 	showCurQuest();
@@ -100,7 +112,7 @@ var MEDIUM = 1;
 var HARD = 2;
 var HARDER = 3;
 var IMPOSSIBLE = 4;
-//           >      Type      <    >     Description      < [ [Difficulty MinAmt RndAmt  gainMult (baseGain) (Hardness) (type2) ] ]
+//           >----- Type -----<    >---- Description ----< [ [Difficulty MinAmt RndAmt  gainMult (baseGain) (Hardness) (type2) ] ]
 //addQuests('defeatPokemonRoute', 'Defeat $amount; Pokemon', [[    EASY,    10,    30,     1,         1,         0     (null)  ]]);
 // base: 1 kill
 addQuests('defeatPokemonRoute', 'Defeat $amount; Pokemon on route $type2;', [
