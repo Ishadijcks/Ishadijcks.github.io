@@ -335,7 +335,10 @@ var throwBall = function() {
             var index = Math.floor(random*4);
             if (random*100 < getSafariCatchFactor()*1275/100){
                 captureSafariPokemon(safari.enemy.name);
-                endBattle();
+                setTimeout(function(){
+                	endBattle();
+            		p.remove();
+                }, 2000);
             } else {
             	//Dimava pls help
             	//p.addClass('bounce');
