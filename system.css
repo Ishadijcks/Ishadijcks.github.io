@@ -572,6 +572,11 @@ table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView, #shop
 	margin-right: 0;
 }
 
+.largeShinyImage{
+	height: 96px;
+	width: auto;
+}
+
 .smallShinyImage{
 	max-height: 40px;
 	height: auto;

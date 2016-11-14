@@ -227,35 +227,36 @@ var useEvoStone = function(item){
 					eeveelution = "Flareon";
 				}
 				html += "<div data-pokemon='" + eeveelution + "' class='evoButton col-sm-3 col-md-2 pokedexEntry' id='evo" + item.id + "'>";
-				html += "<img class='center-block' id='pokedexImage' src=images/"
+				html += "<img class='center-block"
+				if (alreadyCaughtShiny("Eevee")) {
+					html += " largeShinyImage"
+				}
+				html += "' id='pokedexImage' src=images/"
 				if (alreadyCaughtShiny("Eevee")) {
 					html += "shiny";
 				}
 				html += "pokemon/" + id + ".png >" + possibleEvolutions[i].name;
-				if (alreadyCaught(eeveelution)){
-					html += " <img id=alreadyCaughtImage src=images/"
-					if (alreadyCaughtShiny(eeveelution)) {
-						html += "shiny";
-					}
-					html += "Pokeball.PNG>";
-				}
+				evolution = eeveelution;
 			} else {
 				html += "<div data-pokemon='" + possibleEvolutions[i].evolution + "' class='evoButton col-sm-3 col-md-2 pokedexEntry' id='evo" + item.id + "'>";
-				
-				html += "<img class='center-block' id='pokedexImage' src=images/"
-				console.log(possibleEvolutions[i])
+				html += "<img class='center-block"
+				if (alreadyCaughtShiny(possibleEvolutions[i].name)) {
+					html += " largeShinyImage"
+				}
+				html += "' id='pokedexImage' src=images/"
 				if (alreadyCaughtShiny(possibleEvolutions[i].name)){
 					html += "shiny";
 				}
 				html += "pokemon/" + id + ".png >" + possibleEvolutions[i].name;
+				evolution = possibleEvolutions[i].evolution;
 			}
 
 
 
 			
-			if (alreadyCaught(possibleEvolutions[i].evolution)){
+			if (alreadyCaught(evolution)){
 				html += " <img id=alreadyCaughtImage src=images/"
-				if (alreadyCaughtShiny(possibleEvolutions[i].evolution)) {
+				if (alreadyCaughtShiny(evolution)) {
 					html += "shiny";
 				}
 				html+= "Pokeball.PNG>";
