@@ -36,6 +36,11 @@ var updateUpgrades = function(){
 			document.getElementById("Upgrade"+upgrade.id).title = upgrade.flavorText;
 		}
 	}
+	if($('#upgradeBox').children().length){
+		$('#upgradeBox').show();
+	} else {
+		$('#upgradeBox').hide();
+	}
 }
 
 

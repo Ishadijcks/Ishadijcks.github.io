@@ -189,6 +189,7 @@ var hatchEgg = function(i){
 	capturePokemon(egg.pokemon, generateEggShiny(egg));
 	player.totalBred++;
 	showEggs();
+	save();
 }
 
 var buyEggSlot = function(i){
@@ -214,11 +215,11 @@ var showEggs = function(){
 				html += "<img title='" + player.eggList[i].type + "' class='egg tooltipUp' src=images/breeding/egg" + player.eggList[i].type.toLowerCase() + ".png>";
 			}
 			if(player.eggList[i].progress < player.eggList[i].steps){
-				html += "<div title='" + player.eggList[i].progress + "/" + player.eggList[i].steps + "' class='progress eggProgress tooltipEggProgress' style='width: 80%; margin:auto'>";
+				html += "<div title='" + Math.floor(player.eggList[i].progress) + "/" + player.eggList[i].steps + "' class='progress eggProgress tooltipEggProgress' style='width: 80%; margin:auto'>";
 			} else {
 				html += "<div title='Click on the egg to hatch it!' class='progress eggProgress tooltipEggProgress' style='width: 80%; margin:auto'>";
 			}
-			html += 	"<div class='progress-bar progress-bar-success' style='width: " + player.eggList[i].progress/player.eggList[i].steps*100 + "%'>";
+			html += 	"<div class='progress-bar progress-bar-success' style='width: " + Math.floor(player.eggList[i].progress)/player.eggList[i].steps*100 + "%'>";
 			html += 		"<span class='sr-only'></span>";
 			html +=		"</div>";
 			html += "</div>";
