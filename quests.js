@@ -1,89 +1,86 @@
 var questList = [];
 
-var addQuest = function(type, description, difficulty, minAmount, maxAmount, baseReward){
+var addQuest = function(type, description, difficulty, minAmount, randomAmount, rewardMultiplier, baseReward, hardness, type2) {
 	var tempQuest = {
-		type:type,
-		description:description,
-		difficulty:difficulty,
-		minAmount:minAmount,
-		maxAmount:maxAmount,
-		baseReward:baseReward
-	}
+		type: type,
+		description: description,
+		difficulty: difficulty,
+		minAmount: minAmount,
+		randomAmount: randomAmount,
+		baseReward: baseReward * (rewardMultiplier || 1),
+		hardness: hardness || 0,
+		type2: type2 || "none";
+	};
 	questList.push(tempQuest);
 }
 
 
+var addQuests = function(type, description, quests){
+	for (var i = 0; i < quests.length; i++) {
+		var q = quests[i];
+		addQuest(type, description, q[0],q[1],q[2],q[3],q[4]);
+	}
+}
 
-var questDifficultyName = ["EASY", "MEDIUM", "HARD", "", "IMPOSSIBLE"];
 
-var startQuest = function(quest){
-	player.curQuest.progress = 0;
-	player.curQuest.type = quest.type;
-	player.curQuest.description = quest.description;
-	player.curQuest.difficulty = quest.difficulty;
-	player.curQuest.amount = Math.floor((quest.minAmount + Math.random()*(quest.maxAmount-quest.minAmount) + 1)*player.questDifficulty) + 1; // some math
-	player.curQuest.reward = Math.floor(quest.baseReward*player.questDifficulty); // some math.
-	player.curQuest.notified = 0;
 
-	switch(quest.type){
+var questDifficultyName = ["EASY", "MEDIUM", "HARD", "HARDER", "IMPOSSIBLE"];
+var questPointsPerKillInAverageZone = 0.2;
+var startQuest = function(quest) {
+	var curQuest = player.curQuest;
+	curQuest.progress = 0;
+	curQuest.type = quest.type;
+	curQuest.difficulty = quest.difficulty;
+	curQuest.amount = Math.ceil(quest.minAmount + Math.random() * quest.randomAmount * (1 + player.questDifficulty)); // some math
+	curQuest.notified = 0;
+	curQuest.type2 = quest.type2;
+
+	switch (quest.type) {
 		case "defeatPokemonRoute":
-		//Route to defeat Pokémon on.
-			player.curQuest.type2 = Math.max(1, Math.min(25, Math.floor(5* Math.random()) + (quest.difficulty )*5));
-			player.curQuest.description = "Defeat " + numberWithCommas(player.curQuest.amount) + " Pokemon on route " + player.curQuest.type2;
+			//Route to defeat Pokémon on.
+			curQuest.type2 = Math.min(Math.floor(5 * Math.random() + quest.hardness), 25) || 1;
+			if(!accessToRoute(curQuest.type2)) return startRandomQuest(); //restart
 			break;
-
 		case "capturePokemonRoute":
-		//Route to capture Pokémon on.
-			player.curQuest.type2 = Math.max(1, Math.min(25, Math.floor(5* Math.random()) + (quest.difficulty )*5));
-			player.curQuest.description = "Capture " + numberWithCommas(player.curQuest.amount) + " Pokemon on route " + player.curQuest.type2;
+			//Route to capture Pokémon on.
+			curQuest.type2 = Math.min(Math.floor(5 * Math.random() + quest.hardness), 25) || 1;
+			if(!accessToRoute(curQuest.type2)) return startRandomQuest(); //restart
 			break;
 		case "captureShinies":
-			player.curQuest.type2 = "none";
-			player.curQuest.amount = 1;
-			player.curQuest.reward = 100;
-			player.curQuest.description = "Capture " + player.curQuest.amount + " shinies";
+			curQuest.amount = 1;
+			curQuest.reward = 100;
 			break;
 		case "findItems":
-			player.curQuest.type2 = "none";
-			player.curQuest.description = "Find " + player.curQuest.amount + " items";
 			break;
 		case "clearDungeons":
 			var dungeonNameList = getDungeonNames();
-			player.curQuest.type2 = dungeonNameList[Math.floor(Math.min(dungeonNameList.length-1, player.curQuest.difficulty + Math.random() * 3))];
-			player.curQuest.description = "Clear the " + player.curQuest.type2 + " " + player.curQuest.amount + " times";
+			curQuest.type2 = dungeonNameList[Math.floor(Math.min(dungeonNameList.length - 1, curQuest.hardness + Math.random() * 3))];
 			break;
 		case "clearGyms":
 			var gymNameList = getGymNames();
-			player.curQuest.type2 = gymNameList[Math.floor(Math.min(gymNameList.length-1, player.curQuest.difficulty + Math.random() * 3))];
-			player.curQuest.description = "Clear the " + player.curQuest.type2 + " " + player.curQuest.amount + " times";
+			curQuest.type2 = gymNameList[Math.floor(Math.min(gymNameList.length - 1, curQuest.hardness + Math.random() * 3))];
 			break;
 		case "defeatPokemon":
-			player.curQuest.type2 = Math.floor(Math.random()*pokemonList.length) + 1;
-			player.curQuest.description = "Defeat " + numberWithCommas(player.curQuest.amount) + " " + getPokemonById(player.curQuest.type2).name;
+			curQuest.type2 = Math.floor(Math.random() * pokemonList.length) + 1;
+			curQuest.description = "Defeat " + numberWithCommas(curQuest.amount) + " " + getPokemonById(curQuest.type2).name;
 			break;
 		case "gainMoney":
-			player.curQuest.type2 = "none";
-			player.curQuest.description = "Gain " + numberWithCommas(player.curQuest.amount) + " money!";
-			break;
-		case "gainExp":
-			player.curQuest.type2 = "none";
-			player.curQuest.description = "Gain " + numberWithCommas(player.curQuest.amount) + " exp!";
 			break;
 		case "gainTokens":
-			player.curQuest.type2 = "none";
-			player.curQuest.description = "Gain " + numberWithCommas(player.curQuest.amount) + " dungeon tokens!";
 			break;
 		case "gainShards":
-			player.curQuest.type2 = "none";
-			player.curQuest.description = "Gain " + numberWithCommas(player.curQuest.amount) + " shards (any type)";
 			break;
 		case "breedPokemon":
-			player.curQuest.type2 = "none";
-			player.curQuest.description = "Hatch " + player.curQuest.amount + " eggs";
 			break;
+	}
+	curQuest.description = quest.description.replace(/$/);
+	curQuest.reward = Math.floor(quest.baseReward * curQuest.amount * (0.9 + Math.random() * 0.2) * questPointsPerKillInAverageZone); // some math.
+	if(curQuest.amount==0||curQuest.reward==0){
+		return startRandomQuest();
 	}
 	showCurQuest();
 }
+
 
 var progressQuest = function(type, type2,  amount){
 	// console.log(type);
@@ -105,57 +102,75 @@ var progressQuest = function(type, type2,  amount){
 var EASY = 0;
 var MEDIUM = 1;
 var HARD = 2;
+var HARDER = 3;
 var IMPOSSIBLE = 4;
-//				Type 			Description   Difficulty Min Max Reward
+//           >      Type      <    >     Description      < [ [Difficulty MinAmt RndAmt  gainMult (baseGain) (Hardness) (type2) ] ]
+//addQuests('defeatPokemonRoute', 'Defeat $amount; Pokemon', [[    EASY,    10,    30,     1,         1,         0     (null)  ]]);
+// base: 1 kill
+addQuests('defeatPokemonRoute', 'Defeat $amount; Pokemon on route $type2;', [
+	[EASY,        10, 20,  1,   1,  0],
+	[MEDIUM,      50, 20,  1, 1.1,  5],
+	[HARD,       150, 20,  1, 1.2, 10],
+	[HARDER,     300, 20,  1, 1.5, 15],
+	[IMPOSSIBLE, 500, 20,  1,   2, 20]
+]);
+// base: 1.2 kill
+addQuest('capturePokemonRoute', 'Capture $amount; Pokemon on route $type2;', [
+	[EASY,         8, 16, 1.2,   1,  0],
+	[MEDIUM,      40, 16, 1.2, 1.1,  5],
+	[HARD,       120, 16, 1.2, 1.2, 10],
+	[HARDER,     240, 16, 1.2, 1.5, 10],
+	[IMPOSSIBLE, 400, 16, 1.2,   2, 20]
+]);
+// base: 50kills(route,no use) | 20 kills(route,use) | 5 kills(dung,random) | 3 kills(dung,plan) |  4 used
+addQuests('findItems', 'Find $amount; items', [
+	[EASY,         2, 4, 4],
+	[MEDIUM,      10, 4, 4],
+	[HARD,        30, 4, 5],
+	[HARDER,      60, 4, 6],
+	[IMPOSSIBLE, 100, 4, 7]
+]);
+// base: 1/2k (route,no use) | 1/1k (route,use) | 1.7 used
+addQuests('gainMoney', 'Gain $amount; money', [
+	[EASY,       10000,    500,  2],
+	[MEDIUM,     25000,   7000,  6],
+	[HARD,       15000,  25000, 15],
+	[HARDER,     15000,  25000, 15],
+	[IMPOSSIBLE, 50000, 100000, 30]
+]);
+addQuests('gainTokens', 'Gain $amount; dungeon tokens', [
+	[EASY,         30,   50,  2],
+	[MEDIUM,      100,  500,  6],
+	[HARD,       1000, 2000, 15],
+	[HARDER,     1000, 2000, 15],
+	[IMPOSSIBLE, 2500, 5000, 20]
+]);
+addQuest('captureShinies', 'Capture $amount; shinies', IMPOSSIBLE, 1, 1, 80);
 
-// Secondary routenumber
-addQuest('defeatPokemonRoute', 'Defeat x pokemon', EASY, 10, 30, 3);
-addQuest('defeatPokemonRoute', 'Defeat x pokemon', MEDIUM, 30, 50, 8);
-addQuest('defeatPokemonRoute', 'Defeat x pokemon', HARD, 50, 80, 20);
-addQuest('defeatPokemonRoute', 'Defeat x pokemon', IMPOSSIBLE, 80, 100, 50);
+addQuests('clearDungeons', 'Clear the $type2; $amount; times', [
+	[EASY,   1, 5, 9 ],
+	[MEDIUM, 3, 8, 15]
+]);
+addQuests('clearGyms', 'Clear the $type2; $amount; times', [
+	[EASY,       1,  5,  5],
+	[MEDIUM,     3, 10, 10],
+	[HARD,       3, 10, 10],
+	[HARDER,     3, 10, 10],
+	[IMPOSSIBLE, 3, 10, 10]
+]);
+addQuests('gainShards', 'Gain $amount; shards (any type)', [
+	[EASY,        25,  50,  5],
+	[MEDIUM,      50, 100, 10],
+	[HARD,       100, 150, 20],
+	[HARDER,     100, 150, 20],
+	[IMPOSSIBLE, 250, 500, 40]
+]);
+addQuests('breedPokemon', 'Hatch $amount; eggs', [
+	[HARD,       3,  7, 25],
+	[HARDER,     3,  7, 25],
+	[IMPOSSIBLE, 5, 10, 52]
+]);
 
-// Secondary routenumber
-addQuest('capturePokemonRoute', 'Capture x pokemon', EASY, 10, 30, 4);
-addQuest('capturePokemonRoute', 'Capture x pokemon', MEDIUM, 30, 50, 10);
-addQuest('capturePokemonRoute', 'Capture x pokemon', HARD, 50, 80, 25);
-addQuest('capturePokemonRoute', 'Capture x pokemon', IMPOSSIBLE, 80, 100, 55);
-
-addQuest('findItems', 'Find x items', EASY, 1, 5, 5);
-addQuest('findItems', 'Find x items', MEDIUM, 5, 10, 12);
-addQuest('findItems', 'Find x items', HARD, 10, 15, 28);
-addQuest('findItems', 'Find x items', IMPOSSIBLE, 20, 25, 60);
-
-addQuest('gainMoney', 'Gain x money', EASY, 300, 500, 2)
-addQuest('gainMoney', 'Gain x money', MEDIUM, 2500, 7000, 6)
-addQuest('gainMoney', 'Gain x money', HARD, 15000, 25000, 15)
-addQuest('gainMoney', 'Gain x money', IMPOSSIBLE, 50000, 100000, 30)
-
-addQuest('gainTokens', 'Gain x tokens', EASY, 30, 50, 2)
-addQuest('gainTokens', 'Gain x tokens', MEDIUM, 100, 500, 6)
-addQuest('gainTokens', 'Gain x tokens', HARD, 1000, 2000, 15)
-addQuest('gainTokens', 'Gain x tokens', IMPOSSIBLE, 2500, 5000, 20)
-
-addQuest('captureShinies', 'Capture x shinies', IMPOSSIBLE, 1, 1, 80)
-
-addQuest('clearDungeons', 'Clear x dungeons', EASY, 1, 5, 9)
-addQuest('clearDungeons', 'Clear x dungeons', MEDIUM, 3, 8, 15)
-// addQuest('clearDungeons', 'Clear x dungeons', HARD, 5, 10, 28)
-// addQuest('clearDungeons', 'Clear x dungeons', IMPOSSIBLE, 15, 25, 60)
-
-addQuest('clearGyms', 'Clear x gyms', EASY, 1, 5, 5)
-addQuest('clearGyms', 'Clear x gyms', MEDIUM, 3, 10, 10)
-// addQuest('clearGyms', 'Clear x gyms', HARD, 1, 5, 23)
-// addQuest('clearGyms', 'Clear x gyms', IMPOSSIBLE, 1, 5, 55)
-
-addQuest('gainShards', 'Gain x shards', EASY, 25, 50, 5)
-addQuest('gainShards', 'Gain x shards', MEDIUM, 50, 100, 10)
-addQuest('gainShards', 'Gain x shards', HARD, 100, 150, 20)
-addQuest('gainShards', 'Gain x shards', IMPOSSIBLE, 250, 500, 40)
-
-// addQuest('breedPokemon', 'Breed x Pokemon', EASY, 1, 3, 5)
-// addQuest('breedPokemon', 'Breed x Pokemon', MEDIUM, 3, 7, 11)
-addQuest('breedPokemon', 'Breed x Pokemon', HARD, 3, 7, 25)
-addQuest('breedPokemon', 'Breed x Pokemon', IMPOSSIBLE, 5, 10, 52);
 
 
 
