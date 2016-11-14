@@ -395,7 +395,10 @@ var throwBait = function(){
         safari.battleBusy = 1;
         safari.enemy.eating = Math.max(safari.enemy.eating, Math.floor(Math.random()*5 + 2))
         safari.enemy.angry = 0;
-        dropParticle('<img src=images/safari/bait.png>', $('#safariPlayer').offset(), $('#safariEnemy').offset(), 1, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
+        var enemy = $('#safariEnemy').offset();
+        enemy.left += 40;
+        enemy.top += 10
+        dropParticle('<img src=images/safari/bait.png>', $('#safariPlayer').offset(), enemy, 1, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
         setTimeout(safariEnemyTurn, 1500);
     }
 }
