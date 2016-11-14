@@ -18,7 +18,7 @@ var addQuests = function(type, description, quests) {
 		var q = quests[i];
 		addQuest(type, description, q[0], q[1], q[2], q[3], q[4]);
 	}
-}
+};
 var questDifficultyName = ["EASY", "MEDIUM", "HARD", "HARDER", "IMPOSSIBLE"];
 var questPointsPerKillInAverageZone = 0.2;
 var startQuest = function(quest, forsed) {
@@ -30,7 +30,10 @@ var startQuest = function(quest, forsed) {
 	curQuest.hardness = quest.hardness;
 	curQuest.amount = Math.ceil(quest.minAmount + Math.random() * quest.randomAmount * (1 + player.questDifficulty)); // some math
 	curQuest.notified = 0;
-	curQuest.type2 = quest.type2;
+	if (typeof quest.type2 == "object")
+		curQuest.type2 = quest.type2;
+	else
+		curQuest.type2 = quest.type2[Math.floor(quest.type2.length * Math.random())];
 
 	switch (quest.type) {
 		case "defeatPokemonRoute":
@@ -45,16 +48,18 @@ var startQuest = function(quest, forsed) {
 			break;
 		case "clearDungeons":
 			var dungeonNameList = getDungeonNames();
+			curQuest.type2 = dungeonNameList[curQuest.type2];
 			//curQuest.type2 = dungeonNameList[Math.floor(Math.min(dungeonNameList.length - 1, curQuest.hardness + Math.random() * 3))]; type2 is constant
 			if (!accessToTown(townList.filter(function(e) {
-					return e.gym && e.gym.town == s;
+					return e.gym && e.gym.town == curQuest.type2;
 				})[0].reqRoutes) && !forsed) return startRandomQuest(); //restart
 			break;
 		case "clearGyms":
 			var gymNameList = getGymNames();
+			curQuest.type2 = gymNameList[curQuest.type2];
 			// curQuest.type2 = gymNameList[Math.floor(Math.min(gymNameList.length - 1, curQuest.hardness + Math.random() * 3))]; type2 is constant
 			if (!accessToTown(townList.filter(function(e) {
-					return e.gym && e.gym.town == s;
+					return e.gym && e.gym.town == curQuest.type2;
 				})[0].reqRoutes) && !forsed) return startRandomQuest(); //restart
 			break;
 		case "defeatPokemon":
@@ -76,9 +81,10 @@ var startQuest = function(quest, forsed) {
 			if (curQuest.amount > player.totalMoney / 3 + 300 && !forsed) return startRandomQuest(); //restart
 			break;
 		case "breedPokemon":
-			if (curQuest.amount > player.totalBred / 3 + 4 && !forsed) return startRandomQuest(); //restart
+			if ((player.totalBred == 0 || curQuest.amount > player.totalBred / 3 + 4) && !forsed) return startRandomQuest(); //restart
 			break;
 	}
+	curQuest._amount=numberWithCommas(curQuest.amount);
 	curQuest.description = quest.description.replace(/\$(\w*);/g, function(s, a) {
 		return curQuest[a];
 	});
@@ -115,75 +121,82 @@ var IMPOSSIBLE = 4;
 //           >----- Type -----<    >---- Description ----< [ [Difficulty MinAmt RndAmt  gainMult (baseGain) (Hardness) (type2) ] ]
 //addQuests('defeatPokemonRoute', 'Defeat $amount; Pokemon', [[    EASY,    10,    30,     1,         1,         0     (null)  ]]);
 // base: 1 kill
-addQuests('defeatPokemonRoute', 'Defeat $amount; Pokemon on route $type2;', [
-	[EASY,        10, 20,  1, 0.8,  0],
-	[MEDIUM,      50, 20,  1, 0.9,  5],
-	[HARD,       150, 20,  1,   1, 10],
-	[HARDER,     300, 20,  1, 1.2, 15],
-	[IMPOSSIBLE, 500, 20,  1, 1.5, 20]
+addQuests('defeatPokemonRoute', 'Defeat $_amount; Pokemon on route $type2;', [
+	[EASY,        10, 20,  1, 0.8,   0],
+	[MEDIUM,      50, 20,  1, 0.9,   5],
+	[HARD,       150, 20,  1,   1,  10],
+	[HARDER,     300, 20,  1, 1.2,  15],
+	[IMPOSSIBLE, 500, 20,  1, 1.5,  20]
 ]);
 // base: 1.2 kill
-addQuest('capturePokemonRoute', 'Capture $amount; Pokemon on route $type2;', [
-	[EASY,         8, 16, 1.2,   1,  0],
-	[MEDIUM,      40, 16, 1.2, 1.1,  5],
-	[HARD,       120, 16, 1.2, 1.2, 10],
-	[HARDER,     240, 16, 1.2, 1.5, 10],
-	[IMPOSSIBLE, 400, 16, 1.2,   2, 20]
+addQuest('capturePokemonRoute', 'Capture $_amount; Pokemon on route $type2;', [
+	[EASY,         8, 16,  1.2,   1,   0],
+	[MEDIUM,      40, 16,  1.2, 1.1,   5],
+	[HARD,       120, 16,  1.2, 1.2,  10],
+	[HARDER,     240, 16,  1.2, 1.5,  10],
+	[IMPOSSIBLE, 400, 16,  1.2,   2,  20]
 ]);
 // base: 50kills(route,no use) | 20 kills(route,use) | 5 kills(dung,random) | 3 kills(dung,plan) |  4 used
-addQuests('findItems', 'Find $amount; items', [
-	[EASY,         2, 4, 4],
-	[MEDIUM,      10, 4, 4],
-	[HARD,        30, 4, 5],
-	[HARDER,      60, 4, 6],
-	[IMPOSSIBLE, 100, 4, 7]
+addQuests('findItems', 'Find $_amount; items', [
+	[EASY,         2, 4,  4],
+	[MEDIUM,      10, 4,  4],
+	[HARD,        30, 4,  5],
+	[HARDER,      60, 4,  6],
+	[IMPOSSIBLE, 100, 4,  7]
 ]);
 // base: 1/2k (route,no use) | 1/1k (route,use) | 1.5/1.7 used
-addQuests('gainMoney', 'Gain $amount; money', [
-	[EASY,        15000, 30000, 0.0017],
-	[MEDIUM,      75000, 30000, 0.0017],
-	[HARD,       225000, 30000, 0.0017],
-	[HARDER,     450000, 30000, 0.0017],
-	[IMPOSSIBLE, 750000, 30000, 0.0017]
+addQuests('gainMoney', 'Gain $_amount; money', [
+	[EASY,        15000, 30000,  0.0017],
+	[MEDIUM,      75000, 30000,  0.0017],
+	[HARD,       225000, 30000,  0.0017],
+	[HARDER,     450000, 30000,  0.0017],
+	[IMPOSSIBLE, 750000, 30000,  0.0017]
 ]);
 // base: 1.2/45=1/37.5 | 37.5 used
-addQuests('gainTokens', 'Gain $amount; dungeon tokens', [
-	[EASY,         375, 750, 0.027],
-	[MEDIUM,      1875, 750, 0.027],
-	[HARD,        5625, 750, 0.027],
-	[HARDER,     11250, 750, 0.027],
-	[IMPOSSIBLE, 18750, 750, 0.027]
+addQuests('gainTokens', 'Gain $_amount; dungeon tokens', [
+	[EASY,         375, 750,  0.027],
+	[MEDIUM,      1875, 750,  0.027],
+	[HARD,        5625, 750,  0.027],
+	[HARDER,     11250, 750,  0.027],
+	[IMPOSSIBLE, 18750, 750,  0.027]
 ]);
 // base: 512*100||1.2*4000
-addQuest('captureShinies', 'Capture $amount; shinies', 
+addQuest('captureShinies', 'Capture $_amount; shinies', 
 	IMPOSSIBLE, 1, 0, 6000 // that's 1200QP!
 );
 // base: 10
-addQuests('clearDungeons', 'Clear the $type2; $amount; times', [
-	[EASY,   1, 5, 9 ],
-	[MEDIUM, 3, 8, 15]
+//           >----- Type -----<    >---- Description ----< [ [Difficulty MinAmt RndAmt  gainMult (baseGain) (Hardness) (type2) ] ]
+addQuests('clearDungeons', 'Clear the $type2; $_amount; times', [
+	[EASY,        1,   3,  1, 10,  0, [0,1,2]],
+	[MEDIUM,      5,   3,  1, 10,  0, [0,1,2]],
+	[HARD,       15,   3,  1, 10,  0, [0,1,2]],
+	[HARDER,     30,   2,  1, 10,  0, [0,1,2]],
+	[IMPOSSIBLE, 50,   1,  1, 10,  0, [0,1,2]],
+	[IMPOSSIBLE,  7, 0.2,  2, 10,  0, [3,4,5]],
+	[IMPOSSIBLE,  5, 0.1,  4, 10,  0, [6,7,8,9]]
 ]);
-addQuests('clearGyms', 'Clear the $type2; $amount; times', [
-	[EASY,       1,  5,  5],
-	[MEDIUM,     3, 10, 10],
-	[HARD,       3, 10, 10],
-	[HARDER,     3, 10, 10],
-	[IMPOSSIBLE, 3, 10, 10]
-]);
+// base: UNKNOWN!!!
+// addQuests('clearGyms', 'Clear the $type2; $amount; times', [
+// 	[EASY,       1,  5,  5],
+// 	[MEDIUM,     3, 10, 10],
+// 	[HARD,       3, 10, 10],
+// 	[HARDER,     3, 10, 10],
+// 	[IMPOSSIBLE, 3, 10, 10]
+// ]);
 // base: 1 kill | 1/3 kills(dung) | 2 used
-addQuests('gainShards', 'Gain $amount; shards (any type)', [
-	[EASY,         20, 40, 0.4],
-	[MEDIUM,      100, 40, 0.5],
-	[HARD,        300, 40, 0.6],
-	[HARDER,      600, 40, 0.7],
-	[IMPOSSIBLE, 1000, 40, 0.8]
+addQuests('gainShards', 'Gain $_amount; shards (any type)', [
+	[EASY,         20, 40,  0.4],
+	[MEDIUM,      100, 40,  0.5],
+	[HARD,        300, 40,  0.6],
+	[HARDER,      600, 40,  0.7],
+	[IMPOSSIBLE, 1000, 40,  0.8]
 ]);
 // base: 125/4 kills | 62/4 kills(item) | 33 used
-addQuests('breedPokemon', 'Hatch $amount; eggs', [
-	[MEDIUM,     1.5, 0.6, 33],
-	[HARD,       4.5, 0.6, 33],
-	[HARDER,       9, 0.6, 33],
-	[IMPOSSIBLE,  15, 0.6, 33]
+addQuests('breedPokemon', 'Hatch $_amount; eggs', [
+	[MEDIUM,     1.5, 0.6,  33],
+	[HARD,       4.5, 0.6,  33],
+	[HARDER,       9, 0.6,  33],
+	[IMPOSSIBLE,  15, 0.6,  33]
 ]);
 
 
