@@ -216,37 +216,49 @@ var useEvoStone = function(item){
 		if (!possibleEvolutions[i].evolved){
 			var id = getPokemonByName(possibleEvolutions[i].name).id;
 			if(possibleEvolutions[i].name === "Eevee"){
+				var eeveelution;
 				if(item.name === "Thunder Stone"){
-					html += "<div data-pokemon='Jolteon' class='evoButton col-sm-3 col-md-2 pokedexEntry' id='evo" + item.id + "'>";
-					html += "<img class='center-block' id='pokedexImage' src=images/pokemon/" + id + ".png >" + possibleEvolutions[i].name;
-					if (alreadyCaught("Jolteon")){
-						html += " <img id=alreadyCaughtImage src=images/Pokeball.PNG>";
-					}
+					eeveelution = "Jolteon";
 				}
 				else if(item.name === "Water Stone"){
-					html +="<div data-pokemon='Vaporeon' class='evoButton col-sm-3 col-md-2 pokedexEntry' id='evo" + item.id + "'>";
-					html += "<img class='center-block' id='pokedexImage' src=images/pokemon/" + id + ".png >" + possibleEvolutions[i].name;
-					if (alreadyCaught("Vaporeon")){
-						html += " <img id=alreadyCaughtImage src=images/Pokeball.PNG>";
-					}
+					eeveelution = "Vaporeon";
 				}
 				else if(item.name === "Fire Stone"){
-					html += "<div data-pokemon='Flareon' class='evoButton col-sm-3 col-md-2 pokedexEntry' id='evo" + item.id + "'>";
-					html += "<img class='center-block' id='pokedexImage' src=images/pokemon/" + id + ".png >" + possibleEvolutions[i].name;
-					if (alreadyCaught("Flareon")){
-						html += " <img id=alreadyCaughtImage src=images/Pokeball.PNG>";
+					eeveelution = "Flareon";
+				}
+				html += "<div data-pokemon='" + eeveelution + "' class='evoButton col-sm-3 col-md-2 pokedexEntry' id='evo" + item.id + "'>";
+				html += "<img class='center-block' id='pokedexImage' src=images/"
+				if (alreadyCaughtShiny("Eevee")) {
+					html += "shiny";
+				}
+				html += "pokemon/" + id + ".png >" + possibleEvolutions[i].name;
+				if (alreadyCaught(eeveelution)){
+					html += " <img id=alreadyCaughtImage src=images/"
+					if (alreadyCaughtShiny(eeveelution)) {
+						html += "shiny";
 					}
+					html += "Pokeball.PNG>";
 				}
 			} else {
 				html += "<div data-pokemon='" + possibleEvolutions[i].evolution + "' class='evoButton col-sm-3 col-md-2 pokedexEntry' id='evo" + item.id + "'>";
-				html += "<img class='center-block' id='pokedexImage' src=images/pokemon/" + id + ".png >" + possibleEvolutions[i].name;
+				
+				html += "<img class='center-block' id='pokedexImage' src=images/"
+				console.log(possibleEvolutions[i])
+				if (alreadyCaughtShiny(possibleEvolutions[i].name)){
+					html += "shiny";
+				}
+				html += "pokemon/" + id + ".png >" + possibleEvolutions[i].name;
 			}
 
 
 
 			
 			if (alreadyCaught(possibleEvolutions[i].evolution)){
-				html += " <img id=alreadyCaughtImage src=images/Pokeball.PNG>";
+				html += " <img id=alreadyCaughtImage src=images/"
+				if (alreadyCaughtShiny(possibleEvolutions[i].evolution)) {
+					html += "shiny";
+				}
+				html+= "Pokeball.PNG>";
 			}
 			html += "</div>";
 
