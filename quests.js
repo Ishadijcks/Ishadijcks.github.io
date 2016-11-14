@@ -48,19 +48,21 @@ var startQuest = function(quest, forsed) {
 			break;
 		case "clearDungeons":
 			var dungeonNameList = getDungeonNames();
-			curQuest.type2 = dungeonNameList[curQuest.type2];
+			if (typeof curQuest.type2 == "number")
+				curQuest.type2 = dungeonNameList[curQuest.type2];
 			//curQuest.type2 = dungeonNameList[Math.floor(Math.min(dungeonNameList.length - 1, curQuest.hardness + Math.random() * 3))]; type2 is constant
-			if (!accessToTown(townList.filter(function(e) {
+			if (curQuest.type2!="none"&& !forsed && !accessToTown(townList.filter(function(e) {
 					return e.gym && e.gym.town == curQuest.type2;
-				})[0].reqRoutes) && !forsed) return startRandomQuest(); //restart
+				})[0].reqRoutes) ) return startRandomQuest(); //restart
 			break;
 		case "clearGyms":
 			var gymNameList = getGymNames();
-			curQuest.type2 = gymNameList[curQuest.type2];
+			if (typeof curQuest.type2 == "number")
+				curQuest.type2 = gymNameList[curQuest.type2];
 			// curQuest.type2 = gymNameList[Math.floor(Math.min(gymNameList.length - 1, curQuest.hardness + Math.random() * 3))]; type2 is constant
-			if (!accessToTown(townList.filter(function(e) {
+			if (curQuest.type2!="none"&& !forsed && !accessToTown(townList.filter(function(e) {
 					return e.gym && e.gym.town == curQuest.type2;
-				})[0].reqRoutes) && !forsed) return startRandomQuest(); //restart
+				})[0].reqRoutes) ) return startRandomQuest(); //restart
 			break;
 		case "defeatPokemon":
 			curQuest.type2 = Math.floor(Math.random() * pokemonList.length) + 1;
@@ -84,7 +86,7 @@ var startQuest = function(quest, forsed) {
 			if ((player.totalBred == 0 || curQuest.amount > player.totalBred / 3 + 4) && !forsed) return startRandomQuest(); //restart
 			break;
 	}
-	curQuest._amount=numberWithCommas(curQuest.amount);
+	curQuest._amount = numberWithCommas(curQuest.amount);
 	curQuest.description = quest.description.replace(/\$(\w*);/g, function(s, a) {
 		return curQuest[a];
 	});
@@ -96,12 +98,13 @@ var startQuest = function(quest, forsed) {
 }
 
 
+
 var progressQuest = function(type, type2,  amount){
 	// console.log(type);
 	// console.log(type2);
 	// console.log(player.curQuest);
 	if(type === player.curQuest.type){
-		if(type2 === player.curQuest.type2 || type2 === "none"){
+		if(type2 === player.curQuest.type2 || type2 === "none" || player.curQuest.type2 === "none"){
 			player.curQuest.progress += amount;
 			showCurQuest();
 			if(player.curQuest.progress >= player.curQuest.amount && !player.curQuest.notified){
@@ -175,6 +178,7 @@ addQuests('clearDungeons', 'Clear the $type2; $_amount; times', [
 	[IMPOSSIBLE,  7, 0.2,  2, 10,  0, [3,4,5]],
 	[IMPOSSIBLE,  5, 0.1,  4, 10,  0, [6,7,8,9]]
 ]);
+addQuest('clearDungeons', 'Clear any dungeon $_amount; times', MEDIUM, 5,3, 10)
 // base: UNKNOWN!!!
 // addQuests('clearGyms', 'Clear the $type2; $amount; times', [
 // 	[EASY,       1,  5,  5],
