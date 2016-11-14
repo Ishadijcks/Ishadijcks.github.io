@@ -532,7 +532,7 @@ var gainTokens = function(amount){
 			money *= getOakItemBonus("Token Case")
 		}
 		amount = Math.floor(amount);
-
+		dropTokenParticle(amount);
 		var totalMagnitude = getItemBonus("tokenBoost");
 		amount *= totalMagnitude;
 
@@ -637,42 +637,35 @@ var enemyDefeated = function(){
 				gainRandomItem(player.route);
 		}
 
-
-
-
-		setTimeout(function(){
-
-			if(alreadyCaughtShiny(curEnemy.name)){
-				$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/shinyPokeball.PNG><br><img id=pokeball src=images/Pokeball.PNG>");
-            } else if(alreadyCaught(curEnemy.name)){
-				$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=pokeball src=images/Pokeball.PNG>");
-			}
-			else{
-			$("#enemyInfo").html("<br>"+curEnemy.name+" <br><img id=pokeball src=images/Pokeball.PNG>");
-			}
-			player.pokeballs--;
-		}, 1);
-
 		var catchRate = curEnemy.catchRate + getBonusCatchrate() -10;
-		$("#catchDisplay").html("Catch chance: "+Math.min(100,catchRate) + "%");
+
+		setTimeout(function() {
+			$("#enemyInfo").html("<br>" + curEnemy.name + " " +
+			 (alreadyCaught(curEnemy.name) ? "<img id=alreadyCaughtImage src=images/" + (alreadyCaughtShiny(curEnemy.name) ? "shiny"  : "") +
+			  "Pokeball.PNG>"  : "<span id=alreadyCaughtImage></span>") +
+			 "<br><div id=pokeballContainer><img id=pokeball src=images/" + (curEnemy.shiny ? "shiny"  : "") + "Pokeball.PNG></div>");
+			$("#catchDisplay").html("Catch chance: " + Math.min(100, catchRate) + "%");
+			player.pokeballs--;
+			afterShowBall();
+		}, 4);
 
 		setTimeout(function(){
-		if(canCatch){
-			var chance = Math.floor(Math.random()*100+1);
-			if(chance<=catchRate){
-				capturePokemon(curEnemy.name, curEnemy.shiny);
-				progressQuest('capturePokemonRoute', player.route , 1);
+			if(canCatch){
+				var chance = Math.floor(Math.random()*100+1);
+				if(chance<=catchRate){
+					capturePokemon(curEnemy.name, curEnemy.shiny);
+					progressQuest('capturePokemonRoute', player.route , 1);
+					afterCatch(1);
+				} else afterCatch(0);
 
+				if( inProgress == 1){
+					generatePokemon(player.route);
+				}
+
+				updateStats();
+				updateEnemy();
+				$("#catchDisplay").html("");
 			}
-
-			if( inProgress == 1){
-				generatePokemon(player.route);
-			}
-
-			updateStats();
-			updateEnemy();
-			$("#catchDisplay").html("");
-		}
 		}, player.catchTime);
 
 		curEnemy.alive = false;

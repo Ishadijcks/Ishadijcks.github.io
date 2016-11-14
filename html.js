@@ -240,4 +240,5 @@ var hideAllViews = function(){
 	$("#townView").hide();
 	$("#dungeonView").hide();
 	$("#shopView").hide();
+	$("#pokeball,#pokeballContainer").remove();
 }
