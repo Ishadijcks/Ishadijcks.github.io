@@ -254,6 +254,7 @@ var gymEnemyDefeated = function(){
 	player.defeatNumbers[id]++;
 	gainShards(curEnemy.type, 3);
 	gainExp(curEnemy.exp, curEnemy.level, true);
+	progressEgg(Math.floor(Math.sqrt(currentGym.badgeReq*3 + 1)));
 	if(currentGym.pokemons[gymPokemonIndex] != null){
 		spawnGymPokemon(gymPokemonIndex);
 	}

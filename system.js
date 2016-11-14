@@ -68,6 +68,7 @@ var player = {
         itemsBuried: 0,
         rewardNumbers: [],
         maxItems: 3,
+        maxDailyDeals: 3,
         layersCleared: 0,
         totalItemsFound: 0,
         energy: 50,
@@ -81,12 +82,16 @@ var player = {
         maxEnergyUpgrades: 0,
         energyRegenUpgrades: 0,
         maxItemsUpgrades: 0,
+        maxDailyDealUpgrades: 0,
         energyGainUpgrades: 0,
         dailyDeals: [],
     },
 	oakItemsEquipped: [],
 	gymsDefeated: Array.apply(null, Array(15)).map(Number.prototype.valueOf,0),
 	dungeonsDefeated: Array.apply(null, Array(15)).map(Number.prototype.valueOf,0),
+	dateStarted: new Date(),
+	timePlayed: 0,
+	lastSaved: new Date().getTime(),
 }
 
 var curEnemy = {

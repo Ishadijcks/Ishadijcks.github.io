@@ -49,10 +49,11 @@ var showTown = function(town){
 
 	if(town.gym != null){	
 		if(town.gym.bossList != undefined){
-			if(allPokemonCaughtInDungeon(town.gym.pokemons, town.gym.bossList)){
-				html += " <img id=alreadyCaughtImage src=images/Pokeball.PNG>";
-			}
-			
+			if (dungeonCompletedShiny(town.gym)){
+                html += "<a title='You have caught all shiny Pokemon on this route!'><img id='alreadyCaughtImage' src='images/shinyPokeball.PNG'></a>";
+            } else if(dungeonCompleted(town.gym)){
+                html += "<a title='You have caught all available Pokemon on this route!'><img id='alreadyCaughtImage' src='images/Pokeball.PNG'></a>";
+            }			
 		}
 	}
 	html += "</h3>";
@@ -60,7 +61,11 @@ var showTown = function(town){
 
 	if(town.shop === "mom"){
 		html += "<button onClick='showMom()' class='mom leftTownButton btn btn-primary col-sm-2' id='"+town.name+" mom'>Mom</button>";
-
+		html += "</div><div class='row'>";
+		if(player.mapExplain || player.townExplain || player.dungeonExplain) {
+			html += "<button onClick='oakExplainAgain()' class='tutorial leftTownButton btn btn-primary col-sm-2' id='"+town.name+" mom'>Oak</button>";
+			html += "</div><div class='row'>";
+		}
 	} else if(town.shop != null){
 		html += "<button class='shop leftTownButton btn btn-primary col-sm-2' id='"+town.name+" Shop'>Shop</button>";
 		html += "</div><div class='row'>";

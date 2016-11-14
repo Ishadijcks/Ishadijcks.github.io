@@ -4,7 +4,7 @@ var oakItemList = [];
 var oakExplainEvolution = function(){
 	if(!player.evoExplain){
 		html = "";
-		html += "<div class='row'><img class='oakImage' src='images/oak/oak.png'</div";
+		html += "<div class='row'><img class='oakImage' src='images/oak/oak.png'</div>";
 		html += "<div class='row'><p class='oakText'>One of your Pokemon has evolved.<br>When a Pokemon evolves, you capture its evolution, while still keeping the original Pokemon.</p>"
 		html += "<img class='oakImage' id='evolutionImage' src=images/oak/"+player.starter+"Evolution.png>";
 		$("#oakBody").html(html);
@@ -16,7 +16,7 @@ var oakExplainEvolution = function(){
 var oakExplainMap = function(){
 	if(!player.mapExplain){
 		html = "";
-		html += "<div class='row'><img class='oakImage' src='images/oak/oak.png'</div";
+		html += "<div class='row'><img class='oakImage' src='images/oak/oak.png'</div>";
 		html += "<div class='row'><p class='oakText'>You have defeated enough Pokemon on this route, you can now advance to the next route by clicking on the map.</p>";
 		html += "<img class='oakImage' src=images/oak/mapExplain.png>";
 		$("#oakBody").html(html);
@@ -28,7 +28,7 @@ var oakExplainMap = function(){
 var oakExplainTown = function(){
 	if(!player.townExplain){
 		html = "";
-		html += "<div class='row'><img class='oakImage' src='images/oak/oak.png'</div";
+		html += "<div class='row'><img class='oakImage' src='images/oak/oak.png'</div>";
 		html += "<div class='row'><p class='oakText'>Visit towns to challenge the gym leaders!</p>";
 		html += "<img class='oakImage' src=images/oak/townExplain.png>";
 		$("#oakBody").html(html);
@@ -40,7 +40,7 @@ var oakExplainTown = function(){
 var oakExplainDungeons = function(){
 	if(!player.dungeonExplain){
 		html = "";
-		html += "<div class='row'><img class='oakImage' src='images/oak/oak.png'</div";
+		html += "<div class='row'><img class='oakImage' src='images/oak/oak.png'</div>";
 		html += "<div class='row'><p class='oakText'>Move around in the dungeon to explore all the rooms!<br>You complete the dungeon when you have defeated the boss Pokemon!<br>You can click, use WASD or use the arrow keys to navigate in the dungeon.</p>";
 		html += "<img class='oakImage' src=images/oak/dungeonExplain.png>";
 		$("#oakBody").html(html);
@@ -49,11 +49,50 @@ var oakExplainDungeons = function(){
 	}
 }
 
-var oakExplainDungeonAgain = function(){
-	player.dungeonExplain = 0;
-	oakExplainDungeons();
-}
+var oakExplainAgain = function () {
+	if(player.mapExplain || player.townExplain || player.dungeonExplain) {
+		var html = "<div class='row'><img class='oakImage' src='images/oak/oak.png'</div>";
+		html +="<div class='row' style='padding-top:20px'>";
+		html +="<div class='col-sm-offset-4'>";
+		if (player.mapExplain) {
 
+			html += "<button class='leftTownButton btn btn-primary col-sm-2' id='map_tutorial'>Maps</button>";
+			//html += "</div><div class='row'>";
+		}
+		if (player.townExplain) {
+			html += "<button class='leftTownButton btn btn-primary col-sm-2' id='town_tutorial'>Towns</button>";
+			//html += "</div><div class='row'>";
+		}
+		if (player.dungeonExplain) {
+			html += "<button class='leftTownButton btn btn-primary col-sm-2' id='dungeon_tutorial'>Dungeons</button>";
+			//html += "</div><div class='row'>";
+		}
+		html += "</div>";
+		html += "</div>";
+
+		$("#tutorialBody").html(html);
+		$("#tutorialModal").modal('show');
+
+		$("#map_tutorial").on("click", function(){
+			console.log("Hi");
+			player.mapExplain = 0;
+			$('#tutorialModal').modal('hide');
+			oakExplainMap();
+		});
+
+		$("#dungeon_tutorial").click(function () {
+			player.townExplain = 0;
+			$('#tutorialModal').modal('hide');
+			oakExplainDungeons();
+		});
+
+		$("#town_tutorial").click(function () {
+			player.townExplain = 0;
+			$('#tutorialModal').modal('hide');
+			oakExplainTown();
+		});
+	}
+};
 
 var addOakItem = function(name, image, pokedexReq, flavorText, value){
 
