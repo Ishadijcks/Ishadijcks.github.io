@@ -441,6 +441,7 @@ $(document).ready(function(){
 		} else if(questCompleted()) {
 			completeQuest();
 		}
+	})
 
 	$("body").on('click',"#safariButton", function(){
 		$("#safariModal").modal("show");
