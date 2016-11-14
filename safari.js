@@ -356,8 +356,23 @@ var throwRock = function(){
         safari.battleBusy = 1;
         safari.enemy.angry = Math.max(safari.enemy.angry, Math.floor(Math.random() * 5 + 2))
         safari.enemy.eating = 0;
-        dropParticle('<img src=images/safari/rock.png>', $('#safariPlayer').offset(), $('#safariEnemy').offset(), 1, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
-        setTimeout(safariEnemyTurn, 1500);
+        var enemy = $('#safariEnemy').offset();
+        enemy.left += 40;
+        enemy.top += 10
+        dropParticle('<img src=images/safari/rock.png>', $('#safariPlayer').offset(), enemy, 1, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
+        setTimeout(function(){
+        	$("#safariEnemy").append("<img id='angry' src=images/safari/angry.png>").css('z-index', 9999);
+        	$(".safariEnemyRow").css('margin-bottom', '166px');
+        	$('#angry').addClass('pulse');
+        	setTimeout(function(){
+        		$('#angry').css({'left': '65px', 'top': '-90px'});
+        		setTimeout(function(){
+        			$('#angry').remove();
+        			$(".safariEnemyRow").css('margin-bottom', '186px');
+        		},350)
+        	},350);
+        },1100);
+        setTimeout(safariEnemyTurn, 2000);
     }
 }
 

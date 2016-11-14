@@ -47,8 +47,29 @@
   100%{left:0px;transform:rotate(0deg);}
 }
 
+#angry {
+	position: relative;
+	top: -80px;
+	left: 5px;
+}
+
+.pulse {
+	animation-name: pulseAnimation;
+	animation-duration: 350ms;
+	transform-origin; 50% 50%;
+	animation-iteration-count: 2;
+	animation-timing-function: linear;	
+}
+
+@keyframes pulseAnimation{
+	0% {transform: scale(1);}
+	45% {transform: scale(1.3);}
+	55% {transform: scale(1.3);}
+	100% {transform: scale(1);}
+}
+
 .safariEnemyRow {
-    margin-bottom:186px;
+    margin-bottom: 186px;
 }
 
 .safariCapture {
