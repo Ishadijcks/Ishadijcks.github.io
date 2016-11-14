@@ -184,6 +184,7 @@ var questCompleted = function(){
 
 var gainQuestPoints = function(amount){
 	player.questPoints += amount;
+	player.totalQuestPoints += amount;
 }
 
 var getSkipPriceQuest = function(){

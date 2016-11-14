@@ -92,6 +92,13 @@ var player = {
 	dateStarted: new Date(),
 	timePlayed: 0,
 	lastSaved: new Date().getTime(),
+	totalMoney: 0,
+	totalDungeonTokens: 0,
+	totalQuestPoints: 0,
+	totalItemsFound: 0,
+	totalClicks: 0,
+	totalEggsHatched: 0,
+	totalMineCoins: 0,
 }
 
 var curEnemy = {
@@ -143,6 +150,7 @@ $(document).ready(function(){
 
 	$("body").on('click',"#enemy", function(){
 		clicks++;
+		player.totalClicks++;
 		if(clicks < maxClicks){
 			if (curEnemy.alive && inProgress != 0){
 				if(curEnemy.health > 0){
@@ -160,6 +168,7 @@ $(document).ready(function(){
 
 	$("body").on('click',"#healthBar", function(){
 		clicks++;
+		player.totalClicks++;
 		if(clicks < maxClicks){
 			if (curEnemy.alive && inProgress != 0){
 				if(curEnemy.health > 0){
@@ -177,6 +186,7 @@ $(document).ready(function(){
 
 	$("body").on('click',"#gymEnemy", function(){
 		clicks++;
+		player.totalClicks++;
 		if(clicks < maxClicks){
 			if (curEnemy.alive && inProgress != 0){
 				if(curEnemy.health > 0){
@@ -194,6 +204,7 @@ $(document).ready(function(){
 
 	$("body").on('click',"#dungeonEnemy", function(){
 		clicks++;
+		player.totalClicks++;
 		if(clicks < maxClicks){
 			if (curEnemy.alive && inProgress != 0){
 				if(curEnemy.health > 0){
@@ -547,7 +558,8 @@ var gainTokens = function(amount){
 		amount *= totalMagnitude;
 
 		progressQuest('gainTokens', "none" , amount);
-		player.dungeonTokens += amount
+		player.dungeonTokens += amount;
+		player.totalDungeonTokens += amount;
 		if(amount == 1){
 			log("You gained " + amount + " dungeon token!");
 		} else {
@@ -568,6 +580,7 @@ var gainMoney = function(money, message){
 
 		progressQuest('gainMoney', "none" , money);
 		player.money += money
+		player.totalMoney += money;
 		log(message + money + "!");
 	}
 }
