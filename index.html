@@ -29,7 +29,8 @@
 	<script src="breeding.js"></script>
 	<script src="types.js"></script>
 	<script src="mining.js"></script>
-	
+	<script src="stats.js"></script>
+
 	<!-- Latest compiled and minified CSS -->
 	<link href="bootstrap.css" rel="stylesheet"><!-- Optional theme -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
@@ -840,7 +841,19 @@
 							<div class="modal-header">
 								<h4 class="modal-title" >Professor Oak</h4>
 							</div>
-							<div class="modal-body" id="oakBody">Test
+							<div class="modal-body" id="oakBody">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div aria-labelledby="myModalLabel" class="modal fade" id="tutorialModal" role="dialog" tabindex="-1">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title" >Professor Oak</h4>
+							</div>
+							<div class="modal-body" id="tutorialBody">
 							</div>
 						</div>
 					</div>
@@ -928,6 +941,7 @@
 								<ul class="nav nav-tabs">
 									<li class="active"><a onClick='showPokedex()' data-toggle="tab" href="#PokedexTab">Pokedex</a></li>
 									<li><a data-toggle="tab" onClick='showGymBadges()' href="#badgesTab">Badges</a></li>
+									<li><a data-toggle="tab" onClick='showStats()' href="#statsTab">Statistics</a></li>
 								</ul>
 								<div class="tab-content">
 									<div id="PokedexTab" class="tab-pane fade active in">
@@ -949,6 +963,9 @@
 												<img class="pokeBadge col-sm-3" id="EarthBadge" src="images/gyms/badges/EarthBadge.png">
 											</div>
 										</div>
+									</div>
+									<div id="statsTab" class="tab-pane fade active in">
+										<div id="statsBody" style="width:80%; margin:auto; margin-top:30px; text-align:center"></div>
 									</div>
 								</div>
 							</div>
@@ -1699,7 +1716,7 @@
 							<thead>
 								<tr>
 									<th>Item</th>
-									<th>Amount</th>
+									<th>Amt</th>
 									<th>Time</th>
 								</tr>
 							<thead>

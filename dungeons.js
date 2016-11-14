@@ -381,6 +381,7 @@ var dungeonEnemyDefeated = function() {
         
         currentDungeon.map[playerPosition] = "Empty";
 
+        var catchRate = curEnemy.catchRate + getBonusCatchrate();
         var id = getPokemonByName(curEnemy.name).id - 1;
         player.defeatNumbers[id]++;
         setTimeout(function() {
@@ -393,14 +394,13 @@ var dungeonEnemyDefeated = function() {
                     $("#dungeonEnemyInfo").html("<br>" + curEnemy.name + " <br><img id=dungeonPokeball src=images/Pokeball.PNG>");
                 }
             }
+            $("#dungeonCatchDisplay").html("Catch chance: " + Math.min(100, catchRate) + "%");
             player.pokeballs--;
         }, 1);
 
         gainExp(curEnemy.exp,curEnemy.level,false);
         gainShards(curEnemy.type, 3);
         dungeonCanMove = 1;
-        var catchRate = curEnemy.catchRate + getBonusCatchrate();
-        $("#dungeonCatchDisplay").html("Catch chance: " + Math.min(100, catchRate) + "%");
         progressEgg(Math.floor(Math.sqrt(currentDungeon.itemRoute)));
         setTimeout(function() {
             if (inProgress != 0) {
@@ -520,7 +520,7 @@ var spawnDungeonBoss = function() {
     if(possibleType != undefined){
         curEnemy.type = possibleType;
     } else {
-        curEnemy.type = 'normal';        
+        curEnemy.type = ['normal'];        
     }
 
     clearInterval(attackInterval);
@@ -549,7 +549,7 @@ var spawnDungeonPokemon = function() {
     if(possibleType != undefined){
         curEnemy.type = possibleType;
     } else {
-        curEnemy.type = 'normal';        
+        curEnemy.type = ['normal'];        
     }
     clearInterval(attackInterval);
     attackInterval = setInterval(pokemonsAttack, 1000);

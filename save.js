@@ -63,6 +63,13 @@ var load = function(){
 			}
 		}
 	}
+
+	if(player.version < 0.92) {
+		updateTypes();
+		player.notEffectiveTypeBonus.push(0);
+		player.normalEffectiveTypeBonus.push(0);
+		player.veryEffectiveTypeBonus.push(0);
+	}
 	
 	var date = new Date();
 	if(date.getDate() !== player.lastSeen){
@@ -136,5 +143,11 @@ var correctFossils = function() {
 		if (player.mineInventory[i].id < 4 && player.mineInventory[i].value != 0) {
 			player.mineInventory[i].value = 0;
 		}
+	}
+}
+
+var updateTypes = function() {
+	for( var i = 0; i<player.caughtPokemonList.length; i++) {
+		player.caughtPokemonList[i].type = getPokemonByName(player.caughtPokemonList[i].name).type;
 	}
 }

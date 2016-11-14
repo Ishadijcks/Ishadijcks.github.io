@@ -1,4 +1,4 @@
-var version = "0.91"
+var version = "0.92"
 var inProgress = 1;
 var canCatch = 1;
 var attackInterval;
@@ -39,10 +39,10 @@ var player = {
 	townExplain: 0,
 	dungeonExplain: 0,
 	inventoryList: [],
-	typeShards: Array.apply(null, Array(17)).map(Number.prototype.valueOf,0),
-	notEffectiveTypeBonus: Array.apply(null, Array(17)).map(Number.prototype.valueOf,0),
-	normalEffectiveTypeBonus: Array.apply(null, Array(17)).map(Number.prototype.valueOf,0),
-	veryEffectiveTypeBonus: Array.apply(null, Array(17)).map(Number.prototype.valueOf,0),
+	typeShards: Array.apply(null, Array(18)).map(Number.prototype.valueOf,0),
+	notEffectiveTypeBonus: Array.apply(null, Array(18)).map(Number.prototype.valueOf,0),
+	normalEffectiveTypeBonus: Array.apply(null, Array(18)).map(Number.prototype.valueOf,0),
+	veryEffectiveTypeBonus: Array.apply(null, Array(18)).map(Number.prototype.valueOf,0),
 	shopPriceDeviation: Array.apply(null, Array(100)).map(Number.prototype.valueOf,1),
 	questPoints:0,
 	curQuest: firstQuest,
@@ -92,6 +92,13 @@ var player = {
 	dateStarted: new Date(),
 	timePlayed: 0,
 	lastSaved: new Date().getTime(),
+	totalMoney: 0,
+	totalDungeonTokens: 0,
+	totalQuestPoints: 0,
+	totalItemsFound: 0,
+	totalClicks: 0,
+	totalEggsHatched: 0,
+	totalMineCoins: 0,
 }
 
 var curEnemy = {
@@ -143,6 +150,7 @@ $(document).ready(function(){
 
 	$("body").on('click',"#enemy", function(){
 		clicks++;
+		player.totalClicks++;
 		if(clicks < maxClicks){
 			if (curEnemy.alive && inProgress != 0){
 				if(curEnemy.health > 0){
@@ -160,6 +168,7 @@ $(document).ready(function(){
 
 	$("body").on('click',"#healthBar", function(){
 		clicks++;
+		player.totalClicks++;
 		if(clicks < maxClicks){
 			if (curEnemy.alive && inProgress != 0){
 				if(curEnemy.health > 0){
@@ -177,6 +186,7 @@ $(document).ready(function(){
 
 	$("body").on('click',"#gymEnemy", function(){
 		clicks++;
+		player.totalClicks++;
 		if(clicks < maxClicks){
 			if (curEnemy.alive && inProgress != 0){
 				if(curEnemy.health > 0){
@@ -194,6 +204,7 @@ $(document).ready(function(){
 
 	$("body").on('click',"#dungeonEnemy", function(){
 		clicks++;
+		player.totalClicks++;
 		if(clicks < maxClicks){
 			if (curEnemy.alive && inProgress != 0){
 				if(curEnemy.health > 0){
@@ -357,6 +368,16 @@ $(document).ready(function(){
 	$("body").on('click',"#questButton", function(){
 		$("#questModal").modal("show");
 		showCurQuest();
+	})
+
+	$("body").on('click',"#questCounter", function(){
+		// No action when completing quest
+		if(!questCompleted()/*already false*/ && !(player.curQuest.progress==0 && $('#smallQuestBar').width()>0)){
+			$("#questModal").modal("show");
+			showCurQuest();
+		} else if(questCompleted()) {
+			completeQuest();
+		}
 	})
 
 	$("body").on('click',"#mineButton", function(){
@@ -537,7 +558,8 @@ var gainTokens = function(amount){
 		amount *= totalMagnitude;
 
 		progressQuest('gainTokens', "none" , amount);
-		player.dungeonTokens += amount
+		player.dungeonTokens += amount;
+		player.totalDungeonTokens += amount;
 		if(amount == 1){
 			log("You gained " + amount + " dungeon token!");
 		} else {
@@ -558,6 +580,7 @@ var gainMoney = function(money, message){
 
 		progressQuest('gainMoney', "none" , money);
 		player.money += money
+		player.totalMoney += money;
 		log(message + money + "!");
 	}
 }
@@ -580,7 +603,7 @@ var gainExp = function(exp,level,trainer){
 		}
 
 
-		var expTotal = Math.floor((exp * trainerBonus * oakBonus * level * multiplier * totalMagnitude) / 7);
+		var expTotal = Math.floor((exp * trainerBonus * oakBonus * level * pokedexBonusExp * multiplier * totalMagnitude) / 9);
 		//realgame formula: (trainerbonus * baseexp * luckyeggbonus * affectionbonus * level * tradedbonus * unevolvedbonus) / (7 * outofbattlepenalty)
 		for( var i = 0; i<player.caughtPokemonList.length; i++){
 			var pokemonLevel = experienceToLevel(player.caughtPokemonList[i].experience, player.caughtPokemonList[i].levelType);
@@ -609,7 +632,7 @@ var enemyDefeated = function(){
 
 	canCatch = 1;
 	if (curEnemy.alive){
-		progressEgg(Math.floor(Math.sqrt(player.route)));
+		progressEgg(Math.floor(Math.sqrt(player.route)*100)/100);
 		progressQuest('defeatPokemonRoute', player.route , 1);
 		progressQuest('defeatPokemon', curEnemy.id, 1);
 
@@ -639,6 +662,7 @@ var enemyDefeated = function(){
 
 
 
+		var catchRate = curEnemy.catchRate + getBonusCatchrate() -10;
 
 		setTimeout(function(){
 
@@ -650,11 +674,10 @@ var enemyDefeated = function(){
 			else{
 			$("#enemyInfo").html("<br>"+curEnemy.name+" <br><img id=pokeball src=images/Pokeball.PNG>");
 			}
+			$("#catchDisplay").html("Catch chance: "+Math.min(100,catchRate) + "%");
 			player.pokeballs--;
 		}, 1);
 
-		var catchRate = curEnemy.catchRate + getBonusCatchrate() -10;
-		$("#catchDisplay").html("Catch chance: "+Math.min(100,catchRate) + "%");
 
 		setTimeout(function(){
 		if(canCatch){
@@ -768,7 +791,7 @@ var calculateAttack = function(){
 
 		var level = experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType);
 		if( curEnemy != "undefined"){
-			total += Math.ceil(level*(player.caughtPokemonList[i].attack)/100)* typeEffectiveness[typeToNumber(player.caughtPokemonList[i].type)][typeToNumber(curEnemy.type)];
+			total += Math.ceil(level*(player.caughtPokemonList[i].attack)/100)* damageModifier(player.caughtPokemonList[i], curEnemy);
 		}
 	}
 	player.attack = total;
@@ -776,7 +799,17 @@ var calculateAttack = function(){
 	return Math.max(total,1);
 }
 
-
+var damageModifier = function(attacker, defender) {
+	var tmp = 0;
+	for (var i = 0; i<attacker.type.length; i++) {
+		for (var j = 0; j<defender.type.length; j++) {
+			tmp += typeEffectiveness[typeToNumber(attacker.type[i])][typeToNumber(defender.type[j])];
+		}
+	}
+	
+	tmp /= attacker.type.length * defender.type.length
+	return tmp;
+}
 
 var generatePokemon = function(route){
 	clicks = 0;
