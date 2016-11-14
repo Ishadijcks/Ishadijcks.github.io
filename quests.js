@@ -69,7 +69,7 @@ var startQuest = function(quest) {
 		case "breedPokemon":
 			break;
 	}
-	curQuest.description = quest.description.replace(/$/);
+	curQuest.description = quest.description.replace(/\$(\w*);/g,function(s,a){return curQuest[a];});
 	curQuest.reward = Math.floor(quest.baseReward * curQuest.amount * (0.9 + Math.random() * 0.2) * questPointsPerKillInAverageZone); // some math.
 	if(curQuest.amount==0||curQuest.reward==0){
 		return startRandomQuest();
@@ -146,7 +146,7 @@ addQuests('gainTokens', 'Gain $amount; dungeon tokens', [
 addQuest('captureShinies', 'Capture $amount; shinies', 
 	IMPOSSIBLE, 1, 0, 6000 // that's 1200QP!
 );
-// base: 12
+// base: 10
 addQuests('clearDungeons', 'Clear the $type2; $amount; times', [
 	[EASY,   1, 5, 9 ],
 	[MEDIUM, 3, 8, 15]
