@@ -359,19 +359,30 @@ var throwRock = function(){
         var enemy = $('#safariEnemy').offset();
         enemy.left += 40;
         enemy.top += 10
-        dropParticle('<img src=images/safari/rock.png>', $('#safariPlayer').offset(), enemy, 1, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
+        dropParticle('<img src=images/safari/rock.png>', $('#safariPlayer').offset(), enemy, 0.8, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
         setTimeout(function(){
-        	$("#safariEnemy").append("<img id='angry' src=images/safari/angry.png>").css('z-index', 9999);
-        	$(".safariEnemyRow").css('margin-bottom', '166px');
-        	$('#angry').addClass('pulse');
+        	var hitSplash = $('<ptcl>').html("<img src=images/safari/hit.png>").children().appendTo('body');
+        	hitSplash.offset(enemy).css({'opacity': 0.8, 'z-index': 9998});
+        	hitSplash.fadeOut(400, function(){hitSplash.remove();});
         	setTimeout(function(){
-        		$('#angry').css({'left': '65px', 'top': '-90px'});
+        		var newOffset = {
+        			top: enemy.top + 4,
+        			left: enemy.left - 20
+        		}
+        		var ang = $('<ptcl>').html("<img src=images/safari/angry.png>").children().appendTo('body');
+    			ang.css('position','absolute').css('z-index', 9999);
+    			ang.offset(newOffset);
+        		ang.addClass('pulse');
         		setTimeout(function(){
-        			$('#angry').remove();
-        			$(".safariEnemyRow").css('margin-bottom', '186px');
-        		},350)
-        	},350);
-        },1100);
+        			newOffset.top -= 10;
+        			newOffset.left += 60;
+        			ang.offset(newOffset);
+        			setTimeout(function(){
+        				ang.remove();
+        			},350)
+        		},350);
+        	},300);
+        },800);
         setTimeout(safariEnemyTurn, 2000);
     }
 }

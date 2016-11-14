@@ -47,12 +47,6 @@
   100%{left:0px;transform:rotate(0deg);}
 }
 
-#angry {
-	position: relative;
-	top: -80px;
-	left: 5px;
-}
-
 .pulse {
 	animation-name: pulseAnimation;
 	animation-duration: 350ms;
