@@ -16,7 +16,7 @@ var addQuest = function(type, description, difficulty, minAmount, randomAmount, 
 var addQuests = function(type, description, quests) {
 	for (var i = 0; i < quests.length; i++) {
 		var q = quests[i];
-		addQuest(type, description, q[0], q[1], q[2], q[3], q[4]);
+		addQuest(type, description, q[0], q[1], q[2], q[3], q[4], q[5], q[6]);
 	}
 };
 var questDifficultyName = ["EASY", "MEDIUM", "HARD", "HARDER", "IMPOSSIBLE"];
@@ -31,9 +31,9 @@ var startQuest = function(quest, forsed) {
 	curQuest.amount = Math.ceil(quest.minAmount + Math.random() * quest.randomAmount * (1 + player.questDifficulty)); // some math
 	curQuest.notified = 0;
 	if (typeof quest.type2 == "object")
-		curQuest.type2 = quest.type2;
-	else
 		curQuest.type2 = quest.type2[Math.floor(quest.type2.length * Math.random())];
+	else
+		curQuest.type2 = quest.type2;
 
 	switch (quest.type) {
 		case "defeatPokemonRoute":
@@ -52,7 +52,7 @@ var startQuest = function(quest, forsed) {
 				curQuest.type2 = dungeonNameList[curQuest.type2];
 			//curQuest.type2 = dungeonNameList[Math.floor(Math.min(dungeonNameList.length - 1, curQuest.hardness + Math.random() * 3))]; type2 is constant
 			if (curQuest.type2!="none"&& !forsed && !accessToTown(townList.filter(function(e) {
-					return e.gym && e.gym.town == curQuest.type2;
+					return e.gym && e.gym.name == curQuest.type2;
 				})[0].reqRoutes) ) return startRandomQuest(); //restart
 			break;
 		case "clearGyms":
@@ -91,15 +91,19 @@ var startQuest = function(quest, forsed) {
 		return curQuest[a];
 	});
 	curQuest.reward = Math.floor(quest.baseReward * curQuest.amount * (0.9 + Math.random() * 0.2) * questPointsPerKillInAverageZone); // some math.
-	if ((curQuest.amount == 0 || curQuest.reward == 0) && !forsed) {
+	if ((!(curQuest.amount>0) || !(curQuest.reward>0)) && !forsed) {
+		console.log('bag quest')
 		return startRandomQuest();
 	}
 	showCurQuest();
+	console.log(`Started quest "${curQuest.type}", "${curQuest.type2}", x${curQuest.amount}, ${questDifficultyName[curQuest.difficulty]}, ${curQuest.reward} QP, hard ${curQuest.hardness}\n"${curQuest.description}"`)
 }
 
 
 
 var progressQuest = function(type, type2,  amount){
+	if(window.logp)
+	console.log('progressQuest('+Array.from(arguments).join(',')+')')
 	// console.log(type);
 	// console.log(type2);
 	// console.log(player.curQuest);
@@ -129,7 +133,7 @@ addQuests('defeatPokemonRoute', 'Defeat $_amount; Pokemon on route $type2;', [
 	[MEDIUM,      50, 20,  1, 0.9,   5],
 	[HARD,       150, 20,  1,   1,  10],
 	[HARDER,     300, 20,  1, 1.2,  15],
-	[IMPOSSIBLE, 500, 20,  1, 1.5,  20]
+	[IMPOSSIBLE, 500, 20,  1,   2,  20]
 ]);
 // base: 1.2 kill
 addQuest('capturePokemonRoute', 'Capture $_amount; Pokemon on route $type2;', [
@@ -178,15 +182,19 @@ addQuests('clearDungeons', 'Clear the $type2; $_amount; times', [
 	[IMPOSSIBLE,  7, 0.2,  2, 10,  0, [3,4,5]],
 	[IMPOSSIBLE,  5, 0.1,  4, 10,  0, [6,7,8,9]]
 ]);
-addQuest('clearDungeons', 'Clear any dungeon $_amount; times', MEDIUM, 5,3, 10)
-// base: UNKNOWN!!!
-// addQuests('clearGyms', 'Clear the $type2; $amount; times', [
-// 	[EASY,       1,  5,  5],
-// 	[MEDIUM,     3, 10, 10],
-// 	[HARD,       3, 10, 10],
-// 	[HARDER,     3, 10, 10],
-// 	[IMPOSSIBLE, 3, 10, 10]
-// ]);
+addQuest('clearDungeons', 'Clear any dungeon $_amount; times',
+	MEDIUM, 5,3, 10
+);
+// base: 2,2, 3,4, 5.5,7, 8.5,10
+addQuests('clearGyms', 'Clear the $type2; $amount; times', [
+	[EASY,   1, 3,    2, 1,  0, [0,1]],
+	[MEDIUM, 1, 2,  3.5, 1,  0, [2,3]],
+	[HARD,   1, 1,  6.3, 1,  0, [4,5]],
+	[HARDER, 1, 2,  9.3, 1,  0, [6,7]]
+]);
+addQuest('clearGyms', 'Clear any gym $_amount; times',
+	MEDIUM, 1, 2,  3.5
+);
 // base: 1 kill | 1/3 kills(dung) | 2 used
 addQuests('gainShards', 'Gain $_amount; shards (any type)', [
 	[EASY,         20, 40,  0.4],
@@ -277,11 +285,11 @@ var dailyReset = function(){
 var startRandomQuest = function(){
 	var possibleQuests = getQuestsByDifficulty(player.questDifficulty);
 	var random = Math.floor(Math.random() * possibleQuests.length);
-	startQuest(possibleQuests[random]);
+	startQuest(possibleQuests[random]/*,1*/);
 }
 
 var getQuestsByDifficulty = function(difficulty){
-	difficulty = Math.min(4, Math.floor(Math.sqrt(difficulty)));
+	difficulty = Math.min(questDifficultyName.length-1, Math.floor(Math.sqrt(difficulty)));
 	var list = [];
 	for( var i = 0; i<questList.length; i++){
 		if(questList[i].type === player.curQuest.type) {
@@ -290,8 +298,7 @@ var getQuestsByDifficulty = function(difficulty){
 		if( questList[i].difficulty === difficulty){
 			list.push(questList[i]);
 		} else {
-			var random = Math.floor(Math.random()*100 + 1);
-			if( random < (100 - (questList[i].difficulty - difficulty)* 40)){
+			if (Math.random()>(questList[i].difficulty - difficulty)*0.4){
 				list.push(questList[i]);
 			}
 		}
