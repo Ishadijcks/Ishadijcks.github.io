@@ -159,20 +159,21 @@ var startQuest = function(quest, forsed) {
 	});
 	curQuest.reward = Math.floor(quest.baseReward * curQuest.amount * (0.9 + Math.random() * 0.2) * questPointsPerKillInAverageZone); // Fluctuation is +-10%. May be changed.
 	if ((!(curQuest.amount > 0) || !(curQuest.reward > 0)) && !forsed) {
-		console.log('bag quest')
+		// console.log('bag quest:',JSON.stringify(curQuest))
+		// console.log(curQuest.template)
 		return startRandomQuest();
 	}
 	if (curQuest.location)
 		if (!isLocationAccessible(curQuest.location) && !forsed) return startRandomQuest(); //restart
 	showCurQuest();
-	console.log(`Started quest "${curQuest.type}", "${curQuest.type2}", x${curQuest.amount}, ${questDifficultyName[curQuest.difficulty]}, ${curQuest.reward} QP, hard ${curQuest.hardness}\n"${curQuest.description}"`)
+	// console.log(`Started quest "${curQuest.type}", "${curQuest.type2}", x${curQuest.amount}, ${questDifficultyName[curQuest.difficulty]}, ${curQuest.reward} QP, hard ${curQuest.hardness}\n"${curQuest.description}"`)
 }
 
 
 
 var progressQuest = function(type, type2, amount) {
-	if (window.logp)
-		console.log('progressQuest(' + Array.from(arguments).join(',') + ')')
+	// if (window.logp)
+	// 	console.log('progressQuest(' + Array.from(arguments).join(',') + ')')
 		// console.log(type);
 		// console.log(type2);
 		// console.log(player.curQuest);
@@ -242,7 +243,7 @@ addQuest('captureShinies', 'Capture $_amount; shinies',
 	IMPOSSIBLE, 1, 0, 6000 // that's 1200QP!
 );
 // base: 10
-//           >----- Type -----<    >---- Description ----< [ [Difficulty MinAmt RndAmt  gainMult (baseGain) (Hardness) (type2) ] ]
+//        >--- Type ---<   >---------- Description ----------< [ [Difficulty MinAmt RndAmt  gainMult (baseGain) (Hardness) (type2) ] ]
 addQuests('clearDungeons', 'Clear the $type2; $_amount; times', [
 	[EASY,        1,   3,  1, 10,  0, [0,1,2]],
 	[MEDIUM,      5,   3,  1, 10,  0, [0,1,2]],
@@ -306,9 +307,23 @@ addQuestMultiplate('gainShards',MEDIUM,
 	["Steel",    2.33,  4, "Power Plant Dungeon"]],
 	function(quest){});
 
+////////////////////////////////////
+// UNOPTIMIZED QUESTS FOR TESTING //
+////////////////////////////////////
+//addQuest(type, description, difficulty, minAmount, randomAmount, rewardMultiplier, baseReward, hardness, type2)
+/* UNDERGROUND */
+addQuest('clearUnderground','clearUnderground',EASY, 1,0, 5,5, 0,'none'); // tested
 
+addQuest('digUnderground','digUnderground',EASY, 1,0, 5,5, 0,'none'); // tested
+addQuest('digUnderground','digUnderground',EASY, 1,0, 5,5, 0,'chisel'); // tested
+addQuest('digUnderground','digUnderground',EASY, 1,0, 5,5, 0,'hammer'); // tested
 
+addQuest('tilesUnderground','tilesUnderground',EASY, 1,0, 5,5, 0,'none'); // tested
+addQuest('tilesUnderground','tilesUnderground',EASY, 1,0, 5,5, 0,'chisel'); // tested
+addQuest('tilesUnderground','tilesUnderground',EASY, 1,0, 5,5, 0,'hammer'); // tested
 
+addQuest('itemsUnderground','itemsUnderground',EASY, 1,0, 5,5, 0,'none'); // tested
+addQuest('dealsUnderground','dealsUnderground',EASY, 1,0, 5,5, 0,'none'); // tested
 
 
 
@@ -381,6 +396,7 @@ var startRandomQuest = function(){
 }
 
 var getQuestsByDifficulty = function(difficulty){
+																				return[questList.pop()];
 	difficulty = Math.min(questDifficultyName.length-1, Math.floor(Math.sqrt(difficulty)));
 	var list = [];
 	for( var i = 0; i<questList.length; i++){
@@ -395,7 +411,7 @@ var getQuestsByDifficulty = function(difficulty){
 			}
 		}
 	}
-	console.log(difficulty);
+	// console.log(difficulty);
 	if(list.length > 0){
 		return list;
 	} else {

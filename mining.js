@@ -77,6 +77,7 @@ var useDailyDeal = function(id){
         player.mineInventory[index].amount -= deal.amount1;
         for( var i = 0; i<deal.amount2; i++){
             gainMineItem(deal.item2.id);
+			progressQuest('dealsUnderground','none',1);
         }
     }
     showDailyDeals();
@@ -570,6 +571,7 @@ var checkItemsRevealed = function(){
 		if(checkItemRevealed(player.curMine.rewardNumbers[i])){
 			gainMineItem(player.curMine.rewardNumbers[i]);
 			player.curMine.itemsFound++;
+			progressQuest('itemsUnderground','none',1);
 			player.curMine.rewardNumbers.splice(i,1);
 			i--;
 			$.notify("You dug an item", "success");
@@ -583,6 +585,7 @@ var checkMineCompleted = function(){
 
 	if(player.curMine.itemsFound >= player.curMine.itemsBuried && !loadingNewMine){
 		setTimeout(mineCompleted, 1500);
+		progressQuest('clearUnderground','none',1);	
 		loadingNewMine = true;
 	}
 }
@@ -677,12 +680,14 @@ var hammer = function(x,y){
 			for(var j = -1; j < 2; j++){
 				if(player.curMine.grid[normalizeY(x+i)][normalizeX(y+j)] > 0){
 					hasMined = true;
+					progressQuest('tilesUnderground','hammer',1);
 				}
 				player.curMine.grid[normalizeY(x+i)][normalizeX(y+j)] = Math.max(0, player.curMine.grid[normalizeY(x+i)][normalizeX(y+j)]-1);
 			}
 		}
 		if(hasMined) {
 			player.curMine.energy -= player.curMine.hammerEnergy
+			progressQuest('digUnderground','hammer',1);
 		}
 	}
 }
@@ -692,6 +697,8 @@ var chisel = function(x,y){
 		if (player.curMine.energy >= player.curMine.chisselEnergy) {
 			player.curMine.grid[normalizeY(x)][normalizeX(y)] = Math.max(0, player.curMine.grid[normalizeY(x)][normalizeX(y)] - 2);
 			player.curMine.energy -= player.curMine.chisselEnergy;
+			progressQuest('tilesUnderground','chisel',1);
+			progressQuest('digUnderground','chisel',1);
 		}
 	}
 }
