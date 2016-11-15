@@ -312,18 +312,18 @@ addQuestMultiplate('gainShards',MEDIUM,
 ////////////////////////////////////
 //addQuest(type, description, difficulty, minAmount, randomAmount, rewardMultiplier, baseReward, hardness, type2)
 /* UNDERGROUND */
-addQuest('clearUnderground','clearUnderground',EASY, 1,0, 5,5, 0,'none'); // tested
+// addQuest('clearUnderground','clearUnderground',EASY, 1,0, 5,5, 0,'none'); // tested
 
-addQuest('digUnderground','digUnderground',EASY, 1,0, 5,5, 0,'none'); // tested
-addQuest('digUnderground','digUnderground',EASY, 1,0, 5,5, 0,'chisel'); // tested
-addQuest('digUnderground','digUnderground',EASY, 1,0, 5,5, 0,'hammer'); // tested
+// addQuest('digUnderground','digUnderground',EASY, 1,0, 5,5, 0,'none'); // tested
+// addQuest('digUnderground','digUnderground',EASY, 1,0, 5,5, 0,'chisel'); // tested
+// addQuest('digUnderground','digUnderground',EASY, 1,0, 5,5, 0,'hammer'); // tested
 
-addQuest('tilesUnderground','tilesUnderground',EASY, 1,0, 5,5, 0,'none'); // tested
-addQuest('tilesUnderground','tilesUnderground',EASY, 1,0, 5,5, 0,'chisel'); // tested
-addQuest('tilesUnderground','tilesUnderground',EASY, 1,0, 5,5, 0,'hammer'); // tested
+// addQuest('tilesUnderground','tilesUnderground',EASY, 1,0, 5,5, 0,'none'); // tested
+// addQuest('tilesUnderground','tilesUnderground',EASY, 1,0, 5,5, 0,'chisel'); // tested
+// addQuest('tilesUnderground','tilesUnderground',EASY, 1,0, 5,5, 0,'hammer'); // tested
 
-addQuest('itemsUnderground','itemsUnderground',EASY, 1,0, 5,5, 0,'none'); // tested
-addQuest('dealsUnderground','dealsUnderground',EASY, 1,0, 5,5, 0,'none'); // tested
+// addQuest('itemsUnderground','itemsUnderground',EASY, 1,0, 5,5, 0,'none'); // tested
+// addQuest('dealsUnderground','dealsUnderground',EASY, 1,0, 5,5, 0,'none'); // tested
 
 
 
