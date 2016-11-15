@@ -1,5 +1,7 @@
 // Move it somewhere
 function isLocationAccessible(name) {
+	if (!name)
+		return false;
 	if (+name)
 		return accessToRoute(+name);
 	name = name + '';
@@ -10,7 +12,7 @@ function isLocationAccessible(name) {
 			return accessToTown(townList[i].reqRoutes);
 		if (townList[i].gym)
 			if (townList[i].gym.name == name || townList[i].gym.town == name)
-				return accessToTown(townList[i].reqRoutes) && player.gymBadges.length >= town.gym.badgeReq;
+				return accessToTown(townList[i].reqRoutes) && player.gymBadges.length >= townList[i].gym.badgeReq;
 	}
 	console.warn("Wrong location name!");
 	return null;
@@ -38,20 +40,72 @@ var addQuests = function(type, description, quests) {
 		addQuest(type, description, q[0], q[1], q[2], q[3], q[4], q[5], q[6]);
 	}
 };
-
+var addQuestMultiplate = function(type, difficulty, list, base, quests, fn) {
+	var tempQuest = {
+		isMultiplate: true,
+		type: type,
+		difficulty: difficulty,
+		list: list,
+		base: base,
+		quests: quests,
+		fn: fn
+	};
+	questList.push(tempQuest);
+}
+var addQuestMultiplates = function(type, list, base, plates, fn) {
+	for (var i = 0; i < plates.length; i++) {
+		var p = plates[i];
+		addQuestMultiplate(type, p[0], list, base, p, fn);
+	}
+};
+var useQuestMultiplate = function(plate, curQuest) {
+	var tempQuest = {
+		type: plate.type,
+		description: plate.description,
+		difficulty: plate.difficulty,
+		minAmount: 0,
+		randomAmount: 0,
+		baseReward: 1,
+		hardness: 0,
+		type2: "none"
+	};
+	var list = plate.list;
+	var quest = plate.quests[Math.floor(plate.quests.length * Math.random())];
+	for (var i = 0; i < list.length; i++) {
+		tempQuest[list[i]] = plate.base[i];
+	}
+	for (i = 0; i < quest.length; i++) {
+		tempQuest[list[i]] = quest[i];
+	}
+	if (tempQuest.rewardMultiplier)
+		tempQuest.baseReward *= tempQuest.rewardMultiplier;
+	if (plate.fn)
+		plate.fn(tempQuest);
+	for (i in tempQuest) {
+		curQuest[i] = tempQuest[i];
+	}
+	return tempQuest;
+}
 
 var questDifficultyName = ["EASY", "MEDIUM", "HARD", "HARDER", "IMPOSSIBLE"];
 var questPointsPerKillInAverageZone = 0.2;
 var startQuest = function(quest, forsed) {
 	var curQuest = player.curQuest;
-	curQuest.template = quest;
 	curQuest.progress = 0;
-	curQuest.type = quest.type;
-	curQuest.difficulty = quest.difficulty;
-	curQuest.hardness = quest.hardness;
-	curQuest.amount = Math.ceil(quest.minAmount + Math.random() * quest.randomAmount * (1 + player.questDifficulty)); // some math
 	curQuest.notified = 0;
 	curQuest.location = '';
+	if (quest.isMultiplate) {
+		curQuest.multiplate = quest;
+		curQuest.template = quest = useQuestMultiplate(quest, curQuest);
+	} else {
+		curQuest.multiplate = null;
+		curQuest.template = quest;
+		curQuest.type = quest.type;
+		curQuest.difficulty = quest.difficulty;
+		curQuest.hardness = quest.hardness;
+	}
+	curQuest.amount = Math.ceil(quest.minAmount + Math.random() * quest.randomAmount * (1 + player.questDifficulty)); // some math
+
 	if (typeof quest.type2 == "object")
 		curQuest.type2 = quest.type2[Math.floor(quest.type2.length * Math.random())];
 	else
@@ -60,21 +114,21 @@ var startQuest = function(quest, forsed) {
 	switch (quest.type) {
 		case "defeatPokemonRoute":
 			//Route to defeat Pokémon on.
-			curQuest.location=curQuest.type2 = Math.min(Math.floor(5 * Math.random() + quest.hardness), 25) || 1;
+			curQuest.location = curQuest.type2 = Math.min(Math.floor(5 * Math.random() + quest.hardness), 25) || 1;
 			break;
 		case "capturePokemonRoute":
 			//Route to capture Pokémon on.
-			curQuest.location=curQuest.type2 = Math.min(Math.floor(5 * Math.random() + quest.hardness), 25) || 1;
+			curQuest.location = curQuest.type2 = Math.min(Math.floor(5 * Math.random() + quest.hardness), 25) || 1;
 			break;
 		case "clearDungeons":
 			var dungeonNameList = getDungeonNames();
 			if (typeof curQuest.type2 == "number")
-				curQuest.location=curQuest.type2 = dungeonNameList[curQuest.type2];
+				curQuest.location = curQuest.type2 = dungeonNameList[curQuest.type2];
 			break;
 		case "clearGyms":
 			var gymNameList = getGymNames();
 			if (typeof curQuest.type2 == "number")
-				curQuest.location=curQuest.type2 = gymNameList[curQuest.type2];
+				curQuest.location = curQuest.type2 = gymNameList[curQuest.type2];
 			break;
 		case "defeatPokemon":
 			curQuest.type2 = Math.floor(Math.random() * pokemonList.length) + 1;
@@ -83,18 +137,18 @@ var startQuest = function(quest, forsed) {
 		case "captureShinies":
 			if (curQuest.amount > getTotalShinies() / 3 + 20 && !forsed) return startRandomQuest(); //restart
 			break;
-		// case "findItems":
-		//  if (curQuest.amount > player.totalItemsFound / 3 + 20 && !forsed) return startRandomQuest(); //restart
-		// 	break;
-		// case "gainMoney":
-		// 	if (curQuest.amount > player.totalMoney / 3 + 1000 && !forsed) return startRandomQuest(); //restart
-		// 	break;
-		// case "gainTokens":
-		// 	if (curQuest.amount > player.totalDungeonTokens / 3 + 1000 && !forsed) return startRandomQuest(); //restart
-		// 	break;
-		// case "gainShards":
-		// 	if (curQuest.amount > getTotalDefeats() / 3 + 300 && !forsed) return startRandomQuest(); //restart
-		// 	break;
+			// case "findItems":
+			//  if (curQuest.amount > player.totalItemsFound / 3 + 20 && !forsed) return startRandomQuest(); //restart
+			// 	break;
+			// case "gainMoney":
+			// 	if (curQuest.amount > player.totalMoney / 3 + 1000 && !forsed) return startRandomQuest(); //restart
+			// 	break;
+			// case "gainTokens":
+			// 	if (curQuest.amount > player.totalDungeonTokens / 3 + 1000 && !forsed) return startRandomQuest(); //restart
+			// 	break;
+			// case "gainShards":
+			// 	if (curQuest.amount > getTotalDefeats() / 3 + 300 && !forsed) return startRandomQuest(); //restart
+			// 	break;
 		case "breedPokemon":
 			if ((player.totalBred == 0 || curQuest.amount > player.totalBred / 3 + 4) && !forsed) return startRandomQuest(); //restart
 			break;
@@ -103,12 +157,12 @@ var startQuest = function(quest, forsed) {
 	curQuest.description = quest.description.replace(/\$(\w*);/g, function(s, a) {
 		return curQuest[a];
 	});
-	curQuest.reward = Math.floor(quest.baseReward * curQuest.amount * (0.9 + Math.random() * 0.2) * questPointsPerKillInAverageZone); // some math.
-	if ((!(curQuest.amount>0) || !(curQuest.reward>0)) && !forsed) {
+	curQuest.reward = Math.floor(quest.baseReward * curQuest.amount * (0.9 + Math.random() * 0.2) * questPointsPerKillInAverageZone); // Fluctuation is +-10%. May be changed.
+	if ((!(curQuest.amount > 0) || !(curQuest.reward > 0)) && !forsed) {
 		console.log('bag quest')
 		return startRandomQuest();
 	}
-	if(curQuest.location)
+	if (curQuest.location)
 		if (!isLocationAccessible(curQuest.location) && !forsed) return startRandomQuest(); //restart
 	showCurQuest();
 	console.log(`Started quest "${curQuest.type}", "${curQuest.type2}", x${curQuest.amount}, ${questDifficultyName[curQuest.difficulty]}, ${curQuest.reward} QP, hard ${curQuest.hardness}\n"${curQuest.description}"`)
@@ -116,17 +170,17 @@ var startQuest = function(quest, forsed) {
 
 
 
-var progressQuest = function(type, type2,  amount){
-	if(window.logp)
-	console.log('progressQuest('+Array.from(arguments).join(',')+')')
-	// console.log(type);
-	// console.log(type2);
-	// console.log(player.curQuest);
-	if(type === player.curQuest.type){
-		if(type2 === player.curQuest.type2 || type2 === "none" || player.curQuest.type2 === "none"){
+var progressQuest = function(type, type2, amount) {
+	if (window.logp)
+		console.log('progressQuest(' + Array.from(arguments).join(',') + ')')
+		// console.log(type);
+		// console.log(type2);
+		// console.log(player.curQuest);
+	if (type === player.curQuest.type) {
+		if (type2 === player.curQuest.type2 || type2 === "none" || player.curQuest.type2 === "none") {
 			player.curQuest.progress += amount;
 			showCurQuest();
-			if(player.curQuest.progress >= player.curQuest.amount && !player.curQuest.notified){
+			if (player.curQuest.progress >= player.curQuest.amount && !player.curQuest.notified) {
 				$.notify("Your random quest is ready to be completed!", "success");
 				notifyMe("You can complete your quest");
 				player.curQuest.notified = 1;
@@ -140,6 +194,7 @@ var MEDIUM = 1;
 var HARD = 2;
 var HARDER = 3;
 var IMPOSSIBLE = 4;
+
 //           >----- Type -----<    >---- Description ----< [ [Difficulty MinAmt RndAmt  gainMult (baseGain) (Hardness) (type2) ] ]
 //addQuests('defeatPokemonRoute', 'Defeat $amount; Pokemon', [[    EASY,    10,    30,     1,         1,         0     (null)  ]]);
 // base: 1 kill
@@ -225,9 +280,31 @@ addQuests('breedPokemon', 'Hatch $_amount; eggs', [
 	[HARDER,       9, 0.6,  33],
 	[IMPOSSIBLE,  15, 0.6,  33]
 ]);
-
-
-
+////////////////////////
+// TRYING MULTIPLATES //
+////////////////////////
+//addQuestMultiplate(type,difficulty,list,base,quests,fn)
+addQuestMultiplate('gainShards',MEDIUM,
+	['type2','rewardMultiplier','randomAmount','location','description',                                                                       'minAmount','baseReward'],
+	['none',                0.5,            40,'location','Gain $_amount; $type2; shards<br><small>Recommended location is $location;</small>',         10,           1],[
+	["Ground",   0.33, 30, "Digletts Cave Dungeon"],
+	["Rock",     0.67, 15, "Pewter City Gym"],
+	["Water",    0.44, 23, "Cerulean City Gym"],
+	["Psychic",  0.53, 19, "Saffron City Gym"],
+	["Electric", 0.33, 30, "Vermillion City Gym"],
+	["Poison",   0.33, 30, "Fuchsia City Gym"],
+	["Grass",     0.5, 20, "Celadon City Gym"],
+	["Fairy",       2,  5, "Mt. Moon Dungeon"],
+	["Bug",      0.67, 15, "Viridian Forest Dungeon"],
+	["Fire",     0.33, 30, "Cinnabar Island Gym"],
+	["Ice",      0.83, 12, "Elite Lorelei"],
+	["Fighting", 0.56, 18, "Elite Bruno"],
+	["Flying",   1.11,  9, "Elite Lance"],
+	["Ghost",       1, 10, "Pokemon Tower Dungeon"],
+	["Dragon",   0.67, 15, "Elite Lance"],
+	["Normal",   1.33,  8, "Route 1"],
+	["Steel",    2.33,  4, "Power Plant Dungeon"]],
+	function(quest){});
 
 
 

@@ -363,7 +363,7 @@ var gainShards = function(type, amount){
 			typeNum = Math.floor(Math.random()*2);
 		}
 		player.typeShards[typeToNumber(type[typeNum])] += amount;
-		progressQuest('gainShards', "none" , amount);
+		progressQuest('gainShards', type[typeNum], amount);
 	}
 }
 
