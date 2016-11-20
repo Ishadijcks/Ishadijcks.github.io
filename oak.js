@@ -81,7 +81,7 @@ var oakExplainAgain = function () {
 		});
 
 		$("#dungeon_tutorial").click(function () {
-			player.townExplain = 0;
+			player.dungeonExplain = 0;
 			$('#tutorialModal').modal('hide');
 			oakExplainDungeons();
 		});
