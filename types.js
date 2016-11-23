@@ -22,8 +22,8 @@ var typeEffectiveness = [];
 
 var numberToType = ["normal","fire","water","electric","grass","ice","fighting","poison","ground","flying","psychic","bug","rock",	"ghost","dragon","dark","steel","fairy"];
 
-var typeColorLocked = ["9da07d","f85858","6b94ff","ffc663","73e763","b5efef","e78c6b","c684ff","cead7b","4ac6ff","ffb5ad","cef77b","d6bd94","948cad","ce6363","7394b5","AAAAAA"];
-var typeColorUnlocked = ["595c3b","b10818","294a94","b57b31","4a944a","42a59c","b54a4a","7b42c6","946b4a","218cb5","ce6363","8cb521","a58c4a","737373","8c424a","4a6b84","737373"];
+var typeColorLocked = ["9da07d","f85858","6b94ff","ffc663","73e763","b5efef","e78c6b","c684ff","cead7b","4ac6ff","ffb5ad","cef77b","d6bd94","948cad","ce6363","7394b5","aaaaaa","ffc6e7"];
+var typeColorUnlocked = ["595c3b","b10818","294a94","b57b31","4a944a","42a59c","b54a4a","7b42c6","946b4a","218cb5","ce6363","8cb521","a58c4a","737373","8c424a","4a6b84","737373","d694ce"];
 
 var initTypeEffectiveness = function(){
 	typeEffectiveness = [];
