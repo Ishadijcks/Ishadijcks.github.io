@@ -502,7 +502,7 @@ var alreadyHasMineItem = function(id){
 }
 
 var getRandomMineItem = function(){
-	var index = Math.floor(Math.random()*(mineItemList.length-1)+1);
+	var index = Math.floor(Math.random()*(mineItemList.length));
 	return mineItemList[index] || mineItemList[0];
 }
 
