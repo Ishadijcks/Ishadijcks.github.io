@@ -27,12 +27,16 @@ var generateDailyDeals = function(){
 }
 
 var reverseDailyDealExists = function(item1, item2){
-    for(var i = 0; i<player.curMine.dailyDeals.length; i++){
-        if(player.curMine.dailyDeals[i].item1.name === item2.name && player.curMine.dailyDeals[i].item2.name === item1.name){
-            return true;
-        }
-    }
-    return false;
+	for (var i=0; i<player.curMine.dailyDeals.length; i++) {
+		if (player.curMine.dailyDeals[i].item2.name == item1.name) {
+			if (player.curMine.dailyDeals[i].item1.name == item2.name) {
+				return true;
+			}else {
+				return reverseDeal(player.curMine.dailyDeals[i].item1, item2);
+			}
+		}
+	}
+	return false
 }
 
 var generateDailyDeal = function(seed){
