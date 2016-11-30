@@ -32,7 +32,7 @@ var reverseDailyDealExists = function(item1, item2){
 			if (player.curMine.dailyDeals[i].item1.name == item2.name) {
 				return true;
 			}else {
-				return reverseDeal(player.curMine.dailyDeals[i].item1, item2);
+				return reverseDailyDealExists(player.curMine.dailyDeals[i].item1, item2);
 			}
 		}
 	}
