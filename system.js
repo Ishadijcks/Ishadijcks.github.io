@@ -115,6 +115,7 @@ var curEnemy = {
 	moneyReward: 1
 }
 
+var saveFrame;
 
 $(document).ready(function(){
 	if(!(document.domain === "ishadijcks.github.io" || document.domain === "")){
@@ -123,13 +124,29 @@ $(document).ready(function(){
 	initTypeEffectiveness();
 	//$('#changeLogModal').modal('show');
 
+	//Save management
 	$("body").append("<iframe id='saveLocation' style='display:none' src='https://rawgit.com/Aegyo/Ishadijcks.github.io/share-save/iframe.html'></iframe>")
+	saveFrame = document.getElementById('saveLocation').contentWindow
 
-	if(localStorage.getItem("player") != null){
-		load();
-		generatePokemon(player.route);
+	var savegame;
+
+	window.onmessage = function(e){
+		savegame = e.data;
+		console.log("Set savegame from https");
 	}
 
+	saveFrame.postMessage(JSON.stringify({key: 'player', method: "get"}), "*");
+
+	if(!savegame){
+		if(localStorage.getItem("player") != null){
+			savegame = localStorage.getItem("player");
+		}
+	}
+
+	if(savegame){
+		load(savegame);
+		generatePokemon(player.route);
+	}
 	else {
 		$('#pickStarter').modal({backdrop: 'static', keyboard: false});
 	}
