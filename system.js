@@ -117,6 +117,41 @@ var curEnemy = {
 
 var saveFrame;
 
+window.onload = function(){
+	var savegame;
+
+	saveFrame.postMessage(JSON.stringify({key: 'player', method: "get"}), "*");
+
+	if(!savegame){
+		if(localStorage.getItem("player") != null){
+			savegame = localStorage.getItem("player");
+		}
+	}
+
+	if(savegame){
+		load(savegame);
+		generatePokemon(player.route);
+	}
+	else {
+		$('#pickStarter').modal({backdrop: 'static', keyboard: false});
+	}
+	initTypeEffectiveness();
+	initUpgrades();
+	initOakItems();
+	updateItems();
+	setInterval(itemInterval, 1000);
+	itemInterval();
+
+	if(player.starter != "none"){
+	updateAll();
+	}
+
+	loadTowns();
+	hideAllViews()
+	$("#currentEnemy").show();
+
+}
+
 $(document).ready(function(){
 	if(!(document.domain === "ishadijcks.github.io" || document.domain === "")){
 		$("#siteModal").modal('show')
@@ -128,45 +163,10 @@ $(document).ready(function(){
 	$("body").append("<iframe id='saveLocation' style='display:none' src='https://rawgit.com/Aegyo/Ishadijcks.github.io/share-save/iframe.html'></iframe>")
 	saveFrame = document.getElementById('saveLocation').contentWindow
 
-	var savegame;
-
 	window.onmessage = function(e){
 		savegame = e.data;
 		console.log("Set savegame from https to:\n"+e.data);
 	}
-
-	setTimeout(function(){
-		saveFrame.postMessage(JSON.stringify({key: 'player', method: "get"}), "*");
-
-		if(!savegame){
-			if(localStorage.getItem("player") != null){
-				savegame = localStorage.getItem("player");
-			}
-		}
-
-		if(savegame){
-			load(savegame);
-			generatePokemon(player.route);
-		}
-		else {
-			$('#pickStarter').modal({backdrop: 'static', keyboard: false});
-		}
-		initTypeEffectiveness();
-		initUpgrades();
-		initOakItems();
-		updateItems();
-		setInterval(itemInterval, 1000);
-		itemInterval();
-
-		if(player.starter != "none"){
-		updateAll();
-		}
-
-		loadTowns();
-		hideAllViews()
-		$("#currentEnemy").show();
-	},200);
-
 
 	$("body").on('click',"#enemy", function(){
 		clicks++;
