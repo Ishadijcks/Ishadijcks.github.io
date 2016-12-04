@@ -21,6 +21,10 @@ var save = function(){
 
 // Loads the game from localStorage and update favIcon to starter
 var load = function(){
+	window.onmessage = funcion(e){
+		console.log(JSON.parse(e.data));
+	}
+
 	var savegame = JSON.parse(localStorage.getItem("player"));
 
 
