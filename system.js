@@ -131,40 +131,41 @@ $(document).ready(function(){
 	var savegame;
 
 	window.onmessage = function(e){
-		savegame = e;
-		console.log("Set savegame from https to:\n"+e);
+		savegame = e.data;
+		console.log("Set savegame from https to:\n"+e.data);
 	}
 
-	saveFrame.postMessage(JSON.stringify({key: 'player', method: "get"}), "*");
+	setTimeout(function(){
+		saveFrame.postMessage(JSON.stringify({key: 'player', method: "get"}), "*");
 
-	if(!savegame){
-		if(localStorage.getItem("player") != null){
-			savegame = localStorage.getItem("player");
+		if(!savegame){
+			if(localStorage.getItem("player") != null){
+				savegame = localStorage.getItem("player");
+			}
 		}
-	}
 
-	if(savegame){
-		load(savegame);
-		generatePokemon(player.route);
-	}
-	else {
-		$('#pickStarter').modal({backdrop: 'static', keyboard: false});
-	}
-	initTypeEffectiveness();
-	initUpgrades();
-	initOakItems();
-	updateItems();
-	setInterval(itemInterval, 1000);
-	itemInterval();
+		if(savegame){
+			load(savegame);
+			generatePokemon(player.route);
+		}
+		else {
+			$('#pickStarter').modal({backdrop: 'static', keyboard: false});
+		}
+		initTypeEffectiveness();
+		initUpgrades();
+		initOakItems();
+		updateItems();
+		setInterval(itemInterval, 1000);
+		itemInterval();
 
-	if(player.starter != "none"){
-	updateAll();
-	}
+		if(player.starter != "none"){
+		updateAll();
+		}
 
-	loadTowns();
-	hideAllViews()
-	$("#currentEnemy").show();
-
+		loadTowns();
+		hideAllViews()
+		$("#currentEnemy").show();
+	},200);
 
 
 	$("body").on('click',"#enemy", function(){
