@@ -131,8 +131,8 @@ $(document).ready(function(){
 	var savegame;
 
 	window.onmessage = function(e){
-		savegame = e.data;
-		console.log("Set savegame from https");
+		savegame = e;
+		console.log("Set savegame from https to:\n"+e);
 	}
 
 	saveFrame.postMessage(JSON.stringify({key: 'player', method: "get"}), "*");
