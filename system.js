@@ -159,7 +159,7 @@ $(document).ready(function(){
 	//$('#changeLogModal').modal('show');
 
 	//Save management
-	$("body").append("<iframe id='saveLocation' style='display:none' src='https://rawgit.com/Aegyo/Ishadijcks.github.io/share-save/iframe.html'></iframe>")
+	$("body").append("<iframe id='saveLocation' style='display:none' src='https://ishadijcks.github.io/iframe.html'></iframe>")
 	saveFrame = document.getElementById('saveLocation').contentWindow
 
 	window.onmessage = function(e){
