@@ -118,9 +118,13 @@ var curEnemy = {
 var saveFrame;
 
 window.onload = function(){
-	//If testing locally, comment out the following line and uncomment the next 
-	saveFrame.postMessage(JSON.stringify({key: 'player', method: "get"}), "*");
-	//initGame(localStorage.getItem("player"));
+	if (window.location.hostname == "ishadijcks.github.io"){
+		console.log("loading from iframe");
+		saveFrame.postMessage(JSON.stringify({key: 'player', method: "get"}), "*");
+	} else {
+		console.log("loading from this localStorage");
+		initGame(localStorage.getItem("player"));
+	}
 }
 
 initGame = function(savegame){
