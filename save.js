@@ -129,6 +129,7 @@ var confirmReset = function() {
     if (input == 6) {
         canSave = 0;
         localStorage.clear();
+        saveFrame.postMessage(JSON.stringify({key: "player", method: "remove"}), "*");
         location.reload();
     }
 }
