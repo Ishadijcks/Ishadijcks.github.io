@@ -118,38 +118,33 @@ var curEnemy = {
 var saveFrame;
 
 window.onload = function(){
-	var savegame;
-
+	//If testing locally, comment out the following line and uncomment the next 
 	saveFrame.postMessage(JSON.stringify({key: 'player', method: "get"}), "*");
-	setTimeout(function(){
-		if(!savegame){
-			if(localStorage.getItem("player") != null){
-				savegame = localStorage.getItem("player");
-			}
-		}
+	//initGame(localStorage.getItem("player"));
+}
 
-		if(savegame){
-			load(savegame);
-			generatePokemon(player.route);
-		}
-		else {
-			$('#pickStarter').modal({backdrop: 'static', keyboard: false});
-		}
-		initTypeEffectiveness();
-		initUpgrades();
-		initOakItems();
-		updateItems();
-		setInterval(itemInterval, 1000);
-		itemInterval();
+initGame = function(savegame){
+	if(savegame){
+		load(savegame);
+		generatePokemon(player.route);
+	}
+	else {
+		$('#pickStarter').modal({backdrop: 'static', keyboard: false});
+	}
+	initTypeEffectiveness();
+	initUpgrades();
+	initOakItems();
+	updateItems();
+	setInterval(itemInterval, 1000);
+	itemInterval();
 
-		if(player.starter != "none"){
-		updateAll();
-		}
+	if(player.starter != "none"){
+	updateAll();
+	}
 
-		loadTowns();
-		hideAllViews()
-		$("#currentEnemy").show();
-	},100);
+	loadTowns();
+	hideAllViews()
+	$("#currentEnemy").show();
 }
 
 $(document).ready(function(){
@@ -164,9 +159,16 @@ $(document).ready(function(){
 	saveFrame = document.getElementById('saveLocation').contentWindow
 
 	window.onmessage = function(e){
-		savegame = e.data;
-		console.log("Set savegame from https to:\n"+e.data);
+		var savegame = e.data;
+		if(!savegame){
+			if(localStorage.getItem("player") != null){
+				savegame = localStorage.getItem("player");
+			}
+		}
+		initGame(savegame);
 	}
+
+
 
 	$("body").on('click',"#enemy", function(){
 		clicks++;
