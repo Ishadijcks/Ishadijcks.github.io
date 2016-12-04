@@ -123,6 +123,8 @@ $(document).ready(function(){
 	initTypeEffectiveness();
 	//$('#changeLogModal').modal('show');
 
+	$("body").append("<iframe id='saveLocation' style='display:none' src='https://cdn.rawgit.com/Aegyo/Ishadijcks.github.io/share-save/iframe.html'></iframe>")
+
 	if(localStorage.getItem("player") != null){
 		load();
 		generatePokemon(player.route);
