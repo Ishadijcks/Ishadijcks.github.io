@@ -4,7 +4,6 @@
 	<script>
 		window.onmessage = function(e) {
     		var payload = JSON.parse(e.data);
-    		console.log(payload);
     		switch(payload.method) {
         		case 'set':
             		localStorage.setItem(payload.key, JSON.stringify(payload.data));
