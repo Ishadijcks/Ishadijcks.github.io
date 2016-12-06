@@ -10,7 +10,9 @@ var save = function(){
 	player.lastSeen = new Date().getDate();
 	if(canSave){
 		localStorage.setItem("player", JSON.stringify(player));
-		saveFrame.postMessage(JSON.stringify({key: 'player', method: "set", data: player}), "*");
+		if (window.location.origin == "http://ishadijcks.github.io"){
+			saveFrame.postMessage(JSON.stringify({key: 'player', method: "set", data: player}), "*");
+		}
 	}
 
 	var tmp = new Date().getTime();
@@ -23,7 +25,7 @@ var save = function(){
 // Loads the game from localStorage and update favIcon to starter
 var load = function(save){
 
-	var savegame = JSON.parse(save);
+	var savegame = save;
 
 
 	for (var property in savegame) {

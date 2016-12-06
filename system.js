@@ -202,7 +202,7 @@ $(document).ready(function(){
 	//$('#changeLogModal').modal('show');
 
 	//Save management
-	if (window.location.protocol == "http:"){
+	if (window.location.origin == "http://ishadijcks.github.io"){
 		$("body").append("<iframe id='saveLocation' style='display:none' onload='beginLoad()' src='https://ishadijcks.github.io/iframe.html'></iframe>");
 		saveFrame = document.getElementById('saveLocation').contentWindow;
 	} else {
