@@ -275,10 +275,12 @@ var useEvoStone = function(item){
 }
 
 var activateEvoStone = function(pokemon, id){
-	capturePokemon(pokemon, generateStoneShiny());
 	var item = player.inventoryList[getItemById(id)];
-	item.quantity--;
-	updateItems();
+	if (item.quantity > 0){
+		capturePokemon(pokemon, generateStoneShiny());
+		item.quantity--;
+		updateItems();
+	}
 }
 
 var generateStoneShiny = function(){
