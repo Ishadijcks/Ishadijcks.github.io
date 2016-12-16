@@ -2,6 +2,7 @@ var Egg = function(type, steps, pokemon){
 	var temp = {
 		type:type,
 		steps:steps,
+		shinySteps:0,
 		progress: 0,
 		pokemon:pokemon,
 		notified: 0,
@@ -86,6 +87,7 @@ var gainEgg = function(egg){
 			var tempEgg = {
 				type: egg.type,
 				steps: egg.steps,
+				shinySteps:0,
 				progress: 0,
 				pokemon: egg.pokemon
 			}
@@ -147,6 +149,11 @@ var progressEgg = function(amount){
 	}
 	for(var i = 0; i<player.eggList.length; i++){
 		if(player.eggList[i] !== null){
+			if(player.eggList[i].shinySteps == null)
+				player.eggList[i].shinySteps = isActive("Shiny Charm") ? player.eggList[i].steps  : 0;
+			if(isActive("Shiny Charm")){
+				player.eggList[i].shinySteps = (player.eggList[i].shinySteps||0) + amount;
+			}
 			player.eggList[i].progress += amount;
 		}
 	}
@@ -174,7 +181,7 @@ var hatchEgg = function(i){
 	player.eggList[i] = null;
 	$.notify("You hatched " + egg.pokemon, 'success');
 	progressQuest('breedPokemon', "none", 1);
-	capturePokemon(egg.pokemon, generateEggShiny());
+	capturePokemon(egg.pokemon, generateEggShiny(egg));
 	player.totalBred++;
 	showEggs();
 	save();
@@ -259,11 +266,12 @@ var canBreed = function(pokemon){
 	return pokemonLevel >= 100 && !pokemon.shiny;
 }
 
-var generateEggShiny = function(){
+var generateEggShiny = function(egg){
 	var chance = 1024;
-	if(isActive("Shiny Charm")){
-		chance /= getOakItemBonus("Shiny Charm");
-	}
+	chance /= 1 + (egg.shinySteps||0)/egg.steps;
+// 	if(isActive("Shiny Charm")){
+// 		chance /= getOakItemBonus("Shiny Charm");
+// 	}
 	var number = Math.floor(Math.random()*chance) + 1;
 
 	if(number <= 1){

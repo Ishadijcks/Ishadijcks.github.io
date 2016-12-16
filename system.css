@@ -693,6 +693,33 @@ g, rect {
 
 }
 
+#pokeballContainer{
+	display:inline-block;
+	height:71px;
+	width:80px
+}
+.particle{
+	position:absolute;
+	border:1px solid green;
+	background:white;
+	border-radius:50%;
+	display:inline-block;
+	padding:0;}
+.moneyParticle{
+	border-color:brown;
+	background:yellow;
+	padding:2px;
+}
+.tokenParticle{
+	border-color:burlywood;
+	background:antiquewhite;
+	padding: 2px 3px 4px 6px;
+	border-radius: 14px;
+}
+.itemParticle img{
+	margin:0;
+}
+
 /* http://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting-using-css */
 .noselect {
     -webkit-touch-callout: none; /* iOS Safari */
