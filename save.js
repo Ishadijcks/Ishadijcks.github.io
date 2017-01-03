@@ -73,6 +73,12 @@ var load = function(){
 		for (var i=0; i<player.caughtPokemonList.length; i++) {
 			player.caughtPokemonList[i].iv = {attack: 1};
 		}
+
+		for (var i=0; i<4; i++) {
+			if (player.eggList[i]) {
+				player.eggList[i].iv = generateNewIV({attack: 0});
+			}
+		}
 	}
 	
 	var date = new Date();
