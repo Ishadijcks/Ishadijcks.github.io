@@ -795,7 +795,7 @@ var calculateAttack = function(){
 
 		var level = experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType);
 		if( curEnemy != "undefined"){
-			total += Math.ceil(level*(player.caughtPokemonList[i].attack)/100)* damageModifier(player.caughtPokemonList[i], curEnemy);
+			total += Math.ceil(level*(player.caughtPokemonList[i].attack + player.caughtPokemonList[i].iv.attack/2)/100)* damageModifier(player.caughtPokemonList[i], curEnemy);
 		}
 	}
 	player.attack = total;
