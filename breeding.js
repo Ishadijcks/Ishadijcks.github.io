@@ -1,4 +1,7 @@
-var Egg = function(type, steps, pokemon){
+var Egg = function(type, steps, pokemon, iv){
+	if (typeof iv == 'undefined') {
+		iv = {attack: 1};
+	}
 	var temp = {
 		type:type,
 		steps:steps,
@@ -6,6 +9,7 @@ var Egg = function(type, steps, pokemon){
 		shinyProgress: 0,
 		pokemon:pokemon ,
 		notified: 0,
+		iv: iv,
 	}
 	return temp;
 }
@@ -48,9 +52,21 @@ var gainRandomEgg = function(type){
 	}
 }
 
-var gainPokemonEgg = function(pokemonName){
+var gainPokemonEgg = function(pokemonName, oldIV){
 	var pokemon = getPokemonByName(pokemonName);
-	gainEgg(Egg(pokemon.type, getSteps(pokemonName), pokemonName));
+
+	var newIV = generateNewIV(oldIV)
+	console.log(newIV)
+
+	gainEgg(Egg(pokemon.type, getSteps(pokemonName), pokemonName, newIV));
+}
+
+var generateNewIV = function(iv){
+	console.log(iv)
+	for (var stat in iv) {
+		iv[stat] += Math.floor(Math.pow(Math.random(), 5) * (33 - iv[stat]))
+	}
+	return iv
 }
 
 var gainMineEgg = function(itemId){
@@ -95,7 +111,8 @@ var gainEgg = function(egg){
 				steps: egg.steps,
 				progress: 0,
 				shinyProgress: 0,
-				pokemon: egg.pokemon
+				pokemon: egg.pokemon,
+				iv: egg.iv
 			}
 			player.eggList[i] = tempEgg;
 			showEggs();
@@ -118,7 +135,7 @@ var releasePokemon = function(pokemonName){
 	updateCaughtList();
 }
 
-var breedPokemon = function(pokemonName){
+var breedPokemon = function(pokemonName, iv){
 	if(pokemonName === "Farfetch"){
 		pokemonName = "Farfetch'd";
 	}
@@ -126,7 +143,7 @@ var breedPokemon = function(pokemonName){
 		if(player.eggList[i] === null){
 			var pokemon = getCaughtPokemonByName(pokemonName);
 			if(canBreed(pokemon)){
-				gainPokemonEgg(pokemonName);
+				gainPokemonEgg(pokemonName, iv);
 				releasePokemon(pokemonName);
 			}
 			showMom();
@@ -186,7 +203,7 @@ var hatchEgg = function(i){
 	player.eggList[i] = null;
 	$.notify("You hatched " + egg.pokemon, 'success');
 	progressQuest('breedPokemon', "none", 1);
-	capturePokemon(egg.pokemon, generateEggShiny(egg));
+	capturePokemon(egg.pokemon, generateEggShiny(egg), egg.iv);
 	player.totalBred++;
 	showEggs();
 	save();
@@ -253,7 +270,7 @@ var showMom = function(){
 	html += "<div class='row'>";
 	for( var i = 0; i<player.caughtPokemonList.length; i++){
 		if(canBreed(player.caughtPokemonList[i])){
-			html += "<div data-pokemon='" + player.caughtPokemonList[i].name + "' class='col-sm-3 col-md-2 pokedexEntry breedPokemon' style='height:auto;'>";
+			html += "<div data-pokemon='" + player.caughtPokemonList[i].name + "' data-ivattack='" + player.caughtPokemonList[i].iv.attack + "' class='col-sm-3 col-md-2 pokedexEntry breedPokemon' style='height:auto;'>";
 			html += "<img class='center-block' id='pokedexImage' src=images/pokemon/"+player.caughtPokemonList[i].id+".png >";
 			html += "<p>" + player.caughtPokemonList[i].name + "</p>";
 			html += "</div>"

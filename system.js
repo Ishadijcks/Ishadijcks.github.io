@@ -396,7 +396,7 @@ $(document).ready(function(){
 	})
 
 	$("body").on('click',".breedPokemon", function(){
-		breedPokemon(this.dataset.pokemon);
+		breedPokemon(this.dataset.pokemon, {attack: +this.dataset.ivattack});
 	})
 
 	$("body").on('click',".mineSquare", function(){
@@ -705,7 +705,10 @@ var enemyDefeated = function(){
 
 // Capture a pokemon by moving it to the player.caughtPokemonList
 // Pokemon are adressable by name
-var capturePokemon = function(name, shiny){
+var capturePokemon = function(name, shiny, iv){
+	if (typeof iv == 'undefined') {
+		iv = {attack: 1};
+	}
 	var id = getPokemonByName(name).id-1;
 	player.catchNumbers[id]++;
 	if(!alreadyCaught(name)){
@@ -714,6 +717,7 @@ var capturePokemon = function(name, shiny){
 				pokemonList[i].timeStamp = Math.floor(Date.now() / 1000);
 				pokemonList[i].shiny = shiny;
 				pokemonList[i].experience = 0;
+				pokemonList[i].iv = iv;
 				player.caughtPokemonList.push(pokemonList[i]);
 				if(shiny){
 					$.notify("You have caught a shiny "+ name +"!", "succes")

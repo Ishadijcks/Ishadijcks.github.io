@@ -69,6 +69,10 @@ var load = function(){
 		player.notEffectiveTypeBonus.push(0);
 		player.normalEffectiveTypeBonus.push(0);
 		player.veryEffectiveTypeBonus.push(0);
+
+		for (var i=0; i<player.caughtPokemonList.length; i++) {
+			player.caughtPokemonList[i].iv = {attack: 1};
+		}
 	}
 	
 	var date = new Date();
