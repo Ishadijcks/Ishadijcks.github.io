@@ -71,7 +71,7 @@ var load = function(){
 		player.veryEffectiveTypeBonus.push(0);
 
 		for (var i=0; i<player.caughtPokemonList.length; i++) {
-			player.caughtPokemonList[i].iv = {attack: 1};
+			player.caughtPokemonList[i].iv = {attack: 0};
 		}
 
 		for (var i=0; i<4; i++) {

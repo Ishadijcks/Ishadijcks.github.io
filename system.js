@@ -707,7 +707,7 @@ var enemyDefeated = function(){
 // Pokemon are adressable by name
 var capturePokemon = function(name, shiny, iv){
 	if (typeof iv == 'undefined') {
-		iv = {attack: 1};
+		iv = {attack: 0};
 	}
 	var id = getPokemonByName(name).id-1;
 	player.catchNumbers[id]++;

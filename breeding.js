@@ -1,6 +1,6 @@
 var Egg = function(type, steps, pokemon, iv){
 	if (typeof iv == 'undefined') {
-		iv = {attack: 1};
+		iv = {attack: 0};
 	}
 	var temp = {
 		type:type,
@@ -62,10 +62,13 @@ var gainPokemonEgg = function(pokemonName, oldIV){
 }
 
 var generateNewIV = function(iv){
-	console.log(iv)
 	for (var stat in iv) {
-		iv[stat] += Math.floor(Math.pow(Math.random(), 5) * (33 - iv[stat]))
+		if (iv[stat] < 31) {
+			iv[stat] += Math.floor(Math.pow(Math.random(), 5) * (32 - iv[stat]));
+			iv[stat] = Math.min(iv[stat], 31);
+		}
 	}
+
 	return iv
 }
 
