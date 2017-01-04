@@ -293,7 +293,7 @@ var updateDungeon = function() {
     html += "<div id='dungeonMap'></div>"
     if(!dungeonCanMove && curEnemy.alive){
 
-        html += "<div id='dungeonEnemyInfo'><br>" + curEnemy.name;
+        html += "<div id='dungeonEnemyInfo'><br>" + curEnemy.name + " ";
 
         if(curEnemy.shiny){
             html += "<img class='shinyEnemyStar' src='images/shinypokemon/star.png'><br><img id=dungeonEnemy class='shinyFiller' src='images/shinypokemon/"+curEnemy.id+".png' >";

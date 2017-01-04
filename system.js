@@ -410,6 +410,8 @@ $(document).ready(function(){
 	$("body").on('click',"#pokedexButton", function(){
 		$("#pokedexModal").modal("show");
 		showPokedex();
+		showGymBadges();
+		showStats();
 	})
 
 	$("body").on('click',".oakItem", function(){
