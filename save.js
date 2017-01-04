@@ -64,7 +64,7 @@ var load = function(){
 		}
 	}
 
-	if(player.notEffectiveTypeBonus.length <= 17) {
+	if(player.typeShards.length <= 17) {
 		updateTypes();
 		player.notEffectiveTypeBonus.push(0);
 		player.normalEffectiveTypeBonus.push(0);
