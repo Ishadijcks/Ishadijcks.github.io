@@ -56,7 +56,6 @@ var gainPokemonEgg = function(pokemonName, oldIV){
 	var pokemon = getPokemonByName(pokemonName);
 
 	var newIV = generateNewIV(oldIV)
-	console.log(newIV)
 
 	gainEgg(Egg(pokemon.type, getSteps(pokemonName), pokemonName, newIV));
 }
