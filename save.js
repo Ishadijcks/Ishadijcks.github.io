@@ -64,11 +64,12 @@ var load = function(){
 		}
 	}
 
-	if(player.version < 0.92) {
+	if(player.notEffectiveTypeBonus.length <= 17) {
 		updateTypes();
 		player.notEffectiveTypeBonus.push(0);
 		player.normalEffectiveTypeBonus.push(0);
 		player.veryEffectiveTypeBonus.push(0);
+		player.typeShards.push(0);
 	}
 	
 	var date = new Date();
