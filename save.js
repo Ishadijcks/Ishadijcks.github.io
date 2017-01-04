@@ -151,4 +151,7 @@ var updateTypes = function() {
 	for( var i = 0; i<player.caughtPokemonList.length; i++) {
 		player.caughtPokemonList[i].type = getPokemonByName(player.caughtPokemonList[i].name).type;
 	}
+	for (i = 0; i < numberToType.length; i++) {
+		player.typeShards[i] = player.typeShards[i] || 0;
+	}
 }
