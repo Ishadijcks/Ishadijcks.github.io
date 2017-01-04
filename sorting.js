@@ -98,8 +98,8 @@ function compareByLevel(a,b) {
 }
 
 function compareByAttack(a,b) {
-	var aAttack = experienceToLevel(a.experience,a.levelType)*a.attack/100;
-	var bAttack = experienceToLevel(b.experience,b.levelType)*b.attack/100;
+	var aAttack = experienceToLevel(a.experience,a.levelType)*(a.attack + a.iv.attack/2)/100;
+	var bAttack = experienceToLevel(b.experience,b.levelType)*(b.attack + b.iv.attack/2)/100;
   if (aAttack> bAttack)
     return -1;
   if (aAttack < bAttack)
