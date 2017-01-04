@@ -64,7 +64,7 @@ var gainPokemonEgg = function(pokemonName, oldIV){
 var generateNewIV = function(iv){
 	for (var stat in iv) {
 		if (iv[stat] < 31) {
-			iv[stat] += Math.floor(Math.pow(Math.random(), 5) * (32 - iv[stat]));
+			iv[stat] += Math.floor(Math.pow(Math.random(), 75) * (32 - iv[stat]));
 			iv[stat] = Math.min(iv[stat], 31);
 		}
 	}
