@@ -583,8 +583,8 @@ table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView, #shop
 }
 
 .largeShinyImage{
-	height: 96px;
-	width: auto;
+	padding-top: 17px;
+	padding-bottom: 17px;
 }
 
 .smallShinyImage{
