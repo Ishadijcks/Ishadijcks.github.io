@@ -56,13 +56,13 @@ var gainPokemonEgg = function(pokemonName){
 var gainMineEgg = function(itemId){
     if(breedSlotLeft()) {
         sellMineItem(itemId);
-        var type = "amber";
+        var type = ["amber"];
         var pokemonName = "Aerodactyl";
         if (itemId === 1) {
-            type = "helix";
+            type = ["helix"];
             pokemonName = "Omanyte";
         } else if (itemId === 2) {
-            type = "dome";
+            type = ["dome"];
             pokemonName = "Kabuto";
         }
         var pokemon = getPokemonByName(pokemonName);
