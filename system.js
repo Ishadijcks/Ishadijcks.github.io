@@ -733,6 +733,15 @@ var capturePokemon = function(name, shiny, iv){
 	}
 
 	else{
+		if(iv.attack > 0){
+			for( var i = 0; i<player.caughtPokemonList.length; i++){
+				if(player.caughtPokemonList[i].name == name){
+					if(player.caughtPokemonList[i].iv.attack < iv.attack){
+						player.caughtPokemonList[i].iv.attack = iv.attack
+					}
+				}
+			}
+		}
 
 		if(shiny){
 			for( var i = 0; i<player.caughtPokemonList.length; i++){
