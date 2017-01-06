@@ -396,7 +396,7 @@ $(document).ready(function(){
 	})
 
 	$("body").on('click',".breedPokemon", function(){
-		breedPokemon(this.dataset.pokemon, {attack: +this.dataset.ivattack});
+		breedPokemon(this.dataset.pokemon, JSON.parse(this.dataset.iv));
 	})
 
 	$("body").on('click',".mineSquare", function(){
@@ -709,7 +709,7 @@ var enemyDefeated = function(){
 // Pokemon are adressable by name
 var capturePokemon = function(name, shiny, iv){
 	if (typeof iv == 'undefined') {
-		iv = {attack: 0};
+		iv = IV();
 	}
 	var id = getPokemonByName(name).id-1;
 	player.catchNumbers[id]++;

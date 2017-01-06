@@ -1,6 +1,6 @@
 var Egg = function(type, steps, pokemon, iv){
 	if (typeof iv == 'undefined') {
-		iv = {attack: 0};
+		iv = IV();
 	}
 	var temp = {
 		type:type,
@@ -12,6 +12,18 @@ var Egg = function(type, steps, pokemon, iv){
 		iv: iv,
 	}
 	return temp;
+}
+
+var IV = function(seed){
+	var tmp = {
+		attack: 0
+	}
+
+	for (stat in seed) {
+		tmp[stat] = seed[stat]
+	}
+
+	return tmp
 }
 
 var possibleEggs = Array.apply(null, Array(17)).map(Number.prototype.valueOf,0);
@@ -272,7 +284,7 @@ var showMom = function(){
 	html += "<div class='row'>";
 	for( var i = 0; i<player.caughtPokemonList.length; i++){
 		if(canBreed(player.caughtPokemonList[i])){
-			html += "<div data-pokemon='" + player.caughtPokemonList[i].name + "' data-ivattack='" + player.caughtPokemonList[i].iv.attack + "' class='col-sm-3 col-md-2 pokedexEntry breedPokemon' style='height:auto;'>";
+			html += "<div data-pokemon='" + player.caughtPokemonList[i].name + "' data-iv='" + JSON.stringify(player.caughtPokemonList[i].iv) + "' class='col-sm-3 col-md-2 pokedexEntry breedPokemon' style='height:auto;'>";
 			html += "<img class='center-block' id='pokedexImage' src=images/pokemon/"+player.caughtPokemonList[i].id+".png >";
 			html += "<p>" + player.caughtPokemonList[i].name + "</p>";
 			html += "</div>"

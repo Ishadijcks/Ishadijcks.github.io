@@ -73,12 +73,12 @@ var load = function(){
 
 	if(player.version < 0.931) {
 		for (var i=0; i<player.caughtPokemonList.length; i++) {
-			player.caughtPokemonList[i].iv = {attack: 0};
+			player.caughtPokemonList[i].iv = IV();
 		}
 
 		for (var i=0; i<4; i++) {
 			if (player.eggList[i]) {
-				player.eggList[i].iv = generateNewIV({attack: 0});
+				player.eggList[i].iv = generateNewIV(IV());
 			}
 		}
 	}
