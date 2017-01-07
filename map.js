@@ -68,16 +68,18 @@ var moveToRoute = function(route){
 
 	
 		if(!isNaN(route) && !(route == player.route && inProgress === 1)){
-			inProgress = 1;
 			hideAllViews()
 			resetDungeon();
 			$("#currentEnemy").show();
 			if(accessToRoute(route)){
 				player.route = route;
-				generatePokemon(player.route);
 			}
 			else {
 				log("You don't have access to that route yet.");
+			}
+			if(accessToRoute(route) || inProgress !== 1){
+				inProgress = 1;
+				generatePokemon(player.route);
 			}
 		}
 	
