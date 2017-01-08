@@ -4,6 +4,8 @@ var canCatch = 1;
 var attackInterval;
 var maxClicks = 15;
 var clicks = 0;
+var show;
+var fadingModal = false;
 // Add new variables to the savefile!!
 
 var firstQuest = {progress: 0, type: "defeatPokemonRoute", description: "Defeat 30 Pokemon on route 1", difficulty: 1, amount: 30, type2: 1, reward: 5, notified:0}
@@ -333,6 +335,77 @@ $(document).ready(function(){
 
 	$(document).on("keydown", function (e) {
 		var keyCode = e.keyCode;
+
+
+		if (keyCode == 80){
+			e.preventDefault();
+			if (fadingModal == false){
+				if (!$('#pokedexModal').hasClass('in')){show = true};
+				$('.modal').modal('hide');
+				setTimeout(function(){
+					if (show){
+						$('#pokedexModal').modal('show');
+						showPokedex();
+						showGymBadges();
+						showStats();
+						show = false;
+					}
+					fadingModal = true;
+					setTimeout(function(){fadingModal=false},500)
+				},500);
+			}
+		}
+
+		if (keyCode == 85){
+			e.preventDefault();
+			if (fadingModal == false){
+				if (!$('#mineModal').hasClass('in')){show = true};
+				$('.modal').modal('hide');
+				setTimeout(function(){
+					if (show){
+						$("#mineModal").modal("show");
+						showCurMine();
+						show = false;
+					}
+					fadingModal = true;
+					setTimeout(function(){fadingModal=false},500)
+				},500);
+			}
+		}
+
+		if (keyCode == 88){
+			e.preventDefault();
+			if (fadingModal == false){
+				if (!$('#shardModal').hasClass('in')){show = true};
+				$('.modal').modal('hide');
+				setTimeout(function(){
+					if (show){
+						showShardModal();
+						show = false;
+					}
+					fadingModal = true;
+					setTimeout(function(){fadingModal=false},500)
+				},500);
+			}
+		}
+
+		if (keyCode == 81){
+			e.preventDefault();
+			if (fadingModal == false){
+				if (!$('#questModal').hasClass('in')){show = true};
+				$('.modal').modal('hide');
+				setTimeout(function(){
+					if (show){
+						$("#questModal").modal("show");
+						showCurQuest();
+						show = false;
+					}
+					fadingModal = true;
+					setTimeout(function(){fadingModal=false},500)
+				},500);
+			}
+		}
+
 		if(inProgress == 3){
 			if(keyCode == 38 || keyCode == 87){
 				moveToRoom(playerPosition-currentDungeon.size);
