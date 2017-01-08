@@ -429,7 +429,18 @@ $(document).ready(function(){
 		openDungeonChest();
 	})
 
-
+	$.notify.addStyle('shiny', {
+		html: "<div><img src=images/shinypokemon/star.png height='25px' width='auto'><span data-notify-text/></div>",
+		classes: {
+			base: {
+				"background-color": "#f9ff92",
+				"font-weight": "bold",
+				"color": "#84760d",
+				"padding": "5px",
+				"border-radius": "10px",
+			}
+		}
+	});
 
 	// Logs to welcome the player
 	log("Welcome to PokeClicker");
@@ -718,7 +729,7 @@ var capturePokemon = function(name, shiny){
 				pokemonList[i].experience = 0;
 				player.caughtPokemonList.push(pokemonList[i]);
 				if(shiny){
-					$.notify("You have caught a shiny "+ name +"!", "succes")
+					$.notify("You have caught a shiny "+ name +"!", {style: "shiny"})
 					progressQuest('captureShinies', "none" , 1);
 				}
 				calculateAttack();
@@ -740,7 +751,7 @@ var capturePokemon = function(name, shiny){
 						player.caughtPokemonList[i].timeStamp = Math.floor(Date.now() / 1000);
 					}
 					player.caughtPokemonList[i].shiny = 1;
-					$.notify("You have caught a shiny "+ name +"!", "succes")
+					$.notify("You have caught a shiny "+ name +"!", {style: "shiny"})
 					progressQuest('captureShinies', "none" , 1);
 					var tokens = Math.floor(Math.pow(route,1.4) - route/2);
 					var deviation = Math.floor(Math.random() * 2 ) + 3;
