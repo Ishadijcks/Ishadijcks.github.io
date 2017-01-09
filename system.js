@@ -4,7 +4,6 @@ var canCatch = 1;
 var attackInterval;
 var maxClicks = 15;
 var clicks = 0;
-var show;
 var fadingModal = false;
 // Add new variables to the savefile!!
 
@@ -496,6 +495,7 @@ var safelyOpen = function(modalFunc){
 }
 
 var safelyToggle = function(modalFunc, modalId){
+	var show = false;
 	if (fadingModal == false){
 		if (!$(modalId).hasClass('in')){show = true};
 		fadingModal = true;
@@ -503,7 +503,6 @@ var safelyToggle = function(modalFunc, modalId){
 		setTimeout(function(){
 			if (show){
 				modalFunc();
-				show = false;
 			}
 			setTimeout(function(){fadingModal=false},500)
 		},500);
