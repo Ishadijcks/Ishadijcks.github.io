@@ -341,6 +341,7 @@ $(document).ready(function(){
 			e.preventDefault();
 			if (fadingModal == false){
 				if (!$('#pokedexModal').hasClass('in')){show = true};
+				fadingModal = true;
 				$('.modal').modal('hide');
 				setTimeout(function(){
 					if (show){
@@ -350,7 +351,6 @@ $(document).ready(function(){
 						showStats();
 						show = false;
 					}
-					fadingModal = true;
 					setTimeout(function(){fadingModal=false},500)
 				},500);
 			}
@@ -360,6 +360,7 @@ $(document).ready(function(){
 			e.preventDefault();
 			if (fadingModal == false){
 				if (!$('#mineModal').hasClass('in')){show = true};
+				fadingModal = true;
 				$('.modal').modal('hide');
 				setTimeout(function(){
 					if (show){
@@ -367,7 +368,6 @@ $(document).ready(function(){
 						showCurMine();
 						show = false;
 					}
-					fadingModal = true;
 					setTimeout(function(){fadingModal=false},500)
 				},500);
 			}
@@ -377,13 +377,13 @@ $(document).ready(function(){
 			e.preventDefault();
 			if (fadingModal == false){
 				if (!$('#shardModal').hasClass('in')){show = true};
+				fadingModal = true;
 				$('.modal').modal('hide');
 				setTimeout(function(){
 					if (show){
 						showShardModal();
 						show = false;
 					}
-					fadingModal = true;
 					setTimeout(function(){fadingModal=false},500)
 				},500);
 			}
@@ -393,6 +393,7 @@ $(document).ready(function(){
 			e.preventDefault();
 			if (fadingModal == false){
 				if (!$('#questModal').hasClass('in')){show = true};
+				fadingModal = true;
 				$('.modal').modal('hide');
 				setTimeout(function(){
 					if (show){
@@ -400,7 +401,6 @@ $(document).ready(function(){
 						showCurQuest();
 						show = false;
 					}
-					fadingModal = true;
 					setTimeout(function(){fadingModal=false},500)
 				},500);
 			}

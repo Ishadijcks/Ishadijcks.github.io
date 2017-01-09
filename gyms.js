@@ -330,8 +330,20 @@ var showGymDefeated = function(first, town){
 
 
 	$("#gymDefeatedBody").html(html);
-	$('.modal').modal('hide');
-	setTimeout(function(){$("#gymModal").modal('show')},500);
+	showGymModal();
+}
+
+var showGymModal = function(){
+	if (fadingModal == false){
+		fadingModal = true;
+		$('.modal').modal('hide');
+		setTimeout(function(){
+			$("#gymModal").modal('show');
+			setTimeout(function(){fadingModal = false},500);
+		},500);
+	} else {
+		setTimeout(function(){showGymModal()},100)
+	}
 }
 
 var alreadyGotBadge = function(badgeName){
