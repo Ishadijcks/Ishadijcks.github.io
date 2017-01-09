@@ -91,19 +91,6 @@ var oakExplainAgain = function () {
 	}
 };
 
-var safelyOpen = function(explainFunc){
-	if (fadingModal == false){
-		fadingModal = true;
-		$('.modal').modal('hide');
-		setTimeout(function(){
-			explainFunc();
-			setTimeout(function(){fadingModal = false},500);
-		},500);
-	} else {
-		setTimeout(function(){safelyOpen(explainFunc)},100)
-	}
-}
-
 var addOakItem = function(name, image, pokedexReq, flavorText, value){
 
 	var temp = {

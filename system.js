@@ -339,71 +339,22 @@ $(document).ready(function(){
 
 		if (keyCode == 80){
 			e.preventDefault();
-			if (fadingModal == false){
-				if (!$('#pokedexModal').hasClass('in')){show = true};
-				fadingModal = true;
-				$('.modal').modal('hide');
-				setTimeout(function(){
-					if (show){
-						$('#pokedexModal').modal('show');
-						showPokedex();
-						showGymBadges();
-						showStats();
-						show = false;
-					}
-					setTimeout(function(){fadingModal=false},500)
-				},500);
-			}
+			safelyToggle(showPokedexModal, '#pokedexModal')
 		}
 
 		if (keyCode == 85){
 			e.preventDefault();
-			if (fadingModal == false){
-				if (!$('#mineModal').hasClass('in')){show = true};
-				fadingModal = true;
-				$('.modal').modal('hide');
-				setTimeout(function(){
-					if (show){
-						$("#mineModal").modal("show");
-						showCurMine();
-						show = false;
-					}
-					setTimeout(function(){fadingModal=false},500)
-				},500);
-			}
+			safelyToggle(showMineModal, '#mineModal');
 		}
 
 		if (keyCode == 88){
 			e.preventDefault();
-			if (fadingModal == false){
-				if (!$('#shardModal').hasClass('in')){show = true};
-				fadingModal = true;
-				$('.modal').modal('hide');
-				setTimeout(function(){
-					if (show){
-						showShardModal();
-						show = false;
-					}
-					setTimeout(function(){fadingModal=false},500)
-				},500);
-			}
+			safelyToggle(showShardModal, '#shardModal');
 		}
 
 		if (keyCode == 81){
 			e.preventDefault();
-			if (fadingModal == false){
-				if (!$('#questModal').hasClass('in')){show = true};
-				fadingModal = true;
-				$('.modal').modal('hide');
-				setTimeout(function(){
-					if (show){
-						$("#questModal").modal("show");
-						showCurQuest();
-						show = false;
-					}
-					setTimeout(function(){fadingModal=false},500)
-				},500);
-			}
+			safelyToggle(showQuestModal, '#questModal');
 		}
 
 		if(inProgress == 3){
@@ -531,6 +482,50 @@ $(document).ready(function(){
 	generateDailyDeals();
 });
 
+var safelyOpen = function(modalFunc){
+	if (fadingModal == false){
+		fadingModal = true;
+		$('.modal').modal('hide');
+		setTimeout(function(){
+			modalFunc();
+			setTimeout(function(){fadingModal = false},500);
+		},500);
+	} else {
+		setTimeout(function(){safelyOpen(modalFunc)},100)
+	}
+}
+
+var safelyToggle = function(modalFunc, modalId){
+	if (fadingModal == false){
+		if (!$(modalId).hasClass('in')){show = true};
+		fadingModal = true;
+		$('.modal').modal('hide');
+		setTimeout(function(){
+			if (show){
+				modalFunc();
+				show = false;
+			}
+			setTimeout(function(){fadingModal=false},500)
+		},500);
+	}
+}
+
+var showMineModal = function(){
+	$("#mineModal").modal("show");
+	showCurMine();
+}
+
+var showPokedexModal = function(){
+	$('#pokedexModal').modal('show');
+	showPokedex();
+	showGymBadges();
+	showStats();
+}
+
+var showQuestModal = function(){
+	$("#questModal").modal("show");
+	showCurQuest();
+}
 
 // Update all functions and save
 var updateAll = function(){
