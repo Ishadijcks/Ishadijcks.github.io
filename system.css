@@ -59,10 +59,20 @@
 	right: 0;
 }
 
-.mineSquare:hover:after {
+.rock1:hover:after,
+.rock2:hover:after,
+.rock3:hover:after,
+.rock4:hover:after,
+.rock5:hover:after,
+.hammerSelected.mineSquare:hover:after
+{
 	border: 1px solid red;
 }
 
+img.hammerSelected.mineReward:hover {
+	outline: 1px solid red;
+	z-index: 1;
+}
 
 .hammerSelected {
 	cursor:url('images/mine/hammer.png'),auto;
