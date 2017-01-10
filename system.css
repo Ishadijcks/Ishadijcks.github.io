@@ -43,6 +43,10 @@
 	background-image: url('images/mine/rock0.png');
 }
 
+.mineReward:hover{
+	border: 1px solid red;
+}
+
 .mineSquare {
 	height:32px;
 	width:32px !important;
