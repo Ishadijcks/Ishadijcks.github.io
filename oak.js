@@ -76,20 +76,17 @@ var oakExplainAgain = function () {
 		$("#map_tutorial").on("click", function(){
 			console.log("Hi");
 			player.mapExplain = 0;
-			$('#tutorialModal').modal('hide');
-			setTimeout(function(){oakExplainMap()},500);
+			safelyOpen(oakExplainMap);
 		});
 
 		$("#dungeon_tutorial").click(function () {
 			player.dungeonExplain = 0;
-			$('#tutorialModal').modal('hide');
-			setTimeout(function(){oakExplainDungeons()},500);
+			safelyOpen(oakExplainDungeons);
 		});
 
 		$("#town_tutorial").click(function () {
 			player.townExplain = 0;
-			$('#tutorialModal').modal('hide');
-			setTimeout(function(){oakExplainTown()},500);
+			safelyOpen(oakExplainTown);
 		});
 	}
 };
