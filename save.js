@@ -105,8 +105,18 @@ var exportSave = function(){
 	}else{
 		$("#saveAsFile").attr("visibility", "hidden");
 	}
+	if(document.queryCommandSupported("copy")){
+		$("#copyToClipboard").css({"visibility":"visible"});
+	}
     $("#exportBody").html("<textarea id='saveCode' style='width:100%; height:500px'>"+saveData+"</textarea>");
 	$("#exportModal").modal('show');
+}
+
+var saveDataToClipboard = function(){
+	var textField = document.getElementById("saveCode");
+	textField.select();
+	document.execCommand("copy");
+	window.getSelection().removeAllRanges();
 }
 
 var importSave = function(){
