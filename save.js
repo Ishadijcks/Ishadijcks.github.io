@@ -100,7 +100,8 @@ var load = function(){
 var exportSave = function(){
 	var saveData = btoa(JSON.stringify(player));
 	if(typeof FileReader != "undefined" && typeof document.getElementById("saveAsFile").download != "undefined") {
-		$("#saveAsFile").attr("download", "pokeclicker.sav").attr('href', URL.createObjectURL(new Blob([saveData])));
+		var timestamp = new Date().toISOString();
+		$("#saveAsFile").attr("download", "pokeclicker_"+timestamp+".sav").attr('href', URL.createObjectURL(new Blob([saveData])));
 		$("#fileUploadButton").css({"visibility": "visible"});
 	}else{
 		$("#saveAsFile").attr("visibility", "hidden");
