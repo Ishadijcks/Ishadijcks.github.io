@@ -988,12 +988,15 @@
                                     <div id="export" class="tab-pane fade active in">
                                         <br><br>
                                         Save this string in a textfile on your computer.<br>
+										<a id="saveAsFile"><button class="btn-danger">Save File</button></a>
                                         <div id="exportBody"></div>
                                     </div>
                                     <div id="import" class="tab-pane">
                                         <div id="importBody">
                                             <br><br>The Export and Import feature are in beta, use at your own risk.
+											<input type="file" id="inputSaveFile" onchange="readSaveFile(this.files[0])" style="visibility: hidden; width: 0px; height: 0px;">
                                             <button class="btn btn-info" onClick="importSave()">Import</button>
+											<button class="btn btn-info" onClick="$('#inputSaveFile').click()">Upload a savefile</button>
                                         </div>
                                     </div>
                                     <div id="reset" class="tab-pane">

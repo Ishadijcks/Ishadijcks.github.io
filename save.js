@@ -1,4 +1,4 @@
-			// Save and load functions
+// Save and load functions
 var canSave = 1;
 
 // Saves the game by writing play to JSON and save it in localStorage
@@ -98,7 +98,9 @@ var load = function(){
 }
 
 var exportSave = function(){
-    $("#exportBody").html("<textarea id='saveCode' style='width:100%; height:500px'>"+btoa(JSON.stringify(player))+"</textarea>");
+	var saveData = btoa(JSON.stringify(player));
+	$("#saveAsFile").attr("download","pokeclicker.sav").attr('href',URL.createObjectURL(new Blob([saveData])))
+    $("#exportBody").html("<textarea id='saveCode' style='width:100%; height:500px'>"+saveData+"</textarea>");
 	$("#exportModal").modal('show');
 }
 
@@ -106,20 +108,33 @@ var importSave = function(){
     var save = prompt("Paste your savefile here");
     console.log(save);
     if(save) {
-		try {
-			var decoded = atob(save)
-			JSON.parse(decoded);
-			if (decoded) {
-				localStorage.setItem("player", decoded);
-				canSave = 0;
-				location.reload();
-			} else {
-				$.notfiy("This is not a valid savefile", "error")
-			}
-        } catch(err){
-			$.notify("This is not a valid savefile");
-		}
+		restoreSave(save)
+	}
+}
 
+var readSaveFile = function(file){
+	var fr = new FileReader();
+	fr.onload = function(){
+		if(fr.result){
+			restoreSave(fr.result);
+		}
+	}
+	fr.readAsText(file);
+}
+
+var restoreSave = function(save){
+	try {
+		var decoded = atob(save);
+		JSON.parse(decoded);
+		if (decoded) {
+			localStorage.setItem("player", decoded);
+			canSave = 0;
+			location.reload();
+		} else {
+			$.notfiy("This is not a valid savefile", "error")
+		}
+	} catch(err){
+		$.notify("This is not a valid savefile");
 	}
 }
 
