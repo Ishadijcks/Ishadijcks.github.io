@@ -44,7 +44,7 @@ var gainRandomEgg = function(type){
 		var num = typeToNumber(type);
 		var eggs = possibleEggs[num];
 		var eggName = eggs[Math.floor(Math.random()*(eggs.length))];
-		gainEgg(Egg(type, getSteps(eggName), eggName));
+		gainEgg(Egg([type], getSteps(eggName), eggName));
 	}
 }
 
