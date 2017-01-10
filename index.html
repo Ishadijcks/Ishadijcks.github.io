@@ -996,7 +996,7 @@
                                             <br><br>The Export and Import feature are in beta, use at your own risk.
 											<input type="file" id="inputSaveFile" onchange="readSaveFile(this.files[0])" style="visibility: hidden; width: 0px; height: 0px;">
                                             <button class="btn btn-info" onClick="importSave()">Import</button>
-											<button class="btn btn-info" onClick="$('#inputSaveFile').click()">Upload a savefile</button>
+											<button id="fileUploadButton" style="visibility: hidden" class="btn btn-info" onClick="$('#inputSaveFile').click()">Upload a savefile</button>
                                         </div>
                                     </div>
                                     <div id="reset" class="tab-pane">

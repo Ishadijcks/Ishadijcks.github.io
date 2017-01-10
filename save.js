@@ -99,7 +99,11 @@ var load = function(){
 
 var exportSave = function(){
 	var saveData = btoa(JSON.stringify(player));
-	$("#saveAsFile").attr("download","pokeclicker.sav").attr('href',URL.createObjectURL(new Blob([saveData])))
+	if(typeof FileReader != "undefined") {
+		$("#saveAsFile").attr("download", "pokeclicker.sav").attr('href', URL.createObjectURL(new Blob([saveData])));
+	}else{
+		$("#saveAsFile").attr("visibility", "hidden");
+	}
     $("#exportBody").html("<textarea id='saveCode' style='width:100%; height:500px'>"+saveData+"</textarea>");
 	$("#exportModal").modal('show');
 }
@@ -112,14 +116,16 @@ var importSave = function(){
 	}
 }
 
-var readSaveFile = function(file){
-	var fr = new FileReader();
-	fr.onload = function(){
-		if(fr.result){
-			restoreSave(fr.result);
-		}
+var readSaveFile = function(file) {
+	if (typeof FileReader != "undefined") {
+		var fr = new FileReader();
+		fr.onload = function () {
+			if (fr.result) {
+				restoreSave(fr.result);
+			}
+		};
+		fr.readAsText(file);
 	}
-	fr.readAsText(file);
 }
 
 var restoreSave = function(save){
