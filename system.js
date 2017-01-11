@@ -313,12 +313,32 @@ $(document).ready(function(){
 		$("#gymModal").modal('hide');
 		loadGym(id);
 	})
+	
+	$("body").keypress(function (e) {
+		if ($("#gymModal").hasClass('in') && (e.keyCode == 0 || e.keyCode == 32)){
+			e.preventDefault();
+			$("#gymModal").modal('hide');
+			if (currentGym.town === "Indigo Plateau Gym"){
+				loadGym(currentGym.leaderName);
+			} else {
+				loadGym(currentGym.town.slice(0, -4));
+			}
+		}
+	});
 
 	$("body").on('click touchstart',".dungeon", function(){
 		var id = this.id;
 		id = id.slice(0, -8);
 		loadDungeon(id);
 	})
+	
+	$("body").keypress(function (e) {
+		if ($("#dungeonModal").hasClass('in') && (e.keyCode == 0 || e.keyCode == 32)){
+			e.preventDefault();
+			$("#dungeonModal").modal('hide');
+			loadDungeon(currentDungeon.name.slice(0, -8));
+		}
+	});
 
 	$("body").on('click',".shop", function(){
 		var id = this.id;
