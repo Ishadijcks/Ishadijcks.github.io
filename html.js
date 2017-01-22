@@ -6,13 +6,19 @@ var logCount = 0;
 
 var log = function(text){
 	logCount++;
-	if(logCount > 250){
-		logCount = 0;
-		$("#console").html("");
-	}
-	$("#console").append(text+"<br>");
 	var elem = document.getElementById('console');
-	elem.scrollTop = elem.scrollHeight;
+	var atBottom = (elem.scrollTop > (elem.scrollHeight - (elem.clientHeight + 10))); //Checks if we're scrolled to the bottom (or close to the bottom)
+	if(logCount > 250){
+		logCount--;
+		$("#console div").first().remove();
+	}
+	var message = document.createElement('div');
+	message.className = "log-message";
+	message.innerHTML = text;
+	$("#console").append(message);
+	if (atBottom){
+		elem.scrollTop = elem.scrollHeight; //Stay at the bottom if we were at the bottom before
+	}
 }
 
 		// HTML functions
