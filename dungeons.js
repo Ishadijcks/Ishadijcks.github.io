@@ -1,5 +1,6 @@
 var currentDungeon;
 var counter;
+var catchTimeout;
 var playerPosition;
 var dungeonCanMove = 0;
 
@@ -402,7 +403,7 @@ var dungeonEnemyDefeated = function() {
         gainShards(curEnemy.type, 3);
         dungeonCanMove = 1;
         progressEgg(Math.floor(Math.sqrt(currentDungeon.itemRoute)));
-        setTimeout(function() {
+        catchTimeout = setTimeout(function() {
             if (inProgress != 0) {
                 if (canCatch) {
 
@@ -458,6 +459,7 @@ var dungeonDefeated = function() {
 var resetDungeon = function() {
     if (currentDungeon != undefined) {
         clearInterval(counter);
+        clearTimeout(catchTimeout);
         currentDungeon.timeLeft = currentDungeon.timeLimit;
         currentDungeon.pokemonDefeated = 0;
         currentDungeon.mapDiscovered = [];
