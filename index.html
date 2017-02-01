@@ -8,6 +8,7 @@
 	<script src="jquery.js"></script>
 	<script type="text/javascript" src="tooltipster/dist/js/tooltipster.bundle.min.js"></script>
 	<link href="tooltipster/dist/css/tooltipster.bundle.min.css" rel="stylesheet" type="text/css">
+    <script src="motio.js"></script>
 	<script src="pokemonList.js"></script>
 	<script src="dungeons.js"></script>
 	<script src="system.js"></script>
@@ -30,6 +31,7 @@
 	<script src="types.js"></script>
 	<script src="mining.js"></script>
 	<script src="stats.js"></script>
+    <script src="safari.js"></script>
 
 	<!-- Latest compiled and minified CSS -->
 	<link href="bootstrap.css" rel="stylesheet"><!-- Optional theme -->
@@ -627,6 +629,9 @@
 
 								<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="451.5" y="103.6"></rect>
 								<rect class="city" id="Power Plant"  fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="452.9" y="105"></rect>
+                                
+                                <rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="282.8" y="314.3"></rect>
+                                <rect class="city" id="Safari Zone"  fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="284.2" y="315.7"></rect>
 
 
 								<rect id="route_13" fill="#fcb612" height="28" stroke="none" transform="rotate(90,458.85,286.3)" width="58.8" x="429.1" y="274.3"></rect>
@@ -657,6 +662,7 @@
 						<button class="btn-success" id="questButton">Quest</button>
 						<button class="btn-danger" id="pokedexButton">Pokedex</button>
 						<button class="btn-info" id="changeLogButton">Changelog</button>
+                        <button class="btn-info" id="safariButton">Safari</button>
 						<button class="btn-danger" onClick="$('#saveModal').modal('show'); exportSave()" id="resetButton">Save</button>
 						<a style="text-decoration:none; color:white;" href="https://reddit.com/r/pokeclicker" target="_blank"><button class="btn-info" id="subredditButton">Subreddit</button></a>
 						<a style="text-decoration:none; color:white;" href="http://kiwiirc.com/client/irc.freenode.net/pokeclicker" target="_blank"><button class="btn-success" id="chatButton">Chat</button></a>
@@ -697,16 +703,23 @@
 							<div class="modal-header">
 								<h4 style='text-align:center' class="modal-title">Breeding</h4>
 							</div>
-							<div class="modal-body" id="breedingBody" style="width: 80%;margin: auto;">
-
-
-							</div>
-
-						</div>
-					</div>
-				</div>
-
-
+							<div class="modal-body" id="breedingBody" style="width: 80%;margin: auto;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Safari Modal -->
+                <div aria-labelledby="myModalLabel" class="modal fade noselect" id="safariModal" role="dialog" style="cursor:default" tabindex="-1">
+                <div class="modal-dialog" role="document" style="width:55%">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 style='text-align:center' class="modal-title">Safari Zone</h4>
+                            </div>
+                        <div class="modal-body" id="safariBody" style="width: 80%;margin: auto;"></div>
+                </div>
+                </div>
+                </div>
+                
 				<!-- Quest Modal -->
 				<div aria-labelledby="myModalLabel" class="modal fade noselect" id="questModal" role="dialog" style="cursor:default" tabindex="-1">
 					<div class="modal-dialog" role="document" style="width:55%">
@@ -963,7 +976,7 @@
 											</div>
 										</div>
 									</div>
-									<div id="statsTab" class="tab-pane fade">
+									<div id="statsTab" class="tab-pane fade active in">
 										<div id="statsBody" style="width:80%; margin:auto; margin-top:30px; text-align:center"></div>
 									</div>
 								</div>
@@ -985,19 +998,14 @@
                                 </ul>
                                 <div class="tab-content">
                                     <div id="export" class="tab-pane fade active in">
-                                        <br>
+                                        <br><br>
                                         Save this string in a textfile on your computer.<br>
-										<button id="copyToClipboard" class="btn btn-info" style="visibility: hidden" onclick="saveDataToClipboard()">Copy the string to your clipboard</button>
-										<a id="saveAsFile"><button class="btn btn-info">Save File</button></a>
-										<br>
-										<div id="exportBody"></div>
+                                        <div id="exportBody"></div>
                                     </div>
                                     <div id="import" class="tab-pane">
                                         <div id="importBody">
                                             <br><br>The Export and Import feature are in beta, use at your own risk.
-											<input type="file" id="inputSaveFile" onchange="readSaveFile(this.files[0])" style="visibility: hidden; width: 0px; height: 0px;">
                                             <button class="btn btn-info" onClick="importSave()">Import</button>
-											<button id="fileUploadButton" style="visibility: hidden" class="btn btn-info" onClick="$('#inputSaveFile').click()">Upload a savefile</button>
                                         </div>
                                     </div>
                                     <div id="reset" class="tab-pane">

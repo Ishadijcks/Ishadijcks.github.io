@@ -340,6 +340,8 @@ $(document).ready(function(){
 			e.preventDefault();
 			safelyToggle(showPokedexModal, '#pokedexModal')
 		}
+                   
+        
 
 		if (keyCode == 85){
 			e.preventDefault();
@@ -373,7 +375,23 @@ $(document).ready(function(){
 				openDungeonChest();
     			e.preventDefault();
 			}
-		}
+        } else if(inProgress == 4){
+                   if(keyCode == 38 || keyCode == 87){
+                        safariMove('up')
+                        e.preventDefault();
+                   } else if(keyCode == 39 || keyCode == 68){
+                        safariMove('right')
+                        e.preventDefault();
+                   } else if(keyCode == 37 || keyCode == 65){
+                        safariMove('left')
+                        e.preventDefault();
+                   } else if(keyCode == 40 || keyCode == 83){
+                    	safariMove('down')
+                        e.preventDefault();
+                   } else if(keyCode == 32){
+                        e.preventDefault();
+                   }
+        }
 
 	});
 
@@ -402,6 +420,11 @@ $(document).ready(function(){
 			completeQuest();
 		}
 	})
+                  
+    $("body").on('click',"#safariButton", function(){
+        $("#safariModal").modal("show");
+            showSafari();
+        })
 
 	$("body").on('click',"#mineButton", function(){
 		$("#mineModal").modal("show");
@@ -479,6 +502,7 @@ $(document).ready(function(){
 	showCurQuest();
 	showEggs();
 	generateDailyDeals();
+    loadSafari();
 });
 
 var safelyOpen = function(modalFunc){
