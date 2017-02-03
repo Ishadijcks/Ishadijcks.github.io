@@ -12,10 +12,10 @@
   display:inline-block;
   transform: translateY(62px);
   animation: 
-  bounce1 1s ease-in-out 0s,
-  bounce2 0.75s ease-in-out 1s,
-  bounce3 0.5s ease-in-out 1.75s,
-  bounce4 0.25s ease-in 2.25s
+  bounce1 0.64s ease-in-out 0s,
+  bounce2 0.48s ease-in-out 0.64s,
+  bounce3 0.32s ease-in-out 1.12s,
+  bounce4 0.16s ease-in 1.44s
 }
 @keyframes bounce1{
   0%{transform: translateY(0px)}

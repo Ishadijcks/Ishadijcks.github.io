@@ -352,7 +352,7 @@ var throwBall = function() {
                             setTimeout(safariEnemyTurn, 1000);
                         }
                     }, (200 + 1200*index));
-                }, 2600);
+                }, 1700);
             }, 750);
         }, 750);
     }
