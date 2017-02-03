@@ -316,7 +316,7 @@ var throwBall = function() {
     if(!safari.battleBusy) {
         safari.balls--;
         showBattle();
-        updateSafariBattleText("You throw a ball... (fancy animation #DimavaPls)");
+        updateSafariBattleText("You throw a ball...");
         safari.battleBusy = 1;
         var enemy = $('#safariEnemy').offset();
         enemy.left += 48;
@@ -372,7 +372,7 @@ var safariRoll = function(n){
 
 var throwRock = function(){
     if(!safari.battleBusy) {
-        updateSafariBattleText("You throw a rock at " + safari.enemy.name + "... (fancy animation #AegyoPls)");
+        updateSafariBattleText("You throw a rock at " + safari.enemy.name);
         safari.battleBusy = 1;
         safari.enemy.angry = Math.max(safari.enemy.angry, Math.floor(Math.random() * 5 + 2))
         safari.enemy.eating = 0;
@@ -409,7 +409,7 @@ var throwRock = function(){
 
 var throwBait = function(){
     if(!safari.battleBusy){
-        updateSafariBattleText("You throw some bait at " + safari.enemy.name + "... (fancy animation #AegyoPls)");
+        updateSafariBattleText("You throw some bait at " + safari.enemy.name);
         safari.battleBusy = 1;
         safari.enemy.eating = Math.max(safari.enemy.eating, Math.floor(Math.random()*5 + 2))
         safari.enemy.angry = 0;
