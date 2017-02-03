@@ -339,6 +339,7 @@ var throwBall = function() {
                     setTimeout(function(){
                         if (random*100 < getSafariCatchFactor()*1275/100){
                             captureSafariPokemon(safari.enemy.name);
+                            $('#safariBall').attr('src', 'images/safari/pokeball-dark.png')
                             setTimeout(function(){
                                 p.remove();
                                 endBattle();
