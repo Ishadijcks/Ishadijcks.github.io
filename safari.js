@@ -320,37 +320,52 @@ var throwBall = function() {
         safari.battleBusy = 1;
         var enemy = $('#safariEnemy').offset();
         enemy.left += 48;
-        var p = dropParticle('<img src=images/safari/pokeball.png>', $('#safariPlayer').offset(), enemy, 0.75, 'cubic-bezier(0,0,0.4,1)', true).css('z-index',9999);
+        var p = dropParticle('<div><img id="safariBall" src=images/safari/pokeball.png></div>', $('#safariPlayer').offset(), enemy, 0.75, 'cubic-bezier(0,0,0.4,1)', true).css('z-index',9999);
 
         setTimeout(function() {
         	$('#safariEnemy').addClass('safariCapture')
+
+            setTimeout(function() {
+                $('#safariEnemy > img').css('opacity', '0');
+                p.addClass('bounce');
+
+                setTimeout(function () {
+                    var random = Math.random();
+                    var index = Math.floor( (1 - Math.max( random, getSafariCatchFactor()*1275/(100*100) ))/(1 - getSafariCatchFactor()*1275/(100*100))*3);
+                    if (index != 0) {
+                        startRoll(index);
+                    }
+
+                    setTimeout(function(){
+                        if (random*100 < getSafariCatchFactor()*1275/100){
+                            captureSafariPokemon(safari.enemy.name);
+                            setTimeout(function(){
+                                p.remove();
+                                endBattle();
+                            }, 2000);
+                        } else {
+                            $('#safariEnemy > img').css('opacity', '1');
+                            $('#safariEnemy').removeClass('safariCapture');
+                            updateSafariBattleText(safariCatchMessages[index]);
+                            p.remove();
+                            setTimeout(safariEnemyTurn, 1000);
+                        }
+                    }, (200 + 1200*index));
+                }, 3100);
+            }, 750);
         }, 750);
+    }
+}
 
-        setTimeout(function() {
-        	$('#safariEnemy > img').css('opacity', '0');
-        }, 1500)
+var startRoll = function(n){
+    $('#safariBall').addClass('safari-roll-left');
+    setTimeout(function(){ safariRoll(n-1) }, 1200);
+}
 
-        setTimeout(function () {
-            var random = Math.random();
-            var index = Math.floor(random*4);
-            if (random*100 < getSafariCatchFactor()*1275/100){
-                captureSafariPokemon(safari.enemy.name);
-                setTimeout(function(){
-                	endBattle();
-            		p.remove();
-                }, 2000);
-            } else {
-            	//Dimava pls help
-            	//p.addClass('bounce');
-            	setTimeout(function() {
-        			$('#safariEnemy > img').css('opacity', '1');
-            		$('#safariEnemy').removeClass('safariCapture');
-                	updateSafariBattleText(safariCatchMessages[index]);
-                	setTimeout(safariEnemyTurn,1000);
-                	p.remove();
-                }, 1000 + index*500);
-            }
-        }, 1600)
+var safariRoll = function(n){
+    if (n != 0){
+        $('#safariBall').toggleClass('safari-roll-left').toggleClass('safari-roll-right');
+        setTimeout(function(){safariRoll(n-1)}, 1200);
     }
 }
 
