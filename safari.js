@@ -38,6 +38,7 @@ var element;
 var sprite;
 var walking = false;
 var origin;
+var enemyChoice = ["Nidoran(F)", "Nidorina", "Nidoran(M)", "Nidorino", "Paras", "Parasect", "Venonat", "Exeggcute", "Rhyhorn", "Chansey", "Tangela", "Scyther", "Pinsir", "Cubone", "Marowak", "Kangaskhan", "Tauros", "Venomoth"];
 
 
 var loadSafari = function(){
@@ -190,7 +191,7 @@ var checkBattle = function(){
 }
 
 var loadBattle = function(){
-    safari.enemy.name = "Pinsir";
+    safari.enemy.name = enemyChoice[Math.floor(Math.random() * enemyChoice.length)];
     safari.enemy.catchFactor = getPokemonByName(safari.enemy.name).catchRate * 100/1275;
     safari.enemy.escapeFactor = 10;
     safari.enemy.angry = 0;
@@ -237,7 +238,7 @@ var showBattleBars = function(){
 }
 
 var showBattle = function(){
-    var enemy = getPokemonByName(safari.enemy.name || "Pinsir");
+    var enemy = getPokemonByName(safari.enemy.name);
     var html = "";
     html += "<div class='row safariEnemyRow'>";
     html +=     "<div class='col-sm-2 col-sm-offset-8' id='safariEnemy'><img src='images/pokemon/" + enemy.id + ".png'></div>";
@@ -424,7 +425,7 @@ var throwBait = function(){
 
 var captureSafariPokemon = function(pokemonName){
     updateSafariBattleText("GOTCHA!<br>" + pokemonName + " was caught!");
-    // capturePokemon(pokemonName);
+    capturePokemon(pokemonName);
 }
 
 
