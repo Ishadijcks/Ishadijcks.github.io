@@ -210,7 +210,7 @@ var showEggs = function(){
 		var html = ""
 		if(player.eggList[i] !== null){
 			if( player.eggList[i].progress >= player.eggList[i].steps){
-				html += "<img style='cursor:pointer;' onClick='hatchEgg(" + i + ")' title='" + player.eggList[i].type + "' class='egg tooltipUp' src=images/breeding/egg" + player.eggList[i].type.toLowerCase() + ".png>"
+				html += "<img style='cursor:pointer;' onmousedown='hatchEgg(" + i + ")' title='" + player.eggList[i].type + "' class='egg tooltipUp' src=images/breeding/egg" + player.eggList[i].type.toLowerCase() + ".png>"
 			} else{
 				html += "<img title='" + player.eggList[i].type + "' class='egg tooltipUp' src=images/breeding/egg" + player.eggList[i].type.toLowerCase() + ".png>";
 			}
@@ -225,7 +225,7 @@ var showEggs = function(){
 			html += "</div>";
 		} else {
 			if( i == player.eggSlots && canBuyEggSlot(i)){
-				html += "<br><button class='egg btn btn-info' onClick='buyEggSlot("+i+")'>" + eggSlotPrice[i] + " QP</p><p>Egg slot</p>";
+				html += "<br><button class='egg btn btn-info' onmousedown='buyEggSlot("+i+")'>" + eggSlotPrice[i] + " QP</p><p>Egg slot</p>";
 			} else if (i >= player.eggSlots){
 				html += "<br><button class='egg btn btn-info disabled'>" + eggSlotPrice[i] + " QP</p><p>Egg slot</p>";
 			}

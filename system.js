@@ -148,7 +148,7 @@ $(document).ready(function(){
 
 
 
-	$("body").on('click',"#enemy", function(){
+	$("body").on('mousedown',"#enemy", function(){
 		clicks++;
 		player.totalClicks++;
 		if(clicks < maxClicks){
@@ -166,7 +166,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$("body").on('click',"#healthBar", function(){
+	$("body").on('mousedown',"#healthBar", function(){
 		clicks++;
 		player.totalClicks++;
 		if(clicks < maxClicks){
@@ -184,7 +184,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$("body").on('click',"#gymEnemy", function(){
+	$("body").on('mousedown',"#gymEnemy", function(){
 		clicks++;
 		player.totalClicks++;
 		if(clicks < maxClicks){
@@ -202,7 +202,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$("body").on('click',"#dungeonEnemy", function(){
+	$("body").on('mousedown',"#dungeonEnemy", function(){
 		clicks++;
 		player.totalClicks++;
 		if(clicks < maxClicks){
@@ -220,7 +220,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$("body").on('click touchstart',".useItemButton", function(){
+	$("body").on('mousedown touchstart',".useItemButton", function(){
 		var id = this.id.substring(4);
 		activateItem(id);
 	});
@@ -252,7 +252,7 @@ $(document).ready(function(){
 	})
 
 	// Allows the player buy upgrades
-	$("body").on('click',".upgradeBoxes", function(){
+	$("body").on('mousedown',".upgradeBoxes", function(){
 		var id = this.id.substr(7,this.id.length);
 		for( var i = 0; i<player.upgradeList.length; i++){
 			if( player.upgradeList[i].id == id){
@@ -346,7 +346,7 @@ $(document).ready(function(){
 		loadShop(id);
 	})
 
-	$("body").on('click touchstart',".dungeonRoom", function(){
+	$("body").on('mousedown touchstart',".dungeonRoom", function(){
 		var id = parseInt(this.id.substring(4));
 		moveToRoom(id);
 	})
@@ -445,7 +445,7 @@ $(document).ready(function(){
 	})
 
 
-	$("body").on('click',"#chestImage", function(){
+	$("body").on('mousedown',"#chestImage", function(){
 		openDungeonChest();
 	})
 
