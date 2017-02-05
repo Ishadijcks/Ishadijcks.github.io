@@ -271,7 +271,7 @@ var useEvoStone = function(item){
 	html += "</div>";
 
 	$("#evoBody").html(html);
-	$("#evoTitle").html(item.name);
+	$("#evoTitle").html(item.name + " (" + player.inventoryList[getItemById(item.id)].quantity + ")");
 	updateItems();
 }
 
@@ -281,6 +281,11 @@ var activateEvoStone = function(pokemon, id){
 		capturePokemon(pokemon, generateStoneShiny());
 		item.quantity--;
 		updateItems();
+		if (item.quantity == 0){
+			$("#evoModal").modal("hide");
+		} else {
+			$("#evoTitle").html(item.name + " (" + item.quantity + ")");
+		}
 	}
 }
 

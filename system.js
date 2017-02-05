@@ -412,7 +412,6 @@ $(document).ready(function(){
 
 	$("body").on('click',".evoButton", function(){
 		activateEvoStone(this.dataset.pokemon, this.id.substr(3));
-		$("#evoModal").modal("hide");
 	})
 
 	$("body").on('click',".breedPokemon", function(){
