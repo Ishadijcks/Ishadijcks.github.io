@@ -8,58 +8,67 @@
 }
 
 .bounce {
-    position: relative;
-    top:100px;
-    display:inline-block;
-    animation:
-    bounce1 1s ease-in-out 0s,
-    bounce2 1s ease-in-out 1s,
-    bounce3 1s ease-in-out 2s,
-    bounce4 1s ease-in 3s,
-    roll 4s linear 4s;
+  position: relative;
+  display:inline-block;
+  transform: translateY(62px);
+  animation: 
+  bounce1 0.64s ease-in-out 0s,
+  bounce2 0.48s ease-in-out 0.64s,
+  bounce3 0.32s ease-in-out 1.12s,
+  bounce4 0.16s ease-in 1.44s
 }
 @keyframes bounce1{
-    0%{top:0px}
-    50%{top:100px}
-    100%{top:30px}
+  0%{transform: translateY(0px)}
+  50%{transform: translateY(62px)}
+  100%{transform: translateY(22px)}
 }
 @keyframes bounce2{
-    0%{top:30px}
-    50%{top:100px}
-    100%{top:50px}
+  0%{transform: translateY(22px)}
+  50%{transform: translateY(62px)}
+  100%{transform: translateY(47px)}
 }
 @keyframes bounce3{
-    0%{top:50px}
-    50%{top:100px}
-    100%{top:65px}
+  0%{transform: translateY(47px)}
+  50%{transform: translateY(62px)}
+  100%{transform: translateY(57px)}
 }
 @keyframes bounce4{
-    0%{top:65px}
-    50%{top:100px}
-    100%{top:100px}
+  0%{transform: translateY(57px)}
+  50%{transform: translateY(62px)}
+  100%{transform: translateY(62px)}
 }
-@keyframes roll{
-    0%{left:0px;transform:rotate(0deg);}
-    20%{left:-10px;transform:rotate(-45deg);}
-    20%{left:-10px;transform:rotate(-45deg);}
-    70%{left:10px;transform:rotate(45deg);}
-    80%{left:10px;transform:rotate(45deg);}
-    100%{left:0px;transform:rotate(0deg);}
+
+.safari-roll-left {
+	animation: roll-left 1s ease-in-out 0s;
+}
+@keyframes roll-left{
+  0%{transform: rotate(0deg);}
+  50%{transform: rotate(-45deg) translate(-8px, -10px);}
+  100%{transform: rotate(0deg);}
+}
+
+.safari-roll-right {
+	animation: roll-right 1s ease-in-out;
+}
+@keyframes roll-right{
+  0%{transform: rotate(0deg);}
+  50%{transform: rotate(45deg) translate(8px, -10px);}
+  100%{transform: rotate(0deg);}
 }
 
 .pulse {
-    animation-name: pulseAnimation;
-    animation-duration: 350ms;
-    transform-origin; 50% 50%;
-    animation-iteration-count: 2;
-    animation-timing-function: linear;
+	animation-name: pulseAnimation;
+	animation-duration: 350ms;
+	transform-origin; 50% 50%;
+	animation-iteration-count: 2;
+	animation-timing-function: linear;	
 }
 
 @keyframes pulseAnimation{
-    0% {transform: scale(1);}
-    45% {transform: scale(1.3);}
-    55% {transform: scale(1.3);}
-    100% {transform: scale(1);}
+	0% {transform: scale(1);}
+	45% {transform: scale(1.3);}
+	55% {transform: scale(1.3);}
+	100% {transform: scale(1);}
 }
 
 .safariEnemyRow {
@@ -67,14 +76,14 @@
 }
 
 .safariCapture {
-    transform: scale(0.3) translate(-15px, -130px);
+	transform: scale(0.3) translate(-15px, -130px);
 }
 
 #safariEnemy {
     position: relative;
     top:15px;
-    transition-duration: 0.75s;
-    transition-timing-function: ease-in;
+	transition-duration: 0.75s;
+	transition-timing-function: ease-in;
 }
 
 #battleConsole {
@@ -99,24 +108,24 @@
 }
 
 #safariPlayer{
-    
+
 }
 
 .battleBar {
-    width:0%;
-    height: 50px;
-    background-color:black;
-    float:left;
+	width:0%;
+	height: 50px;
+	background-color:black;
+	float:left;
 }
 
 .battleBar:nth-of-type(even){
-    float:right;
+	float:right;
 }
 
 .sprite {
-    width: 32px;
-    height: 32px;
-    background: url('images/safari/walkDown.png');
+	width: 32px;
+	height: 32px;
+	background: url('images/safari/walkDown.png');
 }
 
 #sprite {
@@ -142,7 +151,7 @@
 }
 
 .vertical-midle {
-    vertical-align: middle !important;
+	vertical-align: middle !important;
 }
 
 .modal-dialog{
@@ -193,29 +202,10 @@
 	padding:0px !important;
 	text-align: center;
 }
-.mineSquare:after {
-	content: "";
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
+.mineSquare:hover {
+    border: 1px solid red;
 }
 
-.rock1:hover:after,
-.rock2:hover:after,
-.rock3:hover:after,
-.rock4:hover:after,
-.rock5:hover:after,
-.hammerSelected.mineSquare:hover:after
-{
-	border: 1px solid red;
-}
-
-img.hammerSelected.mineReward:hover {
-	outline: 1px solid red;
-	z-index: 1;
-}
 
 .hammerSelected {
 	cursor:url('images/mine/hammer.png'),auto;
@@ -331,7 +321,6 @@ img.hammerSelected.mineReward:hover {
 	background-color: #6BA82A;
 	width: 40px;
 	text-align: center;
-	cursor: pointer;
 }
 
 .useItemButtonEmpty {
@@ -360,7 +349,6 @@ img.hammerSelected.mineReward:hover {
 
 .shinyFiller {
 	padding:16px;
-	background: url("images/shinyFiller.png");
 }
 
 .oakItemImage {
@@ -667,14 +655,6 @@ table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView, #shop
 	margin-bottom: 20px;
 }
 
-#itemTable {
-	margin-bottom: 0px;
-}
-
-#items .tooltipItem {
-	cursor: help;
-}
-
 #pokeball {
 	-webkit-animation:spinleft 1s linear infinite;
     -moz-animation:spinleft 1s linear infinite;
@@ -735,19 +715,13 @@ table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView, #shop
 	margin-right: 0;
 }
 
-.largeShinyImage{
-	padding-top: 17px;
-	padding-bottom: 17px;
-}
-
 .smallShinyImage{
 	max-height: 40px;
 	height: auto;
 	width: auto;
 	padding: 4.33px;
 	margin: -7px;
-	margin-right: 0;
-	background: url("images/smallShinyBackground.png");
+	margin-right: 0	
 }
 
 .smallImage:hover{
@@ -770,7 +744,7 @@ g, rect {
 }
 
 #statDiv {
-	max-height:320px;
+	height:320px;
 	overflow:auto;
 	background-color:white;
 	border:1px solid black;
@@ -867,4 +841,3 @@ g, rect {
     user-select: none;           /* Non-prefixed version, currently
                                  not supported by any browser */
 }
-
