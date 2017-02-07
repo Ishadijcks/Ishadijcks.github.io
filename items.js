@@ -81,7 +81,7 @@ var isPokemon = function(name){
 }
 
 var gainItemByName = function(name, amt){
-	if(!amt) { amt = 1 };
+	if(typeof amt != 'number') { amt = 1 };
 	if(isPokemon(name)){
 		capturePokemon(name);
 		$.notify("You got a "+name, 'success');

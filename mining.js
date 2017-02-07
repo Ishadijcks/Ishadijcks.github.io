@@ -208,25 +208,27 @@ var loadMine = function(){
 }
 
 var gainMineItem = function(id, amt){
-	if(!amt) { amt = 1 };
-	var index = alreadyHasMineItem(id);
-	var item = getMineItemById(id);
-	if(mineItemIsStone(item.name)){
-		gainItemByName(item.name, amt);
-		return;
-	}
-	if( index == -1){	
-
-		var tempItem = {
-			name: item.name,
-			amount: amt,
-			id: id,
-			value: item.value,
-			valueType: item.valueType
+	if(typeof amt != 'number') { amt = 1 };
+	if (amt > 0){
+		var index = alreadyHasMineItem(id);
+		var item = getMineItemById(id);
+		if(mineItemIsStone(item.name)){
+			gainItemByName(item.name, amt);
+			return;
 		}
-		player.mineInventory.push(tempItem);
-	} else {
-		player.mineInventory[index].amount += amt;
+		if( index == -1){	
+	
+			var tempItem = {
+				name: item.name,
+				amount: amt,
+				id: id,
+				value: item.value,
+				valueType: item.valueType
+			}
+			player.mineInventory.push(tempItem);
+		} else {
+			player.mineInventory[index].amount += amt;
+		}
 	}
 }
 
@@ -281,7 +283,6 @@ var showMineItems = function(){
 		if($(this).val() !== ''){
 			var amt = Math.max(1, Math.floor(Number($(this).val())));
 			max = Number($(this).attr('max'));
-			console.log(amt + ", " + max)
 
 			if (amt > max){
 				$(this).val(max);
@@ -504,18 +505,18 @@ var isMineInventoryEmpty = function(){
 }
 
 var sellMineItem = function(id, n){
-	console.log($("#treasure"+n+"amt").val())
 	var amt = parseInt($("#treasure"+n+"amt").val())
-	console.log(amt)
-	for( var i = 0; i< player.mineInventory.length; i++){
-		if(player.mineInventory[i].id === id){
-			if(player.mineInventory[i].amount >= amt){
-				player.mineInventory[i].amount -= amt;
-				gainMainItemProfit(player.mineInventory[i].value * amt, player.mineInventory[i].valueType);
+	if (amt > 0){
+		for( var i = 0; i< player.mineInventory.length; i++){
+			if(player.mineInventory[i].id === id){
+				if(player.mineInventory[i].amount >= amt){
+					player.mineInventory[i].amount -= amt;
+					gainMainItemProfit(player.mineInventory[i].value * amt, player.mineInventory[i].valueType);
+				}
 			}
 		}
+		showMineItems();
 	}
-	showMineItems();
 }
 
 var gainMainItemProfit = function(value, valueType){
