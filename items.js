@@ -80,19 +80,20 @@ var isPokemon = function(name){
 	return false;
 }
 
-var gainItemByName = function(name){
+var gainItemByName = function(name, amt){
+	if(!amt) { amt = 1 };
 	if(isPokemon(name)){
 		capturePokemon(name);
 		$.notify("You got a "+name, 'success');
 	} else {
 		if (alreadyHaveItem(name)){
 			var itemNum = findItemInInventory(name);
-			player.inventoryList[itemNum].quantity++;
+			player.inventoryList[itemNum].quantity = Number(player.inventoryList[itemNum].quantity) + amt;
 		}
 		else{
 
 			var item = getItemByName(name);
-			var itemObject = {id:item.id, name:item.name, quantity:1, type:item.type, use:item.use, unUse:item.unUse, time:item.time, timeLeft:0, instant:item.instant, magnitude:item.magnitude, inUse:0, flavorText:item.flavorText};
+			var itemObject = {id:item.id, name:item.name, quantity:amt, type:item.type, use:item.use, unUse:item.unUse, time:item.time, timeLeft:0, instant:item.instant, magnitude:item.magnitude, inUse:0, flavorText:item.flavorText};
 			player.inventoryList.push(itemObject);
 		}
 

@@ -75,12 +75,13 @@ var canUseDailyDeal = function(id){
 }
 
 var useDailyDeal = function(id){
+	  amt = Number($("#deal"+id+"amt").val())
     var deal = player.curMine.dailyDeals[id];
     var index = alreadyHasMineItem(deal.item1.id);
-    if(player.mineInventory[index].amount >= deal.amount1){
-        player.mineInventory[index].amount -= deal.amount1;
+    if(player.mineInventory[index].amount >= deal.amount1 * amt){
+        player.mineInventory[index].amount -= deal.amount1 * amt;
         for( var i = 0; i<deal.amount2; i++){
-            gainMineItem(deal.item2.id);
+            gainMineItem(deal.item2.id, amt);
         }
     }
     showDailyDeals();
@@ -206,25 +207,26 @@ var loadMine = function(){
 	loadingNewMine = false;
 }
 
-var gainMineItem = function(id){
+var gainMineItem = function(id, amt){
+	if(!amt) { amt = 1 };
 	var index = alreadyHasMineItem(id);
 	var item = getMineItemById(id);
 	if(mineItemIsStone(item.name)){
-		gainItemByName(item.name);
+		gainItemByName(item.name, amt);
 		return;
 	}
 	if( index == -1){	
 
 		var tempItem = {
 			name: item.name,
-			amount: 1,
+			amount: amt,
 			id: id,
 			value: item.value,
 			valueType: item.valueType
 		}
 		player.mineInventory.push(tempItem);
 	} else {
-		player.mineInventory[index].amount++;
+		player.mineInventory[index].amount += amt;
 	}
 }
 
@@ -279,8 +281,10 @@ var showDailyDeals = function(){
     html += "<table class='table'><tbody>";
     for( var i = 0; i<player.curMine.dailyDeals.length; i++){
         var amountOwned = 0;
+        var maxDeals = 0
         if(alreadyHasMineItem(player.curMine.dailyDeals[i].item1.id) != -1) {
             amountOwned = player.mineInventory[alreadyHasMineItem(player.curMine.dailyDeals[i].item1.id)].amount;
+            maxDeals = Math.floor(player.mineInventory[alreadyHasMineItem(player.curMine.dailyDeals[i].item1.id)].amount/player.curMine.dailyDeals[i].amount1);
         }
         html += "<tr>";
         html += 	"<td class='vertical-midle'><img class='mineInventoryItem' src='images/mine/" + player.curMine.dailyDeals[i].item1.id + ".png'>(" + amountOwned + ")</td>";
@@ -295,12 +299,24 @@ var showDailyDeals = function(){
         } else {
             html += 	"<td class='vertical-midle'><button class='btn btn-info disabled'>Trade</button></td>";
         }
+        html +=   "<td class='vertical-midle'><input id='deal"+i+"amt' class='dealAmount form-control' type='number' min='0' max='" + maxDeals + "' value='"+ (maxDeals?1:0) + "' />";
         html += "</tr>";
     }
 
 
     html +="</tbody></table>";
     $("#dailyDealsBody").html(html);
+
+    $(".dealAmount").on('input', function(){
+        amt = Math.max(0, Math.floor(Number($(this).val())));
+        max = Number($(this).attr('max'));
+
+        if (amt > max){
+            $(this).val(max);
+        } else {
+            $(this).val(amt);
+        }
+    });
 
 }
 
