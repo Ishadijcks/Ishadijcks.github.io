@@ -75,7 +75,7 @@ var canUseDailyDeal = function(id){
 }
 
 var useDailyDeal = function(id){
-	  var amt = Number($("#deal"+id+"amt").val())
+    var amt = Number($("#deal"+id+"amt").val())
     var deal = player.curMine.dailyDeals[id];
     var index = alreadyHasMineItem(deal.item1.id);
     if(player.mineInventory[index].amount >= deal.amount1 * amt){
