@@ -78,7 +78,7 @@ var moveToRoute = function(route){
 				log("You don't have access to that route yet.");
 			}
 			if(accessToRoute(route) || inProgress !== 1){
-				inProgress = 1;
+				inProgress = 4;
 				generatePokemon(player.route);
 			}
 		}
