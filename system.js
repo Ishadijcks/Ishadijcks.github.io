@@ -563,6 +563,9 @@ var updateAll = function(){
 	else if (inProgress == 3){
 		updateDungeon();
 	}
+	else if (inProgress == 4){
+		updateEnemy();
+	}
 	updateCaughtList();
 	updateRoute();
 	updateUpgrades();
@@ -793,6 +796,9 @@ var enemyDefeated = function(){
 			}
 
 			if( inProgress == 1){
+				generatePokemon(player.route);
+			}
+			if( inProgress == 4){
 				generatePokemon(player.route);
 			}
 
