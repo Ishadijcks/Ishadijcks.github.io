@@ -1,44 +1,43 @@
 var safari = {
-grid: [],
-sizeX: 25,
-sizeY: 21,
-maxItems: 3,
-layersCleared: 0,
-totalItemsFound: 0,
-energy: 50,
-maxEnergy: 50,
-player: {
-x: 12,
-y: 20
-},
-isMoving:0,
-movingX: 0,
-movingY: 0,
-lastDirection: "up",
-nextDirection: "up",
-offset: {
-top: 0,
-left: 0
-},
-balls: 30,
-inBattle: 0,
-enemy: {
-name: "",
-catchFactor: 0,
-angry: 0,
-eating: 0,
-escapeFactor: 0
-},
-escapes: 0,
-frame: 0,
-battleBusy: 0
+    grid: [],
+    sizeX: 25,
+    sizeY: 21,
+    maxItems: 3,
+    layersCleared: 0,
+    totalItemsFound: 0,
+    energy: 50,
+    maxEnergy: 50,
+    player: {
+        x: 12,
+        y: 20
+    },
+    isMoving:0,
+    movingX: 0,
+    movingY: 0,
+    lastDirection: "up",
+    nextDirection: "up",
+    offset: {
+        top: 0,
+        left: 0
+    },
+    balls: 30,
+    inBattle: 0,
+    enemy: {
+        name: "",
+        catchFactor: 0,
+        angry: 0,
+        eating: 0,
+        escapeFactor: 0
+    },
+    escapes: 0,
+    frame: 0,
+    battleBusy: 0
 }
 
 var element;
 var sprite;
 var walking = false;
 var origin;
-var enemyChoice = ["Nidoran(F)", "Nidorina", "Nidoran(M)", "Nidorino", "Paras", "Parasect", "Venonat", "Exeggcute", "Rhyhorn", "Chansey", "Tangela", "Scyther", "Pinsir", "Cubone", "Marowak", "Kangaskhan", "Tauros", "Venomoth"];
 
 
 var loadSafari = function(){
@@ -53,7 +52,7 @@ var loadSafari = function(){
         }
         safari.grid.push(row);
     }
-    
+
     addRandomBody(fenceBody(), 'fence');
     addRandomBody(waterBody(), 'water');
     addRandomBody(sandBody(), 'sand');
@@ -111,13 +110,13 @@ var getXY = function(direction){
             y = 1;
             break;
     }
-    
+
     return {x: x, y: y}
 }
 
 var showSafari = function(){
     var html = "";
-    
+
     html += "<div>";
     for(var i = 0; i<safari.grid.length; i++){
         html += "<div class='row'>";
@@ -126,56 +125,56 @@ var showSafari = function(){
         }
         html += "</div>";
     }
-    
+
     $("#safariBody").html(html);
     addPlayer();
-    
-    
+
+
     // Sprite
     element = document.querySelector('#sprite');
     sprite = new Motio(element, {
-                       fps: 10,
-                       frames: 2
-                       });
+        fps: 10,
+        frames: 2
+    });
 }
 
 
 var safariStep = function(direction) {
     safari.lastDirection = direction;
-    
+
     sprite.toggle();
     directionOffset = getXY(direction);
     safari.movingX = directionOffset.x;
     safari.movingY = directionOffset.y;
-    
+
     safari.isMoving = 1;
-    
+
     if (canMoveSafari(safari.player.x + safari.movingX, safari.player.y + safari.movingY)) {
         var next = $("#safari-" + (safari.player.x + safari.movingX) + "-" + (safari.player.y + safari.movingY)).offset();
         safari.offset = {
-        top: next.top - origin.top,
-        left: next.left - origin.left
+            top: next.top - origin.top,
+            left: next.left - origin.left
         }
-        
+
         $(".sprite").css("background", "url('images/safari/walk"+direction+".png')");
         safari.player.x += safari.movingX;
         safari.player.y += safari.movingY;
         $('#sprite').animate(safari.offset, 250, "linear", function() {
-                             checkBattle();
-                             safari.isMoving = 0;
-                             if(walking){ if (!checkBattle() && queue[0]){safariStep(queue[0])} }
-                             });
+            checkBattle();
+            safari.isMoving = 0;
+            if(walking){ if (!checkBattle() && queue[0]){safariStep(queue[0])} }
+        });
     } else {
         $(".sprite").css("background", "url('images/safari/walk"+direction+".png')");
         setTimeout(function(){
-                   walking = false;
-                   safari.isMoving = 0;
-                   if(queue[0]){
-                   safari.isMoving = 1;
-                   walking = true;
-                   safariStep(queue[0]);
-                   }
-                   }, 250);
+            walking = false;
+            safari.isMoving = 0;
+            if(queue[0]){
+                safari.isMoving = 1;
+                walking = true;
+                safariStep(queue[0]);
+            }
+        }, 250);
     }
 }
 
@@ -191,7 +190,7 @@ var checkBattle = function(){
 }
 
 var loadBattle = function(){
-    safari.enemy.name = enemyChoice[Math.floor(Math.random() * enemyChoice.length)];
+    safari.enemy.name = "Pinsir";
     safari.enemy.catchFactor = getPokemonByName(safari.enemy.name).catchRate * 100/1275;
     safari.enemy.escapeFactor = 10;
     safari.enemy.angry = 0;
@@ -208,7 +207,7 @@ var getSafariCatchFactor = function(){
     if(safari.enemy.angry > 0) {
         return safari.enemy.catchFactor * 2;
     }
-    
+
     return safari.enemy.catchFactor;
 }
 
@@ -219,7 +218,7 @@ var getSafariEscapeFactor = function(){
     if(safari.enemy.angry > 0) {
         return safari.enemy.escapeFactor * 2;
     }
-    
+
     return safari.enemy.escapeFactor;
 }
 
@@ -228,17 +227,17 @@ var showBattleBars = function(){
     for( var i = 0; i<10; i++){
         html += "<div id=battleBar"+i + " class='row battleBar'></div>";
     }
-    
+
     html += "</div>";
     $("#safariBody").html(html);
-    $(".battleBar").animate({
-                            width: "50%"
-                            }, 1000, "linear");
+        $(".battleBar").animate({
+            width: "50%"
+        }, 1000, "linear");
     showBattle();
 }
 
 var showBattle = function(){
-    var enemy = getPokemonByName(safari.enemy.name);
+    var enemy = getPokemonByName(safari.enemy.name || "Pinsir");
     var html = "";
     html += "<div class='row safariEnemyRow'>";
     html +=     "<div class='col-sm-2 col-sm-offset-8' id='safariEnemy'><img src='images/pokemon/" + enemy.id + ".png'></div>";
@@ -248,7 +247,7 @@ var showBattle = function(){
     html +=         "<img id='safariPlayer' src='images/safari/playerBack.png'>"
     html +=     "</div>";
     html += "</div>";
-    
+
     html += "<div class='row'>";
     html +=     "<div class='col-sm-12' id='battleConsole'>";
     html +=         "<div class='col-sm-6'>"
@@ -260,9 +259,9 @@ var showBattle = function(){
     html +=             "<div class='col-sm-6 safariOption'><button onClick='throwRock()' class='btn btn-info safariButton'>Rock</button></div>";
     html +=             "<div class='col-sm-6 safariOption'><button onClick='safariRun()' class='btn btn-info safariButton'>Run</button></div>";
     html +=     "</div>";
-    
+
     html += "</div>";
-    
+
     $("#safariBody").html(html);
     $("#safariBody").css("background-image", "url('images/safari/safariBattle.png')");
     $("#safariBody").css("background-size", "100% auto");
@@ -283,9 +282,9 @@ var safariEnemyTurn = function(){
     safari.enemy.eating = Math.max(0, safari.enemy.eating-1);
     safari.enemy.angry = Math.max(0, safari.enemy.angry-1);
     setTimeout(function(){
-               updateSafariBattleText("What will you do?");
-               safari.battleBusy = 0;
-               }, 1500);
+        updateSafariBattleText("What will you do?");
+        safari.battleBusy = 0;
+    }, 1500);
     console.log(getSafariCatchFactor()*1275/100);
     console.log(getSafariEscapeFactor()*5 + "%");
 }
@@ -317,47 +316,63 @@ var throwBall = function() {
     if(!safari.battleBusy) {
         safari.balls--;
         showBattle();
-        updateSafariBattleText("You throw a ball... (fancy animation #DimavaPls)");
+        updateSafariBattleText("You throw a ball...");
         safari.battleBusy = 1;
         var enemy = $('#safariEnemy').offset();
         enemy.left += 48;
-        var p = dropParticle('<img src=images/safari/pokeball.png>', $('#safariPlayer').offset(), enemy, 0.75, 'cubic-bezier(0,0,0.4,1)', true).css('z-index',9999);
-        
+        var p = dropParticle('<div><img id="safariBall" src=images/safari/pokeball.png></div>', $('#safariPlayer').offset(), enemy, 0.75, 'cubic-bezier(0,0,0.4,1)', true).css('z-index',9999);
+
         setTimeout(function() {
-                   $('#safariEnemy').addClass('safariCapture')
-                   }, 750);
-        
-        setTimeout(function() {
-                   $('#safariEnemy > img').css('opacity', '0');
-                   }, 1500)
-        
-        setTimeout(function () {
-                   var random = Math.random();
-                   var index = Math.floor(random*4);
-                   if (random*100 < getSafariCatchFactor()*1275/100){
-                   captureSafariPokemon(safari.enemy.name);
-                   setTimeout(function(){
-                              endBattle();
-                              p.remove();
-                              }, 2000);
-                   } else {
-                   //Dimava pls help
-                   //p.addClass('bounce');
-                   setTimeout(function() {
-                              $('#safariEnemy > img').css('opacity', '1');
-                              $('#safariEnemy').removeClass('safariCapture');
-                              updateSafariBattleText(safariCatchMessages[index]);
-                              setTimeout(safariEnemyTurn,1000);
-                              p.remove();
-                              }, 1000 + index*500);
-                   }
-                   }, 1600)
+        	$('#safariEnemy').addClass('safariCapture')
+
+            setTimeout(function() {
+                $('#safariEnemy > img').css('opacity', '0');
+                p.addClass('bounce');
+
+                setTimeout(function () {
+                    var random = Math.random();
+                    var index = Math.floor( (1 - Math.max( random, getSafariCatchFactor()*1275/(100*100) ))/(1 - getSafariCatchFactor()*1275/(100*100))*3);
+                    if (index != 0) {
+                        startRoll(index);
+                    }
+
+                    setTimeout(function(){
+                        if (random*100 < getSafariCatchFactor()*1275/100){
+                            captureSafariPokemon(safari.enemy.name);
+                            $('#safariBall').attr('src', 'images/safari/pokeball-dark.png')
+                            setTimeout(function(){
+                                p.remove();
+                                endBattle();
+                            }, 2000);
+                        } else {
+                            $('#safariEnemy > img').css('opacity', '1');
+                            $('#safariEnemy').removeClass('safariCapture');
+                            updateSafariBattleText(safariCatchMessages[index]);
+                            p.remove();
+                            setTimeout(safariEnemyTurn, 1000);
+                        }
+                    }, (200 + 1200*index));
+                }, 1700);
+            }, 750);
+        }, 750);
+    }
+}
+
+var startRoll = function(n){
+    $('#safariBall').addClass('safari-roll-left');
+    setTimeout(function(){ safariRoll(n-1) }, 1200);
+}
+
+var safariRoll = function(n){
+    if (n != 0){
+        $('#safariBall').toggleClass('safari-roll-left').toggleClass('safari-roll-right');
+        setTimeout(function(){safariRoll(n-1)}, 1200);
     }
 }
 
 var throwRock = function(){
     if(!safari.battleBusy) {
-        updateSafariBattleText("You throw a rock at " + safari.enemy.name + "... (fancy animation #AegyoPls)");
+        updateSafariBattleText("You throw a rock at " + safari.enemy.name);
         safari.battleBusy = 1;
         safari.enemy.angry = Math.max(safari.enemy.angry, Math.floor(Math.random() * 5 + 2))
         safari.enemy.eating = 0;
@@ -366,41 +381,41 @@ var throwRock = function(){
         enemy.top += 10
         dropParticle('<img src=images/safari/rock.png>', $('#safariPlayer').offset(), enemy, 0.8, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
         setTimeout(function(){
-                   var hitSplash = $('<ptcl>').html("<img src=images/safari/hit.png>").children().appendTo('body');
-                   hitSplash.offset(enemy).css({'opacity': 0.8, 'z-index': 9998});
-                   hitSplash.fadeOut(400, function(){hitSplash.remove();});
-                   setTimeout(function(){
-                              var newOffset = {
-                              top: enemy.top + 4,
-                              left: enemy.left - 20
-                              }
-                              var ang = $('<ptcl>').html("<img src=images/safari/angry.png>").children().appendTo('body');
-                              ang.css('position','absolute').css('z-index', 9999);
-                              ang.offset(newOffset);
-                              ang.addClass('pulse');
-                              setTimeout(function(){
-                                         newOffset.top -= 10;
-                                         newOffset.left += 60;
-                                         ang.offset(newOffset);
-                                         setTimeout(function(){
-                                                    ang.remove();
-                                                    },350)
-                                         },350);
-                              },300);
-                   },800);
+        	var hitSplash = $('<ptcl>').html("<img src=images/safari/hit.png>").children().appendTo('body');
+        	hitSplash.offset(enemy).css({'opacity': 0.8, 'z-index': 9998});
+        	hitSplash.fadeOut(400, function(){hitSplash.remove();});
+        	setTimeout(function(){
+        		var newOffset = {
+        			top: enemy.top + 4,
+        			left: enemy.left - 20
+        		}
+        		var ang = $('<ptcl>').html("<img src=images/safari/angry.png>").children().appendTo('body');
+    			ang.css('position','absolute').css('z-index', 9999);
+    			ang.offset(newOffset);
+        		ang.addClass('pulse');
+        		setTimeout(function(){
+        			newOffset.top -= 10;
+        			newOffset.left += 60;
+        			ang.offset(newOffset);
+        			setTimeout(function(){
+        				ang.remove();
+        			},350)
+        		},350);
+        	},300);
+        },800);
         setTimeout(safariEnemyTurn, 2000);
     }
 }
 
 var throwBait = function(){
     if(!safari.battleBusy){
-        updateSafariBattleText("You throw some bait at " + safari.enemy.name + "... (fancy animation #AegyoPls)");
+        updateSafariBattleText("You throw some bait at " + safari.enemy.name);
         safari.battleBusy = 1;
         safari.enemy.eating = Math.max(safari.enemy.eating, Math.floor(Math.random()*5 + 2))
         safari.enemy.angry = 0;
         var enemy = $('#safariEnemy').offset();
-        enemy.left += 40;
-        enemy.top += 10
+        enemy.left += 30;
+        enemy.top += 70
         dropParticle('<img src=images/safari/bait.png>', $('#safariPlayer').offset(), enemy, 1, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
         setTimeout(safariEnemyTurn, 1500);
     }
@@ -409,27 +424,27 @@ var throwBait = function(){
 
 var captureSafariPokemon = function(pokemonName){
     updateSafariBattleText("GOTCHA!<br>" + pokemonName + " was caught!");
-    capturePokemon(pokemonName);
+    // capturePokemon(pokemonName);
 }
 
 
 var safariMove = function(direction){
     safari.nextDirection = direction;
-    
+
     if(!safari.isMoving) {
         var frame = 0;
         origin = $("#safari-12-20").offset();
-        
+
         element = document.querySelector('#sprite');
         sprite = new Motio(element, {
-                           fps: 8,
-                           frames: 4
-                           }).on('frame', function() {
-                                 if (sprite.frame%2 == 0) {
-                                 sprite.pause();
-                                 safari.frame = sprite.frame;
-                                 }
-                                 });
+            fps: 8,
+            frames: 4
+        }).on('frame', function() {
+            if (sprite.frame%2 == 0) {
+                sprite.pause();
+                safari.frame = sprite.frame;
+            }
+        });
         if (safari.frame == 2) {
             sprite.to(2, true, function(){safariStep(direction)});
         }
@@ -554,9 +569,9 @@ var grassBody = function(){
         shuffle(row);
         body.push(row);
     }
-    
+
     body = fillHoles(body);
-    
+
     return body;
 }
 
@@ -572,11 +587,11 @@ var fillHoles = function(body){
             }
         }
     }
-    
+
     for(var i = 0; i<body.length; i++){
         for(var j = 0; j<body[0].length; j++){
             if(body[i][j] === 0) {
-                
+
                 if (j !== 0 && j !== body[0].length - 1) {
                     if (body[i][j-1] === 10 && body[i][j+1] === 10) {
                         body[i][j] = 10;
@@ -638,13 +653,13 @@ var getTileNeighbours = function(x, y, body) {
     } else {
         ret[1] = body[y][x + 1] !== 0;
     }
-    
+
     if (y === body.length - 1) {
         ret[2] = false;
     } else {
         ret[2] = body[y + 1][x] !== 0 && body[y + 1][x] !== undefined;
     }
-    
+
     if (ret.equals([true, true, true, true])) {
         cross[0] = body[y - 1][x + 1] !== 0;
         cross[1] = body[y + 1][x + 1] !== 0;
@@ -652,8 +667,8 @@ var getTileNeighbours = function(x, y, body) {
         cross[3] = body[y - 1][x - 1] !== 0;
     }
     return {
-    plus: ret,
-    cross: cross
+        plus: ret,
+        cross: cross
     };
 }
 
@@ -763,7 +778,7 @@ var generateCube = function(sizeX, sizeY, type){
         }
         body.push(row);
     }
-    
+
     var amount = type === 'fence' ? 20 : 4
     for (var i = 0; i<amount; i++){
         var x = Math.floor(Math.random()*(sizeX-2));
@@ -823,11 +838,11 @@ Array.prototype.equals = function (array) {
     // if the other array is a falsy value, return
     if (!array)
         return false;
-    
+
     // compare lengths - can save a lot of time
     if (this.length != array.length)
         return false;
-    
+
     for (var i = 0, l=this.length; i < l; i++) {
         // Check if we have nested arrays
         if (this[i] instanceof Array && array[i] instanceof Array) {
@@ -851,12 +866,12 @@ var dropParticle = function(html, pos, target, time = 2, top, persistentParticle
     p[0].style.transition = 'left ' + time + 's linear, top ' + time + 's '+top;
     p.offset(target);
     if (!persistentParticle) {
-        setTimeout(function() {
-                   p.fadeOut()
-                   }, time * 1000 - 200);
-        setTimeout(function() {
-                   p.remove()
-                   }, time * 1000);
+    	setTimeout(function() {
+        	p.fadeOut()
+    	}, time * 1000 - 200);
+    	setTimeout(function() {
+        	p.remove()
+    	}, time * 1000);
     }
     return p;
 };
