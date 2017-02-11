@@ -278,9 +278,13 @@ var useEvoStone = function(item){
 var activateEvoStone = function(pokemon, id){
 	var item = player.inventoryList[getItemById(id)];
 	if (item.quantity > 0){
-		capturePokemon(pokemon, generateStoneShiny());
+		var shiny = generateStoneShiny();
+		capturePokemon(pokemon, shiny);
 		item.quantity--;
 		updateItems();
+		if (shiny){
+			$("#evoModal div[data-pokemon='"+pokemon+"'] > #alreadyCaughtImage").attr('src', "images/shinyPokeball.PNG");
+		}
 		if (item.quantity == 0){
 			$("#evoModal").modal("hide");
 		} else {
