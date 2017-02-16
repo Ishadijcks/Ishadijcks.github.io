@@ -124,13 +124,13 @@ var loadTowns = function(){
 	addTown("Pewter City", PewterCityGym(), "images/gyms/pewtercity.png", PewterCityShop(), [2]);
 	addTown("Cerulean City", CeruleanCityGym(), "images/gyms/ceruleancity.png", CeruleanCityShop(), [4]);
 	addTown("Vermillion City",VermillionCityGym(), "images/gyms/vermillioncity.png", VermillionCityShop(), [6]);
-	addTown("Celadon City", CeladonCityGym(), "images/gyms/celadoncity.png", CeladonCityShop(), [8]);
+	addTown("Celadon City", CeladonCityGym(), "images/gyms/celadoncity.png", CeladonCityShop(), [7]);
 	addTown("Saffron City", SaffronCityGym(), "images/gyms/saffroncity.png", SaffronCityShop(), [5]);
 	addTown("Fuchsia City", FuchsiaCityGym(), "images/gyms/fuchsiacity.png", FuchsiaCityShop(), [18,15]);
 	addTown("Cinnabar Island", CinnabarIslandGym(), "images/gyms/cinnabarisland.png", CinnabarIslandShop(), [20]);
 	addTown("Viridian City", ViridianCityGym(), "images/gyms/viridiancity.png", ViridianCityShop(), [1]);
 	addTown("Pallet Town", null, "images/gyms/pallettown.png", "mom", []);
-	addTown("Lavender Town", null, "images/gyms/lavendertown.png", LavenderTownShop(), [7,10]);
+	addTown("Lavender Town", null, "images/gyms/lavendertown.png", LavenderTownShop(), [8,10]);
 	addTown("Indigo Plateau", [EliteLorelei(), EliteBruno(), EliteAgatha(), EliteLance(), Champion()], "images/gyms/indigoplateau.png", null, [23]);
 	addTown("Elite Lorelei", EliteLorelei(), null, null, null);
 	addTown("Elite Bruno", EliteBruno(), null, null, null);
@@ -143,7 +143,7 @@ var loadTowns = function(){
 	addTown("Mt. Moon", MtMoonDungeon(), "images/dungeons/mtmoon.png", null, [3]);
 	addTown("Rock Tunnel", RockTunnelDungeon(), "images/dungeons/rocktunnel.png", null, [9]);
 	addTown("Power Plant", PowerPlantDungeon(), "images/dungeons/powerplant.png", null, [9]);
-	addTown("Pokemon Tower", PokemonTowerDungeon(), "images/dungeons/pokemontower.png", null, [7,10]);
+	addTown("Pokemon Tower", PokemonTowerDungeon(), "images/dungeons/pokemontower.png", null, [8,10]);
 	addTown("Seafoam Islands", SeafoamIslandsDungeon(), "images/dungeons/seafoamislands.png", null, [19]);
 	addTown("Victory Road", VictoryRoadDungeon(), "images/dungeons/victoryroad.png", null, [22]);
 	addTown("Cerulean Cave", CeruleanCaveDungeon(), "images/dungeons/ceruleancave.png", null, [4]);
