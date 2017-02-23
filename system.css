@@ -132,7 +132,7 @@ img.hammerSelected.mineReward:hover {
 }
 
 #questModal {
-	width: 100%;	
+	width: 100%;
 }
 
 .shardImage {
@@ -196,7 +196,7 @@ img.hammerSelected.mineReward:hover {
 	border:1px solid black;
 	background-color: red;
 	width: 40px;
-	text-align: center;	
+	text-align: center;
 }
 
 .oakImage {
@@ -373,7 +373,7 @@ img.hammerSelected.mineReward:hover {
     -1px -1px 0 #000,
     1px -1px 0 #000,
     -1px 1px 0 #000,
-    1px 1px 0 #000;  
+    1px 1px 0 #000;
 }
 
 #pokedexModal{
@@ -398,7 +398,7 @@ img.hammerSelected.mineReward:hover {
 }
 
 .pokedexEntry:hover{
-	background-color:#DEDEDE; 	
+	background-color:#DEDEDE;
 	cursor:pointer;
 }
 
@@ -463,7 +463,7 @@ img.hammerSelected.mineReward:hover {
 }
 
 body {
-	background-image: url('http://i.imgur.com/O7ZWigt.png'); 
+	background-image: url('http://i.imgur.com/O7ZWigt.png');
 }
 
 .container-fluid{
@@ -556,24 +556,24 @@ table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView, #shop
 @-moz-keyframes spinleft { 100% { -moz-transform: rotate(20deg); } }
 @-webkit-keyframes spinleft { 100% { -webkit-transform: rotate(20deg); } }
 
-    @keyframes spinleft { 
-        0% { 
-            transform: rotate(0deg); 
+    @keyframes spinleft {
+        0% {
+            transform: rotate(0deg);
         }
-        15% { 
-            transform: rotate(10deg); 
+        15% {
+            transform: rotate(10deg);
         }
-        30% { 
-            transform: rotate(0deg); 
+        30% {
+            transform: rotate(0deg);
         }
         50% {
         	transform: rotate (0deg);
         }
-        65% { 
-            transform: rotate(-10deg); 
+        65% {
+            transform: rotate(-10deg);
         }
-        80% { 
-            transform: rotate(0deg); 
+        80% {
+            transform: rotate(0deg);
         }
     }
 
@@ -609,7 +609,7 @@ table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView, #shop
 
 .smallImage:hover{
 	position:relative;
-	
+
 }
 
 .upgradeBoxes{
@@ -725,3 +725,78 @@ g, rect {
                                  not supported by any browser */
 }
 
+
+
+
+@media (max-width: 1100px) {
+	.modal-dialog {
+		margin:30px auto;
+	}
+
+	#mineModal .modal-body {
+		min-width:800px;
+	}
+
+	.modal-open .modal, #pickStarter {
+		overflow-x: scroll;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+	#righterColumn {
+		margin-left:34%;
+		margin-top:18px;
+	}
+
+	#oakItemBody {
+		margin-top:18px;
+	}
+}
+
+@media (max-width: 767px) {
+	#leftColumn {
+		padding-left:0px;
+		padding-right:0px;
+		margin-left:14px;
+		margin-right:14px;
+	}
+	#rightColumn {
+		padding-left:0px;
+		padding-right:0px;
+		margin-left:14px;
+		margin-right:14px;
+
+		margin-top:10px;
+	}
+
+	#righterColumn {
+		padding-left:0px;
+		padding-right:0px;
+		margin-left:14px;
+		margin-right:14px;
+
+		margin-top:10px;
+	}
+
+	#oakItemBody {
+		padding-left:0px;
+		padding-right:0px;
+		margin-left:4px;
+		margin-right:4px;
+
+		margin-top:0px;
+	}
+
+	#oakItemBody .oakItem {
+		float:left;
+		margin-right:7.5px;
+	}
+
+	#mineModal .mineSquare {
+		float:left;
+	}
+
+	#shardBody .shardUpgrade, #shardBody .shardUpgradeLocked {
+		float:left;
+	}
+}
