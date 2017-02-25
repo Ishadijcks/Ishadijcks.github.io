@@ -69,7 +69,7 @@ var moveToRoute = function(route){
 	
 		if(!isNaN(route) && !(route == player.route && inProgress === 1)){
 			inProgress = 1;
-			hideAllViews()
+			hideAllActionViews();
 			resetDungeon();
 			$("#currentEnemy").show();
 			if(accessToRoute(route)){

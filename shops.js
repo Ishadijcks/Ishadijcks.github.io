@@ -148,7 +148,7 @@ var loadShop = function(shopName){
 
 var showShop = function(shop){
 	var items = shop.itemList;
-	hideAllViews();
+	hideAllActionViews();
 	var html = "";
 	html += "<h3 class='townName'>" + shop.name + " Shop</h3>"
 	html += "<div class='row'>";

@@ -237,12 +237,6 @@ var updateEnemy = function(){
         $("#healthDisplay").html(curEnemy.health+"/"+curEnemy.maxHealth);
 }
 
-
-
-var hideAllViews = function(){
-	$("#currentEnemy").hide();
-	$("#gymView").hide();
-	$("#townView").hide();
-	$("#dungeonView").hide();
-	$("#shopView").hide();
+var hideAllActionViews = function (){
+	$(".actionView").hide();
 }

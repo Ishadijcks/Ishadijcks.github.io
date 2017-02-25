@@ -143,7 +143,7 @@ $(document).ready(function(){
 	}
 
 	loadTowns();
-	hideAllViews()
+	hideAllActionViews();
 	$("#currentEnemy").show();
 
 

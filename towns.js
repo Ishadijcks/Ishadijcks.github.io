@@ -115,7 +115,7 @@ var showTown = function(town){
 	$("#townView").css("background-repeat", "no-repeat");
 	$("#townView").css("background-position", "center");    
 
-	hideAllViews()
+	hideAllActionViews();
 	$("#townView").show();	
 }
 
