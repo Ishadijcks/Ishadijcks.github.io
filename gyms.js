@@ -205,7 +205,7 @@ var timer = function(){
 
 var updateGym = function(){
 
-	hideAllViews();
+	hideAllActionViews();
 	$("#gymView").show();
 
     if (curEnemy.health <0){

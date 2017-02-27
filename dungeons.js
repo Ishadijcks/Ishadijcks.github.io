@@ -277,8 +277,7 @@ var updateDungeon = function() {
         curEnemy.health = 0;
     }
 
-
-    hideAllViews();
+	hideAllActionViews();
     $("#dungeonView").show();
 
     var html = "";

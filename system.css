@@ -338,12 +338,6 @@
 	text-align: center;
 }
 
-#townView, #shopView{
-	border: 1px solid black;
-	height: 250px;
-	margin-bottom: 20px;
-}
-
 .townName {
 	text-align:center;
 }
@@ -460,7 +454,7 @@ body {
 	margin-top: 15px;
 }
 
-table, #console, #currentEnemy, #upgradeBox, #navBar, #townView, #gymView, #shopView, #dungeonView {
+table, #console, #upgradeBox, #navBar {
 	background-color: white;
 }
 
@@ -672,10 +666,14 @@ g, rect {
 }
 
 #currentEnemy, #gymView, #dungeonView{
-	border: 1px solid black;
 	text-align:center;
+}
+
+.actionView {
+	border: 1px solid black;
 	height: 250px;
 	margin-bottom: 20px;
+	background-color: white;
 }
 
 #pokemons table{
