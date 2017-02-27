@@ -1,4 +1,4 @@
-			// Save and load functions
+// Save and load functions
 var canSave = 1;
 
 // Saves the game by writing play to JSON and save it in localStorage
@@ -64,11 +64,12 @@ var load = function(){
 		}
 	}
 
-	if(player.version < 0.92) {
+	if(player.typeShards.length <= 17) {
 		updateTypes();
 		player.notEffectiveTypeBonus.push(0);
 		player.normalEffectiveTypeBonus.push(0);
 		player.veryEffectiveTypeBonus.push(0);
+		player.typeShards.push(0);
 	}
 	
 	var date = new Date();
@@ -97,28 +98,61 @@ var load = function(){
 }
 
 var exportSave = function(){
-    $("#exportBody").html("<textarea id='saveCode' style='width:100%; height:500px'>"+btoa(JSON.stringify(player))+"</textarea>");
+	var saveData = btoa(JSON.stringify(player));
+	if(typeof FileReader != "undefined" && typeof document.getElementById("saveAsFile").download != "undefined") {
+		var timestamp = new Date().toISOString();
+		$("#saveAsFile").attr("download", "pokeclicker_"+timestamp+".sav").attr('href', URL.createObjectURL(new Blob([saveData])));
+		$("#fileUploadButton").css({"visibility": "visible"});
+	}else{
+		$("#saveAsFile").attr("visibility", "hidden");
+	}
+	if(document.queryCommandSupported("copy")){
+		$("#copyToClipboard").css({"visibility":"visible"});
+	}
+    $("#exportBody").html("<textarea id='saveCode' style='width:100%; height:500px'>"+saveData+"</textarea>");
 	$("#exportModal").modal('show');
+}
+
+var saveDataToClipboard = function(){
+	var textField = document.getElementById("saveCode");
+	textField.select();
+	document.execCommand("copy");
+	window.getSelection().removeAllRanges();
 }
 
 var importSave = function(){
     var save = prompt("Paste your savefile here");
     console.log(save);
     if(save) {
-		try {
-			var decoded = atob(save)
-			JSON.parse(decoded);
-			if (decoded) {
-				localStorage.setItem("player", decoded);
-				canSave = 0;
-				location.reload();
-			} else {
-				$.notfiy("This is not a valid savefile", "error")
-			}
-        } catch(err){
-			$.notify("This is not a valid savefile");
-		}
+		restoreSave(save)
+	}
+}
 
+var readSaveFile = function(file) {
+	if (typeof FileReader != "undefined") {
+		var fr = new FileReader();
+		fr.onload = function () {
+			if (fr.result) {
+				restoreSave(fr.result);
+			}
+		};
+		fr.readAsText(file);
+	}
+}
+
+var restoreSave = function(save){
+	try {
+		var decoded = atob(save);
+		JSON.parse(decoded);
+		if (decoded) {
+			localStorage.setItem("player", decoded);
+			canSave = 0;
+			location.reload();
+		} else {
+			$.notfiy("This is not a valid savefile", "error")
+		}
+	} catch(err){
+		$.notify("This is not a valid savefile");
 	}
 }
 

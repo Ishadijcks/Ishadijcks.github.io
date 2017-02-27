@@ -44,7 +44,7 @@ var gainRandomEgg = function(type){
 		var num = typeToNumber(type);
 		var eggs = possibleEggs[num];
 		var eggName = eggs[Math.floor(Math.random()*(eggs.length))];
-		gainEgg(Egg(type, getSteps(eggName), eggName));
+		gainEgg(Egg([type], getSteps(eggName), eggName));
 	}
 }
 
@@ -56,13 +56,13 @@ var gainPokemonEgg = function(pokemonName){
 var gainMineEgg = function(itemId){
     if(breedSlotLeft()) {
         sellMineItem(itemId);
-        var type = "amber";
+        var type = ["amber"];
         var pokemonName = "Aerodactyl";
         if (itemId === 1) {
-            type = "helix";
+            type = ["helix"];
             pokemonName = "Omanyte";
         } else if (itemId === 2) {
-            type = "dome";
+            type = ["dome"];
             pokemonName = "Kabuto";
         }
         var pokemon = getPokemonByName(pokemonName);

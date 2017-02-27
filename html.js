@@ -1,18 +1,24 @@
 		// Console stuff
-		
+
 var specialLog = [];
 var completeLog = specialLog;
 var logCount = 0;
 
 var log = function(text){
 	logCount++;
-	if(logCount > 250){
-		logCount = 0;
-		$("#console").html("");
-	}
-	$("#console").append(text+"<br>");
 	var elem = document.getElementById('console');
-	elem.scrollTop = elem.scrollHeight;
+	var atBottom = (elem.scrollTop > (elem.scrollHeight - (elem.clientHeight + 10))); //Checks if we're scrolled to the bottom (or close to the bottom)
+	if(logCount > 250){
+		logCount--;
+		$("#console div").first().remove();
+	}
+	var message = document.createElement('div');
+	message.className = "log-message";
+	message.innerHTML = text;
+	$("#console").append(message);
+	if (atBottom){
+		elem.scrollTop = elem.scrollHeight; //Stay at the bottom if we were at the bottom before
+	}
 }
 
 		// HTML functions
@@ -22,16 +28,16 @@ var log = function(text){
 var updateUpgrades = function(){
 	$(".upgradeBoxes").remove();
 	for( var i = 0; i<player.upgradeList.length; i++){
-		if( player.upgradeList[i].require <= boughtUpgrades() && 
-		    !player.upgradeList[i].bought && 
+		if( player.upgradeList[i].require <= boughtUpgrades() &&
+		    !player.upgradeList[i].bought &&
 			(alreadyUpgradeId(player.upgradeList[i].requiredUpgrade) || player.upgradeList[i].requiredUpgrade == null )){
-			
+
 			var upgrade = player.upgradeList[i];
 			if(player.money > upgrade.cost){
 				$("#upgradeBox").append("<button type=button id=Upgrade"+upgrade.id+" title=s class='upgradeBoxes btn btn-primary col-sm-12'>"+upgrade.name+"<br>Cost: "+ numberWithCommas(upgrade.cost) +"</button>");
 			}
 			else {
-				$("#upgradeBox").append("<button type=button id=Upgrade"+upgrade.id+" title=s class='upgradeBoxes disabled btn btn-primary col-sm-12'>"+upgrade.name+"<br>Cost: "+ numberWithCommas(upgrade.cost) +"</button>");	
+				$("#upgradeBox").append("<button type=button id=Upgrade"+upgrade.id+" title=s class='upgradeBoxes disabled btn btn-primary col-sm-12'>"+upgrade.name+"<br>Cost: "+ numberWithCommas(upgrade.cost) +"</button>");
 			}
 			document.getElementById("Upgrade"+upgrade.id).title = upgrade.flavorText;
 		}
@@ -44,11 +50,11 @@ var updateUpgrades = function(){
 }
 
 
-		
+
 // Update the list of caught pokemon
 var updateCaughtList = function(){
 
-	var pokemonHtml = ""
+	var pokemonHtml = "";
 	// var pokemonHeight = $("#pokemonBody").height()
 	// if( pokemonHeight > 1000){
 	// 	$("#pokemons").height(1000);
@@ -76,7 +82,7 @@ var updateCaughtList = function(){
 		pokemonHtml += "<th>" + Math.ceil(experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType)*(player.caughtPokemonList[i].attack)/100) +"</th>";
 		pokemonHtml += "<th>" + experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType) + "</th>";
 		pokemonHtml += "</tr>";
-		
+
 	}
 
 	$("#pokemonBody").html(pokemonHtml);
@@ -84,7 +90,7 @@ var updateCaughtList = function(){
 	$("#caughtPokemon").html("<br>Name<br>");
 	$("#AttackCaughtPokemon").html("<br>Attack <br><br>");
 	$("#LevelCaughtPokemon").html("<br>Level <br><br>");
-	
+
 	if( player.caughtPokemonList.length == 0){
 		$("#caughtPokemon").append("None");
 		$("#AttackCaughtPokemon").append("<br>");
@@ -95,7 +101,7 @@ var updateCaughtList = function(){
 
 var updateItems = function(){
 
-	var itemHtml = ""
+	var itemHtml = "";
 
 	for (var i = 0; i<player.inventoryList.length; i++){
 		itemHtml += "<tr>";
@@ -141,7 +147,7 @@ var updateStats = function(){
 		"<tr><th>Catch bonus</th><th>"+getBonusCatchrate()+"%</th></tr>" +
 		"<tr><th>Catch time</th><th>"+player.catchTime/1000+" sec</th></tr>");
 //	$("#statBody").html("Stats<br><br>Money<br>Click attack<br>Pokemon attack<br>Exp multiplier<br>Catch bonus<br>Catch time<br>Route<br>Pokemon Caught");
-//	$("#statBoxStats").html("<br><br>$"+player.money+"<br>"+player.clickAttack*player.clickMultiplier+"<br>"+player.attack*player.attackMultiplier+"<br>"+player.expMultiplier.toFixed(2)+"x<br>"+player.catchBonus+"%<br>"+player.catchTime/1000+" sec<br>"+player.route+"<br>"+player.totalCaught);	
+//	$("#statBoxStats").html("<br><br>$"+player.money+"<br>"+player.clickAttack*player.clickMultiplier+"<br>"+player.attack*player.attackMultiplier+"<br>"+player.expMultiplier.toFixed(2)+"x<br>"+player.catchBonus+"%<br>"+player.catchTime/1000+" sec<br>"+player.route+"<br>"+player.totalCaught);
 }
 
 var getHeight = function(){
@@ -175,7 +181,7 @@ var updateRoute = function(){
 	// }
 	// if(player.route == 1){
 	// 	$("#routeLeft").hide();
-	// } 
+	// }
 	// else{
 	// 	$("#routeLeft").show();
 	// }
@@ -183,7 +189,7 @@ var updateRoute = function(){
 	for(var i = 1; i< 26; i++){
 		if(player.routeKills[i] >= player.routeKillsNeeded){
 			if( i == 19){
-				$("#route_"+i+"a").attr('style', "fill:#FCB612" );	
+				$("#route_"+i+"a").attr('style', "fill:#FCB612" );
 			}
 			$("#route_"+i).attr('style', "fill:#FCB612" );
 		}
@@ -195,17 +201,17 @@ var updateRoute = function(){
 		}
 		else {
 			if( i == 19){
-				$("#route_"+i+"a").attr('style', "fill:#BD1952");	
+				$("#route_"+i+"a").attr('style', "fill:#BD1952");
 			}
-			$("#route_"+i).attr('style', "fill:#BD1952");	
+			$("#route_"+i).attr('style', "fill:#BD1952");
 		}
-		
+
 	}
 
 	if( inProgress == 1){
 		$("#route_"+player.route).attr('style', "fill:green" );
 		if( player.route == 19){
-			$("#route_"+player.route+"a").attr('style', "fill:green" );	
+			$("#route_"+player.route+"a").attr('style', "fill:green" );
 		}
 	}
 }
@@ -224,16 +230,16 @@ var updateEnemy = function(){
     	} else {
 
 			if(alreadyCaughtShiny(curEnemy.name)){
-            	$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/shinyPokeball.PNG><br><img id=enemy src=images/pokemon/"+curEnemy.id+".png>"); 
+            	$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/shinyPokeball.PNG><br><img id=enemy src=images/pokemon/"+curEnemy.id+".png>");
             } else if(alreadyCaught(curEnemy.name)){
-            	$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=enemy src=images/pokemon/"+curEnemy.id+".png>"); 
+            	$("#enemyInfo").html("<br>"+curEnemy.name+" <img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=enemy src=images/pokemon/"+curEnemy.id+".png>");
             } else {
             	$("#enemyInfo").html("<br>"+curEnemy.name+"<br><img id=enemy src=images/pokemon/"+curEnemy.id+".png>");
-            }   		
+            }
     	}
 
     }
-        $("#healthBar").width(100*curEnemy.health/curEnemy.maxHealth+"%"); 
+        $("#healthBar").width(100*curEnemy.health/curEnemy.maxHealth+"%");
         $("#healthDisplay").html(curEnemy.health+"/"+curEnemy.maxHealth);
 }
 
