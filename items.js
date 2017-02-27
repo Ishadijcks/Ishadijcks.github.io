@@ -271,16 +271,25 @@ var useEvoStone = function(item){
 	html += "</div>";
 
 	$("#evoBody").html(html);
-	$("#evoTitle").html(item.name);
+	$("#evoTitle").html(item.name + " (" + player.inventoryList[getItemById(item.id)].quantity + ")");
 	updateItems();
 }
 
 var activateEvoStone = function(pokemon, id){
 	var item = player.inventoryList[getItemById(id)];
 	if (item.quantity > 0){
-		capturePokemon(pokemon, generateStoneShiny());
+		var shiny = generateStoneShiny();
+		capturePokemon(pokemon, shiny);
 		item.quantity--;
 		updateItems();
+		if (shiny){
+			$("#evoModal div[data-pokemon='"+pokemon+"'] > #alreadyCaughtImage").attr('src', "images/shinyPokeball.PNG");
+		}
+		if (item.quantity == 0){
+			$("#evoModal").modal("hide");
+		} else {
+			$("#evoTitle").html(item.name + " (" + item.quantity + ")");
+		}
 	}
 }
 

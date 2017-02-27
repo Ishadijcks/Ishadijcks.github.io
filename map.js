@@ -6,16 +6,16 @@ var routeRequirements = {
 	4: [[3]],
 	5: [[4]],
 	6: [[5]],
-	7: [[5],[10]],
-	8: [[5],[7],[6]],
+	7: [[5],[8],[6]],
+	8: [[5],[10]],
 	9: [[4]],
 	10: [[9]],
 	11: [[6],[12]],
-	12: [[7],[10],[11]],
+	12: [[8],[10],[11]],
 	13: [[11],[12]],
 	14: [[13]],
 	15:[[14]],
-	16:[[8]],
+	16:[[7]],
 	17:[[16]],
 	18:[[17]],
 	19:[[18],[15]],
@@ -68,16 +68,20 @@ var moveToRoute = function(route){
 
 	
 		if(!isNaN(route) && !(route == player.route && inProgress === 1)){
+
 			inProgress = 1;
-			hideAllViews()
+			hideAllActionViews();
 			resetDungeon();
 			$("#currentEnemy").show();
 			if(accessToRoute(route)){
 				player.route = route;
-				generatePokemon(player.route);
 			}
 			else {
 				log("You don't have access to that route yet.");
+			}
+			if(accessToRoute(route) || inProgress !== 1){
+				inProgress = 1;
+				generatePokemon(player.route);
 			}
 		}
 	

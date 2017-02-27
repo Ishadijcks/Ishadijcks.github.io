@@ -205,7 +205,7 @@ var timer = function(){
 
 var updateGym = function(){
 
-	hideAllViews();
+	hideAllActionViews();
 	$("#gymView").show();
 
     if (curEnemy.health <0){
@@ -330,7 +330,7 @@ var showGymDefeated = function(first, town){
 
 
 	$("#gymDefeatedBody").html(html);
-	$("#gymModal").modal('show');
+	safelyOpen(function(){$("#gymModal").modal('show')});
 }
 
 var alreadyGotBadge = function(badgeName){

@@ -4,6 +4,7 @@ var canCatch = 1;
 var attackInterval;
 var maxClicks = 15;
 var clicks = 0;
+var fadingModal = false;
 // Add new variables to the savefile!!
 
 var firstQuest = {progress: 0, type: "defeatPokemonRoute", description: "Defeat 30 Pokemon on route 1", difficulty: 1, amount: 30, type2: 1, reward: 5, notified:0}
@@ -143,12 +144,12 @@ $(document).ready(function(){
 	}
 
 	loadTowns();
-	hideAllViews()
+	hideAllActionViews();
 	$("#currentEnemy").show();
 
 
 
-	$("body").on('click',"#enemy", function(){
+	$("body").on('mousedown',"#enemy", function(){
 		clicks++;
 		player.totalClicks++;
 		if(clicks < maxClicks){
@@ -166,7 +167,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$("body").on('click',"#healthBar", function(){
+	$("body").on('mousedown',"#healthBar", function(){
 		clicks++;
 		player.totalClicks++;
 		if(clicks < maxClicks){
@@ -184,7 +185,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$("body").on('click',"#gymEnemy", function(){
+	$("body").on('mousedown',"#gymEnemy", function(){
 		clicks++;
 		player.totalClicks++;
 		if(clicks < maxClicks){
@@ -202,7 +203,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$("body").on('click',"#dungeonEnemy", function(){
+	$("body").on('mousedown',"#dungeonEnemy", function(){
 		clicks++;
 		player.totalClicks++;
 		if(clicks < maxClicks){
@@ -220,7 +221,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$("body").on('click touchstart',".useItemButton", function(){
+	$("body").on('mousedown touchstart',".useItemButton", function(){
 		var id = this.id.substring(4);
 		activateItem(id);
 	});
@@ -252,7 +253,7 @@ $(document).ready(function(){
 	})
 
 	// Allows the player buy upgrades
-	$("body").on('click',".upgradeBoxes", function(){
+	$("body").on('mousedown',".upgradeBoxes", function(){
 		var id = this.id.substr(7,this.id.length);
 		for( var i = 0; i<player.upgradeList.length; i++){
 			if( player.upgradeList[i].id == id){
@@ -313,12 +314,32 @@ $(document).ready(function(){
 		$("#gymModal").modal('hide');
 		loadGym(id);
 	})
+	
+	$("body").keypress(function (e) {
+		if ($("#gymModal").hasClass('in') && (e.keyCode == 0 || e.keyCode == 32)){
+			e.preventDefault();
+			$("#gymModal").modal('hide');
+			if (currentGym.town === "Indigo Plateau Gym"){
+				loadGym(currentGym.leaderName);
+			} else {
+				loadGym(currentGym.town.slice(0, -4));
+			}
+		}
+	});
 
 	$("body").on('click touchstart',".dungeon", function(){
 		var id = this.id;
 		id = id.slice(0, -8);
 		loadDungeon(id);
 	})
+	
+	$("body").keypress(function (e) {
+		if ($("#dungeonModal").hasClass('in') && (e.keyCode == 0 || e.keyCode == 32)){
+			e.preventDefault();
+			$("#dungeonModal").modal('hide');
+			loadDungeon(currentDungeon.name.slice(0, -8));
+		}
+	});
 
 	$("body").on('click',".shop", function(){
 		var id = this.id;
@@ -326,13 +347,35 @@ $(document).ready(function(){
 		loadShop(id);
 	})
 
-	$("body").on('click touchstart',".dungeonRoom", function(){
+	$("body").on('mousedown touchstart',".dungeonRoom", function(){
 		var id = parseInt(this.id.substring(4));
 		moveToRoom(id);
 	})
 
 	$(document).on("keydown", function (e) {
 		var keyCode = e.keyCode;
+
+
+		if (keyCode == 80){
+			e.preventDefault();
+			safelyToggle(showPokedexModal, '#pokedexModal')
+		}
+
+		if (keyCode == 85){
+			e.preventDefault();
+			safelyToggle(showMineModal, '#mineModal');
+		}
+
+		if (keyCode == 88){
+			e.preventDefault();
+			safelyToggle(showShardModal, '#shardModal');
+		}
+
+		if (keyCode == 81){
+			e.preventDefault();
+			safelyToggle(showQuestModal, '#questModal');
+		}
+
 		if(inProgress == 3){
 			if(keyCode == 38 || keyCode == 87){
 				moveToRoom(playerPosition-currentDungeon.size);
@@ -392,7 +435,6 @@ $(document).ready(function(){
 
 	$("body").on('click',".evoButton", function(){
 		activateEvoStone(this.dataset.pokemon, this.id.substr(3));
-		$("#evoModal").modal("hide");
 	})
 
 	$("body").on('click',".breedPokemon", function(){
@@ -425,11 +467,22 @@ $(document).ready(function(){
 	})
 
 
-	$("body").on('click',"#chestImage", function(){
+	$("body").on('mousedown',"#chestImage", function(){
 		openDungeonChest();
 	})
 
-
+	$.notify.addStyle('shiny', {
+		html: "<div><img src=images/shinypokemon/star.png height='25px' width='auto'><span data-notify-text/></div>",
+		classes: {
+			base: {
+				"background-color": "#f9ff92",
+				"font-weight": "bold",
+				"color": "#84760d",
+				"padding": "5px",
+				"border-radius": "10px",
+			}
+		}
+	});
 
 	// Logs to welcome the player
 	log("Welcome to PokeClicker");
@@ -447,6 +500,50 @@ $(document).ready(function(){
 	generateDailyDeals();
 });
 
+var safelyOpen = function(modalFunc){
+	if (fadingModal == false){
+		fadingModal = true;
+		$('.modal').modal('hide');
+		setTimeout(function(){
+			modalFunc();
+			setTimeout(function(){fadingModal = false},500);
+		},500);
+	} else {
+		setTimeout(function(){safelyOpen(modalFunc)},100)
+	}
+}
+
+var safelyToggle = function(modalFunc, modalId){
+	var show = false;
+	if (fadingModal == false){
+		if (!$(modalId).hasClass('in')){show = true};
+		fadingModal = true;
+		$('.modal').modal('hide');
+		setTimeout(function(){
+			if (show){
+				modalFunc();
+			}
+			setTimeout(function(){fadingModal=false},500)
+		},500);
+	}
+}
+
+var showMineModal = function(){
+	$("#mineModal").modal("show");
+	showCurMine();
+}
+
+var showPokedexModal = function(){
+	$('#pokedexModal').modal('show');
+	showPokedex();
+	showGymBadges();
+	showStats();
+}
+
+var showQuestModal = function(){
+	$("#questModal").modal("show");
+	showCurQuest();
+}
 
 // Update all functions and save
 var updateAll = function(){
@@ -720,7 +817,7 @@ var capturePokemon = function(name, shiny, iv){
 				pokemonList[i].iv = iv;
 				player.caughtPokemonList.push(pokemonList[i]);
 				if(shiny){
-					$.notify("You have caught a shiny "+ name +"!", "succes")
+					$.notify("You have caught a shiny "+ name +"!", {style: "shiny"})
 					progressQuest('captureShinies', "none" , 1);
 				}
 				calculateAttack();
@@ -751,7 +848,7 @@ var capturePokemon = function(name, shiny, iv){
 						player.caughtPokemonList[i].timeStamp = Math.floor(Date.now() / 1000);
 					}
 					player.caughtPokemonList[i].shiny = 1;
-					$.notify("You have caught a shiny "+ name +"!", "succes")
+					$.notify("You have caught a shiny "+ name +"!", {style: "shiny"})
 					progressQuest('captureShinies', "none" , 1);
 					var tokens = Math.floor(Math.pow(route,1.4) - route/2);
 					var deviation = Math.floor(Math.random() * 2 ) + 3;
