@@ -11,6 +11,7 @@ var Dungeon = function(name, pokemons, size, baseHealth, bossList, tokenCost, ba
         size: size,
         map: [],
         mapDiscovered: [],
+        mapVisited: [],
         baseHealth: baseHealth,
         pokemons: pokemons,
         bossList: bossList,
@@ -131,6 +132,7 @@ var loadDungeon = function(townId) {
         currentDungeon.map = createMap(currentDungeon.size);
         playerPosition = Math.floor(currentDungeon.size * currentDungeon.size / 2);
         currentDungeon.mapDiscovered[playerPosition] = 1;
+        currentDungeon.mapVisited[playerPosition] = 1;
         player.dungeonTokens -= currentDungeon.tokenCost;
         currentDungeon.loot = [];
         dungeonCanMove = 1;
@@ -164,31 +166,76 @@ var createMap = function(size) {
     return map;
 }
 
-var adjacent = function(pos, target, size) {
+var canMoveToRoom = function(target, size) {
+    if (curEnemy.alive || !dungeonCanMove) {
+        return false;
+    }
+
+    //If any of the adjacent squares are visited, it's a valid room.
     if (target < 0 || target > (size*size) - 1) {
         return false;
     }
-    if (target == pos + size) {
+    if (currentDungeon.mapVisited[target+size] || currentDungeon.mapVisited[target-size]) {
         return true;
     }
-    if (target == pos - size) {
-        return true;
-    }
-    if (target == pos + 1) {
+    //things get a bit tricky with the wrapped "x-values".
+    if (currentDungeon.mapVisited[target-1]) {
         return !(target % (size) == 0)
     }
-
-    if (target == pos - 1) {
+    if (currentDungeon.mapVisited[target+1]) {
         return !(target % (size) == (size - 1))
     }
-    return false;
+}
 
+var floodVisit = function(startPos) {
+	var size = currentDungeon.size;
+	var Q = [];
+	var chk = [];
+	currentDungeon.mapVisited[startPos] = 1;
+	Q.push(startPos);
+	chk[startPos] = 1;
+	while (Q.length > 0) {
+		var n = Q.shift();
+		var nStep = n-1; //left
+		if (chk[nStep] != 1 && 
+			n % (size) != 0 && (nStep) >= 0 && 
+			currentDungeon.mapDiscovered[nStep] && currentDungeon.map[nStep] == "Empty") {
+				currentDungeon.mapVisited[nStep] = 1;
+				Q.push(nStep);
+				chk[nStep] = 1;
+		}
+		nStep = n+1; //right
+		if (chk[nStep] != 1 && 
+			n % (size) != (size-1) && (nStep) < (size*size) && 
+			currentDungeon.mapDiscovered[nStep] && currentDungeon.map[nStep] == "Empty") {
+				currentDungeon.mapVisited[nStep] = 1;
+				Q.push(nStep);
+				chk[nStep] = 1;
+		}
+		nStep = n-size; //up
+		if (chk[nStep] != 1 && 
+			(nStep) >= 0 && 
+			currentDungeon.mapDiscovered[nStep] && currentDungeon.map[nStep] == "Empty") {
+				currentDungeon.mapVisited[nStep] = 1;
+				Q.push(nStep);
+				chk[nStep] = 1;
+		}
+		nStep = n+size; //down
+		if (chk[nStep] != 1 && 
+			(nStep) < (size*size) && 
+			currentDungeon.mapDiscovered[nStep] && currentDungeon.map[nStep] == "Empty") {
+				currentDungeon.mapVisited[nStep] = 1;
+				Q.push(nStep);
+				chk[nStep] = 1;
+		}
+	}
 }
 
 var moveToRoom = function(id) {
-    if (adjacent(playerPosition, id, currentDungeon.size) && !curEnemy.alive && dungeonCanMove) {
+    if (canMoveToRoom(id, currentDungeon.size)) {
         playerPosition = id;
         currentDungeon.mapDiscovered[id] = 1;
+		floodVisit(playerPosition);
         hideDungeonChest();
         if (currentDungeon.map[id] == "Pokemon") {
             spawnDungeonPokemon();
@@ -214,6 +261,8 @@ var revealEverything = function(){
     for(var i = 0; i<currentDungeon.map.length; i++){
         currentDungeon.mapDiscovered[i] = 1;
     }
+
+    floodVisit(playerPosition);
 }
 
 var spawnDungeonChest = function() {
@@ -301,12 +350,12 @@ var updateDungeon = function() {
         } else {
 
             if(alreadyCaughtShiny(curEnemy.name)){
-                html += "<img id=alreadyCaughtImage src=images/shinyPokeball.PNG><br><img id=dungeonEnemy src='images/pokemon/"+curEnemy.id+".png' >"; 
+                html += "<img id=alreadyCaughtImage src=images/shinyPokeball.PNG><br><img id=dungeonEnemy src='images/pokemon/"+curEnemy.id+".png' >";
             } else if(alreadyCaught(curEnemy.name)){
-                html += "<img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=dungeonEnemy src='images/pokemon/"+curEnemy.id+".png' >"; 
+                html += "<img id=alreadyCaughtImage src=images/Pokeball.PNG><br><img id=dungeonEnemy src='images/pokemon/"+curEnemy.id+".png' >";
             } else {
                 html += "<br><img id=dungeonEnemy src='images/pokemon/"+curEnemy.id+".png' >";
-            }           
+            }
         }
 
         html += "</div>";
@@ -379,7 +428,7 @@ var dungeonEnemyDefeated = function() {
     attackInterval = setInterval(pokemonsAttack,1000);
     canCatch = 1;
     if (curEnemy.alive) {
-        
+
         currentDungeon.map[playerPosition] = "Empty";
 
         var catchRate = curEnemy.catchRate + getBonusCatchrate();
@@ -463,6 +512,7 @@ var resetDungeon = function() {
         currentDungeon.timeLeft = currentDungeon.timeLimit;
         currentDungeon.pokemonDefeated = 0;
         currentDungeon.mapDiscovered = [];
+        currentDungeon.mapVisited = [];
         currentDungeon.chestsOpened = 0;
     }
 }
@@ -522,7 +572,7 @@ var spawnDungeonBoss = function() {
     if(possibleType != undefined){
         curEnemy.type = possibleType;
     } else {
-        curEnemy.type = ['normal'];        
+        curEnemy.type = ['normal'];
     }
 
     clearInterval(attackInterval);
@@ -551,7 +601,7 @@ var spawnDungeonPokemon = function() {
     if(possibleType != undefined){
         curEnemy.type = possibleType;
     } else {
-        curEnemy.type = ['normal'];        
+        curEnemy.type = ['normal'];
     }
     clearInterval(attackInterval);
     attackInterval = setInterval(pokemonsAttack, 1000);
