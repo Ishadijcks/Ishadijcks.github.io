@@ -4,10 +4,10 @@ var canSave = 1;
 // Saves the game by writing play to JSON and save it in localStorage
 var save = function(){
 	var date = new Date();
-	if(date.getDate() !== player.lastSeen){
+	if(date.toDateString() !== player.lastSeen){
 		dailyReset();
 	}
-	player.lastSeen = new Date().getDate();
+	player.lastSeen = new Date().toDateString();
 	if(canSave){
 		localStorage.setItem("player", JSON.stringify(player));
 	}
@@ -73,7 +73,7 @@ var load = function(){
 	}
 	
 	var date = new Date();
-	if(date.getDate() !== player.lastSeen){
+	if(date.toDateString() !== player.lastSeen){
 		dailyReset();
 	}
 
