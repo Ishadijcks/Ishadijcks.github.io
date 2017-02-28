@@ -7,8 +7,12 @@
     display: table; //This is important
     overflow-y: auto;
     overflow-x: auto;
-    width: auto;
-    min-width: 1032px;
+}
+
+@media (max-width: 992px){
+	.modal-lg {
+		width: 95%;
+	}
 }
 
 .mineInventoryItem {
@@ -150,11 +154,6 @@ img.hammerSelected.mineReward:hover {
 .shardRow{
 	margin-left: 15px;
 }
-
-#shardModalDialog{
-	width:40%;
-}
-
 .shardTable{
 	width:100%;
 }
@@ -375,19 +374,13 @@ img.hammerSelected.mineReward:hover {
 }
 
 #pokedex{
-	width:70%;
 	overflow: auto;
 }
 
 
 .pokedexEntry {
 	height:175px;
-	border: 1px solid black;
-	margin: 2%;
-	width:16%;
 	text-align: center;
-	padding-left: 0;
-	padding-right: 0;
 	cursor: default;
 }
 
@@ -499,16 +492,10 @@ table, #console, #upgradeBox, #navBar {
 }
 
 #leftColumn {
-	margin-right: 7.5px;
 	padding-right: 25px;
 }
 
-#rightColumn {
-	margin-left: 7.5px;
-}
-
 #righterColumn {
-	margin-left: 7.5px;
 	padding-left: 25px;
 }
 
@@ -675,11 +662,6 @@ g, rect {
 	text-align:center;
 }
 
-#changeLogModal .modal-dialog
-{
-    width: 1000px;
-}
-
 #starterPokemons{
 	text-align:center;
 }
@@ -747,8 +729,11 @@ g, rect {
                                  not supported by any browser */
 }
 
-
-
+@media (min-width: 1000px) {
+	#mineModal > .modal-dialog {
+		min-width:1040px;
+	}
+}
 
 @media (max-width: 1100px) {
 	.modal-dialog {
@@ -761,17 +746,6 @@ g, rect {
 
 	.modal-open .modal, #pickStarter {
 		overflow-x: scroll;
-	}
-}
-
-@media (min-width: 768px) and (max-width: 1200px) {
-	#righterColumn {
-		margin-left:34%;
-		margin-top:18px;
-	}
-
-	#oakItemBody {
-		margin-top:18px;
 	}
 }
 

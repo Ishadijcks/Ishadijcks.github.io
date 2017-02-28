@@ -12,7 +12,7 @@ var showPokedex = function(){
 	
 	var max = highestPokemonId();
 	for( var i = 0; i<= max; i++){
-		html += "<div class='col-sm-3 col-md-2 pokedexEntry'>";
+		html += "<div class='col-xs-6 col-sm-4 col-md-3 col-lg-2 pokedexEntry'>";
 		if( player.defeatNumbers[i] > 0 || player.catchNumbers[i] > 0){
 
 			if(isShiny(pokemonList[i].name)){
