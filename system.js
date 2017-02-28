@@ -281,11 +281,13 @@ $(document).ready(function(){
 
 
 	$("body").on('click',"#AttackCaughtPokemon", function(){
+		player.caughtPokemonList.sort(compareById);
 		player.caughtPokemonList.sort(compareByAttack);
 		updateCaughtList();
 	})
 
 	$("body").on('click',"#LevelCaughtPokemon", function(){
+		player.caughtPokemonList.sort(compareById);
 		player.caughtPokemonList.sort(compareByLevel);
 		updateCaughtList();
 	})
