@@ -95,8 +95,8 @@ var progressQuest = function(type, type2,  amount){
 			showCurQuest();
 			if(player.curQuest.progress >= player.curQuest.amount && !player.curQuest.notified){
 				$.notify("Your random quest is ready to be completed!", "success");
-				notifyMe("You can complete your quest");
 				player.curQuest.notified = 1;
+				notifyMe("You can complete your quest");
 			}
 		}
 	}
@@ -188,12 +188,12 @@ var gainQuestPoints = function(amount){
 }
 
 var getSkipPriceQuest = function(){
-	return Math.floor(5*Math.pow(player.questSkipToday,1.1));	
+	return Math.floor(5*Math.pow(player.questSkipToday,1.1));
 }
 
 var skipQuestQuest = function(){
 	var cost = getSkipPriceQuest();
-	if( canSkipQuestQuest()){	
+	if( canSkipQuestQuest()){
 		player.questPoints -= cost;
 		player.questSkipToday++;
 		player.questDifficulty *= 0.65;
@@ -203,12 +203,12 @@ var skipQuestQuest = function(){
 }
 
 var getSkipPriceMoney = function(){
-	return Math.floor(Math.pow(500*player.questSkipToday,1.5));	
+	return Math.floor(Math.pow(500*player.questSkipToday,1.5));
 }
 
 var skipQuestMoney = function(){
 	var cost = getSkipPriceMoney();
-	if( canSkipQuestMoney()){	
+	if( canSkipQuestMoney()){
 		player.money -= cost;
 		player.questSkipToday++;
 		player.questDifficulty *= 0.8;
@@ -300,7 +300,7 @@ var showCurQuest = function(){
 	} else {
 		html += 		"<button class='btn btn-danger disabled'>Skip Quest</button> ($" + numberWithCommas(getSkipPriceMoney()) + ")";
 	}
-	
+
 	html += 		"</div>";
 	html += 	"</div>"
 	html += "</div>";
@@ -317,4 +317,4 @@ var showCurQuest = function(){
 	$("#questCounterTitle").html(player.curQuest.description);
 	$("#smallQuestBar").width(player.curQuest.progress/player.curQuest.amount*100 + "%");
 	$("#questCounterProgress").html(Math.min(player.curQuest.amount, player.curQuest.progress) +"/" + player.curQuest.amount)
-}	
+}
