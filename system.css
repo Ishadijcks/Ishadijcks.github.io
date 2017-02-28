@@ -841,3 +841,76 @@ g, rect {
     user-select: none;           /* Non-prefixed version, currently
                                  not supported by any browser */
 }
+
+@media (max-width: 1100px) {
+	.modal-dialog {
+		margin:30px auto;
+	}
+
+	#mineModal .modal-body {
+		min-width:800px;
+	}
+
+	.modal-open .modal, #pickStarter {
+		overflow-x: scroll;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+	#righterColumn {
+		margin-left:34%;
+		margin-top:18px;
+	}
+
+	#oakItemBody {
+		margin-top:18px;
+	}
+}
+
+@media (max-width: 767px) {
+	#leftColumn {
+		padding-left:0px;
+		padding-right:0px;
+		margin-left:14px;
+		margin-right:14px;
+	}
+	#rightColumn {
+		padding-left:0px;
+		padding-right:0px;
+		margin-left:14px;
+		margin-right:14px;
+
+		margin-top:10px;
+	}
+
+	#righterColumn {
+		padding-left:0px;
+		padding-right:0px;
+		margin-left:14px;
+		margin-right:14px;
+
+		margin-top:10px;
+	}
+
+	#oakItemBody {
+		padding-left:0px;
+		padding-right:0px;
+		margin-left:4px;
+		margin-right:4px;
+
+		margin-top:0px;
+	}
+
+	#oakItemBody .oakItem {
+		float:left;
+		margin-right:7.5px;
+	}
+
+	#mineModal .mineSquare {
+		float:left;
+	}
+
+	#shardBody .shardUpgrade, #shardBody .shardUpgradeLocked {
+		float:left;
+	}
+}
