@@ -779,6 +779,17 @@ g, rect {
 	}
 }
 
+@media (min-width: 768px) and (max-width: 996px) {
+	#righterColumn {
+		margin-left:34%;
+		margin-top:18px;
+	}
+
+	#oakItemBody {
+		margin-top:18px;
+	}
+}
+
 @media (max-width: 767px) {
 	#leftColumn {
 		padding-left:0px;
