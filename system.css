@@ -383,7 +383,7 @@ img.hammerSelected.mineReward:hover {
 }
 
 .pokedexEntry {
-	height:175px;
+	height:190px;
 	text-align: center;
 	cursor: default;
 	padding: 5px;
@@ -409,7 +409,12 @@ img.hammerSelected.mineReward:hover {
 	width:30px;
 }
 
-
+@media (min-width: 1290px){
+	#pokedexModal .modal-dialog{
+		width: 70%;
+		max-width: 1350px;
+	}
+}
 
 .rank0 {
 	background-color: #F1F8E9;

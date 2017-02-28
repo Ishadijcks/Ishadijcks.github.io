@@ -1,10 +1,10 @@
 var showPokedex = function(){
 	html = "";
-	html += "<div class='row'>";
-		html += "<div class='col-md-4 col-md-offset-2'>";
+	html += "<div class='row row-centered'>";
+		html += "<div class='col-md-5 col-centered'>";
 			html += "<h3>Unique Pok&eacute;mon captured: "+getUniqueCaptures()+"</h3><h3>Total Pok&eacute;mon captured: "+getTotalCaptures()+"</h3>";
 		html += "</div>"
-		html += "<div class='col-md-4 col-md-offset-2'>";
+		html += "<div class='col-md-5 col-md-offset-1 col-centered'>";
 			html += "<h3>Unique shinies captured: "+getTotalShinies()+"</h3><h3>Total Pok&eacute;mon defeated: "+getTotalDefeats()+"</h3>";
 		html += "</div>"
 	html += "</div>";
