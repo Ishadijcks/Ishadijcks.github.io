@@ -354,6 +354,7 @@ img.hammerSelected.mineReward:hover {
 .leftTownButton {
 	margin-left: 2%;
 	margin-bottom: 5px;
+	width: 100px;
 }
 
 .rightTownButton {
@@ -592,6 +593,10 @@ table, #console, #upgradeBox, #navBar {
 #upgradeBox{
 	text-align:center;
 	border: 1px solid black;
+}
+
+#upgradeBox button{
+	white-space: normal;
 }
 
 .smallImage{
