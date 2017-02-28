@@ -377,11 +377,16 @@ img.hammerSelected.mineReward:hover {
 	overflow: auto;
 }
 
+.buffer-bottom-30 {
+	margin-bottom: 30px;
+}
 
 .pokedexEntry {
 	height:175px;
 	text-align: center;
 	cursor: default;
+	padding: 5px;
+	border: 1px solid black;
 }
 
 .pokedexEntry:hover{
@@ -393,7 +398,7 @@ img.hammerSelected.mineReward:hover {
 .pokedexRank {
 	position:absolute;
 	top:0px;
-	right:0px;
+	right:15px;
 	border-left:1px solid black;
 	border-bottom:1px solid black;
 	text-align:center;
@@ -681,13 +686,18 @@ g, rect {
 	height: 96px !important;
 }
 
+.shopItemContainer {
+	min-width: 96px;
+	padding-bottom: 100px;
+}
+
 #currentEnemy, #gymView, #dungeonView{
 	text-align:center;
 }
 
 .actionView {
 	border: 1px solid black;
-	height: 250px;
+	min-height: 250px;
 	margin-bottom: 20px;
 	background-color: white;
 }
@@ -727,6 +737,16 @@ g, rect {
     -ms-user-select: none;       /* Internet Explorer/Edge */
     user-select: none;           /* Non-prefixed version, currently
                                  not supported by any browser */
+}
+
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    margin-right:-4px;
+    vertical-align: top;
 }
 
 @media (min-width: 1000px) {

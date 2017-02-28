@@ -210,10 +210,11 @@ var activateItem = function(id){
 }
 
 var useEvoStone = function(item){
-	var html = "<div class='row'>";
+	var html = "<div class='row row-centered'>";
 	var possibleEvolutions = getStoneEvolutionPokemon(item.name);
 	$("#evoModal").modal("show");
 	for(var i = 0; i <possibleEvolutions.length; i++){
+		html += "<div class='col-sm-3 col-md-2 col-centered'>"
 		if (!possibleEvolutions[i].evolved){
 			var id = getPokemonByName(possibleEvolutions[i].name).id;
 			if(possibleEvolutions[i].name === "Eevee"){
@@ -227,7 +228,7 @@ var useEvoStone = function(item){
 				else if(item.name === "Fire Stone"){
 					eeveelution = "Flareon";
 				}
-				html += "<div data-pokemon='" + eeveelution + "' class='evoButton col-sm-3 col-md-2 pokedexEntry' id='evo" + item.id + "'>";
+				html += "<div data-pokemon='" + eeveelution + "' class='evoButton pokedexEntry' id='evo" + item.id + "'>";
 				html += "<img class='center-block"
 				if (alreadyCaughtShiny("Eevee")) {
 					html += " largeShinyImage"
@@ -239,7 +240,7 @@ var useEvoStone = function(item){
 				html += "pokemon/" + id + ".png >" + possibleEvolutions[i].name;
 				evolution = eeveelution;
 			} else {
-				html += "<div data-pokemon='" + possibleEvolutions[i].evolution + "' class='evoButton col-sm-3 col-md-2 pokedexEntry' id='evo" + item.id + "'>";
+				html += "<div data-pokemon='" + possibleEvolutions[i].evolution + "' class='evoButton pokedexEntry' id='evo" + item.id + "'>";
 				html += "<img class='center-block"
 				if (alreadyCaughtShiny(possibleEvolutions[i].name)) {
 					html += " largeShinyImage"
@@ -266,6 +267,7 @@ var useEvoStone = function(item){
 
 
 		}
+		html += "</div>" //Close evoButton wrapper
 	}
 	
 	html += "</div>";

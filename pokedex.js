@@ -12,7 +12,7 @@ var showPokedex = function(){
 	
 	var max = highestPokemonId();
 	for( var i = 0; i<= max; i++){
-		html += "<div class='col-xs-6 col-sm-4 col-md-3 col-lg-2 pokedexEntry'>";
+		html += "<div class='col-xs-6 col-sm-4 col-md-3 col-lg-2 buffer-bottom-30'><div class='pokedexEntry'>";
 		if( player.defeatNumbers[i] > 0 || player.catchNumbers[i] > 0){
 
 			if(isShiny(pokemonList[i].name)){
@@ -36,7 +36,7 @@ var showPokedex = function(){
 		}
 		
 		
-		html += "</div>";
+		html += "</div></div>"; //close wrapper and .pokedexEntry
 	}
 	html += "</div>"
 	$("#pokedexBody").html(html);
