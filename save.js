@@ -23,6 +23,15 @@ var save = function(){
 var load = function(){
 	var savegame = JSON.parse(localStorage.getItem("player"));
 
+	if (savegame.version < player.version) {
+		localStorage.setItem("player_old", JSON.stringify(savegame))
+	}
+
+	if (savegame.version > player.version) {
+		if (oldSave = JSON.parse(localStorage.getItem("player_old"))) {
+			savegame = oldSave;
+		}
+	}
 
 	for (var property in savegame) {
 		if (typeof savegame[property] !== 'undefined') player[property] = savegame[property];
