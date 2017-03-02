@@ -60,14 +60,14 @@ var showTown = function(town){
 	html += "<div class='row'>";
 
 	if(town.shop === "mom"){
-		html += "<button onClick='showMom()' class='mom leftTownButton btn btn-primary col-sm-2' id='"+town.name+" mom'>Mom</button>";
+		html += "<button onClick='showMom()' class='mom leftTownButton btn btn-primary' id='"+town.name+" mom'>Mom</button>";
 		html += "</div><div class='row'>";
 		if(player.mapExplain || player.townExplain || player.dungeonExplain) {
-			html += "<button onClick='oakExplainAgain()' class='tutorial leftTownButton btn btn-primary col-sm-2' id='"+town.name+" mom'>Oak</button>";
+			html += "<button onClick='oakExplainAgain()' class='tutorial leftTownButton btn btn-primary' id='"+town.name+" mom'>Oak</button>";
 			html += "</div><div class='row'>";
 		}
 	} else if(town.shop != null){
-		html += "<button class='shop leftTownButton btn btn-primary col-sm-2' id='"+town.name+" Shop'>Shop</button>";
+		html += "<button class='shop leftTownButton btn btn-primary' id='"+town.name+" Shop'>Shop</button>";
 		html += "</div><div class='row'>";
 	}
 
@@ -75,7 +75,7 @@ var showTown = function(town){
 		if(town.gym.bossList != undefined){
 			oakExplainDungeons()
 			if(player.gymBadges.length >= town.gym.badgeReq){
-				html += "<button class='dungeon leftTownButton btn btn-primary col-sm-2' id='"+town.name+" Dungeon'>Dungeon<br>"+town.gym.tokenCost+" tokens</button>"
+				html += "<button class='dungeon leftTownButton btn btn-primary' id='"+town.name+" Dungeon'>Dungeon<br>"+town.gym.tokenCost+" tokens</button>"
 			} else {
 				html += "<button class='wrongDungeon leftTownButton btn btn-primary disabled col-sm-2' id='"+town.name+" Dungeon'>Dungeon</button>"
 			}

@@ -1,10 +1,10 @@
 var showPokedex = function(){
 	html = "";
-	html += "<div class='row'>";
-		html += "<div class='col-md-4 col-md-offset-2'>";
+	html += "<div class='row row-centered'>";
+		html += "<div class='col-md-5 col-centered'>";
 			html += "<h3>Unique Pok&eacute;mon captured: "+getUniqueCaptures()+"</h3><h3>Total Pok&eacute;mon captured: "+getTotalCaptures()+"</h3>";
 		html += "</div>"
-		html += "<div class='col-md-4 col-md-offset-2'>";
+		html += "<div class='col-md-5 col-md-offset-1 col-centered'>";
 			html += "<h3>Unique shinies captured: "+getTotalShinies()+"</h3><h3>Total Pok&eacute;mon defeated: "+getTotalDefeats()+"</h3>";
 		html += "</div>"
 	html += "</div>";
@@ -12,7 +12,7 @@ var showPokedex = function(){
 	
 	var max = highestPokemonId();
 	for( var i = 0; i<= max; i++){
-		html += "<div class='col-sm-3 col-md-2 pokedexEntry'>";
+		html += "<div class='col-xs-6 col-sm-4 col-md-3 col-lg-2 buffer-bottom-30'><div class='pokedexEntry'>";
 		if( player.defeatNumbers[i] > 0 || player.catchNumbers[i] > 0){
 
 			if(isShiny(pokemonList[i].name)){
@@ -36,7 +36,7 @@ var showPokedex = function(){
 		}
 		
 		
-		html += "</div>";
+		html += "</div></div>"; //close wrapper and .pokedexEntry
 	}
 	html += "</div>"
 	$("#pokedexBody").html(html);

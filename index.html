@@ -58,10 +58,11 @@
 
 </head>
 <body>
+	<img id="background-image">
 
 	<div class="container-fluid">
-		<div class="row-fluid">
-			<div class="col-lg-2 col-lg-offset-2 col-sm-4" id="leftColumn">
+		<div class="row">
+			<div class="col-lg-offset-2 col-md-2 col-md-offset-1 col-sm-4" id="leftColumn">
 				<div class="row">
 					<div id="pokemons">
 						<select id="sortBox" onchange="sortChange()">
@@ -124,7 +125,7 @@
 			</div>
 
 
-			<div class="col-lg-4 col-sm-7" id="rightColumn">
+			<div class="col-lg-4 col-md-6 col-sm-7" id="rightColumn">
 				<div class="row">
 					<div class="col-lg-12 actionView" id="currentEnemy">
 						<span id="currentRoute"></span>
@@ -667,7 +668,7 @@
 				</div>
 				<!-- Starter Modal -->
 				<div aria-labelledby="myModalLabel" class="modal fade" id="pickStarter" role="dialog" tabindex="-1">
-					<div class="modal-dialog" role="document">
+					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h4 class="modal-title" >Pick a starter</h4>
@@ -692,7 +693,7 @@
 
 				<!-- Breeding Modal -->
 				<div aria-labelledby="myModalLabel" class="modal fade noselect" id="breedingModal" role="dialog" style="cursor:default" tabindex="-1">
-					<div class="modal-dialog" role="document" style="width:55%">
+					<div class="modal-dialog modal-lg" role="document" style="width:55%">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h4 style='text-align:center' class="modal-title">Breeding</h4>
@@ -709,7 +710,7 @@
 
 				<!-- Quest Modal -->
 				<div aria-labelledby="myModalLabel" class="modal fade noselect" id="questModal" role="dialog" style="cursor:default" tabindex="-1">
-					<div class="modal-dialog" role="document" style="width:55%">
+					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h4 style='text-align:center' class="modal-title" id="questLabel">Random Quest</h4>
@@ -753,7 +754,7 @@
 
 
 				<div aria-labelledby="myModalLabel" class="modal fade noselect" id="mineModal" role="dialog" style="cursor:default" tabindex="-1">
-					<div class="modal-dialog" role="document" style="width:55%">
+					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
 								<ul class="nav nav-tabs">
@@ -808,7 +809,7 @@
 
 				<!-- Gym completed Modal -->
 				<div aria-labelledby="myModalLabel" class="modal fade" id="gymModal" role="dialog" tabindex="-1">
-					<div class="modal-dialog" role="document">
+					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h4 class="modal-title" >Gym leader defeated!</h4>
@@ -821,7 +822,7 @@
 
 				<!-- Wrong site Modal -->
 				<div aria-labelledby="myModalLabel" class="modal fade" id="siteModal" role="dialog" tabindex="-1">
-					<div class="modal-dialog" role="document">
+					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h4 class="modal-title" ></h4>
@@ -835,7 +836,7 @@
 				</div>
 
 				<div aria-labelledby="myModalLabel" class="modal fade" id="oakModal" role="dialog" tabindex="-1">
-					<div class="modal-dialog" role="document">
+					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h4 class="modal-title" >Professor Oak</h4>
@@ -847,7 +848,7 @@
 				</div>
 
 				<div aria-labelledby="myModalLabel" class="modal fade" id="tutorialModal" role="dialog" tabindex="-1">
-					<div class="modal-dialog" role="document">
+					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h4 class="modal-title" >Professor Oak</h4>
@@ -859,7 +860,7 @@
 				</div>
 
 				<div aria-labelledby="myModalLabel" class="modal fade" id="dungeonModal" role="dialog" tabindex="-1">
-					<div class="modal-dialog" role="document">
+					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h4 class="modal-title" >Dungeon cleared!</h4>
@@ -872,7 +873,7 @@
 
 				<!-- Shards Modal -->
 				<div aria-labelledby="myModalLabel" class="modal fade" id="shardModal" role="dialog" tabindex="-1">
-					<div class="modal-dialog" id="shardModalDialog" role="document">
+					<div class="modal-dialog modal-lg" id="shardModalDialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h4 class="modal-title" >Shards</h4>
@@ -886,7 +887,7 @@
 
 				<!-- Evolution Modal -->
 				<div aria-labelledby="myModalLabel" class="modal fade" id="evoModal" role="dialog" tabindex="-1">
-					<div class="modal-dialog" id="evolDialog" role="document">
+					<div class="modal-dialog modal-lg" id="evolDialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h4 class="modal-title" style='text-align:center' id="evoTitle">Evolution</h4>
@@ -901,7 +902,7 @@
 
 				<!-- Badge Modal -->
 				<div aria-labelledby="myModalLabel" class="modal fade" id="badgeModal" role="dialog" tabindex="-1">
-					<div class="modal-dialog" role="document">
+					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h4 class="modal-title" >Badges</h4>
@@ -911,7 +912,7 @@
 					</div>
 				</div>
 				<div aria-labelledby="myModalLabel" class="modal fade" id="itemModal" role="dialog" tabindex="-1">
-					<div class="modal-dialog" role="document">
+					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h4 class="modal-title" >Alert</h4>
@@ -922,7 +923,7 @@
 					</div>
 				</div>
 				<div aria-labelledby="myModalLabel" class="modal fade" id="itemChoiceModal" role="dialog" tabindex="-1">
-					<div class="modal-dialog" role="document">
+					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h4 class="modal-title" >Confirmation</h4>
@@ -934,7 +935,7 @@
 				</div>
 				<!-- Pokedex Modal -->
 				<div aria-labelledby="myModalLabel" class="modal fade" id="pokedexModal" role="dialog" tabindex="-1">
-					<div class="modal-dialog" role="document" id="pokedex">
+					<div class="modal-dialog modal-lg" role="document" id="pokedex">
 						<div class="modal-content">
 							<div class="modal-header">
 								<ul class="nav nav-tabs">
@@ -975,7 +976,7 @@
 
 
                 <div aria-labelledby="myModalLabel" class="modal fade" id="saveModal" role="dialog" tabindex="-1">
-                    <div class="modal-dialog" role="document" id="saveFile">
+                    <div class="modal-dialog modal-lg" role="document" id="saveFile">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <ul class="nav nav-tabs">
@@ -1018,7 +1019,7 @@
 
             <!-- changelog Modal -->
 				<div aria-labelledby="myModalLabel" class="modal fade" id="changeLogModal" role="dialog" tabindex="-1">
-					<div class="modal-dialog" role="document">
+					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h4 class="modal-title" >Changelog</h4>
@@ -1767,7 +1768,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-2 col-lg-offset-3 col-sm-4" id="righterColumn">
+			<div class="col-md-2 col-sm-4" id="righterColumn">
 				<div class="row">
 					<div id="items">
 						<table id="itemTable" class="table table-striped table-bordered table-condensed">

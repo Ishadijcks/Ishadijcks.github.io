@@ -151,9 +151,9 @@ var showShop = function(shop){
 	hideAllActionViews();
 	var html = "";
 	html += "<h3 class='townName'>" + shop.name + " Shop</h3>"
-	html += "<div class='row'>";
+	html += "<div class='row row-centered'>";
 	for(var i = 0; i<items.length; i++){
-		html += "<div data-itemName='" + items[i].name + "' class='col-sm-3 col-md-2 pokedexEntry shopItem'>";
+		html += "<div class='col-sm-4 col-lg-3 col-centered shopItemContainer'><div data-itemName='" + items[i].name + "' class='pokedexEntry shopItem'>";
 		html += "<br><img class='center-block' src=images/items/" + items[i].id + ".png >" + items[i].name;
 		console.log(shop.name);
 		console.log(items[i].name);
@@ -167,7 +167,7 @@ var showShop = function(shop){
 		html += "<p style='margin-top:15px'>" + (items[i].cost*player.shopPriceDeviation[getShopItemByName(items[i].name).id]).toFixed(0);
 		html += "<br>";
 		html += getFullResourceName(items[i].costType) + "</p>";
-		html += "</div>";
+		html += "</div></div>";//Close wrapper and shopItem
 	}
 
 	html += "</div>";
