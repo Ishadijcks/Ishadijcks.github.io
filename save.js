@@ -68,8 +68,20 @@ var load = function(){
 		updateTypes();
 		player.notEffectiveTypeBonus.push(0);
 		player.normalEffectiveTypeBonus.push(0);
-		player.veryEffectiveTypeBonus.push(0);
-		player.typeShards.push(0);
+		player.veryEffectiveTypeBonus.push(0);	
+    player.typeShards.push(0);
+	}
+
+	if(player.version < 0.931) {
+		for (var i=0; i<player.caughtPokemonList.length; i++) {
+			player.caughtPokemonList[i].iv = IV();
+		}
+
+		for (var i=0; i<4; i++) {
+			if (player.eggList[i]) {
+				player.eggList[i].iv = generateNewIV(IV());
+			}
+		}
 	}
 	
 	var date = new Date();

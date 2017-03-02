@@ -1,4 +1,4 @@
-var version = "0.93"
+var version = "0.931"
 var inProgress = 1;
 var canCatch = 1;
 var attackInterval;
@@ -438,7 +438,7 @@ $(document).ready(function(){
 	})
 
 	$("body").on('click',".breedPokemon", function(){
-		breedPokemon(this.dataset.pokemon);
+		breedPokemon(this.dataset.pokemon, JSON.parse(this.dataset.iv));
 	})
 
 	$("body").on('click',".mineSquare", function(){
@@ -814,7 +814,8 @@ var enemyDefeated = function(){
 
 // Capture a pokemon by moving it to the player.caughtPokemonList
 // Pokemon are adressable by name
-var capturePokemon = function(name, shiny){
+var capturePokemon = function(name, shiny, iv){
+	iv = IV(iv);
 	var id = getPokemonByName(name).id-1;
 	player.catchNumbers[id]++;
 	if(!alreadyCaught(name)){
@@ -823,6 +824,7 @@ var capturePokemon = function(name, shiny){
 				pokemonList[i].timeStamp = Math.floor(Date.now() / 1000);
 				pokemonList[i].shiny = shiny;
 				pokemonList[i].experience = 0;
+				pokemonList[i].iv = iv;
 				player.caughtPokemonList.push(pokemonList[i]);
 				if(shiny){
 					$.notify("You have caught a shiny "+ name +"!", {style: "shiny"})
@@ -836,6 +838,15 @@ var capturePokemon = function(name, shiny){
 	}
 
 	else{
+		if(iv.attack > 0){
+			for( var i = 0; i<player.caughtPokemonList.length; i++){
+				if(player.caughtPokemonList[i].name == name){
+					if(player.caughtPokemonList[i].iv.attack < iv.attack){
+						player.caughtPokemonList[i].iv.attack = iv.attack
+					}
+				}
+			}
+		}
 
 		if(shiny){
 			for( var i = 0; i<player.caughtPokemonList.length; i++){
@@ -900,7 +911,7 @@ var calculateAttack = function(){
 
 		var level = experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType);
 		if( curEnemy != "undefined"){
-			total += Math.ceil(level*(player.caughtPokemonList[i].attack)/100)* damageModifier(player.caughtPokemonList[i], curEnemy);
+			total += Math.ceil(level*(player.caughtPokemonList[i].attack + player.caughtPokemonList[i].iv.attack/2)/100)* damageModifier(player.caughtPokemonList[i], curEnemy);
 		}
 	}
 	player.attack = total;

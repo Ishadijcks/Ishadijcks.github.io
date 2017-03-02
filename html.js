@@ -79,7 +79,7 @@ var updateCaughtList = function(){
 		} else {
 			pokemonHtml += "<th><img class=smallImage src=images/pokemon/"+player.caughtPokemonList[i].id+".png>"+player.caughtPokemonList[i].name + "</th>";
 		}
-		pokemonHtml += "<th>" + Math.ceil(experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType)*(player.caughtPokemonList[i].attack)/100) +"</th>";
+		pokemonHtml += "<th>" + Math.ceil(experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType)*(player.caughtPokemonList[i].attack + player.caughtPokemonList[i].iv.attack/2)/100) +"</th>";
 		pokemonHtml += "<th>" + experienceToLevel(player.caughtPokemonList[i].experience,player.caughtPokemonList[i].levelType) + "</th>";
 		pokemonHtml += "</tr>";
 
