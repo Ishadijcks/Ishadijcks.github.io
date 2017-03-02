@@ -116,19 +116,24 @@ var curEnemy = {
 	moneyReward: 1
 }
 
+var saveFrame, saves = [];
 
-$(document).ready(function(){
-	if(!(document.domain === "ishadijcks.github.io" || document.domain === "")){
-		$("#siteModal").modal('show')
+beginLoad = function(){
+	if (window.location.hostname == "ishadijcks.github.io"){
+		console.log("loading from iframe");
+		saveFrame.postMessage(JSON.stringify({key: 'player', method: "get"}), "*");
+	} else {
+		console.log("loading from this localStorage");
+		initGame(JSON.parse(localStorage.getItem("player")));
 	}
-	initTypeEffectiveness();
-	//$('#changeLogModal').modal('show');
+}
 
-	if(localStorage.getItem("player") != null){
-		load();
+initGame = function(savegame){
+	saves = [];
+	if(savegame){
+		load(savegame);
 		generatePokemon(player.route);
 	}
-
 	else {
 		$('#pickStarter').modal({backdrop: 'static', keyboard: false});
 	}
@@ -146,6 +151,90 @@ $(document).ready(function(){
 	loadTowns();
 	hideAllActionViews();
 	$("#currentEnemy").show();
+}
+
+var checkSaves = function(){
+	console.log("checking");
+	for (var i=0; i<2; i++){
+		if (saves[i] == 0){
+			initGame(saves[i-1]);
+			return
+		}
+	}
+	
+	for (var i=0; i<2; i++){
+		var uniqueShiny = 0;
+		for (var j=0; j<saves[i].caughtPokemonList.length; j++){
+			if (saves[i].caughtPokemonList[j].shiny){
+				uniqueShiny++;
+			}
+		}
+		var lastHere = new Date(saves[i].lastSaved).toLocaleDateString();
+
+		var info = "<table class='save'>";
+			info += "<tr> <td>Version</td> <td>" + saves[i].version + "</td> </tr>";
+			info += "<tr> <td>Last Seen</td> <td>" + lastHere + "</td> </tr>";
+			info += "<tr> <td>Unique Caught</td> <td>" + saves[i].caughtPokemonList.length + "</td> </tr>";
+			info += "<tr> <td>Unique Shinies Caught</td> <td>" + uniqueShiny + "</td> </tr>";
+			info += "<tr> <td>Total Hatched</td> <td>" + saves[i].totalBred + "</td> </tr>";
+			info += "<tr> <td>Total Caught</td> <td>" + saves[i].totalCaught+ "</td> </tr>";
+			info += "<tr> <td>Total Underground Diamonds</td> <td>" + saves[i].totalMineCoins + "</td> </tr>";
+		info += "</table>"
+
+		info += "<button class='load btn btn-primary' id='"+(i+1)+"'>Load</button>"
+
+		$("#loadModal #save"+(i+1)).html(info);
+
+		$("#"+(i+1)+".load").on("click", function(){
+			var _i = +$(this).attr("id") - 1;
+			initGame(saves[_i]);
+			$("#loadModal").modal("hide");
+		});
+	}
+
+	$("#loadModal").modal("show");
+}
+
+$(document).ready(function(){
+	if(!(document.domain === "ishadijcks.github.io" || document.domain === "")){
+		$("#siteModal").modal('show')
+	}
+	initTypeEffectiveness();
+	//$('#changeLogModal').modal('show');
+
+	//Save management
+	if (window.location.origin == "http://ishadijcks.github.io"){
+		$("body").append("<iframe id='saveLocation' style='display:none' onload='beginLoad()' src='https://ishadijcks.github.io/iframe.html'></iframe>");
+		saveFrame = document.getElementById('saveLocation').contentWindow;
+	} else {
+		initGame(JSON.parse(localStorage.getItem("player")));
+	}
+
+	window.onmessage = function(e){
+		var savegame = JSON.parse(e.data)
+		console.log(savegame);
+
+		if (savegame && savegame.version >= 0.93){
+			initGame(savegame);
+			return
+		} else {
+			if(!savegame){
+				savegame = 0;
+			}
+			saves.push(savegame);
+		}
+
+		if (saves.length == 1){
+			local = JSON.parse(localStorage.getItem("player")) || 0;
+			saves.push(local);
+		}
+
+		if (saves[0] == 0 && saves[1] == 0){
+			initGame(savegame);
+		} else {
+			checkSaves();
+		}
+	}
 
 
 
