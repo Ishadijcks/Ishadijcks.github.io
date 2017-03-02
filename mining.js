@@ -75,12 +75,13 @@ var canUseDailyDeal = function(id){
 }
 
 var useDailyDeal = function(id){
+    var amt = Number($("#deal"+id+"amt").val())
     var deal = player.curMine.dailyDeals[id];
     var index = alreadyHasMineItem(deal.item1.id);
-    if(player.mineInventory[index].amount >= deal.amount1){
-        player.mineInventory[index].amount -= deal.amount1;
+    if(player.mineInventory[index].amount >= deal.amount1 * amt){
+        player.mineInventory[index].amount -= deal.amount1 * amt;
         for( var i = 0; i<deal.amount2; i++){
-            gainMineItem(deal.item2.id);
+            gainMineItem(deal.item2.id, amt);
         }
     }
     showDailyDeals();
@@ -206,25 +207,28 @@ var loadMine = function(){
 	loadingNewMine = false;
 }
 
-var gainMineItem = function(id){
-	var index = alreadyHasMineItem(id);
-	var item = getMineItemById(id);
-	if(mineItemIsStone(item.name)){
-		gainItemByName(item.name);
-		return;
-	}
-	if( index == -1){	
-
-		var tempItem = {
-			name: item.name,
-			amount: 1,
-			id: id,
-			value: item.value,
-			valueType: item.valueType
+var gainMineItem = function(id, amt){
+	if(typeof amt != 'number') { amt = 1 };
+	if (amt > 0){
+		var index = alreadyHasMineItem(id);
+		var item = getMineItemById(id);
+		if(mineItemIsStone(item.name)){
+			gainItemByName(item.name, amt);
+			return;
 		}
-		player.mineInventory.push(tempItem);
-	} else {
-		player.mineInventory[index].amount++;
+		if( index == -1){	
+	
+			var tempItem = {
+				name: item.name,
+				amount: amt,
+				id: id,
+				value: item.value,
+				valueType: item.valueType
+			}
+			player.mineInventory.push(tempItem);
+		} else {
+			player.mineInventory[index].amount += amt;
+		}
 	}
 }
 
@@ -255,10 +259,12 @@ var showMineItems = function(){
 		 		}
 		 		if(isMineEgg(player.mineInventory[i].name)){
 		 			html += "<td></td>";
-                    html += "<td class='vertical-midle'><button title='You can breed this item, I wonder what will happen...' class='btn btn-success tooltipRightMine' onClick='gainMineEgg(" + player.mineInventory[i].id + ")'>Breed</button></td>";
+          html += "<td class='vertical-midle'><button title='You can breed this item, I wonder what will happen...' class='btn btn-success tooltipRightMine' onClick='gainMineEgg(" + player.mineInventory[i].id + ")'>Breed</button></td>";
+          html += "<td />";
                 } else {
                 	html += "<td class='vertical-midle'>" + player.mineInventory[i].value + " " + resourceName + "</td>";
-                    html += "<td class='vertical-midle'><button class='btn btn-success tooltipRightMine' onClick='sellMineItem(" + player.mineInventory[i].id + ")'>Sell</button></td>";
+                    html += "<td class='vertical-midle'><button class='btn btn-success tooltipRightMine' onClick='sellMineItem(" + player.mineInventory[i].id + ", " + i + ")'>Sell</button></td>";
+                    html += "<td class='vertical-midle'><input id='treasure"+i+"amt' class='treasureAmount form-control' type='number' min='1' max='" + player.mineInventory[i].amount + "' value='1' />";
                 }
                 html += "</tr>";
 			}
@@ -272,6 +278,19 @@ var showMineItems = function(){
 	$(".tooltipRightMine").tooltipster({
 		position: "right"
 	});
+
+	$(".treasureAmount").on('input', function(){
+		if($(this).val() !== ''){
+			var amt = Math.max(1, Math.floor(Number($(this).val())));
+			max = Number($(this).attr('max'));
+
+			if (amt > max){
+				$(this).val(max);
+			} else {
+				$(this).val(amt);
+			}
+		}
+	});
 }
 
 var showDailyDeals = function(){
@@ -279,8 +298,10 @@ var showDailyDeals = function(){
     html += "<table class='table'><tbody>";
     for( var i = 0; i<player.curMine.dailyDeals.length; i++){
         var amountOwned = 0;
+        var maxDeals = 0
         if(alreadyHasMineItem(player.curMine.dailyDeals[i].item1.id) != -1) {
             amountOwned = player.mineInventory[alreadyHasMineItem(player.curMine.dailyDeals[i].item1.id)].amount;
+            maxDeals = Math.floor(player.mineInventory[alreadyHasMineItem(player.curMine.dailyDeals[i].item1.id)].amount/player.curMine.dailyDeals[i].amount1);
         }
         html += "<tr>";
         html += 	"<td class='vertical-midle'><img class='mineInventoryItem' src='images/mine/" + player.curMine.dailyDeals[i].item1.id + ".png'>(" + amountOwned + ")</td>";
@@ -295,12 +316,26 @@ var showDailyDeals = function(){
         } else {
             html += 	"<td class='vertical-midle'><button class='btn btn-info disabled'>Trade</button></td>";
         }
+        html +=   "<td class='vertical-midle'><input id='deal"+i+"amt' class='dealAmount form-control' type='number' min='0' max='" + maxDeals + "' value='"+ (maxDeals?1:0) + "' />";
         html += "</tr>";
     }
 
 
     html +="</tbody></table>";
     $("#dailyDealsBody").html(html);
+
+    $(".dealAmount").on('input', function(){
+        if($(this).val() !== ''){
+            var amt = Math.max(0, Math.floor(Number($(this).val())));
+            max = Number($(this).attr('max'));
+
+            if (amt > max){
+                $(this).val(max);
+            } else {
+                $(this).val(amt);
+            }
+        }
+    });
 
 }
 
@@ -469,16 +504,19 @@ var isMineInventoryEmpty = function(){
 	return true;
 }
 
-var sellMineItem = function(id){
-	for( var i = 0; i< player.mineInventory.length; i++){
-		if(player.mineInventory[i].id === id){
-			if(player.mineInventory[i].amount > 0){
-				player.mineInventory[i].amount--;
-				gainMainItemProfit(player.mineInventory[i].value, player.mineInventory[i].valueType);
+var sellMineItem = function(id, n){
+	var amt = parseInt($("#treasure"+n+"amt").val())
+	if (amt > 0){
+		for( var i = 0; i< player.mineInventory.length; i++){
+			if(player.mineInventory[i].id === id){
+				if(player.mineInventory[i].amount >= amt){
+					player.mineInventory[i].amount -= amt;
+					gainMainItemProfit(player.mineInventory[i].value * amt, player.mineInventory[i].valueType);
+				}
 			}
 		}
+		showMineItems();
 	}
-	showMineItems();
 }
 
 var gainMainItemProfit = function(value, valueType){
