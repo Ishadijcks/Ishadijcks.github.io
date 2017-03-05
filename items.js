@@ -348,3 +348,30 @@ addKeyItem("Incubator", "Pewter City Gym", "Hatching eggs", "incubator");
 addKeyItem("Shard Case", "Route 5", "See shards and use them to upgrade damage", "shardCase");
 addKeyItem("Underground Key", "Lavender Town Shop", "Access to underground mining", "undergroundKey");
 addKeyItem("Mom's Letter", "First level 100 pokemon", "Breeding at mom's house", "momLetter");
+
+var showKeyItems = function(){
+	var html = "<div id='keyItemsTableHead' class='row buffer-bottom-30 visible-md visible-lg'>";
+	html +=		"<div class='col-md-3'></div>"
+	html +=		"<div class='col-md-9 row'>"
+	html +=			"<div class='col-md-4'><span>Name</span></div>";
+	html +=			"<div class='col-md-4'><span>Location</span></div>";
+	html +=			"<div class='col-md-4'><span>Unlocks</span></div>";
+	html += 	"</div>"
+	html += "</div>"
+	for (var i=0;i<keyItemsList.length;i++){
+		var tmp = keyItemsList[i];
+
+		html +=	"<div class='row buffer-bottom-30'>";
+		html +=		"<div class='col-xs-3'><img src='"+tmp.image+"'></div>";
+		html +=		"<div class='col-xs-9 row'>";
+		html +=			"<div class='col-xs-12 col-md-4'><span>"+tmp.name+"</span></div>";
+		html +=			"<div class='clearfix visible-xs'></div>";
+		html +=			"<div class='col-xs-12 col-sm-6 col-md-4'><span class='visible-xs visible-sm'>Location: </span><span>"+tmp.location+"</span></div>";
+		html +=			"<div class='clearfix visible-xs'></div>";
+		html +=			"<div class='col-xs-12 col-sm-6 col-md-4'><span class='visible-xs visible-sm'>Unlocks: </span><span>"+tmp.unlocks+"</span></div>";
+		html +=		"</div>";
+		html +=	"</div>";
+	}
+
+	$('#keyItemsBody').html(html)
+}

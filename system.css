@@ -759,6 +759,10 @@ g, rect {
     vertical-align: top;
 }
 
+#keyItemsBody{
+	text-align: center;
+}
+
 @media (min-width: 1000px) {
 	#mineModal > .modal-dialog {
 		min-width:1040px;
@@ -779,7 +783,7 @@ g, rect {
 	}
 }
 
-@media (min-width: 768px) and (max-width: 996px) {
+@media (min-width: 768px) and (max-width: 991px) {
 	#righterColumn {
 		margin-left:34%;
 		margin-top:18px;
@@ -787,6 +791,10 @@ g, rect {
 
 	#oakItemBody {
 		margin-top:18px;
+	}
+
+	span.visible-sm {
+    display: inline!important;
 	}
 }
 
@@ -835,5 +843,9 @@ g, rect {
 
 	#shardBody .shardUpgrade, #shardBody .shardUpgradeLocked {
 		float:left;
+	}
+
+	span.visible-xs {
+    display: inline!important;
 	}
 }
