@@ -39,6 +39,8 @@ var player = {
 	mapExplain: 0,
 	townExplain: 0,
 	dungeonExplain: 0,
+	shardExplain: 0,
+	breedingExplain: 0,
 	inventoryList: [],
 	typeShards: Array.apply(null, Array(18)).map(Number.prototype.valueOf,0),
 	notEffectiveTypeBonus: Array.apply(null, Array(18)).map(Number.prototype.valueOf,0),
@@ -718,6 +720,9 @@ var gainExp = function(exp,level,trainer){
 			var pokemonLevel = experienceToLevel(player.caughtPokemonList[i].experience, player.caughtPokemonList[i].levelType);
 			if( pokemonLevel < (player.gymBadges.length+2)*10) {
 				player.caughtPokemonList[i].experience += expTotal;
+			}
+			if(!player.explainBreeding && pokemonLevel == 100){
+				oakExplainBreeding();
 			}
 		}
 		checkEvolution();

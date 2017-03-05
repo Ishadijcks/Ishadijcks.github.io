@@ -45,7 +45,62 @@ var oakExplainDungeons = function(){
 		html += "<img class='oakImage' src=images/oak/dungeonExplain.png>";
 		$("#oakBody").html(html);
 		$("#oakModal").modal('show')
+		getKeyItem("Dungeon Pass").setFound(1);
 		player.dungeonExplain = 1;
+	}
+}
+
+var oakExplainShards = function(){
+	if(!player.shardExplain){
+		html = "";
+		html +=	"<div class='row'><img class='oakImage' src='images/oak/oak.png'</div>";
+		html +=	"<div class='row'><p class='oakText'>";
+		html +=		"Whenever you defeat a pokemon, you will recieve a shard matching it's type<br>";
+		html +=		"These shards can be spent in the shards menu to increase your pokemon's damage<br>";
+		html +=		"The upgrades are increase the damage multiplier your pokemon recieve based on the type matchup<br>";
+		html +=		"For instance, if you increase your fire type's not very effective, all of your fire pokemon will do more damage against water pokemon<br><br>";
+		html +=		"You can access the shard menu with the button at the bottom of the screen"
+		html +=	"</p></div>"
+		$("#oakBody").html(html);
+		$("#oakModal").modal('show')
+		getKeyItem("Shard Case").setFound(1);
+		$('#shardButton').css('display','inline-block');
+		player.shardExplain = 1;
+	}
+}
+
+var oakExplainUnderground = function(){
+	if(!player.undergroundExplain){
+		html = "";
+		html +=	"<div class='row'><img class='oakImage' src='images/oak/oak.png'</div>";
+		html +=	"<div class='row'><p class='oakText'>";
+		html +=		"You now have access to mining underground!<br>"
+		html +=		"Click the Underground menu button to begin mining<br>"
+		html +=		"There are many treasures you can find hidden underground, like shard plates and evolution stones<br>"
+		html +=		"Some say there are even ancient pokemon preserved there..."
+		html +=	"</p></div>"
+		$("#oakBody").html(html);
+		$("#oakModal").modal('show')
+		getKeyItem("Underground Key").setFound(1);
+		$('#mineButton').css('display','inline-block');
+		player.undergroundExplain = 1;
+	}
+}
+
+var oakExplainBreeding = function(){
+	if(!player.breedingExplain){
+		html = "";
+		html +=	"<div class='row'><img class='oakImage' src='images/keyItems/momLetter.png'</div>";
+		html +=	"<div class='row'><p class='oakText'>";
+		html +=		"Your have recieved a letter from your mom.<br><br>";
+		html +=		"She is worried about you, maybe you should visit?</br>";
+		html +=		"She also says that oak has been talking to her about breeding..."
+		html +=	"</p></div>"
+		$("#oakBody").html(html);
+		$("#oakModal").modal('show')
+		getKeyItem("Mom's Letter").setFound(1);
+		$('body').addClass('showMom');
+		player.breedingExplain = 1;
 	}
 }
 
@@ -67,6 +122,12 @@ var oakExplainAgain = function () {
 			html += "<button class='leftTownButton btn btn-primary col-sm-2' id='dungeon_tutorial'>Dungeons</button>";
 			//html += "</div><div class='row'>";
 		}
+		if (player.shardExplain) {
+			html += "<button class='leftTownButton btn btn-primary col-sm-2' id='shard_tutorial'>Shards</button>";
+		}
+		if (player.undergroundExplain) {
+			html += "<button class='leftTownButton btn btn-primary col-sm-2' id='underground_tutorial'>Underground</button>";
+		}
 		html += "</div>";
 		html += "</div>";
 
@@ -87,6 +148,16 @@ var oakExplainAgain = function () {
 		$("#town_tutorial").click(function () {
 			player.townExplain = 0;
 			safelyOpen(oakExplainTown);
+		});
+
+		$("#shard_tutorial").click(function () {
+			player.shardExplain = 0;
+			safelyOpen(oakExplainTown);
+		});
+
+		$("#underground_tutorial").click(function () {
+			player.undergroundExplain = 0;
+			safelyOpen(oakExplainUnderground);
 		});
 	}
 };

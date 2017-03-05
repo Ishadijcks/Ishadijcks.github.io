@@ -60,7 +60,7 @@ var showTown = function(town){
 	html += "<div class='row'>";
 
 	if(town.shop === "mom"){
-		html += "<button onClick='showMom()' class='mom leftTownButton btn btn-primary' id='"+town.name+" mom'>Mom</button>";
+		html += "<button onClick='showMom()' class='mom leftTownButton btn btn-primary' id='"+town.name.replace(" ","-")+"-mom'>Mom</button>";
 		html += "</div><div class='row'>";
 		if(player.mapExplain || player.townExplain || player.dungeonExplain) {
 			html += "<button onClick='oakExplainAgain()' class='tutorial leftTownButton btn btn-primary' id='"+town.name+" mom'>Oak</button>";

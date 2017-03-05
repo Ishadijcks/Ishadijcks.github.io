@@ -84,6 +84,11 @@ var gainItemByName = function(name){
 	if(isPokemon(name)){
 		capturePokemon(name);
 		$.notify("You got a "+name, 'success');
+	} else if(name == "Underground Key"){
+		oakExplainUnderground();
+		if(curShop.name == "Lavender Town" && curShop.itemList.length == 4){
+			curShop.itemList.splice(3,1);
+		}
 	} else {
 		if (alreadyHaveItem(name)){
 			var itemNum = findItemInInventory(name);
@@ -345,14 +350,15 @@ var getKeyItem = function(name){
 }
 
 addKeyItem("Teachy TV", "Start the game", "Help explanations", "teachyTV", "gif");
-addKeyItem("Dungeon Pass", "Defeat a pokemon on Route 1", "Access to dungeons", "dungeonPass");
+addKeyItem("Dungeon Pass", "Route 2", "Access to dungeons", "dungeonPass");
 addKeyItem("Incubator", "Pewter City Gym", "Hatching eggs", "incubator");
 addKeyItem("Shard Case", "Route 5", "See shards and use them to upgrade damage", "shardCase");
 addKeyItem("Underground Key", "Lavender Town Shop", "Access to underground mining", "undergroundKey");
 addKeyItem("Mom's Letter", "First level 100 pokemon", "Breeding at mom's house", "momLetter");
 
 var showKeyItems = function(){
-	var html = "<div id='keyItemsTableHead' class='row buffer-bottom-30 visible-md visible-lg'>";
+	var html = "";
+	html +=	"<div id='keyItemsTableHead' class='keyItemsHead row buffer-bottom-30 visible-md visible-lg'>";
 	html +=		"<div class='col-md-3'></div>"
 	html +=		"<div class='col-md-9 row'>"
 	html +=			"<div class='col-md-4'><span>Name</span></div>";
@@ -362,8 +368,13 @@ var showKeyItems = function(){
 	html += "</div>"
 	for (var i=0;i<keyItemsList.length;i++){
 		var tmp = keyItemsList[i];
-
-		html +=	"<div class='row buffer-bottom-30'>";
+		var style = "";
+		console.log(tmp)
+		console.log(tmp.isFound())
+		if (!tmp.isFound()){
+			style = ' dark'
+		}
+		html +=	"<div class='row buffer-bottom-30"+style+"'>";
 		html +=		"<div class='col-xs-3'><img class='keyItemImage' src='"+tmp.image+"'></div>";
 		html +=		"<div class='col-xs-9 row'>";
 		html +=			"<div class='col-xs-12 col-md-4'><span>"+tmp.name+"</span></div>";

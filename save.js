@@ -71,6 +71,26 @@ var load = function(){
 		player.veryEffectiveTypeBonus.push(0);
 		player.typeShards.push(0);
 	}
+
+	//Key Items stuff
+	player.teachyTV = 1
+	if(player.routeKills[2] > 0){
+		player.dungeonPass = 2;
+	}
+	if(player.gymBadges.length > 0){
+		$('#eggs').css('display','block');
+		player.incubator = 1;
+	}
+	if(player.routeKills[5] > 0){
+		$('#shardButton').css('display','inline-block');
+	}
+	if(player.undergroundExplain){
+		$('#mineButton').css('display','inline-block');
+	}
+	if(player.breedingExplain || haveMaxLevel()){
+		$('body').addClass('showMom');
+	}
+
 	
 	var date = new Date();
 	if(date.getDate() !== player.lastSeen){
@@ -187,4 +207,16 @@ var updateTypes = function() {
 	for (i = 0; i < numberToType.length; i++) {
 		player.typeShards[i] = player.typeShards[i] || 0;
 	}
+}
+
+var haveMaxLevel = function() {
+	var level
+	for( var i = 0; i<player.caughtPokemonList.length; i++) {
+		level = experienceToLevel(player.caughtPokemonList[i].experience, player.caughtPokemonList[i].levelType);
+		if (level == 100){
+			return true;
+		}
+	}
+	return false;
+	console.log("checked levels")
 }

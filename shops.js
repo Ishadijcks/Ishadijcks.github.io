@@ -53,6 +53,7 @@ var fightingEgg = ShopItem(26, "Fighting Egg", 150, 'quest');
 var electricEgg = ShopItem(27, "Electric Egg", 150, 'quest');
 var dragonEgg = ShopItem(28, "Dragon Egg", 500, 'quest');
 var randomEgg = ShopItem(29, "Random Egg", 100, 'quest');
+var undergroundKey = ShopItem(30, "Underground Key", 10, 'quest')
 
 var decreaseShopPriceDeviation = function(){
 	for( var i = 0; i<player.shopPriceDeviation.length; i++){
@@ -142,6 +143,9 @@ var CinnabarIslandShop = function(){ return Shop("Cinnabar Island", [fireStone, 
 var loadShop = function(shopName){
 
 	if(curShop = getShop(shopName)){
+		if(!player.undergroundExplain && shopName == "Lavender Town"){
+			curShop.itemList.push(undergroundKey);
+		}
 		showShop(curShop);
 	}
 }

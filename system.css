@@ -768,6 +768,34 @@ g, rect {
 	height: auto;
 }
 
+.dark{
+	background-color: #a1a1a1;
+	color: #1a1a1a;
+}
+
+.dark img{
+	opacity: 0.3;
+}
+
+#eggs{
+	display: none;
+}
+
+#shardButton{
+	display: none;
+}
+
+#mineButton{
+	display: none;
+}
+
+#Pallet-Town-mom{
+	display: none;
+}
+body.showMom #Pallet-Town-mom{
+	display: inline-block;
+}
+
 @media (min-width: 1000px) {
 	#mineModal > .modal-dialog {
 		min-width:1040px;
