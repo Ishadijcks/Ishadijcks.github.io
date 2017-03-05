@@ -311,12 +311,14 @@ var generateStoneShiny = function(){
 
 var keyItemsList = []
 
-var addKeyItem = function(name, location, unlocks, player_property){
+var addKeyItem = function(name, location, unlocks, player_property, filetype){
+	if (typeof filetype == 'undefined'){ filetype = 'png' };
+
 	var temp = {
 		name: name,
 		location: location,
 		unlocks: unlocks,
-		image: "images/keyItems/"+player_property,
+		image: "images/keyItems/"+player_property+"."+filetype,
 		isFound: function(){
 			return player[player_property];
 		},
@@ -342,7 +344,7 @@ var getKeyItem = function(name){
 	return 0;
 }
 
-addKeyItem("Teachy TV", "Start the game", "Help explanations", "teachyTV");
+addKeyItem("Teachy TV", "Start the game", "Help explanations", "teachyTV", "gif");
 addKeyItem("Dungeon Pass", "Defeat a pokemon on Route 1", "Access to dungeons", "dungeonPass");
 addKeyItem("Incubator", "Pewter City Gym", "Hatching eggs", "incubator");
 addKeyItem("Shard Case", "Route 5", "See shards and use them to upgrade damage", "shardCase");
@@ -362,7 +364,7 @@ var showKeyItems = function(){
 		var tmp = keyItemsList[i];
 
 		html +=	"<div class='row buffer-bottom-30'>";
-		html +=		"<div class='col-xs-3'><img src='"+tmp.image+"'></div>";
+		html +=		"<div class='col-xs-3'><img class='keyItemImage' src='"+tmp.image+"'></div>";
 		html +=		"<div class='col-xs-9 row'>";
 		html +=			"<div class='col-xs-12 col-md-4'><span>"+tmp.name+"</span></div>";
 		html +=			"<div class='clearfix visible-xs'></div>";

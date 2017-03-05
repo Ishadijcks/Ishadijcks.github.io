@@ -763,6 +763,11 @@ g, rect {
 	text-align: center;
 }
 
+.keyItemImage{
+	width: 48px;
+	height: auto;
+}
+
 @media (min-width: 1000px) {
 	#mineModal > .modal-dialog {
 		min-width:1040px;
