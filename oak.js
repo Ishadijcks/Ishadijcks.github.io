@@ -106,29 +106,33 @@ var oakExplainBreeding = function(){
 
 var oakExplainAgain = function () {
 	if(player.mapExplain || player.townExplain || player.dungeonExplain) {
-		var html = "<div class='row'><img class='oakImage' src='images/oak/oak.png'</div>";
-		html +="<div class='row' style='padding-top:20px'>";
-		html +="<div class='col-sm-offset-4'>";
+		var html = "<div class='row'><img class='oakImage' src='images/oak/oak.png'></div>";
+		html +="<div class='row row-centered' style='padding-top:20px'>";
 		if (player.mapExplain) {
 
-			html += "<button class='leftTownButton btn btn-primary col-sm-2' id='map_tutorial'>Maps</button>";
+			html += "<div class='col-xs-6 col-sm-4 col-md-3 col-lg-2 col-centered'><button class='oakButton btn btn-primary' id='map_tutorial'>Maps</button></div>";
 			//html += "</div><div class='row'>";
 		}
+		if (player.evoExplain) {
+			html += "<div class='col-xs-6 col-sm-4 col-md-3 col-lg-2 col-centered'><button class='oakButton btn btn-primary' id='evo_tutorial'>Evolution</button></div>";
+		}
 		if (player.townExplain) {
-			html += "<button class='leftTownButton btn btn-primary col-sm-2' id='town_tutorial'>Towns</button>";
+			html += "<div class='col-xs-6 col-sm-4 col-md-3 col-lg-2 col-centered'><button class='oakButton btn btn-primary' id='town_tutorial'>Towns</button></div>";
 			//html += "</div><div class='row'>";
 		}
 		if (player.dungeonExplain) {
-			html += "<button class='leftTownButton btn btn-primary col-sm-2' id='dungeon_tutorial'>Dungeons</button>";
+			html += "<div class='col-xs-6 col-sm-4 col-md-3 col-lg-2 col-centered'><button class='oakButton btn btn-primary' id='dungeon_tutorial'>Dungeons</button></div>";
 			//html += "</div><div class='row'>";
 		}
 		if (player.shardExplain) {
-			html += "<button class='leftTownButton btn btn-primary col-sm-2' id='shard_tutorial'>Shards</button>";
+			html += "<div class='col-xs-6 col-sm-4 col-md-3 col-lg-2 col-centered'><button class='oakButton btn btn-primary' id='shard_tutorial'>Shards</button></div>";
 		}
 		if (player.undergroundExplain) {
-			html += "<button class='leftTownButton btn btn-primary col-sm-2' id='underground_tutorial'>Underground</button>";
+			html += "<div class='col-xs-6 col-sm-4 col-md-3 col-lg-2 col-centered'><button class='oakButton btn btn-primary' id='underground_tutorial'>Underground</button></div>";
 		}
-		html += "</div>";
+		if (player.breedingExplain) {
+			html += "<div class='col-xs-6 col-sm-4 col-md-3 col-lg-2 col-centered'><button class='oakButton btn btn-primary' id='breeding_tutorial'>Breeding</button></div>";
+		}
 		html += "</div>";
 
 		$("#tutorialBody").html(html);
@@ -138,6 +142,11 @@ var oakExplainAgain = function () {
 			console.log("Hi");
 			player.mapExplain = 0;
 			safelyOpen(oakExplainMap);
+		});
+
+		$("#evo_tutorial").click(function () {
+			player.evoExplain = 0;
+			safelyOpen(oakExplainEvolution);
 		});
 
 		$("#dungeon_tutorial").click(function () {
@@ -158,6 +167,11 @@ var oakExplainAgain = function () {
 		$("#underground_tutorial").click(function () {
 			player.undergroundExplain = 0;
 			safelyOpen(oakExplainUnderground);
+		});
+
+		$("#breeding_tutorial").click(function () {
+			player.breedingExplain = 0;
+			safelyOpen(oakExplainBreeding);
 		});
 	}
 };

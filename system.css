@@ -237,6 +237,11 @@ img.hammerSelected.mineReward:hover {
     margin-right: auto;
 }
 
+.oakButton{
+	width: 85%;
+	margin-top: 10px;
+}
+
 #evolutionImage {
 	width:85%;
 }
