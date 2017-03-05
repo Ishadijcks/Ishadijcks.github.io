@@ -550,6 +550,7 @@ var showPokedexModal = function(){
 	showPokedex();
 	showGymBadges();
 	showStats();
+	showKeyItems();
 }
 
 var showQuestModal = function(){
