@@ -161,7 +161,7 @@ var oakExplainAgain = function () {
 
 		$("#shard_tutorial").click(function () {
 			player.shardExplain = 0;
-			safelyOpen(oakExplainTown);
+			safelyOpen(oakExplainShards);
 		});
 
 		$("#underground_tutorial").click(function () {
