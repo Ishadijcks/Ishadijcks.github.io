@@ -83,12 +83,18 @@ var load = function(){
 	}
 	if(player.routeKills[5] > 0){
 		$('#shardButton').css('display','inline-block');
+		player.shardExplain = 1;
+		player.shardCase = 1;
 	}
 	if(player.undergroundExplain){
 		$('#mineButton').css('display','inline-block');
 	}
-	if(player.breedingExplain || haveMaxLevel()){
+	if(player.breedingExplain || player.totalBred || haveMaxLevel()){
 		$('body').addClass('showMom');
+	}
+	if(player.totalBred){
+		player.momLetter = 1;
+		player.breedingExplain = 1;
 	}
 
 	
