@@ -310,7 +310,17 @@ var showGymDefeated = function(first, town){
 			html +=	"<img id='badgeReward' src=images/gyms/badges/"+currentGym.badgeReward+"Badge.png><br>";
 			html += "You have earned the "+currentGym.badgeReward+ " Badge!<br>";
 			html += "You can now train your pokemon to level " + (1+player.gymBadges.length)*10 + "<br>";
-			html += "Prize money: $" + currentGym.moneyReward;
+			html += "Prize money: $" + currentGym.moneyReward + "<br>";
+
+			if ( town == 'Pewter City'){
+				var keyItem = getKeyItem("Incubator");
+				html += "<img src='"+keyItem.image+"' style='width:85px'><br>";
+				html += "You have unlocked the Incubator!<br>";
+				html += "Eggs can be bought from shops and incubated in a slot on the right"
+				keyItem.setFound(1);
+				$('#eggs').css('display','block');
+			}
+
 			html += "<br><br>Defeat this gym again to earn 10% of its original money reward!"
 		}
 

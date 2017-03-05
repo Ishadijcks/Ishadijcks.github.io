@@ -84,6 +84,11 @@ var gainItemByName = function(name){
 	if(isPokemon(name)){
 		capturePokemon(name);
 		$.notify("You got a "+name, 'success');
+	} else if(name == "Underground Key"){
+		oakExplainUnderground();
+		if(curShop.name == "Lavender Town" && curShop.itemList.length == 4){
+			curShop.itemList.splice(3,1);
+		}
 	} else {
 		if (alreadyHaveItem(name)){
 			var itemNum = findItemInInventory(name);
@@ -307,4 +312,77 @@ var generateStoneShiny = function(){
 		return 1;
 	}
 	return 0;
+}
+
+var keyItemsList = []
+
+var addKeyItem = function(name, location, unlocks, player_property, filetype){
+	if (typeof filetype == 'undefined'){ filetype = 'png' };
+
+	var temp = {
+		name: name,
+		location: location,
+		unlocks: unlocks,
+		image: "images/keyItems/"+player_property+"."+filetype,
+		isFound: function(){
+			return player[player_property];
+		},
+		setFound: function(n){
+			player[player_property] = n;
+		}
+	}
+
+	if (typeof temp.isFound() == 'undefined'){
+		temp.setFound(0);
+	}
+
+	keyItemsList.push(temp)
+}
+
+var getKeyItem = function(name){
+	for (var i=0;i<keyItemsList.length;i++){
+		if (keyItemsList[i].name == name){
+			return keyItemsList[i];
+		}
+	}
+	console.log("No item found with name "+name);
+	return 0;
+}
+
+addKeyItem("Teachy TV", "Start the game", "Help explanations", "teachyTV", "gif");
+addKeyItem("Dungeon Pass", "Route 2", "Access to dungeons", "dungeonPass");
+addKeyItem("Incubator", "Pewter City Gym", "Hatching eggs", "incubator");
+addKeyItem("Shard Case", "Route 5", "See shards and use them to upgrade damage", "shardCase");
+addKeyItem("Underground Key", "Lavender Town Shop", "Access to underground mining", "undergroundKey");
+addKeyItem("Mom's Letter", "First level 100 pokemon", "Breeding at mom's house", "momLetter");
+
+var showKeyItems = function(){
+	var html = "";
+	html +=	"<div id='keyItemsTableHead' class='keyItemsHead row buffer-bottom-30 visible-md visible-lg'>";
+	html +=		"<div class='col-md-3'></div>"
+	html +=		"<div class='col-md-9 row'>"
+	html +=			"<div class='col-md-4'><span>Name</span></div>";
+	html +=			"<div class='col-md-4'><span>Location</span></div>";
+	html +=			"<div class='col-md-4'><span>Unlocks</span></div>";
+	html += 	"</div>"
+	html += "</div>"
+	for (var i=0;i<keyItemsList.length;i++){
+		var tmp = keyItemsList[i];
+		var style = "";
+		if (!tmp.isFound()){
+			style = ' dark'
+		}
+		html +=	"<div class='row buffer-bottom-30"+style+"'>";
+		html +=		"<div class='col-xs-3'><img class='keyItemImage' src='"+tmp.image+"'></div>";
+		html +=		"<div class='col-xs-9 row'>";
+		html +=			"<div class='col-xs-12 col-md-4'><span>"+tmp.name+"</span></div>";
+		html +=			"<div class='clearfix visible-xs'></div>";
+		html +=			"<div class='col-xs-12 col-sm-6 col-md-4'><span class='visible-xs visible-sm'>Location: </span><span>"+tmp.location+"</span></div>";
+		html +=			"<div class='clearfix visible-xs'></div>";
+		html +=			"<div class='col-xs-12 col-sm-6 col-md-4'><span class='visible-xs visible-sm'>Unlocks: </span><span>"+tmp.unlocks+"</span></div>";
+		html +=		"</div>";
+		html +=	"</div>";
+	}
+
+	$('#keyItemsBody').html(html)
 }

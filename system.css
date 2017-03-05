@@ -237,6 +237,11 @@ img.hammerSelected.mineReward:hover {
     margin-right: auto;
 }
 
+.oakButton{
+	width: 85%;
+	margin-top: 10px;
+}
+
 #evolutionImage {
 	width:85%;
 }
@@ -759,6 +764,43 @@ g, rect {
     vertical-align: top;
 }
 
+#keyItemsBody{
+	text-align: center;
+}
+
+.keyItemImage{
+	width: 48px;
+	height: auto;
+}
+
+.dark{
+	background-color: #a1a1a1;
+	color: #1a1a1a;
+}
+
+.dark img{
+	opacity: 0.3;
+}
+
+#eggs{
+	display: none;
+}
+
+#shardButton{
+	display: none;
+}
+
+#mineButton{
+	display: none;
+}
+
+#Pallet-Town-mom{
+	display: none;
+}
+body.showMom #Pallet-Town-mom{
+	display: inline-block;
+}
+
 @media (min-width: 1000px) {
 	#mineModal > .modal-dialog {
 		min-width:1040px;
@@ -779,7 +821,7 @@ g, rect {
 	}
 }
 
-@media (min-width: 768px) and (max-width: 996px) {
+@media (min-width: 768px) and (max-width: 991px) {
 	#righterColumn {
 		margin-left:34%;
 		margin-top:18px;
@@ -787,6 +829,10 @@ g, rect {
 
 	#oakItemBody {
 		margin-top:18px;
+	}
+
+	span.visible-sm {
+    display: inline!important;
 	}
 }
 
@@ -835,5 +881,9 @@ g, rect {
 
 	#shardBody .shardUpgrade, #shardBody .shardUpgradeLocked {
 		float:left;
+	}
+
+	span.visible-xs {
+    display: inline!important;
 	}
 }

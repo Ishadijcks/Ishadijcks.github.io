@@ -68,6 +68,9 @@ var moveToRoute = function(route){
 
 	
 		if(!isNaN(route) && !(route == player.route && inProgress === 1)){
+			if(route == 5 && player.shardExplain == 0){
+				oakExplainShards()
+			}
 
 			inProgress = 1;
 			hideAllActionViews();
