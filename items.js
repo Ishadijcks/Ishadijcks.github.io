@@ -308,3 +308,43 @@ var generateStoneShiny = function(){
 	}
 	return 0;
 }
+
+var keyItemsList = []
+
+var addKeyItem = function(name, location, unlocks, player_property){
+	var temp = {
+		name: name,
+		location: location,
+		unlocks: unlocks,
+		image: "images/keyItems/"+player_property,
+		isFound: function(){
+			return player[player_property];
+		},
+		setFound: function(n){
+			player[player_property] = n;
+		}
+	}
+
+	if (typeof temp.isFound() == 'undefined'){
+		temp.setFound(0);
+	}
+
+	keyItemsList.push(temp)
+}
+
+var getKeyItem = function(name){
+	for (var i=0;i<keyItemsList.length;i++){
+		if (keyItemsList[i].name == name){
+			return keyItemsList[i];
+		}
+	}
+	console.log("No item found with name "+name);
+	return 0;
+}
+
+addKeyItem("Teachy TV", "Start the game", "Help explanations", "teachyTV");
+addKeyItem("Dungeon Pass", "Defeat a pokemon on Route 1", "Access to dungeons", "dungeonPass");
+addKeyItem("Incubator", "Pewter City Gym", "Hatching eggs", "incubator");
+addKeyItem("Shard Case", "Route 5", "See shards and use them to upgrade damage", "shardCase");
+addKeyItem("Underground Key", "Lavender Town Shop", "Access to underground mining", "undergroundKey");
+addKeyItem("Mom's Letter", "First level 100 pokemon", "Breeding at mom's house", "momLetter");
