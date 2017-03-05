@@ -314,8 +314,9 @@ var showGymDefeated = function(first, town){
 
 			if ( town == 'Pewter City'){
 				var keyItem = getKeyItem("Incubator");
-				html += "<img src='"+keyItem.image+"'><br>";
-				html += "You have unlocked the Incubator!";
+				html += "<img src='"+keyItem.image+"' style='width:85px'><br>";
+				html += "You have unlocked the Incubator!<br>";
+				html += "Eggs can be bought from shops and incubated in a slot on the right"
 				keyItem.setFound(1);
 				$('#eggs').css('display','block');
 			}
