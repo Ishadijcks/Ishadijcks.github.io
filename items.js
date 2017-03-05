@@ -369,8 +369,6 @@ var showKeyItems = function(){
 	for (var i=0;i<keyItemsList.length;i++){
 		var tmp = keyItemsList[i];
 		var style = "";
-		console.log(tmp)
-		console.log(tmp.isFound())
 		if (!tmp.isFound()){
 			style = ' dark'
 		}

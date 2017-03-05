@@ -75,7 +75,7 @@ var load = function(){
 	//Key Items stuff
 	player.teachyTV = 1
 	if(player.routeKills[2] > 0){
-		player.dungeonPass = 2;
+		player.dungeonPass = 1;
 	}
 	if(player.gymBadges.length > 0){
 		$('#eggs').css('display','block');

@@ -722,7 +722,7 @@ var gainExp = function(exp,level,trainer){
 			if( pokemonLevel < (player.gymBadges.length+2)*10) {
 				player.caughtPokemonList[i].experience += expTotal;
 			}
-			if(!player.explainBreeding && pokemonLevel == 100){
+			if(!player.breedingExplain && pokemonLevel == 100){
 				oakExplainBreeding();
 			}
 		}
