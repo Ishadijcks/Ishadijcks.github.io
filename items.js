@@ -23,6 +23,7 @@ var itemList = [
 {id:27, name:"Electric Egg", price:25000, use:"breeding", unUse:null, time: null, type:"electric", instant:1, magnitude:0, flavorText: "An electric egg."},
 {id:28, name:"Dragon Egg", price:25000, use:"breeding", unUse:null, time: null, type:"dragon", instant:1, magnitude:0, flavorText: "A dragon egg."},
 {id:29, name:"Random Egg", price:25000, use:"breeding", unUse:null, time: null, type:"random", instant:1, magnitude:0, flavorText: "An egg of a random type."},
+{id:30, name:"Explorer Kit", price: 75000, use:"mineEnergy", unUse:null, time:null, type:"mining", instant:1, magnitue:0, flavorText: "A kit that fully reignites your passion for mining."}
 ]
 
 
@@ -42,16 +43,16 @@ var itemsPerRoute = {
 	13: ["X Attack", "X Click", "X Attack", "X Exp"],
 	14: ["X Attack", "X Click", "X Click", "Token Collector"],
 	15: ["X Attack", "X Click", "Lucky Incense"],
-	16: ["X Attack", "X Click", "Item Magnet"],
+	16: ["X Attack", "X Click", "Item Magnet", "Explorer Kit"],
 	17: ["X Attack", "X Click", "X Exp"],
 	18: ["X Attack", "X Click", "Token Collector"],
-	19: ["X Attack", "Lucky Incense"],
+	19: ["X Attack", "Lucky Incense", "Explorer Kit"],
 	20: ["X Click", "Item Magnet"],
-	21: ["X Attack", "X Exp"],
+	21: ["X Attack", "X Exp", "Explorer Kit"],
 	22: ["X Click", "Token Collector"],
-	23: ["Lucky Incense", "Item Magnet", "Token Collector"],
+	23: ["Lucky Incense", "Item Magnet", "Token Collector", "Explorer Kit"],
 	24: ["X Exp", "Lucky Incense", "Token Collector"],
-	25: ["X Exp", "Item Magnet"],
+	25: ["X Exp", "Item Magnet", "Explorer Kit"],
 }
 
 var getItemChance = function(route){
@@ -195,6 +196,10 @@ var activateItem = function(id){
 		} else {
 			$.notify("Your hatchery is full");
 		}
+	} else if(item.use == "mineEnergy") {
+		useExplorersKit(item);
+		updateItems();
+		updateStats();
 	} else if (!isNaN(item.time)){
 		if(item.quantity > 0){
 			item.timeLeft += item.time;
@@ -296,4 +301,11 @@ var generateStoneShiny = function(){
 		return 1;
 	}
 	return 0;
+}
+
+var useExplorersKit = function(item){
+	if(player.curMine.energy < player.curMine.maxEnergy) {
+		player.curMine.energy = player.curMine.maxEnergy;
+		item.quantity--;
+	}
 }
