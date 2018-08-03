@@ -1,3 +1,11 @@
+.safariSquare {
+    height:32px;
+    width:32px !important;
+    margin: 0px !important;
+    padding:0px !important;
+    text-align: center;
+}
+
 .vertical-midle {
 	vertical-align: middle !important;
 }

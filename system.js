@@ -401,6 +401,10 @@ $(document).ready(function(){
 		} else if(questCompleted()) {
 			completeQuest();
 		}
+
+	$("body").on('click',"#safariButton", function(){
+		$("#safariModal").modal("show");
+		showSafari();
 	})
 
 	$("body").on('click',"#mineButton", function(){
@@ -479,6 +483,7 @@ $(document).ready(function(){
 	showCurQuest();
 	showEggs();
 	generateDailyDeals();
+	loadSafari();
 });
 
 var safelyOpen = function(modalFunc){
