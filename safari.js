@@ -188,7 +188,7 @@ var safariStep = function(direction) {
 
 var checkBattle = function(){
     if(safari.grid[safari.player.y][safari.player.x] === 10){
-        var battle = Math.random() <= 1;
+        var battle = Math.random() <= 1 / safari.Battle.encounterRate;
     }
     if(battle){
         loadBattle();
@@ -462,7 +462,7 @@ var throwRock = function(){
 
 var throwBait = function(){
     if(!safari.Battle.busy){
-        updateSafariBattleText("You throw some bait at " + SafariPokemon.curEnemy.name;
+        updateSafariBattleText("You throw some bait at " + SafariPokemon.curEnemy.name);
         safari.Battle.busy = 1;
         SafariPokemon.eating = Math.max(SafariPokemon.eating, Math.floor(Math.random()*5 + 2))
         SafariPokemon.angry = 0;
@@ -474,7 +474,7 @@ var throwBait = function(){
 
 var captureSafariPokemon = function(){
     updateSafariBattleText("GOTCHA!<br>" + SafariPokemon.curEnemy.name + " was caught!");
-    //capturePokemon(pokemonName);
+    capturePokemon(SafariPokemon.curEnemy.name);
 }
 
 

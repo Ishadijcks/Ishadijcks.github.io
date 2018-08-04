@@ -7,7 +7,7 @@ var SafariPokemon = {
     baseEscapeFactor: 30,
     angry: 0,
     eating: 0,
-    SHINY_CHANCE: 256,
+    SHINY_CHANCE: 128,
 
     // Lower weighted pokemon will appear less frequently, equally weighted are equally likely to appear
     list: [
