@@ -3,8 +3,8 @@
 var SafariPokemon = {
     curEnemy:undefined,
     shiny:undefined,
-    catchFactorModifier: 100/1275,
-    baseEscapeFactor: 40,
+    catchFactorModifier: 1/4,
+    baseEscapeFactor: 30,
     angry: 0,
     eating: 0,
     SHINY_CHANCE: 256,
@@ -39,7 +39,7 @@ var SafariPokemon = {
     },
 
     catchFactor: function() {
-        let catchF = SafariPokemon.catchFactorModifier * SafariPokemon.pokemon.catchRate;
+        let catchF = SafariPokemon.catchFactorModifier * SafariPokemon.curEnemy.catchRate;
         if(SafariPokemon.eating > 0) {
             catchF /= 2;
         }
@@ -67,7 +67,7 @@ var SafariPokemon = {
         for (let pokemon of SafariPokemon.list) {
             i += pokemon.weight;
             if (rand < i) {
-                SafariPokemon.new(pokemon.name);
+                return pokemon.name;
             }
         }
     }

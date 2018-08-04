@@ -23,29 +23,21 @@ var safari = {
     },
     balls: 30,
     inBattle: 0,
-    enemy: {
-        name: "",
-        catchFactor: 0,
-        angry: 0,
-        eating: 0,
-        escapeFactor: 0
-    },
     escapes: 0,
     frame: 0,
     Battle: {
         busy: 0,
         animationSpeed: 1000,
-        ballThrowSpeed: 1000,
-        ballBounceSpeed: 1000,
-        ballRollSpeed: 1000,
+        ballThrowSpeed: 750,
+        ballBounceSpeed: 850,
+        ballRollSpeed: 700,
         enemyTransitionSpeed: 1000,
         encounterRate: 6, // Average number of grass tiles to step on before finding a pokemon
         CATCH_MESSAGES: [
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
+            "Oh, no!<br>The Pokemon broke free!",
+            "Aww! It appeared to be caught!",
+            "Aargh! Almost had it!",
+            "Shoot! It was so close, too!"
         ],
     },
 }
@@ -206,32 +198,10 @@ var checkBattle = function(){
 }
 
 var loadBattle = function(){
-    SafariPokemon.random();
+    SafariPokemon.new(SafariPokemon.random());
     safari.inBattle = 1;
     $.notify("Battle");
     showBattle();
-}
-
-var getSafariCatchFactor = function(){
-    if(SafariPokemon.curEnemy.eating > 0) {
-        return SafariPokemon.curEnemy.catchFactor / 2;
-    }
-    if(SafariPokemon.curEnemy.angry > 0) {
-        return SafariPokemon.curEnemy.catchFactor * 2;
-    }
-
-    return SafariPokemon.curEnemy.catchFactor;
-}
-
-var getSafariEscapeFactor = function(){
-    if(SafariPokemon.curEnemy.eating > 0) {
-        return SafariPokemon.curEnemy.escapeFactor / 4;
-    }
-    if(SafariPokemon.curEnemy.angry > 0) {
-        return SafariPokemon.curEnemy.escapeFactor * 2;
-    }
-
-    return SafariPokemon.curEnemy.escapeFactor;
 }
 
 var showBattleBars = function(){
@@ -283,22 +253,23 @@ var safariEnemyTurn = function(){
     // Enemy turn to flee;
     console.log("Enemy turn");
     var random = Math.floor(Math.random()*100);
-    if( random < 5*getSafariEscapeFactor()){
+    if( random < SafariPokemon.escapeFactor()){
         updateSafariBattleText(SafariPokemon.curEnemy.name + " has fled.");
         setTimeout(endBattle, 1000);
-    } else if(SafariPokemon.curEnemy.eating > 0) {
+    } else if(SafariPokemon.eating > 0) {
         updateSafariBattleText(SafariPokemon.curEnemy.name + " is eating.");
-    } else if(SafariPokemon.curEnemy.angry > 0) {
+    } else if(SafariPokemon.angry > 0) {
         updateSafariBattleText(SafariPokemon.curEnemy.name + " is watching carefully.");
     }
-    SafariPokemon.curEnemy.eating = Math.max(0, SafariPokemon.curEnemy.eating-1);
-    SafariPokemon.curEnemy.angry = Math.max(0, SafariPokemon.curEnemy.angry-1);
+    SafariPokemon.eating = Math.max(0, SafariPokemon.eating-1);
+    SafariPokemon.angry = Math.max(0, SafariPokemon.angry-1);
     setTimeout(function(){
         updateSafariBattleText("What will you do?");
         safari.Battle.busy = 0;
     }, 1500);
-    console.log(getSafariCatchFactor()*1275/100);
-    console.log(getSafariEscapeFactor()*5 + "%");
+    console.log(random)
+    console.log(SafariPokemon.catchFactor());
+    console.log(SafariPokemon.escapeFactor() + "%");
 }
 
 var endBattle = function(){
@@ -335,9 +306,9 @@ var throwBall = function() {
         enemyImg.left += 48;
 
         let ptclhtml='<div><img id="safariBall" src="images/safari/pokeball.png"></div>';
-        safari.Battle.particle = dropParticle(ptclhtml, $('#safariPlayer').offset(), enemyImg, 0.75*safari.Battle.ballThrowSpeed, 'cubic-bezier(0,0,0.4,1)', 1).css('z-index',9999);
+        safari.Battle.particle = dropParticle(ptclhtml, $('#safariPlayer').offset(), enemyImg, safari.Battle.ballThrowSpeed, 'cubic-bezier(0,0,0.4,1)', 1).css('z-index',9999);
 
-        delay(safari.Battle.ballThrowSpeed)()
+        delay(1.1*safari.Battle.ballThrowSpeed)()
         .then(startCapture)
         .then(delay(0.75*safari.Battle.enemyTransitionSpeed))
         .then(startBounce)
@@ -384,7 +355,7 @@ var startBounce = function() {
 var calcIndex = function() {
     return new Promise((resolve,reject)=>{
         let random = Math.random();
-        let catchF = SafariPokemon.curEnemy.catchFactor / 100;
+        let catchF = SafariPokemon.catchFactor() / 100;
         let index = catchF >= 1 ? 3 : Math.floor( 4 * (1 - Math.max( random, catchF )) / (1 - catchF) );
         if (index != 0) {
             $('body').css("animation-duration",safari.Battle.ballRollSpeed+"ms")
@@ -411,13 +382,13 @@ var finishCapture = function(result) {
     let [random,index]=result;
     let gameOver = (safari.balls == 0);
     return new Promise((resolve,reject)=>{
-        if (random*100 < SafariPokemon.curEnemy.catchFactor){
+        if (random*100 < SafariPokemon.catchFactor()){
             captureSafariPokemon(SafariPokemon.curEnemy.name)
             $('#safariBall').css('filter', 'brightness(0.4) grayscale(100%)');
             setTimeout(function(){
                 safari.Battle.particle.remove();
                 gameOver ? gameOver() : endBattle();
-            }, 2*safari.Battle.enemyTransitionSpeed);
+            }, 1.7*safari.Battle.enemyTransitionSpeed);
         } else {
             $('#safariEnemy > img').css('opacity', '1');
             $('#safariEnemy').removeClass('safariCapture');
@@ -456,8 +427,8 @@ var throwRock = function(){
     if(!safari.Battle.busy) {
         updateSafariBattleText("You throw a rock at " + SafariPokemon.curEnemy.name);
         safari.Battle.busy = 1;
-        SafariPokemon.curEnemy.angry = Math.max(SafariPokemon.curEnemy.angry, Math.floor(Math.random() * 5 + 2))
-        SafariPokemon.curEnemy.eating = 0;
+        SafariPokemon.angry = Math.max(SafariPokemon.angry, Math.floor(Math.random() * 5 + 2))
+        SafariPokemon.eating = 0;
         var enemy = $('#safariEnemy').offset();
         enemy.left += 40;
         enemy.top += 10
@@ -491,10 +462,10 @@ var throwRock = function(){
 
 var throwBait = function(){
     if(!safari.Battle.busy){
-        updateSafariBattleText("You throw some bait at " + SafariPokemon.curEnemy.name + "... (fancy animation #AegyoPls)");
+        updateSafariBattleText("You throw some bait at " + SafariPokemon.curEnemy.name;
         safari.Battle.busy = 1;
-        SafariPokemon.curEnemy.eating = Math.max(SafariPokemon.curEnemy.eating, Math.floor(Math.random()*5 + 2))
-        SafariPokemon.curEnemy.angry = 0;
+        SafariPokemon.eating = Math.max(SafariPokemon.eating, Math.floor(Math.random()*5 + 2))
+        SafariPokemon.angry = 0;
         dropParticle('<img src=images/safari/bait.png>', $('#safariPlayer').offset(), $('#safariEnemy').offset(), 1000, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
         setTimeout(safariEnemyTurn, 1500);
     }
