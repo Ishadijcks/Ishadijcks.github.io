@@ -97,6 +97,11 @@ var load = function(){
     document.getElementsByTagName('head')[0].appendChild(link);
 }
 
+var dailyReset = function(){
+	dailyQuestReset();
+	dailySafariReset();
+}
+
 var exportSave = function(){
 	var saveData = btoa(JSON.stringify(player));
 	if(typeof FileReader != "undefined" && typeof document.getElementById("saveAsFile").download != "undefined") {

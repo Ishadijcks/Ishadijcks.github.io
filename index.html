@@ -624,6 +624,11 @@
 								<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="210" y="79.1"></rect>
 								<rect class="city" id="Mt. Moon" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="211.4" y="80.5"></rect>
 
+							     <rect id="SafariZone"
+							          fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+							          height="12.6" stroke="#6c8ebf" width="12.6" x="292" y="300.7"
+							          onclick="openSafari()"></rect>
+
 <!-- 								<rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="371.7" y="240.1"></rect>
 								<rect class="city" id="Digletts Cave 2" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6" stroke="#6c8ebf" width="12.6" x="373.1" y="241.5"></rect>
  -->
@@ -716,7 +721,12 @@
 							<div class="modal-header">
 								<h4 style='text-align:center' class="modal-title">Safari Zone</h4>
 							</div>
-							<div class="modal-body" id="safariBody" style="width: 80%;margin: auto;">
+							<div class="modal-body" style="width: 80%;margin: auto;">
+								<div id="safariBody"></div>
+								<div id="safariEntrance">
+									<p id="safariEntranceCost"></p>
+									<button id="paySafariButton" class="btn btn-primary" onclick="paySafari()">Pay for entrance</button>
+								</div>
 							</div>
 						</div>
 					</div>

@@ -453,8 +453,7 @@ $(document).ready(function(){
 	})
 
 	$("body").on('click',"#safariButton", function(){
-		$("#safariModal").modal("show");
-		showSafari();
+		openSafari()
 	})
 
 	$("body").on('click',"#mineButton", function(){
@@ -533,7 +532,6 @@ $(document).ready(function(){
 	showCurQuest();
 	showEggs();
 	generateDailyDeals();
-	loadSafari();
 });
 
 var safelyOpen = function(modalFunc){

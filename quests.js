@@ -216,7 +216,7 @@ var skipQuestMoney = function(){
 	}
 }
 
-var dailyReset = function(){
+var dailyQuestReset = function(){
 	player.questSkipToday = 0;
 	player.questDifficulty = 1;
 	player.questCompletedToday = 0;

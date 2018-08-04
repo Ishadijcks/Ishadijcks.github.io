@@ -1,12 +1,10 @@
 var safari = {
+    inProgress: 0,
+    entranceCostBase: 10,
+    entranceCostGrowthRate: 8,
     grid: [],
     sizeX: 25,
     sizeY: 21,
-    maxItems: 3,
-    layersCleared: 0,
-    totalItemsFound: 0,
-    energy: 50,
-    maxEnergy: 50,
     player: {
         x: 12,
         y: 20
@@ -47,8 +45,51 @@ var sprite;
 var walking = false;
 var origin;
 
+var openSafari = function(){
+    if (alreadyGotBadge("Marsh")) {
+        moveToTown("Fuchsia City")
+        $("#safariModal").modal("show");
+        if (safari.inProgress) {
+            showSafari();
+        }
+        else {
+            $("#safariEntranceCost").text("Entrance cost : "+safariCost());
+            if (canPaySafari()) {
+                $("#paySafariButton").removeClass("disabled");
+            } else {
+                $("#paySafariButton").addClass("disabled");
+            }
+            $("#safariEntrance").show();
+            $("#safariBody").hide();
+        }
+    }
+    else {
+        $.notify("You do not have access to the safari zone yet")
+    }
+}
+
+var paySafari = function(){
+    if (canPaySafari) {
+        player.safariCostModifier++;
+        player.money -= safariCost();
+        loadSafari()
+    }
+}
+
+var safariCost = function(){
+    return safari.entranceCostBase * Math.pow(safari.entranceCostGrowthRate, player.safariCostModifier||0);
+}
+
+var canPaySafari = function(){
+    return player.money >= safariCost();
+}
+
+var dailySafariReset = function(){
+    player.safariCostModifier=0;
+}
 
 var loadSafari = function(){
+    safari.inProgress=1;
     safari.steps=0;
     safari.grid = [];
     safari.player.x = 12;
@@ -144,6 +185,9 @@ var showSafari = function(){
         fps: 10,
         frames: 2
     });
+
+    $("#safariEntrance").hide()
+    $("#safariBody").show()
 }
 
 var safariStep = function(direction) {
@@ -236,7 +280,7 @@ var showBattle = function(){
     html +=             "<h3 id='safariBattleText'>What will you do?</h3>"
     html +=         "</div>";
     html +=     "<div class='col-sm-4 col-sm-offset-2 safariOptions'>";
-    html +=             "<div class='col-sm-6 safariOption'><button onClick='throwBall()' class='btn btn-info safariButton'>Ball (" + safari.balls + ")</button></div>";
+    html +=             "<div class='col-sm-6 safariOption'><button id='safariThrowBall' onClick='throwBall()' class='btn btn-info safariButton'>Ball (" + safari.balls + ")</button></div>";
     html +=             "<div class='col-sm-6 safariOption'><button onClick='throwBait()' class='btn btn-info safariButton'>Bait</button></div>";
     html +=             "<div class='col-sm-6 safariOption'><button onClick='throwRock()' class='btn btn-info safariButton'>Rock</button></div>";
     html +=             "<div class='col-sm-6 safariOption'><button onClick='safariRun()' class='btn btn-info safariButton'>Run</button></div>";
@@ -293,12 +337,12 @@ var updateSafariBattleText = function(text){
     $("#safariBattleText").html(text);
 }
 
-var safariCatchMessages = ["Oh, no!<br>The Pokemon broke free!", "Aww! It appeared to be caught!", "Aargh! Almost had it!", "Shoot! It was so close, too!"]
-
 var throwBall = function() {
     if(!safari.Battle.busy) {
         safari.Battle.busy = 1;
-        safari.balls -= 1;
+        safari.balls--;
+
+        $("#safariThrowBall").text("Ball (" + safari.balls + ")")
         
         $('#safariEnemy').css("transition-duration",(0.75*safari.Battle.enemyTransitionSpeed)+"ms")
         updateSafariBattleText("You throw a ball...");
@@ -380,14 +424,14 @@ var delayRoll = function(result) {
 var finishCapture = function(result) {
     console.log(result)
     let [random,index]=result;
-    let gameOver = (safari.balls == 0);
+    let isgameOver = (safari.balls == 0);
     return new Promise((resolve,reject)=>{
         if (random*100 < SafariPokemon.catchFactor()){
             captureSafariPokemon(SafariPokemon.curEnemy.name)
             $('#safariBall').css('filter', 'brightness(0.4) grayscale(100%)');
             setTimeout(function(){
                 safari.Battle.particle.remove();
-                gameOver ? gameOver() : endBattle();
+                isgameOver ? gameOver() : endBattle();
             }, 1.7*safari.Battle.enemyTransitionSpeed);
         } else {
             $('#safariEnemy > img').css('opacity', '1');
@@ -395,7 +439,7 @@ var finishCapture = function(result) {
             updateSafariBattleText(safari.Battle.CATCH_MESSAGES[index]);
             safari.Battle.particle.remove();
             setTimeout( function() {
-                gameOver ? gameOver() : safariEnemyTurn();
+                isgameOver ? gameOver() : safariEnemyTurn();
             }, 1*safari.Battle.enemyTransitionSpeed);
         }
     })
@@ -415,10 +459,11 @@ var safariRoll = function(n){
 }
 
 var gameOver = function() {
-    SafariBattle.text("You have run out of safari balls. Game Over!");
+    updateSafariBattleText("You have run out of safari balls. Game Over!");
     setTimeout(function() {
         safari.inBattle = 0;
         safari.Battle.busy = 0;
+        safari.inProgress = 0;
         $("#safariModal").modal('toggle');
     }, 2000);
 }
