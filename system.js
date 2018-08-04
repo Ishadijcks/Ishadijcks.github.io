@@ -382,6 +382,7 @@ $(document).ready(function(){
 				}
 			}
 			var dir = getDirectionFromCode(keyCode);
+			console.log(dir)
 			if(!walking && !safari.isMoving) {
 				if (dir) {
 					queue = [];
@@ -416,6 +417,14 @@ $(document).ready(function(){
 			}
 		}
 	});
+
+	$("#safariModal").on("show.bs.modal", function(e) {
+		inProgress=4
+	})
+
+	$("#safariModal").on("hide.bs.modal", function(e) {
+		inProgress=1
+	})
 
 	$("body").on('click',".wrongGym", function(){
 		log("You need more badges to challenge this gym leader")
