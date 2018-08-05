@@ -46,7 +46,7 @@ var walking = false;
 var origin;
 
 var openSafari = function(){
-    if (alreadyGotBadge("Marsh")) {
+    if (alreadyGotBadge("Soul")) {
         moveToTown("Fuchsia City")
         $("#safariModal").modal("show");
         if (safari.inProgress) {
