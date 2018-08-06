@@ -195,8 +195,8 @@ var loadMine = function(){
 	
 	for( var i = 0; i<player.curMine.maxItems; i++){
 		var item = getRandomMineItem();
-		var x = getRandomCoord(player.curMine.sizeX, item[0].length);
-		var y = getRandomCoord(player.curMine.sizeY, item.length);
+		var x = getRandomCoord(player.curMine.sizeX, item.space[0].length);
+		var y = getRandomCoord(player.curMine.sizeY, item.space.length);
 		var res = canAddReward(x,y,item)
 		if(res){
 			addReward(x,y,item);
