@@ -133,7 +133,7 @@ addMineItem("Old Amber", 3, [[0,3,3,3], [3,3,3,3], [3,3,3,3], [3,3,3,0]], 0);
 // addMineItem("Armor Fossil", 6, [[0,6,6,6,0], [0,6,6,6,0], [6,6,6,6,6], [0,6,6,6,0]], 3);
 // addMineItem("Skull Fossil", 7, [[7,7,7,7], [7,7,7,7], [7,7,7,7], [0,7,7,0]], 3);
 addMineItem("Rare Bone", 8, [[8,0,0,0,0,8], [8,8,8,8,8,8], [8,0,0,0,0,8]], 3);
-addMineItem("Star Piece", 9, [[0,9,0], [9,9,9], [0,9,0]], 5);
+addMineItem("Star Piece", 9, [[0,9,0,], [9,9,9], [0,9,0]], 5);
 addMineItem("Revive", 10, [[0,10,0], [10,10,10,], [0,10,0]], 2);
 addMineItem("Max Revive", 11, [[11,11,11], [11,11,11], [11,11,11]], 4);
 addMineItem("Iron Ball", 12, [[12,12,12], [12,12,12], [12,12,12]], 2);
@@ -194,9 +194,9 @@ var loadMine = function(){
 	}
 	
 	for( var i = 0; i<player.curMine.maxItems; i++){
+		var x = getRandomCoord(player.curMine.sizeX);
+		var y = getRandomCoord(player.curMine.sizeY);
 		var item = getRandomMineItem();
-		var x = getRandomCoord(player.curMine.sizeX, item[0].length);
-		var y = getRandomCoord(player.curMine.sizeY, item.length);
 		var res = canAddReward(x,y,item)
 		if(res){
 			addReward(x,y,item);
@@ -512,8 +512,8 @@ var getRandomMineItem = function(){
 	return mineItemList[index] || mineItemList[0];
 }
 
-var getRandomCoord = function(max, size){
-	return Math.floor(Math.random()*(max-size-1)) + 1;
+var getRandomCoord = function(max){
+	return Math.floor(Math.random()*(max-3)) + 1;
 }
 
 var addReward = function(x, y, reward){
