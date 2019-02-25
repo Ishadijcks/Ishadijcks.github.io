@@ -1,7 +1,7 @@
 var safari = {
     inProgress: 0,
-    entranceCostBase: 10,
-    entranceCostGrowthRate: 8,
+    entranceCostBase: 100,
+    entranceCostGrowthRate: 1.6,
     grid: [],
     sizeX: 25,
     sizeY: 21,
@@ -70,8 +70,8 @@ var openSafari = function(){
 
 var paySafari = function(){
     if (canPaySafari) {
-        player.safariCostModifier++;
-        player.money -= safariCost();
+        typeof player.safariCostModifier == undefined ? 1 : player.safariCostModifier++;
+        player.questPoints -= safariCost();
         loadSafari()
     }
 }
@@ -81,7 +81,7 @@ var safariCost = function(){
 }
 
 var canPaySafari = function(){
-    return player.money >= safariCost();
+    return player.questPoints >= safariCost();
 }
 
 var dailySafariReset = function(){
