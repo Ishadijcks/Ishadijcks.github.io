@@ -733,6 +733,13 @@ g, rect {
                                  not supported by any browser */
 }
 
+.center {
+	text-align: center
+}
+
+.margin-bottom-sm {
+	margin-bottom: 10px;
+}
 
 
 

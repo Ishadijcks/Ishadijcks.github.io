@@ -53,7 +53,7 @@ var openSafari = function(){
             showSafari();
         }
         else {
-            $("#safariEntranceCost").text("Entrance cost : "+safariCost());
+            $("#safariEntranceCost").text(`( ${safariCost()} Quest Points )`);
             if (canPaySafari()) {
                 $("#paySafariButton").removeClass("disabled");
             } else {
@@ -77,7 +77,8 @@ var paySafari = function(){
 }
 
 var safariCost = function(){
-    return safari.entranceCostBase * Math.pow(safari.entranceCostGrowthRate, player.safariCostModifier||0);
+    let multiplier = Math.pow(safari.entranceCostGrowthRate, player.safariCostModifier||0);
+    return Math.floor(safari.entranceCostBase * multiplier);
 }
 
 var canPaySafari = function(){
