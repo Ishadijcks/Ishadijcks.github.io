@@ -25,6 +25,7 @@
 #sprite {
     height: 32px;
     width: 32px;
+    z-index: 1;
 }
 
 .bounce {
