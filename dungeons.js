@@ -179,12 +179,8 @@ var canMoveToRoom = function(target, size) {
         return true;
     }
     //things get a bit tricky with the wrapped "x-values".
-    if (currentDungeon.mapVisited[target-1]) {
-        return !(target % (size) == 0)
-    }
-    if (currentDungeon.mapVisited[target+1]) {
-        return !(target % (size) == (size - 1))
-    }
+    return currentDungeon.mapVisited[target-1] && (target % size != 0) ||
+        currentDungeon.mapVisited[target+1] && ((target+1) % size != 0)
 }
 
 var floodVisit = function(startPos) {
