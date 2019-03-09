@@ -357,14 +357,14 @@ var throwBall = function() {
         let ptclhtml='<div><img id="safariBall" src="images/safari/pokeball.png"></div>';
         safari.Battle.particle = dropParticle(ptclhtml, $('#safariPlayer').offset(), enemyImg, safari.Battle.ballThrowSpeed, 'cubic-bezier(0,0,0.4,1)', 1).css('z-index',9999);
 
-        delay(1.1*safari.Battle.ballThrowSpeed)()
-        .then(startCapture)
-        .then(delay(0.75*safari.Battle.enemyTransitionSpeed))
-        .then(startBounce)
+        delay(1.1*safari.Battle.ballThrowSpeed)()              // throwing the ball
+        .then(startCapture)                                    // pokemon being sucked into ball
+        .then(delay(0.75*safari.Battle.enemyTransitionSpeed))  
+        .then(startBounce)                                     // pokeball dropping to ground
         .then(delay(1.7*safari.Battle.ballBounceSpeed))
-        .then(calcIndex)
+        .then(calcIndex)                                       // roll a dice for catching, use dice roll to determine how many pokeball rolls
         .then(delayRoll)
-        .then(finishCapture)
+        .then(finishCapture)                                   // capture pokemon or break free
 
     }
 }

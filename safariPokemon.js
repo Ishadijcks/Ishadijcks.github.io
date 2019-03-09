@@ -3,7 +3,7 @@
 var SafariPokemon = {
     curEnemy:undefined,
     shiny:undefined,
-    catchFactorModifier: 1/4,
+    catchFactorModifier: 1/6,
     baseEscapeFactor: 30,
     angry: 0,
     eating: 0,
