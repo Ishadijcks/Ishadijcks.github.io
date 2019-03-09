@@ -92,6 +92,7 @@ var dailySafariReset = function(){
 var loadSafari = function(){
     safari.inProgress=1;
     safari.steps=0;
+    safari.balls=30;
     safari.grid = [];
     safari.player.x = 12;
     safari.player.y = 20
