@@ -423,7 +423,7 @@ $(document).ready(function(){
 	})
 
 	$("#safariModal").on("hide.bs.modal", function(e) {
-		inProgress=1
+		inProgress=0
 	})
 
 	$("body").on('click',".wrongGym", function(){
