@@ -913,7 +913,7 @@ var adjacentBodyParts = function(x, y, body){
 }
 
 var canAddBody = function(x, y, body){
-    if(y+body.length > safari.sizeY || x+body[0].length > safari.sizeX){
+    if(y+body.length > safari.sizeY-1 || x+body[0].length > safari.sizeX-1){
         return false;
     }
     for(var i = 0; i<body.length; i++){
