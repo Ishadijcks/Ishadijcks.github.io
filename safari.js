@@ -30,7 +30,7 @@ var safari = {
         ballBounceSpeed: 850,
         ballRollSpeed: 700,
         enemyTransitionSpeed: 1000,
-        encounterRate: 6, // Average number of grass tiles to step on before finding a pokemon
+        encounterRate: 24, // Average number of grass tiles to step on before finding a pokemon
         CATCH_MESSAGES: [
             "Oh, no!<br>The Pokemon broke free!",
             "Aww! It appeared to be caught!",
