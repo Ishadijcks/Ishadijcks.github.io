@@ -328,13 +328,8 @@ var endBattle = function(){
 var safariRun = function(){
     if(!safari.Battle.busy){
         safari.Battle.busy = 1;
-        if(Math.random()*100 < (30 + 15*safari.escapes)){
-            updateSafariBattleText("You flee.");
-            setTimeout(endBattle, 1500);
-        } else {
-            updateSafariBattleText("You can't escape...");
-            setTimeout(safariEnemyTurn, 1000);
-        }
+        updateSafariBattleText("You flee.");
+        setTimeout(endBattle, 1500);
     }
 }
 
