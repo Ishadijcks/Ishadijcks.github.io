@@ -720,17 +720,55 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<h4 style='text-align:center' class="modal-title">Safari Zone</h4>
+								<ul class="nav nav-tabs">
+										<li class="active"><a data-toggle="tab" href="#safariExplore">Explore</a></li>
+										<!--li><a data-toggle="tab" onClick='showSafariUpgrades()' href="#safariUpgrades">Upgrades</a></li-->
+										<li><a data-toggle="tab" href="#safariHelp">Help</a></li>
+								</ul>
 							</div>
-							<div class="modal-body" style="width: 80%;margin: auto;">
-								<div id="safariBody"></div>
-								<div id="safariEntrance">
-									<div class="center margin-bottom-sm">
-										<button id="paySafariButton" class="btn btn-primary" onclick="paySafari()">Pay Entrance Fee</button>
-										<span id="safariEntranceCost"></span>
+
+							<!-- Tabs -->
+							<div class=tab-content>
+
+								<!-- Main tab -->
+								<div  id="safariExplore" class="tab-pane fade in active">
+									<div class="modal-body" style="width: 80%;margin: auto;">
+										<div id="safariBody"></div>
+										<div id="safariEntrance">
+											<div class="center margin-bottom-sm">
+												<button id="paySafariButton" class="btn btn-primary" onclick="paySafari()">Pay Entrance Fee</button>
+												<span id="safariEntranceCost"></span>
+											</div>
+											<img src="images/safari/area1.png" />
+										</div>
 									</div>
-									<img src="images/safari/area1.png" />
+								</div>
+
+								<!-- Upgrades tab -->
+
+								<!-- Help tab -->
+								<div  id="safariHelp" class="tab-pane fade">
+									<div class="modal-body" style="width: 80%;margin: auto;">
+										<p id="safariHelpText">
+											<p>The safari zone contains several unique pokemon, and a different method of encountering and capturing pokemon.</p>
+											<p>After paying the entrance fee, you will be able to walk around in the safari zone. To encounter pokemon, you must walk in tall grass.</p>
+											<p>
+												When you have encountered a pokemon, you will be given 4 options:
+												<ul>
+													<li>Ball: This will throw a pokeball and give you a chance of capturing the pokemon</li>
+													<li>Rock: Throwing a rock will make the pokemon more likely to flee, but easier to catch</li>
+													<li>Bait: Throwing bait will make the pokemon less likely to flee, but harder to catch</li>
+													<li>Run: This will end the encounter</li>
+												</ul>
+											</p>
+											<p>After your turn of the encounter, if it did not result in the encounter ending, the wild pokemon will have a chance of running away.</p>
+											<p>Your safari exploration will end when you have run out of pokeballs.</p>
+										</p>
+
+									</div>
 								</div>
 							</div>
+
 						</div>
 					</div>
 				</div>
