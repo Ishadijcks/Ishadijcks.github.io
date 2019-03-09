@@ -326,12 +326,15 @@ var endBattle = function(){
 }
 
 var safariRun = function(){
-    if(Math.random()*100 < (30 + 15*safari.escapes)){
-        updateSafariBattleText("You flee.");
-        setTimeout(endBattle, 1500);
-    } else {
-        updateSafariBattleText("You can't escape...");
-        setTimeout(safariEnemyTurn, 1000);
+    if(!safari.Battle.busy){
+        safari.Battle.busy = 1;
+        if(Math.random()*100 < (30 + 15*safari.escapes)){
+            updateSafariBattleText("You flee.");
+            setTimeout(endBattle, 1500);
+        } else {
+            updateSafariBattleText("You can't escape...");
+            setTimeout(safariEnemyTurn, 1000);
+        }
     }
 }
 
@@ -472,8 +475,8 @@ var gameOver = function() {
 
 var throwRock = function(){
     if(!safari.Battle.busy) {
-        updateSafariBattleText("You throw a rock at " + SafariPokemon.curEnemy.name);
         safari.Battle.busy = 1;
+        updateSafariBattleText("You throw a rock at " + SafariPokemon.curEnemy.name);
         SafariPokemon.angry = Math.max(SafariPokemon.angry, Math.floor(Math.random() * 5 + 2))
         SafariPokemon.eating = 0;
         var enemy = $('#safariEnemy').offset();
@@ -509,8 +512,8 @@ var throwRock = function(){
 
 var throwBait = function(){
     if(!safari.Battle.busy){
-        updateSafariBattleText("You throw some bait at " + SafariPokemon.curEnemy.name);
         safari.Battle.busy = 1;
+        updateSafariBattleText("You throw some bait at " + SafariPokemon.curEnemy.name);
         SafariPokemon.eating = Math.max(SafariPokemon.eating, Math.floor(Math.random()*5 + 2))
         SafariPokemon.angry = 0;
         dropParticle('<img src=images/safari/bait.png>', $('#safariPlayer').offset(), $('#safariEnemy').offset(), 1000, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
