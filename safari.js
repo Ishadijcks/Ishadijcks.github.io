@@ -269,6 +269,10 @@ var showBattle = function(){
     var html = "";
     html += "<div class='row safariEnemyRow'>";
     html +=     "<div class='col-sm-2 col-sm-offset-8' id='safariEnemy'><img src='images/pokemon/" + enemy.id + ".png'></div>";
+    html +=     "<div id='safariEnemyTag' class='col-sm-6'>"
+    html +=         "<p>"+enemy.name+"</p>"
+    html +=         "<p><span id='safariCatchChance'></span><span id='safariRunChance'></span></p>"
+    html +=     "</div>"
     html += "</div>";
     html += "<div class='row'>";
     html +=     "<div class='col-sm-2 col-sm-offset-3'>";
@@ -291,8 +295,14 @@ var showBattle = function(){
     html += "</div>";
 
     $("#safariBody").html(html);
+    updateSafariEnemyStats()
     $("#safariBody").css("background-image", "url('images/safari/safariBattle.png')");
     $("#safariBody").css("background-size", "100% auto");
+}
+
+var updateSafariEnemyStats = function(){
+    $('#safariCatchChance').text(`Catch chance: ${SafariPokemon.catchFactor().toFixed(2)}%`);
+    $('#safariRunChance').text(`Run chance: ${SafariPokemon.escapeFactor().toFixed(2)}%`);
 }
 
 var safariEnemyTurn = function(){
@@ -502,6 +512,7 @@ var throwRock = function(){
         	},300);
         },800);
         setTimeout(safariEnemyTurn, 2000);
+        updateSafariEnemyStats();
     }
 }
 
@@ -513,6 +524,7 @@ var throwBait = function(){
         SafariPokemon.angry = 0;
         dropParticle('<img src=images/safari/bait.png>', $('#safariPlayer').offset(), $('#safariEnemy').offset(), 1000, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
         setTimeout(safariEnemyTurn, 1500);
+        updateSafariEnemyStats();
     }
 }
 

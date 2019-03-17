@@ -162,3 +162,21 @@
 #safariBattleText {
   font-family: "Helvetica Neue", sans-serif;
 }
+
+#safariEnemyTag {
+  border: 1px solid black;
+  border-radius: 8px;
+  margin-top: -5%;
+  margin-left: 5%;
+  height: 50px;
+  background: beige;
+  text-align: center;
+}
+
+#safariCatchChance{
+  float: left;
+}
+
+#safariRunChance{
+  float: right;
+}
