@@ -194,9 +194,9 @@ var loadMine = function(){
 	}
 	
 	for( var i = 0; i<player.curMine.maxItems; i++){
-		var x = getRandomCoord(player.curMine.sizeX);
-		var y = getRandomCoord(player.curMine.sizeY);
 		var item = getRandomMineItem();
+		var x = getRandomCoord(player.curMine.sizeX, item.space[0].length);
+		var y = getRandomCoord(player.curMine.sizeY, item.space.length);
 		var res = canAddReward(x,y,item)
 		if(res){
 			addReward(x,y,item);
@@ -512,8 +512,8 @@ var getRandomMineItem = function(){
 	return mineItemList[index] || mineItemList[0];
 }
 
-var getRandomCoord = function(max){
-	return Math.floor(Math.random()*(max-3)) + 1;
+var getRandomCoord = function(max, size){
+	return Math.floor(Math.random()*(max-size-1)) + 1;
 }
 
 var addReward = function(x, y, reward){
