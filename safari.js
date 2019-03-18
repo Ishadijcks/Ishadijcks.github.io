@@ -43,7 +43,6 @@ var safari = {
 var element;
 var sprite;
 var walking = false;
-var origin;
 
 var openSafari = function(){
     if (alreadyGotBadge("Soul")) {
@@ -95,7 +94,8 @@ var loadSafari = function(){
     safari.balls=30;
     safari.grid = [];
     safari.player.x = 12;
-    safari.player.y = 20
+    safari.player.y = 20;
+    safari.lastDirection = "up";
     for( var i = 0; i<safari.sizeY; i++){
         var row = [];
         for(var j = 0; j<safari.sizeX; j++){
@@ -165,6 +165,16 @@ var getXY = function(direction){
     return {x: x, y: y}
 }
 
+var getSafariOffset = function(x, y){
+    var origin = $("#safari-12-20").offset();
+    var pos = $("#safari-" + x + "-" + y).offset();
+    var offset = {
+        top: pos.top - origin.top,
+        left: pos.left - origin.left
+    }
+    return offset
+}
+
 var showSafari = function(){
     var html = "";
 
@@ -204,11 +214,8 @@ var safariStep = function(direction) {
     safari.isMoving = 1;
 
     if (canMoveSafari(safari.player.x + safari.movingX, safari.player.y + safari.movingY)) {
-        var next = $("#safari-" + (safari.player.x + safari.movingX) + "-" + (safari.player.y + safari.movingY)).offset();
-        safari.offset = {
-            top: next.top - origin.top,
-            left: next.left - origin.left
-        }
+        safari.offset = getSafariOffset(
+            safari.player.x + safari.movingX, safari.player.y + safari.movingY)
 
         $(".sprite").css("background", "url('images/safari/walk"+direction+".png')");
         safari.player.x += safari.movingX;
@@ -579,7 +586,7 @@ var addPlayer = function(){
     $("#safari-12-20").html("<div id='sprite' class='sprite'></div>");
     $(".sprite").css('background',  "url('images/safari/walk" + safari.lastDirection + ".png')");
     $(".sprite").css('position', 'absolute');
-    $(".sprite").animate(safari.offset,0)
+    $(".sprite").animate(getSafariOffset(safari.player.x, safari.player.y),0)
     safari.isMoving = 0;
 }
 
