@@ -932,6 +932,10 @@ var canAddBody = function(x, y, body){
     }
     for(var i = 0; i<body.length; i++){
         for( var j = 0; j<body[i].length; j++){
+            if (i + y == 20 && j + x == 12) {
+                // Spawn nothing at player starting position
+                return false;
+            }
             if( (i + y) <safari.sizeY && (j + x) < safari.sizeX) {
                 if (body[i][j] !== 0) {
                     if (safari.grid[i + y][j + x] !== 0) {
