@@ -547,9 +547,7 @@ var safariMove = function(direction){
 
     if(!safari.isMoving) {
         var frame = 0;
-        origin = $("#safari-12-20").offset();
-
-
+        
         element = document.querySelector('#sprite');
         sprite = new Motio(element, {
             fps: 8,
