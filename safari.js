@@ -68,7 +68,7 @@ var openSafari = function(){
 }
 
 var paySafari = function(){
-    if (canPaySafari) {
+    if (canPaySafari()) {
         typeof player.safariCostModifier == undefined ? 1 : player.safariCostModifier++;
         player.questPoints -= safariCost();
         loadSafari()
