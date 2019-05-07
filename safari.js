@@ -96,6 +96,7 @@ var loadSafari = function(){
     safari.player.x = 12;
     safari.player.y = 20;
     safari.lastDirection = "up";
+    safari.offset = {"top": 0, "left": 0};
     for( var i = 0; i<safari.sizeY; i++){
         var row = [];
         for(var j = 0; j<safari.sizeX; j++){
@@ -273,11 +274,18 @@ var showBattleBars = function(){
 
 var showBattle = function(){
     var enemy = getPokemonByName(SafariPokemon.curEnemy.name || "Pinsir");
+    var enemyPkballDisplay = "";
+    if(alreadyCaughtShiny(enemy.name)){
+        enemyPkballDisplay = " <img id=alreadyCaughtImage src=images/shinyPokeball.PNG>";
+    } else if(alreadyCaught(enemy.name)){
+        enemyPkballDisplay = " <img id=alreadyCaughtImage src=images/Pokeball.PNG>";
+    }
+
     var html = "";
     html += "<div class='row safariEnemyRow'>";
     html +=     "<div class='col-sm-2 col-sm-offset-8' id='safariEnemy'><img src='images/pokemon/" + enemy.id + ".png'></div>";
     html +=     "<div id='safariEnemyTag' class='col-sm-6'>"
-    html +=         "<p>"+enemy.name+"</p>"
+    html +=         "<p>"+enemy.name+enemyPkballDisplay+"</p>"
     html +=         "<p><span id='safariCatchChance'></span><span id='safariRunChance'></span></p>"
     html +=     "</div>"
     html += "</div>";
@@ -584,7 +592,7 @@ var addPlayer = function(){
     $("#safari-12-20").html("<div id='sprite' class='sprite'></div>");
     $(".sprite").css('background',  "url('images/safari/walk" + safari.lastDirection + ".png')");
     $(".sprite").css('position', 'absolute');
-    $(".sprite").animate(getSafariOffset(safari.player.x, safari.player.y),0)
+    $(".sprite").animate(safari.offset, 0)
     safari.isMoving = 0;
 }
 
