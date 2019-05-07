@@ -96,6 +96,7 @@ var loadSafari = function(){
     safari.player.x = 12;
     safari.player.y = 20;
     safari.lastDirection = "up";
+    safari.offset = {"top": 0, "left": 0};
     for( var i = 0; i<safari.sizeY; i++){
         var row = [];
         for(var j = 0; j<safari.sizeX; j++){
@@ -591,7 +592,7 @@ var addPlayer = function(){
     $("#safari-12-20").html("<div id='sprite' class='sprite'></div>");
     $(".sprite").css('background',  "url('images/safari/walk" + safari.lastDirection + ".png')");
     $(".sprite").css('position', 'absolute');
-    $(".sprite").animate(getSafariOffset(safari.player.x, safari.player.y),0)
+    $(".sprite").animate(safari.offset, 0)
     safari.isMoving = 0;
 }
 
