@@ -273,11 +273,18 @@ var showBattleBars = function(){
 
 var showBattle = function(){
     var enemy = getPokemonByName(SafariPokemon.curEnemy.name || "Pinsir");
+    var enemyPkballDisplay = "";
+    if(alreadyCaughtShiny(enemy.name)){
+        enemyPkballDisplay = " <img id=alreadyCaughtImage src=images/shinyPokeball.PNG>";
+    } else if(alreadyCaught(enemy.name)){
+        enemyPkballDisplay = " <img id=alreadyCaughtImage src=images/Pokeball.PNG>";
+    }
+
     var html = "";
     html += "<div class='row safariEnemyRow'>";
     html +=     "<div class='col-sm-2 col-sm-offset-8' id='safariEnemy'><img src='images/pokemon/" + enemy.id + ".png'></div>";
     html +=     "<div id='safariEnemyTag' class='col-sm-6'>"
-    html +=         "<p>"+enemy.name+"</p>"
+    html +=         "<p>"+enemy.name+enemyPkballDisplay+"</p>"
     html +=         "<p><span id='safariCatchChance'></span><span id='safariRunChance'></span></p>"
     html +=     "</div>"
     html += "</div>";
