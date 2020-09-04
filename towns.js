@@ -9,7 +9,7 @@ var addTown = function(name,gym,image,shop,reqRoutes){
 		shop: shop,
 		reqRoutes: reqRoutes
 	}
-	
+
 	townList.push(temp);
 }
 
@@ -17,7 +17,7 @@ var moveToTown = function(townName){
 	var town = getTown(townName);
 	canCatch = 0;
 		if( accessToTown(town.reqRoutes)){
-			$("#catchDisplay").html("");	
+			$("#catchDisplay").html("");
 			inProgress = 0;
 			resetDungeon();
 			showTown(town);
@@ -43,17 +43,17 @@ var accessToTown = function(routeList){
 }
 
 var showTown = function(town){
-	
+
 	var html = "";
 	html += "<h3 class='townName strokeme'>"+town.name;
 
-	if(town.gym != null){	
+	if(town.gym != null){
 		if(town.gym.bossList != undefined){
 			if (dungeonCompletedShiny(town.gym)){
                 html += "<a title='You have caught all shiny Pokemon on this route!'><img id='alreadyCaughtImage' src='images/shinyPokeball.PNG'></a>";
             } else if(dungeonCompleted(town.gym)){
                 html += "<a title='You have caught all available Pokemon on this route!'><img id='alreadyCaughtImage' src='images/Pokeball.PNG'></a>";
-            }			
+            }
 		}
 	}
 	html += "</h3>";
@@ -111,12 +111,12 @@ var showTown = function(town){
 	}
 	html += "</div>"
 	$("#townView").html(html);
-	$("#townView").css("background-image", "url("+town.image+")");  
+	$("#townView").css("background-image", "url("+town.image+")");
 	$("#townView").css("background-repeat", "no-repeat");
-	$("#townView").css("background-position", "center");    
+	$("#townView").css("background-position", "center");
 
 	hideAllViews()
-	$("#townView").show();	
+	$("#townView").show();
 }
 
 var loadTowns = function(){
@@ -144,6 +144,7 @@ var loadTowns = function(){
 	addTown("Rock Tunnel", RockTunnelDungeon(), "images/dungeons/rocktunnel.png", null, [9]);
 	addTown("Power Plant", PowerPlantDungeon(), "images/dungeons/powerplant.png", null, [9]);
 	addTown("Pokemon Tower", PokemonTowerDungeon(), "images/dungeons/pokemontower.png", null, [7,10]);
+	addTown("Safari Zone", SafariZoneDungeon(), "images/dungeons/safarizone.png", null, [15, 18]);
 	addTown("Seafoam Islands", SeafoamIslandsDungeon(), "images/dungeons/seafoamislands.png", null, [19]);
 	addTown("Victory Road", VictoryRoadDungeon(), "images/dungeons/victoryroad.png", null, [22]);
 	addTown("Cerulean Cave", CeruleanCaveDungeon(), "images/dungeons/ceruleancave.png", null, [4]);
