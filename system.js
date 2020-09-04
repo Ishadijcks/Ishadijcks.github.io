@@ -805,7 +805,6 @@ var capturePokemon = function(name, shiny){
 		$.notify("You successfully caught "+name, 'success');
 
 		if (player.caughtPokemonList.length === 151) {
-			console.log("completed")
 			$("#gameCompleted").modal('show');
 		}
 
