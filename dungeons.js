@@ -94,6 +94,13 @@ var PokemonTowerDungeon = function(){
     return Dungeon("Pokemon Tower Dungeon", pokemonList, 5, 7523, bossPokemon, 750, 2, 10, 20);
 }
 
+
+var SafariZoneDungeon = function(){
+    var pokemonList = ["Nidoran(F)", "Nidorina", "Nidoran(M)", "Nidorino", "Exeggcute", "Paras", "Parasect", "Chansey", "Scyther", "Tauros", "Cubone", "Marowak", "Tangela"];
+    var bossPokemon = [BossPokemon("Pinsir", 60438, 40), BossPokemon("Rhyhorn", 60438, 40), BossPokemon("Kangaskhan", 60438, 40), ];
+    return Dungeon("Safari Zone Dungeon", pokemonList, 5, 12602, bossPokemon, 1000, 6, 13, 25);
+}
+
 var SeafoamIslandsDungeon = function(){
     var pokemonList = ["Zubat", "Golbat", "Psyduck", "Golduck", "Slowpoke", "Slowbro", "Shellder", "Krabby", "Horsea", "Staryu"];
     var bossPokemon = [ BossPokemon("Articuno", 129195, 50) , BossPokemon("Seel", 86130, 35), BossPokemon("Seel", 86130, 35), BossPokemon("Seel", 86130, 35)];
@@ -197,32 +204,32 @@ var floodVisit = function(startPos) {
 	while (Q.length > 0) {
 		var n = Q.shift();
 		var nStep = n-1; //left
-		if (chk[nStep] != 1 && 
-			n % (size) != 0 && (nStep) >= 0 && 
+		if (chk[nStep] != 1 &&
+			n % (size) != 0 && (nStep) >= 0 &&
 			currentDungeon.mapDiscovered[nStep] && currentDungeon.map[nStep] == "Empty") {
 				currentDungeon.mapVisited[nStep] = 1;
 				Q.push(nStep);
 				chk[nStep] = 1;
 		}
 		nStep = n+1; //right
-		if (chk[nStep] != 1 && 
-			n % (size) != (size-1) && (nStep) < (size*size) && 
+		if (chk[nStep] != 1 &&
+			n % (size) != (size-1) && (nStep) < (size*size) &&
 			currentDungeon.mapDiscovered[nStep] && currentDungeon.map[nStep] == "Empty") {
 				currentDungeon.mapVisited[nStep] = 1;
 				Q.push(nStep);
 				chk[nStep] = 1;
 		}
 		nStep = n-size; //up
-		if (chk[nStep] != 1 && 
-			(nStep) >= 0 && 
+		if (chk[nStep] != 1 &&
+			(nStep) >= 0 &&
 			currentDungeon.mapDiscovered[nStep] && currentDungeon.map[nStep] == "Empty") {
 				currentDungeon.mapVisited[nStep] = 1;
 				Q.push(nStep);
 				chk[nStep] = 1;
 		}
 		nStep = n+size; //down
-		if (chk[nStep] != 1 && 
-			(nStep) < (size*size) && 
+		if (chk[nStep] != 1 &&
+			(nStep) < (size*size) &&
 			currentDungeon.mapDiscovered[nStep] && currentDungeon.map[nStep] == "Empty") {
 				currentDungeon.mapVisited[nStep] = 1;
 				Q.push(nStep);
