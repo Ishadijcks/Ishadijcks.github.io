@@ -100,6 +100,7 @@ var player = {
 	totalClicks: 0,
 	totalEggsHatched: 0,
 	totalMineCoins: 0,
+	alreadyShownGameCompletionModal: false
 }
 
 var curEnemy = {
@@ -804,7 +805,8 @@ var capturePokemon = function(name, shiny){
 		}
 		$.notify("You successfully caught "+name, 'success');
 
-		if (player.caughtPokemonList.length === 151) {
+		if (player.caughtPokemonList.length === 151 && !player.alreadyShownGameCompletionModal) {
+			player.alreadyShownGameCompletionModal = true;
 			$("#gameCompleted").modal('show');
 		}
 
