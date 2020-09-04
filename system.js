@@ -727,7 +727,7 @@ var enemyDefeated = function(){
 
 		var money = curEnemy.moneyReward;
 		var exp = curEnemy.exp;
-		var level = player.route * 2; 
+		var level = player.route * 2;
 
 
 		gainMoney(Math.floor(money), "You earned $");
@@ -803,6 +803,10 @@ var capturePokemon = function(name, shiny){
 			}
 		}
 		$.notify("You successfully caught "+name, 'success');
+
+		if (player.caughtPokemonList.length === 151) {
+			$("#gameCompleted").modal('show');
+		}
 
 	}
 
@@ -886,7 +890,7 @@ var damageModifier = function(attacker, defender) {
 			tmp += typeEffectiveness[typeToNumber(attacker.type[i])][typeToNumber(defender.type[j])];
 		}
 	}
-	
+
 	tmp /= attacker.type.length * defender.type.length
 	return tmp;
 }
